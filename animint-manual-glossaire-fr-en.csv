@@ -1,4 +1,209 @@
 FR,EN
-visualisation de données,data visualization
+annulation,aborting
+affectation mémoire,allocation
+ANOVA,anova
+barre oblique gauche '\',antislash
+argument,argument
+tableau,array
+affectation,assigment
+attribut,attribute
+caractère barre oblique inversée,backslash
+opérateur binaire,binary operator
+lien,bind
+lier,binding
+bitmap,bitmap
+BOM (indicateur d'ordre d'octets),BOM
+boite à moustaches,boxplot
+borne des classes (histogrammes),breaks
+explorateur,browser
+bogue,bug
+pseudo-code,bytecode
+valeur enregistrée en mémoire cache,cached value
+appel,call
+rappel,callback
+correspondance insensible à la casse,case insensitive matching
+qualitative,categorical
+canal,channel
+caractère,character
+détourage,clipping
+fermeture (closure),closure
+agrégation (groupe),cluster
+convertir automatiquement,coerce
+conversion automatique,coercion
+classement,collation
+niveau de fusion,collapsing level
+colorimétrie,colortype
+numériquement singulière,computationally singular
+connexion,connection
+console,console
+covariables,covariate
+base de données,database
+tableau de données (data frame),dataframe
+jeu de données,dataset
 tableau de données,data table
-paquet,package 
+visualisation de données,data visualization
+reconstruction de code (deparse),deparse
+obsolète,deprecated
+déviance,deviance
+périphérique,device
+dispatcheur,dispatch
+‘double’,double
+téléchargement client <- serveur,download
+pilote,driver
+côté,edge
+valeurs propres,eigenvalues
+encodage,encoding
+environnement,environment
+chargement complet,explicit loading
+facteur,factor
+repli,fallback
+fifo,fifo
+nom de fichier,filename
+corps du fichier,file stream
+ajustement,fit
+vidage,flush
+formule,formula
+cadre,frame
+giga octets,GiB
+manipulateur de données,handler
+hachage,hashing
+Hessienne,Hessian
+jointures,hinges
+historique des commandes,history
+image d'environnement,image
+implémenté,implemented
+indice,index
+gestionnaire d'interruptions,interrupt handler
+incorrect,invalid
+E/S (entrées/sorties),IO
+gestionnaire de tickets (issue tracker),issue tracker
+noeuds,knots
+krigeage,kriging
+étiquette,label
+décalage,lag
+longueur,l
+mise en page,layout
+chargement partiel,lazy loading
+mineur dominant,leading minor
+longueur,length
+membre gauche,LHS
+bibliothèque,library
+vraisemblance,likelihood
+colonne de type liste,list column
+environnement linguistique,locale
+mode de localisation à la souris,locator
+booléen,logical
+log de vraisemblance,log-likelihood
+nombre magique,magic number
+mapper,map
+matrice singulière,matrix is exactly singular
+metafile,metafile
+site miroir,mirror site
+incohérence,mismatch
+mixte,mixed
+mode,mode
+modulus,modulus
+multioctets,multibyte
+NA,NA
+arguments nommés,named args
+espace de noms,namespace
+vecteur de valeurs non décroissantes,nondecreasing vector
+type non vectoriel,non-vector type
+indentations,notches
+décalage,offset
+code d'opération,opcode
+valeur extrême,outlier
+en dehors de l'intervalle,out of range
+débordement au dépassement de capacité par le haut,overflow
+package,package
+afficheur,pager
+liste appairée,pair list
+analyse syntaxique du code,parse
+analyseur syntaxique,parser
+transmis,passed
+passé en argument,passed in
+chemin d'accès,path
+motif,pattern
+conduite,pipe
+pixmap,pixmap
+architecture,platform
+ligne brisée,polyline
+port,port
+profilage,profiling
+promesse (promise),promise
+invite de commande,prompt
+proxy,proxy
+repoussage,push back
+symbole de chaine de caractères,quote symbol
+règle des guillemets,quote rule
+raw (brut),raw
+plage (ou étendue ou intervalle),range
+retraçage (ou rafraichissement),redraw
+expression régulière,regex
+expression régulière,regular expression
+signaler,report
+dépôt,repository
+résidus,residuals
+restaurer,restore
+retourner (abcd -> dcba) (ou renvoyer (d'une fonction)),return
+membre droit,RHS
+RNG (générateur de nombres aléatoires),RNG
+sous-programme (ou procédure),routine
+standardisé,scaled
+chemin de recherche,search path
+graine aléatoire,seed
+mode d'accès aléatoire,seek
+fonction auto-initialisée,self-starting function
+séquence,sequence
+latte (dans lattice),shingle
+sortie par défaut,sink
+taille,size
+matrice anti-symétrique,skew-symmetric
+caractère barre oblique droite '/',slash
+slot,slot
+capture d'écran,snapshot
+connecteur logiciel (socket),socket
+source,source
+fourni (ou choisi ou donné),specified
+pile,stack
+écart-type,standard deviation
+strate,stratum
+indice,subscript
+sous-ensemble,subset
+indiçage (ou réalisation d'un sous-ensemble),subsetting
+super-noeud,supernode
+pris en charge,supported
+tableau de contingence,table
+marque,tag
+jauge,thermometer
+contexte,thread
+code contextuel,threaded code
+mémoire tampon des thread,thread buffers
+délai maximal,timeout
+horloge (ou temporisation),timer
+fuseau horaire,timezone
+taille préallouée (true length),tl
+niveau le plus haut,top level
+historique des fonctions appelées (traceback),traceback
+moyenne tronquée,trimmed mean
+troncature,truncation
+type,type
+collision / changement de type,type bumps
+opérateur unaire,unary operator
+délier,unbind
+dépassement de capacité par le bas,underflow
+déparié,unmatched
+extraction,unpacking
+déplier les colonnes,unwrap columns
+démappage de la vue du fichier,unmapping view of file
+téléversement client -> serveur,upload
+URL,url
+non pris en charge,unsupported
+sommet,vertex
+vue,viewport
+vignette,vignette
+avis (ou avertissement),warning
+pondération,weight
+répertoire de travail,working directory
+environnement de travail,workspace
+emballage,wrapup
