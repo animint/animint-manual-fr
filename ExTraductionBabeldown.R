@@ -28,7 +28,9 @@ if (FALSE) { # \dontrun{
 
 # Fonction de la traduction FR <- EN utilisant babeldown
 
-Translate_FR_EN <- function(file_name = "README", file_extension = ".md") {
+Translate_FR_EN <- function(file_name = "README",
+                            file_extension = ".md",
+                            ajoutFR = TRUE) {
     
   # Création d'un fichier temporaire
     temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
@@ -41,7 +43,7 @@ Translate_FR_EN <- function(file_name = "README", file_extension = ".md") {
     
   # Traduction utilisant babeldown et le glossaire maison  
     output_path <- paste0(path_local_animint2_fr,
-                          "/",file_name,"_FR",file_extension)
+                          "/",file_name,ifelse(ajoutFR,"_FR",""),file_extension)
     
     babeldown::deepl_translate(path = temp_file,
                                source_lang = "EN",
@@ -67,6 +69,8 @@ Translate_FR_EN <- function(file_name = "README", file_extension = ".md") {
 
 # Traduction du README avec la fonction Translate_FR_EN
 
-Translate_FR_EN(file_name = "README", file_extension = ".md")
+Translate_FR_EN(file_name = "README",
+                file_extension = ".md",
+                ajoutFR = FALSE)
 
 
