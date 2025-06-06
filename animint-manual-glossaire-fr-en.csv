@@ -62,6 +62,7 @@ nom de fichier,filename
 corps du fichier,file stream
 ajustement,fit
 vidage,flush
+fork,fork
 formule,formula
 cadre,frame
 giga octets,GiB
