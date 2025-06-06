@@ -65,6 +65,7 @@ vidage,flush
 fork,fork
 formule,formula
 cadre,frame
+éléments graphiques,geoms
 giga octets,GiB
 manipulateur de données,handler
 hachage,hashing
@@ -128,6 +129,8 @@ motif,pattern
 conduite,pipe
 pixmap,pixmap
 architecture,platform
+graphe,plot
+tracé,plotted
 ligne brisée,polyline
 port,port
 profilage,profiling
@@ -159,13 +162,14 @@ séquence,sequence
 latte (dans lattice),shingle
 sortie par défaut,sink
 taille,size
+dessiner,sketching
 matrice anti-symétrique,skew-symmetric
 caractère barre oblique droite '/',slash
 slot,slot
 capture d'écran,snapshot
 connecteur logiciel (socket),socket
 source,source
-fourni (ou choisi ou donné),specified
+fourni (ou choisi ou donné ou spécifier),specified
 pile,stack
 écart-type,standard deviation
 strate,stratum

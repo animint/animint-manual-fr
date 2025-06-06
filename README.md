@@ -4,7 +4,7 @@ Traduction de [English](https://github.com/tdhock/animint-book/)
 
 # Animint2
 
-[![Build Status](https://github.com/tdhock/animint2/actions/workflows/tests.yaml/badge.svg)](https://github.com/tdhock/animint2/actions/workflows/tests.yaml)
+[![](https://github.com/tdhock/animint2/actions/workflows/tests.yaml/badge.svg "Un badge vérifiant que ce package a transmis tous ses arguments.")](https://github.com/tdhock/animint2/actions/workflows/tests.yaml)
 
 Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAXffJrny6nSfeytFR0kO5NB-NQEspcE/edit?usp=sharing) et en [Français](https://docs.google.com/presentation/d/1WpRZs9qz9wm1yik_MLj8tIJyWuL5-IBPYKLhOHZ9X4Y/edit?usp=sharing) pour une présentation de 30 à 60 minutes sur animint2 ! [Résumé](https://github.com/animint/animint2/wiki/Presentations#30-60-minute-talk), [Vidéo de la présentation à Toulouse-Dataviz](https://www.youtube.com/watch?v=Em6AVJi37zo).
 
@@ -12,7 +12,7 @@ Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAX
 
 Animint2 est un package R permettant de générer et de partager des visualisations de données interactives animées, parfois appelées animints. Il s'agit d'un fork de, et utilise une syntaxe similaire à, [ggplot2](https://ggplot2.tidyverse.org/). Animint2 est particulièrement utile pour les grands jeux de données, mais des jeux de données plus petits peuvent également être rendus interactifs. Il est également capable de générer des visualisations de données statiques.
 
-<a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L&apos;utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."/></a>
+[![](man/figures/world_bank_screencast.gif "Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF.")](https://rcdata.nau.edu/genomic-ml/WorldBank-facets/)
 
 Jouer avec [cette visualisation interactive de données de la Banque mondiale.](https://rcdata.nau.edu/genomic-ml/WorldBank-facets/) ou [une version plus récente qui comprend également une carte du monde](https://tdhock.github.io/2025-01-WorldBank-facets-map/). Pour plus d'exemples, voir ces galeries, qui présentent des captures d'écran ainsi que des liens vers l'affichage interactif des données et le code source :
 
