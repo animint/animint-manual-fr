@@ -145,6 +145,7 @@ plage (ou étendue ou intervalle),range
 retraçage (ou rafraichissement),redraw
 expression régulière,regex
 expression régulière,regular expression
+afficher,render
 signaler,report
 dépôt,repository
 résidus,residuals
@@ -162,6 +163,7 @@ séquence,sequence
 latte (dans lattice),shingle
 sortie par défaut,sink
 taille,size
+dessin,sketch
 dessiner,sketching
 matrice anti-symétrique,skew-symmetric
 caractère barre oblique droite '/',slash
@@ -212,5 +214,3 @@ pondération,weight
 répertoire de travail,working directory
 environnement de travail,workspace
 emballage,wrapup
-afficher,render
-dessin,sketch
