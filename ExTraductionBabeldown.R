@@ -14,6 +14,10 @@ install.packages('babeldown',
                  repos = c('https://ropensci.r-universe.dev',
                            'https://cloud.r-project.org'))
 
+install.packages("aeolus",
+                 repos = c("https://packages.ropensci.org",
+                           "https://cloud.r-project.org"))
+
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_KEY = "3be8c59d-9e13-4022-a7d8-30cd5bf3a9b6:fx")
@@ -34,22 +38,47 @@ Translate_FR_EN <- function(file_name = "README",
                             file_extension = ".md",
                             source_filepath = path_github_animint2,
                             dest_filepath = path_local_animint2_fr,
+                            #UpdateDoc = FALSE, # maj du doc traduit ou creation dun nouveau doc traduit
                             ajoutFR = TRUE) {
     
-  # Création d'un fichier temporaire
-    temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
-                          fileext = file_extension)
-    
-  # Téléchargement du fichier
-    download.file(url = paste0(source_filepath,"/",file_name,file_extension),
-                  destfile = temp_file,
-                  mode = "wb")
+
     
   # Traduction utilisant babeldown et le glossaire maison  
     output_path <- paste0(dest_filepath,
                           "/",file_name,ifelse(ajoutFR,"_FR",""),file_extension)
     
-    if(file_extension == ".qmd"){
+    
+    # Définition du répertoire temporaire et suppression des anciens fichiers
+    temp_dir <- tempdir()
+    existing_temp_files <- list.files(temp_dir, pattern = paste0(file_name, "_Temp"), full.names = TRUE)
+    
+  #  if(UpdateDoc == TRUE) {
+  #    
+  #    babeldown::deepl_update(
+  #      path = existing_temp_files,
+  #      source_lang = "EN",
+  #      target_lang = "FR",
+  #      out_path = output_path,
+  #      glossary_name = "animint-manual-glossaire-fr-en")
+      
+  #  } else {
+      
+      if (length(existing_temp_files) > 0) {
+        file.remove(existing_temp_files)
+      }
+      
+      # Création d'un fichier temporaire
+      temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
+                            fileext = file_extension)
+      
+      # Téléchargement du fichier
+      download.file(url = paste0(source_filepath,"/",file_name,file_extension),
+                    destfile = temp_file,
+                    mode = "wb")
+      
+      aeolus::unleash(temp_file,temp_file)
+    
+    if(file_extension == ".qmd") {
       
       babeldown::deepl_translate_quarto(
         path = temp_file,
@@ -59,16 +88,16 @@ Translate_FR_EN <- function(file_name = "README",
         glossary_name = "animint-manual-glossaire-fr-en"
       )
       
-      
     } else {
       
-      babeldown::deepl_translate(
-        path = temp_file,
-        source_lang = "EN",
-        target_lang = "FR",
-        out_path = output_path,
-        glossary_name = "animint-manual-glossaire-fr-en")
-    }
+        babeldown::deepl_translate(
+          path = temp_file,
+          source_lang = "EN",
+          target_lang = "FR",
+          out_path = output_path,
+          glossary_name = "animint-manual-glossaire-fr-en")
+      }
+   # }
     
   # Lire le fichier traduit
     translated_text <- readLines(output_path, encoding = "UTF-8")
@@ -88,9 +117,8 @@ Translate_FR_EN <- function(file_name = "README",
     writeLines(updated_text, output_path, useBytes = TRUE)
     
   # Supprimer le fichier temporaire
-    unlink(temp_file)
+    #unlink(temp_file)
     
-
   }
 
 # Traduction du README avec la fonction Translate_FR_EN
@@ -108,4 +136,6 @@ Translate_FR_EN(file_name = "Ch03-showSelected",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
-                ajoutFR = FALSE)
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+                )

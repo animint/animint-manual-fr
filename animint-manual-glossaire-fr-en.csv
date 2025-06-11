@@ -65,7 +65,7 @@ vidage,flush
 fork,fork
 formule,formula
 cadre,frame
-éléments graphiques,geoms
+geom,geom
 giga octets,GiB
 manipulateur de données,handler
 hachage,hashing
@@ -168,10 +168,11 @@ dessiner,sketching
 matrice anti-symétrique,skew-symmetric
 caractère barre oblique droite '/',slash
 slot,slot
+transitions fluides,smooth transitions
 capture d'écran,snapshot
 connecteur logiciel (socket),socket
 source,source
-fourni (ou choisi ou donné ou spécifier),specified
+spécifier,specify
 pile,stack
 écart-type,standard deviation
 strate,stratum
