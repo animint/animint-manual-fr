@@ -32,6 +32,48 @@ if (FALSE) { # \dontrun{
   )
 } # }
 
+adapted_unleash <- function(path, new_path = path) {
+  if (!file.exists(path)) {
+    cli::cli_abort("Can't find path {path}.")
+  }
+  
+  handle_node <- aeolus:::handle_node
+  yarn <- tinkr::yarn$new(path, sourcepos = TRUE)
+  
+  nodes <- xml2::xml_find_all(yarn$body, ".//d1:paragraph[not(d1:image)] | .//d1:list/d1:item")
+  
+  purrr::walk(nodes, function(node) {
+    text_nodes <- xml2::xml_find_all(node, "./d1:text")
+    if (length(text_nodes) == 0) return()
+    
+    texts <- xml2::xml_text(text_nodes)
+    
+    combined <- character()
+    for (text in texts) {
+      if (length(combined) == 0) {
+        combined <- c(combined, text)
+      } else {
+        prev <- combined[length(combined)]
+        
+        # Check if the previous line ends a sentence or link
+        if (grepl("(\\.|\\?|!|\\])\\s*$", prev) || grepl("^[A-Z\\[]", text)) {
+          combined <- c(combined, text)
+        } else {
+          combined[length(combined)] <- paste0(prev, " ", text)
+        }
+      }
+    }
+    
+    purrr::walk(text_nodes, xml2::xml_remove)
+    for (line in combined) {
+      xml2::xml_add_child(node, "text", line)
+    }
+  })
+  
+  yarn$write(new_path)
+  invisible(new_path)
+}
+
 # Fonction de la traduction FR <- EN utilisant babeldown
 
 Translate_FR_EN <- function(file_name = "README",
@@ -76,7 +118,8 @@ Translate_FR_EN <- function(file_name = "README",
                     destfile = temp_file,
                     mode = "wb")
       
-      aeolus::unleash(temp_file,temp_file)
+      adapted_unleash(temp_file,temp_file)
+      #aeolus::unleash(temp_file,temp_file)
     
     if(file_extension == ".qmd") {
       
