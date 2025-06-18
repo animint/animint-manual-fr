@@ -20,7 +20,7 @@ install.packages("aeolus",
 
 # Clé API de Jeremi pour DEEPL
 
-Sys.setenv(DEEPL_API_KEY = "3be8c59d-9e13-4022-a7d8-30cd5bf3a9b6:fx")
+Sys.setenv(DEEPL_API_KEY = "cfeb8f36-48c1-45df-95c5-dfa4a9d88d8a:fx")
 
 # MAJ du glossaire
 
