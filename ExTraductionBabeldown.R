@@ -20,7 +20,9 @@ install.packages("aeolus",
 
 # Clé API de Jeremi pour DEEPL
 
-Sys.setenv(DEEPL_API_KEY = "cfeb8f36-48c1-45df-95c5-dfa4a9d88d8a:fx")
+Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
+Sys.setenv(DEEPL_AUTH_KEY = "a9cde247-5a66-4fd1-ac8d-399c3c0d149b")
+
 
 # MAJ du glossaire
 
@@ -32,47 +34,76 @@ if (FALSE) { # \dontrun{
   )
 } # }
 
-adapted_unleash <- function(path, new_path = path) {
+
+
+adapted_unleash <- function(path,
+                            new_path = path,
+                            showCombinedText = FALSE) {
   if (!file.exists(path)) {
     cli::cli_abort("Can't find path {path}.")
   }
   
-  handle_node <- aeolus:::handle_node
   yarn <- tinkr::yarn$new(path, sourcepos = TRUE)
   
-  nodes <- xml2::xml_find_all(yarn$body, ".//d1:paragraph[not(d1:image)] | .//d1:list/d1:item")
+  nodes <- xml2::xml_find_all(
+    yarn$body,
+    ".//d1:paragraph[not(.//d1:image)]"
+  )
   
   purrr::walk(nodes, function(node) {
-    text_nodes <- xml2::xml_find_all(node, "./d1:text")
-    if (length(text_nodes) == 0) return()
+    children <- xml2::xml_children(node)
+    if (length(children) == 0) return()
     
-    texts <- xml2::xml_text(text_nodes)
+    combined_md <- ""
     
-    combined <- character()
-    for (text in texts) {
-      if (length(combined) == 0) {
-        combined <- c(combined, text)
-      } else {
-        prev <- combined[length(combined)]
-        
-        # Check if the previous line ends a sentence or link
-        if (grepl("(\\.|\\?|!|\\])\\s*$", prev) || grepl("^[A-Z\\[]", text)) {
-          combined <- c(combined, text)
-        } else {
-          combined[length(combined)] <- paste0(prev, " ", text)
+    for (child in children) {
+      tag <- xml2::xml_name(child)
+      
+      if (tag == "link") {
+        link_text <- xml2::xml_text(child)
+        href <- xml2::xml_attr(child, "destination")
+        if (is.na(href) || href == "") {
+          href <- xml2::xml_attr(child, "target")
         }
+        if (is.na(href) || href == "") {
+          href <- xml2::xml_attr(child, "href")
+        }
+        if (!is.na(href) && href != "") {
+          content <- paste0("[", link_text, "](", href, ")")
+        } else {
+          content <- link_text
+        }
+      } else if (tag == "code") {
+        content <- paste0("`", xml2::xml_text(child), "`")
+      } else {
+        content <- xml2::xml_text(child)
       }
+      
+      combined_md <- paste0(combined_md, content, " ")
     }
     
-    purrr::walk(text_nodes, xml2::xml_remove)
-    for (line in combined) {
-      xml2::xml_add_child(node, "text", line)
+    combined_md <- trimws(combined_md)
+    
+    if (showCombinedText) {
+      message("Paragraph: ", combined_md)
     }
+    
+    xml2::xml_remove(xml2::xml_children(node))
+    xml2::xml_add_child(node, "text", combined_md)
   })
   
   yarn$write(new_path)
+  
+  # POST-PROCESS output to strip escaping backslashes before [ ] ( ), and also backticks `
+  out_lines <- readLines(new_path, encoding = "UTF-8", warn = FALSE)
+  out_lines_clean <- gsub("\\\\(\\[|\\]|\\(|\\)|`)", "\\1", out_lines)
+  writeLines(out_lines_clean, new_path, useBytes = TRUE)
+  
   invisible(new_path)
 }
+
+
+
 
 # Fonction de la traduction FR <- EN utilisant babeldown
 
@@ -164,6 +195,77 @@ Translate_FR_EN <- function(file_name = "README",
     
   }
 
+
+Test_it <- function(file_name = "README",
+                            file_extension = ".md",
+                            source_filepath = path_github_animint2,
+                            dest_filepath = path_local_animint2_fr,
+                            #UpdateDoc = FALSE, # maj du doc traduit ou creation dun nouveau doc traduit
+                            ajoutFR = TRUE) {
+  
+  
+  
+  # Traduction utilisant babeldown et le glossaire maison  
+  output_path <- paste0(dest_filepath,
+                        "/",file_name,ifelse(ajoutFR,"_FR_TEST_IT","_TEST_IT"),file_extension)
+  
+  
+  # Définition du répertoire temporaire et suppression des anciens fichiers
+  temp_dir <- tempdir()
+  existing_temp_files <- list.files(temp_dir, pattern = paste0(file_name, "_Temp"), full.names = TRUE)
+  
+  #  if(UpdateDoc == TRUE) {
+  #    
+  #    babeldown::deepl_update(
+  #      path = existing_temp_files,
+  #      source_lang = "EN",
+  #      target_lang = "FR",
+  #      out_path = output_path,
+  #      glossary_name = "animint-manual-glossaire-fr-en")
+  
+  #  } else {
+  
+  if (length(existing_temp_files) > 0) {
+    file.remove(existing_temp_files)
+  }
+  
+  # Création d'un fichier temporaire
+  temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
+                        fileext = file_extension)
+  
+  # Téléchargement du fichier
+  download.file(url = paste0(source_filepath,"/",file_name,file_extension),
+                destfile = temp_file,
+                mode = "wb")
+  
+  adapted_unleash(temp_file,temp_file)
+  #aeolus::unleash(temp_file,temp_file)
+  
+  file.copy(temp_file, output_path, overwrite = TRUE)
+  
+  
+  # Lire le fichier traduit
+  translated_text <- readLines(output_path, encoding = "UTF-8")
+  
+  
+  # Détecter les lignes de formatage YAML (triple tiret "---")
+  yaml_end <- which(translated_text == "---")[2]  # Trouver la fin du YAML (deuxième occurrence)
+  
+  
+  # Ajouter le header personnalisé
+  header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "TEST IT /n Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
+  
+  # Assembler le nouveau contenu
+  updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
+  
+  # Écrire le contenu modifié dans le fichier
+  writeLines(updated_text, output_path, useBytes = TRUE)
+  
+  # Supprimer le fichier temporaire
+  #unlink(temp_file)
+  
+}
+
 # Traduction du README avec la fonction Translate_FR_EN
 
 Translate_FR_EN(file_name = "README",
@@ -182,3 +284,11 @@ Translate_FR_EN(file_name = "Ch03-showSelected",
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
                 )
+
+Test_it(file_name = "Ch03-showSelected",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
