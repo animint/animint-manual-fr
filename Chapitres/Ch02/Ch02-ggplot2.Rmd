@@ -1,106 +1,57 @@
 ---
-title: Grammar of graphics
+title: Grammaire graphique
 layout: default
 output: bookdown::html_chapter
 ---
 
-# Chapter 2, data visualization using the grammar of graphics {#chapter-2}
+
+
+Traduction de [English](https://github.com/tdhock/animint-book/)
+[Ch02-ggplot2](https://raw.githubusercontent.com/tdhock/animint-book/refs/heads/master/Ch02-ggplot2.Rmd)
+
+
+# Chapitre 2, visualisation de données à l'aide de la grammaire graphique {#chapter-2}
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch02-figures/")
 ```
 
-This chapter explains the grammar of graphics, which is a powerful
-model for describing a large class of data visualizations. After
-reading this chapter, you will be able to
+Ce chapitre explique la grammaire des graphiques, qui est un modèle puissant pour décrire une grande classe de visualisations de données. Après avoir lu ce chapitre, vous serez en mesure de
 
-* State the advantages of the grammar of graphics relative to previous
-  plotting systems
-* Install the animint2 R package 
-* Translate plot sketches into ggplot code in R
-* Render ggplots on web pages using animint2
-* Create multi-layer ggplots
-* Create multi-panel ggplots
+- citer les avantages de la grammaire graphique par rapport aux systèmes de tracé précédents
+- Installer le package R animint2
+- Traduire les dessins de graphe en code ggplot dans R
+- Afficher des ggplots sur des pages web en utilisant animint2
+- Créer des ggplots multicouches
+- Créer des ggplots multi-panneaux
 
-## History and purpose of the grammar of graphics {#history}
+## Historique des commandes et objectif de la grammaire graphique {#history}
 
-Most computer systems for data analysis provide functions for creating
-plots to visualize patterns in data. The oldest systems provide very
-general functions for drawing basic plot components such as lines and
-points (e.g. the `graphics` and `grid` packages in R). If you use one
-of these general systems, then it is your job to put the components
-together to form a meaningful, interpretable plot. The advantage of
-general systems is that they impose few limitations on what kinds of
-plots can be created. The disadvantage is that general systems
-typically do not provide functions for automating common plotting
-tasks (axes, panels, legends).
+La plupart des systèmes informatiques d'analyse de données proposent des fonctions permettant de créer des graphes afin de visualiser les motifs des données. Les systèmes les plus anciens proposent des fonctions très générales permettant de dessiner les éléments de base d'un graphe, tels que des lignes et des points (par exemple, la fonction `graphics`  et `grid`  dans R). Si vous utilisez l'un de ces systèmes généraux, c'est à vous qu'il incombe d'assembler les composants pour former un graphe significatif et interprétable. L'avantage des systèmes généraux est qu'ils imposent peu de limites aux types de tracés qui peuvent être créés. L'inconvénient est que les systèmes généraux ne fournissent généralement pas de fonctions permettant d'automatiser les tâches courantes de tracé (axes, panneaux, légendes).
 
-To overcome the disadvantages of these general plotting systems,
-charting packages such as `lattice` were developed
-([Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html)). Such
-packages have several pre-defined chart types, and provide a dedicated
-function for creating each chart type. For example, `lattice` provides
-the `bwplot` function for making box and whisker plots. The advantage
-of such systems is that they make it much easier to create entire
-plots, including a legend and panels. The disadvantage is the set of
-pre-defined chart types, which means that it is not easy to create
-more complex graphics.
+Pour pallier les inconvénients de ces systèmes de tracé généraux, des packages de tracé tels que `lattice`  ont été développés ( [Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html) ). Ces packages disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chaque type de graphique. Par exemple, `lattice`  fournit la fonction `bwplot`  pour créer des graphes en boîte et des graphes avec des lignes de démarcation. L'avantage de ces systèmes est qu'ils facilitent grandement la création de tracés entiers, y compris une légende et des panneaux. L'inconvénient est l'ensemble des types de graphiques prédéfinis, ce qui signifie qu'il n'est pas facile de créer des graphiques plus complexes.
 
-Newer plotting systems based on the grammar of graphics are situated
-between these two extremes. Wilkinson proposed the grammar of graphics
-in order to describe and create a large class of plots
-([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)). Wickham
-later implemented several ideas from the grammar of graphics in the
-`ggplot2` R package
-([Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20)). The
-`ggplot2` package has several advantages with respect to previous
-plotting systems.
+Les nouveaux systèmes de tracé basés sur la grammaire graphique se situent entre ces deux extrêmes. Wilkinson a proposé la grammaire des graphiques afin de décrire et de créer une grande classe de graphes ( [Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952) ). Wickham a implémenté plus tard plusieurs idées de la grammaire graphique dans le projet `ggplot2`  package R ( [Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20) ). Les `ggplot2`  présentent plusieurs avantages par rapport aux systèmes de tracé précédents.
 
-* Like general plotting systems, and unlike `lattice`, `ggplot2`
-  imposes few limitations on the types of plots that can be created
-  (there are no pre-defined chart types).
-* Unlike general plotting systems, and like `lattice`, `ggplot2` makes
-  it easy to include common plot elements such as axes, panels, and
-  legends.
-* Since `ggplot2` is based on the grammar of graphics, an explicit
-  mapping of data variables to visual properties is required. Later in
-  this chapter, we will explain how this mapping allows sketches of
-  plot ideas to be directly translated into R code.
+- Comme les systèmes de tracé généraux, et à la différence de `lattice` , `ggplot2`  impose peu de limites aux types de tracés qui peuvent être créés (il n'y a pas de types de graphiques prédéfinis).
+- Contrairement aux systèmes de tracé généraux, et à l'instar de `lattice` , `ggplot2`  permet d'inclure facilement des éléments de graphe courants tels que des axes, des panneaux et des légendes.
+- Depuis que `ggplot2`  est basé sur la grammaire des graphiques, il est nécessaire de mapper explicitement les variables de données aux propriétés visuelles. Plus loin dans ce chapitre, nous expliquerons comment ce mappage permet de dessiner des idées de graphe qui peuvent être directement traduites en code R.
 
-Finally, all of the previously discussed plotting systems are intended
-for creating *static* graphics, which can be viewed equally well on a
-computer screen or on paper. However, the main topic of this manual is
-`animint2`, an R package for *interactive* graphics. In contrast to
-static graphics, interactive graphics are best viewed on a computer
-with a mouse and keyboard that can be used to interact with the plot.
+Enfin, tous les systèmes de tracé évoqués précédemment sont destinés à la création de graphiques statiques, qui peuvent être visualisés aussi bien sur un écran d'ordinateur que sur du papier. Cependant, le sujet principal de ce manuel est `animint2` un package R pour les graphiques interactifs. Contrairement aux graphiques statiques, les graphiques interactifs sont mieux visualisés sur un ordinateur équipé d'une souris et d'un clavier permettant d'interagir avec le graphe.
 
-Since many concepts from static graphics are also useful in
-interactive graphics, the `animint2` package is implemented as an
-extension/fork of `ggplot2`. In this chapter we will introduce the main
-features of `ggplot2` which will also be useful for interactive plot
-design in later chapters.
+Étant donné que de nombreux concepts des graphiques statiques sont également utiles dans les graphiques interactifs, le programme `animint2`  est implémenté en tant qu'extension/fork du package `ggplot2` . Dans ce chapitre, nous présenterons les principales caractéristiques de `ggplot2`  qui seront également utiles pour la conception de graphes interactifs dans les chapitres suivants.
 
-In 2013, we created the animint package, which depends on the ggplot2
-package. However during 2014-2017, the ggplot2 package introduced many
-changes that were incompatible with the interactive grammar of
-animint. Therefore in 2018 we created the animint2 package which
-copies/forks the relevant parts of the ggplot2 package. Now animint2
-can be used without having ggplot2 installed. In fact, it is
-recommended to use animint2 without attaching (via library) 
-ggplot2. However it is fine to use animint2 along with packages that
-import/load ggplot2. For an example, see
-[Chapter 16](Ch16-change-point.html), which uses the penaltyLearning
-package (which imports ggplot2).
+En 2013, nous avons créé le package animint, qui dépend du package ggplot2. Cependant, au cours de la période 2014-2017, le package ggplot2 a introduit de nombreux changements qui étaient incompatibles avec la grammaire interactive de animint. Par conséquent, en 2018, nous avons créé le package animint2 qui copie/fourche les parties pertinentes du package ggplot2. Maintenant, animint2 peut être utilisé sans que ggplot2 soit installé. En fait, il est recommandé d'utiliser animint2 sans attacher (via la bibliothèque) ggplot2. Cependant, il est possible d'utiliser animint2 avec des packages qui importent/chargent ggplot2. Pour un exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le package penaltyLearning (qui importe ggplot2).
 
-## Installing and attaching animint2 {#installing}
+## Installer et attacher animint2 {#installing}
 
-To install the most recent release of `animint2` from CRAN,
+Pour installer la version la plus récente de `animint2`  à partir du CRAN,
 
 ```{r installCRAN}
 if(!requireNamespace("animint2"))install.packages("animint2")
 ```
 
-To install an even more recent development version of `animint2` from GitHub,
+Pour installer une version de développement encore plus récente de `animint2`  depuis GitHub,
 
 ```{r installGitHub}
 if(!requireNamespace("animint2")){
@@ -109,18 +60,15 @@ if(!requireNamespace("animint2")){
 }
 ```
 
-Once you have installed animint2, you can load and attach all of its
-exported functions via:
+Une fois que vous avez installé animint2, vous pouvez charger et attacher toutes ses fonctions exportées via :
 
 ```{r attach}
 library(animint2)
 ```
 
-## Translating plot sketches into ggplots {#sketching}
+## Traduire des dessins de tracés en ggplots {#sketching}
 
-This section explains how to translate a plot sketch into R 
-code. We use a data set from the World Bank as an example, and we
-begin by loading and looking at a subset these data.
+Cette section explique comment traduire un dessin de graphe en code R. Nous utilisons un ensemble de données de la Banque mondiale comme exemple, et nous commençons par charger et examiner un sous-ensemble de ces données.
 
 ```{r data}
 data(WorldBank, package="animint2")
@@ -130,38 +78,20 @@ tail(WorldBank)
 dim(WorldBank)
 ```
 
-The `WorldBank` data set consist of measures such as fertility rate
-and life expectancy for each country over the period 1960-2010. The
-code above prints the first and last few rows, and the dimension of
-the data table
-(`r nrow(WorldBank)` rows and `r ncol(WorldBank)` columns).
+Les `WorldBank`  consiste en des mesures telles que le taux de fécondité et l'espérance de vie pour chaque pays sur la période 1960-2010. Le code ci-dessus imprime les premières et dernières lignes, ainsi que la dimension du tableau de données ( `r nrow(WorldBank)`  lignes et `r ncol(WorldBank)`  colonnes).
 
-Suppose that we are interested to see if there is any relationship
-between life expectancy and fertility rate. We could fix one year,
-then use those two data variables in a scatterplot. Consider the
-figure below which sketches the main components of that data
-visualization.
+Supposons que nous voulions voir s'il existe une relation entre l'espérance de vie et le taux de fécondité. Nous pourrions fixer une année, puis utiliser ces deux variables de données dans un nuage de points. La figure ci-dessous dessine les principaux éléments de cette visualisation de données.
 
-![World Bank scatterplot](Ch02-viz-scatter.png)
+![Diagramme de dispersion de la Banque mondiale](Ch02-viz-scatter.png)
 
-The sketch above shows life expectancy on the horizontal (x) axis,
-fertility rate on the vertical (y) axis, and a legend for the
-region. These elements of the sketch can be directly translated into R
-code using the following method. First, we need to construct a data
-table that has one row for every country in 1975, and columns named
-`life.expectancy`, `fertility.rate`, and `region`. The `WorldBank`
-data already has these columns, so all we need to do is consider the
-subset for the year 1975:
+Le dessin ci-dessus montre l'espérance de vie sur l'axe horizontal (x), le taux de fécondité sur l'axe vertical (y) et une légende pour la région. Ces éléments du dessin peuvent être directement traduits en code R à l'aide de la méthode suivante. Tout d'abord, nous devons construire un tableau de données comportant une ligne pour chaque pays en 1975, et des colonnes nommées `life.expectancy` , `fertility.rate` , et `region` . Les `WorldBank`  possèdent déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
 
 ```{r head}
 WorldBank1975 <- subset(WorldBank, year==1975)
 head(WorldBank1975)
 ```
 
-The code above prints the data for 1975, which clearly has the
-appropriate columns, and one row for each country. The next step is to
-use the notes in the sketch to code a ggplot with a corresponding
-`aes` or aesthetic mapping of data variables to visual properties:
+Le code ci-dessus imprime les données pour 1975, qui ont clairement les colonnes appropriées, et une ligne pour chaque pays. L'étape suivante consiste à utiliser les notes du dessin pour coder un ggplot avec une fonction correspondante de `aes`  ou un mappage esthétique des variables de données aux propriétés visuelles :
 
 ```{r scatter}
 scatter <- ggplot()+
@@ -171,62 +101,29 @@ scatter <- ggplot()+
 scatter
 ```
 
-The `aes` function is called with names for visual properties (`x`,
-`y`, `color`) and values for the corresponding data variables
-(`life.expectancy`, `fertility.rate`, `region`). This mapping is
-applied to the variables in the `WorldBank1975` data table, in order
-to create the visual properties of the `geom_point`. The ggplot was
-saved as the `scatter` object, which when printed on the R command
-line shows the plot on a graphics device. Note that we automatically
-have a `region` color legend.
+Le `aes`  est appelée avec les noms des propriétés visuelles ( `x` , `y` , `color` ) et les valeurs des variables de données correspondantes ( `life.expectancy` , `fertility.rate` , `region` ). Ce mappage est appliqué aux variables de la `WorldBank1975`  tableau de données, afin de créer les propriétés de visualisation de la `geom\_point` . Le ggplot a été sauvegardé en tant que fichier `scatter`  qui, lorsqu'il est imprimé sur la ligne de commande R, affiche le graphe sur un périphérique graphique. Notez que nous avons automatiquement un objet `region`  légende en couleur.
 
-## Rendering ggplots on web pages using animint {#rendering-with-animint}
+## Afficher des ggplots sur des pages web à l'aide d'animint {#rendering-with-animint}
 
-This section explains how the `animint2` package can be used to render
-ggplots on web pages. The ggplot from the previous section can be
-rendered with animint2, by using the `animint` function.
+Cette section explique comment l'outil `animint2`  peut être utilisé pour afficher des ggplots sur des pages web. Le ggplot de la section précédente peut être affiché avec animint2, en utilisant l'option `animint`  en utilisant la fonction
 
 ```{r Ch02-scatter}
 animint(scatter)
 ```
 
-If, when you run the code above, the animint does not render in your web 
-browser for some reason (for example if you see a blank web page), then
-please consult our [wiki FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank)
-which will help you find a solution.
-Internally, the `animint` function creates a list of class animint,
-and then R runs the `print.animint` function via the [S3 object
-system](http://adv-r.had.co.nz/OO-essentials.html#s3). The `animint2`
-package implements a compiler that takes the list as input, and
-outputs a web page with a data visualization. 
-The compiler is the `animint2dir` function, which compiles the animint
-`scatter.viz` list to a directory of data and code files that can be
-rendered in a web browser.
-It is activated automatically by the `print.animint` function.
+Si, lorsque vous exécutez le code ci-dessus, l'animint ne s'affiche pas dans votre explorateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre section [FAQ wiki](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank)  qui vous aidera à trouver une solution.  En interne, l'animint `animint`  crée une liste de classes animint, puis R exécute la fonction `print.animint`  via la fonction [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3) . Le système `animint2`  implémente un compilateur qui prend la liste en entrée et produit une page web avec une visualisation de données.  Le compilateur est le paquet `animint2dir`  qui compile l'animint `scatter.viz`  en un répertoire de fichiers de données et de code qui peuvent être affichés dans un explorateur web.  Elle est activée automatiquement par la fonction `print.animint`  fonction.
 
-When viewed in a web browser, the animint plot should look mostly the
-same as static versions produced by standard R graphics devices. One
-difference is that the region legend is interactive: clicking a legend
-entry will hide or show the points of that color.
+Lorsqu'il est visualisé dans un explorateur web, le graphe animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard. Une différence est que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
 
-**Exercise**: try changing the `aes` mapping of the ggplot, and then
-making a new animint. Quantitative variables like `population` are
-best shown using the `x`/`y` axes or point `size`. Qualitative
-variables like `lending` are best shown using point `color` or `fill`.
+Exercice : essayez de modifier la valeur de `aes`  de la cartographie du ggplot, puis de créer une nouvelle animint. Les variables quantitatives comme `population`  sont mieux représentées à l'aide de la fonction `x` / `y`  ou le point `size` . Les variables qualitatives comme `lending`  sont mieux représentées en utilisant le point `color`  ou `fill` .
 
-## Multi-layer data visualization (multiple geoms) {#multi-layer}
+## Visualisation de données multicouches (plusieurs geoms) {#multi-layer}
 
-Multi-layer data visualization is useful when you want to display
-several different geoms or data sets in the same plot. For example,
-consider the following sketch which adds a `geom_path` to the previous
-data visualization.
+La visualisation de données multicouches est utile lorsque vous souhaitez afficher plusieurs geoms ou ensembles de données différents dans le même graphe. Par exemple, considérons le dessin suivant qui ajoute une couche de `geom\_path`  à la visualisation de données précédente.
 
-![multi-layer WorldBank data viz](Ch02-two-layer-viz.png)
+![Visualisation multicouche des données de la Banque mondiale](Ch02-two-layer-viz.png)
 
-Note how the sketch above includes two different geoms (point and
-path). The two geoms share a common definition of the `x`, `y`, and
-`color` aesthetics, but have different data sets. Below we translate
-this sketch into R code.
+Notez que le dessin ci-dessus comprend deux geoms différents (point et chemin). Les deux geoms partagent une définition commune de l'élément `x` , `y` , et `color`  esthétique, mais avec des ensembles de données différents. Nous traduisons ci-dessous ce dessin en code R.
 
 ```{r Ch02-two-layer-viz}
 WorldBankBefore1975 <- subset(WorldBank, 1970 <= year & year <= 1975)
@@ -240,36 +137,18 @@ two.layers <- scatter+
 (viz.two.layers <- animint(two.layers))
 ```
 
-Note that we save the return value of the `animint` function to the
-`viz.two.layers` object (which is also printed due to the
-parentheses). In this manual we will often use variable names that
-start with `viz` to denote animint data visualization objects, which
-are in fact lists of ggplots and options.
+Notez que nous sauvegardons la valeur de retour (abcd -> dcba) (d'une fonction). `animint`  dans le fichier `viz.two.layers`  (qui est également imprimée en raison des parenthèses). Dans ce manuel, nous utiliserons souvent des noms de variables commençant par `viz`  pour désigner les objets de visualisation de données animint, qui sont en fait des listes de ggplots et d'options.
 
-The plot above shows a data visualization with 2 geoms/layers: 
+Le graphe ci-dessus montre une visualisation de données avec 2 geoms/couches :
 
-* the `geom_point` shows the life expectancy, fertility rate, and
-  region of all countries in 1975.
-* the `geom_path` shows the same variables for the previous 5 years.
+- le `geom\_point`  montre l'espérance de vie, le taux de fécondité et la région de tous les pays en 1975.
+- L'espérance de vie, le taux de fécondité et la région de tous les pays en 1975. `geom\_path`  montre les mêmes variables pour les 5 années précédentes.
 
-The addition of the `geom_path` shows how the countries changed over
-time. In particular, it shows that most countries moved to the right
-and down, meaning higher life expectancy and lower fertility
-rate. However, there are some exceptions. For example, the two East
-Asian countries in the bottom left suffered a decrease in life
-expectancy over this period. And there are some countries which showed
-an increased fertility rate.
+L'ajout de la `geom\_path`  montre comment les pays ont changé au fil du temps. En particulier, il montre que la plupart des pays se sont déplacés vers la droite et vers le bas, ce qui signifie une espérance de vie plus élevée et un taux de fécondité plus faible. Il y a cependant quelques exceptions. Par exemple, les deux pays d'Asie de l'Est situés en bas à gauche ont vu leur espérance de vie diminuer au cours de cette période. Par ailleurs, certains pays ont vu leur taux de fécondité augmenter.
 
-**Exercise**: try changing the `region` legend to an `income`
-  legend. Hint: you need to use the same `aes(color=income)`
-  specification for all geoms. You may want to use
-  `scale_color_manual` with a sequential color palette, see
-  `RColorBrewer::display.brewer.all(type="seq")` and
-  [read the appendix for more
-  details](Ch99-appendix.html#manual-color-legends).
-  
-Can we add the names of the countries to the data viz? Below, we add
-another layer with a text label for each country's name.
+Exercice : essayez de changer le `region`  par une `income`  légende. Conseil : vous devez utiliser le même `aes(color=income)`  pour tous les geoms. Vous pouvez utiliser `scale\_color\_manual`  avec une palette de couleurs séquentielle, voir `RColorBrewer::display.brewer.all(type="seq")`  et [lire l'annexe pour plus de détails](Ch99-appendix.html#manual-color-legends) .
+
+Pouvons-nous ajouter les noms des pays à l'image de données ? Ci-dessous, nous ajoutons une autre couche avec une étiquette de texte pour le nom de chaque pays.
 
 ```{r Ch02-three-layer-viz}
 three.layers <- two.layers+
@@ -282,32 +161,17 @@ three.layers <- two.layers+
 animint(three.layers)
 ```
 
-This data viz is not so easy to read, since there are so many
-overlapping text labels. The interactive region legend helps a little,
-by allowing the user to hide data from selected regions. However, it
-would be even better if the user could show and hide the text for
-individual countries. That type of interaction can be achieved using
-the showSelected and clickSelects aesthetics which we explain in
-Chapters 3-4.
+Cette image de données n'est pas très facile à lire, car il y a beaucoup d'étiquettes de texte qui se chevauchent. La légende interactive des régions aide un peu, en permettant à l'utilisateur de masquer les données des régions sélectionnées. Cependant, ce serait encore mieux si l'utilisateur pouvait afficher et masquer le texte pour les pays individuels. Ce type d'interaction peut être réalisé en utilisant l'esthétique showSelected et clickSelects que nous expliquons dans les chapitres 3-4.
 
-For now, we move on to discuss a major strength of animint: data
-visualization with multiple linked plots.
+Pour l'instant, nous passons à l'examen d'un atout majeur d'animint : la visualisation de données à l'aide de plusieurs graphes liés.
 
-## Multi-plot data visualization {#multi-plot}
+## Visualisation de données en plusieurs graphes {#multi-plot}
 
-Multi-plot data visualization is useful when you want to show some
-related data sets using more than one aesthetic mapping. In
-interactive data visualization, one plot is often used to display a
-summary, and another plot is used to display details. For example,
-consider a data visualization with two plots: a time series with World
-Bank data from 1960-2010 (summary), and a scatterplot with data from
-1975 (details). We sketch the time series plot below.
+La visualisation de données à plusieurs graphes est utile lorsque vous souhaitez présenter des ensembles de données liés en utilisant plus d'un mappage esthétique. Dans la visualisation de données interactive, un graphe est souvent utilisé pour afficher un résumé et un autre pour afficher les détails. Prenons l'exemple d'une visualisation de données comportant deux graphes : une série chronologique avec les données de la Banque mondiale de 1960 à 2010 (résumé) et un nuage de points avec les données de 1975 (détails). Nous dessinons ci-dessous le graphe de la série chronologique.
 
-![WorldBank data viz with two plots](Ch02-viz-two-plots.png)
+![Visualisation des données de la Banque mondiale avec deux graphes](Ch02-viz-two-plots.png)
 
-Note how the sketch above can be directly translated into the R code
-below. 
-For simplicity, we first down-sample the data set to every five years (some web browsers like chromium are not able to display 10,000+ data points at once),
+Notez que le dessin ci-dessus peut être directement traduit dans le code R ci-dessous.  Pour plus de simplicité, nous commençons par réduire l'échantillonnage des données à tous les cinq ans (certains explorateurs web comme Chrome ne sont pas en mesure d'afficher plus de 10 000 points de données en une seule fois),
 
 ```{r}
 WorldBankSome <- subset(WorldBank, year %% 5 == 0)
@@ -315,10 +179,8 @@ dim(WorldBankSome)
 table(WorldBankSome$year)
 ```
 
-The table above shows that there are 214 rows for each of the years in the data set.
-Next we copy the existing viz list (`viz.two.layers`),
-then we assign a ggplot to a new element named `timeSeries`. 
-  
+Le tableau de contingence ci-dessus montre qu'il y a 214 lignes pour chacune des années de l'ensemble de données.  Ensuite, nous copions la liste de viz existante ( `viz.two.layers` ), puis nous assignons un ggplot à un nouvel élément nommé `timeSeries` .
+
 ```{r vizTwoPlots}
 viz.two.plots <- viz.two.layers
 viz.two.plots$timeSeries <- ggplot()+
@@ -330,82 +192,40 @@ viz.two.plots$timeSeries <- ggplot()+
     data=WorldBankSome)
 ```
 
-That results in a named list of two elements (both elements are
-ggplots with class `gganimint`).
+Il en résulte une liste nommée de deux éléments (les deux éléments sont des ggplots avec la classe `gganimint` ).
 
 ```{r summaryTwo}
 summary(viz.two.plots)
 ```
 
-This data visualization list can be printed/rendered by typing its
-name. Since the list contains two ggplots, `animint2`
-renders the data viz as two linked plots.
+Cette liste de visualisation de données peut être imprimée ou affichée en tapant son nom. Puisque la liste contient deux ggplots, `animint2`  affiche la visualisation de données sous la forme de deux graphes liés.
 
 ```{r Ch02-viz-two-plots}
 viz.two.plots
 ```
 
-The data visualization above contains two ggplots, which each map
-different data variables to the horizontal `x` axis. The time series
-uses `aes(x=year)`, and shows a summary of fertility rate values over
-all years. The scatterplot uses `aes(x=life.expectancy)`, and shows
-details of the relationship between fertility rate and life expectancy
-during 1975.
+La visualisation de données ci-dessus contient deux ggplots, qui mappent chacun des variables de données différentes sur le plan horizontal. `x`  l'axe horizontal. La série temporelle utilise `aes(x=year)` et montre un résumé des valeurs du taux de fécondité pour toutes les années. Le nuage de points utilise `aes(x=life.expectancy)` et montre les détails de la relation entre le taux de fécondité et l'espérance de vie en 1975.
 
-**Try** clicking a legend entry in either the scatterplot or the time
-series above. You should see the data and legends in both plots update
-simultaneously. Since `aes(color=Region)` was specified in both plots,
-animint creates a single shared selector variable called
-`Region`. Clicking either legend has the effect of updating the set of
-selected regions, and so animint updates the legends and data in both
-plots accordingly. This is the main mechanism that animint uses to
-create interactive data visualizations with linked plots, and will be
-discussed in more detail in the next two chapters.
+Essayez de cliquer sur une entrée de légende dans le nuage de points ou dans la série chronologique ci-dessus. Vous devriez voir les données et les légendes des deux graphes se mettre à jour simultanément. Depuis `aes(color=Region)`  a été spécifié dans les deux graphes, animint crée une seule variable de sélection partagée appelée `Region` . Cliquer sur l'une ou l'autre légende a pour effet de mettre à jour l'ensemble des régions sélectionnées, et animint met donc à jour les légendes et les données dans les deux graphes en conséquence. Il s'agit du principal mécanisme utilisé par animint pour créer des visualisations de données interactives avec des graphes liés, et il sera discuté plus en détail dans les deux prochains chapitres.
 
-**Exercise**: use animint to create a data viz with three plots, by
-  creating a list with three ggplots. For example, you could add a
-  time series of another data variable such as `life.expectancy` or
-  `population`.
-  
-Note that both ggplots map the fertility rate variable to the y
-axis. However, since they are separate plots, the ranges of their y
-axes are computed separately. That means that even when the two plots
-are rendered side-by-side, the two y axis are not exactly
-aligned. That is a problem since it would make it easier to decode the
-data visualization if each unit of vertical space was used to show the
-same amount of fertility rate. To achieve that effect, we use facets
-in the next section.
+Exercice : utilisez animint pour créer une visualisation de données avec trois graphes, en créant une liste avec trois ggplots. Par exemple, vous pourriez ajouter une série temporelle d'une autre variable de données telle que `life.expectancy`  ou `population` .
 
-## Multi-panel data visualization (facets) {#multi-panel}
+Notez que les deux ggplots mappent la variable taux de fécondité sur l'axe des y. Cependant, comme il s'agit de deux graphes distincts, les plages (ou étendues ou intervalles) de leurs axes des ordonnées sont calculées séparément. Cela signifie que même lorsque les deux graphes sont affichés côte à côte, les deux axes des ordonnées ne sont pas exactement alignés. C'est un problème car il serait plus facile de décoder la visualisation des données si chaque unité d'espace vertical était utilisée pour montrer la même quantité de taux de fécondité. Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 
-Panels or facets are sub-plots that show related data
-visualizations. One of the main strengths of ggplots is that different
-kinds of multi-panel plots are relatively easy to create. Multi-panel
-data visualization is useful for two different purposes:
+## Visualisation de données multi-panneaux (facettes) {#multi-panel}
 
-* You want to align the axes of several related plots containing
-  different geoms. This facilitates comparison between several
-  different geoms, and is a technique that is also useful for
-  interactive data visualization.
-* You want to divide the data from one geom into several panels. This
-  facilitates comparison between data subsets, and is less useful for
-  interactive data visualization (interactivity can often be used
-  instead, to achieve the same effect of comparing data subsets).
+Les panneaux ou facettes sont des sous-tracés qui présentent des visualisations de données connexes. L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphes à panneaux multiples. La visualisation de données multi-panneaux est utile pour deux raisons différentes :
 
-### Different geoms in each panel (aligned axes) {#aligned-axes}
-  
-We begin by explaining the how facets are useful to align the axes of
-related plots. Consider the sketch below which contains a plot with
-two panels.
+- Vous souhaitez aligner les axes de plusieurs tracés connexes contenant différents geoms. Cela facilite la comparaison entre plusieurs geoms différents et c'est une technique qui est également utile pour la visualisation interactive des données.
+- Vous souhaitez diviser les données d'un geom en plusieurs panneaux. Cette technique facilite la comparaison entre des sous-ensembles de données et est moins utile pour la visualisation interactive de données (l'interactivité peut souvent être utilisée à la place, pour obtenir le même effet de comparaison de sous-ensembles de données).
 
-![World Bank aligned plot](Ch02-viz-aligned.png)
+### Différents geom dans chaque panneau (axes alignés) {#aligned-axes}
 
-Note that the two panels plot different geoms using a panel-specific
-aesthetic mapping. The point and path in the left panel have
-`x=life.expectancy`, and the line in the right panel has
-`x=year`. Also note that we specified `facet=x.var`, so we need to add
-a variable called `x.var` to each of the three data sets. We translate
-this sketch to the R code below.
+Nous commençons par expliquer comment les facettes sont utiles pour aligner les axes de graphiques apparentés. Considérons le dessin ci-dessous qui contient un graphe avec deux panneaux.
+
+![Banque mondiale alignée sur le gracé](Ch02-viz-aligned.png)
+
+Notez que les deux panneaux tracent des geoms différents à l'aide d'une cartographie esthétique spécifique au panneau. Le point et le chemin d'accès dans le panneau de gauche ont `x=life.expectancy` et la ligne du panneau de droite a `x=year` . Notez également que nous avons spécifié `facet=x.var` nous devons donc ajouter une variable appelée `x.var`  à chacun des trois ensembles de données. Nous traduisons ce dessin en code R ci-dessous.
 
 ```{r Ch02-viz-aligned}
 add.x.var <- function(df, x.var){
@@ -429,61 +249,30 @@ add.x.var <- function(df, x.var){
     facet_grid(. ~ x.var, scales="free")))
 ```
 
-The data visualization above contains a single ggplot with two panels
-and three layers. The left panel shows the `geom_point` and
-`geom_path`, and the right panel shows the `geom_line`. The panels
-have a shared axis for fertility rate, which ensures that the lines in
-the time series panel can be directly compared with the points and
-paths in the scatterplot panel.
+La visualisation de données ci-dessus contient un seul ggplot avec deux panneaux et trois couches. Le panneau de gauche montre les `geom\_point`  et `geom\_path` et le panneau de droite montre les `geom\_line` . Les panneaux ont un axe commun pour le taux de fécondité, ce qui permet de comparer directement les lignes du panneau des séries chronologiques avec les points et les chemins du panneau du nuage de points.
 
-Note that we used the `add.x.var` function to add a
-`x.var` variable to each data set, and then we used that
-variable in `facet_grid(scales="free")`. We call this the
-[addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet),
-which is generally useful for creating a multi-panel data
-visualization with aligned axes. In particular, if we wanted to change
-the order of the panels in the data visualization, we would only need
-to edit the order of the factor levels in the definition of
-`add.x.var`.
+Il est à noter que nous avons utilisé le `add.x.var`  pour ajouter un `x.var`  à chaque ensemble de données, puis nous avons utilisé cette variable dans la fonction `facet\_grid(scales="free")` . Nous appelons cela la fonction [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) qui est généralement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés. En particulier, si nous voulions changer l'ordre des panneaux dans la visualisation de données, il nous suffirait de modifier l'ordre des niveaux de facteurs dans la définition de la facette `add.x.var` .
 
-Also note that `theme_bw` means to use black panel borders and white
-panel backgrounds, and `panel.margin=0` means to use no space between
-panels. Eliminating the space between panels means that more space
-will be used for the panels, which serves to emphasize the data. We
-call this the
-[Space saving facets idiom](Ch99-appendix.html#space-saving-facets), 
-which is generally useful in any ggplot with facets.
+Notez également que `theme\_bw`  signifie qu'il faut utiliser des bordures de panneaux noires et des fonds de panneaux blancs, et que `panel.margin=0`  signifie qu'il n'y a pas d'espace entre les panneaux. En éliminant l'espace entre les panneaux, on utilise plus d'espace pour les panneaux, ce qui permet d'accentuer les données. C'est ce que nous appelons le [idiome des facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
 
-In the data viz above, the text labels overlap a bit, which can be
-fixed by either (exercise for the reader)
+Dans l'image de données ci-dessus, les étiquettes de texte se chevauchent un peu, ce qui peut être corrigé par l'une ou l'autre des méthodes suivantes (exercice pour le lecteur)
 
-* using `breaks` argument of `scale_x_continuous()`
-* reducing text size with `theme()` and `element_text()`
-* increasing plot width using `theme_animint()`, see [Chapter 6](Ch06-other.html#plot-height-width) for more info.
+- en utilisant `breaks`  l'argument de `scale\_x\_continuous()`
+- la réduction de la taille du texte avec `theme()`  et `element\_text()`
+- l'augmentation de la largeur du gracé à l'aide de `theme\_animint()` voir [Chapitre 6](Ch06-other.html#plot-height-width)  pour plus d'informations.
 
-### Same geoms in each panel (compare data subsets) {#compare-data-subsets}
+### Mêmes geoms dans chaque panneau (réalisation de sous-ensembles de données) {#compare-data-subsets}
 
-The second reason for using plots with multiple panels in a data
-visualization is to compare subsets of observations. This facilitates
-comparison between data subsets, and can be used in at least two
-different situations:
+La deuxième raison d'utiliser des graphes avec plusieurs panneaux dans une visualisation de données est de comparer des sous-ensembles d'observations. Cela facilite la comparaison entre les sous-ensembles de données et peut être utilisé dans au moins deux situations différentes :
 
-* One geom's data set has too many observations to display
-  informatively in one panel.
-* You want to compare different subsets of data that is plotted for
-  one geom.
-  
-For example, consider the sketch below.
+- L'ensemble de données d'un geom comporte trop d'observations pour être affiché de manière informative dans un seul panneau.
+- Vous souhaitez comparer différents sous-ensembles de données tracées pour un geom.
 
-![World Bank panels plot](Ch02-viz-panels.png)
+Prenons l'exemple du dessin ci-dessous.
 
-Note that the three panels plot the same two geoms (point and
-path). Since `facet=show.year`, and there are three panels shown, we
-will need to create data tables which have three values for the
-`show.year` variable. The `geom_point` has data for just 3 years, and
-the `geom_path` has data for 15 years (but 3 values of
-`show.year`). The code below creates these two data sets for three
-years of the WorldBank data set.
+![Tracé des panels de la Banque mondiale](Ch02-viz-panels.png)
+
+Notez que les trois panneaux tracent les deux mêmes geoms (point et chemin). Puisque les `facet=show.year` et qu'il y a trois panneaux, nous devrons créer des tableaux de données qui auront trois valeurs pour la variable `show.year`  pour trois valeurs. Les `geom\_point`  ne contient des données que pour 3 ans, et le tableau `geom\_path`  a des données pour 15 ans (mais 3 valeurs de `show.year` ). Le code ci-dessous crée ces deux ensembles de données pour trois années de l'ensemble de données de la Banque mondiale.
 
 ```{r}
 show.point.list <- list()
@@ -498,16 +287,9 @@ show.point <- do.call(rbind, show.point.list)
 show.path <- do.call(rbind, show.path.list)
 ```
 
-We used a for loop over three values of `show.year`, the variable
-which we will use later in `facet_grid`. For each value of
-`show.year`, we store a data subset as a named element of a
-list. After the for loop, we use `do.call` with `rbind` to combine the
-data subsets. This is an example of the
-[list of data tables idiom](Ch99-appendix.html#list-of-data-tables),
-which is generally useful for interactive data visualization.
+Nous avons utilisé une boucle for sur trois valeurs de `show.year` la variable que nous utiliserons plus tard dans `facet\_grid` . Pour chaque valeur de `show.year` nous stockons un sous-ensemble de données sous la forme d'un élément nommé d'une liste. Après la boucle for, nous utilisons `do.call`  avec `rbind`  pour combiner les sous-ensembles de données. Il s'agit d'un exemple de la méthode [tableau de données idiome](Ch99-appendix.html#list-of-data-tables) qui est généralement utile pour la visualisation de données interactive.
 
-Below, we facet on the `show.year` variable to create a data
-visualization with three panels.
+Ci-dessous, nous nous penchons sur l'idiome `show.year`  pour créer une visualisation de données avec trois panneaux.
 
 ```{r Ch02-viz-panels}
 animint(
@@ -523,73 +305,45 @@ animint(
     theme_bw())
 ```
 
-The data visualization above contains a single ggplot with three
-panels. It shows more of the WorldBank data set than the previous
-visualizations which showed only the data from 1975. However, it still
-only shows a relatively small data subset. You may be tempted to try
-using a panel to display every year (not just 1975, 1985, and
-1995). However, beware that this type of multi-panel data
-visualization is especially useful if there are only a few data
-subsets. With more than about 10 panels, it becomes difficult to see
-all the data at once, and thus difficult to make meaningful
-comparisons.
+La visualisation de données ci-dessus contient un seul ggplot avec trois panneaux. Elle montre une plus grande partie de l'ensemble des données de la Banque mondiale que les visualisations précédentes qui ne montraient que les données de 1975. Cependant, elle ne montre qu'un sous-ensemble de données relativement restreint. Vous pourriez être tenté d'utiliser un panneau pour afficher chaque année (pas seulement 1975, 1985 et 1995). Sachez toutefois que ce type de visualisation de données à plusieurs panneaux n'est utile que s'il n'y a que quelques sous-ensembles de données. Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les données en même temps, et donc de faire des comparaisons significatives.
 
-Instead of showing all of the data at once, we can instead create an
-animated data visualization that shows the viewer different data
-subsets over time. In the [next chapter](Ch03-showSelected.html), we
-will show how the new `showSelected` keyword can be used to achieve
-animation, and reveal more details of this data set.
+Au lieu de montrer toutes les données en même temps, nous pouvons créer une visualisation de données animée qui montre à l'observateur différents sous-ensembles de données au fil du temps. Dans l'outil de visualisation [chapitre suivant](Ch03-showSelected.html) nous montrerons comment la nouvelle `showSelected`  peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
-This chapter presented the basics of static data visualization using
-ggplot2. We showed how animint can be used to render a list of ggplots
-in a web browser. We explained two features of ggplot2 that make it
-ideal for data visualization: multi-layer and multi-panel graphics.
+Ce chapitre a présenté les bases de la visualisation de données statiques à l'aide de ggplot2. Nous avons montré comment animint peut être utilisé pour afficher une liste de ggplots dans un explorateur web. Nous avons expliqué deux caractéristiques de ggplot2 qui le rendent idéal pour la visualisation de données : les graphiques multicouches et multi-panneaux.
 
-Exercises:
+Exercices :
 
-* What are the three main advantages of `ggplot2` relative to previous
-  plotting systems such as `grid` and `lattice`?
-* What is the purpose of multi-layer graphics?
-* What are the two different reasons for creating multi-panel
-  graphics? Which of these two types is useful with interactivity?
-* Let us define "A < B" to mean that "one B can contain several A."
-  Which of the following statements is true?
+- Quels sont les trois principaux avantages de la `ggplot2`  par rapport aux systèmes de tracé antérieurs tels que `grid`  et `lattice` ?
 
-	* ggplot < panel
-	* panel < ggplot
-	* ggplot < animint
-	* animint < ggplot
-	* layer < panel
-	* panel < layer
-	* layer < ggplot
-	* ggplot < layer
-	
-* In the `viz.aligned` facets, why is it important to use the
-  `scales="free"` argument?
-* In `viz.aligned` we showed a ggplot with a scatterplot panel on the
-  left and a time series panel on the right. Make another version of
-  the data visualization with the time series panel on the left and
-  the scatterplot panel on the right.
-* In `viz.aligned` the scatterplot displays fertility rate and life
-  expectancy, but the time series displays only fertility rate. Make
-  another version of the data visualization that shows both time
-  series. Hint: use both horizontal and vertical panels in
-  `facet_grid`.
-* Use `aes(size=population)` in the scatterplot to show the population
-  of each country. Hint: `scale_size_animint(pixel.range=c(5, 10)`
-  means that circles with a radius of 5/10 pixels should be used
-  represent the minimum/maximum population.
-* Create a multi-panel data visualization that shows each year of the
-  `WorldBank` data set in a separate panel. What are the limitations
-  of using static graphics to visualize these data?
-* Create `viz.aligned` using a plotting system that is not based on
-  the grammar of graphics. For example, you can use functions from the
-  `graphics` package in R (`plot`, `points`, `lines`, etc), or
-  matplotlib in Python. What are some advantages of ggplot2 and
-  animint?
+- Quel est l'objectif des graphiques multicouches ?
 
-Next, [Chapter 3](Ch03-showSelected.html) explains the `showSelected`
-keyword, which indicates a variable to use for subsetting the data
-before plotting.
+- Quelles sont les deux raisons différentes de créer des graphiques à panneaux multiples ? Lequel de ces deux types est utile pour l'interactivité ?
+
+- Définissons "A \< B" comme signifiant qu'"un B peut contenir plusieurs A".  Laquelle des affirmations suivantes est vraie ?
+  
+  - ggplot \< panel
+  - panel \< ggplot
+  - ggplot \< animint
+  - animint \< ggplot
+  - layer \< panel
+  - panneau \< couche
+  - couche \< ggplot
+  - ggplot \< couche
+
+- Dans la couche `viz.aligned`  pourquoi est-il important d'utiliser l'option `scales="free"`  argument ?
+
+- En ce qui concerne les facettes, pourquoi est-il important d'utiliser l'argument ? `viz.aligned`  nous avons montré un ggplot avec un panneau de nuage de points à gauche et un panneau de séries temporelles à droite. Réalisez une autre version de la visualisation de données avec le panneau des séries temporelles à gauche et le panneau du nuage de points à droite.
+
+- En `viz.aligned`  le nuage de points affiche le taux de fécondité et l'espérance de vie, mais la série chronologique n'affiche que le taux de fécondité. Réalisez une autre version de la visualisation de données qui montre les deux séries temporelles. Conseil : utilisez les panneaux horizontaux et verticaux dans la visualisation de données. `facet\_grid` .
+
+- Utiliser `aes(size=population)`  dans le nuage de points pour indiquer la population de chaque pays. Indice : `scale\_size\_animint(pixel.range=c(5, 10)`  signifie que des cercles d'un rayon de 5/10 pixels doivent être utilisés pour représenter la population minimale/maximale.
+
+- Créez une visualisation de données à plusieurs panneaux qui montre chaque année de la `WorldBank`  dans un panneau séparé. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
+
+- Créer `viz.aligned`  en utilisant un système de tracé qui n'est pas basé sur la grammaire des graphiques. Par exemple, vous pouvez utiliser les fonctions du `graphics`  du package R ( `plot` , `points` , `lines` etc.), ou matplotlib en Python. Quels sont les avantages de ggplot2 et animint ?
+
+Suivant, [Chapitre 3](Ch03-showSelected.html)  explique les `showSelected`  qui indique une variable à utiliser pour le sous-ensemble des données avant le tracé.
+
+
