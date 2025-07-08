@@ -21,7 +21,7 @@ install.packages("aeolus",
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-Sys.setenv(DEEPL_AUTH_KEY = "a9cde247-5a66-4fd1-ac8d-399c3c0d149b")
+Sys.setenv(DEEPL_AUTH_KEY = Sys.getenv("user_DEEPL_AUTH_KEY"))
 
 
 # MAJ du glossaire
@@ -251,15 +251,20 @@ Test_it <- function(file_name = "README",
   # Détecter les lignes de formatage YAML (triple tiret "---")
   yaml_end <- which(translated_text == "---")[2]  # Trouver la fin du YAML (deuxième occurrence)
   
-  
+
   # Ajouter le header personnalisé
   header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "TEST IT /n Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
   
   # Assembler le nouveau contenu
-  updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
+ # updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
+  
+  full_text <- paste(c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
+   
+  # Ajouter un commentaire HTML entre chaque paragraphe
+  updated_with_comments <- gsub("\n\n","\n\n<!-- paragraphe suivant -->\n\n",x = full_text)
   
   # Écrire le contenu modifié dans le fichier
-  writeLines(updated_text, output_path, useBytes = TRUE)
+  writeLines(updated_with_comments, output_path, useBytes = TRUE)
   
   # Supprimer le fichier temporaire
   #unlink(temp_file)
@@ -292,3 +297,6 @@ Test_it(file_name = "Ch03-showSelected",
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
 )
+
+
+quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_TEST_IT.Rmd")
