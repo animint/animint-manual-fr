@@ -235,8 +235,8 @@ ConvertRmd_comments <- function(file_name = "README",
   
   library(magick)
   
-  # Find all PNG files that start with "Ch03-"
-  png_files <- list.files("animint-book", pattern = "^Ch03-.*\\.png$", 
+  # Find all PNG files that start with "Chx"
+  png_files <- list.files("animint-book", pattern = paste0("^", Chx, ".*\\.png$"), 
                           recursive = TRUE, full.names = TRUE)
   
   file.copy(png_files, dest_filepath,overwrite = TRUE)
