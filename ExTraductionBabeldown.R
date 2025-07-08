@@ -8,6 +8,10 @@ path_github_animint2 <- "https://raw.githubusercontent.com/animint/animint2/mast
 
 path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-book/master"
 
+path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/master"
+
+
+
 # Installation du package babeldown
 
 install.packages('babeldown',
@@ -201,11 +205,13 @@ ConvertRmd_comments <- function(file_name = "README",
                             source_filepath = path_github_animint2,
                             dest_filepath = path_local_animint2_fr,
                             #UpdateDoc = FALSE, # maj du doc traduit ou creation dun nouveau doc traduit
-                            ajoutFR = TRUE) {
+                            ajoutFR = TRUE,
+                            github_tree_filepath = path_tree_github_animint_book,
+                            Chx = "Ch03-") {
   
   # Traduction utilisant babeldown et le glossaire maison  
   output_path <- paste0(dest_filepath,
-                        "/",file_name,ifelse(ajoutFR,"_FR_ConvertRmd_comments","_ConvertRmd_comments"),file_extension)
+                        "/",file_name,file_extension)
   
   
   # Définition du répertoire temporaire et suppression des anciens fichiers
@@ -224,6 +230,16 @@ ConvertRmd_comments <- function(file_name = "README",
   download.file(url = paste0(source_filepath,"/",file_name,file_extension),
                 destfile = temp_file,
                 mode = "wb")
+  
+  # et des photos
+  
+  library(magick)
+  
+  # Find all PNG files that start with "Ch03-"
+  png_files <- list.files("animint-book", pattern = "^Ch03-.*\\.png$", 
+                          recursive = TRUE, full.names = TRUE)
+  
+  file.copy(png_files, dest_filepath,overwrite = TRUE)
   
   adapted_unleash(temp_file,temp_file)
   
@@ -272,7 +288,7 @@ Translate_FR_EN <- function(file_name = "README",
                         "/",file_name,ifelse(ajoutFR,"_FR",""),file_extension)
   
   Rmd_OG_path <- paste0(dest_filepath,
-                        "/",file_name,ifelse(ajoutFR,"_FR_ConvertRmd_comments","_ConvertRmd_comments"),file_extension)
+                        "/",file_name,file_extension)
   
   # Téléchargement du fichier
  # download.file(url = paste0(source_filepath,"/",file_name,file_extension),
@@ -312,7 +328,7 @@ Translate_FR_EN <- function(file_name = "README",
   header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
   
   # Assembler le nouveau contenu
-  updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
+  updated_text <- paste(c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
   
   # Écrire le contenu modifié dans le fichier
   writeLines(updated_text, output_path, useBytes = TRUE)
@@ -321,9 +337,6 @@ Translate_FR_EN <- function(file_name = "README",
   #unlink(temp_file)
   
 }
-
-
-
 
 
 # Traduction du README avec la fonction Translate_FR_EN
@@ -349,8 +362,10 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
+                github_tree_filepath = path_tree_github_animint_book,
                 #UpdateDoc = TRUE,
-                ajoutFR = FALSE
+                ajoutFR = FALSE,
+                Chx = "Ch03-"
 )
 
 
