@@ -350,14 +350,6 @@ Translate_FR_EN(file_name = "README",
 
 # Traduction Chapitre 03 par Jeremi Lepage
 
-Translate_FR_EN(file_name = "Ch03-showSelected",
-                file_extension = ".Rmd",
-                source_filepath = path_github_animint_book,
-                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
-                #UpdateDoc = TRUE,
-                ajoutFR = FALSE
-                )
-
 ConvertRmd_comments(file_name = "Ch03-showSelected",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
@@ -367,6 +359,16 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                 ajoutFR = FALSE,
                 Chx = "Ch03-"
 )
+
+Translate_FR_EN(file_name = "Ch03-showSelected",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+                )
+
+
 
 
 quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
