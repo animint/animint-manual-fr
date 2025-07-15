@@ -128,10 +128,10 @@ Below, we translate this sketch into R code.
 library(animint2)
 data(WorldBank)
 scatter <- ggplot()+
- geom_point(aes(
-  x=life.expectancy, y=fertility.rate, color=region),
-  showSelected="year",
-  data=WorldBank)
+  geom_point(aes(
+    x=life.expectancy, y=fertility.rate, color=region),
+    showSelected="year",
+    data=WorldBank)
 scatter
 ```
 
@@ -250,7 +250,7 @@ In the R code below we compute a table of counts of data points that can be plot
 ```{r}
 three.years <- subset(WorldBank, 1979 <= year & year <= 1981)
 can.plot <- with(three.years, {
- (!is.na(life.expectancy)) & (!is.na(fertility.rate))
+  (!is.na(life.expectancy)) & (!is.na(fertility.rate))
 })
 table(three.years$year, can.plot)
 ```
@@ -283,11 +283,11 @@ In the code below, we use `aes(key=country)` to specify that the `country` varia
 
 ```{r}
 scatter.key <- ggplot()+
- geom_point(aes(
-  x=life.expectancy, y=fertility.rate, color=region,
-  key=country),
-  showSelected="year",
-  data=WorldBank)
+  geom_point(aes(
+    x=life.expectancy, y=fertility.rate, color=region,
+    key=country),
+    showSelected="year",
+    data=WorldBank)
 ```
 
 <!-- comment -->
