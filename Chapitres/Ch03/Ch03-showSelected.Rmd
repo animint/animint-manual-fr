@@ -14,138 +14,146 @@ knitr::opts_chunk$set(fig.path="Ch03-figures/")
 
 <!-- comment -->
 
-This chapter explains showSelected, one of the two main keywords that animint introduces for interactive data visualization.
+Ce chapitre explique showSelected, l'un des deux principaux mots-clés introduits par `animint2` pour la visualisation interactive de données.
 <!-- comment -->
-After reading  this chapter, you will be able to
+Après avoir lu ce chapitre, vous serez en mesure de
 
 <!-- comment -->
 
-- Use the showSelected keyword in your plot sketches to specify geoms  for which only a subset of data should be plotted at any time.
+- Utiliser le mot-clé `showSelected` dans vos esquisses pour spécifier des geoms pour lesquels seul un sous-ensemble de données doit être tracé à la fois.
 <!-- comment -->
-- Use selection menus in animint to change the subset of plotted data.
+- Utilisez les menus de sélection pour modifier le sous-ensemble de données tracées.
 <!-- comment -->
-- Specify smooth transitions between data subsets using the duration  option and key aesthetic.
+- Spécifiez des transitions fluides entre les sous-ensembles de données à l'aide de l'option `duration` et `aes(key)`.
 <!-- comment -->
-- Create animated data visualizations using the time option.
+- Créez des visualisations de données animées à l'aide de l'option `time`.
 
 <!-- comment -->
 
-## Sketching with showSelected {#sketching}
+## Esquisses avec `showSelected` {#esquisses}
 
 <!-- comment -->
 
-In this section, we will explain how the showSelected keyword can be used in plot sketches.
+Dans cette section, nous allons expliquer comment le mot-clé `showSelected` peut être utilisé dans les esquisses.
 <!-- comment -->
-The showSelected keyword specifies a variable to use for subsetting the data before plotting.
+Le mot-clé `showSelected` spécifie une variable à utiliser pour sélectionner un sous-ensemble de données.
 <!-- comment -->
-Each geom in a data visualization has its own data set, and its own definition of showSelected variables.
+Chaque geom d'une visualisation de données possède son propre ensemble de données, et sa propre définition des variables `showSelected`.
 <!-- comment -->
-That means different geoms can specify different data sets and showSelected keywords to show different data subsets.
+Cela signifie que des geoms différents peuvent spécifier des ensembles de données et des mots-clés `showSelected` différents pour afficher des sous-ensembles de données différents.
 
 <!-- comment -->
 
-In fact, we have already used the showSelected keyword, which was automatically created by the interactive legends that we created in the previous two chapters.
+En fait, nous avons déjà utilisé le mot-clé `showSelected`, qui a été automatiquement créé par les légendes interactives que nous avons créées dans les deux chapitres précédents.
 <!-- comment -->
-For example, consider the sketch below of the [Keeling Curve data visualization from Chapter 1](Ch01-motivation.html#large-data).
-
-<!-- comment -->
-
-![CO2 data viz](Ch03-viz-co2.png)
+Par exemple, considérons l'esquisse ci-dessous, de [la courbe de Keeling du chapitre 1](Ch01-motivation.html#large-data).
 
 <!-- comment -->
 
-The sketch above includes `showSelected=month` for the `geom_point`, meaning that it should show the subset of data for the selected months.
+![courbe de Keeling](Ch03-viz-co2.png)
+
 <!-- comment -->
-In contrast, since the `geom_line` does not include `showSelected` keywords, it always shows the entire data set (regardless of the selected months).
+L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
+<!-- comment -->
+En revanche, étant donné que l'élément `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (quels que soient les mois sélectionnés).
 
 <!-- comment -->
 
-As another example, consider the sketch below of the first WorldBank data visualization from Chapter 2.
+Prenons un autre exemple : le dessin ci-dessous de la première visualisation de données de la banque mondiale, du chapitre 2.
 
 <!-- comment -->
 
-![WorldBank data viz with showSelected](Ch03-viz-showSelectedColor.png)
+![banque mondiale avec showSelected](Ch03-viz-showSelectedColor.png)
 
 <!-- comment -->
 
-The sketch above specifies `showSelected=region` for the `geom_point`, meaning that it should show the subset of data for the selected regions.
+L'esquisse ci-dessus spécifie `showSelected=région`  pour le `geom_point`, ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
 
 <!-- comment -->
 
-Note that the code we used in chapter 2 did not explicitly specify `showSelected=region`.
+Notez que le code que nous avons utilisé dans chapitre 2 ne spécifiait pas explicitement `showSelected=région`.
 <!-- comment -->
-Instead, we specified `aes(color=region)`, and animint automatically assigned a showSelected keyword.
+Au lieu de cela, nous avons spécifié `aes(color=région)` et `animint2` a automatiquement rajouté un mot-clé `showSelected`.
 <!-- comment -->
-In general, animint will assign a showSelected keyword for each variable that is used in a categorical legend.
+En général, `animint2` rajoute un mot-clé `showSelected` pour chaque variable utilisée dans une légende qualitative.
 
 <!-- comment -->
 
-However, the showSelected keyword is not limited to use with categorical legends.
+Cependant, le mot-clé `showSelected` n'est pas limité aux légendes qualitatives.
 <!-- comment -->
-You can use showSelected keywords for any data variables you like, by explicitly specifying the variable names in the showSelected argument of the geom.
+Vous pouvez utiliser les mots-clés `showSelected` pour toutes les variables que vous souhaitez, en spécifiant explicitement les noms des variables dans l'argument `showSelected` du geom.
 
 <!-- comment -->
 
-Each variable that is used with showSelected is treated by animint as a selection variable.
+Chaque variable utilisée avec showSelected est traitée par `animint2` comme une variable de sélection.
 <!-- comment -->
-For example, the Keeling Curve data viz has one selection variable (month), and so does the WorldBank data viz (region).
+Par exemple, la visualisation de la courbe de Keeling a une variable de sélection (`mois`), tout comme la visualisation de la Banque Mondiale (`région`).
 <!-- comment -->
-For each selection variable, animint keeps track of the currently selected values.
+Pour chaque variable de sélection, `animint2` stocke les valeurs actuellement sélectionnées.
 <!-- comment -->
-When the selection changes, animint updates the subset of data that is shown.
+Lorsque la sélection change, `animint2` met à jour le sous-ensemble de données affiché.
 
 <!-- comment -->
 
-Each of the data visualizations sketched above has only one selection variable.
+Chacune des visualisations esquissées ci-dessus ne comporte qu'une seule variable de sélection.
 <!-- comment -->
-However, a data visualization can have any number of selection variables.
+Cependant, une visualisation de données peut comporter un nombre quelconque de variables de sélection.
 <!-- comment -->
-In the next section, we will explore a visualization of the World Bank data that has selection variables for `region` and `year`.
+Dans la section suivante, nous allons étudier une visualisation des données de la banque mondiale, qui comporte des variables de sélection pour `région`  et `année`.
 
 <!-- comment -->
 
-## Selecting data subsets using menus {#selecting-with-menus}
+## Sélection de sous-ensembles avec menus {#selection-avec-menus}
 
 <!-- comment -->
 
-Consider the following sketch which adds a `showSelected` variable, and changes the data set.
+Considérons l'esquisse suivant, avec une variable `showSelected` de plus, et avec un différent ensemble de données.
 
 <!-- comment -->
 
-![WorldBank data viz with showSelected](Ch03-viz-scatter.png)
+![esquisse banque mondiale avec showSelected](Ch03-viz-scatter.png)
 
 <!-- comment -->
 
-Note that there are two `showSelected` variables, `region` and `year`.
+Notez qu'il y a deux variables `showSelected` : `région` et `année`.
 <!-- comment -->
-Also note that the data is specified as all years (but only one will be shown at a time due to `showSelected=year` ).
+Notez également que les données sont spécifiées pour toutes les années (mais une seule année sera affichée à la fois, grâce au `showSelected=année`).
 <!-- comment -->
-Below, we translate this sketch into R code.
+Ci-dessous, nous traduisons l'esquisse en code R.
 
 <!-- comment -->
 
 ```{r}
 library(animint2)
 data(WorldBank)
+WorldBank$espérance.de.vie <- WorldBank$life.expectancy
+WorldBank$taux.de.fertilité <- WorldBank$fertility.rate
+en2fr.region <- c(
+  "East Asia & Pacific"="Asie de l'est et pacifique",
+  "Europe & Central Asia"="Europe et Asie centrale",
+  "Latin America & Caribbean"="Amérique latine et Caraïbes",
+  "Middle East & North Africa"="Moyen orient et Magreb",
+  "North America"="Amérique du nord",
+  "South Asia"="Asie du sud",
+  "Sub-Saharan Africa"="Afrique subsaharienne")
+WorldBank$région <- factor(sub(" \\(.*", "", WorldBank$region), names(en2fr.region), en2fr.region)
+WorldBank$année <- WorldBank$year
 scatter <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region),
-    showSelected="year",
+    x=espérance.de.vie, y=taux.de.fertilité, color=région),
+    showSelected="année",
     data=WorldBank)
 scatter
 ```
 
 <!-- comment -->
 
-Note that the ggplot above contains the `showSelected` argument, one of the two main features introduced in animint2.
+Notez que le code ci-dessus contient l'argument `showSelected=année`, ce qui est nouveau dans `animint2`, par rapport à `ggplot2`.
 <!-- comment -->
-The `showSelected` keyword is ignored when rendering the plot using the usual R graphics devices, which produce a scatterplot with one point for every country and year.
-<!-- comment -->
-Note that since `color=region` was specified, animint also automatically uses `region` as a `showSelected` variable.
-
+L'argument `showSelected=année` est ignoré lorsque le graphe est affiché comme ci-dessus, avec les fonctions d'affichage habituelles dans R, qui dessinent un nuage de points qui comprend toutes les années.
 <!-- comment -->
 
-In constrast, rendering the same ggplot using animint yields the interactive data visualization below.
+En revanche, donner le code ci-dessus comme argument pour `animint()` donne la visualisation interactive ci-dessous, qui dessine une année à la fois.
 
 <!-- comment -->
 
@@ -155,57 +163,57 @@ animint(scatter)
 
 <!-- comment -->
 
-Note that the data viz above has two selection variables: region and year.
+Notez que la visualisation ci-dessus comporte deux variables de sélection : `région` et `année` (`color=région` fait que `région` est automatiquement une variable `showSelected`).
 <!-- comment -->
-Each variable has a menu at the bottom of the data viz that can be used to change the current selection.
+Chaque variable dispose d'un menu en bas qui peut être utilisé pour modifier la sélection en cours.
 <!-- comment -->
-In this data viz, these selection menus are shown by default.
+Dans cette visualisation, ces menus sont affichés par défaut.
 <!-- comment -->
-They can be hidden by clicking the "Hide selection menus" button, and shown again by clicking the "Show selection menus" button.
+Ils peuvent être masqués en cliquant sur le bouton "Hide selection menus", et réaffichés en cliquant sur le bouton "Show selection menus".
 
 <!-- comment -->
 
-Discrete legend variables such as region default to multiple selection, so several values are selected and shown at once.
+Les variables discrètes, telles que `région`, ont sélection multiple par défaut, de sorte que plusieurs valeurs sont sélectionnées et affichées à la fois.
 <!-- comment -->
-Try changing the selected region in the interactive legend and the selection menu.
+Essayez de modifier la région sélectionnée dans la légende interactive et dans le menu de sélection.
 <!-- comment -->
-When you change the selection using either method, both the interactive legend and the selection menu should update to reflect the current selection.
+Lorsque vous modifiez la sélection à l'aide de l'une ou l'autre méthode, la légende interactive et le menu de sélection sont tous les deux mises à jour, pour refléter la sélection actuelle.
 
 <!-- comment -->
 
-We use the terms "direct manipulation" and "indirect manipulation" to describe these different ways of changing the selection.
+Nous utilisons les termes "manipulation directe" et "manipulation indirecte" pour décrire ces différentes façons de modifier la sélection.
 <!-- comment -->
-Direct manipulation typically involves clicking on the objects that you want to change, and is usually easier to understand.
+La manipulation directe est généralement plus facile à comprendre, parce qu'il s'agit de cliquer sur les objets dans le graphique que l'on souhaite modifier.
 <!-- comment -->
-In contrast, indirect manipulation techniques such as menus are typically more complicated to understand.
+En revanche, les techniques de manipulation indirecte, telles que les menus, sont utiles dans d'autres cas (par exemple, sélection d'un pays par nom).
 <!-- comment -->
-In the animint above, you can change the value of the `region` variable using either the legend or the menu.
+Dans la visualisation ci-dessus, vous pouvez modifier la valeur de `région` en utilisant soit la légende, soit le menu.
 <!-- comment -->
-Using the legend is a more direct manipulation technique, since the legend is drawn closer to the plotted data points that will be updated.
+L'utilisation de la légende est une technique de manipulation plus directe, puisque la légende est dessinée plus près du nuage de points qui sera mis à jour.
 
 <!-- comment -->
 
-Other selection variables such as year default to single selection, so only one value is selected and shown at any time.
+D'autres variables de sélection, comme `année`, ont sélection simple par défaut, de sorte qu'une seule valeur est sélectionnée et affichée à la fois.
 <!-- comment -->
-Try changing the selected value of the year variable using the selection menu.
+Essayez de modifier la valeur sélectionnée de la variable `année`, à l'aide du menu de sélection.
 <!-- comment -->
-You should see the points in the scatterplot immediately update to show the fertility rate and life expectancy of all the countries in the year that you selected.
+Vous devriez voir le nuage de points se mettre à jour immédiatement pour afficher le taux de fértilité et l'espérance de vie de tous les pays au cours de l'année que vous avez sélectionnée.
 
 <!-- comment -->
 
-Multi-layer exercise: Add another geom to this interactive scatterplot.
+Exercice multi-couche : ajoutez un autre geom à ce nuage de points interactif.
 <!-- comment -->
-As in [Chapter 2](Ch02-ggplot2.html#multi-layer), you can use a `geom_text` to show the name of each country (easy), or a `geom_text` to show the selected year (medium), or a `geom_path` to show the previous 5 years of data (hard).
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-layer) vous pouvez utiliser `geom_text` pour afficher le nom de chaque pays (facile), ou `geom_text` pour afficher l'année sélectionnée (moyen), ou `geom_path` pour afficher les données des 5 années précédentes (difficile).
 <!-- comment -->
-Hint: make sure to specify `showSelected=year` for all geoms.
+Astuce : utiliser `showSelected=année` dans tous les geoms.
 
 <!-- comment -->
 
-Multi-plot exercise: Add a time series plot to the data viz above.
+Exercice multi-geom : ajoutez une série temporelle à la visualisation de données ci-dessus.
 <!-- comment -->
-As in [Chapter 2](Ch02-ggplot2.html#multi-plot), you can use a `geom_line` to show the fertility rate for each country over all years.
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-plot) vous pouvez utiliser un `geom_line` pour afficher le taux de fértilité de chaque pays, pour toutes les années.
 <!-- comment -->
-Add a `geom_vline` with `showSelected=year` to highlight the currently selected year.
+Utiliser `geom_vline` avec `showSelected=année` pour mettre en évidence l'année sélectionnée.
 
 <!-- comment -->
 
