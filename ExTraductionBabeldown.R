@@ -206,12 +206,13 @@ ConvertRmd_comments <- function(file_name = "README",
                             dest_filepath = path_local_animint2_fr,
                             #UpdateDoc = FALSE, # maj du doc traduit ou creation dun nouveau doc traduit
                             ajoutFR = TRUE,
+                            TestFile = TRUE,
                             github_tree_filepath = path_tree_github_animint_book,
                             Chx = "Ch03-") {
   
   # Traduction utilisant babeldown et le glossaire maison  
   output_path <- paste0(dest_filepath,
-                        "/",file_name,file_extension)
+                        "/",file_name,ifelse(TestFile,"_Test",""),file_extension)
   
   
   # Définition du répertoire temporaire et suppression des anciens fichiers
@@ -247,7 +248,7 @@ ConvertRmd_comments <- function(file_name = "README",
   
   # Lire le fichier traduit
   translated_text <- readLines(output_path, encoding = "UTF-8")
-  
+  translated_text <- gsub("\\\\_", "_", translated_text)
   
   # Détecter les lignes de formatage YAML (triple tiret "---")
   yaml_end <- which(translated_text == "---")[2]  # Trouver la fin du YAML (deuxième occurrence)
@@ -318,7 +319,7 @@ Translate_FR_EN <- function(file_name = "README",
   
   # Lire le fichier traduit
   translated_text <- readLines(output_path, encoding = "UTF-8")
-  
+
   
   # Détecter les lignes de formatage YAML (triple tiret "---")
   yaml_end <- which(translated_text == "---")[2]  # Trouver la fin du YAML (deuxième occurrence)
@@ -357,6 +358,7 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                 github_tree_filepath = path_tree_github_animint_book,
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE,
+                TestFile = TRUE,
                 Chx = "Ch03-"
 )
 
