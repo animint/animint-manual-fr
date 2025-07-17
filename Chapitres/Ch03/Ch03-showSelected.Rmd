@@ -56,8 +56,8 @@ A titre d'exemple, considérons le dessin ci-dessous de la légende interactive 
 
 <!-- paragraphe suivant -->
 
-Le dessin ci-dessus comprend `showSelected=month` pour le `geom\_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
-En revanche, étant donné que l'élément `geom\_line` n'inclut pas `showSelected` il affiche toujours l'ensemble des données (quels que soient les mois sélectionnés).
+Le dessin ci-dessus comprend `showSelected=month` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
+En revanche, étant donné que l'élément `geom_line` n'inclut pas `showSelected` il affiche toujours l'ensemble des données (quels que soient les mois sélectionnés).
 
 <!-- paragraphe suivant -->
 
@@ -69,7 +69,7 @@ Comme autre exemple, considérons le dessin ci-dessous de la première visualisa
 
 <!-- paragraphe suivant -->
 
-Le dessin ci-dessus spécifie `showSelected=region` pour le `geom\_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
+Le dessin ci-dessus spécifie `showSelected=region` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
 
 <!-- paragraphe suivant -->
 
@@ -172,14 +172,14 @@ Vous devriez voir les points du nuage de points se mettre à jour immédiatement
 <!-- paragraphe suivant -->
 
 Exercice multicouche : Ajoutez un autre geom à ce nuage de points interactif.
-Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-layer) vous pouvez utiliser un `geom\_text` pour afficher le nom de chaque pays (facile), ou un `geom\_text` pour afficher l'année sélectionnée (moyen), ou a `geom\_path` pour afficher les données des 5 années précédentes (difficile).
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-layer) vous pouvez utiliser un `geom_text` pour afficher le nom de chaque pays (facile), ou un `geom_text` pour afficher l'année sélectionnée (moyen), ou a `geom_path` pour afficher les données des 5 années précédentes (difficile).
 Conseil : veillez à spécifier `showSelected=year` pour tous les geoms.
 
 <!-- paragraphe suivant -->
 
 Exercice de tracé multiple : Ajoutez un gracé de série temporelle à la viz de données ci-dessus.
-Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-plot) vous pouvez utiliser un `geom\_line` pour afficher le taux de fécondité de chaque pays pour toutes les années.
-Ajoutez a `geom\_vline` avec `showSelected=year` pour mettre en évidence l'année sélectionnée.
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-plot) vous pouvez utiliser un `geom_line` pour afficher le taux de fécondité de chaque pays pour toutes les années.
+Ajoutez a `geom_vline` avec `showSelected=year` pour mettre en évidence l'année sélectionnée.
 
 <!-- paragraphe suivant -->
 
@@ -276,7 +276,7 @@ Si vous changez la sélection de 1980 à 1981, vous devriez voir une transition 
 
 En général, le `key` doit être spécifiée pour tous les geoms qui utilisent l'esthétique `showSelected` avec une variable qui apparaît dans l'élément `duration` dans l'option.
 Dans cet exemple, nous avons utilisé la variable `duration` pour spécifier une transitions fluides pour l'option `year` pour une transition en douceur.
-Puisque nous utilisons l'option `showSelected=year` dans l'option `geom\_point` nous avons également spécifié la variable `key` esthétique pour ce geom.
+Puisque nous utilisons l'option `showSelected=year` dans l'option `geom_point` nous avons également spécifié la variable `key` esthétique pour ce geom.
 
 <!-- paragraphe suivant -->
 
@@ -313,7 +313,7 @@ Exercices :
 
 <!-- paragraphe suivant -->
 
--   Réalisez une version améliorée de `viz.aligned` du chapitre précédent. Au lieu de fixer l'année à 1975, utilisez `showSelected=year` pour que l'utilisateur puisse sélectionner une année. Ajoutez des geoms qui affichent l'année sélectionnée : a `geom\_text` sur le nuage de points, et un `geom\_vline` sur la série chronologique.
+-   Réalisez une version améliorée de `viz.aligned` du chapitre précédent. Au lieu de fixer l'année à 1975, utilisez `showSelected=year` pour que l'utilisateur puisse sélectionner une année. Ajoutez des geoms qui affichent l'année sélectionnée : a `geom_text` sur le nuage de points, et un `geom_vline` sur la série chronologique.
 -   Traduisez l'un des [exemples du package d'animation](https://yihui.name/animation/examples/) en animint. Conseil : dans le code du package d'animation, il y a toujours une boucle for sur la variable time. Au lieu d'appeler une fonction de tracé à l'intérieur de la boucle for, utilisez la fonction [tableau de données idiome](Ch99-appendix.html#list-of-data-tables) pour stocker les données qui doivent être tracées. Utilisez ensuite ces données avec la fonction `showSelected` pour créer des ggplots, et les afficher en utilisant animint.
 
 <!-- paragraphe suivant -->
