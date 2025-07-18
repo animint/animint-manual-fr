@@ -166,22 +166,27 @@ ConvertRmd_comments <- function(file_name = "README",
   
 
   # Ajouter le header personnalisé
-  header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "ConvertRmd_comments /n Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
+#  header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "ConvertRmd_comments /n Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
   
   # Assembler le nouveau contenu
- # updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
+#  updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
   
-  full_text <- paste(c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
+  #full_text <- paste(c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
+  
+  full_text <- paste(c(translated_text[1:yaml_end],translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
+  
    
   # Ajouter un commentaire HTML entre chaque paragraphe
   # 1. Séparation entre les phrases
-  text_with_phrase_comments <- gsub("(?<=[\\.\\!\\?])\\s+", "\n\n<!-- comment -->\n\n", full_text, perl = TRUE)
-  
-  # 2. Ajouter les commentaires entre paragraphes
-  updated_with_comments <- gsub("\n{3,}", "\n\n<!-- comment -->\n\n", text_with_phrase_comments)
+  text_with_phrase_comments <- gsub(
+    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|M|Mme|Mr))(?<=[\\.\\!\\?])\\s+", 
+    "\n\n<!-- comment -->\n\n", 
+    full_text, 
+    perl = TRUE
+  )
   
   # Écrire le contenu modifié dans le fichier
-  writeLines(updated_with_comments, output_path, useBytes = TRUE)
+  writeLines(text_with_phrase_comments, output_path, useBytes = TRUE)
   
   # Supprimer le fichier temporaire
   #unlink(temp_file)
