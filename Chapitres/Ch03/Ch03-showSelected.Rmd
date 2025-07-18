@@ -4,11 +4,7 @@ layout: default
 output: bookdown::html_chapter
 ---
 
-
-
-Traduction de [English](https://github.com/tdhock/animint-book/)
-[Ch03-showSelected](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch03-showSelected.Rmd)
-
+Traduction de [English](https://github.com/tdhock/animint-book/) [Ch03-showSelected](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch03-showSelected.Rmd)
 
 # Chapitre 3, le mot-clé showSelected
 
@@ -22,19 +18,19 @@ Ce chapitre explique showSelected, l'un des deux principaux mots-clés introduit
 
 Après avoir lu ce chapitre, vous serez en mesure de
 
-- Utiliser le mot-clé showSelected dans vos dessins pour spécifier les geoms pour lesquels seul un sous-ensemble de données doit être tracé à tout moment.
+-   Utiliser le mot-clé showSelected dans vos dessins pour spécifier les geoms pour lesquels seul un sous-ensemble de données doit être tracé à tout moment.
 
 <!-- commentaire -->
 
-- Utilisez les menus de sélection dans animint pour modifier le sous-ensemble de données tracées.
+-   Utiliser les menus de sélection dans animint pour modifier le sous-ensemble de données tracées.
 
 <!-- commentaire -->
 
-- Spécifiez des transitions fluides entre les sous-ensembles de données à l'aide de l'option de durée et de l'esthétique des touches.
+-   Spécifier des transitions fluides entre les sous-ensembles de données à l'aide de l'option de durée et de l'esthétique des touches.
 
 <!-- commentaire -->
 
-- Créez des visualisations de données animées en utilisant l'option time.
+-   Créer des visualisations de données animées en utilisant l'option time.
 
 <!-- commentaire -->
 
@@ -60,17 +56,18 @@ En fait, nous avons déjà utilisé le mot-clé showSelected, qui a été automa
 
 <!-- commentaire -->
 
-A titre d'exemple, considérons le dessin ci-dessous de l'élément [visualisation de données de la courbe de Keeling du chapitre 1.](Ch01-motivation.html#large-data) .
+A titre d'exemple, considérons le dessin ci-dessous de l'élément [visualisation de données de la courbe de Keeling du chapitre 1.](Ch01-motivation.html#large-data)
+.
 
 <!-- commentaire -->
 
 ![Données sur le CO2 viz](Ch03-viz-co2.png)
 
-Le dessin ci-dessus comprend `showSelected=month`  pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
+Le dessin ci-dessus comprend `showSelected=month` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
 
 <!-- commentaire -->
 
-En revanche, étant donné que l'option `geom_line`  n'inclut pas `showSelected`  il affiche toujours l'ensemble des données (quels que soient les mois sélectionnés).
+En revanche, étant donné que l'option `geom_line` n'inclut pas `showSelected` il affiche toujours l'ensemble des données (quels que soient les mois sélectionnés).
 
 <!-- commentaire -->
 
@@ -80,7 +77,7 @@ Comme autre exemple, considérons le dessin ci-dessous de la première visualisa
 
 ![Visualisation des données de la Banque mondiale avec showSelected](Ch03-viz-showSelectedColor.png)
 
-Le dessin ci-dessus spécifie `showSelected=region`  pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
+Le dessin ci-dessus spécifie `showSelected=region` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
 
 <!-- commentaire -->
 
@@ -128,19 +125,19 @@ Cependant, une visualisation de données peut avoir un nombre quelconque de vari
 
 <!-- commentaire -->
 
-Dans la section suivante, nous étudierons une visualisation des données de la Banque mondiale qui comporte des variables de sélection pour les éléments suivants `region`  et `year` .
+Dans la section suivante, nous étudierons une visualisation des données de la Banque mondiale qui comporte des variables de sélection pour les éléments suivants `region` et `year` .
 
 <!-- commentaire -->
 
 ## Sélection de sous-ensembles de données à l'aide de menus (ou réalisation d'un sous-ensemble) {#selecting-with-menus}
 
-Considérons le dessin suivant, qui ajoute un élément `showSelected`  et modifie l'ensemble des données.
+Considérons le dessin suivant, qui ajoute un élément `showSelected` et modifie l'ensemble des données.
 
 <!-- commentaire -->
 
 ![Visualisation des données de la Banque mondiale avec showSelected](Ch03-viz-scatter.png)
 
-Notez qu'il y a deux `showSelected`  variables, `region`  et `year` .
+Notez qu'il y a deux `showSelected` variables, `region` et `year` .
 
 <!-- commentaire -->
 
@@ -163,15 +160,15 @@ scatter <- ggplot()+
 scatter
 ```
 
-Notez que le ggplot ci-dessus contient l'élément `showSelected`  l'une des deux principales caractéristiques introduites dans animint2.
+Notez que le ggplot ci-dessus contient l'élément `showSelected` l'une des deux principales caractéristiques introduites dans animint2.
 
 <!-- commentaire -->
 
-L'argument `showSelected`  est ignoré lorsque le graphe est affiché à l'aide des périphériques graphiques habituels de R, qui produisent un nuage de points avec un point pour chaque pays et chaque année.
+L'argument `showSelected` est ignoré lorsque le graphe est affiché à l'aide des périphériques graphiques habituels de R, qui produisent un nuage de points avec un point pour chaque pays et chaque année.
 
 <!-- commentaire -->
 
-Notez que puisque `color=region`  a été spécifié, animint utilise aussi automatiquement `region`  comme `showSelected`  variable.
+Notez que puisque `color=region` a été spécifié, animint utilise aussi automatiquement `region` comme `showSelected` variable.
 
 <!-- commentaire -->
 
@@ -223,7 +220,7 @@ En revanche, les techniques de manipulation indirecte, telles que les menus, son
 
 <!-- commentaire -->
 
-Dans l'animint ci-dessus, vous pouvez changer la valeur de l'élément `region`  à l'aide de la légende ou du menu.
+Dans l'animint ci-dessus, vous pouvez changer la valeur de l'élément `region` à l'aide de la légende ou du menu.
 
 <!-- commentaire -->
 
@@ -243,27 +240,27 @@ Vous devriez voir les points du nuage de points se mettre à jour immédiatement
 
 <!-- commentaire -->
 
-Exercice multicouche :  Ajoutez un autre geom à ce nuage de points interactif.
+Exercice multicouche : Ajoutez un autre geom à ce nuage de points interactif.
 
 <!-- commentaire -->
 
-Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-layer) vous pouvez utiliser un `geom_text`  pour afficher le nom de chaque pays (facile), ou un `geom_text`  pour afficher l'année sélectionnée (moyen), ou a `geom_path`  pour afficher les données des 5 années précédentes (difficile).
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-layer) vous pouvez utiliser un `geom_text` pour afficher le nom de chaque pays (facile), ou un `geom_text` pour afficher l'année sélectionnée (moyen), ou a `geom_path` pour afficher les données des 5 années précédentes (difficile).
 
 <!-- commentaire -->
 
-Conseil : veillez à spécifier `showSelected=year`  pour tous les geoms.
+Conseil : veillez à spécifier `showSelected=year` pour tous les geoms.
 
 <!-- commentaire -->
 
-Exercice de tracé multiple :  Ajouter un gracé de série temporelle à la viz de données ci-dessus.
+Exercice de tracé multiple : Ajouter un gracé de série temporelle à la viz de données ci-dessus.
 
 <!-- commentaire -->
 
-Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-plot) vous pouvez utiliser un `geom_line`  pour afficher le taux de fécondité de chaque pays pour toutes les années.
+Comme dans [Chapitre 2](Ch02-ggplot2.html#multi-plot) vous pouvez utiliser un `geom_line` pour afficher le taux de fécondité de chaque pays pour toutes les années.
 
 <!-- commentaire -->
 
-Ajouter un `geom_vline`  avec `showSelected=year`  pour mettre en évidence l'année sélectionnée.
+Ajouter un `geom_vline` avec `showSelected=year` pour mettre en évidence l'année sélectionnée.
 
 <!-- commentaire -->
 
@@ -301,19 +298,11 @@ Vous devriez voir les points de données se déplacer lentement vers leurs nouve
 
 <!-- commentaire -->
 
-Certaines transitions n'entraînent qu'un léger déplacement des points vers des positions proches (par ex.
+Certaines transitions n'entraînent qu'un léger déplacement des points vers des positions proches (par ex. 1979-1980).
 
 <!-- commentaire -->
 
-1979-1980).
-
-<!-- commentaire -->
-
-D'autres transitions se traduisent par des points qui se déplacent beaucoup plus, vers des localisations très éloignées (ex.
-
-<!-- commentaire -->
-
-1980-1981).
+D'autres transitions se traduisent par des points qui se déplacent beaucoup plus, vers des localisations très éloignées (ex. 1980-1981).
 
 <!-- commentaire -->
 
@@ -365,7 +354,7 @@ Comment spécifier cela dans la visualisation de données ?
 
 <!-- commentaire -->
 
-Dans le code ci-dessous, nous utilisons `aes(key=country)`  pour spécifier que l'élément `country`  doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection.
+Dans le code ci-dessous, nous utilisons `aes(key=country)` pour spécifier que l'élément `country` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection.
 
 <!-- commentaire -->
 
@@ -378,15 +367,15 @@ scatter.key <- ggplot()+
     data=WorldBank)
 ```
 
-Les `key`  dans le ggplot ci-dessus n'a de sens que pour la visualisation interactive des données, elle est donc ignorée lorsqu'elle est affichée avec les périphériques graphiques habituels de R.
+Les `key` dans le ggplot ci-dessus n'a de sens que pour la visualisation interactive des données, elle est donc ignorée lorsqu'elle est affichée avec les périphériques graphiques habituels de R.
 
 <!-- commentaire -->
 
-Cependant, si nous affichons ce ggplot en utilisant animint2, l'attribut `country`  sera utilisée pour s'assurer que les durées des transitions sont significatives.
+Cependant, si nous affichons ce ggplot en utilisant animint2, l'attribut `country` sera utilisée pour s'assurer que les durées des transitions sont significatives.
 
 <!-- commentaire -->
 
-Pour spécifier une durée de transition par défaut pour la variable `year`  nous utilisons l'attribut `duration`  dans l'image de données ci-dessous.
+Pour spécifier une durée de transition par défaut pour la variable `year` nous utilisons l'attribut `duration` dans l'image de données ci-dessous.
 
 <!-- commentaire -->
 
@@ -394,7 +383,7 @@ Pour spécifier une durée de transition par défaut pour la variable `year`  no
 (viz.duration <- animint(scatter.key, duration=list(year=2000)))
 ```
 
-L'option `duration`  doit être une liste nommée.
+L'option `duration` doit être une liste nommée.
 
 <!-- commentaire -->
 
@@ -410,21 +399,21 @@ Si vous changez la sélection de 1980 à 1981, vous devriez voir une transition 
 
 <!-- commentaire -->
 
-En général, les `key`  doit être spécifié pour tous les geoms qui utilisent l'esthétique `showSelected`  avec une variable qui apparaît dans l'élément `duration`  option.
+En général, les `key` doit être spécifié pour tous les geoms qui utilisent l'esthétique `showSelected` avec une variable qui apparaît dans l'élément `duration` option.
 
 <!-- commentaire -->
 
-Dans cet exemple, nous avons utilisé l'option `duration`  pour spécifier une transitions fluides pour l'option `year`  pour la variable
+Dans cet exemple, nous avons utilisé l'option `duration` pour spécifier une transitions fluides pour l'option `year` pour la variable
 
 <!-- commentaire -->
 
-Puisque nous utilisons `showSelected=year`  dans le `geom_point` nous avons également spécifié l'option `key`  esthétique pour ce geom.
+Puisque nous utilisons `showSelected=year` dans le `geom_point` nous avons également spécifié l'option `key` esthétique pour ce geom.
 
 <!-- commentaire -->
 
 ## Animation : l'option temps {#animation-time}
 
-L'option `time`  permet de spécifier une variable à utiliser pour l'animation.
+L'option `time` permet de spécifier une variable à utiliser pour l'animation.
 
 <!-- commentaire -->
 
@@ -438,7 +427,7 @@ Exercice : réalisez une visualisation de données animée qui n'utilise PAS de 
 
 <!-- commentaire -->
 
-Indice : faites une liste de ggplots qui a le format `time`  mais pas d'option `duration`  option.
+Indice : faites une liste de ggplots qui a le format `time` mais pas d'option `duration` option.
 
 <!-- commentaire -->
 
@@ -450,19 +439,19 @@ Ce chapitre a expliqué l'esthétique showSelected, les menus de sélection, les
 
 Exercices :
 
-- Réaliser une version améliorée de `viz.aligned`  du chapitre précédent.
+-   Réaliser une version améliorée de `viz.aligned` du chapitre précédent.
 
 <!-- commentaire -->
 
-Au lieu de fixer l'année à 1975, utilisez `showSelected=year`  pour que l'utilisateur puisse choisir une année.
+Au lieu de fixer l'année à 1975, utilisez `showSelected=year` pour que l'utilisateur puisse choisir une année.
 
 <!-- commentaire -->
 
-Ajouter des geom qui montrent l'année sélectionnée : a `geom_text`  sur le nuage de points, et un `geom_vline`  sur la série chronologique.
+Ajouter des geom qui montrent l'année sélectionnée : a `geom_text` sur le nuage de points, et un `geom_vline` sur la série chronologique.
 
 <!-- commentaire -->
 
-- Traduire l'un des [exemples du package d'animation](https://yihui.name/animation/examples/)  en un animint.
+-   Traduire l'un des [exemples du package d'animation](https://yihui.name/animation/examples/) en un animint.
 
 <!-- commentaire -->
 
@@ -470,16 +459,14 @@ Conseil : dans le code du package d'animation, il y a toujours une boucle for su
 
 <!-- commentaire -->
 
-Au lieu d'appeler une fonction de tracé à l'intérieur de la boucle for, utilisez la fonction [tableau de données idiome](Ch99-appendix.html#list-of-data-tables)  pour stocker les données qui doivent être tracées.
+Au lieu d'appeler une fonction de tracé à l'intérieur de la boucle for, utilisez la fonction [tableau de données idiome](Ch99-appendix.html#list-of-data-tables) pour stocker les données qui doivent être tracées.
 
 <!-- commentaire -->
 
-Utilisez ensuite ces données avec `showSelected`  pour créer des ggplots, et les afficher en utilisant animint.
+Utilisez ensuite ces données avec `showSelected` pour créer des ggplots, et les afficher en utilisant animint.
 
 <!-- commentaire -->
 
-Suivant, [Chapitre 4](Ch04-clickSelects.html)  explique les `clickSelects`  qui indique un geom sur lequel on peut cliquer pour mettre à jour une variable de sélection.
+Suivant, [Chapitre 4](Ch04-clickSelects.html) explique les `clickSelects` qui indique un geom sur lequel on peut cliquer pour mettre à jour une variable de sélection.
 
 <!-- commentaire -->
-
-
