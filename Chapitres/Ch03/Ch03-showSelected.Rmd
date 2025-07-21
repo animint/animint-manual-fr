@@ -356,7 +356,7 @@ Hint: make a list of ggplots that has the `time` option but no `duration` option
 
 <!-- comment -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- comment -->
 
