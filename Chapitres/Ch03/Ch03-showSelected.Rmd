@@ -334,7 +334,7 @@ Since we use `showSelected=year` in the `geom_point`, we also specified the `key
 
 <!-- comment -->
 
-## Animation: the time option {#animation-time}
+## Animation : l'option `time` {#animation-time}
 
 <!-- comment -->
 
