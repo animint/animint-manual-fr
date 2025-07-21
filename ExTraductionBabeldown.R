@@ -178,12 +178,23 @@ ConvertRmd_comments <- function(file_name = "README",
    
   # Ajouter un commentaire HTML entre chaque paragraphe
   # 1. Séparation entre les phrases
-  text_with_phrase_comments <- gsub(
-    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|M|Mme|Mr))(?<=[\\.\\!\\?])\\s+", 
-    "\n\n<!-- comment -->\n\n", 
-    full_text, 
+  
+ # updated_with_comments <- gsub("\n\n","\n\n<!-- comment -->\n\n",x = full_text)
+  
+  updated_with_comments<- gsub(
+    "(\\n{2,})(?!<!--)",
+     "\\1<!-- comment -->\\1",
+    full_text,
     perl = TRUE
   )
+  
+  text_with_phrase_comments <- gsub(
+    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- comment -->)(?!\\n{1,2}<!-- comment -->)",
+    "\n<!-- comment -->\n",
+    updated_with_comments, 
+    perl = TRUE
+  )
+  
   
   # Écrire le contenu modifié dans le fichier
   writeLines(text_with_phrase_comments, output_path, useBytes = TRUE)
@@ -278,7 +289,7 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                 github_tree_filepath = path_tree_github_animint_book,
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE,
-                TestFile = FALSE,
+                TestFile = TRUE,
                 Chx = "Ch03-"
 )
 
