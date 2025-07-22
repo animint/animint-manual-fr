@@ -126,18 +126,6 @@ Ci-dessous, nous traduisons l'esquisse en code R.
 ```{r}
 library(animint2)
 data(BanqueMondiale, package="animint2fr")
-BanqueMondiale$espérance.de.vie <- BanqueMondiale$life.expectancy
-BanqueMondiale$taux.de.fertilité <- BanqueMondiale$fertility.rate
-en2fr.region <- c(
-  "East Asia & Pacific"="Asie de l'est et pacifique",
-  "Europe & Central Asia"="Europe et Asie centrale",
-  "Latin America & Caribbean"="Amérique latine et Caraïbes",
-  "Middle East & North Africa"="Moyen orient et Magreb",
-  "North America"="Amérique du nord",
-  "South Asia"="Asie du sud",
-  "Sub-Saharan Africa"="Afrique subsaharienne")
-BanqueMondiale$région <- factor(sub(" \\(.*", "", BanqueMondiale$region), names(en2fr.region), en2fr.region)
-BanqueMondiale$année <- BanqueMondiale$year
 scatter <- ggplot()+
   geom_point(aes(
     x=espérance.de.vie, y=taux.de.fertilité, color=région),
