@@ -125,9 +125,9 @@ Ci-dessous, nous traduisons l'esquisse en code R.
 
 ```{r}
 library(animint2)
-data(WorldBank)
-WorldBank$espérance.de.vie <- WorldBank$life.expectancy
-WorldBank$taux.de.fertilité <- WorldBank$fertility.rate
+data(BanqueMondiale, package="animint2fr")
+BanqueMondiale$espérance.de.vie <- BanqueMondiale$life.expectancy
+BanqueMondiale$taux.de.fertilité <- BanqueMondiale$fertility.rate
 en2fr.region <- c(
   "East Asia & Pacific"="Asie de l'est et pacifique",
   "Europe & Central Asia"="Europe et Asie centrale",
@@ -136,13 +136,13 @@ en2fr.region <- c(
   "North America"="Amérique du nord",
   "South Asia"="Asie du sud",
   "Sub-Saharan Africa"="Afrique subsaharienne")
-WorldBank$région <- factor(sub(" \\(.*", "", WorldBank$region), names(en2fr.region), en2fr.region)
-WorldBank$année <- WorldBank$year
+BanqueMondiale$région <- factor(sub(" \\(.*", "", BanqueMondiale$region), names(en2fr.region), en2fr.region)
+BanqueMondiale$année <- BanqueMondiale$year
 scatter <- ggplot()+
   geom_point(aes(
     x=espérance.de.vie, y=taux.de.fertilité, color=région),
     showSelected="année",
-    data=WorldBank)
+    data=BanqueMondiale)
 scatter
 ```
 
@@ -256,7 +256,7 @@ In the R code below we compute a table of counts of data points that can be plot
 <!-- comment -->
 
 ```{r}
-three.years <- subset(WorldBank, 1979 <= year & year <= 1981)
+three.years <- subset(BanqueMondiale, 1979 <= year & year <= 1981)
 can.plot <- with(three.years, {
   (!is.na(life.expectancy)) & (!is.na(fertility.rate))
 })
@@ -295,7 +295,7 @@ scatter.key <- ggplot()+
     x=life.expectancy, y=fertility.rate, color=region,
     key=country),
     showSelected="year",
-    data=WorldBank)
+    data=BanqueMondiale)
 ```
 
 <!-- comment -->
