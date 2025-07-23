@@ -183,13 +183,13 @@ ConvertRmd_comments <- function(file_name = "README",
   
   updated_with_comments<- gsub(
     "(\\n{2,})(?!<!--)",
-     "\\1<!-- comment -->\\1",
+     "\\1<!-- paragraph -->\\1",
     full_text,
     perl = TRUE
   )
   
   text_with_phrase_comments <- gsub(
-    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- comment -->)(?!\\n{1,2}<!-- comment -->)",
+    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
     "\n<!-- comment -->\n",
     updated_with_comments, 
     perl = TRUE
@@ -270,6 +270,108 @@ Translate_FR_EN <- function(file_name = "README",
   
 }
 
+#################################
+
+# Fonction de la traduction FR <- EN utilisant babeldown
+
+Translate_FR_EN <- function(file_name = "README",
+                            file_extension = ".md",
+                            source_filepath = path_github_animint2,
+                            dest_filepath = path_local_animint2_fr,
+                            ajoutFR = TRUE) {
+  
+  library(stringr)
+  
+  # Chemins d'accès
+  output_path <- paste0(dest_filepath, "/", file_name, ifelse(ajoutFR, "_FR", ""), file_extension)
+  Rmd_OG_path <- paste0(dest_filepath, "/", file_name, file_extension)
+  
+  # Traduction via babeldown
+  if (file_extension == ".qmd") {
+    babeldown::deepl_translate_quarto(
+      path = Rmd_OG_path,
+      source_lang = "EN",
+      target_lang = "FR",
+      out_path = output_path,
+      glossary_name = "animint-manual-glossaire-fr-en"
+    )
+  } else {
+    babeldown::deepl_translate(
+      path = Rmd_OG_path,
+      source_lang = "EN",
+      target_lang = "FR",
+      out_path = output_path,
+      glossary_name = "animint-manual-glossaire-fr-en"
+    )
+  }
+  
+  # Lire le fichier traduit
+  translated_text <- readLines(output_path, encoding = "UTF-8")
+  
+  # Restaurer les balises modifiées par DeepL
+  translated_text <- str_replace_all(translated_text, "<!-- commentaire -->", "<!-- comment -->")
+  translated_text <- str_replace_all(translated_text, "<!-- paragraphe -->", "<!-- paragraph -->")
+  translated_text <- str_replace_all(translated_text, "<!--comment-->", "<!-- comment -->")
+  
+  # Nettoyage du format selon le type de balise
+  cleaned_lines <- c()
+  i <- 1
+  while (i <= length(translated_text)) {
+    line <- translated_text[i]
+    
+    if (str_trim(line) == "<!-- comment -->") {
+      # Supprimer ligne vide avant
+      if (length(cleaned_lines) > 0 && str_trim(cleaned_lines[length(cleaned_lines)]) == "") {
+        cleaned_lines <- cleaned_lines[-length(cleaned_lines)]
+      }
+      cleaned_lines <- c(cleaned_lines, line)
+      # Supprimer ligne vide après
+      j <- i + 1
+      while (j <= length(translated_text) && str_trim(translated_text[j]) == "") {
+        i <- i + 1  # sauter les lignes vides
+        j <- j + 1
+      }
+    } else if (str_trim(line) == "<!-- paragraph -->") {
+      # Ajouter ligne vide avant (si absente)
+      if (length(cleaned_lines) == 0 || str_trim(cleaned_lines[length(cleaned_lines)]) != "") {
+        cleaned_lines <- c(cleaned_lines, "")
+      }
+      cleaned_lines <- c(cleaned_lines, line)
+      # Ajouter ligne vide après (si absente)
+      if (i < length(translated_text) && str_trim(translated_text[i + 1]) != "") {
+        cleaned_lines <- c(cleaned_lines, "")
+      }
+    } else {
+      cleaned_lines <- c(cleaned_lines, line)
+    }
+    i <- i + 1
+  }
+  
+  # Conversion finale des paragraphes en commentaires
+  cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
+  
+  
+  # Injection du header personnalisé
+  yaml_end <- which(cleaned_lines == "---")[2]
+  header <- c(
+    "",
+    ifelse(file_name == "README", "# animint-manual-fr", ""),
+    "",
+    "Traduction de [English](https://github.com/tdhock/animint-book/)",
+    paste0("[", file_name, "](", source_filepath, "/", file_name, file_extension, ")"),
+    ""
+  )
+  
+  final_lines <- c(
+    cleaned_lines[1:yaml_end],
+    header,
+    cleaned_lines[(yaml_end + 1):length(cleaned_lines)]
+  )
+  
+  # Écriture du fichier final
+  writeLines(final_lines, output_path, useBytes = TRUE)
+}
+
 
 # Traduction du README avec la fonction Translate_FR_EN
 
@@ -289,7 +391,7 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                 github_tree_filepath = path_tree_github_animint_book,
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE,
-                TestFile = TRUE,
+                TestFile = FALSE,
                 Chx = "Ch03-"
 )
 
