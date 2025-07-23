@@ -205,59 +205,59 @@ Utiliser `geom_vline` avec `showSelected=année` pour mettre en évidence l'ann�
 
 <!-- comment -->
 
-## Transitions: the duration option and key aesthetic {#duration-key}
+## Transitions : l'option de la durée et l'esthétique clé {#duration-key}
 
 <!-- comment -->
 
-You may have noticed that there are buttons at the bottom of each data visualization created by animint.
+Vous avez peut-être remarqué qu'il y a des boutons en bas de chaque visualisation de données créée par animint.
 <!-- comment -->
-Try clicking the "Show animation controls" button above.
+Essayez de cliquer sur le bouton "Show animation controls" ci-dessus.
 <!-- comment -->
-This table contains a row for each selection variable.
+Ce tableau contient une ligne pour chaque variable de sélection.
 <!-- comment -->
-The text boxes show the number of milliseconds that are used for transition durations after updating each selection variable.
+Les boîtes de texte indiquent le nombre de millisecondes utilisées pour les durées de transition après la mise à jour de chaque variable de sélection.
 <!-- comment -->
-The default transition duration for each selection variable is 0, meaning data will be immediately placed at their new positions after updating each variable.
+La durée de transition par défaut pour chaque variable de sélection est de 0, ce qui signifie que les données seront immédiatement placées à leur nouvelle position après la mise à jour de chaque variable.
 
 <!-- comment -->
 
-To illustrate the significance of transition durations, try changing the transition duration of the year variable to 2000.
+Pour illustrer l'importance des durées de transition, essayez de changer la durée de transition de la variable année en 2000.
 <!-- comment -->
-Then, change the selected value of the year variable.
+Ensuite, modifiez la valeur sélectionnée de la variable année.
 <!-- comment -->
-You should see the data points move slowly to their new positions, over a duration of 2 seconds.
+Vous devriez voir les points de données se déplacer lentement vers leurs nouvelles positions, sur une durée de 2 secondes.
 
 <!-- comment -->
 
-Some transitions result in points moving only a little bit, to nearby positions (for example, 1979-1980).
+Certaines transitions n'entraînent qu'un léger déplacement des points vers des positions proches (par exemple, 1979-1980).
 <!-- comment -->
-Other transitions result in points moving a lot more, to far away locations (for example, 1980-1981). 
+D'autres transitions entraînent un déplacement beaucoup plus important des points, vers des localisations plus éloignées (par exemple 1980-1981).
 <!-- comment -->
-Why is that?
+Comment cela se fait-il ?
 
 <!-- comment -->
 
-Smooth transitions only make sense for data points that exist both before and after changing the selection.
+Les transitions fluides n'ont de sens que pour les points de données qui existent à la fois avant et après la modification de la sélection.
 <!-- comment -->
-In the R code below we compute a table of counts of data points that can be plotted in each of these three years.
+Dans le code R ci-dessous, nous calculons un tableau de contingences des points de données qui peuvent être tracés dans chacune de ces trois années.
 
 <!-- comment -->
 
 ```{r}
-three.years <- subset(BanqueMondiale, 1979 <= year & year <= 1981)
+three.years <- subset(BanqueMondiale, 1979 <= année & année <= 1981)
 can.plot <- with(three.years, {
-  (!is.na(life.expectancy)) & (!is.na(fertility.rate))
+  (!is.na(espérance.de.vie)) & (!is.na(taux.de.fertilité))
 })
-table(three.years$year, can.plot)
+table(three.years$année, can.plot)
 ```
 
 <!-- comment -->
 
-It is clear from the table above that there are 187 points that can be plotted in 1979 and 1980.
+Le tableau de contingence ci-dessus montre clairement que 187 points peuvent être tracés en 1979 et 1980. 
 <!-- comment -->
-However, in 1981 there is one more data point, corresponding to a country for which we did not have data in 1980.
+Cependant, en 1981, il y a un point de données supplémentaire, correspondant à un pays pour lequel nous n'avions pas de données en 1980. 
 <!-- comment -->
-Below we show the data for that country, Kosovo.
+Nous présentons ci-dessous les données de ce pays, le Kosovo.
 
 <!-- comment -->
 
@@ -267,58 +267,58 @@ subset(three.years, country=="Kosovo")
 
 <!-- comment -->
 
-Indeed, the table above shows that fertility rate and life expectancy are missing for Kosovo during 1979-1980.
+En effet, le tableau de contingence ci-dessus montre que le taux de fécondité et l'espérance de vie sont manquants pour le Kosovo en 1979-1980. 
 <!-- comment -->
-Thus it does not make sense to do a smooth transition for countries such as Kosovo which would not be plotted either before or after the transition.
+Il n'est donc pas logique d'effectuer une transition fluides pour des pays tels que le Kosovo, qui ne seraient pas tracés avant ou après la transition. 
 <!-- comment -->
-How to specify that in the data visualization?
+Comment spécifier cela dans la visualisation de données ? 
 <!-- comment -->
-In the code below, we use `aes(key=country)` to specify that the `country` variable should be used to match data points before and after changing the selection.
+Dans le code ci-dessous, nous utilisons `aes(key=country)` pour spécifier que les `country` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection.
 
 <!-- comment -->
 
 ```{r}
 scatter.key <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region,
+    x=espérance.de.vie, y=taux.de.fertilité, color=région,
     key=country),
-    showSelected="year",
+    showSelected="année",
     data=BanqueMondiale)
 ```
 
 <!-- comment -->
 
-The `key` aesthetic in the ggplot above is only meaningful for interactive data visualization, so it ignored when rendering with the usual R graphics devices.
+Le `key` dans le ggplot ci-dessus n'a de sens que pour la visualisation interactive des données, il est donc ignoré lorsqu'il est affiché avec les périphériques graphiques R habituels. 
+<!-- comment --> 
+Cependant, si nous affichons ce ggplot en utilisant animint2, l'attribut `country` sera utilisée pour s'assurer que les durées de transition sont significatives. 
 <!-- comment -->
-However, if we render this ggplot using animint2, the `country` variable will be used to make sure transtion durations are meaningful.
-<!-- comment -->
-To specify a default transition duration for the `year` variable, we use the `duration` option in the data viz below.
+Pour spécifier une durée de transition par défaut pour la variable `année` nous utilisons l'attribut `duration` dans l'image de données ci-dessous.
 
 <!-- comment -->
 
 ```{r Ch03-viz-duration}
-(viz.duration <- animint(scatter.key, duration=list(year=2000)))
+(viz.duration <- animint(scatter.key, duration=list(année=2000)))
 ```
 
 <!-- comment -->
 
-The `duration` option must be a named list.
+L'option `duration` doit être une liste nommée. 
 <!-- comment -->
-Each name should be a selection variable, and each value should specify the number of milliseconds to use for a transition duration when the selected value of that variable is changed.
+Chaque nom doit être une variable de sélection et chaque valeur doit spécifier le nombre de millisecondes à utiliser pour la durée de la transition lorsque la valeur sélectionnée de cette variable est modifiée.
 
 <!-- comment -->
 
-If you click "Show animation controls" in the data viz above, you will see that the text box for the year variable is 2000, as specified in the R code.
+Si vous cliquez sur "Afficher les contrôles d'animation" dans l'image de données ci-dessus, vous verrez que la zone de texte pour la variable année est 2000, comme spécifié dans le code R. 
 <!-- comment -->
-If you change the selection from 1980 to 1981, you should see a proper transition.
+Si vous changez la sélection de 1980 à 1981, vous devriez voir une transition correcte.
 
 <!-- comment -->
 
-In general the `key` aesthetic should be specified for all geoms that use `showSelected` with a variable that appears in the `duration` option.
+En règle générale, l'animation `key` doit être spécifiée pour tous les geoms qui utilisent l'esthétique `showSelected` avec une variable qui apparaît dans l'élément `duration` dans l'option. 
 <!-- comment -->
-In this example, we used the `duration` option to specify a smooth transition for the `year` variable.
+Dans cet exemple, nous avons utilisé la variable `duration` pour spécifier une transitions fluides pour l'option `année` pour une transition en douceur. 
 <!-- comment -->
-Since we use `showSelected=year` in the `geom_point`, we also specified the `key` aesthetic for this geom.
+Puisque nous utilisons l'option `showSelected=année` dans l'option `geom_point` nous avons également spécifié la variable `key` esthétique pour ce geom.
 
 <!-- comment -->
 
@@ -326,21 +326,21 @@ Since we use `showSelected=year` in the `geom_point`, we also specified the `key
 
 <!-- comment -->
 
-The `time` option is used to specify a variable to use for animation.
+L'option `time`  permet de spécifier une variable à utiliser pour l'animation.
 
 <!-- comment -->
 
 ```{r Ch03-viz-duration-time}
 viz.duration.time <- viz.duration
-viz.duration.time$time <- list(variable="year", ms=2000)
+viz.duration.time$time <- list(variable="année", ms=2000)
 viz.duration.time
 ```
 
 <!-- comment -->
 
-Exercise: make an animated data visualization that does NOT use smooth transitions.
+Exercice : réalisez une visualisation de données animée qui n'utilise PAS de transitions fluides. 
 <!-- comment -->
-Hint: make a list of ggplots that has the `time` option but no `duration` option.
+Conseil : créez une liste de ggplots qui possède l'option `time` mais pas l'option `duration` option.
 
 <!-- comment -->
 
@@ -348,21 +348,21 @@ Hint: make a list of ggplots that has the `time` option but no `duration` option
 
 <!-- comment -->
 
-This chapter explained the showSelected aesthetic, selection menus, transition durations, and animation.
+Ce chapitre a expliqué l'esthétique showSelected, les menus de sélection, les durées de transition et l'animation.
 
 <!-- comment -->
 
-Exercises:
+Exercices :
 
 <!-- comment -->
 
-- Make an improved version of `viz.aligned` from the previous chapter. Instead of fixing the year at 1975, use `showSelected=year` so that the user can select a year. Add geoms that show the selected year: a `geom_text` on the scatterplot, and a `geom_vline` on the time series.
+- Réaliser une version améliorée de `viz.aligned` du chapitre précédent. Au lieu de fixer l'année à 1975, utilisez `showSelected=année` pour que l'utilisateur puisse sélectionner une année. Ajoutez des geoms qui affichent l'année sélectionnée : a `geom_text` sur le nuage de points, et un `geom_vline` sur la série chronologique.
 <!-- comment -->
-- Translate one of the [animation package examples](https://yihui.name/animation/examples/) to an animint. Hint: in the code for the animation package there is always a for loop over the time variable. Instead of calling a plotting function inside the for loop, use the [list of data tables idiom](Ch99-appendix.html#list-of-data-tables) to store the data that should be plotted. Then use those data along with `showSelected` to create ggplots, and render them using animint.
+- Traduisez l'un des [exemples du package d'animation](https://yihui.name/animation/examples/) en animint. Conseil : dans le code du package d'animation, il y a toujours une boucle `for` sur la variable `time`. Au lieu d'appeler une fonction de tracé à l'intérieur de la boucle `for`, utilisez la fonction [tableau de données idiome](Ch99-appendix.html#list-of-data-tables)  pour stocker les données qui doivent être tracées. Utilisez ensuite ces données avec la fonction `showSelected` pour créer des ggplots, et les afficher en utilisant animint.
 
 <!-- comment -->
 
-Next, [Chapter 4](Ch04-clickSelects.html) explains the `clickSelects` keyword, which indicates a geom that can be clicked to update a selection variable.
+Suivant, [Chapitre 4](Ch04-clickSelects.html) explique les `clickSelects` qui indique un geom sur lequel on peut cliquer pour mettre à jour une variable de sélection.
 
 <!-- comment -->
 
