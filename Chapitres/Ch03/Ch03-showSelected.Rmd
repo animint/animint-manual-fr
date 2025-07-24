@@ -331,14 +331,16 @@ Since we use `showSelected=year` in the `geom_point`, we also specified the `key
 <!-- comment -->
 
 The `time` option is used to specify a variable to use for animation.
-
 <!-- comment -->
+The code below specifies `year` as the variable to animate over time, with an update every 2000 milliseconds.
 
 ```{r Ch03-viz-duration-time}
 viz.duration.time <- viz.duration
 viz.duration.time$time <- list(variable="year", ms=2000)
 viz.duration.time
 ```
+
+The data visualization above is animated, because the selected year advances every two seconds.
 
 <!-- comment -->
 
