@@ -171,7 +171,7 @@ Lorsque vous modifiez la sélection à l'aide d'une des méthodes, la légende i
 
 Nous utilisons les termes "manipulation directe" et "manipulation indirecte" pour décrire ces différentes façons de modifier la sélection.
 <!-- comment -->
-La manipulation directe est généralement plus facile à comprendre, parce qu'il s'agit de cliquer sur les objets dans le graphique que l'on souhaite modifier.
+La manipulation directe est généralement plus facile à comprendre, parce qu'il s'agit de cliquer sur les objets que l'on souhaite modifier dans le graphique.
 <!-- comment -->
 En revanche, les techniques de manipulation indirecte, telles que les menus, sont utiles dans d'autres cas (par exemple, sélection d'un pays par nom).
 <!-- comment -->
@@ -221,7 +221,7 @@ Pour chaque variable de sélection, la durée de transition par défaut est 0, c
 
 <!-- comment -->
 
-Pour illustrer l'importance des durées de transition, essayez de changer la durée de transition de la variable `année` en 2000.
+Pour illustrer l'importance des durées de transition, essayez de changer la valeur de la durée de transition de la variable `année` à 2000.
 <!-- comment -->
 Ensuite, utilisez le menu pour modifier la valeur sélectionnée de la variable `année`.
 <!-- comment -->
