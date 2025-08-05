@@ -205,5 +205,3 @@ Exercices :
 - Traduisez l'un des [exemples de library(animation)](https://yihui.name/animation/examples/) en animint2. Indice : dans le code de `library(animation)`, il y a toujours une boucle `for` dans l'option `time`. Au lieu d'appeler une fonction d'affichage à l'intérieur de la boucle `for`, utilisez [l'idiome liste de tableaux de données](Ch99-appendix.html#list-of-data-tables)  pour stocker les données qui doivent être tracées. Utilisez ensuite ces données avec `showSelected` pour créer des ggplots, et affichez-les avec `animint2`.
 
 Dans le [chapitre 4](Ch04-clickSelects.html), nous vous expliquerons le mot-clé `clickSelects` qui indique un geom sur lequel on peut cliquer pour mettre à jour une variable de sélection.
-
-
