@@ -129,7 +129,7 @@ motif,pattern
 conduite,pipe
 pixmap,pixmap
 architecture,platform
-graphe,plot
+graphique,plot
 tracé,plotted
 ligne brisée,polyline
 port,port
@@ -183,6 +183,7 @@ super-noeud,supernode
 pris en charge,supported
 tableau de contingence,table
 marque,tag
+zone de texte,text box
 jauge,thermometer
 contexte,thread
 code contextuel,threaded code
