@@ -16,11 +16,11 @@ Après avoir lu ce chapitre, vous serez en mesure de
 <!-- comment -->
 * Citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents pour la visualisation de données
 <!-- comment -->
-* Installer le package R animint2 
+* Installer le package R `animint2 `
 <!-- comment -->
-* Traduire les esquisses de graphe en code ggplot dans R
+* Traduire les esquisses de graphique en code ggplot dans R
 <!-- comment -->
-* Afficher des ggplots sur des pages web en utilisant animint2
+* Afficher des ggplots sur des pages web en utilisant `animint2`
 <!-- comment -->
 * Créer des ggplots avec multiples couches
 <!-- comment -->
@@ -32,11 +32,11 @@ Après avoir lu ce chapitre, vous serez en mesure de
 
 <!-- comment -->
 
-La plupart des systèmes informatiques d'analyse de données proposent des fonctions permettant de créer des graphes afin de visualiser les données.
+La plupart des systèmes informatiques d'analyse de données proposent des fonctions permettant de créer des graphiques afin de visualiser les tendances dans les données.
 <!-- comment -->
-Les systèmes les plus anciens proposent des fonctions très générales permettant de dessiner les éléments de base d'un graphe, tels que des lignes et des points (par exemple, les packages `graphics`  et `grid`  dans R).
+Les systèmes les plus anciens proposent des fonctions très générales permettant de tracer les éléments de base d'un graphique, tels que des lignes et des points (par exemple, les packages `graphics`  et `grid`  dans R).
 <!-- comment -->
-Si vous utilisez l'un de ces systèmes généraux, c'est à vous d'assembler les composants pour former un graphe significatif et interprétable.
+Si vous utilisez l'un de ces systèmes généraux, c'est à vous d'assembler les composants pour former un graphique significatif et interprétable.
 <!-- comment -->
 L'avantage des systèmes généraux est qu'ils imposent peu de limites aux types de graphiques qui peuvent être créés.
 <!-- comment -->
@@ -44,11 +44,11 @@ L'inconvénient est que les systèmes généraux ne fournissent généralement p
 
 <!-- comment -->
 
-Pour pallier les inconvénients de ces systèmes de tracé généraux, des packages de tracé tels que `lattice`  ont été développés ( [Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html) ).
+Pour remédier aux inconvénients de ces systèmes de tracé généraux, des packages de visualisation tels que `lattice`  ont été développés ( [Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html) ).
 <!-- comment -->
 Ces packages disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chaque type de graphique.
 <!-- comment -->
- Par exemple, `lattice` fournit la fonction `bwplot`  pour créer des graphes en boîte et des boîtes à moustaches.
+ Par exemple, `lattice` fournit la fonction `bwplot`  pour créer des diagrammes en boîte et des boîtes à moustaches.
 <!-- comment -->
 L'avantage de ces systèmes est qu'ils facilitent grandement la création de certains graphiques en entiers, y compris une légende et des panneaux.
 <!-- comment -->
@@ -58,19 +58,19 @@ L'inconvénient est l'ensemble des types de graphiques prédéfinis, ce qui fait
 
 Les nouveaux systèmes basés sur la grammaire des graphiques se situent entre ces deux extrêmes.
 <!-- comment -->
-Wilkinson a proposé la grammaire des graphiques afin de décrire et de créer une grande classe de graphes ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
+Wilkinson a proposé la grammaire des graphiques afin de décrire et de créer une grande classe de graphiques ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
 <!-- comment -->
-Wickham a implémenté plus tard plusieurs idées de la grammaire des graphiques dans le package `ggplot2`  package R ([Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20)).
+Wickham a implémenté plus tard plusieurs idées de la grammaire des graphiques dans le package R `ggplot2` ([Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20)).
 <!-- comment -->
-Le package `ggplot2` présente plusieurs avantages par rapport aux systèmes de précédents.
+Le package `ggplot2` présente plusieurs avantages par rapport aux systèmes de tracé précédents.
 
 <!-- comment -->
 
-* Comme les systèmes généraux, et à la différence de `lattice`, `ggplot2` impose peu de limites aux types de graphiques qui peuvent être créés (il n'y a pas de types de graphiques prédéfinis).
+* Comme les systèmes généraux, et contrairement à `lattice`, `ggplot2` impose peu de limites aux types de graphiques qui peuvent être créés (il n'y a pas de types de graphiques prédéfinis).
 <!-- comment -->
-* Contrairement aux systèmes généraux, et à l'instar de `lattice`, `ggplot2` permet d'inclure facilement des éléments de graphe courants tels que des axes, des panneaux et des légendes.
+* Contrairement aux systèmes généraux, et à l'instar de `lattice`, `ggplot2` permet d'inclure facilement des éléments de graphique courants tels que des axes, des panneaux et des légendes.
 <!-- comment -->
-* Parce que `ggplot2` est basé sur la grammaire des graphiques, il est nécessaire de mapper explicitement les variables de données aux propriétés visuelles. Plus loin dans ce chapitre, nous expliquerons comment ce mappage permet la création d'esquisses qui peuvent être directement traduites en code R.
+* Puisque `ggplot2` est basé sur la grammaire des graphiques, il est nécessaire de mapper explicitement les variables de données aux propriétés visuelles. Plus loin dans ce chapitre, nous expliquerons comment ce mappage permet la création d'esquisses qui peuvent être directement traduites en code R.
 
 <!-- comment -->
 
@@ -78,13 +78,13 @@ Enfin, tous les systèmes évoqués précédemment sont destinés à la créatio
 <!-- comment -->
 Cependant, le sujet principal de ce manuel est `animint2`, un package R pour les graphiques interactifs.
 <!-- comment -->
-Contrairement aux graphiques statiques, les graphiques interactifs sont mieux visualisés sur un ordinateur équipé d'une souris et d'un clavier permettant d'interagir avec le graphe.
+Contrairement aux graphiques statiques, les graphiques interactifs sont mieux visualisés sur un ordinateur équipé d'une souris et d'un clavier permettant d'interagir avec le graphique.
 
 <!-- comment -->
 
 Étant donné que de nombreux concepts des graphiques statiques sont également utiles dans les graphiques interactifs, le package `animint2`  est implémenté en tant qu'extension/fork du package `ggplot2`.
 <!-- comment -->
-Dans ce chapitre, nous présenterons les principales caractéristiques de `ggplot2`  qui seront également utiles pour la conception de graphes interactifs dans les chapitres suivants.
+Dans ce chapitre, nous présenterons les principales caractéristiques de `ggplot2`  qui seront également utiles pour la conception de graphiques interactifs dans les chapitres suivants.
 
 <!-- comment -->
 
@@ -96,7 +96,7 @@ Par conséquent, en 2018, nous avons créé le package `animint2` qui copie/fork
 <!-- comment -->
 Maintenant, `animint2` peut être utilisé sans que `ggplot2` soit installé.
 <!-- comment -->
-En fait, il est conseillé d'utiliser `animint2` sans attacher (avec `library`) ggplot2.
+En fait, il est conseillé d'utiliser `animint2` sans attacher (avec `library`) `ggplot2`.
 <!-- comment -->
 Cependant, il est possible d'utiliser `animint2` avec des packages qui importent/chargent `ggplot2`.
 <!-- comment -->
@@ -141,11 +141,11 @@ library(animint2)
 
 <!-- comment -->
 
-## Traduire des esquisses de tracés en ggplots {#sketching}
+## Traduire des esquisses en ggplots {#sketching}
 
 <!-- comment -->
 
-Cette section explique comment traduire une esquisse de graphe en code R.
+Cette section explique comment traduire une esquisse de graphique en code R.
 <!-- comment -->
 Nous utilisons un ensemble de données de la Banque mondiale comme exemple, et nous commençons par charger et examiner un sous-ensemble de ces données.
 
@@ -161,9 +161,9 @@ dim(BanqueMondiale)
 
 <!-- comment -->
 
-Le jeu de données `BanqueMondiale`  consiste en des mesures telles que le taux de fertilité et l'espérance de vie pour chaque pays sur la période 1960-2010.
+Le jeu de données `BanqueMondiale`  comprend des mesures telles que le taux de fertilité et l'espérance de vie pour chaque pays sur la période 1960-2010.
 <!-- comment -->
-Le code ci-dessus imprime les premières et dernières lignes, ainsi que la dimension du tableau de données ( `r nrow(BanqueMondiale)`  lignes et `r ncol(BanqueMondiale)`  colonnes).
+Le code ci-dessus imprime les premières et dernières lignes, ainsi que la dimension (lignes `r nrow(BanqueMondiale)` et colonnes `r ncol(BanqueMondiale)`) du tableau de données.
 
 <!-- comment -->
 
@@ -181,7 +181,7 @@ La figure ci-dessous esquisse les principaux éléments de cette visualisation d
 
 L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (x), le taux de fertilité sur l'axe vertical (y) et une légende pour la région.
 <!-- comment -->
-Ces éléments du dessin peuvent être directement traduits en code R à l'aide de la méthode suivante.
+Ces éléments de l'esquisse peuvent être directement traduits en code R à l'aide de la méthode suivante.
 <!-- comment -->
 Tout d'abord, nous devons construire un tableau de données comportant une ligne pour chaque pays en 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 <!-- comment -->
@@ -198,7 +198,7 @@ head(BanqueMondiale1975)
 
 Le code ci-dessus imprime les données pour 1975, qui ont clairement les colonnes appropriées, et une ligne pour chaque pays
 <!-- comment -->
-L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec une fonction correspondante de `aes`  ou un mappage esthétique des variables de données aux propriétés visuelles :
+L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec une fonction correspondante de `aes`  ou un mappage `aes` des variables de données aux propriétés visuelles :
 
 <!-- comment -->
 
@@ -214,9 +214,9 @@ scatter
 
 La fonction `aes`  est appelée avec les noms des propriétés visuelles ( `x` , `y` , `color` ) et les valeurs des variables de données correspondantes ( `espérance.de.vie` , `taux.de.fertilité` , `région` )
 <!-- comment -->
-Ce mappage est appliqué aux variables du tableau de données `BanqueMondiale1975`, afin de créer les propriétés de visualisation de la `geom_point` .
+Ce mappage est appliqué aux variables du tableau de données `BanqueMondiale1975`, afin de créer les propriétés de visualisation du `geom_point` .
 <!-- comment -->
-Le ggplot a été sauvegardé en tant qu'objet `scatter`  qui, lorsqu'il est imprimé sur la ligne de commande R, affiche le graphe sur un périphérique graphique.
+Le ggplot a été sauvegardé en tant qu'objet `scatter`  qui, lorsqu'il est imprimé sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
 <!-- comment -->
 Notez que nous avons automatiquement une légende `région` en couleur.
 
@@ -226,7 +226,7 @@ Notez que nous avons automatiquement une légende `région` en couleur.
 
 <!-- comment -->
 
-Cette section explique comment l'outil `animint2`  peut être utilisé pour afficher des ggplots sur des pages web.
+Cette section explique comment `animint2`  peut être utilisé pour afficher des ggplots sur des pages web.
 <!-- comment -->
 Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint`
 
@@ -250,7 +250,7 @@ Elle est activée automatiquement par la fonction `print.animint`.
 
 <!-- comment -->
 
-Lorsqu'il est visualisé dans un navigateur web, le graphe animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard.
+Lorsqu'il est visualisé dans un navigateur web, le graphiquee animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard.
 <!-- comment -->
 Une différence est que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
 
@@ -268,9 +268,9 @@ Les variables qualitatives comme `lending`  sont mieux représentées en utilisa
 
 <!-- comment -->
 
-La visualisation de données multicouches est utile lorsque vous souhaitez afficher plusieurs geoms ou ensembles de données différents dans le même graphe.
+La visualisation de données multicouches est utile lorsque vous souhaitez afficher plusieurs geoms ou ensembles de données différents dans le même graphique.
 <!-- comment -->
-Par exemple, considérons l'esquisse suivante qui ajoute une couche de `geom\_path` à la visualisation de données précédente.
+Par exemple, considérons l'esquisse suivante qui ajoute une couche de `geom_path` à la visualisation de données précédente.
 
 <!-- comment -->
 
@@ -278,9 +278,9 @@ Par exemple, considérons l'esquisse suivante qui ajoute une couche de `geom\_pa
 
 <!-- comment -->
 
-Notez que l'esquisse ci-dessus comprend deux geoms différents (point et chemin).
+Notez que l'esquisse ci-dessus comprend deux geoms différents (point et path).
 <!-- comment -->
-Les deux geoms partagent une définition commune des éléments `x` , `y` , et de l'esthétique `color`, mais avec des ensembles de données différents.
+Les deux geoms partagent une définition commune des éléments `x` , `y` , et de l'`aes` `color`, mais avec des ensembles de données différents.
 <!-- comment -->
 Nous traduisons ci-dessous cette esquisse en code R.
 
@@ -295,18 +295,18 @@ deux.couches <- scatter+
     color=région,
     group=pays),
     data=BanqueMondialeAvant1975)
-(viz.deux.couches <- animint(deux.couches))
+(vis.deux.couches <- animint(deux.couches))
 ```
 
 <!-- comment -->
 
-Notez que nous sauvegardons la valeur de retour de la fonction `animint`  dans l'objet `viz.deux.couches`  (qui est également imprimé en raison des parenthèses).
+Notez que nous sauvegardons la valeur de retour de la fonction `animint`  dans l'objet `vis.deux.couches`  (qui est également imprimé en raison des parenthèses).
 <!-- comment -->
-Dans ce manuel, nous utiliserons souvent des noms de variables commençant par `viz`  pour désigner les objets de classe `animint`, qui sont en fait des listes de ggplots et d'options.
+Dans ce manuel, nous utiliserons souvent des noms de variables commençant par `vis`  pour désigner les objets de classe `animint`, qui sont en fait des listes de ggplots et d'options.
 
 <!-- comment -->
 
-Le graphe ci-dessus montre une visualisation de données avec 2 geoms/couches : 
+Le graphique ci-dessus montre une visualisation de données avec 2 geoms/couches : 
 
 <!-- comment -->
 
@@ -328,15 +328,15 @@ Par ailleurs, certains pays ont vu leur taux de fertilité augmenter.
 
 <!-- comment -->
 
-**Exercice**: essayez de changer le `région`  par une légende `revenu`.
+**Exercice**: essayez de changer la légende `région`  par une légende `revenu`.
 <!-- comment -->
-Conseil : vous devez utiliser la même spécification `aes(color=revenu)`  pour tous les geoms.
+Indice : vous devez utiliser la même spécification `aes(color=revenu)`  pour tous les geoms.
 <!-- comment -->
 Vous pouvez utiliser `scale_color_manual` avec une palette de couleurs séquentielle, voir `RColorBrewer::display.brewer.all(type="seq")` et [lire l'annexe pour plus de détails](Ch99-appendix.html#manual-color-legends).
   
 <!-- comment -->
 
-Pouvons-nous ajouter les noms des pays à l'image de données ?
+Pouvons-nous ajouter les noms des pays à la visualisation de données ?
 <!-- comment -->
 Ci-dessous, nous ajoutons une autre couche avec une étiquette de texte pour le nom de chaque pays.
 
@@ -359,27 +359,27 @@ Cette visualisation n'est pas très facile à lire, car il y a beaucoup d'étiqu
 <!-- comment -->
 La légende interactive des régions aide un peu, en permettant à l'utilisateur de masquer les données des régions sélectionnées.
 <!-- comment -->
-Cependant, ce serait encore mieux si l'utilisateur pouvait afficher et masquer le texte pour les pays individuels.
+Cependant, ce serait encore mieux si l'utilisateur pouvait afficher et masquer le texte pour les pays individuellement.
 <!-- comment -->
-Ce type d'interaction peut être réalisé en utilisant les paramètres `showSelected` et `clickSelects` que nous expliquons dans les chapitres 3-4.
+Ce type d'interaction peut être réalisé en utilisant les mots-clés `showSelected` et `clickSelects` que nous expliquons dans les chapitres 3-4.
 
 <!-- comment -->
 
-Pour l'instant, nous passons à l'examen d'un atout majeur d'animint : la visualisation de données à l'aide de plusieurs graphes liés.
+Pour l'instant, nous passons à une des grandes forces d'`animint` : la visualisation de données à l'aide de plusieurs graphiques interconnectés.
 
 <!-- comment -->
 
-## Visualisation de données en plusieurs graphes {#multi-plot}
+## Visualisation multi-graphiques de données{#multi-plot}
 
 <!-- comment -->
 
-La visualisation de données à plusieurs graphes est utile lorsque vous souhaitez présenter des ensembles de données liés en utilisant plus d'un mappage esthétique.
+La visualisation de données multi-graphiques est utile lorsque vous souhaitez présenter des ensembles de données liés en utilisant plus d'un mappage `aes`.
 <!-- comment -->
-Dans la visualisation de données interactive, un graphe est souvent utilisé pour afficher un résumé et un autre pour afficher les détails.
+Dans la visualisation de données interactive, un graphique est souvent utilisé pour afficher un sommaire et un autre pour afficher les détails.
 <!-- comment -->
-Prenons l'exemple d'une visualisation comportant deux graphes : une série chronologique avec les données de la Banque mondiale de 1960 à 2010 (résumé) et un nuage de points avec les données de 1975 (détails).
+Prenons l'exemple d'une visualisation comportant deux graphiques : une série temporelle avec les données de la Banque mondiale de 1960 à 2010 (sommaire) et un nuage de points avec les données de 1975 (détails).
 <!-- comment -->
-Nous esquissons ci-dessous le graphe de la série chronologique.
+Nous esquissons ci-dessous le graphique des séries temporelles.
 
 <!-- comment -->
 
@@ -403,13 +403,13 @@ table(BanqueMondialeSome$année)
 
 Le tableau de contingence ci-dessus montre qu'il y a 214 lignes pour chacune des années de l'ensemble de données.
 <!-- comment -->
-Ensuite, nous copions la liste viz existante ( `viz.deux.couches` ), puis nous assignons un ggplot à un nouvel élément nommé `timeSeries`. 
+Ensuite, nous copions la liste vis existante ( `vis.deux.couches` ), puis nous assignons un ggplot à un nouvel élément nommé `timeSeries`. 
 
  <!-- comment -->
 
 ```{r vizTwoPlots}
-viz.deux.graphes <- viz.deux.couches
-viz.deux.graphes$timeSeries <- ggplot()+
+vis.deux.graphes <- vis.deux.couches
+vis.deux.graphes$timeSeries <- ggplot()+
   geom_line(aes(
     x=année, 
     y=taux.de.fertilité, 
@@ -420,29 +420,29 @@ viz.deux.graphes$timeSeries <- ggplot()+
 
 <!-- comment -->
 
-Il en résulte une liste nommée de deux éléments (les deux éléments sont des ggplots avec la classe `gganimint`).
+Il en résulte une liste nommée de deux éléments (les deux éléments sont des ggplots de classe `gganimint`).
 
 <!-- comment -->
 
 ```{r summaryTwo}
-summary(viz.deux.graphes)
+summary(vis.deux.graphes)
 ```
 
 <!-- comment -->
 
 Cette liste de visualisation de données peut être imprimée ou affichée en tapant son nom.
 <!-- comment -->
-Puisque la liste contient deux ggplots, `animint2`  affiche la visualisation de données sous la forme de deux graphes liés.
+Puisque la liste contient deux ggplots, `animint2`  affiche la visualisation de données sous la forme de deux graphiques liés.
 
 <!-- comment -->
 
 ```{r Ch02-viz-two-plots}
-viz.deux.graphes
+vis.deux.graphes
 ```
 
 <!-- comment -->
 
-La visualisation de données ci-dessus contient deux ggplots, qui mappent chacun des variables de données différentes sur le plan horizontal `x`.
+La visualisation de données ci-dessus contient deux ggplots, qui mappent chacun différentes variables de données sur le plan horizontal `x`.
 <!-- comment -->
 La série temporelle utilise `aes(x=année)` et montre un résumé des valeurs du taux de fertilité pour toutes les années.
 <!-- comment -->
@@ -450,29 +450,29 @@ Le nuage de points utilise `aes(x=espérance.de.vie)` et montre les détails de 
 
 <!-- comment -->
 
-**Essayez** de cliquer sur une entrée de légende dans le nuage de points ou dans la série chronologique ci-dessus.
+**Essayez** de cliquer sur une entrée de légende dans le nuage de points ou dans la série temporelle ci-dessus.
 <!-- comment -->
-Vous devriez voir les données et les légendes des deux graphes se mettre à jour simultanément.
+Vous devriez voir les données et les légendes des deux graphiques se mettre à jour simultanément.
 <!-- comment -->
-Etant donné que `aes(color=région)` a été spécifié dans les deux graphes, `animint` crée une seule variable de sélection partagée appelée `région`.
+Etant donné que `aes(color=région)` a été spécifié dans les deux graphiques, `animint` crée une seule variable de sélection partagée appelée `région`.
 <!-- comment -->
-Cliquer sur l'une ou l'autre légende a pour effet de mettre à jour l'ensemble des régions sélectionnées, et `animint` met donc à jour les légendes et les données dans les deux graphes en conséquence.
+Cliquer sur l'une des légendes a pour effet de mettre à jour l'ensemble des régions sélectionnées, et `animint` met donc à jour les légendes et les données dans les deux graphiques en conséquence.
 <!-- comment -->
-Il s'agit du mécanisme principal utilisé par `animint` pour créer des visualisations de données interactives avec des graphes liés, et il sera discuté plus en détail dans les deux prochains chapitres.
+Il s'agit du mécanisme principal utilisé par `animint` pour créer des visualisations de données interactives avec des graphiques liés, et il sera discuté plus en détail dans les deux prochains chapitres.
 
 <!-- comment -->
 
-**Exercice**: utilisez `animint` pour créer une visualisation de données avec trois graphes, en créant une liste avec trois ggplots.
+**Exercice**: utilisez `animint` pour créer une visualisation de données avec trois graphiques, en créant une liste avec trois ggplots.
 <!-- comment -->
-Par exemple, vous pouvez ajouter une série temporelle d'une autre variable de données telle que `espérance.de.vie`  ou `population`.
+Par exemple, vous pouvez ajouter une série temporelle d'une autre variable de données telle que `espérance.de.vie` ou `population`.
 
 <!-- comment -->
 
-Notez que les deux ggplots mappent la variable taux de fertilité sur l'axe y.
+Notez que les deux ggplots mappent la variable taux.de.fertilité sur l'axe y.
 <!-- comment -->
-Cependant, comme il s'agit de deux graphes distincts, les plages (ou intervalles) de leurs axes des ordonnées sont calculées séparément.
+Cependant, comme il s'agit de deux graphiques distincts, les plages de leurs axes y sont calculées séparément.
 <!-- comment -->
-Cela signifie que même lorsque les deux graphes sont affichés côte à côte, les deux axes des ordonnées ne sont pas exactement alignés.
+Cela signifie que même lorsque les deux graphiques sont affichés côte à côte, les deux axes y ne sont pas exactement alignés.
 <!-- comment -->
 C'est un problème car il serait plus facile de décoder la visualisation des données si chaque unité d'espace vertical était utilisée pour montrer la même quantité de taux de fertilité.
 <!-- comment -->
@@ -484,15 +484,15 @@ Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 
 <!-- comment -->
 
-Les panneaux ou facettes sont des sous-tracés qui présentent des visualisations de données connectées.
+Les panneaux ou facettes sont des sous-graphiques qui présentent des visualisations de données connectées.
 <!-- comment -->
-L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphes à panneaux multiples.
+L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques multi-panneaux.
 <!-- comment -->
 La visualisation de données multi-panneaux est utile à deux fins différentes :
 
 <!-- comment -->
 
-* Vous souhaitez aligner les axes de plusieurs tracés connexes contenant différents geoms. Cela facilite la comparaison entre plusieurs geoms différents et c'est une technique qui est également utile pour la visualisation interactive des données.
+* Vous souhaitez aligner les axes de plusieurs graphiques connexes contenant différents geoms. Cela facilite la comparaison entre plusieurs geoms différents et c'est une technique qui est également utile pour la visualisation interactive des données.
 * Vous souhaitez diviser les données d'un geom en plusieurs panneaux. Cette technique facilite la comparaison entre des sous-ensembles de données et est moins utile pour la visualisation interactive de données (l'interactivité peut souvent être utilisée à la place, pour obtenir le même effet de comparaison de sous-ensembles de données).
 
 <!-- comment -->
@@ -503,7 +503,7 @@ La visualisation de données multi-panneaux est utile à deux fins différentes 
 
 Nous commençons par expliquer comment les facettes sont utiles pour aligner les axes de graphiques apparentés.
 <!-- comment -->
-Considérons l'esquisse ci-dessous qui contient un graphe avec deux panneaux.
+Considérons l'esquisse ci-dessous qui contient un graphique avec deux panneaux.
 
 <!-- comment -->
 
@@ -525,7 +525,7 @@ Nous traduisons cette esquisse en code R ci-dessous.
 add.x.var <- function(df, x.var){
   data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
-(viz.aligné <- animint(
+(vis.aligné <- animint(
   scatter=ggplot()+
     theme_bw()+
     theme_animint(width=600)+
@@ -549,13 +549,13 @@ La visualisation de données ci-dessus contient un seul ggplot avec deux panneau
 <!-- comment -->
 Le panneau de gauche montre les `geom_point` et `geom_path` et le panneau de droite montre les `geom_line`.
 <!-- comment -->
-Les panneaux ont un axe commun pour le taux de fertilité, ce qui permet de comparer directement les lignes du panneau des séries chronologiques avec les points et les chemins du panneau du nuage de points.
+Les panneaux ont un axe commun pour le taux de fertilité, ce qui permet de comparer directement les lignes du panneau des séries temporelles avec les points et les chemins du panneau du nuage de points.
 
 <!-- comment -->
 
 Il est à noter que nous avons utilisé la méthode `add.x.var` pour ajouter une variable `x.var` à chaque ensemble de données, puis nous avons utilisé cette variable dans la fonction `facet_grid(scales="free")`.
 <!-- comment -->
-Nous appelons cela la fonction [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) qui est généralement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
+Nous appelons cela l'[idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet) qui est généralement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
 <!-- comment -->
 En particulier, si nous voulions changer l'ordre des panneaux dans la visualisation, il nous suffirait de modifier l'ordre des niveaux de facteurs dans la définition de `add.x.var` .
 
@@ -565,7 +565,7 @@ Notez également que `theme_bw`  signifie qu'il faut utiliser des bordures de pa
 <!-- comment -->
 En éliminant l'espace entre les panneaux, on utilise plus d'espace pour les panneaux, ce qui permet d'accentuer les données.
 <!-- comment -->
-C'est ce que nous appelons l' [idiome des facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
+C'est ce que nous appelons l'[idiome facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
 
 <!-- comment -->
 
@@ -676,7 +676,7 @@ Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les donn
 
 Au lieu de montrer toutes les données en même temps, nous pouvons créer une visualisation de données animée qui montre à l'observateur différents sous-ensembles de données au fil du temps.
 <!-- comment -->
-Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le nouveau mot clé `showSelected`  peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
+Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le nouveau mot-clé `showSelected`  peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
 
 <!-- comment -->
 
@@ -684,7 +684,7 @@ Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le no
 
 <!-- comment -->
 
-Ce chapitre a présenté les bases de la visualisation de données statiques à l'aide de `ggplot2`.
+Ce chapitre a présenté les bases de la visualisation de données statiques avec `ggplot2`.
 <!-- comment -->
 Nous avons montré comment animint peut être utilisé pour afficher une liste de ggplots dans un navigateur web.
 <!-- comment -->
@@ -721,17 +721,17 @@ Exercices :
 	* ggplot < layer
   <!-- comment -->
 	
-* Dans les facettes `viz.aligned`, pourquoi est-il important d'utiliser l'argument `scales="free"` ?
+* Dans les facettes `vis.alignée`, pourquoi est-il important d'utiliser l'argument `scales="free"` ?
 <!-- comment -->
-* Dans `viz.aligned`  nous avons montré un ggplot avec un panneau de nuage de points à gauche et un panneau de séries temporelles à droite. Réalisez une autre version de la visualisation de données avec le panneau des séries temporelles à gauche et le panneau du nuage de points à droite.
+* Dans `vis.alignée`  nous avons montré un ggplot avec un panneau de nuage de points à gauche et un panneau de séries temporelles à droite. Réalisez une autre version de la visualisation de données avec le panneau des séries temporelles à gauche et le panneau du nuage de points à droite.
 <!-- comment -->
-* Dans `viz.aligned`  le nuage de points affiche le taux de fécondité et l'espérance de vie, mais la série chronologique n'affiche que le taux de fertilité. Réalisez une autre version de la visualisation de données qui montre les deux séries temporelles. Conseil : utilisez les panneaux horizontaux et verticaux dans `facet_grid`.
+* Dans `vis.alignée`  le nuage de points affiche le taux de fécondité et l'espérance de vie, mais la série chronologique n'affiche que le taux de fertilité. Réalisez une autre version de la visualisation de données qui montre les deux séries temporelles. Indice : utilisez les panneaux horizontaux et verticaux dans `facet_grid`.
 <!-- comment -->
 * Utilisez `aes(size=population)` dans le nuage de points pour indiquer la population de chaque pays. Indice : `scale_size_animint(pixel.range=c(5, 10))`  signifie que des cercles d'un rayon de 5/10 pixels doivent être utilisés pour représenter la population minimale/maximale.
 <!-- comment -->
 * Créez une visualisation de données à plusieurs panneaux qui montre chaque année de la `BanqueMondiale`  dans un panneau séparé. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
 <!-- comment -->
-* Créez un `viz.aligned`  en utilisant un système de tracé qui n'est pas basé sur la grammaire des graphiques. Par exemple, vous pouvez utiliser les fonctions du package `graphics` dans R (`plot` ,`points` ,`lines` etc.), ou matplotlib en Python. Quels sont les avantages de `ggplot2` et `animint` ?
+* Créez un `vis.alignée`  en utilisant un système de tracé qui n'est pas basé sur la grammaire des graphiques. Par exemple, vous pouvez utiliser les fonctions du package `graphics` dans R (`plot` ,`points` ,`lines` etc.), ou `matplotlib` en Python. Quels sont les avantages de `ggplot2` et `animint` ?
 
 <!-- comment -->
 
