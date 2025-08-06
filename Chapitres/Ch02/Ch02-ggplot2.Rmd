@@ -52,7 +52,7 @@ Ces packages disposent de plusieurs types de graphiques prédéfinis et fourniss
 <!-- comment -->
 L'avantage de ces systèmes est qu'ils facilitent grandement la création de certains graphiques en entiers, y compris une légende et des panneaux.
 <!-- comment -->
-L'inconvénient est l'ensemble des types de graphiques prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
+L'inconvénient est que l'ensemble des types de graphiques sont prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
 
 <!-- comment -->
 
@@ -240,7 +240,7 @@ animint(scatter)
 
 Si, lorsque vous exécutez le code ci-dessus, l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre section [FAQ wiki](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank)  qui vous aidera à trouver une solution.
 <!-- comment -->
-En interne, la fonction `animint`  crée une liste avec classes animint, puis R exécute la fonction `print.animint`  via la fonction [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
+En arrière plan, la fonction `animint`  crée une liste avec classes animint, puis R exécute la fonction `print.animint`  via la fonction [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
 <!-- comment -->
 Le package `animint2`  implémente un compilateur qui prend la liste en entrée et qui produit une page web avec une visualisation de données. 
 <!-- comment -->
