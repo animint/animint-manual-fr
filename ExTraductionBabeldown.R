@@ -329,15 +329,12 @@ Translate_FR_EN <- function(file_name = "README",
 
 # Traduction Chapitre 03 par Jeremi Lepage
 
-ConvertRmd_comments(file_name = "Ch05-sharing",
-                    file_extension = ".Rmd",
-                    source_filepath = path_github_animint_book,
-                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
-                    github_tree_filepath = path_tree_github_animint_book,
-                    #UpdateDoc = TRUE,
-                    ajoutFR = FALSE,
-                    TestFile = FALSE,
-                    Chx = "Ch05-"
+Translate_FR_EN(file_name = "Ch05-sharing",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
 )
 
-quarto::quarto_render(input = "Chapitres/Ch05/Ch05-sharing.Rmd")
+#quarto::quarto_render(input = "Chapitres/Ch05/Ch05-sharing.Rmd")
