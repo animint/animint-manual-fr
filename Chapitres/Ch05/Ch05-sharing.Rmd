@@ -16,7 +16,9 @@ knitr::opts_chunk$set(fig.path="Ch05-figures/")
 
 <!-- paragraph -->
 
-This chapter explains several methods for sharing your interactive  data visualizations on the web. After reading this chapter, you will  be able to view animints
+This chapter explains several methods for sharing your interactive  data visualizations on the web.
+<!-- comment -->
+After reading this chapter, you will  be able to view animints
 
 <!-- paragraph -->
 
@@ -34,11 +36,15 @@ This chapter explains several methods for sharing your interactive  data visuali
 
 <!-- paragraph -->
 
-When experimenting with different interactive data visualization  designs, it is useful to preview them on your personal computer before  publishing on the web. This section discusses two methods for  compiling animints to a local directory.
+When experimenting with different interactive data visualization  designs, it is useful to preview them on your personal computer before  publishing on the web.
+<!-- comment -->
+This section discusses two methods for  compiling animints to a local directory.
 
 <!-- paragraph -->
 
-So far in previous chapters we have only discussed one method for  creating interactive data visualizations. If  `viz`  is an animint (list  of ggplots and options with class animint), then printing it on the R  command line compiles that animint to a temporary  directory, using code like this,
+So far in previous chapters we have only discussed one method for  creating interactive data visualizations.
+<!-- comment -->
+If  `viz`  is an animint (list  of ggplots and options with class animint), then printing it on the R  command line compiles that animint to a temporary  directory, using code like this,
 
 <!-- paragraph -->
 
@@ -143,7 +149,9 @@ If you don't have access to a personal/lab web server, try using  one of the met
 
 <!-- paragraph -->
 
-[Netlify Drop](https://app.netlify.com/drop)  is for hosting static web  sites. To publish your data viz there, simply drag a directory to that  web page (it can be a directory resulting from  `animint2dir` , or from  `rmarkdown::render`  if your animint is inside Rmd, as described  above).
+[Netlify Drop](https://app.netlify.com/drop)  is for hosting static web  sites.
+<!-- comment -->
+To publish your data viz there, simply drag a directory to that  web page (it can be a directory resulting from  `animint2dir` , or from  `rmarkdown::render`  if your animint is inside Rmd, as described  above).
 <!-- comment -->
 After the upload completes, you will be provided a link which  can be used to view the files in that directory.
 <!-- comment -->
@@ -188,7 +196,9 @@ If you want to update an animint that has already been published on  GitHub Page
 
 Beware that GitHub Pages imposes a limit of 100MB per file.
 <!-- comment -->
-For most  animints, this limit should not be a problem. If your data viz  contains a TSV file over 100MB, consider using the  [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options)  option to break that TSV file into several smaller files.
+For most  animints, this limit should not be a problem.
+<!-- comment -->
+If your data viz  contains a TSV file over 100MB, consider using the  [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options)  option to break that TSV file into several smaller files.
 
 <!-- paragraph -->
 
