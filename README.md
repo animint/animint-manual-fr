@@ -14,7 +14,7 @@ Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAX
 
 Animint2 est un package R permettant de générer et de partager des visualisations de données interactives animées, parfois appelées animints. C'est un fork de, et utilise une syntaxe similaire à, [ggplot2](https://ggplot2.tidyverse.org/). Animint2 est particulièrement utile pour les grands jeux de données, mais des jeux de données plus petits peuvent également être rendus interactifs. Il est également capable de générer des visualisations de données statiques.
 
-<a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."></a> 
+<a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."></a>
 
 Jouer avec [cette visualisation interactive de données de la Banque mondiale.](https://rcdata.nau.edu/genomic-ml/WorldBank-facets/) ou [une version plus récente qui comprend également une carte du monde](https://tdhock.github.io/2025-01-WorldBank-facets-map/). Pour plus d'exemples, voir ces galeries, qui présentent des captures d'écran ainsi que des liens vers l'affichage interactif des données et le code source :
 
@@ -23,7 +23,7 @@ Jouer avec [cette visualisation interactive de données de la Banque mondiale.](
 
 Pour apprendre à générer vos propres visualisations de données interactives, consultez le site officiel de la Commission européenne. [Manuel Animint2](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html). Si vous rencontrez des problèmes, veuillez consulter le [animint2 wiki](https://github.com/animint/animint2/wiki) ou [les signaler](https://github.com/animint/animint2/issues).
 
-## Installation
+## Installation de l'appareil
 
 ```r
 # Install the official package from CRAN.

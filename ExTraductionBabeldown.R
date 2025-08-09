@@ -2,7 +2,7 @@
 
 # Réglage de l'environnement de travail
 
-path_local_animint2_fr <- "C:/Users/lepj1/OneDrive/Desktop/animint-manual-fr"
+path_local_animint2_fr <- "/home/anton/projetR/animint-manual-fr"
 
 path_github_animint2 <- "https://raw.githubusercontent.com/animint/animint2/master"
 
@@ -10,7 +10,7 @@ path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-bo
 
 path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/master"
 
-
+#DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b"
 
 # Installation du package babeldown
 
@@ -25,8 +25,9 @@ install.packages("aeolus",
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-deepl_key <- Sys.getenv("DEEPL_API_KEY")
+deepl_key <- Sys.setenv(DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b")
 Sys.setenv(DEEPL_AUTH_KEY = deepl_key)
+
 
 # MAJ du glossaire
 
@@ -119,7 +120,7 @@ ConvertRmd_comments <- function(file_name = "README",
                                 ajoutFR = TRUE,
                                 TestFile = TRUE,
                                 github_tree_filepath = path_tree_github_animint_book,
-                                Chx = "Ch03-") {
+                                Chx = "Ch05-") {
   
   # Traduction utilisant babeldown et le glossaire maison  
   output_path <- paste0(dest_filepath,
@@ -187,13 +188,22 @@ ConvertRmd_comments <- function(file_name = "README",
     full_text,
     perl = TRUE
   )
-  
-  text_with_phrase_comments <- gsub(
-    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
-    "\n<!-- comment -->\n",
-    updated_with_comments, 
-    perl = TRUE
-  )
+  library(stringr)
+
+text_with_phrase_comments <-str_replace_all(
+  updated_with_comments,
+  regex("(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
+        ignore_case = TRUE, 
+        multiline = TRUE)
+  , 
+  replacement = " "
+)
+#  text_with_phrase_comments <- gsub(
+#    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
+#    "\n<!-- comment -->\n",
+#    updated_with_comments, 
+#    perl = TRUE
+#  )
   
   
   # Écrire le contenu modifié dans le fichier
@@ -252,6 +262,7 @@ Translate_FR_EN <- function(file_name = "README",
   i <- 1
   while (i <= length(translated_text)) {
     line <- translated_text[i]
+    #print(line)
     
     if (str_trim(line) == "<!-- comment -->") {
       # Supprimer ligne vide avant
@@ -295,7 +306,7 @@ Translate_FR_EN <- function(file_name = "README",
     paste0("[", file_name, "](", source_filepath, "/", file_name, file_extension, ")"),
     ""
   )
-  
+  #print(cleaned_lines)
   final_lines <- c(
     cleaned_lines[1:yaml_end],
     header,
@@ -306,42 +317,11 @@ Translate_FR_EN <- function(file_name = "README",
   writeLines(final_lines, output_path, useBytes = TRUE)
 }
 
-
 # Traduction du README avec la fonction Translate_FR_EN
 
-Translate_FR_EN(file_name = "README",
-                file_extension = ".md",
-                source_filepath = path_github_animint2,
-                dest_filepath = path_local_animint2_fr,
-                ajoutFR = FALSE)
+
 
 ##### Chapitre 03 ######
-
-# Traduction Chapitre 03 par Jeremi Lepage
-
-ConvertRmd_comments(file_name = "Ch03-showSelected",
-                    file_extension = ".Rmd",
-                    source_filepath = path_github_animint_book,
-                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
-                    github_tree_filepath = path_tree_github_animint_book,
-                    #UpdateDoc = TRUE,
-                    ajoutFR = FALSE,
-                    TestFile = FALSE,
-                    Chx = "Ch03-"
-)
-
-Translate_FR_EN(file_name = "Ch03-showSelected",
-                file_extension = ".Rmd",
-                source_filepath = path_github_animint_book,
-                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
-                #UpdateDoc = TRUE,
-                ajoutFR = FALSE
-)
-
-
-
-
-quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
 
 
 ##### Chapitre 04 ####
@@ -349,44 +329,15 @@ quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comme
 
 # Traduction Chapitre 03 par Jeremi Lepage
 
-ConvertRmd_comments(file_name = "Ch04-clickSelects",
+ConvertRmd_comments(file_name = "Ch05-sharing",
                     file_extension = ".Rmd",
                     source_filepath = path_github_animint_book,
-                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
                     github_tree_filepath = path_tree_github_animint_book,
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch04-"
+                    Chx = "Ch05-"
 )
 
-Translate_FR_EN(file_name = "Ch04-clickSelects",
-                file_extension = ".Rmd",
-                source_filepath = path_github_animint_book,
-                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
-                #UpdateDoc = TRUE,
-                ajoutFR = FALSE
-)
-
-
-quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
-
-##### Chapitre 04 ######
-
-# Traduction Chapitre 04 par Jeremi Lepage
-
-Translate_FR_EN(file_name = "Ch04-clickSelects",
-                file_extension = ".Rmd",
-                source_filepath = path_github_animint_book,
-                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
-                #UpdateDoc = TRUE,
-                ajoutFR = FALSE
-)
-
-ConvertRmd_comments(file_name = "Ch04-clickSelects",
-                    file_extension = ".Rmd",
-                    source_filepath = path_github_animint_book,
-                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
-                    #UpdateDoc = TRUE,
-                    ajoutFR = FALSE
-)
+quarto::quarto_render(input = "Chapitres/Ch05/Ch05-sharing.Rmd")
