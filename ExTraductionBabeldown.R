@@ -14,13 +14,19 @@ path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/ma
 
 # Installation du package babeldown
 
-install.packages('babeldown',
-                 repos = c('https://ropensci.r-universe.dev',
-                           'https://cloud.r-project.org'))
+# Vérifie et installe si nécessaire, puis charge
+for (pkg in c("babeldown", "aeolus")) {
+  if (!require(pkg, character.only = TRUE)) {
+    repos <- if (pkg == "babeldown") {
+      c("https://ropensci.r-universe.dev", "https://cloud.r-project.org")
+    } else {
+      c("https://packages.ropensci.org", "https://cloud.r-project.org")
+    }
+    install.packages(pkg, repos = repos)
+    library(pkg, character.only = TRUE)
+  }
+}
 
-install.packages("aeolus",
-                 repos = c("https://packages.ropensci.org",
-                           "https://cloud.r-project.org"))
 
 # Clé API de Jeremi pour DEEPL
 
@@ -83,8 +89,13 @@ adapted_unleash <- function(path,
         content <- xml2::xml_text(child)
       }
       
-      #combined_md <- paste0(combined_md, content, " ") TEST 12 aout 2025
-      combined_md <- paste0(combined_md, content, "")
+      
+    # Retire les espaces superflues  
+      content <- trimws(content)
+      combined_md <- sub("\\s+$", "", combined_md)
+      combined_md <- paste0(combined_md, " ", content) # OG
+      combined_md <- gsub("`\\s+([,.])", "`\\1", combined_md)
+      
     }
     
     combined_md <- trimws(combined_md)
