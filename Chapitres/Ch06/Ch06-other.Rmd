@@ -23,12 +23,17 @@ After reading this chapter, you will understand how to customize your animint gr
 <!-- paragraph -->
 
 - the `href`, `tooltip`, `id` aesthetics for observation-specific characteristics;
+<!-- comment -->
 - named elements of `clickSelects` and `showSelected` for specifying several selection variables at once;
+<!-- comment -->
 - the `chunk_vars` geom-specific option;
+<!-- comment -->
 - the `color_off`, `fill_off`, and `alpha_off` geom parameters for specifying how selection state is displayed;
+<!-- comment -->
 - the `help` and `title` geom-specific parameters, which can be set to text strings that will be shown in the guided tour.
 <!-- comment -->
 - plot-specific legends and height/width options; and
+<!-- comment -->
 - global data viz options.
 
 <!-- paragraph -->
