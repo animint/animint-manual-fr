@@ -38,7 +38,7 @@ Après avoir lu ce chapitre, vous serez en mesure de
 
 - Comprendre comment les légendes interactives utilisent implicitement les `clickSelects`.
 <!-- comment -->
-- Utilisez le mot-clé `clickSelects` dans vos esquisses de graphiques.
+- Utiliser le mot-clé `clickSelects` dans vos esquisses de graphiques.
 <!-- comment -->
 - Traduisez vos esquisses de graphiques avec `clickSelects` en code R.
 <!-- comment -->
