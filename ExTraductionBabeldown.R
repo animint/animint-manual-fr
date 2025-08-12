@@ -340,15 +340,13 @@ Translate_FR_EN(file_name = "Ch03-showSelected",
 )
 
 
-
-
 quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
 
 
 ##### Chapitre 04 ####
 
 
-# Traduction Chapitre 03 par Jeremi Lepage
+# Traduction Chapitre 04 par Jeremi Lepage
 
 ConvertRmd_comments(file_name = "Ch04-clickSelects",
                     file_extension = ".Rmd",
@@ -370,24 +368,50 @@ Translate_FR_EN(file_name = "Ch04-clickSelects",
 )
 
 
-quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
+##### Chapitre 05 ######
 
-##### Chapitre 04 ######
+# Traduction Chapitre 05 par Anna Artiges
 
-# Traduction Chapitre 04 par Jeremi Lepage
+ConvertRmd_comments(file_name = "Ch05-sharing",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch05-"
+)
 
-Translate_FR_EN(file_name = "Ch04-clickSelects",
+Translate_FR_EN(file_name = "Ch05-sharing",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
-                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
 )
 
-ConvertRmd_comments(file_name = "Ch04-clickSelects",
+
+##### Chapitre 06 ######
+
+# Traduction Chapitre 06 par Jeremi Lepage
+
+ConvertRmd_comments(file_name = "Ch06-other",
                     file_extension = ".Rmd",
                     source_filepath = path_github_animint_book,
-                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
+                    github_tree_filepath = path_tree_github_animint_book,
                     #UpdateDoc = TRUE,
-                    ajoutFR = FALSE
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch06-"
 )
+
+Translate_FR_EN(file_name = "Ch06-other",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
+
