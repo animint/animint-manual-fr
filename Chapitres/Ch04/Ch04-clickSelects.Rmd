@@ -22,11 +22,11 @@ knitr::opts_chunk$set(fig.path="Ch04-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre explique clickSelects, l'un des deux principaux mots-clés introduits par animint pour la visualisation interactive de données.
+Ce chapitre explique `clickSelects`, l'un des deux principaux mots-clés introduits par `animint2` pour la visualisation interactive de données.
 <!-- comment -->
-Le mot-clé clickSelects spécifie un geom pour lequel un clic met à jour une variable de sélection.
+Le mot-clé `clickSelects` spécifie un geom pour lequel un clic met à jour une variable de sélection.
 <!-- comment -->
-Chaque geom d'une visualisation de données possède son propre ensemble de données et sa propre définition du mot-clé clickSelects.
+Chaque geom d'une visualisation de données possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
 <!-- comment -->
 Ainsi, en cliquant sur différents geoms, on peut modifier différentes variables de sélection.
 
@@ -36,23 +36,23 @@ Après avoir lu ce chapitre, vous serez en mesure de
 
 <!-- paragraph -->
 
-- Comprendre comment les légendes interactives utilisent implicitement les clickSelects.
+- Comprendre comment les légendes interactives utilisent implicitement les `clickSelects`.
 <!-- comment -->
-- Utilisez le mot-clé clickSelects dans vos esquisses de graphiques.
+- Utilisez le mot-clé `clickSelects` dans vos esquisses de graphiques.
 <!-- comment -->
-- Traduisez vos esquisses de graphiques avec clickSelects en code R.
+- Traduisez vos esquisses de graphiques avec `clickSelects` en code R.
 <!-- comment -->
 - Utiliser le `selector.types`  pour spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
-## Les légendes interactives utilisent implicitement clickSelects {#implicit-clickSelects}
+## Les légendes interactives utilisent implicitement `clickSelects` {#implicit-clickSelects}
 
 <!-- paragraph -->
 
-Dans cette section, nous expliquerons comment le mot-clé clickSelects est implicitement utilisé dans les légendes interactives.
+Dans cette section, nous expliquerons comment le mot-clé `clickSelects` est implicitement utilisé dans les légendes interactives.
 <!-- comment -->
-Si vous avez lu les chapitres précédents, vous avez déjà utilisé implicitement clickSelects, qui a été créé automatiquement pour les légendes interactives dans les chapitres précédents.
+Si vous avez lu les chapitres précédents, vous avez déjà utilisé implicitement `clickSelects`, qui a été créé automatiquement pour les légendes interactives dans les chapitres précédents.
 <!-- comment -->
 Par exemple, considérons l'esquisse de la viz de données de la Banque mondiale du dernier chapitre.
 
@@ -64,7 +64,7 @@ Par exemple, considérons l'esquisse de la viz de données de la Banque mondiale
 
 Puisque la légende a `clickSelects=region` , cliquer sur une entrée de cette légende met à jour le `region`  la variable de sélection.
 <!-- comment -->
-Notez que animint rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=region`  pour la légende.
+Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=region`  pour la légende.
 <!-- comment -->
 En fait, lorsque nous avons spécifié `color=region`  pour le `geom_point` animint2 fait deux choses automatiquement :
 
@@ -84,7 +84,7 @@ Dans la section suivante, nous donnerons plusieurs exemples de la manière dont 
 
 <!-- paragraph -->
 
-## Utiliser clickSelects pour identifier des points sur un nuage de points {#clickSelects-keyword}
+## Utiliser `clickSelects` pour identifier des points sur un nuage de points {#clickSelects-keyword}
 
 <!-- paragraph -->
 

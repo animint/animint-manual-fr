@@ -83,7 +83,8 @@ adapted_unleash <- function(path,
         content <- xml2::xml_text(child)
       }
       
-      combined_md <- paste0(combined_md, content, " ")
+      #combined_md <- paste0(combined_md, content, " ") TEST 12 aout 2025
+      combined_md <- paste0(combined_md, content, "")
     }
     
     combined_md <- trimws(combined_md)
