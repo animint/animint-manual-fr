@@ -282,7 +282,7 @@ Translate_FR_EN <- function(file_name = "README",
   }
   
   # Conversion finale des paragraphes en commentaires
-  cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
+  #cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
   
   
   # Injection du header personnalisé
