@@ -369,4 +369,24 @@ Translate_FR_EN(file_name = "Ch04-clickSelects",
 )
 
 
+quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
 
+##### Chapitre 04 ######
+
+# Traduction Chapitre 04 par Jeremi Lepage
+
+Translate_FR_EN(file_name = "Ch04-clickSelects",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
+
+ConvertRmd_comments(file_name = "Ch04-clickSelects",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE
+)
