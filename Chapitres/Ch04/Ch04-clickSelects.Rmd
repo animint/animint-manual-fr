@@ -66,7 +66,7 @@ Puisque la légende a `clickSelects=region` , cliquer sur une entrée de cette l
 <!-- comment -->
 Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=region`  pour la légende.
 <!-- comment -->
-En fait, lorsque nous avons spécifié `color=region`  pour le `geom_point` animint2 fait deux choses automatiquement :
+En fait, lorsque nous avons spécifié `color=region`  pour le `geom_point` `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
@@ -117,7 +117,7 @@ scatter
 
 Notez que le graphique ci-dessus n'est pas interactif, car il est affiché à l'aide du périphérique graphique R traditionnel.
 <!-- comment -->
-En revanche, afficher le même ggplot en utilisant animint2 donne le graphique interactif suivant :
+En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique interactif suivant :
 
 <!-- paragraph -->
 
@@ -289,7 +289,7 @@ Le croquis ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-Dans animint, chaque variable de sélection a un type, soit simple, soit multiple.
+Dans `animint2`, chaque variable de sélection a un type, soit simple, soit multiple.
 <!-- comment -->
 La sélection unique signifie qu'une seule valeur peut être sélectionnée à la fois.
 <!-- comment -->
@@ -301,7 +301,7 @@ Pourquoi ?
 
 <!-- paragraph -->
 
-Par défaut, animint attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection simple aux autres variables.
+Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection simple aux autres variables.
 <!-- comment -->
 Cependant, une sélection unique ou multiple peut être spécifiée en utilisant l'option `selector.types`  pour spécifier une sélection unique ou multiple.
 <!-- comment -->
@@ -357,7 +357,7 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-Notez que l'esquisse ci-dessus comprend `geom_tallrect` , un nouveau geom introduit dans animint.
+Notez que l'esquisse ci-dessus comprend `geom_tallrect` , un nouveau geom introduit dans `animint2`.
 <!-- comment -->
 Il est "grand" car il occupe tout l'espace vertical du graphique, et ne nécessite donc que la définition de ses limites horizontales via la fonction `xmin`  et `xmax`  l'esthétique.
 <!-- comment -->
@@ -509,7 +509,7 @@ Pour plus d'informations, voir la discussion et l'exemple dans [chapitre 6, sect
 
 <!-- paragraph -->
 
-Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné et la série temporelle à l'aide d'animint.
+Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné et la série temporelle à l'aide d'`animint()`.
 
 <!-- paragraph -->
 
@@ -535,7 +535,7 @@ Exercice : ajouter `time` , `duration` , `first` et `selector.types`  aux donné
 
 <!-- paragraph -->
 
-Ce chapitre explique `clickSelects` , l'un des deux principaux mots-clés introduits par animint pour la conception de visualisations de données interactives.
+Ce chapitre explique `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
 <!-- comment -->
 Nous avons utilisé l'ensemble des données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour spécifier différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
@@ -557,7 +557,7 @@ Quelle technique est préférable dans quelles circonstances ?
 <!-- comment -->
 - Quand `geom_point(clickSelects=something, alpha=0.75)`  est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
 <!-- comment -->
-Lorsque animint2 affiche le même geom, certains points seront sélectionnés et d'autres non.
+Lorsque `animint2` affiche le même geom, certains points seront sélectionnés et d'autres non.
 <!-- comment -->
 Quelle est l'opacité/transparence des points sélectionnés ?
 <!-- comment -->
