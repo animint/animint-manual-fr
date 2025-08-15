@@ -41,7 +41,7 @@ Prenons un autre exemple : l'esquisse ci-dessous de la première visualisation d
 L'esquisse ci-dessus spécifie `showSelected=région` pour le `geom_point`, ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les régions sélectionnées.
 
 Notez que l'esquisse dans chapitre 2 ne précisait pas explicitement `showSelected=région`.
-Nous avions simplement indiqué `aes(color=région)` et `animint2` a automatiquement ajouté une variable `showSelected` correspondante.
+Nous avions simplement indiqué `aes(color=région)`, et `animint2` a automatiquement ajouté une variable `showSelected` correspondante.
 En général, `animint2` rajoute un mot-clé `showSelected` pour chaque variable utilisée dans une légende qualitative.
 
 Cependant, le mot-clé `showSelected` n'est pas limité aux légendes qualitatives.
