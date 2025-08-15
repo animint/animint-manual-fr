@@ -58,7 +58,7 @@ Dans la section suivante, nous étudierons une visualisation des données de la 
 
 ## Sélection de sous-ensembles avec menus {#selection-avec-menus}
 
-Considérons l'esquisse suivant, avec une variable `showSelected` de plus, et avec un différent ensemble de données.
+Considérons l'esquisse suivante avec une variable `showSelected` de plus et un ensemble de données différent.
 
 ![Esquisse Banque mondiale avec showSelected région et année](Ch03-viz-scatter.png)
 
