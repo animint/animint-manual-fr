@@ -99,11 +99,7 @@ Si la page web est vide, il se peut que vous deviez configurer votre navigateur 
 
 <!-- paragraph -->
 
-En interne, R appelle la méthode S3 `print.animint`, qui appelle `animint2dir` pour le compiler dans un nouveau répertoire temporaire sur votre ordinateur personnel.
-<!-- comment -->
-En général, nous conseillons d'éviter d'appeler `animint2dir` directement, mais c'est utile si vous voulez éviter d'ouvrir plusieurs fenêtres similaires dans le navigateur lorsque vous révisez et affichez un animint de manière répétée.
-<!-- comment -->
-Vous pouvez empêcher l'ouverture par défaut d'une fenêtre du navigateur via :
+En interne, R appelle la méthode S3 `print.animint`, qui appelle `animint2dir` pour le compiler dans un nouveau répertoire temporaire sur votre ordinateur personnel. En général, nous conseillons d'éviter d'appeler `animint2dir` directement, mais c'est utile si vous voulez éviter d'ouvrir plusieurs fenêtres similaires dans le navigateur lorsque vous révisez et affichez un animint de manière répétée. Vous pouvez empêcher l'ouverture par défaut d'une fenêtre du navigateur via :
 
 <!-- paragraph -->
 
@@ -157,9 +153,7 @@ Si vous n'avez pas accès à un serveur web personnel ou de laboratoire, essayez
 
 <!-- paragraph -->
 
-[Netlify Drop](https://app.netlify.com/drop) est destiné à l'hébergement de sites web statiques.
-<!-- comment -->
-Pour y publier votre vis de données, il suffit de faire glisser un répertoire sur cette page web (il peut s'agir d'un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
+[Netlify Drop](https://app.netlify.com/drop) est destiné à l'hébergement de sites web statiques. Pour y publier votre vis de données, il suffit de faire glisser un répertoire sur cette page web (il peut s'agir d'un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
 <!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce répertoire.
 <!-- comment -->
@@ -204,9 +198,7 @@ Si vous voulez mettre à jour un animint qui a déjà été publié sur GitHub P
 
 Attention, GitHub Pages impose une limite de 100MB par fichier.
 <!-- comment -->
-Pour la plupart des animints, cette limite ne devrait pas poser de problème.
-<!-- comment -->
-Si votre fichier de données contient un fichier TSV de plus de 100 Mo, envisagez d'utiliser l'option [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options) pour borner ce fichier TSV en plusieurs fichiers plus petits.
+Pour la plupart des animints, cette limite ne devrait pas poser de problème. Si votre visualisation de données contient un fichier TSV de plus de 100 Mo, envisagez d'utiliser l'option [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options) pour borner ce fichier TSV en plusieurs fichiers plus petits.
 
 <!-- paragraph -->
 
