@@ -23,17 +23,17 @@ knitr::opts_chunk$set(fig.path="Ch05-figures/")
 <!-- paragraph -->
 
 Ce chapitre explique plusieurs méthodes pour partager vos visualisations de données interactives sur le web.
-<!-- paragraph -->
+<!-- comment -->
 Après avoir lu ce chapitre, vous serez en mesure de visualiser des animints
 
 <!-- paragraph -->
 
 - à partir d'un répertoire local sur votre ordinateur personnel.
-<!-- paragraph -->
+<!-- comment -->
 - dans des documents [R Markdown](http://rmarkdown.rstudio.com/).
-<!-- paragraph -->
+<!-- comment -->
 - en utilisant n'importe quel serveur web, y compris [NetlifyDrop](https://app.netlify.com/drop).
-<!-- paragraph -->
+<!-- comment -->
 - publiés en utilisant [pages GitHub](https://pages.github.com/) et organisés dans un groupe appelé galerie.
 
 <!-- paragraph -->
@@ -43,13 +43,13 @@ Après avoir lu ce chapitre, vous serez en mesure de visualiser des animints
 <!-- paragraph -->
 
 Lorsque vous expérimentez différentes conceptions de visualisation de données interactives, il est utile de les prévisualiser sur votre ordinateur personnel avant de les publier sur le web.
-<!-- paragraph -->
+<!-- comment -->
 Cette section traite de deux méthodes pour compiler les animints dans un répertoire local.
 
 <!-- paragraph -->
 
 Jusqu'à présent, dans les chapitres précédents, nous n'avons abordé qu'une seule méthode pour créer des visualisations de données interactives.
-<!-- paragraph -->
+<!-- comment -->
 Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), l'imprimer sur la ligne de commande R compile cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci,
 
 <!-- paragraph -->
@@ -68,9 +68,9 @@ animint(
 <!-- paragraph -->
 
 Le code ci-dessus sauvegarde l'animint dans un nouveau répertoire temporaire.
-<!-- paragraph -->
+<!-- comment -->
 Plutôt que de sauvegarder chaque animint dans un répertoire temporaire séparé, vous pouvez spécifier un répertoire de sortie via l'argument `out.dir` de la commande `animint`.
-<!-- paragraph -->
+<!-- comment -->
 Si vous voulez sauvegarder l'animint dans le fichier `"Ch05-sharing-ten-points"`  utilisez :
 
 <!-- paragraph -->
@@ -88,21 +88,21 @@ animint(
 <!-- paragraph -->
 
 Si le parent de `out.dir` n'existe pas, c'est une erreur (vous pouvez utiliser `dir.create` pour créer le parent si nécessaire).
-<!-- paragraph -->
+<!-- comment -->
 Si `out.dir` n'existe pas, il sera créé.
-<!-- paragraph -->
+<!-- comment -->
 Si `out.dir` existe (et contient un fichier nommé `animint.js`), tous les fichiers de ce répertoire seront écrasés.
-<!-- paragraph -->
+<!-- comment -->
 Pour visualiser les données, naviguez jusqu'à `Ch05-sharing-ten-points/index.html`  dans un navigateur web (ce qui devrait être fait automatiquement / par défaut).
-<!-- paragraph -->
+<!-- comment -->
 Si la page web est vide, il se peut que vous deviez configurer votre navigateur pour autoriser l'exécution du code JavaScript local, [comme expliqué dans notre FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank).
 
 <!-- paragraph -->
 
 En interne, R appelle la méthode S3 `print.animint`, qui appelle `animint2dir` pour le compiler dans un nouveau répertoire temporaire sur votre ordinateur personnel.
-<!-- paragraph -->
+<!-- comment -->
 En général, nous conseillons d'éviter d'appeler `animint2dir` directement, mais c'est utile si vous voulez éviter d'ouvrir plusieurs fenêtres similaires dans le navigateur lorsque vous révisez et affichez un animint de manière répétée.
-<!-- paragraph -->
+<!-- comment -->
 Vous pouvez empêcher l'ouverture par défaut d'une fenêtre du navigateur via :
 
 <!-- paragraph -->
@@ -126,11 +126,11 @@ animint2dir(
 <!-- paragraph -->
 
 Pour inclure un animint dans un document R Markdown, utilisez `animint(...)` à l'intérieur d'un morceau de code R.
-<!-- paragraph -->
+<!-- comment -->
 R exécutera la éthode S3 `knit_print.animint`, qui compile l'animint dans un répertoire local, nommé en fonction du nom du morceau de code R.
-<!-- paragraph -->
+<!-- comment -->
 Par exemple, un morceau de code nommé `vis-facettes` sera sauvegardé dans le répertoire `visfacettes`.
-<!-- paragraph -->
+<!-- comment -->
 Veillez à placer chaque animint dans son propre morceau de code (ne mettez pas deux animints dans le même morceau de code).
 
 <!-- paragraph -->
@@ -144,7 +144,7 @@ Comme les animints ne sont que des répertoires contenant des fichiers HTML, TSV
 <!-- paragraph -->
 
 Par exemple, j'ai exécuté le code dans  <https://github.com/animint/animint2/blob/master/inst/examples/WorldBank-facets.R>  pour créer le `WorldBank-facets` répertoire sur mon ordinateur personnel.
-<!-- paragraph -->
+<!-- comment -->
 J'ai copié ce répertoire sur le serveur web de mon laboratoire à l'aide de la commande `rsync -r WorldBank-facets/ monsoon.hpc.nau.edu:genomic-ml/WorldBank-facets/` et je peux ainsi le visualiser sur <https://rcdata.nau.edu/genomic-ml/WorldBank-facets/>
 
 <!-- paragraph -->
@@ -158,13 +158,13 @@ Si vous n'avez pas accès à un serveur web personnel ou de laboratoire, essayez
 <!-- paragraph -->
 
 [Netlify Drop](https://app.netlify.com/drop) est destiné à l'hébergement de sites web statiques.
-<!-- paragraph -->
+<!-- comment -->
 Pour y publier votre vis de données, il suffit de faire glisser un répertoire sur cette page web (il peut s'agir d'un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
-<!-- paragraph -->
+<!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce répertoire.
-<!-- paragraph -->
+<!-- comment -->
 Aucun enregistrement/connexion n'est requis, mais si vous n'enregistrez pas de compte, vos données seront supprimées au bout d'une heure.
-<!-- paragraph -->
+<!-- comment -->
 Vous pouvez vous inscrire pour un compte gratuit si vous souhaitez que vos vis données soient disponibles plus longtemps.
 
 <!-- paragraph -->
@@ -174,11 +174,11 @@ Vous pouvez vous inscrire pour un compte gratuit si vous souhaitez que vos vis d
 <!-- paragraph -->
 
 [Pages GitHub](https://pages.github.com/) est un service d'hébergement de sites web statiques et peut être utilisé pour publier des animints.
-<!-- paragraph -->
+<!-- comment -->
 Pour publier un animint sur GitHub Pages, vous avez besoin d'un compte GitHub et des packages `gert` (pour exécuter git à partir de R), `gh` (pour utiliser l'API GitHub à partir de R), et `gitcreds` (pour interagir avec le magasin d'identifiants de git, faciliter l'authentification lors de l'envoi à GitHub).
-<!-- paragraph -->
+<!-- comment -->
 Tout d'abord, installez ces packages. Si vous n'avez pas de compte GitHub, vous pouvez [vous inscrire gratuitement](https://github.com/join).
-<!-- paragraph -->
+<!-- comment -->
 Ensuite, assurez-vous d'indiquer à R quel nom/email utiliser pour les commits git :
 
 <!-- paragraph -->
@@ -191,9 +191,9 @@ gert::git_config_global_set("user.email", "<votre_email>")
 <!-- paragraph -->
 
 Vous pouvez ensuite utiliser `animint2pages(vis, "new_repo")` pour publier vos données `vis` dans la branche `gh-pages` de `votre_identifiant_github/new_repo` (à noter que `votre_identifiant_github`  n'est pas spécifié dans le code, parce que `gitcreds` obtiendra cette information à partir de la base de données d'identifiants de git).
-<!-- paragraph -->
+<!-- comment -->
 Un message devrait s'afficher vous indiquant l'URL/le lien où votre vis de données sera accessible.
-<!-- paragraph -->
+<!-- comment -->
 Il faut compter quelques minutes (généralement pas plus de cinq) entre le moment où vous lancez animint2pages et le moment où la data vis est publiée sur GitHub Pages.
 
 <!-- paragraph -->
@@ -203,9 +203,9 @@ Si vous voulez mettre à jour un animint qui a déjà été publié sur GitHub P
 <!-- paragraph -->
 
 Attention, GitHub Pages impose une limite de 100MB par fichier.
-<!-- paragraph -->
+<!-- comment -->
 Pour la plupart des animints, cette limite ne devrait pas poser de problème.
-<!-- paragraph -->
+<!-- comment -->
 Si votre fichier de données contient un fichier TSV de plus de 100 Mo, envisagez d'utiliser l'option [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options) pour borner ce fichier TSV en plusieurs fichiers plus petits.
 
 <!-- paragraph -->
@@ -215,17 +215,17 @@ Si votre fichier de données contient un fichier TSV de plus de 100 Mo, envisage
 <!-- paragraph -->
 
 Une galerie est une collection de méta-données sur les animints qui ont été publiés sur les pages GitHub.
-<!-- paragraph -->
+<!-- comment -->
 Par exemple, la galerie principale des animints est [https://animint.github.io/gallery/](https://animint.github.io/gallery/) qui est une page web contenant des liens vers divers animints, organisés en tableau de contingence.
 
 <!-- paragraph -->
 
 - Il y a une ligne pour chaque animint.
-<!-- paragraph -->
+<!-- comment -->
 - La première colonne `viz.link` montre une capture d'écran de l'animint, qui renvoie à la page web de l'animint.
-<!-- paragraph -->
+<!-- comment -->
 - La deuxième colonne `repo.link` indique le nom de la vis de données (extrait de la base de données des `title` de l'animint), et des liens vers le repo GitHub de l'application `gh-pages` du répertoire GitHub.
-<!-- paragraph -->
+<!-- comment -->
 - La troisième colonne `source.link` indique la date du dernier commit de l'animint, et des liens vers le code source R utilisé pour créer cet animint (extraits du fichier `source` de l'animint).
 
 <!-- paragraph -->
@@ -244,15 +244,15 @@ Pour ajouter un nouvel animint à la galerie qui est publiée sur la branche `gh
 <!-- paragraph -->
 
 - Créez un nouveau animint dans le code R, et assurez-vous de définir les options `source` et `title`.
-<!-- paragraph -->
+<!-- comment -->
 - utilisez `animint2pages(vis, "viz_repo")` pour publier cet animint sur la branche `gh-pages` de `votre_identifiant_github/viz_repo`.
-<!-- paragraph -->
+<!-- comment -->
 - prenez une capture d'écran de cette animint, et valider/pousser cette capture d'écran dans un fichier nommé `Capture.PNG` (sensible à la casse), dans la branche`gh-pages` de `votre_identifiant_github/viz_repo` .
-<!-- paragraph -->
+<!-- comment -->
 - ajoutez `votre_identifiant_github/viz_repo` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/gallery_repo`.
-<!-- paragraph -->
+<!-- comment -->
 - exécutez le code R `animint2::update_gallery("path/to/gallery_repo")` (notez qu'un clone du répertoire de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Il lira `gallery_repo/repos.txt`, lira les méta-données (`title`, `source`, `Capture.PNG`) de chaque répertoire qui n'est pas déjà présent dans `gallery_repo/meta.csv`, écrira les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `gallery_repo/index.Rmd` dans `gallery_repo/index.html`, validera, et poussera vers `origin`.
-<!-- paragraph -->
+<!-- comment -->
 - la galerie mise à jour devrait pouvoir être consultée sur le web, à l'adresse suivante [(https://votre_identifiant_github.github.io/gallery_repo)](https://votre_identifiant_github.github.io/gallery_repo) après quelques minutes (généralement pas plus de cinq).
 
 <!-- paragraph -->
@@ -270,11 +270,11 @@ Exercices :
 <!-- paragraph -->
 
 - Créez un animint en utilisant les options mentionnées dans ce chapitre : `out.dir` (nom du répertoire où sauvegarder l'animint sur votre ordinateur), `source` (lien vers le code source R utilisé pour créer l'animint), `title` (description de l'animint).
-<!-- paragraph -->
+<!-- comment -->
 - Utilisez Netlify Drop pour publier cette animation sur le web.
-<!-- paragraph -->
+<!-- comment -->
 - Utilisez `animint2pages` pour publier cette animint dans un nouveau répertoire GitHub. Faites une capture d'écran et enregistrez-la en tant que `Capture.PNG`  dans la branche `gh-pages` de ce répertoire. Ajoutez ce répertoire à la galerie principale de l'animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
-<!-- paragraph -->
+<!-- comment -->
 - Créez votre propre d derépertoiregalerie animint, et ajoutez deux ou plusieurs de vos propres animints à cette galerie.
 
 <!-- paragraph -->
