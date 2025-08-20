@@ -24,7 +24,7 @@ knitr::opts_chunk$set(fig.path="Ch04-figures/")
 
 Dans ce chapitre, nous expliquons `clickSelects`, l'un des deux principaux mots-clés qu'`animint2` propose pour la visualisation interactive de données.
 <!-- comment -->
-Le mot-clé `clickSelects` spécifie un geom pour lequel un clic met à jour une variable de sélection.
+Le mot-clé `clickSelects` précise quelle variable de séléction sera mise à jour quand on clique sur le geom correspondant.
 <!-- comment -->
 Chaque geom d'une visualisation de données possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
 <!-- comment -->
