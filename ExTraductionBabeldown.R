@@ -25,7 +25,7 @@ install.packages("aeolus",
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-deepl_key <- Sys.setenv(DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b")
+deepl_key <- Sys.setenv(DEEPL_API_KEY = "KEY")
 Sys.setenv(DEEPL_AUTH_KEY = deepl_key)
 
 
