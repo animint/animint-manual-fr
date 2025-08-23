@@ -10,7 +10,7 @@ path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-bo
 
 path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/master"
 
-#DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b"
+
 
 # Installation du package babeldown
 
