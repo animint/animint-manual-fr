@@ -4,9 +4,15 @@ layout: default
 output: bookdown::html_chapter
 ---
 
+
+
+Traduction de [English](https://github.com/tdhock/animint-book/)
+[Ch06-other](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch06-other.Rmd)
+
+
 <!-- paragraph -->
 
-# Chapter 6, Animint options
+# Chapitre 6, Options Animint
 
 <!-- paragraph -->
 
@@ -16,53 +22,53 @@ knitr::opts_chunk$set(fig.path="Ch06-figures/")
 
 <!-- paragraph -->
 
-This chapter gives a complete list of new features that animint introduces to the grammar of graphics.
+Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'animint introduit dans la grammaire graphique.
 <!-- comment -->
-After reading this chapter, you will understand how to customize your animint graphics via
+Après avoir lu ce chapitre, vous comprendrez comment personnaliser vos graphiques animint via
 
 <!-- paragraph -->
 
-- the `href`, `tooltip`, `id` aesthetics for observation-specific characteristics;
+- le `href`, `tooltip`, `id` l'esthétique pour les caractéristiques propres à l'observation ;
 <!-- comment -->
-- named elements of `clickSelects` and `showSelected` for specifying several selection variables at once;
+- les éléments nommés de `clickSelects` et `showSelected` pour spécifier plusieurs variables de sélection à la fois ;
 <!-- comment -->
-- the `chunk_vars` geom-specific option;
+- le `chunk_vars` l'option spécifique au geom ;
 <!-- comment -->
-- the `color_off`, `fill_off`, and `alpha_off` geom parameters for specifying how selection state is displayed;
+- l'option `color_off`, `fill_off`, et `alpha_off` paramètres geom permettant de spécifier le mode d'affichage de l'état de la sélection ;
 <!-- comment -->
-- the `help` and `title` geom-specific parameters, which can be set to text strings that will be shown in the guided tour.
+- le `help` et `title` les paramètres spécifiques au geom, qui peuvent être définis comme des chaînes de texte qui seront affichées dans la visite guidée.
 <!-- comment -->
-- plot-specific legends and height/width options; and
+- les légendes et les options de hauteur/largeur propres au graphique
 <!-- comment -->
-- global data viz options.
+- options de visualisation des données globales.
 
 <!-- paragraph -->
 
-## Observation-specific options (new aesthetics) {#new-aesthetics}
+## Options spécifiques à l'observation (nouvelle esthétique) {#new-aesthetics}
 
 <!-- paragraph -->
 
-This section explains the new aesthetics that are recognized by animint2.
+Cette section explique les nouvelles esthétiques reconnues par animint2.
 
 <!-- paragraph -->
 
-### Review of previously introduced aesthetics {#review-aesthetics}
+### Revue des esthétiques introduites précédemment {#review-aesthetics}
 
 <!-- paragraph -->
 
-First we discuss the new aesthetics that we have already introduced in previous chapters.
+Nous commençons par discuter de la nouvelle esthétique que nous avons déjà introduite dans les chapitres précédents.
 
 <!-- paragraph -->
 
-[Chapter 3](Ch03-showSelected.html#duration-key) also introduced `aes(key)` to designate a variable to use for smooth transitions that are interpretable.
+[Chapitre 3](Ch03-showSelected.html#duration-key) a également introduit `aes(key)` pour désigner une variable à utiliser pour des transitions fluides et interprétables.
 
 <!-- paragraph -->
 
-### Hyperlinks using `aes(href)` {#aes-href}
+### Hyperliens utilisant `aes(href)` {#aes-href}
 
 <!-- paragraph -->
 
-The code below uses animint to draw a map of the United States.
+Le code ci-dessous utilise animint pour dessiner une carte des États-Unis.
 
 <!-- paragraph -->
 
@@ -81,21 +87,21 @@ animint(
 
 <!-- paragraph -->
 
-Try clicking a state in the data viz above.
+Essayez de cliquer sur un état dans l'image de données ci-dessus.
 <!-- comment -->
-You should see the corresponding wikipedia page open in a new tab.
+Vous devriez voir la page wikipedia correspondante s'ouvrir dans un nouvel onglet.
 
 <!-- paragraph -->
 
-### Tooltips using `aes(tooltip)` {#aes-tooltip}
+### Les infobulles utilisant `aes(tooltip)` {#aes-tooltip}
 
 <!-- paragraph -->
 
-Tooltips are little windows of text information that appear when you hover the cursor over something on the screen.
+Les infobulles sont de petites fenêtres d'information textuelle qui apparaissent lorsque vous passez le curseur sur un élément de l'écran.
 <!-- comment -->
-In animint you can use `aes(tooltip)` to designate the observation-specific message that appears.
+Dans animint, vous pouvez utiliser `aes(tooltip)` pour désigner le message spécifique à l'observation qui apparaît.
 <!-- comment -->
-For example we use it to display the population and country name in the scatterplot of the World Bank data below.
+Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans le nuage de points des données de la Banque mondiale ci-dessous.
 
 <!-- paragraph -->
 
@@ -113,25 +119,25 @@ animint(
 
 <!-- paragraph -->
 
-Try hovering the cursor over one of the data points.
+Essayez de placer le curseur sur l'un des points de données.
 <!-- comment -->
-You should see a small box appear with the country name and population for that data point.
+Vous devriez voir apparaître une petite boîte contenant le nom du pays et la population pour ce point de données.
 
 <!-- paragraph -->
 
-Note that a tooltip of the form "variable value" is specified by default for each geom with `aes(clickSelects)`.
+Notez qu'une infobulle de la forme "valeur variable" est spécifiée par défaut pour chaque geom avec `aes(clickSelects)`.
 <!-- comment -->
-For example a geom with `aes(clickSelects=year)` shows the default tooltip "year 1984" for an observation with year 1984.
+Par exemple, un geom avec `aes(clickSelects=year)` affiche l'info-bulle par défaut "année 1984" pour une observation dont l'année est 1984.
 <!-- comment -->
-You can change this default by explicitly specifying `aes(tooltip)`.
+Vous pouvez modifier cette valeur par défaut en spécifiant explicitement `aes(tooltip)`.
 
 <!-- paragraph -->
 
-### HTML id attribute using `aes(id)` {#aes-id}
+### Attribut HTML id utilisant `aes(id)` {#aes-id}
 
 <!-- paragraph -->
 
-Since everything plotted by animint is rendered as an [SVG](http://www.w3schools.com/html/html5_svg.asp) element in a web page, you may want to specify a [HTML id attribute](http://www.w3schools.com/tags/att_global_id.asp) using `aes(id)` as below.
+Puisque tout ce qui est tracé par animint est affiché sous la forme d'un [SVG](http://www.w3schools.com/html/html5_svg.asp) dans une page Web, vous voudrez peut-être spécifier un élément [attribut HTML id](http://www.w3schools.com/tags/att_global_id.asp) à l'aide de l'attribut `aes(id)` comme ci-dessous.
 
 <!-- paragraph -->
 
@@ -148,39 +154,39 @@ animint(
 
 <!-- paragraph -->
 
-Note how `gsub` is used to convert spaces to underscores, since a well-defined id must not include spaces.
+Notez comment `gsub` est utilisé pour convertir les espaces en caractères de soulignement, puisqu'un identifiant bien défini ne doit pas inclure d'espaces.
 <!-- comment -->
-Note also that `paste` is used to add a group number, since there may be more than one polygon per state/region, and each id must be unique on a web page.
+Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d'un polygone par état/région, et chaque identifiant doit être unique sur une page web.
 <!-- comment -->
-The animint2 developers use this feature [for testing the animint JavaScript renderer code](https://github.com/tdhock/animint/wiki/Testing) .
+Les développeurs d'animint2 utilisent cette fonctionnalité [pour tester le code de l'afficheur JavaScript de l'animint2](https://github.com/tdhock/animint/wiki/Testing) .
 
 <!-- paragraph -->
 
-### Data-driven selector names using named clickSelects and showSelected {#data-driven-selectors}
+### Noms de sélecteurs pilotés par les données en utilisant les noms clickSelects et showSelected {#data-driven-selectors}
 
 <!-- paragraph -->
 
-[Chapter 3](Ch03-showSelected.html#selecting-with-menus) introduced `showSelected` for designating a geom which shows only the selected subset of its data.
+[Chapitre 3](Ch03-showSelected.html#selecting-with-menus) introduit `showSelected` pour désigner un geom qui n'affiche que le sous-ensemble sélectionné de ses données.
 
 <!-- paragraph -->
 
-[Chapter 4](Ch04-clickSelects.html#clickSelects-keyword) introduced `clickSelects` to designate a geom which can be clicked to change a selection variable.
+[Chapitre 4](Ch04-clickSelects.html#clickSelects-keyword) introduit `clickSelects` pour désigner un geom sur lequel on peut cliquer pour modifier une variable de sélection.
 
 <!-- paragraph -->
 
-Usually selector names are defined in `showSelected` or `clickSelects`.
+En général, les noms des sélecteurs sont définis dans `showSelected` ou `clickSelects`.
 <!-- comment -->
-For example, `showSelected=c("year", "country")` means to create two selection variables (named `year` and `country` ).
+Par exemple, `showSelected=c("year", "country")` signifie créer deux variables de sélection (nommées `year` et `country` ).
 <!-- comment -->
-However, that method becomes inconvenient if you have many selectors in your data viz.
+Cependant, cette méthode devient peu pratique si vous avez de nombreux sélecteurs dans vos données viz.
 <!-- comment -->
-To illustrate we consider the following theoretical example (the code in this section is not directly executable).
+Pour illustrer notre propos, nous considérons l'exemple théorique suivant (le code de cette section n'est pas directement exécutable).
 <!-- comment -->
-Say you want to use 20 different selector variable names, `selector1value`...
+Supposons que vous souhaitiez utiliser 20 noms de variables de sélection différents, `selector1value`...
 <!-- comment -->
 `selector20value`.
 <!-- comment -->
-The usual way to define your data viz would be
+La façon habituelle de définir une image de données est la suivante
 
 <!-- paragraph -->
 
@@ -196,9 +202,9 @@ geom_point(clickSelects="selector20value", data=data20)
 
 <!-- paragraph -->
 
-However that method is bad since it violates the DRY principle (Don't Repeat Yourself).
+Cependant, cette méthode est mauvaise car elle viole le principe DRY (Don't Repeat Yourself).
 <!-- comment -->
-Another way to do that would be to use a for loop:
+Une autre façon de procéder serait d'utiliser une boucle for :
 
 <!-- paragraph -->
 
@@ -214,13 +220,13 @@ viz$points <- viz$points +
 
 <!-- paragraph -->
 
-That method is bad since it is slow to construct `viz`, and the compiled viz potentially takes up a lot of disk space since there is at least one TSV file created for each `geom_point`.
+Cette méthode est mauvaise car elle est lente à construire `viz` et la viz compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point`.
 <!-- comment -->
-The preferable method is to use a named character vector for `clickSelects`.
+La méthode préférable est d'utiliser un vecteur de caractères nommés pour `clickSelects`.
 <!-- comment -->
-The names should be used to indicate the column that contains the selector variable name.
+Les noms doivent être utilisés pour indiquer la colonne qui contient le nom de la variable du sélecteur.
 <!-- comment -->
-For example:
+Par exemple, les noms doivent être utilisés pour indiquer la colonne qui contient le nom de la variable du sélecteur :
 
 <!-- paragraph -->
 
@@ -235,73 +241,73 @@ viz <- list(
 
 <!-- paragraph -->
 
-The animint compiler looks through the data.frame `all.data` and create selectors for each of the distinct values of `all.data$selector.name`.
+Le compilateur animint parcourt le data.frame `all.data` et crée des sélecteurs pour chacune des valeurs distinctes de `all.data$selector.name`.
 <!-- comment -->
-Clicking one of the data points updates the corresponding selector with the value indicated in `all.data$selector.value`.
+En cliquant sur l'un des points de données, le sélecteur correspondant est mis à jour avec la valeur indiquée dans le champ `all.data$selector.value`.
 
 <!-- paragraph -->
 
-You can similarly use one geom with a named `showSelected` instead of a bunch of different geoms with `showSelected`.
+De la même manière, vous pouvez utiliser un geom avec un élément nommé `showSelected` au lieu d'un tas de geom différents avec un nom `showSelected`.
 
 <!-- paragraph -->
 
-This feature is useful not only to avoid repetition in the definition of the data viz, but also because they are more computationally efficient.
+Cette caractéristique est utile non seulement pour éviter les répétitions dans la définition des données, mais aussi parce qu'elle est plus efficace en termes de calcul.
 <!-- comment -->
-For a detailed example with timings and disk space measurements, see [Chapter 14](Ch14-PeakSegJoint.html) .
+Pour un exemple détaillé avec les temps et les mesures de l'espace disque, voir [Chapitre 14](Ch14-PeakSegJoint.html) .
 
 <!-- paragraph -->
 
-## Geom options {#geom-options}
+## Options du geom {#geom-options}
 
 <!-- paragraph -->
 
-In animint, there are several options for customization at the geom level: `chunk_vars` is used to specify how to split data sets for storage on disk, and `\*_off` parameters are used to specify how a clickSelects geom should be displayed when it is not selected.
+Dans animint, il existe plusieurs options de personnalisation au niveau du geom : `chunk_vars` permet de spécifier la manière de diviser les ensembles de données pour le stockage sur disque et `\*_off` sont utilisés pour spécifier comment un geom clickSelects doit être affiché lorsqu'il n'est pas sélectionné.
 <!-- comment -->
-Additionally, `help` and `title` may be specified, to add information to the guided tour.
+En outre, `help` et `title` peuvent être spécifiées, afin d'ajouter des informations à la visite guidée.
 
 <!-- paragraph -->
 
-### The `chunk_vars` geom-specific compilation option {#chunk-vars}
+### Le `chunk_vars` option de compilation spécifique au geom {#chunk-vars}
 
 <!-- paragraph -->
 
-The `chunk_vars` option defines the selection variables that are used to split the data set into separate chunks (TSV files) to download.
+Le `chunk_vars` définit les variables de sélection qui sont utilisées pour diviser l'ensemble de données en morceaux distincts (fichiers TSV) à télécharger.
 <!-- comment -->
-There is one TSV file created for each combination of values of the `chunk_vars` variables.
+Un fichier TSV est créé pour chaque combinaison de valeurs de l'option `chunk_vars` variables.
 <!-- comment -->
-More selection variables specified in `chunk_vars` means to split the data set into more TSV files, each of a smaller size.
+Plus de variables de sélection spécifiées en `chunk_vars` signifie qu'il faut diviser l'ensemble de données en plusieurs fichiers TSV, chacun d'une taille plus petite.
 
 <!-- paragraph -->
 
-The `chunk_vars` option should be specified as an argument to a `geom_\*` function, and its value should be a character vector of selection variable names.
+Le `chunk_vars` doit être spécifiée en tant qu'argument de l'option `geom_\*` et sa valeur doit être un vecteur de caractères contenant des noms de variables de sélection.
 <!-- comment -->
-When `chunk_vars=character(0)`, a character vector of length zero, all of the data is stored in a single TSV file.
+Lorsque `chunk_vars=character(0)` un vecteur de caractères de longueur zéro, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
-When `chunk_vars` is set to all of the `showSelected` variable names, then a TSV file is created for each combination of values of those variables.
+Quand `chunk_vars` est défini à tous les `showSelected` un fichier TSV est créé pour chaque combinaison de valeurs de ces variables.
 
 <!-- paragraph -->
 
-In general the animint compiler chooses a sensible default for `chunk_vars`, but you may want to specify `chunk_vars` if the data viz is loading slowly, or taking up too much space on disk.
+En général, le compilateur animint choisit une valeur par défaut raisonnable pour les variables `chunk_vars` mais il se peut que vous souhaitiez spécifier `chunk_vars` si les données se chargent lentement ou prennent trop de place sur le disque.
 <!-- comment -->
-If the data viz is loading slowly, you should add selection variables to `chunk_vars` to reduce the size of the first TSV file to download.
+Si l'affichage des données se charge lentement, vous devriez ajouter des variables de sélection à l'affichage des données. `chunk_vars` afin de réduire la taille du premier fichier TSV à télécharger.
 <!-- comment -->
-If the data viz takes up too much space on disk, you should remove selection variables from `chunk_vars` to decrease the number of TSV files.
+Si l'image de données occupe trop d'espace sur le disque, vous devez supprimer les variables de sélection de l'image de données. `chunk_vars` afin de réduire le nombre de fichiers TSV.
 <!-- comment -->
-Lots of small TSV files can take more disk space than a single TSV file because some filesystems store a constant amount of metadata for every file.
+Un grand nombre de petits fichiers TSV peuvent occuper plus d'espace disque qu'un seul fichier TSV, car certains systèmes de fichiers stockent une quantité constante de métadonnées pour chaque fichier.
 
 <!-- paragraph -->
 
-To illustrate the usage of `chunk_vars`, consider the following visualization of the `breakpoints` data set.
+Pour illustrer l'utilisation de `chunk_vars`, considérez la visualisation suivante de l'élément `breakpoints` de l'ensemble de données.
 
 <!-- paragraph -->
 
-![Breakpoints data viz](Ch06-viz-breakpoints.png)
+![Données sur les points d'arrêt](Ch06-viz-breakpoints.png)
 
 <!-- paragraph -->
 
-The sketch above consists of two plots.
+L'esquisse ci-dessus se compose de deux graphiques.
 <!-- comment -->
-We begin by creating the plot of error curves on the left.
+Nous commençons par créer le graphique des courbes d'erreur à gauche.
 
 <!-- paragraph -->
 
@@ -347,9 +353,9 @@ errorPlot
 
 <!-- paragraph -->
 
-The plot above includes a `geom_tallrect` with `clickSelects=segments` and a `geom_line` with `clickSelects=bases.per.probe`.
+Le graphique ci-dessus comprend un `geom_tallrect` avec `clickSelects=segments` et un `geom_line` avec `clickSelects=bases.per.probe`.
 <!-- comment -->
-It will be used to select the data and model in the plot below.
+Il sera utilisé pour sélectionner les données et le modèle dans le graphique ci-dessous.
 
 <!-- paragraph -->
 
@@ -373,9 +379,9 @@ signalPlot+facet_grid(segments ~ bases.per.probe)
 
 <!-- paragraph -->
 
-The non-interactive plot above has 80 facets, one for each combination of the two `showSelected` variables, `bases.per.probe` and `segments`.
+Le graphique non interactif ci-dessus comporte 80 facettes, une pour chaque combinaison des deux `showSelected` variables, `bases.per.probe` et `segments`.
 <!-- comment -->
-Below we make an interactive version in which only one of these facets will be shown.
+Nous présentons ci-dessous une version interactive dans laquelle une seule de ces facettes sera affichée.
 
 <!-- paragraph -->
 
@@ -394,15 +400,15 @@ Below we make an interactive version in which only one of these facets will be s
 
 <!-- paragraph -->
 
-Click the "Show download status table" button, and you should see counts of chunks (TSV files).
+Cliquez sur le bouton "Afficher le tableau de l'état des téléchargements", et vous devriez voir des décomptes de chunks (fichiers TSV).
 <!-- comment -->
-Note that `geom6_vline_signal` has only 1 chunk, since `chunk_vars=character()` is specified for the `geom_vline` in the R code above.
+Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
 <!-- comment -->
-If another value of `chunk_vars` was specified, it would create a different number of TSV files, but the appearance of the data viz should be the same.
+Si une autre valeur de `chunk_vars` était spécifiée, elle créerait un nombre différent de fichiers TSV, mais l'apparence de la viz de données devrait être la même.
 
 <!-- paragraph -->
 
-Below we use the `du` command line program to determine the disk usage of the data viz for different choices of `chunk_vars`.
+Ci-dessous, nous utilisons l'option `du` programme en ligne de commande pour déterminer l'utilisation du disque de la viz de données pour différents choix de `chunk_vars`.
 
 <!-- paragraph -->
 
@@ -438,45 +444,45 @@ sizes.list <- lapply(chunk_vars_list, tsvSizes)
 
 <!-- paragraph -->
 
-The table above includes counts of kilobytes for the data viz, along with counts of TSV files for `geom6_vline_signal` and the other geoms.
+Le tableau de contingence ci-dessus indique le nombre de kilo-octets pour les données, ainsi que le nombre de fichiers TSV pour les éléments suivants `geom6_vline_signal` et les autres geoms.
 <!-- comment -->
-Note how the choice of `chunk_vars` affects the number of TSV files and the disk space usage.
+Notez comment le choix de `chunk_vars` affecte le nombre de fichiers TSV et l'utilisation de l'espace disque.
 <!-- comment -->
-Since `chunk_vars` was only specified for `geom6_vline_signal`, the number of TSV files for the other geoms does not change.
+Depuis `chunk_vars` n'a été spécifié que pour les `geom6_vline_signal` le nombre de fichiers TSV pour les autres geoms ne change pas.
 <!-- comment -->
-When both `segments` and `bases.per.probe` are specified for `chunk_vars`, there are 76 TSV files for `geom6_vline_signal`, and the data viz takes `r sizes["both", "kb"]` kilobytes.
+Lorsque les deux `segments` et `bases.per.probe` sont spécifiés pour `chunk_vars` il y a 76 fichiers TSV pour `geom6_vline_signal` et les données prennent `r sizes["both", "kb"]` kilo-octets.
 <!-- comment -->
-In contrast, `chunk_vars=character()` produces only one TSV file for `geom6_vline_signal`, and the data viz uses `r sizes["neither", "kb"]` kilobytes.
+En revanche, `chunk_vars=character()` ne produit qu'un seul fichier TSV pour `geom6_vline_signal` et l'image de données utilise `r sizes["neither", "kb"]` kilo-octets.
 
 <!-- paragraph -->
 
-In conclusion, the geom-specific `chunk_vars` option defines the number of TSV files created for each geom.
+En conclusion, l'outil de gestion de l'information spécifique au geom `chunk_vars` définit le nombre de fichiers TSV créés pour chaque geom.
 <!-- comment -->
-When deciding the value of `chunk_vars`, you should consider both disk usage and loading time.
+Lors du choix de la valeur de l'option `chunk_vars` vous devez tenir compte de l'utilisation du disque et du temps de chargement.
 <!-- comment -->
-A few large files take up less disk space but are slower to download than many small files.
+Quelques gros fichiers occupent moins d'espace disque mais sont plus lents à télécharger que de nombreux petits fichiers.
 
 <!-- paragraph -->
 
-### Specifying how selection state is displayed {#display-selection-state}
+### Spécifier le mode d'affichage de l'état de la sélection {#display-selection-state}
 
 <!-- paragraph -->
 
-Animint has sensible defaults for displaying selection state.
+Animint a des valeurs par défaut raisonnables pour l'affichage de l'état de la sélection.
 <!-- comment -->
-In particular,
+En particulier,
 
 <!-- paragraph -->
 
-- when there is a rect or tile with clickSelects, we use black color/border to show items which are selected, and transparent for items which are not selected.
+- lorsqu'il y a un rectangle ou une tuile avec clickSelects, nous utilisons la couleur noire/la bordure pour montrer les éléments qui sont sélectionnés, et la couleur transparente pour les éléments qui ne sont pas sélectionnés.
 <!-- comment -->
-- for any other geom with clickSelects, we use full opacity `alpha` to show items which are selected, and `alpha-0.5` opacity to show items which are not selected.
+- pour tout autre geom avec clickSelects, nous utilisons l'opacité totale. `alpha` pour afficher les éléments sélectionnés, et `alpha-0.5` pour afficher les éléments qui ne sont pas sélectionnés.
 
 <!-- paragraph -->
 
-The defaults explained above are illustrated in the first plot below.
+Les valeurs par défaut expliquées ci-dessus sont illustrées dans le premier graphique ci-dessous.
 <!-- comment -->
-Those defaults may be customized by using the `alpha_off`, `fill_off`, and `color_off` geom parameters as in the code below,
+Ces valeurs par défaut peuvent être personnalisées en utilisant l'option `alpha_off`, `fill_off` et `color_off` comme dans le code ci-dessous,
 
 <!-- paragraph -->
 
@@ -528,19 +534,19 @@ animint(
 
 <!-- paragraph -->
 
-Note that when using any one of these visual properties in the `aes` mapping, it should not be specified as a geom parameter.
+Notez que lorsque vous utilisez l'une de ces propriétés visuelles dans l'élément `aes` ne doit pas être spécifiée en tant que paramètre geom.
 <!-- comment -->
-For example in the tile above, we used `aes(fill)`, so `fill` and `fill_off` should not be specified as parameters for that geom (in order to make it clear that fill is used for displaying data values, not selection state).
+Par exemple, dans la tuile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill` et `fill_off` ne doivent pas être spécifiés en tant que paramètres pour ce geom (afin qu'il soit clair que le remplissage est utilisé pour afficher les valeurs des données, et non l'état de la sélection).
 
 <!-- paragraph -->
 
-### Specifying guided tour text {#custom-guided-tour}
+### Spécifier le texte de la visite guidée {#custom-guided-tour}
 
 <!-- paragraph -->
 
-Since Jan 2025, animint supports a guided tour, which displays information about possible interactions with each geom.
+Depuis janvier 2025, animint prend en charge une visite guidée, qui affiche des informations sur les interactions possibles avec chaque geom.
 <!-- comment -->
-To customize what is displayed for each geom, you can specify the `help` and `title` parameters, as in the code below.
+Pour personnaliser ce qui est affiché pour chaque geom, vous pouvez spécifier l'option `help` et `title` comme dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -567,31 +573,31 @@ animint(
 
 <!-- paragraph -->
 
-In the code above, we specify `help` for `geom_point`, which controls the sub-text which is displayed for that geom, after clicking the "Start Tour" button at the bottom of the data visualization.
+Dans le code ci-dessus, nous spécifions `help` pour `geom_point` qui contrôle le sous-texte qui est affiché pour ce geom, après avoir cliqué sur le bouton "Démarrer la visite" au bas de la visualisation de données.
 <!-- comment -->
-After clicking the "Next" button, we can see the `title` that was specified in the code, shown at the top of the tour window, for the `geom_text`.
+Après avoir cliqué sur le bouton "Suivant", nous pouvons voir l'image suivante `title` qui a été spécifié dans le code, affiché en haut de la fenêtre de visite, pour le `geom_text`.
 <!-- comment -->
-This mechanism can be used to provide extra helpful information for the users of your data visualization, so they can more easily understand what is displayed, and what interactions are possible.
+Ce mécanisme peut être utilisé pour fournir des informations supplémentaires utiles aux utilisateurs de votre visualisation de données, afin qu'ils puissent comprendre plus facilement ce qui est affiché et quelles interactions sont possibles.
 
 <!-- paragraph -->
 
-## Plot-specific options {#plot-options}
+## Options spécifiques au graphique {#plot-options}
 
 <!-- paragraph -->
 
-This section discusses options which are specific to one ggplot of a data viz.
+Cette section traite des options qui sont spécifiques à un ggplot d'une viz de données.
 <!-- comment -->
-The `theme_animint` function is used to attach animint options to ggplot objects.
+Les options `theme_animint` est utilisée pour attacher des options animint aux objets ggplot.
 
 <!-- paragraph -->
 
-### Plot height and width {#plot-height-width}
+### Hauteur et largeur du graphique {#plot-height-width}
 
 <!-- paragraph -->
 
-The `width` and `height` options are for specifying the dimensions (in pixels) of a ggplot rendered by animint.
+Le `width` et `height` permettent de spécifier les dimensions (en pixels) d'un ggplot affiché par animint.
 <!-- comment -->
-For example, consider the following re-design of the plot of the United States:
+Par exemple, considérons le remaniement suivant du graphique des États-Unis :
 
 <!-- paragraph -->
 
@@ -615,25 +621,25 @@ animint(
 
 <!-- paragraph -->
 
-Note that the plot above was rendered with a width of 750 pixels and a height of 500 pixels, due to the `theme_animint` options.
+Notez que le graphique ci-dessus a été affiché avec une largeur de 750 pixels et une hauteur de 500 pixels, en raison de l'utilisation de la fonction `theme_animint` options.
 <!-- comment -->
-If either of these options is not specified for any ggplot, then animint uses a default of 400 pixels.
+Si l'une de ces options n'est pas spécifiée pour un ggplot, animint utilise une valeur par défaut de 400 pixels.
 
 <!-- paragraph -->
 
-Also note that `theme` was used to specify several blank elements.
+Notez également que `theme` a été utilisé pour spécifier plusieurs éléments vides.
 <!-- comment -->
-This has the effect of removing the axes and background, and is generally useful for rendering maps.
+Cela a pour effet de supprimer les axes et l'arrière-plan, et est généralement utile pour afficher des cartes.
 
 <!-- paragraph -->
 
-### Size scale in pixels {#scale-size-animint}
+### Échelle de taille en pixels {#scale-size-animint}
 
 <!-- paragraph -->
 
-The `scale_size_animint` scale should be used in all ggplots where you specify `aes(size)`.
+Le `scale_size_animint` doit être utilisée dans tous les ggplots où vous spécifiez `aes(size)`.
 <!-- comment -->
-To see why, consider the following examples.
+Pour comprendre pourquoi, examinons les exemples suivants.
 
 <!-- paragraph -->
 
@@ -658,27 +664,27 @@ scatter1975 <- ggplot()+
 
 <!-- paragraph -->
 
-The first ggplot above has no scale specified, so it uses the default ggplot2 scale, which has two problems.
+Le premier ggplot ci-dessus n'a pas d'échelle spécifiée, il utilise donc l'échelle ggplot2 par défaut, ce qui pose deux problèmes.
 <!-- comment -->
-The first problem is that it seems that all countries have about the same size except the two really big countries.
+Le premier problème est qu'il semble que tous les pays aient à peu près la même taille, à l'exception des deux pays les plus grands.
 <!-- comment -->
-That problem can be fixed by simply adding `scale_size_animint()` to the ggplot, which results in the second plot above.
+Ce problème peut être résolu en ajoutant simplement `scale_size_animint()` au ggplot, ce qui donne le deuxième graphique ci-dessus.
 <!-- comment -->
-However, a second problem is that the legend entries do not show the full range of the data.
+Cependant, un second problème est que les entrées de la légende ne montrent pas toute la plage (ou étendue ou intervalle) des données.
 <!-- comment -->
-That problem is fixed in the third plot above, by manually specifying the `breaks` to use for legend entries.
+Ce problème est résolu dans le troisième graphique ci-dessus, en spécifiant manuellement l'attribut `breaks` à utiliser pour les entrées de légende.
 <!-- comment -->
-Note that the `pixel.range` argument can also be used to specify the radius of the largest and smallest circles.
+Notez que l'élément `pixel.range` peut également être utilisé pour spécifier le rayon du plus grand et du plus petit cercle.
 
 <!-- paragraph -->
 
-### Axes and legend text size {#axes-legend-text-size}
+### Taille du texte des axes et de la légende {#axes-legend-text-size}
 
 <!-- paragraph -->
 
-The syntax of defining axes and legend text size(in pixels) is almost the same as ggplot2.
+La syntaxe de définition des axes et de la taille du texte de la légende(en pixels) est quasiment la même que celle de ggplot2.
 <!-- comment -->
-Inside `theme`, you can use numbers directly to change the font size, or you can use `rel()` to define the relative size.
+A l'intérieur `theme` vous pouvez utiliser des nombres directement pour modifier la taille de la police, ou vous pouvez utiliser la fonction `rel()` pour définir la taille relative.
 
 <!-- paragraph -->
 
@@ -705,51 +711,51 @@ scatter1975 <- ggplot()+
 
 <!-- paragraph -->
 
-This allows you to change the font size while changing the size of the plot to make it look more coherent.
+Cela permet de modifier la taille de la police tout en modifiant la taille du tracé pour lui donner une plus grande cohérence.
 
 <!-- paragraph -->
 
-Note that the default font size in animint is 11px for the axes and 16px for the legend.
+Notez que la taille de police par défaut dans animint est de 11px pour les axes et de 16px pour la légende.
 
 <!-- paragraph -->
 
-## Global data viz options {#global-options}
+## Options d'affichage des données globales {#global-options}
 
 <!-- paragraph -->
 
-Global data viz options are any named elements of the `viz` list that are not ggplots.
+Les options d'affichage des données globales sont des éléments nommés de l'élément `viz` qui ne sont pas des ggplots.
 
 <!-- paragraph -->
 
-### Review of previously introduced global options {#review-global}
+### Révision des options globales introduites précédemment {#review-global}
 
 <!-- paragraph -->
 
-[Chapter 3](Ch03-showSelected.html#duration-key) introduced the `duration` option for specifying the duration of smooth transitions.
+[Chapitre 3](Ch03-showSelected.html#duration-key) a présenté le `duration` pour spécifier la durée des transitions fluides.
 
 <!-- paragraph -->
 
-[Chapter 3](Ch03-showSelected.html#animation-time) introduced the `time` option for specifying a selection variable which is automatically updated (animation).
+[Chapitre 3](Ch03-showSelected.html#animation-time) a présenté le `time` pour spécifier une variable de sélection qui est automatiquement mise à jour (animation).
 
 <!-- paragraph -->
 
-[Chapter 4](Ch04-clickSelects.html#first-option) introduced the `first` option for specifying the selection when the data viz is first rendered.
+[Chapitre 4](Ch04-clickSelects.html#first-option) a présenté le `first` qui permet de spécifier la sélection lorsque l'image de données est affichée pour la première fois.
 
 <!-- paragraph -->
 
-[Chapter 4](Ch04-clickSelects.html#selector-types-option) introduced the `selector.types` option for specifying multiple selection variables.
+[Chapitre 4](Ch04-clickSelects.html#selector-types-option) a présenté le `selector.types` pour spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
-### Web page title with the title option {#title-option}
+### Titre de la page web avec l'option title {#title-option}
 
 <!-- paragraph -->
 
-The `title` option should be a character string, and will be used to set the `\<title>` element of the web page.
+Le `title` doit être une chaîne de caractères, et sera utilisée pour définir l'option `\<title>` de la page web.
 <!-- comment -->
-It does not make sense to use the `title` option in an Rmd document such as this page.
+Il n'est pas utile d'utiliser l'élément `title` dans un document Rmd tel que cette page.
 <!-- comment -->
-A title can and should be used with `animint2dir`, as in the code below.
+Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -761,23 +767,23 @@ animint2dir(viz.title, "Ch06-title")
 
 <!-- paragraph -->
 
-Note that `viz.scale.size` already has three ggplots, each with a `ggtitle`.
+Notez que `viz.scale.size` possède déjà trois ggplots, chacun avec un `ggtitle`.
 <!-- comment -->
-Adding the global `title` option has the effect of defining a title for [the web page](Ch06-title/index.html) .
+Ajout de l'élément global `title` a pour effet de définir un titre pour [la page web](Ch06-title/index.html) .
 
 <!-- paragraph -->
 
-Chapter 5 introduced the [animint2pages](Ch05-sharing.html#pages) function, which is used to publish an animint to GitHub Pages.
+Le chapitre 5 a présenté le [animint2pages](Ch05-sharing.html#pages) qui permet de publier un animint sur les pages GitHub.
 <!-- comment -->
-It requires that the animint defines the `title` option, because that meta-data is required for organizing the animint in a [gallery](Ch05-sharing.html#gallery) .
+Il faut que l'animint définisse l'élément `title` car ces méta-données sont nécessaires à l'organisation de l'animint dans une structure [galerie](Ch05-sharing.html#gallery) .
 
 <!-- paragraph -->
 
-### Link R code with source option {#source-option}
+### Lier le code R avec l'option source {#source-option}
 
 <!-- paragraph -->
 
-The `source` option should be a character string: a link to the R source code which was used to create the animint.
+Le `source` doit être une chaîne de caractères : un lien vers le code source R qui a été utilisé pour créer l'animint.
 
 <!-- paragraph -->
 
@@ -792,23 +798,23 @@ animint(
 
 <!-- paragraph -->
 
-Note above how there is a source link at the bottom of the data viz.
+Notez ci-dessus comment il y a un lien source au bas des données viz.
 
 <!-- paragraph -->
 
-Chapter 5 introduced the [animint2pages](Ch05-sharing.html#pages) function, which is used to publish an animint to GitHub Pages.
+Le chapitre 5 a introduit le [animint2pages](Ch05-sharing.html#pages) qui permet de publier un animint sur les pages GitHub.
 <!-- comment -->
-It requires that the animint defines the `source` option, because that meta-data is required for organizing the animint in a [gallery](Ch05-sharing.html#gallery) .
+Il faut que l'animint définisse l'élément `source` car ces méta-données sont nécessaires à l'organisation de l'animint dans une structure [galerie](Ch05-sharing.html#gallery) .
 
 <!-- paragraph -->
 
-### Link a video {#video-option}
+### Lier une vidéo {#video-option}
 
 <!-- paragraph -->
 
-The `video` option should be a character string: a link to a video which shows typical interactions with the animint.
+Le `video` doit être une chaîne de caractères : un lien vers une vidéo qui montre des interactions typiques avec l'animint.
 <!-- comment -->
-This mechanism can be used to help the users of your data visualization understand what is displayed, and what interactions they can use.
+Ce mécanisme peut être utilisé pour aider les utilisateurs de votre visualisation de données à comprendre ce qui est affiché, et quelles interactions ils peuvent utiliser.
 
 <!-- paragraph -->
 
@@ -825,61 +831,61 @@ animint(
 
 <!-- paragraph -->
 
-In the data visualization above, notice the "video" link which appears in the bottom right.
+Dans la visualisation de données ci-dessus, remarquez le lien "vidéo" qui apparaît en bas à droite.
 <!-- comment -->
-Clicking that link leads to a video that was recorded to explain a more complex data visualization based on the World Bank data.
+En cliquant sur ce lien, on accède à une vidéo qui a été enregistrée pour expliquer une visualisation de données plus complexe basée sur les données de la Banque mondiale.
 <!-- comment -->
-The idea is that you can record a video for each of your animints, and then include a link to the video using this mechanism, so your users can more easily understand what is displayed, and what interactions are possible.
+L'idée est que vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un lien vers la vidéo à l'aide de ce mécanisme, afin que vos utilisateurs puissent comprendre plus facilement ce qui est affiché, et quelles sont les interactions possibles.
 
 <!-- paragraph -->
 
-### Show or hide selection menus with the selectize option {#selectize-option}
+### Afficher ou masquer les menus de sélection avec l'option selectize {#selectize-option}
 
 <!-- paragraph -->
 
-The selectize option should be a named list of logical values.
+L'option selectize doit être une liste nommée de valeurs booléennes.
 <!-- comment -->
-Names should be selector variables, and values should indicate whether or not you would like to render a selection menu via [selectize.js](http://selectize.github.io/selectize.js/) .
+Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non afficher un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/) .
 <!-- comment -->
-By default, animint will render a selection menu for every selection variable, with two exceptions:
+Par défaut, animint affiche un menu de sélection pour chaque variable de sélection, à deux exceptions près :
 
 <!-- paragraph -->
 
-- data-driven selection variables that are defined using [namedclickSelects/showSelectedvariables](Ch06-other.html#data-driven-selectors) .
+- les variables de sélection pilotées par les données qui sont définies à l'aide de l'option [namedclickSelects/showSelectedvariables](Ch06-other.html#data-driven-selectors) .
 <!-- comment -->
-- selection variables that have a lot of values (they are slow to render).
+- les variables de sélection qui ont beaucoup de valeurs (elles sont lentes à afficher).
 
 <!-- paragraph -->
 
-These defaults should work well for the vast majority of animints.
+Ces valeurs par défaut devraient convenir à la grande majorité des animints.
 <!-- comment -->
-For those who are interested to see an example of how the `selectize` option works, please see the [PredictedPeaks test in the animint2 source code](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer2-PredictedPeaks.R) .
+Pour ceux qui sont intéressés par un exemple de la façon dont la fonction `selectize` veuillez consulter l'exemple de l'option [PredictedPeaks dans le code source de animint2](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer2-PredictedPeaks.R) .
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- paragraph -->
 
-This chapter explained several options for customizing animints at the observation, geom, plot, and global level.
+Ce chapitre a expliqué plusieurs options de personnalisation des animints au niveau de l'observation, du geom, du graphique et du global.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Create other versions of `viz.chunk.vars` with different values of `chunk_vars` for the `geom_point` and `geom_segment`.
+- Créez d'autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point` et `geom_segment`.
 <!-- comment -->
-How does the choice of `chunk_vars` affect the appearance of the visualization?
+Comment le choix des `chunk_vars` affecte-t-il l'apparence de la visualisation ?
 <!-- comment -->
-The disk space?
+L'espace disque ?
 <!-- comment -->
-The loading time?
+Le temps de chargement ?
 
 <!-- paragraph -->
 
-Next, [Chapter 7](Ch07-limitations.html) explains the limitations of the current implementation of animint2.
+Suivant, [Chapitre 7](Ch07-limitations.html) explique les limites de l'implémentation actuelle de animint2.
 
 <!-- paragraph -->
 
