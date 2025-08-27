@@ -4,63 +4,63 @@ layout: default
 output: bookdown::html_chapter
 ---
 
-# Chapter 3, the showSelected keyword
+# Chapter 3, Le mot-clé `showSelected`
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch03-figures/")
 ```
 
-Ce chapitre explique `showSelected`, l'un des deux principaux mots-clés introduits par `animint2` pour la visualisation interactive de données.
-Après avoir lu ce chapitre, vous serez en mesure de
+Dans ce chapitre, nous vous présentons `showSelected`, l'un des deux principaux mots-clés introduits par `animint2` pour la visualisation interactive de données.
+Après avoir lu ce chapitre, vous saurez :
 
 - Utiliser le mot-clé `showSelected` dans vos esquisses pour spécifier des geoms pour lesquels seul un sous-ensemble de données doit être tracé à la fois.
 - Utiliser les menus de sélection pour modifier le sous-ensemble de données tracées.
-- Spécifier des transitions fluides entre les sous-ensembles de données à l'aide de l'option `duration` et `aes(key)`.
+- Préciser des transitions fluides entre les sous-ensembles de données avec `aes(key)` et l'option `duration`.
 - Créer des visualisations de données animées à l'aide de l'option `time`.
 
 ## Esquisses avec `showSelected` {#esquisses}
 
-Dans le chapitre 2, nous avons expliqué comment vous pouvez plannifier les codes nécessaires pour créer une visualisation, à l'aide d'une esquisse qui comprend les éléments principaux (geoms, axes, légendes, données).
+Dans le chapitre 2, nous avons expliqué comment planifier les codes nécessaires pour créer une visualisation avec une esquisse qui comprend les éléments principaux (geoms, axes, légendes, données).
 Dans cette section, nous allons expliquer comment le mot-clé `showSelected` peut être utilisé dans les esquisses.
-Le mot-clé `showSelected` spécifie une variable à utiliser pour sélectionner un sous-ensemble de données.
-Chaque geom d'une visualisation de données possède son propre ensemble de données, et sa propre définition des variables `showSelected`.
-Cela signifie que des geoms différents peuvent spécifier des ensembles de données et des mots-clés `showSelected` différents pour afficher des sous-ensembles de données différents.
+Le mot-clé `showSelected` est utilisé pour préciser les variables à utiliser pour sélectionner un sous-ensemble de données.
+Chaque geom possède son propre ensemble de données et sa propre définition de variables `showSelected`.
+Cela signifie que chaque geom peut afficher son propre sous-ensemble de données (qui est différent que les autres geoms).
 
-En fait, nous avons déjà utilisé le mot-clé `showSelected`, qui a été automatiquement créé par les légendes interactives que nous avons créées dans les deux chapitres précédents.
-Par exemple, considérons l'esquisse ci-dessous, de [la courbe de Keeling du chapitre 1](Ch01-motivation.html#large-data).
+En fait, nous avons déjà utilisé le mot-clé `showSelected` : il avait été généré automatiquement par les légendes interactives que nous avions créées dans les deux chapitres précédents.
+Considérons, par exemple, [la courbe de Keeling du chapitre 1 présentée ci-dessous](Ch01-motivation.html#large-data).
 
 ![Esquisse de la courbe de Keeling](Ch03-viz-co2.png)
 
-L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'il doit afficher le sous-ensemble de données pour les mois sélectionnés.
-En revanche, étant donné que `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (quels que soient les mois sélectionnés).
+L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les mois sélectionnés.
+En revanche, puisque `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
 
-Prenons un autre exemple : le dessin ci-dessous de la première visualisation de données de la banque mondiale, du chapitre 2.
+Prenons un autre exemple : l'esquisse ci-dessous de la première visualisation de données de la Banque mondiale, du chapitre 2.
 
-![Esquisse banque mondiale avec showSelected région](Ch03-viz-showSelectedColor.png)
+![Esquisse Banque mondiale avec showSelected région](Ch03-viz-showSelectedColor.png)
 
-L'esquisse ci-dessus spécifie `showSelected=région` pour le `geom_point`, ce qui signifie qu'il doit afficher le sous-ensemble de données pour les régions sélectionnées.
+L'esquisse ci-dessus spécifie `showSelected=région` pour le `geom_point`, ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les régions sélectionnées.
 
-Notez que le code que nous avons utilisé dans chapitre 2 ne spécifiait pas explicitement `showSelected=région`.
-Au lieu de cela, nous avons spécifié `aes(color=région)` et `animint2` a automatiquement rajouté un mot-clé `showSelected`.
+Notez que l'esquisse dans chapitre 2 ne précisait pas explicitement `showSelected=région`.
+Nous avions simplement indiqué `aes(color=région)`, et `animint2` a automatiquement ajouté une variable `showSelected` correspondante.
 En général, `animint2` rajoute un mot-clé `showSelected` pour chaque variable utilisée dans une légende qualitative.
 
 Cependant, le mot-clé `showSelected` n'est pas limité aux légendes qualitatives.
-Vous pouvez utiliser les mots-clés `showSelected` pour toutes les variables que vous souhaitez, en spécifiant explicitement les noms des variables dans l'argument `showSelected` du geom.
+Vous pouvez utiliser `showSelected` pour toutes les variables de votre choix, en précisant explicitement les variables dans l'argument `showSelected` du geom.
 
 Chaque variable utilisée avec `showSelected` est traitée par `animint2` comme une variable de sélection.
-Par exemple, la visualisation de la courbe de Keeling a une variable de sélection (`mois`), tout comme la visualisation de la Banque Mondiale (`région`).
-Pour chaque variable de sélection, `animint2` stocke les valeurs actuellement sélectionnées.
+Par exemple, la visualisation de la courbe de Keeling a une variable de sélection (`mois`), tout comme la visualisation de la Banque mondiale (`région`).
+Pour chaque variable de sélection, `animint2` stocke les valeurs sélectionnées.
 Lorsque la sélection change, `animint2` met à jour le sous-ensemble de données affiché.
 
-Chacune des visualisations esquissées ci-dessus ne comporte qu'une seule variable de sélection.
-Cependant, une visualisation de données peut comporter un nombre quelconque de variables de sélection.
-Dans la section suivante, nous allons étudier une visualisation des données de la Banque Mondiale, qui comporte des variables de sélection pour `région`  et `année`.
+Les deux visualisations présentées ci-dessus ne comportent qu'une seule variable de sélection.
+Par contre, une visualisation de données peut avoir autant de variables de sélection que vous le souhaitez.
+Dans la section suivante, nous étudierons une visualisation des données de la Banque mondiale, avec les variables de sélection `région`  et `année`.
 
 ## Sélection de sous-ensembles avec menus {#selection-avec-menus}
 
-Considérons l'esquisse suivant, avec une variable `showSelected` de plus, et avec un différent ensemble de données.
+Considérons l'esquisse suivante avec une variable `showSelected` de plus et un ensemble de données différent.
 
-![Esquisse banque mondiale avec showSelected région et année](Ch03-viz-scatter.png)
+![Esquisse Banque mondiale avec showSelected région et année](Ch03-viz-scatter.png)
 
 Notez qu'il y a deux variables `showSelected` : `région` et `année`.
 Notez également que les données sont spécifiées pour toutes les années (mais une seule année sera affichée à la fois, grâce au `showSelected=année`).
