@@ -426,3 +426,26 @@ Translate_FR_EN(file_name = "Ch06-other",
                 ajoutFR = FALSE
 )
 
+
+##### Chapitre 07 ######
+
+# Traduction Chapitre 06 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch07-limitations",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch07-"
+)
+
+Translate_FR_EN(file_name = "Ch07-limitations",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
