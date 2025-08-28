@@ -10,7 +10,7 @@ output: bookdown::html_chapter
 knitr::opts_chunk$set(fig.path="Ch02-figures/")
 ```
 
-Ce chapitre explique la grammaire des graphiques, qui est un modèle puissant pour décrire une grande classe de visualisations de données.
+Dans ce chapitre nous expliquons la grammaire des graphiques, un modèle puissant pour décrire une vaste gamme de visualisations de données.
 <!-- comment -->
 Après avoir lu ce chapitre, vous serez en mesure de
 <!-- comment -->
