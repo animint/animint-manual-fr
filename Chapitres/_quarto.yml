@@ -1,0 +1,102 @@
+project:
+  type: book
+
+book:
+  title: "Animint2 dans R pour la visualisation de données"
+  repo-url: https://github.com/animint/animint-manual-fr
+  repo-actions: [edit, issue, source]
+  repo-subdir: Chapitres
+  favicon: Figures/favicon.ico
+  cover-image: Figures/logo.png
+  downloads: [pdf]
+  sidebar:
+    style: "floating"
+    collapse-level: 1
+    border: true
+    search: true
+  page-footer:
+    left: |
+      All content licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) <br> &copy; Toby Dylan Hocking.
+    center: "[GitHub](https://github.com/animint/animint2) | [Gallery](https://animint.github.io/gallery)"
+    right: Built with [Quarto](https://quarto.org/).
+    background: "#f8f9fa"
+  chapters:
+    - index.qmd
+    - part: "Fonctions de base"
+      chapters:
+      - Ch02/Ch02.qmd
+      - Ch03/Ch03.qmd
+      - Ch04/Ch04.qmd
+    - part: "Exemples avancés"
+      chapters:
+      - Ch06/Ch06.qmd
+  appendices:
+      - Ch07/Ch07.qmd
+
+bibliography: refs.bib
+
+format:
+  html:
+    theme:
+      light: [default]
+    fontsize: "15px"
+    linestretch: 1.6
+    mainfont: "Roboto"
+    monofont: "Fira Mono"
+    smooth-scroll: true
+    toc-depth: 3
+    code-link: true
+    code-tools:
+      toggle: true
+    code-fold: false
+    highlight-style: printing
+    code-block-bg: true
+    code-overflow: wrap
+    reference-location: margin
+    mermaid:
+      theme: neutral
+
+  # see https://pandoc.org/MANUAL.html for all options
+  pdf:
+    documentclass: style/krantz
+    classoption: krantz2
+    lof: false
+    lot: false
+    toc: false
+    toc-depth: 2
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    urlcolor: "blue"
+    linkcolor: "black"
+    biblio-style: apalike
+    keep-tex: true
+    code-block-bg: "#f2f2f2"
+    code-block-border-left: "#f2f2f2"
+    code-overflow: wrap
+    mermaid:
+      theme: neutral
+    include-in-header:
+      text: |
+        \usepackage{makeidx}
+        \makeindex
+    include-after-body:
+      text: |
+        \printindex
+
+latex-auto-install: true
+
+knitr:
+  opts_chunk:
+    cache: true
+    cache.lazy: false
+    dpi: 600
+    fig.width: 5.5
+    fig.height: 3
+    out.width: "100%"
+    split: true
+    R.options:
+      knitr.graphics.auto_pdf: true
+      datatable.print.nrows: 10
+      datatable.print.class: false
+      datatable.print.keys: false
+      datatable.print.trunc.cols: TRUE
