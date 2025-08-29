@@ -194,6 +194,7 @@ gg.lines <- ggplot()+
 gg.vjust <- gg.lines+
   geom_text(aes(
     hjust, vjust, label="qwerty", hjust=hjust, vjust=vjust),
+    size=10,
     data=text.df)
 gg.vjust+ggtitle("R graphics devices respect aes(vjust)")
 ```
@@ -280,6 +281,7 @@ When rendering a ggplot using regular R graphics devices, using a line break or 
 gg.return <- ggplot()+
   geom_text(aes(
     hjust, vjust, label=sprintf("x=%.1f\ny=%.1f", hjust, vjust)),
+    size=3,
     data=text.df)
 gg.return
 ```
@@ -310,9 +312,11 @@ Until then, the workaround is to use one `geom_text` layer for each line of text
 gg.two.lines <- ggplot()+
   geom_text(aes(
     hjust, vjust, label=sprintf("x=%.1f", hjust)),
+    size=3,
     data=text.df)+
   geom_text(aes(
     hjust, vjust-0.05, label=sprintf("y=%.1f", vjust)),
+    size=3,
     data=text.df)
 gg.two.lines
 animint(gg.two.lines)
@@ -412,7 +416,8 @@ One way to overcome this limitation is by defining `shiny` inputs that are used 
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-shiny::runApp(system.file("examples", "shiny-WorldBank", package="animint"))
+shiny::runApp(system.file(
+  "examples", "shiny-WorldBank", package="animint2"))
 ```
 
 <!-- paragraph -->

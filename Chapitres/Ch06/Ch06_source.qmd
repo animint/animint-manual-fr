@@ -425,7 +425,8 @@ tsvSizes <- function(segment.chunk.vars){
   setnames(kb.dt, c("kb", "dir"))
   tsv.vec <- Sys.glob(paste0(info$out.dir, "/*.tsv"))
   is.geom6 <- grepl("geom6", tsv.vec)
-  data.frame(kb=kb.dt$kb, geom6.tsv=sum(is.geom6), other.tsv=sum(!is.geom6))
+  data.frame(
+    kb=kb.dt$kb, geom6.tsv=sum(is.geom6), other.tsv=sum(!is.geom6))
 }
 chunk_vars_list <- list(
   neither=c(),
@@ -787,7 +788,9 @@ animint(
     geom_point(aes(
       Petal.Length, Sepal.Length),
       data=iris),
-  source="https://github.com/tdhock/animint-book/edit/master/Ch06-other.Rmd")
+  source=paste0(
+    "https://github.com/animint/animint-manual-fr",
+    "/blob/main/Chapitres/Ch06/Ch06_source.Rmd"))
 ```
 
 <!-- paragraph -->

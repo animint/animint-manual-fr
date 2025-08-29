@@ -87,9 +87,9 @@ Nous utilisons un ensemble de données de la Banque mondiale comme exemple, et n
 
 ```{r data}
 data(BanqueMondiale, package="animint2fr")
-BanqueMondiale$Region <- sub(" (all income levels)", "", BanqueMondiale$région, fixed=TRUE)
-head(BanqueMondiale)
-tail(BanqueMondiale)
+BanqueMondiale$Region <- sub(
+  " (all income levels)", "", BanqueMondiale$région, fixed=TRUE)
+subset(BanqueMondiale, pays=="Canada" & année==2010)
 dim(BanqueMondiale)
 ```
 
@@ -109,7 +109,7 @@ Les données `BanqueMondiale` possèdent déjà ces colonnes, il suffit donc de 
 
 ```{r head}
 BanqueMondiale1975 <- subset(BanqueMondiale, année==1975)
-head(BanqueMondiale1975)
+subset(BanqueMondiale1975, pays=="Canada")
 ```
 
 Le code ci-dessus imprime les données pour 1975, qui ont clairement les colonnes appropriées, et une ligne pour chaque pays
@@ -162,7 +162,8 @@ Les deux geoms partagent une définition commune des éléments `x` , `y` , et d
 Nous traduisons ci-dessous cette esquisse en code R.
 
 ```{r Ch02-two-layer-viz}
-BanqueMondialeAvant1975 <- subset(BanqueMondiale, 1970 <= année & année <= 1975)
+BanqueMondialeAvant1975 <- subset(
+  BanqueMondiale, 1970 <= année & année <= 1975)
 deux.couches <- scatter+
   geom_path(aes(
     x=espérance.de.vie, 
@@ -361,10 +362,12 @@ Le code ci-dessous crée ces deux ensembles de données pour trois années de l'
 show.point.list <- list()
 show.path.list <- list()
 for(show.année in c(1975, 1985, 1995)){
-  show.point.list[[paste(showannée)]] <- data.frame(
-    show.année, subset(BanqueMondiale, année==showannée))
+  show.point.list[[paste(show.année)]] <- data.frame(
+    show.année, subset(
+      BanqueMondiale, année==show.année))
   show.path.list[[paste(show.année)]] <- data.frame(
-    show.année, subset(BanqueMondiale, show.année - 5 <= année & année <= show.année))
+    show.année, subset(
+      BanqueMondiale, show.année - 5 <= année & année <= show.année))
 }
 show.point <- do.call(rbind, show.point.list)
 show.path <- do.call(rbind, show.path.list)
