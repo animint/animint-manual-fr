@@ -39,6 +39,7 @@ format:
   html:
     theme:
       light: [default]
+    page-layout: full
     fontsize: "15px"
     linestretch: 1.6
     smooth-scroll: true

@@ -1,14 +1,8 @@
 ---
-title: clickSelects
+title: Le mot-clé `clickSelects`
 layout: default
 output: bookdown::html_chapter
 ---
-
-<!-- paragraph -->
-
-# Chapter 4, clickSelects
-
-<!-- paragraph -->
 
 ```{r}
 #| echo: false
@@ -528,7 +522,7 @@ Exercise:  add  `time` ,  `duration` ,  `first` , and  `selector.types`  options
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Chapter summary and exercises {#Ch04-exercises}
 
 <!-- paragraph -->
 

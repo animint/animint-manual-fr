@@ -1,10 +1,8 @@
 ---
-title: Grammar of graphics
+title: La grammaire des graphiques
 layout: default
 output: bookdown::html_chapter
 ---
-
-# Chapter 2, data visualization using the grammar of graphics {#chapter-2}
 
 ```{r}
 #| echo: false
@@ -13,6 +11,7 @@ knitr::opts_chunk$set(fig.path="Ch02-figures/")
 
 Ce chapitre explique la grammaire des graphiques, qui est un modèle puissant pour décrire une grande classe de visualisations de données.
 Après avoir lu ce chapitre, vous serez en mesure de
+
 * Citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents pour la visualisation de données
 * Installer le package R `animint2 `
 * Traduire les esquisses de graphique en code ggplot dans R
@@ -405,7 +404,7 @@ Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les donn
 Au lieu de montrer toutes les données en même temps, nous pouvons créer une visualisation de données animée qui montre à l'observateur différents sous-ensembles de données au fil du temps.
 Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le nouveau mot-clé `showSelected`  peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch02-exercises}
 
 Ce chapitre a présenté les bases de la visualisation de données statiques avec `ggplot2`.
 Nous avons montré comment animint peut être utilisé pour afficher une liste de ggplots dans un navigateur web.

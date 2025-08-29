@@ -1,14 +1,8 @@
 ---
-title: Options
+title: Animint options
 layout: default
 output: bookdown::html_chapter
 ---
-
-<!-- paragraph -->
-
-# Chapter 6, Animint options
-
-<!-- paragraph -->
 
 ```{r}
 #| echo: false
@@ -861,7 +855,7 @@ For those who are interested to see an example of how the `selectize` option wor
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Chapter summary and exercises {#Ch06-exercises}
 
 <!-- paragraph -->
 

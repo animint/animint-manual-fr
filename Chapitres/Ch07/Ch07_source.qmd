@@ -1,14 +1,8 @@
 ---
-title: Limitations
+title: Limitations of animint2, and workarounds
 layout: default
 output: bookdown::html_chapter
 ---
-
-<!-- paragraph -->
-
-# Chapter 7, Limitations of animint2, and workarounds
-
-<!-- paragraph -->
 
 ```{r}
 #| echo: false
@@ -435,7 +429,7 @@ In that case, it would be better to use shiny.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Chapter summary and exercises {#Ch07-exercises}
 
 <!-- paragraph -->
 
