@@ -755,17 +755,17 @@ A title can and should be used with `animint2dir`, as in the code below.
 
 <!-- paragraph -->
 
-```{r Ch06-viz-title}
+```{r}
 viz.title <- viz.scale.size
 viz.title$title <- "Several size scales"
-animint2dir(viz.title, "Ch06-title")
+animint2dir(viz.title, "Ch06-viz-title")
 ```
 
 <!-- paragraph -->
 
 Note that `viz.scale.size` already has three ggplots, each with a `ggtitle`.
 <!-- comment -->
-Adding the global `title` option has the effect of defining a title for [the web page](Ch06-title/index.html) .
+Adding the global `title` option has the effect of defining a title for [the web page](Ch06-viz-title/index.html) .
 
 <!-- paragraph -->
 

@@ -28,3 +28,4 @@ for(to_dir in names(from_to_list)){
   from_dir <- from_to_list[[to_dir]]
   file.copy(from_dir, to_dir, recursive=TRUE)
 }
+servr::httd("Chapitres/_book/")

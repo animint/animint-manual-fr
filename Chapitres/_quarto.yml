@@ -24,14 +24,14 @@ book:
     - index.qmd
     - part: "Fonctions de base"
       chapters:
-      - Ch02/Ch02.qmd
-      - Ch03/Ch03.qmd
-      - Ch04/Ch04.qmd
+      - Ch02/Ch02-viz.qmd
+      - Ch03/Ch03-viz.qmd
+      - Ch04/Ch04-viz.qmd
     - part: "Exemples avancés"
       chapters:
-      - Ch06/Ch06.qmd
+      - Ch06/Ch06-viz.qmd
   appendices:
-      - Ch07/Ch07.qmd
+      - Ch07/Ch07-viz.qmd
 
 bibliography: refs.bib
 
@@ -41,8 +41,6 @@ format:
       light: [default]
     fontsize: "15px"
     linestretch: 1.6
-    mainfont: "Roboto"
-    monofont: "Fira Mono"
     smooth-scroll: true
     toc-depth: 3
     code-link: true

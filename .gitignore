@@ -4,6 +4,7 @@
 .RData
 .Ruserdata
 Ch*-viz*
+Ch*viz*
 Ch*-figures
 Ch*_cache
 Chapitres/*.tex
