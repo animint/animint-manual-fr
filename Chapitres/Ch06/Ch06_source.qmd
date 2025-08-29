@@ -10,7 +10,8 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch06-figures/")
 ```
 
@@ -305,7 +306,7 @@ We begin by creating the plot of error curves on the left.
 
 <!-- paragraph -->
 
-```{r Ch06-errorPlot}
+```{r Ch06-viz-errorPlot}
 data(breakpoints)
 only.error <- subset(breakpoints$error, type=="E")
 only.segments <- subset(only.error,bases.per.probe==bases.per.probe[1])
@@ -353,7 +354,7 @@ It will be used to select the data and model in the plot below.
 
 <!-- paragraph -->
 
-```{r Ch06-signalPlot}
+```{r Ch06-viz-signalPlot}
 signalPlot <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
@@ -406,7 +407,7 @@ Below we use the `du` command line program to determine the disk usage of the da
 
 <!-- paragraph -->
 
-```{r tsvSizes}
+```{r}
 tsvSizes <- function(segment.chunk.vars){
   viz <- list(
     error=errorPlot,
@@ -481,7 +482,7 @@ Those defaults may be customized by using the `alpha_off`, `fill_off`, and `colo
 
 <!-- paragraph -->
 
-```{r}
+```{r Ch06-viz-off}
 N <- 3
 set.seed(1)
 demo_df <- data.frame(i=1:N, num=rnorm(N,2))
@@ -545,7 +546,7 @@ To customize what is displayed for each geom, you can specify the `help` and `ti
 
 <!-- paragraph -->
 
-```{r Ch06-customTour}
+```{r Ch06-viz-customTour}
 animint(
   scatter=ggplot()+
     geom_point(aes(
@@ -683,7 +684,7 @@ Inside `theme`, you can use numbers directly to change the font size, or you can
 
 <!-- paragraph -->
 
-```{r Ch06-text-size}
+```{r Ch06-viz-text-size}
 scatter1975 <- ggplot()+
   geom_point(aes(
     x=life.expectancy, y=fertility.rate, color=region),
@@ -782,7 +783,7 @@ The `source` option should be a character string: a link to the R source code wh
 
 <!-- paragraph -->
 
-```{r Ch06-source-demo}
+```{r Ch06-viz-source-demo}
 animint(
   demo=ggplot()+
     geom_point(aes(
@@ -815,7 +816,7 @@ This mechanism can be used to help the users of your data visualization understa
 
 <!-- paragraph -->
 
-```{r Ch06-link-demo}
+```{r Ch06-viz-link-demo}
 animint(
   video="https://vimeo.com/1050117030",
   scatter=ggplot()+

@@ -10,7 +10,8 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch07-figures/")
 ```
 

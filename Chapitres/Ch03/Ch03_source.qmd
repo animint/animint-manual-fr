@@ -6,7 +6,8 @@ output: bookdown::html_chapter
 
 # Chapter 3, Le mot-clé `showSelected`
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch03-figures/")
 ```
 

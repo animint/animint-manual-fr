@@ -10,7 +10,8 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch04-figures/")
 ```
 
@@ -94,7 +95,7 @@ To start, consider the following R code which generates a  scatterplot of the Wo
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatter}
+```{r Ch04-viz-ggplot-scatter}
 library(animint2)
 data(WorldBank)
 scatter <- ggplot()+
@@ -423,7 +424,7 @@ First, we re-create the scatterplot from the previous section using the  [addCol
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatterFacet}
+```{r Ch04-viz-ggplot-scatterFacet}
 add.x.var <- function(df, x.var){
   data.frame(df, x.var=factor(x.var, c("life expectancy", "year")))
 }
@@ -459,7 +460,7 @@ Below, we add  geoms for a time series plot that is aligned on the fertility rat
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatterTS}
+```{r Ch04-viz-ggplot-scatterTS}
 scatterTS <- scatterFacet+
   geom_tallrect(aes(
     xmin=year-0.5, xmax=year+0.5),
