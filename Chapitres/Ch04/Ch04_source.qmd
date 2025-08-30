@@ -435,9 +435,7 @@ scatterFacet <- ggplot()+
     clickSelects="country",
     showSelected=c("year", "country", "region"),
     data=add.x.var(WorldBank, "life expectancy"))+
-  facet_grid(.
-<!-- comment -->
-~ x.var, scales="free")+
+  facet_grid(. ~ x.var, scales="free")+
   xlab("")+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))

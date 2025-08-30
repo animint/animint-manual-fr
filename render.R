@@ -19,6 +19,10 @@ for(qmd_i in seq_along(qmd_vec)){
   }
   sys::exec_wait("grep", c("-v", "'<!--'", qmd_in), std_out=qmd_out)
 }
+if(FALSE){
+  # On Ubuntu xelatex is required for quarto book pdf.
+  system("sudo apt install texlive-xetex")
+}
 quarto::quarto_render("Chapitres")
 animint_js_vec <- Sys.glob("Chapitres/*/*/animint.js")
 from_dir_vec <- dirname(animint_js_vec)

@@ -310,11 +310,9 @@ fp.fn.names <- rbind(
   data.table(error.type="false negatives", type=c("I", "FN")))
 error.dt <- data.table(breakpoints$error)
 error.type.dt <- error.dt[fp.fn.names, on=list(type)]
-<!-- comment -->
 fp.fn.dt <- error.type.dt[, list(
   error.value=sum(error)
 ), by=.(error.type, segments, bases.per.probe)]
-<!-- comment -->
 errorPlot <- ggplot()+
   ggtitle("select data and segments")+
   theme_bw()+

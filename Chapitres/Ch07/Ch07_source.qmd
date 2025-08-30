@@ -120,7 +120,6 @@ random.cumsums <- random.counts[, list(
   count=count,
   stack=stack),
   by=.(letter, facet)]
-<!-- comment -->
 ggidentity <- ggplot() +
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
