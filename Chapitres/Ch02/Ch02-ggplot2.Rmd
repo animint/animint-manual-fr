@@ -21,7 +21,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 <!-- comment -->
 * D'installer le package R `animint2`
 <!-- comment -->
-* Traduire les esquisses de graphique en code ggplot dans R
+* De traduire les esquisses de graphique en code ggplot dans R
 <!-- comment -->
 * Afficher des ggplots sur des pages web en utilisant `animint2`
 <!-- comment -->
