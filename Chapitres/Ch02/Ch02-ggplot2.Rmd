@@ -19,7 +19,7 @@ Après avoir lu ce chapitre, vous serez en mesure de
 
 * Citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents pour la visualisation de données
 <!-- comment -->
-* Installer le package R `animint2 `
+* D'installer le package R `animint2`
 <!-- comment -->
 * Traduire les esquisses de graphique en code ggplot dans R
 <!-- comment -->
