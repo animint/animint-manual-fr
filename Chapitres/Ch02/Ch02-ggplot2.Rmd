@@ -17,7 +17,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 
 <!-- comment -->
 
-* Citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents pour la visualisation de données
+* De citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents de visualisation de données
 <!-- comment -->
 * D'installer le package R `animint2`
 <!-- comment -->
