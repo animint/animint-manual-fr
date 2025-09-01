@@ -31,7 +31,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 
 <!-- comment -->
 
-## Historique et objectif de la grammaire des graphiques {#history}
+## Historique et objectifs de la grammaire des graphiques {#history}
 
 <!-- comment -->
 
