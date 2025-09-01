@@ -43,7 +43,7 @@ Si vous utilisez l'un de ces systèmes généraux,  vous devez assembler vous-m�
 <!-- comment -->
 L'avantage des systèmes généraux réside dans le peu de limites imposées aux types de graphiques qui peuvent être créés.
 <!-- comment -->
-L'inconvénient est que les systèmes généraux ne fournissent généralement pas de fonctions permettant d'automatiser les tâches courantes (axes, panneaux, légendes).
+Leur principal inconvénient est qu'ils  ne fournissent généralement pas de fonctions permettant d'automatiser les tâches courantes (axes, panneaux, légendes).
 
 <!-- comment -->
 
