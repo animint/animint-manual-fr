@@ -23,7 +23,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 <!-- comment -->
 * De traduire les esquisses de graphique en code ggplot dans R
 <!-- comment -->
-* Afficher des ggplots sur des pages web en utilisant `animint2`
+* D'afficher des ggplots sur des pages web en utilisant `animint2`
 <!-- comment -->
 * Créer des ggplots avec multiples couches
 <!-- comment -->
