@@ -35,7 +35,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 
 <!-- comment -->
 
-La plupart des systèmes informatiques d'analyse de données proposent des fonctions permettant de créer des graphiques afin de visualiser les tendances dans les données.
+La plupart des systèmes informatiques d'analyse de données offrent des fonctions de création de graphiques pour visualiser les tendances des données.
 <!-- comment -->
 Les systèmes les plus anciens proposent des fonctions très générales permettant de tracer les éléments de base d'un graphique, tels que des lignes et des points (par exemple, les packages `graphics` et `grid` dans R).
 <!-- comment -->
