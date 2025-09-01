@@ -39,7 +39,7 @@ La plupart des systèmes informatiques d'analyse de données offrent des fonctio
 <!-- comment -->
 Les systèmes les plus anciens proposent des fonctions très générales permettant de tracer les éléments de base d'un graphique, tels que des lignes et des points (par exemple, les packages `graphics` et `grid` dans R).
 <!-- comment -->
-Si vous utilisez l'un de ces systèmes généraux, c'est à vous d'assembler les composants pour former un graphique significatif et interprétable.
+Si vous utilisez l'un de ces systèmes généraux,  vous devez assembler vous-même les composants pour obtenir un graphique significatif et interprétable.
 <!-- comment -->
 L'avantage des systèmes généraux est qu'ils imposent peu de limites aux types de graphiques qui peuvent être créés.
 <!-- comment -->
