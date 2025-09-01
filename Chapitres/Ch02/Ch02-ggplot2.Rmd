@@ -55,7 +55,7 @@ Par exemple, `lattice` fournit la fonction `bwplot` pour créer des diagrammes e
 <!-- comment -->
 L'avantage de ces systèmes est qu'ils facilitent grandement la création de  graphiques complets avec légendes et  panneaux.
 <!-- comment -->
-L'inconvénient est que l'ensemble des types de graphiques sont prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
+Par contre, ils ont l'inconvénient d'offrir un ensemble de types de graphiques prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
 
 <!-- comment -->
 
