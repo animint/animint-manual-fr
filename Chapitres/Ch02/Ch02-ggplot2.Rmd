@@ -27,7 +27,7 @@ Après avoir lu ce chapitre, vous serez en mesure
 <!-- comment -->
 * De créer des ggplots multicouches
 <!-- comment -->
-* Créer des ggplots avec multiples panneaux
+* De créer des ggplots multipanneaux
 
 <!-- comment -->
 
