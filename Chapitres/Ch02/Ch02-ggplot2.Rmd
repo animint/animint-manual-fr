@@ -41,7 +41,7 @@ Les systèmes les plus anciens proposent des fonctions très générales permett
 <!-- comment -->
 Si vous utilisez l'un de ces systèmes généraux,  vous devez assembler vous-même les composants pour obtenir un graphique significatif et interprétable.
 <!-- comment -->
-L'avantage des systèmes généraux est qu'ils imposent peu de limites aux types de graphiques qui peuvent être créés.
+L'avantage des systèmes généraux réside dans le peu de limites imposées aux types de graphiques qui peuvent être créés.
 <!-- comment -->
 L'inconvénient est que les systèmes généraux ne fournissent généralement pas de fonctions permettant d'automatiser les tâches courantes (axes, panneaux, légendes).
 
