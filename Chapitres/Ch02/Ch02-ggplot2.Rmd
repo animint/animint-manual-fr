@@ -53,7 +53,7 @@ Ils disposent de plusieurs types de graphiques prédéfinis et fournissent une f
 <!-- comment -->
 Par exemple, `lattice` fournit la fonction `bwplot` pour créer des diagrammes en boîte et des boîtes à moustaches.
 <!-- comment -->
-L'avantage de ces systèmes est qu'ils facilitent grandement la création de certains graphiques en entiers, y compris une légende et des panneaux.
+L'avantage de ces systèmes est qu'ils facilitent grandement la création de  graphiques complets avec légendes et  panneaux.
 <!-- comment -->
 L'inconvénient est que l'ensemble des types de graphiques sont prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
 
