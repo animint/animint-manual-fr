@@ -49,7 +49,7 @@ Leur principal inconvénient est qu'ils  ne fournissent généralement pas de fo
 
 Pour remédier aux inconvénients de ces systèmes de tracé généraux, des packages de visualisation tels que `lattice` ont été développés ([Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html)).
 <!-- comment -->
-Ces packages disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chaque type de graphique.
+Ils disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chaque type de graphique.
 <!-- comment -->
 Par exemple, `lattice` fournit la fonction `bwplot` pour créer des diagrammes en boîte et des boîtes à moustaches.
 <!-- comment -->
