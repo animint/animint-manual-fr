@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.path="Ch06-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'animint introduit dans la grammaire graphique.
+Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'`animint2` introduit dans la grammaire des graphiques.
 <!-- comment -->
 Après avoir lu ce chapitre, vous comprendrez comment personnaliser vos graphiques animint via
 
