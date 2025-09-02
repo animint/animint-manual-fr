@@ -1,0 +1,144 @@
+project:
+  type: book
+  output-dir: docs
+license: CC BY-SA
+latex-auto-install: true
+
+lang: fr
+language:
+  toc-title-document: "Table des matières"
+  title-block-author-plural: "Auteurs"
+  repo-action-links-issue: "Signaler un problème ou<br>formuler une suggestion"
+crossref:
+  lof-title: "Liste des figures"
+  lot-title: "Listes des tableaux"
+  fig-prefix: figure
+  tbl-prefix: tableau
+  sec-prefix: section
+  eq-prefix: équation
+  fig-title: Figure
+  tbl-title: Tableau
+  eq-title: Équation
+book:
+  title: 'Méthodes de régression spatiale : un grand bol d’R'
+  search: true
+  author: 
+    - name: Philippe Apparicio
+      url: https://www.usherbrooke.ca/recherche/fr/specialistes/details/philippe.apparicio
+      affiliation: Département de géomatique appliquée<br>Université de Sherbrooke, Canada
+      affiliation-url: https://www.usherbrooke.ca/geomatique/
+    - name: Jérémy Gelb
+      url: https://scholar.google.com/citations?user=oFofDScAAAAJ&hl=fr
+      affiliation: Autorité régionale de transport métropolitain<br>Montréal, Canada
+      affiliation-url: https://www.artm.quebec/
+    - name: Jean Dubé
+      url: https://www.esad.ulaval.ca/personnel/professeurs/jean-dube
+      affiliation: ÉSAD<br>Université Laval, Canada
+      affiliation-url: https://www.esad.ulaval.ca/
+    - name: Joan Carles Martori
+      url: https://urecerca.uvic.cat/CawDOS/jsf/seleccionActividades/seleccionActividades.jsf?id=276da803df40ac2c&idioma=ca&tipo=activ&elmeucv=N
+      affiliation: Département d'économie et de gestion, <br>Université de Vic - UCC, Espagne
+      affiliation-url: https://mon.uvic.cat/
+  date: today
+  date-format: YYYY-MM-DD
+  reader-mode: false
+  page-footer:
+    left: |
+      Méthodes de régression spatiale : un grand bol d’R.
+    right: |
+      Ce livre a été réalisé avec <a href="https://quarto.org/">Quarto</a>.
+  cover-image: images/introduction/CouvertureP1.png
+  favicon: images/introduction/CouvertureP1.png
+  site-url: https://serieboldr.github.io/RegressionsSpatiales/index.html
+  repo-url: https://github.com/SerieBoldR/RegressionsSpatiales
+  repo-branch: main
+  repo-actions:
+  - issue
+  downloads: pdf
+  chapters:
+  - index.qmd
+  - 00-auteurs.qmd
+  - part: "Partie 1. Notions de base"
+  - 01-NotionsDeBase.qmd
+  - part: "Partie 2. Spécification de la structure de covariance spatiale"
+  - 02-GLS_CAR_GLMM.qmd
+  - part: Partie 3. Économétrie spatiale
+  - 03-EconometrieSpatiale.qmd
+  - 04-ProbitSpatial.qmd
+  - 05-EcoSpatialePanel.qmd
+  - part: "Partie 4. Variable latente spatiale : lissage et filtrage spatial"
+  - 06-GAM.qmd
+  - 07-SEM.qmd
+  - part: "Partie 5. Régressions spatiales et hétérogénéité spatiale"
+  - 08-GWRClassique.qmd
+  - 09-GWRExtensions.qmd
+  - 10-Heterogenite_GAM_GLMM.qmd
+  - part: "Partie 6. Conclusions"
+  - 11-Exercices.qmd
+  - 12-Conclusion.qmd
+  - references.qmd
+      
+bibliography: references.bib
+csl: StyleRefs.csl
+
+format:
+  html:
+    colorlinks: true
+    css: css/quizlib.min.css
+    theme:
+      light:
+      - cosmo
+      - css/r4ds.scss
+    code-link: true
+    fontsize: 11pt
+    mainfont: Helvetica Neue,Helvetica,Arial,sans-serif
+    monofont: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace
+  pdf:
+    filters:
+      - lua/callout_custom_pdf.lua
+    pdf-engine: pdflatex
+    documentclass: scrbook
+    papersize: letter
+    keep-tex: false
+    fig-dpi: 100
+    classoption:
+      # Remove odd-even page breaks (for printing PDF)
+      - open=any
+      - twoside=false # don't use even/odd pages, no blank pages
+      # pass french to book class (babel will see it automatically)
+      - french
+    output-file: "Méthodes_regressions_spatiales.pdf"
+    hyperrefoptions:
+      # - pdfstartview={XYZ null null 0.75}
+      - pdfpagemode=UseOutlines
+      - pdfdisplaydoctitle=true
+      - pdfpagelayout=SinglePage
+      - pdfstartpage=1
+    geometry:
+      - top=20mm
+      - left=15mm
+      - right=15mm
+      - heightrounded
+    fontfamily: libertinus
+    fontfamilyoptions:
+      - p
+    lof: true
+    lot: true
+    toc: true
+    toc-depth: 4
+    code-block-border-left: false
+    fontsize: 11pt
+    urlcolor: Green4
+    citecolor: violet
+    linkcolor: violet
+    colorlinks: true
+    include-in-header:
+      - tex-hacks/color-tables.tex
+      - tex-hacks/code-font.tex
+      - tex-hacks/fix-unicode-chars.tex
+      - tex-hacks/image-on-title-page.tex
+      - tex-hacks/callout.tex
+    header-includes:
+      - \usepackage{xparse}
+      - \renewcommand{\thepart}{} % Enlever numérotation des parties
+      - \setcounter{secnumdepth}{3} % Activer la numérotation des sections jusqu'au niveau des sous-sections
