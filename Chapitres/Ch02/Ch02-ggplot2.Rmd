@@ -81,7 +81,7 @@ Enfin, tous les systèmes évoqués précédemment sont destinés à la créatio
 <!-- comment -->
 Cependant, le sujet principal de ce manuel est `animint2`, un package R pour les graphiques interactifs.
 <!-- comment -->
-Contrairement aux graphiques statiques, les graphiques interactifs sont mieux visualisés sur un ordinateur équipé d'une souris et d'un clavier permettant d'interagir avec le graphique.
+Contrairement aux graphiques statiques, les graphiques interactifs sont conçus pour être visualisés sur un ordinateur équipé d'une souris et d'un clavier pour interagir avec le graphique.
 
 <!-- comment -->
 
@@ -93,17 +93,17 @@ Dans ce chapitre, nous présenterons les principales caractéristiques de `ggplo
 
 En 2013, nous avons créé le package `animint`, qui dépend du package `ggplot2`.
 <!-- comment -->
-Cependant, au cours de la période 2014-2017, le package `ggplot2` a introduit de nombreux changements qui étaient incompatibles avec la grammaire interactive du package `animint`.
+Cependant, de 2014 à 2017,  `ggplot2` a introduit de nombreux changements incompatibles avec la grammaire interactive du package `animint`,
 <!-- comment -->
-Par conséquent, en 2018, nous avons créé le package `animint2` qui copie/fork les parties pertinentes du package `ggplot2`.
+ce qui a conduit en 2018, à la création du package `animint2` qui copie/fork les parties pertinentes du package `ggplot2`.
 <!-- comment -->
-Maintenant, `animint2` peut être utilisé sans que `ggplot2` soit installé.
+Désormais, `animint2` peut être utilisé sans que `ggplot2` soit installé.
 <!-- comment -->
-En fait, il est conseillé d'utiliser `animint2` sans attacher (avec `library`) `ggplot2`.
+Il est en fait conseillé d'utiliser `animint2` sans attacher `ggplot2` via `library`.
 <!-- comment -->
-Cependant, il est possible d'utiliser `animint2` avec des packages qui importent/chargent `ggplot2`.
+On peut cependant utiliser `animint2` avec des packages qui importent/chargent `ggplot2`.
 <!-- comment -->
-Pour un exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (qui importe `ggplot2`).
+À titre d'exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (lequel importe `ggplot2`).
 
 <!-- comment -->
 
@@ -111,7 +111,7 @@ Pour un exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le packa
 
 <!-- comment -->
 
-Pour installer la version la plus récente de `animint2` à partir du CRAN,
+Pour installer la dernière version d' `animint2` à partir du dépôt CRAN,
 
 <!-- comment -->
 
@@ -121,7 +121,7 @@ if(!requireNamespace("animint2"))install.packages("animint2")
 
 <!-- comment -->
 
-Pour installer une version de développement encore plus récente de `animint2` depuis GitHub,
+Pour installer une version de développement encore plus récente d' `animint2` depuis GitHub,
 
 <!-- comment -->
 
@@ -134,7 +134,7 @@ if(!requireNamespace("animint2")){
 
 <!-- comment -->
 
-Une fois que vous avez installé `animint2`, vous pouvez charger et attacher toutes ses fonctions exportées via :
+Une fois  `animint2` installé, vous pouvez charger et attacher toutes ses fonctions exportées via :
 
 <!-- comment -->
 
@@ -150,7 +150,7 @@ library(animint2)
 
 Cette section explique comment traduire une esquisse de graphique en code R.
 <!-- comment -->
-Nous utilisons un ensemble de données de la Banque mondiale comme exemple, et nous commençons par charger et examiner un sous-ensemble de ces données.
+Nous utilisons comme exemple un ensemble de données de la Banque mondiale. Commençons par charger et examiner un sous-ensemble de ces données.
 
 <!-- comment -->
 
@@ -164,9 +164,9 @@ dim(BanqueMondiale)
 
 <!-- comment -->
 
-Le jeu de données `BanqueMondiale` comprend des mesures telles que le taux de fertilité et l'espérance de vie pour chaque pays sur la période 1960-2010.
+Le jeu de données `BanqueMondiale` rassemble des indicateurs tels que le taux de fécondité et l'espérance de vie de chaque pays entre 1960 et 2010.
 <!-- comment -->
-Le code ci-dessus imprime les premières et dernières lignes, ainsi que la dimension (lignes `r nrow(BanqueMondiale)` et colonnes `r ncol(BanqueMondiale)`) du tableau de données.
+Le code ci-dessus imprime les premières et les dernières lignes, ainsi que les dimensions (lignes `r nrow(BanqueMondiale)` et colonnes `r ncol(BanqueMondiale)`) du tableau de données.
 
 <!-- comment -->
 
