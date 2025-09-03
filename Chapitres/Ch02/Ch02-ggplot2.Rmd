@@ -309,7 +309,7 @@ Dans ce manuel, nous utiliserons souvent des noms de variables commençant par `
 
 <!-- comment -->
 
-Le graphique ci-dessus montre une visualisation de données avec 2 geoms/couches : 
+Le graphique ci-dessus est une visualisation de données avec deux couches : 
 
 <!-- comment -->
 
