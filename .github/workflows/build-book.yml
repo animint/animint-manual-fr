@@ -27,7 +27,7 @@ jobs:
         run: R --vanilla < render.R
 
       - name: Deploy netlify preview
-        uses: animint/animint-actions/quarto-netlify
+        uses: animint/animint-actions/quarto-netlify@main
         with:
           netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}
