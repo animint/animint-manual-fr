@@ -1,5 +1,5 @@
 options(repos="http://cloud.r-project.org")
-if(!requireNamespace("nc"))install.packages("nc")
+for(p in c("nc","quarto"))if(!requireNamespace(p))install.packages(p)
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
   qmd_in <- qmd_vec[[qmd_i]]
