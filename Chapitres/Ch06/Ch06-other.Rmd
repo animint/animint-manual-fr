@@ -6,7 +6,7 @@ output: bookdown::html_chapter
 
 
 
-Traduction de [English](https://github.com/tdhock/animint-book/)
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 [Ch06-other](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch06-other.Rmd)
 
 
