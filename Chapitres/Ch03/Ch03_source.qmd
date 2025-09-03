@@ -1,12 +1,11 @@
 ---
-title: showSelected
+title: Le mot-clé `showSelected`
 layout: default
 output: bookdown::html_chapter
 ---
 
-# Chapter 3, Le mot-clé `showSelected`
-
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch03-figures/")
 ```
 
@@ -196,7 +195,7 @@ On dit que la visualisation ci-dessus est animée, parce que la sélection pour 
 Exercice : réalisez une visualisation de données animée qui n'utilise PAS de transitions fluides. 
 Indice : créez une liste de ggplots qui intègrent l'option `time` mais pas l'option `duration`.
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch03-exercises}
 
 Dans ce chapitre, nous avons expliqué l'utilisation du mot-clé `showSelected`, des menus de sélection, des transitions et de l'animation.
 
