@@ -164,7 +164,7 @@ dim(BanqueMondiale)
 
 <!-- comment -->
 
-Le jeu de données `BanqueMondiale` rassemble des indicateurs tels que le taux de fécondité et l'espérance de vie de chaque pays entre 1960 et 2010.
+Le jeu de données `BanqueMondiale` rassemble des indicateurs tels que le taux de fertilité et l'espérance de vie de chaque pays entre 1960 et 2010.
 <!-- comment -->
 Le code ci-dessus imprime les premières et les dernières lignes, ainsi que les dimensions (lignes `r nrow(BanqueMondiale)` et colonnes `r ncol(BanqueMondiale)`) du tableau de données.
 
@@ -182,7 +182,7 @@ La figure ci-dessous esquisse les principaux éléments de cette visualisation d
 
 <!-- comment -->
 
-L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (`x`), le taux de fécondité sur l'axe vertical (`y`) et une légende pour la région.
+L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (`x`), le taux de fertilité sur l'axe vertical (`y`) et une légende pour la région.
 <!-- comment -->
 Ces éléments de l'esquisse peuvent être directement traduits en code R à l'aide de la méthode suivante.
 <!-- comment -->
@@ -313,7 +313,7 @@ Le graphique ci-dessus est une visualisation de données avec deux couches :
 
 <!-- comment -->
 
-* le `geom_point` montre l'espérance de vie, le taux de fécondité et la région de tous les pays en 1975.
+* le `geom_point` montre l'espérance de vie, le taux de fertilité et la région de tous les pays en 1975.
 <!-- comment -->
 * le `geom_path` montre les mêmes variables pour les cinq années précédentes.
 
@@ -321,7 +321,7 @@ Le graphique ci-dessus est une visualisation de données avec deux couches :
 
 L'ajout de `geom_path` montre comment les pays ont changé au fil du temps.
 <!-- comment -->
-Plus particulièrement que les données de la plupart des pays se sont déplacées vers la droite et vers le bas, ce qui signifie une espérance de vie plus élevée et un taux de fécondité plus faible.
+Plus particulièrement que les données de la plupart des pays se sont déplacées vers la droite et vers le bas, ce qui signifie une espérance de vie plus élevée et un taux de fertilité plus faible.
 <!-- comment -->
 Il y a cependant quelques exceptions.
 <!-- comment -->
@@ -731,7 +731,7 @@ Exercices :
 <!-- comment -->
 * Dans `vis.alignée` nous avons montré un ggplot avec un panneau de nuage de points à gauche et un panneau de séries temporelles à droite. Réalisez une autre version de la visualisation de données avec le panneau des séries temporelles à gauche et le panneau du nuage de points à droite.
 <!-- comment -->
-* Dans `vis.alignée` le nuage de points affiche le taux de fécondité et l'espérance de vie, mais la série chronologique n'affiche que le taux de fertilité. Réalisez une autre version de la visualisation de données qui montre les deux séries temporelles. Indice : utilisez les panneaux horizontaux et verticaux dans `facet_grid`.
+* Dans `vis.alignée` le nuage de points affiche le taux de fertilité et l'espérance de vie, mais la série chronologique n'affiche que le taux de fertilité. Réalisez une autre version de la visualisation de données qui montre les deux séries temporelles. Indice : utilisez les panneaux horizontaux et verticaux dans `facet_grid`.
 <!-- comment -->
 * Utilisez `aes(size=population)` dans le nuage de points pour indiquer la population de chaque pays. Indice : `scale_size_animint(pixel.range=c(5, 10))` signifie que des cercles d'un rayon de 5/10 pixels doivent être utilisés pour représenter la population minimale/maximale.
 <!-- comment -->
