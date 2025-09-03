@@ -450,7 +450,7 @@ add.x.var <- function(df, x.var){
       data=add.x.var(BanqueMondialeAvant1975, "espérance de vie"))+
     geom_line(aes(
       x=year, y=taux.de.fertilité, color=région, group=pays),
-      data=add.x.var(BanqueMondialeSome, "année"))+
+      data=add.x.var(BanqueMondiale, "année"))+
     xlab("")+
     facet_grid(. ~ x.var, scales="free")))
 ```
