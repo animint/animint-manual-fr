@@ -96,7 +96,7 @@ Il est en fait conseillé d'utiliser `library(animint2)` sans utiliser `library(
 <!-- comment -->
 On peut cependant utiliser `animint2` avec des packages qui importent `ggplot2` (sans l'attacher).
 <!-- comment -->
-À titre d'exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (lequel importe `ggplot2`).
+À titre d'exemple, voir le [Chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (lequel importe `ggplot2`).
 
 ## Installer et attacher animint2 {#installing}
 
@@ -400,7 +400,7 @@ Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 
 <!-- comment -->
 
-Un ggplot peut avoir des facettes (panneaux), qui sont des sous-graphiques, chacun qui présent un différent sous-ensemble de données.
+Un ggplot peut avoir des facettes (panneaux), qui sont des sous-graphiques, chacun d'eux présentant un sous-ensemble de données différent.
 <!-- comment -->
 L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques avec plusieurs facettes.
 <!-- comment -->
@@ -429,7 +429,7 @@ Notez que les deux panneaux tracent des geoms différents, chacun avec son propr
 <!-- comment -->
 Le `geom_point` et le `geom_path` dans le panneau de gauche ont `x=espérance.de.vie`, et le `geom_line` du panneau de droite a `x=année` .
 <!-- comment -->
-Notez également que nous avons écrit `facet=x.var`, alors nous devons donc ajouter une variable `x.var` à chacun des trois ensembles de données.
+Notez également que nous avons écrit `facet=x.var`, nous devons donc ajouter une variable `x.var` à chacun des trois ensembles de données.
 <!-- comment -->
 Nous traduisons cette esquisse en code R ci-dessous.
 
@@ -472,7 +472,7 @@ Notez également que `theme_bw()` fait les bordures de panneaux noires et des fo
 <!-- comment -->
 Cette élimination libère de l'espace pour les panneaux, ce qui permet de mettre l'accent sur les données.
 <!-- comment -->
-Nous appelons cette méthode [Les facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
+Nous appelons cette méthode [Les facettes économes en espace](Ch99-appendix.html#space-saving-facets), elle est généralement utile dans tout ggplot avec des facettes.
 
 Dans la visualisation ci-dessus, les étiquettes de texte se chevauchent un peu, ce qui peut être corrigé par l'une des méthodes suivantes (exercice pour le lecteur).
 
@@ -480,7 +480,7 @@ Dans la visualisation ci-dessus, les étiquettes de texte se chevauchent un peu,
 <!-- comment -->
 * en réduisant la taille du texte avec `theme()` et `element_text()`
 <!-- comment -->
-* en augmentant la largeur du graphique à l'aide de `theme_animint()` voir [Chapitre 6](Ch06-other.html#plot-height-width) pour plus d'informations.
+* en augmentant la largeur du graphique à l'aide de `theme_animint()` voir le [Chapitre 6](Ch06-other.html#plot-height-width) pour plus d'informations.
 
 <!-- comment -->
 
@@ -581,7 +581,7 @@ Exercices :
 
 * Quels sont les trois principaux avantages de `ggplot2` par rapport aux systèmes antérieurs tels que `grid` et `lattice` ?
 <!-- comment -->
-* Pourquoi on utiliserait plusieurs couches dans un même graphique ?
+* Pourquoi utiliserait-on plusieurs couches dans un même graphique ?
 <!-- comment -->
 * Quelles sont les deux raisons différentes de créer des graphiques à plusieurs facettes ? Laquelle est plus utile dans les visualisations interactives ?
 <!-- comment -->
