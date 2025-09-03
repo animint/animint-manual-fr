@@ -26,7 +26,7 @@ jobs:
       - name: Render book
         run: R --vanilla < render.R
 
-      - name: Deploy netlify preview
+      - name: netlify deploy
         uses: animint/animint-actions/quarto-netlify@main
         with:
           netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}

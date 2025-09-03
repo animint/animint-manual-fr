@@ -1,7 +1,7 @@
 # Manuel francophone pour animint2 : visualisation de données dans R
 
 Regarder la dernière version que nous travaillons sur
-<https://main--animint-manual-fr.netlify.app/> qui est la traduction du
+<https://animint-manual-fr.netlify.app/> qui est la traduction du
 [Animint2 Manual](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html). 
 
 Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAXffJrny6nSfeytFR0kO5NB-NQEspcE/edit?usp=sharing) et [français](https://docs.google.com/presentation/d/1WpRZs9qz9wm1yik_MLj8tIJyWuL5-IBPYKLhOHZ9X4Y/edit?usp=sharing) pour une présentation de 30 à 60 minutes sur animint2 !
