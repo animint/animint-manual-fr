@@ -91,7 +91,7 @@ Dans ce chapitre, nous présenterons les principales caractéristiques de `ggplo
 
 <!-- comment -->
 
-En 2013, nous avons créé le package `animint`, qui dépend du package `ggplot2`.
+En 2013, Toby Dylan Hocking et ses étudiants ont créé le package `animint`, qui dépend du package `ggplot2`.
 <!-- comment -->
 Cependant, de 2014 à 2017,  `ggplot2` a introduit de nombreux changements incompatibles avec la grammaire interactive du package `animint`,
 <!-- comment -->
@@ -182,13 +182,13 @@ La figure ci-dessous esquisse les principaux éléments de cette visualisation d
 
 <!-- comment -->
 
-L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (`x`), le taux de fertilité sur l'axe vertical (`y`) et une légende pour la région.
+L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (`x`), le taux de fécondité sur l'axe vertical (`y`) et une légende pour la région.
 <!-- comment -->
 Ces éléments de l'esquisse peuvent être directement traduits en code R à l'aide de la méthode suivante.
 <!-- comment -->
-Tout d'abord, nous devons construire un tableau de données comportant une ligne pour chaque pays en 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
+Tout d'abord, nous devons construire un tableau de données comportant une ligne par pays pour l'année 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 <!-- comment -->
-Les données `BanqueMondiale` possèdent déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
+Le jeu de données `BanqueMondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
 
 <!-- comment -->
 
@@ -199,9 +199,9 @@ head(BanqueMondiale1975)
 
 <!-- comment -->
 
-Le code ci-dessus imprime les données pour 1975, qui ont clairement les colonnes appropriées, et une ligne pour chaque pays
+Le code ci-dessus imprime les données pour 1975, avec les colonnes appropriées et une ligne pour chaque pays
 <!-- comment -->
-L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec une fonction correspondante de `aes` ou un mappage `aes` des variables de données aux propriétés visuelles :
+L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec `aes` qui fait correspondence entre variables et propriétés visuelles :
 
 <!-- comment -->
 
@@ -219,7 +219,7 @@ La fonction `aes` est appelée avec les noms des propriétés visuelles (`x`, `y
 <!-- comment -->
 Ce mappage est appliqué aux variables du tableau de données `BanqueMondiale1975`, afin de créer les propriétés de visualisation du `geom_point`.
 <!-- comment -->
-Le ggplot a été sauvegardé en tant qu'objet `scatter` qui, lorsqu'il est imprimé sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
+Le ggplot a été sauvegardé en tant qu'objet `scatter` qui, lorsqu'imprimé sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
 <!-- comment -->
 Notez que nous avons automatiquement une légende `région` en couleur.
 
@@ -241,27 +241,27 @@ animint(scatter)
 
 <!-- comment -->
 
-Si, lorsque vous exécutez le code ci-dessus, l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre section [FAQ wiki](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
+Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre section [FAQ wiki](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
 <!-- comment -->
-En arrière plan, la fonction `animint` crée une liste avec classes animint, puis R exécute la fonction `print.animint` via la fonction [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
+La fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce à au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
 <!-- comment -->
-Le package `animint2` implémente un compilateur qui prend la liste en entrée et qui produit une page web avec une visualisation de données. 
+Le package `animint2` implémente un compilateur qui prend la liste en entrée et produit une page web avec une visualisation de données. 
 <!-- comment -->
-Le compilateur est la fonction `animint2dir` qui compile la liste animint `scatter.viz` en un répertoire de fichiers de données et de code qui peuvent être affichés dans un navigateur web.
+Le compilateur est la fonction `animint2dir()` qui compile la liste animint `nuage.vis` en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
 <!-- comment -->
-Elle est activée automatiquement par la fonction `print.animint`.
+Le compilateur est invoké par la fonction `print.animint`.
 
 <!-- comment -->
 
-Lorsqu'il est visualisé dans un navigateur web, le graphiquee animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard.
+Lorsqu'il est visualisé dans un navigateur web, le graphique animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard,
 <!-- comment -->
-Une différence est que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
+à la différence que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
 
 <!-- comment -->
 
 **Exercice**: essayez de modifier la valeur de `aes` du ggplot, puis de créer une nouvelle visualisation.
 <!-- comment -->
-Les variables quantitatives comme `population` sont mieux représentées avec les axes (`x` ou `y`) ou la taille du cercle (`size`).
+Les variables quantitatives comme `population` sont mieux représentées par les axes (`x` ou `y`) ou par la taille du cercle (`size`).
 <!-- comment -->
 Les variables qualitatives comme `lending` sont mieux représentées en utilisant les propriétés visuelles `color` ou `fill`.
 
@@ -303,7 +303,7 @@ deux.couches <- scatter+
 
 <!-- comment -->
 
-Notez que nous sauvegardons la valeur de retour de la fonction `animint` dans l'objet `vis.deux.couches` (qui est également imprimé en raison des parenthèses).
+Notez que nous sauvegardons la valeur de retour de la fonction `animint()` dans l'objet `vis.deux.couches` (imprimé lui aussi en raison des parenthèses).
 <!-- comment -->
 Dans ce manuel, nous utiliserons souvent des noms de variables commençant par `vis` pour désigner les objets de classe `animint`, qui sont en fait des listes de ggplots et d'options.
 
@@ -313,15 +313,15 @@ Le graphique ci-dessus montre une visualisation de données avec 2 geoms/couches
 
 <!-- comment -->
 
-* le `geom_point` montre l'espérance de vie, le taux de fertilité et la région de tous les pays en 1975.
+* le `geom_point` montre l'espérance de vie, le taux de fécondité et la région de tous les pays en 1975.
 <!-- comment -->
-* le `geom_path` montre les mêmes variables pour les 5 années précédentes.
+* le `geom_path` montre les mêmes variables pour les cinq années précédentes.
 
 <!-- comment -->
 
 L'ajout de `geom_path` montre comment les pays ont changé au fil du temps.
 <!-- comment -->
-En particulier, il montre que la plupart des pays se sont déplacés vers la droite et vers le bas, ce qui signifie une espérance de vie plus élevée et un taux de fertilité plus faible.
+Plus particulièrement que les données de la plupart des pays se sont déplacées vers la droite et vers le bas, ce qui signifie une espérance de vie plus élevée et un taux de fécondité plus faible.
 <!-- comment -->
 Il y a cependant quelques exceptions.
 <!-- comment -->
