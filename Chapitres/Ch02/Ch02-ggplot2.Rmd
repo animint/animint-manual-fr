@@ -587,13 +587,13 @@ Dans la visualisation ci-dessus, les étiquettes de texte se chevauchent un peu,
 
 <!-- comment -->
 
-### Mêmes geoms dans chaque panneau (réalisation de sous-ensembles de données) {#compare-data-subsets}
+### Facettes pour comparaison des sous-ensembles de données {#compare-data-subsets}
 
 <!-- comment -->
 
 La deuxième raison d'utiliser des graphes avec plusieurs panneaux dans une visualisation de données est de comparer des sous-ensembles d'observations.
 <!-- comment -->
-Cela facilite la comparaison entre les sous-ensembles de données et peut être utilisé dans au moins deux situations différentes :
+Cette approche facilite la comparaison entre les sous-ensembles de données et peut être utilisée dans au moins deux situations différentes :
 
 <!-- comment -->
 
@@ -611,7 +611,7 @@ Prenons l'exemple de l'esquisse ci-dessous.
 
 <!-- comment -->
 
-Notez que les trois panneaux tracent les deux mêmes geoms (point et path).
+Notez que les trois panneaux tracent les deux mêmes geoms, `geom_point` et `geom_path`.
 <!-- comment -->
 Puisque `facet=show.année` et qu'il y a trois panneaux, nous devrons créer des tableaux de données qui auront trois valeurs pour la variable `show.année`.
 <!-- comment -->
@@ -636,7 +636,7 @@ show.path <- do.call(rbind, show.path.list)
 
 <!-- comment -->
 
-Nous avons utilisé une boucle for sur trois valeurs de `show.année` la variable que nous utiliserons plus tard dans `facet_grid`.
+Nous avons utilisé une boucle for sur trois valeurs de `show.année`, la variable que nous utiliserons plus tard dans `facet_grid`.
 <!-- comment -->
 Pour chaque valeur de `show.année` nous stockons un sous-ensemble de données sous la forme d'un élément nommé d'une liste.
 <!-- comment -->
@@ -674,13 +674,13 @@ Cependant, elle ne montre qu'un sous-ensemble de données relativement restreint
 <!-- comment -->
 Vous pourriez être tenté d'utiliser un panneau pour afficher chaque année (pas seulement 1975, 1985 et 1995).
 <!-- comment -->
-Sachez toutefois que ce type de visualisation de données à plusieurs panneaux n'est utile que s'il n'y a que quelques sous-ensembles de données.
+Sachez toutefois que ce type de visualisation de données à plusieurs panneaux fonctionne bien seulement s'il y a un nombre limité de sous-ensembles de données.
 <!-- comment -->
-Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les données en même temps, et donc de faire des comparaisons significatives.
+Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les données simultanément, et donc de faire des comparaisons significatives.
 
 <!-- comment -->
 
-Au lieu de montrer toutes les données en même temps, nous pouvons créer une visualisation de données animée qui montre à l'observateur différents sous-ensembles de données au fil du temps.
+Au lieu de montrer toutes les données à la fois, nous pouvons créer une visualisation de données animée qui présente à l'observateur différents sous-ensembles de données au fil du temps.
 <!-- comment -->
 Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le nouveau mot-clé `showSelected` peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
 
@@ -694,7 +694,7 @@ Ce chapitre a présenté les bases de la visualisation de données statiques ave
 <!-- comment -->
 Nous avons montré comment animint peut être utilisé pour afficher une liste de ggplots dans un navigateur web.
 <!-- comment -->
-Nous avons expliqué deux caractéristiques de `ggplot2` qui le rendent idéal pour la visualisation de données : les graphiques avec multiples couches et multi-panneaux.
+Nous avons expliqué comment `ggplot2` facilite la création de graphiques avec plusieurs couches, et plusieurs facettes.
 
 <!-- comment -->
 
@@ -704,9 +704,9 @@ Exercices :
 
 * Quels sont les trois principaux avantages de `ggplot2` par rapport aux systèmes antérieurs tels que `grid` et `lattice` ?
 <!-- comment -->
-* Quel est l'objectif des graphiques multi-couches ?
+* Pourquoi on utiliserait plusieurs couches dans un même graphique ?
 <!-- comment -->
-* Quelles sont les deux raisons différentes de créer des graphiques à panneaux multiples ? Lequel de ces deux types est utile pour l'interactivité ?
+* Quelles sont les deux raisons différentes de créer des graphiques à plusieurs facettes ? Laquelle est plus utile dans les visualisations interactives ?
 <!-- comment -->
 * Définissons "A < B" comme signifiant qu'"un B peut contenir plusieurs A". Laquelle des affirmations suivantes est vraie ?
 <!-- comment -->
@@ -735,10 +735,10 @@ Exercices :
 <!-- comment -->
 * Utilisez `aes(size=population)` dans le nuage de points pour indiquer la population de chaque pays. Indice : `scale_size_animint(pixel.range=c(5, 10))` signifie que des cercles d'un rayon de 5/10 pixels doivent être utilisés pour représenter la population minimale/maximale.
 <!-- comment -->
-* Créez une visualisation de données à plusieurs panneaux qui montre chaque année de la `BanqueMondiale` dans un panneau séparé. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
+* Créez une visualisation de données à plusieurs panneaux qui montre chaque année des données `BanqueMondiale` dans un différent panneau. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
 <!-- comment -->
 * Créez un `vis.alignée` en utilisant un système de tracé qui n'est pas basé sur la grammaire des graphiques. Par exemple, vous pouvez utiliser les fonctions du package `graphics` dans R (`plot`,`points`,`lines` etc.), ou `matplotlib` en Python. Quels sont les avantages de `ggplot2` et `animint` ?
 
 <!-- comment -->
 
-Ensuite, [Chapitre 3](Ch03-showSelected.html) explique le mot-clé `showSelected` qui indique une variable à utiliser pour le sous-ensemble des données avant le tracé.
+Ensuite, dans [Chapitre 3](Ch03-showSelected.html) nous expliquons le mot-clé `showSelected`, qui nous permettra de préciser l'intéractivité ainsi que l'animation.
