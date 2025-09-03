@@ -1,3 +1,4 @@
+if(!requireNamespace("nc"))install.packages("nc")
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
   qmd_in <- qmd_vec[[qmd_i]]
@@ -32,4 +33,4 @@ for(to_dir in names(from_to_list)){
   from_dir <- from_to_list[[to_dir]]
   file.copy(from_dir, to_dir, recursive=TRUE)
 }
-servr::httd("Chapitres/_book/")
+if(interactive())servr::httd("Chapitres/_book/")

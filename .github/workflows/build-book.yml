@@ -1,3 +1,4 @@
+on:
   push:
     branches:
       - main
@@ -23,7 +24,7 @@ jobs:
         run: quarto tools install chromium
 
       - name: Render book
-        run: quarto render book/ --cache-refresh --execute-debug
+        run: R --vanilla < render.R
 
       - name: Deploy netlify preview
         if: ${{ github.event_name == 'pull_request' }}
