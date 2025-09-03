@@ -22,9 +22,9 @@ Après avoir lu ce chapitre, vous serez en mesure
 <!-- comment -->
 * D'afficher des ggplots sur des pages web en utilisant `animint2`
 <!-- comment -->
-* De créer des ggplots multicouches
+* De créer des ggplots multicouches (avec plusieurs geoms)
 <!-- comment -->
-* De créer des ggplots multipanneaux
+* De créer des ggplots avec facettes
 
 <!-- comment -->
 
