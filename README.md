@@ -8,9 +8,8 @@ Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAX
 [Résumé](https://github.com/animint/animint2/wiki/Presentations#30-60-minute-talk),
 [Vidéo de la présentation à Toulouse-Dataviz](https://www.youtube.com/watch?v=Em6AVJi37zo).
 
-## A propos de
-
-Animint2 est un package R permettant de générer et de partager des visualisations de données interactives animées, parfois appelées animints. C'est un fork de, et utilise une syntaxe similaire à, [ggplot2](https://ggplot2.tidyverse.org/). Animint2 est particulièrement utile pour les grands jeux de données, mais des jeux de données plus petits peuvent également être rendus interactifs. Il est également capable de générer des visualisations de données statiques.
+`animint2` est un package R permettant de générer et de partager des visualisations de données qui sont à la fois interactives et animées.
+C'est un fork de [ggplot2](https://ggplot2.tidyverse.org/), qui est pour la création des visualisations non-interactives.
 
 <a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."></a> 
 
