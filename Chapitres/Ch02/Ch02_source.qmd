@@ -13,7 +13,9 @@ knitr::opts_chunk$set(fig.path="Ch02-figures/")
 This chapter explains the grammar of graphics, which is a powerful model for describing a large class of data visualizations.
 <!-- comment -->
 After reading this chapter, you will be able to
+
 <!-- comment -->
+
 * State the advantages of the grammar of graphics relative to previous plotting systems
 <!-- comment -->
 * Install the animint2 R package 
@@ -172,6 +174,8 @@ Suppose that we are interested to see if there is any relationship between life 
 We could fix one year, then use those two data variables in a scatterplot.
 <!-- comment -->
 Consider the figure below which sketches the main components of that data visualization.
+
+<!-- comment -->
 
 <!-- comment -->
 
@@ -437,6 +441,8 @@ Since the list contains two ggplots, `animint2` renders the data viz as two link
 
 <!-- comment -->
 
+<!-- comment -->
+
 ```{r Ch02-viz-two-plots}
 viz.two.plots
 ```
@@ -519,6 +525,8 @@ The point and path in the left panel have `x=life.expectancy`, and the line in t
 Also note that we specified `facet=x.var`, so we need to add a variable called `x.var` to each of the three data sets.
 <!-- comment -->
 We translate this sketch to the R code below.
+
+<!-- comment -->
 
 <!-- comment -->
 
@@ -616,6 +624,8 @@ The code below creates these two data sets for three years of the WorldBank data
 
 <!-- comment -->
 
+<!-- comment -->
+
 ```{r}
 show.point.list <- list()
 show.path.list <- list()
@@ -642,6 +652,8 @@ This is an example of the [list of data tables idiom](Ch99-appendix.html#list-of
 <!-- comment -->
 
 Below, we facet on the `show.year` variable to create a data visualization with three panels.
+
+<!-- comment -->
 
 <!-- comment -->
 
