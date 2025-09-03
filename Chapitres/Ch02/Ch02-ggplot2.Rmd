@@ -486,28 +486,28 @@ Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 
 <!-- comment -->
 
-## Visualisation de données multi-panneaux (facettes) {#multi-panel}
+## Visualisation de données avec plusieurs panneaux (facettes) {#facet}
 
 <!-- comment -->
 
-Les panneaux ou facettes sont des sous-graphiques qui présentent des visualisations de données connectées.
+Un ggplot peut avoir des facettes (panneaux), qui sont des sous-graphiques, chacun qui présent un différent sous-ensemble de données.
 <!-- comment -->
-L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques multi-panneaux.
+L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques avec plusieurs facettes.
 <!-- comment -->
-La visualisation de données multi-panneaux est utile à deux fins différentes :
-
-<!-- comment -->
-
-* Vous souhaitez aligner les axes de plusieurs graphiques connexes contenant différents geoms. Cela facilite la comparaison entre plusieurs geoms différents et c'est une technique qui est également utile pour la visualisation interactive des données.
-* Vous souhaitez diviser les données d'un geom en plusieurs panneaux. Cette technique facilite la comparaison entre des sous-ensembles de données et est moins utile pour la visualisation interactive de données (l'interactivité peut souvent être utilisée à la place, pour obtenir le même effet de comparaison de sous-ensembles de données).
+Les facettes peuvent servir deux objectifs différentes :
 
 <!-- comment -->
 
-### Différents geom dans chaque panneau (axes alignés) {#aligned-axes}
+* L'alignement des axes de plusieurs graphiques connexes contenant différents geoms. Cette technique facilite la comparaison entre plusieurs geoms différents et est également utile pour la visualisation interactive des données.
+* La division des données d'un geom en plusieurs panneaux. Cette technique facilite la comparaison entre des sous-ensembles de données mais elle est moins utile pour la visualisation interactive de données (l'interactivité peut souvent la remplacer et produire le même effet comparatif pour les sous-ensembles de données).
 
 <!-- comment -->
 
-Nous commençons par expliquer comment les facettes sont utiles pour aligner les axes de graphiques apparentés.
+### Des geoms distincts dans chaque panneau (axes alignés) {#aligned-axes}
+
+<!-- comment -->
+
+Nous commençons par expliquer comment les facettes sont utiles pour aligner les axes quand on veut afficher des différents geoms dans chaque facette.
 <!-- comment -->
 Considérons l'esquisse ci-dessous qui contient un graphique avec deux panneaux.
 
@@ -517,11 +517,11 @@ Considérons l'esquisse ci-dessous qui contient un graphique avec deux panneaux.
 
 <!-- comment -->
 
-Notez que les deux panneaux tracent des geoms différents à l'aide d'une cartographie esthétique spécifique au panneau.
+Notez que les deux panneaux tracent des geoms différents, chacun avec son propre `aes()`.
 <!-- comment -->
-Le point et le path dans le panneau de gauche ont `x=espérance.de.vie` et la ligne du panneau de droite a `x=année` .
+Le `geom_point` et le `geom_path` dans le panneau de gauche ont `x=espérance.de.vie`, et le `geom_line` du panneau de droite a `x=année` .
 <!-- comment -->
-Notez également que nous avons spécifié `facet=x.var` nous devons donc ajouter une variable appelée `x.var` à chacun des trois ensembles de données.
+Notez également que nous avons écrit `facet=x.var`, alors nous devons donc ajouter une variable `x.var` à chacun des trois ensembles de données.
 <!-- comment -->
 Nous traduisons cette esquisse en code R ci-dessous.
 
@@ -555,23 +555,23 @@ La visualisation de données ci-dessus contient un seul ggplot avec deux panneau
 <!-- comment -->
 Le panneau de gauche montre les `geom_point` et `geom_path` et le panneau de droite montre les `geom_line`.
 <!-- comment -->
-Les panneaux ont un axe commun pour le taux de fertilité, ce qui permet de comparer directement les lignes du panneau des séries temporelles avec les points et les chemins du panneau du nuage de points.
+Les panneaux ont un axe commun pour le taux de fertilité, ce qui permet de comparer directement le `geom_line` du panneau des séries temporelles avec le `geom_point` et le `geom_path` du panneau du nuage de points.
 
 <!-- comment -->
 
 Il est à noter que nous avons utilisé la méthode `add.x.var` pour ajouter une variable `x.var` à chaque ensemble de données, puis nous avons utilisé cette variable dans la fonction `facet_grid(scales="free")`.
 <!-- comment -->
-Nous appelons cela l'[idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet) qui est généralement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
+Nous appelons cette méthode [Ajouter une variable ensuite des facettes](Ch99-appendix.html#addColumn-then-facet). Elle est généralement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
 <!-- comment -->
-En particulier, si nous voulions changer l'ordre des panneaux dans la visualisation, il nous suffirait de modifier l'ordre des niveaux de facteurs dans la définition de `add.x.var` .
+Ainsi, pour changer l'ordre des panneaux dans la visualisation, il nous suffirait de modifier l'ordre des niveaux de facteurs dans la définition de `add.x.var` .
 
 <!-- comment -->
 
-Notez également que `theme_bw` signifie qu'il faut utiliser des bordures de panneaux noires et des fonds de panneaux blancs, et que `panel.margin=0` signifie qu'il n'y a pas d'espace entre les panneaux.
+Notez également que `theme_bw()` fait les bordures de panneaux noires et des fonds de panneaux blancs, et que `theme(panel.margin=0)` pourrait être utilisé pour supprimer l'espacement entre les panneaux.
 <!-- comment -->
-En éliminant l'espace entre les panneaux, on utilise plus d'espace pour les panneaux, ce qui permet d'accentuer les données.
+Cette élimination libère de l'espace pour les panneaux, ce qui permet de mettre l'accent sur les données.
 <!-- comment -->
-C'est ce que nous appelons l'[idiome facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
+Nous appelons cette méthode [Les facettes économes en espace](Ch99-appendix.html#space-saving-facets) qui est généralement utile dans tout ggplot avec des facettes.
 
 <!-- comment -->
 
