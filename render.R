@@ -1,5 +1,6 @@
 options(repos="http://cloud.r-project.org")
 for(p in c("nc","quarto","animint2"))if(!requireNamespace(p))install.packages(p)
+remotes::install_github("animint/animint2")
 if(!requireNamespace("animint2fr"))remotes::install_github("animint/animint2fr")
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
