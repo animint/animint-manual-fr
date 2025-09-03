@@ -594,7 +594,7 @@ Cela facilite la comparaison entre les sous-ensembles de données et peut être 
 
 <!-- comment -->
 
-* L'ensemble de données d'un geom comporte trop d'observations pour être affiché de manière informative dans un seul panneau.
+* L'ensemble de données d'un geom comporte trop d'observations pour être visualisé efficacement dans un seul panneau.
 <!-- comment -->
 * Vous souhaitez comparer différents sous-ensembles de données tracées pour un geom
 
