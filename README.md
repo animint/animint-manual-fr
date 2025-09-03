@@ -1,10 +1,8 @@
-# Animint2
+# Manuel francophone pour animint2 : visualisation de données dans R
 
-<a href="https://github.com/tdhock/animint2/actions/workflows/tests.yaml">
-	<img src="https://github.com/tdhock/animint2/actions/workflows/tests.yaml/badge.svg" 
-	     alt="Un badge vérifiant que ce package a transmis tous ses arguments.">
-</a>
-<N'hésitez pas à transformer le bloc HTML au-dessus de ce commentaire en Markdown. C'est juste en HTML parce que je n'ai pas réussi à trouver comment combiner correctement une image et un lien dans le Markdown à la sauce Github. -->
+Regarder la dernière version que nous travaillons sur
+<https://main--animint-manual-fr.netlify.app/> qui est la traduction du
+[Animint2 Manual](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html). 
 
 Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAXffJrny6nSfeytFR0kO5NB-NQEspcE/edit?usp=sharing) et [français](https://docs.google.com/presentation/d/1WpRZs9qz9wm1yik_MLj8tIJyWuL5-IBPYKLhOHZ9X4Y/edit?usp=sharing) pour une présentation de 30 à 60 minutes sur animint2 !
 [Résumé](https://github.com/animint/animint2/wiki/Presentations#30-60-minute-talk),
@@ -20,42 +18,5 @@ Jouer avec [cette visualisation interactive de données de la Banque mondiale.](
 
 - [NAU rcdata animint gallery](https://rcdata.nau.edu/genomic-ml/animint-gallery/) contient plus de 50 exemples de viz big data datant de la création d'animint en 2014.
 - [GitHub Pages animint gallery](https://animint.github.io/gallery) est une collection plus récente d'animints qui ont été publiés à l'aide de l'outil `animint2pages` fonction.
-
-Pour apprendre à générer vos propres visualisations de données interactives, consultez le site officiel de la Commission européenne. [Manuel Animint2](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html). Si vous rencontrez des problèmes, veuillez consulter le [animint2 wiki](https://github.com/animint/animint2/wiki) ou [les signaler](https://github.com/animint/animint2/issues).
-
-## Installation
-
-```r
-# Install the official package from CRAN.
-# This is the option most people should choose:
-install.packages("animint2")
-
-# If you want to install the development version:
-devtools::install_github("animint/animint2")
-```
-
-## Utilisation
-
-Animint2 utilise la même implémentation de `ggplot2` avec quelques ajouts. Si vous êtes familier avec `ggplot2` l'utilisation de `animint2` sera facile à utiliser. Si ce n'est pas le cas, ne vous inquiétez pas. Pour commencer, consultez la brève [Guide de démarrage rapide d'Animint2](https://animint.github.io/animint2/articles/animint2.html) ou lisez les premiers chapitres du [Manuel Animint2](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html).
-
-`animint2` affiche et anime des visualisations de données. Il ne peut ni manipuler les jeux de données que vous lui fournissez, ni générer ses propres données.
-
-## Packages similaires
-
-`animint2` n'est pas le seul package R permettant de créer des visualisations de données animées ou interactives.
-
-[animation](https://cran.r-project.org/package=animation) et [gganimate](https://cloud.r-project.org/web/packages/gganimate/index.html) permettent d'animer les changements entre les variables au fil du temps. Les [lion](https://cran.r-project.org/package=loon) est un package spécialisé dans l'analyse exploratoire des données. [tracé](https://cran.r-project.org/package=plotly) est probablement le plus similaire à animint2 en termes de fonctionnalités.
-
-Pour des comparaisons entre les packages susmentionnés et `animint2` voir [la page wiki sur les différences](https://github.com/animint/animint2/wiki/Differences-with-other-packages).
-
-## Problèmes ?
-
-Les `animint2` est un travail en cours. Si vous repérez des bogues ou des comportements inattendus, merci de nous en informer par [signalant un problème sur GitHub](https://github.com/animint/animint2/issues). Nous vous remercions. Bonne journée à tous.
-
-## Autres galeries
-
-[Vatsal-Rajput](https://github.com/Vatsal-Rajput/Vatsal-Animint-Gallery/tree/gh-pages) a créé une petite galerie avec un fichier index.Rmd différent.
-
-[nhintruong](https://nhintruong.github.io/gallery_repo/) a créé une galerie avec plusieurs exemples adaptés du package d'animation, comme [la page wiki](https://github.com/tdhock/animint/wiki/Ports-of-animation-examples).
-
+- [GitHub Pages galerie en français](https://animint.github.io/gallery-fr) est une collection plus récente d'animints qui ont été publiés à l'aide de l'outil `animint2pages` fonction.
 
