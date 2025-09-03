@@ -61,7 +61,7 @@ Par contre, ils ont l'inconvénient d'offrir un ensemble de types de graphiques 
 
 Les nouveaux systèmes basés sur la grammaire des graphiques se situent entre ces deux extrêmes.
 <!-- comment -->
-Wilkinson a proposé la grammaire des graphiques afin de décrire et de créer une grande classe de graphiques ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
+Ensuite, Leland Wilkinson propose la grammaire des graphiques pour décrire et  créer un grand éventail de graphiques ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
 <!-- comment -->
 Wickham a implémenté plus tard plusieurs idées de la grammaire des graphiques dans le package R `ggplot2` ([Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20)).
 <!-- comment -->
