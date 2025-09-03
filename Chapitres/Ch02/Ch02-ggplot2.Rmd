@@ -331,7 +331,7 @@ Par ailleurs, certains pays ont vu leur taux de fertilité augmenter.
 
 <!-- comment -->
 
-**Exercice**: essayez de changer la légende `région` par une légende `revenu`.
+**Exercice**: essayez de remplacer la légende `région` par une légende `revenu`.
 <!-- comment -->
 Indice : vous devez utiliser la même spécification `aes(color=revenu)` pour tous les geoms.
 <!-- comment -->
@@ -339,7 +339,7 @@ Vous pouvez utiliser `scale_color_manual` avec une palette de couleurs séquenti
 
 <!-- comment -->
 
-Pouvons-nous ajouter les noms des pays à la visualisation de données ?
+Pouvons-nous ajouter le nom des pays à la visualisation de données ?
 <!-- comment -->
 Ci-dessous, nous ajoutons une autre couche avec une étiquette de texte pour le nom de chaque pays.
 
@@ -360,25 +360,28 @@ animint(trois.couches)
 
 Cette visualisation n'est pas très facile à lire, car il y a beaucoup d'étiquettes de texte qui se chevauchent.
 <!-- comment -->
-La légende interactive des régions aide un peu, en permettant à l'utilisateur de masquer les données des régions sélectionnées.
+La légende interactive des régions aide un peu, puisqu'elle permet à l'utilisateur de masquer les données des régions sélectionnées.
 <!-- comment -->
 Cependant, ce serait encore mieux si l'utilisateur pouvait afficher et masquer le texte pour les pays individuellement.
 <!-- comment -->
-Ce type d'interaction peut être réalisé en utilisant les mots-clés `showSelected` et `clickSelects` que nous expliquons dans les chapitres 3-4.
+Ce type d'interaction peut être réalisé en utilisant les mots-clés `showSelected` et `clickSelects` que nous expliquons dans les chapitres 3 et 4.
 
 <!-- comment -->
 
-Pour l'instant, nous passons à une des grandes forces d'`animint` : la visualisation de données à l'aide de plusieurs graphiques interconnectés.
+Pour l'instant, passons à une des grandes forces d'`animint` : la visualisation de données à l'aide de plusieurs graphiques interconnectés.
 
 <!-- comment -->
 
-## Visualisation multi-graphiques de données{#multi-plot}
+## Visualisations avec plusieurs ggplots interconnectés {#multi-plot}
 
 <!-- comment -->
 
-La visualisation de données multi-graphiques est utile lorsque vous souhaitez présenter des ensembles de données liés en utilisant plus d'un mappage `aes`.
+L'utilisation de plusieurs ggplots est utile lorsque vous souhaitez présenter des plusieurs jeux de données, ou bien plusieurs façons de regarder un seul jeu de données.
 <!-- comment -->
-Dans la visualisation de données interactive, un graphique est souvent utilisé pour afficher un sommaire et un autre pour afficher les détails.
+Dans ce genre de visualisation, il est courant d'utiliser au moins deux ggplots :
+
+ * un pour afficher un résumé ou survol de données, qu'on peut cliquer pour sélectionner un sous-ensemble d'intêret,
+ * un pour afficher plus de détails pour les données sélectionnées.
 <!-- comment -->
 Prenons l'exemple d'une visualisation comportant deux graphiques : une série temporelle avec les données de la Banque mondiale de 1960 à 2010 (sommaire) et un nuage de points avec les données de 1975 (détails).
 <!-- comment -->
@@ -392,7 +395,7 @@ Nous esquissons ci-dessous le graphique des séries temporelles.
 
 Notez que l'esquisse ci-dessus peut être directement traduite dans le code R ci-dessous. 
 <!-- comment -->
-Pour plus de simplicité, nous commençons par réduire l'échantillonnage des données à tous les cinq ans (certains explorateurs web comme Chromium ne sont pas en mesure d'afficher plus de 10 000 points de données en une seule fois),
+Pour simplifier, nous réduisons d'abord l'échantillonnage des données à tous les cinq ans (certains explorateurs web comme Chromium ne sont pas en mesure d'afficher plus de 10 000 points de données en une seule fois),
 
 <!-- comment -->
 
@@ -406,7 +409,7 @@ table(BanqueMondialeSome$année)
 
 Le tableau de contingence ci-dessus montre qu'il y a 214 lignes pour chacune des années de l'ensemble de données.
 <!-- comment -->
-Ensuite, nous copions la visualisation existante (`vis.deux.couches`), puis nous assignons un ggplot à un nouvel élément nommé `timeSeries`. 
+Nous copions ensuite la visualisation existante (`vis.deux.couches`), puis nous rajoutons un ggplot à un nouvel élément nommé `timeSeries`. 
 
  <!-- comment -->
 
@@ -433,7 +436,7 @@ summary(vis.deux.graphes)
 
 <!-- comment -->
 
-Cette liste de visualisation de données peut être imprimée ou affichée en tapant son nom.
+On peut imprimer ou afficher cette liste de visualisation de données en tapant son nom.
 <!-- comment -->
 Puisque la liste contient deux ggplots, `animint2` affiche la visualisation de données sous la forme de deux graphiques liés.
 
@@ -457,11 +460,11 @@ Le nuage de points utilise `aes(x=espérance.de.vie)` et montre les détails de 
 <!-- comment -->
 Vous devriez voir les données et les légendes des deux graphiques se mettre à jour simultanément.
 <!-- comment -->
-Etant donné que `aes(color=région)` a été spécifié dans les deux graphiques, `animint` crée une seule variable de sélection partagée appelée `région`.
+Étant donné que `aes(color=région)` a été spécifié pour les deux graphiques, `animint` crée une seule variable de sélection partagée appelée `région`.
 <!-- comment -->
-Cliquer sur l'une des légendes a pour effet de mettre à jour l'ensemble des régions sélectionnées, et `animint` met donc à jour les légendes et les données dans les deux graphiques en conséquence.
+Cliquer sur l'une des légendes a pour effet de mettre à jour l'ensemble des régions sélectionnées,  `animint` met donc à jour les légendes et les données dans les deux graphiques en conséquence.
 <!-- comment -->
-Il s'agit du mécanisme principal utilisé par `animint` pour créer des visualisations de données interactives avec des graphiques liés, et il sera discuté plus en détail dans les deux prochains chapitres.
+Il s'agit du mécanisme principal utilisé par `animint` pour créer des visualisations de données interactives avec des graphiques liés, nous en discuterons plus en détail dans les deux prochains chapitres.
 
 <!-- comment -->
 
@@ -477,7 +480,7 @@ Cependant, comme il s'agit de deux graphiques distincts, les plages de leurs axe
 <!-- comment -->
 Cela signifie que même lorsque les deux graphiques sont affichés côte à côte, les deux axes y ne sont pas exactement alignés.
 <!-- comment -->
-C'est un problème car il serait plus facile de décoder la visualisation des données si chaque unité d'espace vertical était utilisée pour montrer la même quantité de taux de fertilité.
+C'est problématique, la visualisation des données serait plus facile à décoder si chaque unité d'espace vertical représentait la même quantité de taux de fertilité.
 <!-- comment -->
 Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 
