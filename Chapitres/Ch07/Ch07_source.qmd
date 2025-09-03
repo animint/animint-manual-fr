@@ -1,14 +1,12 @@
 ---
-title: Limites
+title: Limitations
 layout: default
 output: bookdown::html_chapter
 ---
 
 
-
-Traduction de [English](https://github.com/tdhock/animint-book/)
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 [Ch07-limitations](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch07-limitations.Rmd)
-
 
 <!-- paragraph -->
 
@@ -16,7 +14,8 @@ Traduction de [English](https://github.com/tdhock/animint-book/)
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch07-figures/")
 ```
 
@@ -131,7 +130,6 @@ random.cumsums <- random.counts[, list(
   count=count,
   stack=stack),
   by=.(letter, facet)]
-<!-- comment -->
 ggidentity <- ggplot() +
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
@@ -200,6 +198,7 @@ gg.lines <- ggplot()+
 gg.vjust <- gg.lines+
   geom_text(aes(
     hjust, vjust, label="qwerty", hjust=hjust, vjust=vjust),
+    size=10,
     data=text.df)
 gg.vjust+ggtitle("R graphics devices respect aes(vjust)")
 ```
@@ -286,6 +285,7 @@ Lors de l'affichage d'un ggplot à l'aide des périphériques graphiques R habit
 gg.return <- ggplot()+
   geom_text(aes(
     hjust, vjust, label=sprintf("x=%.1f\ny=%.1f", hjust, vjust)),
+    size=3,
     data=text.df)
 gg.return
 ```
@@ -316,9 +316,11 @@ En attendant, la solution de contournement consiste à utiliser un seul `geom_te
 gg.two.lines <- ggplot()+
   geom_text(aes(
     hjust, vjust, label=sprintf("x=%.1f", hjust)),
+    size=3,
     data=text.df)+
   geom_text(aes(
     hjust, vjust-0.05, label=sprintf("y=%.1f", vjust)),
+    size=3,
     data=text.df)
 gg.two.lines
 animint(gg.two.lines)
@@ -418,7 +420,8 @@ Une façon de surmonter cette limitation est de définir `shiny` qui sont utilis
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-shiny::runApp(system.file("examples", "shiny-WorldBank", package="animint"))
+shiny::runApp(system.file(
+  "examples", "shiny-WorldBank", package="animint2"))
 ```
 
 <!-- paragraph -->
@@ -435,7 +438,7 @@ Dans ce cas, il serait préférable d'utiliser shiny.
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch07-exercises}
 
 <!-- paragraph -->
 

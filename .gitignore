@@ -1,4 +1,12 @@
+*~
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+Ch*-viz*
+Ch*viz*
+Ch*-figures
+Ch*_cache
+Chapitres/*.tex
+_book
+site_libs

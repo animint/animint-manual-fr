@@ -1,0 +1,53 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: build-book
+
+jobs:
+  build-book:
+    runs-on: ubuntu-latest
+    container:
+      image: mlrorg/mlr3-book
+      env:
+        R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install headless chromium
+        run: quarto tools install chromium
+
+      - name: Render book
+        run: R --vanilla < render.R
+
+      - name: Deploy netlify preview
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: mlr-org/actions/quarto-netlify-preview@v1.3.0
+        with:
+          netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: Chapitres/_book
+          netlify_url: animint-manual-fr.netlify.app
+
+      - name: Upload pdf book
+        uses: actions/upload-artifact@v4
+        with:
+          name: animint2frbookpdf
+          path: Chapitres/_book/Animint2-dans-R-pour-la-visualisation-de-données.pdf
+          retention-days: 1
+
+      - name: Deploy
+        if: ${{ github.event_name == 'push' }}
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: Chapitres/_book
+          single-commit: true

@@ -1,17 +1,17 @@
 ---
-title: Grammar of graphics
+title: La grammaire des graphiques
 layout: default
 output: bookdown::html_chapter
 ---
 
-# Chapter 2, data visualization using the grammar of graphics {#chapter-2}
-
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch02-figures/")
 ```
 
 Ce chapitre explique la grammaire des graphiques, qui est un modèle puissant pour décrire une grande classe de visualisations de données.
 Après avoir lu ce chapitre, vous serez en mesure de
+
 * Citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents pour la visualisation de données
 * Installer le package R `animint2 `
 * Traduire les esquisses de graphique en code ggplot dans R
@@ -61,13 +61,13 @@ Pour un exemple, voir [Chapitre 16](Ch16-change-point.html) qui utilise le packa
 
 Pour installer la version la plus récente de `animint2`  à partir du CRAN,
 
-```{r installCRAN}
+```{r}
 if(!requireNamespace("animint2"))install.packages("animint2")
 ```
 
 Pour installer une version de développement encore plus récente de `animint2`  depuis GitHub,
 
-```{r installGitHub}
+```{r}
 if(!requireNamespace("animint2")){
   if(!requireNamespace("remotes"))install.packages("remotes")
   remotes::install_github("tdhock/animint2")
@@ -76,7 +76,7 @@ if(!requireNamespace("animint2")){
 
 Une fois que vous avez installé `animint2`, vous pouvez charger et attacher toutes ses fonctions exportées via :
 
-```{r attach}
+```{r}
 library(animint2)
 ```
 
@@ -85,11 +85,11 @@ library(animint2)
 Cette section explique comment traduire une esquisse de graphique en code R.
 Nous utilisons un ensemble de données de la Banque mondiale comme exemple, et nous commençons par charger et examiner un sous-ensemble de ces données.
 
-```{r data}
+```{r}
 data(BanqueMondiale, package="animint2fr")
-BanqueMondiale$Region <- sub(" (all income levels)", "", BanqueMondiale$région, fixed=TRUE)
-head(BanqueMondiale)
-tail(BanqueMondiale)
+BanqueMondiale$Region <- sub(
+  " (all income levels)", "", BanqueMondiale$région, fixed=TRUE)
+subset(BanqueMondiale, pays=="Canada" & année==2010)
 dim(BanqueMondiale)
 ```
 
@@ -107,15 +107,15 @@ Ces éléments de l'esquisse peuvent être directement traduits en code R à l'a
 Tout d'abord, nous devons construire un tableau de données comportant une ligne pour chaque pays en 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 Les données `BanqueMondiale` possèdent déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
 
-```{r head}
+```{r}
 BanqueMondiale1975 <- subset(BanqueMondiale, année==1975)
-head(BanqueMondiale1975)
+subset(BanqueMondiale1975, pays=="Canada")
 ```
 
 Le code ci-dessus imprime les données pour 1975, qui ont clairement les colonnes appropriées, et une ligne pour chaque pays
 L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec une fonction correspondante de `aes`  ou un mappage `aes` des variables de données aux propriétés visuelles :
 
-```{r scatter}
+```{r Ch02-viz-scatter-ggplot}
 scatter <- ggplot()+
   geom_point(
     mapping=aes(x=espérance.de.vie, y=taux.de.fertilité, color=région),
@@ -133,7 +133,7 @@ Notez que nous avons automatiquement une légende `région` en couleur.
 Cette section explique comment `animint2`  peut être utilisé pour afficher des ggplots sur des pages web.
 Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint`
 
-```{r Ch02-scatter}
+```{r Ch02-viz-scatter-animint}
 animint(scatter)
 ```
 
@@ -161,8 +161,9 @@ Notez que l'esquisse ci-dessus comprend deux geoms différents (point et path).
 Les deux geoms partagent une définition commune des éléments `x` , `y` , et de l'`aes` `color`, mais avec des ensembles de données différents.
 Nous traduisons ci-dessous cette esquisse en code R.
 
-```{r Ch02-two-layer-viz}
-BanqueMondialeAvant1975 <- subset(BanqueMondiale, 1970 <= année & année <= 1975)
+```{r Ch02-viz-two-layer-viz}
+BanqueMondialeAvant1975 <- subset(
+  BanqueMondiale, 1970 <= année & année <= 1975)
 deux.couches <- scatter+
   geom_path(aes(
     x=espérance.de.vie, 
@@ -195,7 +196,7 @@ Vous pouvez utiliser `scale_color_manual` avec une palette de couleurs séquenti
 Pouvons-nous ajouter les noms des pays à la visualisation de données ?
 Ci-dessous, nous ajoutons une autre couche avec une étiquette de texte pour le nom de chaque pays.
 
-```{r Ch02-three-layer-viz}
+```{r Ch02-viz-three-layer-viz}
 trois.couches <- deux.couches+
   geom_text(aes(
     x=espérance.de.vie, 
@@ -235,7 +236,7 @@ Le tableau de contingence ci-dessus montre qu'il y a 214 lignes pour chacune des
 Ensuite, nous copions la liste vis existante ( `vis.deux.couches` ), puis nous assignons un ggplot à un nouvel élément nommé `timeSeries`. 
 
  
-```{r vizTwoPlots}
+```{r}
 vis.deux.graphes <- vis.deux.couches
 vis.deux.graphes$timeSeries <- ggplot()+
   geom_line(aes(
@@ -248,7 +249,7 @@ vis.deux.graphes$timeSeries <- ggplot()+
 
 Il en résulte une liste nommée de deux éléments (les deux éléments sont des ggplots de classe `gganimint`).
 
-```{r summaryTwo}
+```{r}
 summary(vis.deux.graphes)
 ```
 
@@ -361,10 +362,12 @@ Le code ci-dessous crée ces deux ensembles de données pour trois années de l'
 show.point.list <- list()
 show.path.list <- list()
 for(show.année in c(1975, 1985, 1995)){
-  show.point.list[[paste(showannée)]] <- data.frame(
-    show.année, subset(BanqueMondiale, année==showannée))
+  show.point.list[[paste(show.année)]] <- data.frame(
+    show.année, subset(
+      BanqueMondiale, année==show.année))
   show.path.list[[paste(show.année)]] <- data.frame(
-    show.année, subset(BanqueMondiale, show.année - 5 <= année & année <= show.année))
+    show.année, subset(
+      BanqueMondiale, show.année - 5 <= année & année <= show.année))
 }
 show.point <- do.call(rbind, show.point.list)
 show.path <- do.call(rbind, show.path.list)
@@ -401,7 +404,7 @@ Au-delà d'une dizaine de panneaux, il devient difficile de voir toutes les donn
 Au lieu de montrer toutes les données en même temps, nous pouvons créer une visualisation de données animée qui montre à l'observateur différents sous-ensembles de données au fil du temps.
 Dans le [chapitre suivant](Ch03-showSelected.html) nous montrerons comment le nouveau mot-clé `showSelected`  peut être utilisé pour réaliser une animation, et nous révélerons plus de détails sur cet ensemble de données.
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch02-exercises}
 
 Ce chapitre a présenté les bases de la visualisation de données statiques avec `ggplot2`.
 Nous avons montré comment animint peut être utilisé pour afficher une liste de ggplots dans un navigateur web.
