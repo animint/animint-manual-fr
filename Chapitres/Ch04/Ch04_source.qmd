@@ -4,12 +4,8 @@ layout: default
 output: bookdown::html_chapter
 ---
 
-Traduction de [English](https://github.com/tdhock/animint-book/)
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 [Ch04-clickSelects](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch04-clickSelects.Rmd)
-
-<!-- paragraph -->
-
-# Chapitre 4, clickSelects
 
 <!-- paragraph -->
 
