@@ -202,9 +202,9 @@ Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifié
 <!-- comment -->
 Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text`.
 <!-- comment -->
-Cela signifie que l'on ne dessine qu'une étiquette de texte pour les lignes de l'élément `WorldBank`  qui correspondent aux valeurs actuelles des deux variables de sélection.
+Cela signifie que l'on ne dessine qu'une étiquette de texte pour les lignes de la base de données `BanqueMondiale` qui correspondent aux valeurs actuelles des deux variables de sélection.
 <!-- comment -->
-Étant donné que chaque combinaison de `country`  et `year`  a une ligne dans ces données, une seule étiquette de texte sera affichée à la fois.
+Étant donné que chaque combinaison de `pays` et `année` a une ligne dans ces données, une seule étiquette de texte sera affichée à la fois.
 
 <!-- paragraph -->
 
@@ -216,19 +216,19 @@ Vous devriez voir le point disparaître, mais le texte rester affiché.
 
 Exercice : comment faire disparaître le texte en même temps que le point ?
 <!-- comment -->
-Indice : il faut ajouter un mot-clé au mot-clé `geom_text` .
+Indice : il faut ajouter un mot-clé au `geom_text`.
 
 <!-- paragraph -->
 
 Dans le dernier chapitre, nous avons introduit les termes "manipulation directe" et "manipulation indirecte" pour décrire les interactions avec les légendes et les menus.
 <!-- comment -->
-Dans l'image de données ci-dessus, nous pouvons modifier la valeur de l'élément `country`  en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
+Dans la visualisation de données ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
 <!-- comment -->
 Les deux techniques sont utiles, mais à des fins différentes :
 
 <!-- paragraph -->
 
-- La manipulation directe en cliquant sur les points de données est utile pour trouver les noms des pays ayant des valeurs extrêmes de taux de fécondité et d'espérance de vie.
+- La manipulation directe en cliquant sur les points de données est utile pour trouver les noms des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
 <!-- comment -->
 Par exemple, pour l'année 1960, en cliquant sur le point en bas à gauche du graphique, on découvre le nom du pays, le Gabon.
 <!-- comment -->
@@ -238,19 +238,19 @@ Par exemple, il serait difficile de trouver la France en cliquant sur tous les d
 
 <!-- paragraph -->
 
-Notez que lorsque l'image de données ci-dessus est affichée pour la première fois, le pays sélectionné est Andorre et l'année sélectionnée est 1960.
+Notez que lorsque la visualisation ci-dessus est affichée pour la première fois, le pays sélectionné est Andorra et l'année sélectionnée est 1960.
 <!-- comment -->
-Comme les données pour Andorre sont manquantes en 1960, il n'y a pas d'étiquette de texte dessinée au départ.
+Comme les données pour Andorre sont manquantes en 1960, aucune étiquette de texte n'est affichée au départ.
 <!-- comment -->
 Pour modifier la première sélection, vous pouvez spécifier l'option `first`  comme expliqué dans la section suivante.
 
 <!-- paragraph -->
 
-## La première option {#first-option}
+## L'option `first` {#first-option}
 
 <!-- paragraph -->
 
-Pour spécifier la sélection qui doit être affichée lorsque la data viz est affichée pour la première fois, utilisez l'attribut `first`  option.
+Pour spécifier la sélection qui doit être affichée lorsque la visualisation de données est exécutée pour la première fois, utilisez l'option `first`.
 <!-- comment -->
 Il doit s'agir d'une liste nommée avec des entrées pour chaque variable de sélection.
 <!-- comment -->
@@ -269,19 +269,19 @@ viz.first
 
 <!-- paragraph -->
 
-Notez que dans l'image ci-dessus, il n'y a qu'un seul pays sélectionné à la fois.
+Notez que dans la visualisation des données ci-dessus, il n'y a qu'un seul pays sélectionné à la fois.
 <!-- comment -->
-Dans la section suivante, nous expliquerons comment la fonction `selector.types`  peut être utilisée pour modifier l'option `country`  en une variable de sélection multiple.
+Dans la section suivante, nous expliquerons comment l'option `selector.types` peut être utilisée pour modifier la variable de sélection `pays` en une variable de sélection multiple.
 
 <!-- paragraph -->
 
-## L'option selector.types {#selector-types-option}
+## L'option `selector.types` {#selector-types-option}
 
 <!-- paragraph -->
 
-Dans cette section, notre objectif est de produire une version légèrement plus compliquée du nuage de points de la dernière section.
+Dans cette section, notre objectif est de produire une version légèrement plus compliquée du nuage de points de la section précédente.
 <!-- comment -->
-Le croquis ci-dessous ne présente qu'une seule différence par rapport à l'esquisse de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
+L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esquisse de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
 
 <!-- paragraph -->
 
