@@ -40,9 +40,9 @@ Après avoir lu ce chapitre, vous serez en mesure de
 <!-- comment -->
 - Utiliser le mot-clé `clickSelects` dans vos esquisses de graphiques.
 <!-- comment -->
-- Traduisez vos esquisses de graphiques avec `clickSelects` en code R.
+- Traduire vos esquisses de graphiques avec `clickSelects` en code R.
 <!-- comment -->
-- Utiliser le `selector.types`  pour spécifier plusieurs variables de sélection.
+- Utiliser l'option `selector.types` pour spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ Dans cette section, nous expliquerons comment le mot-clé `clickSelects` est imp
 <!-- comment -->
 Si vous avez lu les chapitres précédents, vous avez déjà utilisé implicitement `clickSelects`, qui a été créé automatiquement pour les légendes interactives dans les chapitres précédents.
 <!-- comment -->
-Par exemple, considérons l'esquisse de la viz de données de la Banque mondiale du dernier chapitre.
+Considérons l'esquisse de la visualisation de données de la Banque mondiale présentée au dernier chapitre.
 
 <!-- paragraph -->
 
@@ -62,23 +62,23 @@ Par exemple, considérons l'esquisse de la viz de données de la Banque mondiale
 
 <!-- paragraph -->
 
-Puisque la légende a `clickSelects=region` , cliquer sur une entrée de cette légende met à jour le `region`  la variable de sélection.
+Puisque la légende a `clickSelects=région` , cliquer sur une entrée de cette légende met à jour la variable de sélection `région`.
 <!-- comment -->
-Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=region`  pour la légende.
+Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=région`  pour la légende.
 <!-- comment -->
-En fait, lorsque nous avons spécifié `color=region`  pour le `geom_point` `animint2` fait deux choses automatiquement :
+En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point` `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
-- `showSelected=region`  est assigné au même `geom_point` .
+- `showSelected=région` est aussi affecté au même `geom_point` .
 <!-- comment -->
-- `clickSelects=region`  est attribuée à la légende des couleurs.
+- `clickSelects=région`  est attribué à la légende des couleurs.
 
 <!-- paragraph -->
 
-Notez que `clickSelects`  ne sont pas limités aux légendes interactives.
+Notez que les mots-clés `clickSelects`  ne sont pas limités aux légendes interactives.
 <!-- comment -->
-Chaque geom a son propre mot-clé `clickSelects`  qui détermine quelle variable de sélection est mise à jour après avoir cliqué sur ce geom.
+Chaque geom a sa propre définition de `clickSelects` qui détermine quelle variable de sélection est mise à jour après avoir cliqué sur ce geom.
 <!-- comment -->
 Dans la section suivante, nous donnerons plusieurs exemples de la manière dont les `clickSelects`  peut être utilisé en combinaison avec `showSelected`  pour créer des visualisations de données interactives.
 
