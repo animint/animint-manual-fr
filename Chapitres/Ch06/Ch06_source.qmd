@@ -461,7 +461,7 @@ Quelques gros fichiers occupent moins d'espace disque mais sont plus lents à t�
 
 <!-- paragraph -->
 
-### Spécifier le mode d'affichage de l'état de la sélection {#display-selection-state}
+### Préciser le mode d'affichage de l'état de la sélection {#display-selection-state}
 
 <!-- paragraph -->
 
