@@ -1,14 +1,11 @@
 ---
-title: clickSelects
+title: Le mot-clé `clickSelects`
 layout: default
 output: bookdown::html_chapter
 ---
 
-
-
 Traduction de [English](https://github.com/tdhock/animint-book/)
 [Ch04-clickSelects](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch04-clickSelects.Rmd)
-
 
 <!-- paragraph -->
 
@@ -16,7 +13,8 @@ Traduction de [English](https://github.com/tdhock/animint-book/)
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch04-figures/")
 ```
 
@@ -100,17 +98,17 @@ Pour commencer, considérons le code R suivant qui génère un nuage de points d
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatter}
+```{r Ch04-viz-ggplot-nuage}
 library(animint2)
-data(WorldBank)
-scatter <- ggplot()+
+data(BanqueMondiale, package="animint2fr")
+gg_nuage <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region,
-    key=country),
-    showSelected="year",
-    clickSelects="country",
-    data=WorldBank)
-scatter
+    x=espérance.de.vie, y=taux.de.fertilité, color=région,
+    key=pays),
+    showSelected="année",
+    clickSelects="pays",
+    data=BanqueMondiale)
+gg_nuage
 ```
 
 <!-- paragraph -->
@@ -121,10 +119,10 @@ En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique
 
 <!-- paragraph -->
 
-```{r Ch04-viz-scatter}
-(viz.scatter <- animint(
-  scatter=scatter,
-  duration=list(year=2000)))
+```{r Ch04-vis-nuage}
+(vis.nuage <- animint(
+  nuage=gg_nuage,
+  duration=list(année=2000)))
 ```
 
 <!-- paragraph -->
@@ -143,18 +141,18 @@ Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le cod
 
 <!-- paragraph -->
 
-```{r Ch04-viz-color-off}
+```{r Ch04-vis-color-off}
 animint(
   ggplot()+
     geom_point(aes(
-      x=life.expectancy, y=fertility.rate, fill=region,
-      key=country),
+      x=espérance.de.vie, y=taux.de.fertilité, fill=région,
+      key=pays),
       shape=21,
       color="black",
       color_off=NA,
-      showSelected="year",
-      clickSelects="country",
-      data=WorldBank))
+      showSelected="année",
+      clickSelects="pays",
+      data=BanqueMondiale))
 ```
 
 <!-- paragraph -->
@@ -165,15 +163,15 @@ Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `s
 
 <!-- paragraph -->
 
-```{r Ch04-viz-text}
-viz.text <- viz.scatter
-viz.text$scatter <- scatter+
+```{r Ch04-vis-text}
+vis.text <- vis.nuage
+vis.text$nuage <- gg_nuage+
   geom_text(aes(
-    x=life.expectancy, y=fertility.rate, label=country,
-    key=country),
-    showSelected=c("year", "country"),
-    data=WorldBank)
-viz.text
+    x=espérance.de.vie, y=taux.de.fertilité, label=pays,
+    key=pays),
+    showSelected=c("année", "pays"),
+    data=BanqueMondiale)
+vis.text
 ```
 
 <!-- paragraph -->
@@ -254,17 +252,17 @@ Pour spécifier la sélection qui doit être affichée lorsque la visualisation 
 <!-- comment -->
 Il doit s'agir d'une liste nommée avec des entrées pour chaque variable de sélection.
 <!-- comment -->
-Par exemple, le code ci-dessous spécifie 1970 comme première année, les États-Unis comme premier pays, et l'Amérique du Nord et l'Asie du Sud comme premières régions.
+Par exemple, le code ci-dessous spécifie 1970 comme première année, le Canada comme premier pays, et l'Amérique du Nord et l'Asie du Sud comme premières régions.
 
 <!-- paragraph -->
 
-```{r Ch04-viz-first}
-viz.first <- viz.text
-viz.first$first <- list(
-  year=1970,
-  country="United States",
-  region=c("North America", "South Asia"))
-viz.first
+```{r Ch04-vis-first}
+vis.first <- vis.text
+vis.first$first <- list(
+  année=1970,
+  pays="Canada",
+  région=c("Amérique du Nord", "Asie du Sud"))
+vis.first
 ```
 
 <!-- paragraph -->
@@ -285,7 +283,7 @@ L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-![Banque mondiale viz texte](Ch04-viz-text.png)
+![Banque mondiale vis texte](Ch04-vis-text.png)
 
 <!-- paragraph -->
 
@@ -309,17 +307,17 @@ Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécif
 
 <!-- paragraph -->
 
-```{r Ch04-viz-multiple}
-viz.multiple <- viz.first
-viz.multiple$selector.types <- list(country="multiple")
-viz.multiple
+```{r Ch04-vis-multiple}
+vis.multiple <- vis.first
+vis.multiple$selector.types <- list(pays="multiple")
+vis.multiple
 ```
 
 <!-- paragraph -->
 
 Lorsque la visualisation de données ci-dessus est affichée pour la première fois, elle montre des points de données de l'année 1970, pour chaque pays d'Amérique du Nord et d'Asie du Sud.
 <!-- comment -->
-Elle affiche également une étiquette de texte pour les États-Unis.
+Elle affiche également une étiquette de texte pour le Canada.
 
 <!-- paragraph -->
 
@@ -353,7 +351,7 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-![Série chronologique de la Banque mondiale](Ch04-ggplot-time-series-plot.png)
+![Série temporelle de la Banque mondiale](Ch04-ggplot-time-series-plot.png)
 
 <!-- paragraph -->
 
@@ -363,13 +361,13 @@ Il est "grand" car il occupe tout l'espace vertical du graphique, et ne nécessi
 <!-- comment -->
 Spécifier `clickSelects=année` signifie que nous voulons pouvoir tracer un `tallrect` pour chaque année, et cliquer sur un `tallrect` pour changer l'année sélectionnée.
 <!-- comment -->
-Nous devons donc créer un nouvel ensemble de données appelé `years` avec une ligne pour chaque année des données `BanqueMondiale`.
+Nous devons donc créer un nouvel ensemble de données appelé `années` avec une ligne pour chaque année des données `BanqueMondiale`.
 
 <!-- paragraph -->
 
 ```{r}
-years <- data.frame(year=unique(WorldBank$year))
-head(years)
+années <- data.frame(année=unique(BanqueMondiale$année))
+head(années)
 ```
 
 <!-- paragraph -->
@@ -378,21 +376,21 @@ Ensuite, nous ajoutons la série temporelle à la visualisation existante.
 
 <!-- paragraph -->
 
-```{r Ch04-viz-timeSeries}
-viz.timeSeries <- viz.multiple
-viz.timeSeries$timeSeries <- ggplot()+
+```{r Ch04-vis-timeSeries}
+vis.timeSeries <- vis.multiple
+vis.timeSeries$timeSeries <- ggplot()+
   geom_tallrect(aes(
-    xmin=year-0.5, xmax=year+0.5),
-    clickSelects="year",
+    xmin=année-0.5, xmax=année+0.5),
+    clickSelects="année",
     alpha=0.5,
-    data=years)+
+    data=années)+
   geom_line(aes(
-    x=year, y=fertility.rate, group=country, color=region),
-    clickSelects="country",
+    x=année, y=taux.de.fertilité, group=pays, color=région),
+    clickSelects="pays",
     size=3,
     alpha=0.6,
-    data=WorldBank)
-viz.timeSeries
+    data=BanqueMondiale)
+vis.timeSeries
 ```
 
 <!-- paragraph -->
@@ -407,9 +405,10 @@ Exercice d'animation : rendez la visualisation de données animée en spécifian
 
 <!-- paragraph -->
 
-Exercice avec multicouches : ajoutez un `geom_text` qui indique l'année en cours sur le nuage de points.
+Exercices avec multicouches : ajoutez un `geom_text` qui indique l'année en cours sur le nuage de points.
 <!-- comment -->
 Ajoutez un `geom_path` qui présente les données des 5 dernières années.
+Ajoutez un `geom_label_aligned` pour les pays sélectionnés dans la série temporelle.
 
 <!-- paragraph -->
 
@@ -421,7 +420,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-![Facette de dispersion de la Banque mondiale](Ch04-ggplot-scatterFacet.png)
+![Facette de dispersion de la Banque mondiale](Ch04-ggplot-nuageFacet.png)
 
 <!-- paragraph -->
 
@@ -429,20 +428,20 @@ Tout d'abord, nous recréons le nuage de points de la section précédente à l'
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatterFacet}
+```{r Ch04-vis-ggplot-nuageFacet}
 add.x.var <- function(df, x.var){
-  data.frame(df, x.var=factor(x.var, c("life expectancy", "year")))
+  data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
-scatterFacet <- ggplot()+
+nuageFacet <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region,
-    key=country),
-    showSelected="year",
-    clickSelects="country",
-    data=add.x.var(WorldBank, "life expectancy"))+
+    x=espérance.de.vie, y=taux.de.fertilité, color=région,
+    key=pays),
+    showSelected="année",
+    clickSelects="pays",
+    data=add.x.var(BanqueMondiale, "espérance de vie"))+
   geom_text(aes(
-    x=life.expectancy, y=fertility.rate, label=country,
-    key=country),
+    x=espérance.de.vie, y=taux.de.fertilité, label=pays,
+    key=pays),
     clickSelects="pays",
     showSelected=c("année", "pays", "région"),
     data=add.x.var(BanqueMondiale, "espérance de vie"))+
@@ -450,7 +449,7 @@ scatterFacet <- ggplot()+
   xlab("")+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))
-scatterFacet
+nuageFacet
 ```
 
 <!-- paragraph -->
@@ -463,20 +462,20 @@ Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui e
 
 <!-- paragraph -->
 
-```{r Ch04-ggplot-scatterTS}
-scatterTS <- scatterFacet+
+```{r Ch04-vis-ggplot-nuage-série-temporelle}
+nuage_série_temporelle <- nuageFacet+
   geom_tallrect(aes(
-    xmin=year-0.5, xmax=year+0.5),
-    clickSelects="year",
+    xmin=année-0.5, xmax=année+0.5),
+    clickSelects="année",
     alpha=0.5,
-    data=add.x.var(years, "year"))+
+    data=add.x.var(années, "année"))+
   geom_line(aes(
-    x=year, y=fertility.rate, group=country, color=region),
-    clickSelects="country",
+    x=année, y=taux.de.fertilité, group=pays, color=région),
+    clickSelects="pays",
     size=3,
     alpha=0.6,
-    data=add.x.var(WorldBank, "year"))
-scatterTS
+    data=add.x.var(BanqueMondiale, "année"))
+nuage_série_temporelle
 ```
 
 <!-- paragraph -->
@@ -513,8 +512,8 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 <!-- paragraph -->
 
-```{r Ch04-viz-facets}
-(viz.facets <- animint(scatterTS))
+```{r Ch04-vis-facets}
+(vis.facets <- animint(nuage_série_temporelle))
 ```
 
 <!-- paragraph -->
@@ -531,7 +530,7 @@ Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` �
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch04-exercises}
 
 <!-- paragraph -->
 
@@ -575,9 +574,9 @@ Pourquoi ?
 <!-- comment -->
 - Ajoutez un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
 <!-- comment -->
-- Utilisez l'option `time` pour créer une version animée de `viz.facets`.
+- Utilisez l'option `time` pour créer une version animée de `vis.facets`.
 <!-- comment -->
-- Utiliser `help`  et `title`  pour chaque geom dans `viz.facets` afin de créer une tour guidée plus informative sur ce qui est affiché dans chaque geom.
+- Utiliser `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer une tour guidée plus informative sur ce qui est affiché dans chaque geom.
 
 <!-- paragraph -->
 

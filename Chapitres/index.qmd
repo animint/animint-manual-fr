@@ -1,0 +1,8 @@
+C'est l'index !
+
+Pour créer ce site web à partir des [fichiers source](https://github.com/animint/animint-manual-fr/), nous avons utilisé les versions suivantes de R et ses packages :
+
+```{r}
+requireNamespace("animint2")
+sessionInfo()
+```

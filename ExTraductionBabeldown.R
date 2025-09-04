@@ -14,13 +14,19 @@ path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/ma
 
 # Installation du package babeldown
 
-install.packages('babeldown',
-                 repos = c('https://ropensci.r-universe.dev',
-                           'https://cloud.r-project.org'))
+# Vérifie et installe si nécessaire, puis charge
+for (pkg in c("babeldown", "aeolus")) {
+  if (!require(pkg, character.only = TRUE)) {
+    repos <- if (pkg == "babeldown") {
+      c("https://ropensci.r-universe.dev", "https://cloud.r-project.org")
+    } else {
+      c("https://packages.ropensci.org", "https://cloud.r-project.org")
+    }
+    install.packages(pkg, repos = repos)
+    library(pkg, character.only = TRUE)
+  }
+}
 
-install.packages("aeolus",
-                 repos = c("https://packages.ropensci.org",
-                           "https://cloud.r-project.org"))
 
 # Clé API de Jeremi pour DEEPL
 
@@ -85,6 +91,11 @@ adapted_unleash <- function(path,
       
       #combined_md <- paste0(combined_md, content, " ") TEST 12 aout 2025
       combined_md <- paste0(combined_md, content, "")
+      # Retire les espaces superflues  
+      content <- trimws(content)
+      combined_md <- sub("\\s+$", "", combined_md)
+      combined_md <- paste0(combined_md, " ", content) # OG
+      combined_md <- gsub("`\\s+([,.])", "`\\1", combined_md)
     }
     
     combined_md <- trimws(combined_md)
@@ -283,9 +294,8 @@ Translate_FR_EN <- function(file_name = "README",
   }
   
   # Conversion finale des paragraphes en commentaires
-  #cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
-  
-  
+  # cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
+
   # Injection du header personnalisé
   yaml_end <- which(cleaned_lines == "---")[2]
   header <- c(
@@ -340,15 +350,13 @@ Translate_FR_EN(file_name = "Ch03-showSelected",
 )
 
 
-
-
 quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
 
 
 ##### Chapitre 04 ####
 
 
-# Traduction Chapitre 03 par Jeremi Lepage
+# Traduction Chapitre 04 par Jeremi Lepage
 
 ConvertRmd_comments(file_name = "Ch04-clickSelects",
                     file_extension = ".Rmd",
@@ -370,4 +378,73 @@ Translate_FR_EN(file_name = "Ch04-clickSelects",
 )
 
 
+##### Chapitre 05 ######
 
+# Traduction Chapitre 05 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch05-sharing",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch05-"
+)
+
+Translate_FR_EN(file_name = "Ch05-sharing",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
+
+
+##### Chapitre 06 ######
+
+# Traduction Chapitre 06 par Jeremi Lepage
+
+ConvertRmd_comments(file_name = "Ch06-other",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch06-"
+)
+
+Translate_FR_EN(file_name = "Ch06-other",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
+
+
+##### Chapitre 07 ######
+
+# Traduction Chapitre 06 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch07-limitations",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch07-"
+)
+
+Translate_FR_EN(file_name = "Ch07-limitations",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
