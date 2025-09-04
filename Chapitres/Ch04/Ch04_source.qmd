@@ -119,7 +119,7 @@ En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique
 
 <!-- paragraph -->
 
-```{r Ch04-vis-nuage}
+```{r Ch04-viz-nuage}
 (vis.nuage <- animint(
   nuage=gg_nuage,
   duration=list(année=2000)))
@@ -141,7 +141,7 @@ Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le cod
 
 <!-- paragraph -->
 
-```{r Ch04-vis-color-off}
+```{r Ch04-viz-color-off}
 animint(
   ggplot()+
     geom_point(aes(
@@ -163,7 +163,7 @@ Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `s
 
 <!-- paragraph -->
 
-```{r Ch04-vis-text}
+```{r Ch04-viz-text}
 vis.text <- vis.nuage
 vis.text$nuage <- gg_nuage+
   geom_text(aes(
@@ -256,7 +256,7 @@ Par exemple, le code ci-dessous spécifie 1970 comme première année, le Canada
 
 <!-- paragraph -->
 
-```{r Ch04-vis-first}
+```{r Ch04-viz-first}
 vis.first <- vis.text
 vis.first$first <- list(
   année=1970,
@@ -283,7 +283,7 @@ L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-![Banque mondiale vis texte](Ch04-vis-text.png)
+![Banque mondiale vis texte](Ch04-viz-text.png)
 
 <!-- paragraph -->
 
@@ -307,7 +307,7 @@ Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécif
 
 <!-- paragraph -->
 
-```{r Ch04-vis-multiple}
+```{r Ch04-viz-multiple}
 vis.multiple <- vis.first
 vis.multiple$selector.types <- list(pays="multiple")
 vis.multiple
@@ -376,7 +376,7 @@ Ensuite, nous ajoutons la série temporelle à la visualisation existante.
 
 <!-- paragraph -->
 
-```{r Ch04-vis-timeSeries}
+```{r Ch04-viz-timeSeries}
 vis.timeSeries <- vis.multiple
 vis.timeSeries$timeSeries <- ggplot()+
   geom_tallrect(aes(
@@ -428,7 +428,7 @@ Tout d'abord, nous recréons le nuage de points de la section précédente à l'
 
 <!-- paragraph -->
 
-```{r Ch04-vis-ggplot-nuageFacet}
+```{r Ch04-viz-ggplot-nuageFacet}
 add.x.var <- function(df, x.var){
   data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
@@ -462,7 +462,7 @@ Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui e
 
 <!-- paragraph -->
 
-```{r Ch04-vis-ggplot-nuage-série-temporelle}
+```{r Ch04-viz-ggplot-nuage-série-temporelle}
 nuage_série_temporelle <- nuageFacet+
   geom_tallrect(aes(
     xmin=année-0.5, xmax=année+0.5),
@@ -512,7 +512,7 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 <!-- paragraph -->
 
-```{r Ch04-vis-facets}
+```{r Ch04-viz-facets}
 (vis.facets <- animint(nuage_série_temporelle))
 ```
 
