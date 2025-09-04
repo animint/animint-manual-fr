@@ -539,9 +539,9 @@ Dans ce chapitre, nous avons vu l'utilisation de `clickSelects` , l'un des deux 
 <!-- comment -->
 Nous avons utilisé l'ensemble des données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour spécifier différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
-Nous avons expliqué comment la fonction `first`  peut être utilisée pour spécifier les valeurs sélectionnées qui sont utilisées lorsque l'animint est affiché pour la première fois.
+Nous avons expliqué comment l'option `first` peut être utilisée pour spécifier les valeurs sélectionnées qui sont utilisées lorsque le `animint2` est affiché pour la première fois.
 <!-- comment -->
-Nous avons également expliqué comment l'option `selector.types`  peut être utilisée pour spécifier plusieurs variables de sélection.
+Nous avons également expliqué comment l'option `selector.types` peut être utilisée pour préciser le type de sélection (unique ou multiple).
 
 <!-- paragraph -->
 
@@ -549,13 +549,13 @@ Exercices :
 
 <!-- paragraph -->
 
-- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) les légendes interactives, (2) les menus de sélection et (3) le fait de cliquer sur les données à l'aide de la touche `clickSelects` .
+- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) les légendes interactives, (2) les menus de sélection et (3) le fait de cliquer sur les données à l'aide de `clickSelects`.
 <!-- comment -->
-Classez ces trois techniques de la plus directe à la moins directe.
+Classez ces trois techniques de manipulation, de la plus directe, à la moins directe.
 <!-- comment -->
 Quelle technique est préférable dans quelles circonstances ?
 <!-- comment -->
-- Quand `geom_point(clickSelects=something, alpha=0.75)`  est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
+- Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
 <!-- comment -->
 Lorsque `animint2` affiche le même geom, certains points seront sélectionnés et d'autres non.
 <!-- comment -->
@@ -569,19 +569,19 @@ La légende de la taille est-elle interactive ?
 <!-- comment -->
 Pourquoi ?
 <!-- comment -->
-- Ajouter un `geom_text`  au nuage de points de la Banque mondiale qui montre l'année sélectionnée.
+- Ajoutez un `geom_text`  au nuage de points de la Banque mondiale qui montre l'année sélectionnée.
 <!-- comment -->
-- Ajouter un `geom_text`  à la série chronologique de la Banque mondiale pour afficher les noms des pays sélectionnés.
+- Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher les noms des pays sélectionnés.
 <!-- comment -->
-- Ajouter un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
+- Ajoutez un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
 <!-- comment -->
-- Utiliser le diagramme de dispersion de la `time`  pour créer une version animée de `viz.facets` .
+- Utilisez l'option `time` pour créer une version animée de `viz.facets`.
 <!-- comment -->
-- Utiliser `help`  et `title`  pour chaque geom en `viz.facets` afin de créer une tournée plus informative sur ce qui est affiché dans chaque geom.
+- Utiliser `help`  et `title`  pour chaque geom dans `viz.facets` afin de créer une tour guidée plus informative sur ce qui est affiché dans chaque geom.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 5](Ch05-sharing.html)  explique différentes méthodes pour publier et partager des animints sur le web.
+Ensuite, [Chapitre 5](Ch05-sharing.html) explique différentes méthodes pour publier et partager des animints sur le web.
 
 <!-- paragraph -->
 
