@@ -295,17 +295,17 @@ La sélection unique signifie qu'une seule valeur peut être sélectionnée à l
 <!-- comment -->
 La sélection multiple signifie qu'un nombre quelconque de valeurs peut être sélectionné à la fois.
 <!-- comment -->
-Dans les graphiques de la dernière section, la sélection multiple a été utilisée pour le `region`  mais pas pour la variable `year`  et `country`  variables.
+Dans les graphiques de la section précédente, la sélection multiple a été utilisée pour la variable `région` mais pas pour les variables `année` et `pays`.
 <!-- comment -->
-Pourquoi ?
+Comment cela se fait-il ?
 
 <!-- paragraph -->
 
-Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection simple aux autres variables.
+Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection unique aux autres variables.
 <!-- comment -->
-Cependant, une sélection unique ou multiple peut être spécifiée en utilisant l'option `selector.types`  pour spécifier une sélection unique ou multiple.
+Cependant, une sélection unique (`"single"`) ou multiple (`"multiple"`) peut être précisée en utilisant l'option `selector.types`.
 <!-- comment -->
-Dans le code R ci-dessous, nous utilisons l'option `selector.types`  pour spécifier que l'option `country`  doit être traitée comme une variable de sélection multiple.
+Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécifier que la variable `pays` doit être traitée comme une variable de sélection multiple.
 
 <!-- paragraph -->
 
@@ -317,9 +317,9 @@ viz.multiple
 
 <!-- paragraph -->
 
-Lorsque la viz de données ci-dessus est affichée pour la première fois, elle montre des points de données de l'année 1970, pour chaque pays d'Amérique du Nord et d'Asie du Sud.
+Lorsque la visualisation de données ci-dessus est affichée pour la première fois, elle montre des points de données de l'année 1970, pour chaque pays d'Amérique du Nord et d'Asie du Sud.
 <!-- comment -->
-L'image affiche également une étiquette de texte pour les États-Unis.
+Elle affiche également une étiquette de texte pour les États-Unis.
 
 <!-- paragraph -->
 
@@ -327,21 +327,21 @@ Vous avez peut-être remarqué qu'il est facile d'ajouter des pays à la sélect
 <!-- comment -->
 Normalement, le fait de cliquer sur un point de données sélectionné supprime ce pays de la sélection actuelle.
 <!-- comment -->
-Cependant, dans cette image de données particulière, il n'est pas si facile de les supprimer, car les étiquettes de texte sont affichées au-dessus des points de données.
+Toutefois, dans cette visualisation de données en particulier, il n'est pas si facile de les supprimer, car les étiquettes de texte sont affichées au-dessus des points de données.
 
 <!-- paragraph -->
 
-Exercice :  Reformulez l'image de données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
+Exercice :  Recréer la visualisation des données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
 <!-- comment -->
-Indice : vous devez ajouter un `clickSelects`  au mot-clé `geom_text` .
+Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text`.
 
 <!-- paragraph -->
 
-Notez que dans l'image de données ci-dessus, la variable année ne peut être modifiée que par le menu de sélection.
+Notez que dans la visualisation de données ci-dessus, la variable année ne peut être modifiée que par le menu de sélection.
 
 <!-- paragraph -->
 
-Dans la section suivante, nous ajouterons une facette avec un geom directement cliquable pour changer la variable année.
+Dans la section suivante, nous ajouterons une facette avec un geom directement cliquable pour changer la variable `année`.
 
 <!-- paragraph -->
 
