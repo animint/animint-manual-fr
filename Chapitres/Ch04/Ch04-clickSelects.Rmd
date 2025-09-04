@@ -80,7 +80,7 @@ Notez que les mots-clés `clickSelects`  ne sont pas limités aux légendes inte
 <!-- comment -->
 Chaque geom a sa propre définition de `clickSelects` qui détermine quelle variable de sélection est mise à jour après avoir cliqué sur ce geom.
 <!-- comment -->
-Dans la section suivante, nous donnerons plusieurs exemples de la manière dont les `clickSelects`  peut être utilisé en combinaison avec `showSelected`  pour créer des visualisations de données interactives.
+Dans la section suivante, nous donnerons plusieurs exemples sur la manière dont `clickSelects` peut être utilisé en combinaison avec `showSelected` pour créer des visualisations de données interactives.
 
 <!-- paragraph -->
 
@@ -131,13 +131,13 @@ En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique
 
 Essayez de cliquer sur des points de données dans le nuage de points ci-dessus.
 <!-- comment -->
-Vous devriez voir la valeur de la variable `country`  changer après avoir cliqué sur un point de données.
+Vous devriez voir la valeur de la variable `pays`  changer après avoir cliqué sur un point de données.
 <!-- comment -->
 Vous devriez également voir que le point de données pour le pays sélectionné est plus foncé que les autres.
 <!-- comment -->
 Cela permet de mettre en évidence la sélection en cours, et est effectué automatiquement pour chaque geom avec `clickSelects` .
 <!-- comment -->
-Par défaut, le point sélectionné a un alpha=1 (totalement opaque, pas de transparence), et les autres points ont un alpha=0,5 (semi-transparent).
+Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
 Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection actuelle.
 
@@ -161,7 +161,7 @@ animint(
 
 La visualisation de données ci-dessus affiche le nom du pays actuellement sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous la forme d'une étiquette de texte sur le nuage de points.
 <!-- comment -->
-Nous pouvons le faire en ajoutant un `geom_text`  avec deux variables showSelected :
+Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `showSelected` :
 
 <!-- paragraph -->
 
@@ -180,7 +180,7 @@ viz.text
 
 Après avoir cliqué sur un point de données dans le nuage de points ci-dessus, vous devriez voir apparaître une étiquette de texte avec le nom du pays.
 <!-- comment -->
-En outre, essayez de changer l'année à l'aide du menu de sélection.
+Essayez également de changer l'année à l'aide du menu de sélection.
 <!-- comment -->
 Vous devriez voir l'étiquette de texte se déplacer dans une transition fluide en même temps que le point de données correspondant.
 
@@ -190,17 +190,17 @@ La visualisation de données ci-dessus contient plus d'un geom, chacun avec des 
 <!-- comment -->
 Essayez de cliquer sur le bouton "Démarrer la visite" au bas de la visualisation de données, qui affichera les fonctions interactives disponibles pour le premier geom de la visualisation de données.
 <!-- comment -->
-En cliquant sur Suivant, vous obtiendrez des informations sur le prochain geom, et en cliquant sur Terminé ou sur l'arrière-plan gris, vous mettrez fin à la visite.
+En cliquant sur "Next", vous obtiendrez des informations sur le prochain geom, et en cliquant sur "Done" ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
 <!-- comment -->
-La fonction "Démarrer la visite" peut être utile aux nouveaux utilisateurs de votre visualisation de données pour découvrir les fonctions interactives présentes dans chaque geom.
+La fonction "Start Tour" peut être utile aux nouveaux utilisateurs de votre visualisation de données pour découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
-Les informations affichées pendant la visite peuvent être personnalisées, en spécifiant le paramètre `help`  et `title`  de chaque geom.
+Les informations affichées pendant la visite peuvent être personnalisées, en spécifiant les paramètres `help` et `title` de chaque geom.
 
 <!-- paragraph -->
 
-Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifiée à l'aide de la fonction `showSelected`  d'un geom est traitée comme une variable interactive.
+Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifiée à l'aide du mot-clé `showSelected` d'un geom est traitée comme une variable interactive.
 <!-- comment -->
-Dans l'exemple ci-dessus, nous avons spécifié deux `showSelected`  pour l'élément `geom_text` .
+Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text`.
 <!-- comment -->
 Cela signifie que l'on ne dessine qu'une étiquette de texte pour les lignes de l'élément `WorldBank`  qui correspondent aux valeurs actuelles des deux variables de sélection.
 <!-- comment -->
