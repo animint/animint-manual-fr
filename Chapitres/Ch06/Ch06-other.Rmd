@@ -263,7 +263,7 @@ Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace di
 
 Dans `animint2`, il existe plusieurs options au niveau du geom : `chunk_vars` permet de spécifier comment diviser les ensembles de données pour leur stockage sur disque, et les paramètres `*_off` sont utilisés pour définir comment un geom `clickSelects` devrait être affiché lorsqu'il n'est pas sélectionné.
 <!-- comment -->
-En outre, `help` et `title` peuvent être spécifiées, afin d'ajouter des informations à la visite guidée.
+De plus, les paramètres `help` et `title` peuvent être spécifiés, afin d'ajouter des informations à la visite guidée.
 
 <!-- paragraph -->
 
@@ -283,7 +283,7 @@ Le paramètre `chunk_vars` doit être spécifiée comme argument d'une fonction 
 <!-- comment -->
 Lorsque `chunk_vars=character(0)`, soit un vecteur de caractères de longueur zéro, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
-Quand `chunk_vars` est défini à tous les `showSelected` un fichier TSV est créé pour chaque combinaison de valeurs de ces variables.
+A l'autre extreme, lorsque `chunk_vars` contient tous les variables de `showSelected`, un fichier TSV est créé pour chaque combinaison des valeurs de ces variables (beaucoup de fichiers TSV, chacun de petite taille).
 
 <!-- paragraph -->
 
