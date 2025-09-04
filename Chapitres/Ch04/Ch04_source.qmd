@@ -420,7 +420,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-![Facette de dispersion de la Banque mondiale](Ch04-ggplot-nuageFacet.png)
+![Facette de dispersion de la Banque mondiale](Ch04-ggplot-scatterFacet.png)
 
 <!-- paragraph -->
 
