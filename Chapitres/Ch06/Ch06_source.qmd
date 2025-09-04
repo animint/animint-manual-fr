@@ -99,7 +99,7 @@ Les infobulles sont de petites fenêtres d'information textuelle qui apparaissen
 <!-- comment -->
 Dans `animint()`, vous pouvez utiliser `aes(tooltip)` pour définir le message spécifique à chaque observation qui s'affichera.
 <!-- comment -->
-Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans le nuage de points des données de la Banque Mondiale ci-dessous.
+Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans le nuage de points des données de la Banque mondiale ci-dessous.
 
 <!-- paragraph -->
 
