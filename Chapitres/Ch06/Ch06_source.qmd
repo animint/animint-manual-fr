@@ -1,14 +1,11 @@
 ---
-title: Options
+title: Animint options
 layout: default
 output: bookdown::html_chapter
 ---
 
-
-
 Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 [Ch06-other](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch06-other.Rmd)
-
 
 <!-- paragraph -->
 
@@ -16,7 +13,8 @@ Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: false
 knitr::opts_chunk$set(fig.path="Ch06-figures/")
 ```
 
@@ -311,7 +309,7 @@ Nous commençons par créer le graphique des courbes d'erreur situé à gauche.
 
 <!-- paragraph -->
 
-```{r Ch06-errorPlot}
+```{r Ch06-viz-errorPlot}
 data(breakpoints)
 only.error <- subset(breakpoints$error, type=="E")
 only.segments <- subset(only.error,bases.per.probe==bases.per.probe[1])
@@ -321,11 +319,9 @@ fp.fn.names <- rbind(
   data.table(error.type="false negatives", type=c("I", "FN")))
 error.dt <- data.table(breakpoints$error)
 error.type.dt <- error.dt[fp.fn.names, on=list(type)]
-<!-- comment -->
 fp.fn.dt <- error.type.dt[, list(
   error.value=sum(error)
 ), by=.(error.type, segments, bases.per.probe)]
-<!-- comment -->
 errorPlot <- ggplot()+
   ggtitle("select data and segments")+
   theme_bw()+
@@ -359,7 +355,7 @@ Il sera utilisé pour sélectionner les données et le modèle dans le graphique
 
 <!-- paragraph -->
 
-```{r Ch06-signalPlot}
+```{r Ch06-viz-signalPlot}
 signalPlot <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
@@ -412,7 +408,7 @@ Ci-dessous, nous utilisons l'option `du` programme en ligne de commande pour dé
 
 <!-- paragraph -->
 
-```{r tsvSizes}
+```{r}
 tsvSizes <- function(segment.chunk.vars){
   viz <- list(
     error=errorPlot,
@@ -431,7 +427,8 @@ tsvSizes <- function(segment.chunk.vars){
   setnames(kb.dt, c("kb", "dir"))
   tsv.vec <- Sys.glob(paste0(info$out.dir, "/*.tsv"))
   is.geom6 <- grepl("geom6", tsv.vec)
-  data.frame(kb=kb.dt$kb, geom6.tsv=sum(is.geom6), other.tsv=sum(!is.geom6))
+  data.frame(
+    kb=kb.dt$kb, geom6.tsv=sum(is.geom6), other.tsv=sum(!is.geom6))
 }
 chunk_vars_list <- list(
   neither=c(),
@@ -486,7 +483,7 @@ Ces valeurs par défaut peuvent être personnalisées en utilisant l'option `alp
 
 <!-- paragraph -->
 
-```{r}
+```{r Ch06-viz-off}
 N <- 3
 set.seed(1)
 demo_df <- data.frame(i=1:N, num=rnorm(N,2))
@@ -550,7 +547,7 @@ Pour personnaliser ce qui est affiché pour chaque geom, vous pouvez spécifier 
 
 <!-- paragraph -->
 
-```{r Ch06-customTour}
+```{r Ch06-viz-customTour}
 animint(
   scatter=ggplot()+
     geom_point(aes(
@@ -688,7 +685,7 @@ A l'intérieur `theme` vous pouvez utiliser des nombres directement pour modifie
 
 <!-- paragraph -->
 
-```{r Ch06-text-size}
+```{r Ch06-viz-text-size}
 scatter1975 <- ggplot()+
   geom_point(aes(
     x=life.expectancy, y=fertility.rate, color=region),
@@ -759,17 +756,17 @@ Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-de
 
 <!-- paragraph -->
 
-```{r Ch06-viz-title}
+```{r}
 viz.title <- viz.scale.size
 viz.title$title <- "Several size scales"
-animint2dir(viz.title, "Ch06-title")
+animint2dir(viz.title, "Ch06-viz-title")
 ```
 
 <!-- paragraph -->
 
 Notez que `viz.scale.size` possède déjà trois ggplots, chacun avec un `ggtitle`.
 <!-- comment -->
-Ajout de l'élément global `title` a pour effet de définir un titre pour [la page web](Ch06-title/index.html) .
+Ajout de l'option global `title` a pour effet de définir un titre pour [la page web](Ch06-title/index.html) .
 
 <!-- paragraph -->
 
@@ -787,13 +784,15 @@ Le `source` doit être une chaîne de caractères : un lien vers le code source 
 
 <!-- paragraph -->
 
-```{r Ch06-source-demo}
+```{r Ch06-viz-source-demo}
 animint(
   demo=ggplot()+
     geom_point(aes(
       Petal.Length, Sepal.Length),
       data=iris),
-  source="https://github.com/tdhock/animint-book/edit/master/Ch06-other.Rmd")
+  source=paste0(
+    "https://github.com/animint/animint-manual-fr",
+    "/blob/main/Chapitres/Ch06/Ch06_source.Rmd"))
 ```
 
 <!-- paragraph -->
@@ -818,7 +817,7 @@ Ce mécanisme peut être utilisé pour aider les utilisateurs de votre visualisa
 
 <!-- paragraph -->
 
-```{r Ch06-link-demo}
+```{r Ch06-viz-link-demo}
 animint(
   video="https://vimeo.com/1050117030",
   scatter=ggplot()+
@@ -863,7 +862,7 @@ Pour ceux qui sont intéressés par un exemple de la façon dont la fonction `se
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#Ch06-exercises}
 
 <!-- paragraph -->
 
