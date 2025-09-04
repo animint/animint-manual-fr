@@ -357,13 +357,13 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-Notez que l'esquisse ci-dessus comprend `geom_tallrect` , un nouveau geom introduit dans `animint2`.
+Notez que l'esquisse ci-dessus comprend `geom_tallrect`, un nouveau geom introduit dans `animint2`.
 <!-- comment -->
-Il est "grand" car il occupe tout l'espace vertical du graphique, et ne nécessite donc que la définition de ses limites horizontales via la fonction `xmin`  et `xmax`  l'esthétique.
+Il est "grand" car il occupe tout l'espace vertical du graphique, et ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
-Spécifier `clickSelects=year`  signifie que nous voulons pouvoir dessiner un tallrect pour chaque année, et cliquer sur un tallrect pour changer l'année sélectionnée.
+Spécifier `clickSelects=année` signifie que nous voulons pouvoir tracer un `tallrect` pour chaque année, et cliquer sur un `tallrect` pour changer l'année sélectionnée.
 <!-- comment -->
-Nous devons donc créer un nouvel ensemble de données appelé `years`  avec une ligne pour chaque année unique de la `WorldBank`  données.
+Nous devons donc créer un nouvel ensemble de données appelé `years` avec une ligne pour chaque année des données `BanqueMondiale`.
 
 <!-- paragraph -->
 
@@ -374,7 +374,7 @@ head(years)
 
 <!-- paragraph -->
 
-Ensuite, nous ajoutons la série temporelle ggplot aux données existantes viz.
+Ensuite, nous ajoutons la série temporelle à la visualisation existante.
 
 <!-- paragraph -->
 
@@ -397,19 +397,19 @@ viz.timeSeries
 
 <!-- paragraph -->
 
-Essayez de cliquer sur l'arrière-plan de la série temporelle dans l'image de données ci-dessus.
+Essayez de cliquer sur l'arrière-plan de la série temporelle dans la visualisation de données ci-dessus.
 <!-- comment -->
-Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition fluide vers leur place à l'année nouvellement sélectionnée.
+Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition fluide vers leur position correspondant à l'année nouvellement sélectionnée.
 
 <!-- paragraph -->
 
-Exercice d'animation : rendez la viz de données animée en spécifiant l'option `time`  option, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time) .
+Exercice d'animation : rendez la visualisation de données animée en spécifiant l'option `time`, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time).
 
 <!-- paragraph -->
 
-Exercice à plusieurs niveaux : ajouter un `geom_text`  qui indique l'année en cours sur le nuage de points.
+Exercice avec multicouches : ajoutez un `geom_text` qui indique l'année en cours sur le nuage de points.
 <!-- comment -->
-Ajouter un `geom_path`  qui présente les données des 5 dernières années.
+Ajoutez un `geom_path` qui présente les données des 5 dernières années.
 
 <!-- paragraph -->
 
@@ -425,7 +425,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-Tout d'abord, nous recréons le nuage de points de la section précédente à l'aide de la fonction [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) qui est utile pour créer des ggplots avec des axes alignés.
+Tout d'abord, nous recréons le nuage de points de la section précédente à l'aide de la méthode [Ajouter une variable ensuite des facettes](Ch99-appendix.html#addColumn-then-facet) qui est utile pour créer des ggplots avec des axes alignés.
 
 <!-- paragraph -->
 
@@ -443,9 +443,9 @@ scatterFacet <- ggplot()+
   geom_text(aes(
     x=life.expectancy, y=fertility.rate, label=country,
     key=country),
-    clickSelects="country",
-    showSelected=c("year", "country", "region"),
-    data=add.x.var(WorldBank, "life expectancy"))+
+    clickSelects="pays",
+    showSelected=c("année", "pays", "région"),
+    data=add.x.var(BanqueMondiale, "espérance de vie"))+
   facet_grid(. ~ x.var, scales="free")+
   xlab("")+
   theme_bw()+
@@ -455,11 +455,11 @@ scatterFacet
 
 <!-- paragraph -->
 
-Notez que le ggplot ci-dessus utilise la même méthode que le `aes`  définitions que le nuage de points de la section précédente.
+Notez que le ggplot ci-dessus utilise les mêmes définitions `aes` que le nuage de points de la section précédente.
 <!-- comment -->
-La seule différence réside dans le fait que nous avons utilisé un `WorldBank`  avec un ensemble de données supplémentaires `x.var`  que nous utilisons avec `facet_grid` .
+La seule différence est que nous avons utilisé un jeu de données `BanqueMondiale` enrichi avec une variable `x.var` supplémentaire que nous utilisons avec `facet_grid`.
 <!-- comment -->
-Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui est tracé sur l'axe du taux de fécondité.
+Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui est aligné sur l'axe du taux de fertilité.
 
 <!-- paragraph -->
 
@@ -481,7 +481,7 @@ scatterTS
 
 <!-- paragraph -->
 
-Les deux geom définis ci-dessus occupent une nouvelle facette pour le `"year"`  de la valeur `x.var`  (définie par l'élément `add.x.var`  fonction).
+Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur d'`année` de la variable `x.var` (définie par la fonction `add.x.var`).
 <!-- comment -->
 Puisque ces deux geoms ont des définitions différentes de `clickSelects` un clic sur chaque geom mettra à jour le graphique d'une manière différente.
 <!-- comment -->
