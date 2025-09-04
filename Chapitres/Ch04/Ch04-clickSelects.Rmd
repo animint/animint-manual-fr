@@ -483,33 +483,33 @@ scatterTS
 
 Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur d'`année` de la variable `x.var` (définie par la fonction `add.x.var`).
 <!-- comment -->
-Puisque ces deux geoms ont des définitions différentes de `clickSelects` un clic sur chaque geom mettra à jour le graphique d'une manière différente.
+Puisque ces deux geoms ont des définitions différentes de `clickSelects`, un clic sur chaque geom mettra à jour le graphique d'une manière différente.
 <!-- comment -->
-Notez que pour le `geom_line`  nous spécifions `size=3` ce qui signifie une largeur de trait de 3 pixels.
+Notez que pour le `geom_line` nous spécifions `size=3` ce qui signifie une largeur de trait de 3 pixels.
 <!-- comment -->
-En général, il est bon d'augmenter la taille des geoms avec `clickSelects` afin qu'il soit plus facile de cliquer dessus.
+En général, il est judicieux d'augmenter la taille des geoms avec `clickSelects`, afin de les rendre plus faciles à cliquer.
 
 <!-- paragraph -->
 
-Notez également que nous avons spécifié `alpha=0.5`  pour le `geom_tallrect`  et `alpha=0.6`  pour les `geom_line` .
+Notez également que nous avons spécifié `alpha=0.5` pour le `geom_tallrect` et `alpha=0.6` pour le `geom_line`.
 <!-- comment -->
-Puisque ces deux geoms définissent `clickSelects` , certaines lignes tracées et tallrect seront sélectionnées, et d'autres ne le seront pas.
+Puisque ces deux geoms définissent `clickSelects`, certaines lignes et rectangles seront sélectionnées, et d'autres ne le seront pas.
 <!-- comment -->
-Les valeurs alpha dans le code R spécifient l'opacité des objets sélectionnés, et les autres objets auront une valeur `alpha`  opacité inférieure de 0,5 à cette valeur.
+Les valeurs `alpha` précisent l'opacité des objets sélectionnés, et les autres objets auront une valeur d'opacité de 0,5 inférieure à cette valeur.
 <!-- comment -->
-Dans l'exemple ci-dessus, les lignes non sélectionnées auront une opacité de `alpha=0.1` et les hauts-reliefs non sélectionnés auront `alpha=0`  (complètement transparent).
+Dans l'exemple ci-dessus, les lignes non sélectionnées auront `alpha=0.1` et les `tallrects` non sélectionnés auront `alpha=0`  (complètement transparent).
 
 <!-- paragraph -->
 
-À partir de septembre 2023, il est également possible de spécifier l'opacité, le remplissage et la couleur pour les objets qui ne sont pas actuellement sélectionnés ( `alpha_off` , `fill_off` , `color_off` ).
+Depuis septembre 2023, il est également possible de spécifier l'opacité, le remplissage et la couleur des objets qui ne sont pas actuellement sélectionnés (`alpha_off`, `fill_off`, `color_off`).
 <!-- comment -->
-Les utilisateurs peuvent spécifier ces paramètres dans le geom (pas dans l'aes) pour créer librement une apparence différente pour les éléments sélectionnés et non sélectionnés, au lieu d'être contraints de s'appuyer sur le comportement décrit ci-dessus.
+Les utilisateurs peuvent spécifier ces paramètres dans le geom (pas dans le `aes`) afin de créer librement une apparence différente pour les éléments sélectionnés et non sélectionnés, au lieu d'être contraints de dépendre du comportement décrit ci-dessus.
 <!-- comment -->
-Pour plus d'informations, voir la discussion et l'exemple dans [chapitre 6, section Spécifier le mode d'affichage de l'état de la sélection](Ch06-other.html#display-selection-state) .
+Pour plus d'informations, voir la discussion et l'exemple dans [chapitre 6, section Préciser le mode d'affichage de l'état de la sélection](Ch06-other.html#display-selection-state) .
 
 <!-- paragraph -->
 
-Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné et la série temporelle à l'aide d'`animint()`.
+Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle.
 
 <!-- paragraph -->
 
@@ -519,15 +519,15 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 <!-- paragraph -->
 
-L'image de données interactives ci-dessus contient un nouveau panneau avec des lignes qui montrent une série chronologique de taux de fécondité sur toutes les années.
+La visualisation de données interactives ci-dessus contient un nouveau panneau avec des lignes qui montrent une série temporelle de taux de fertilité sur toutes les années.
 <!-- comment -->
-Puisque nous avons spécifié `clickSelects=country`  pour l'élément `geom_line` un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
+Puisque nous avons précisé `clickSelects=pays`  pour le `geom_line`, un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
 <!-- comment -->
-Puisque nous avons spécifié `clickSelects=year`  pour l'élément `geom_tallrect` un clic sur un rectangle met à jour l'année sélectionnée.
+Puisque nous avons spécifié `clickSelects=année` pour le `geom_tallrect`, un clic sur un `tallrect` met à jour l'année sélectionnée.
 
 <!-- paragraph -->
 
-Exercice : ajouter `time` , `duration` , `first` et `selector.types`  aux données ci-dessus.
+Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` à la visualisation de données ci-dessus.
 
 <!-- paragraph -->
 
@@ -535,7 +535,7 @@ Exercice : ajouter `time` , `duration` , `first` et `selector.types`  aux donné
 
 <!-- paragraph -->
 
-Ce chapitre explique `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
+Dans ce chapitre, nous avons vu l'utilisation de `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
 <!-- comment -->
 Nous avons utilisé l'ensemble des données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour spécifier différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
