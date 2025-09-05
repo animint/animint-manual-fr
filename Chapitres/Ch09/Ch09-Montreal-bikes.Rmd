@@ -1,12 +1,18 @@
 ---
-title: Montreal bikes data viz
+title: Visualisation des données des vélos de Montréal
 layout: default
 output: bookdown::html_chapter
 ---
 
+
+
+Traduction de [English](https://github.com/tdhock/animint-book/)
+[Ch09-Montreal-bikes](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch09-Montreal-bikes.Rmd)
+
+
 <!-- paragraph -->
 
-# Chapter 9, Montreal bikes data viz
+# Chapitre 9, visualisation des données sur les vélos de Montréal
 
 <!-- paragraph -->
 
@@ -16,29 +22,29 @@ knitr::opts_chunk$set(fig.path="Ch09-figures/")
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of the Montreal bike data set.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l'ensemble de données sur les vélos de Montréal.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin with some static data visualizations.
+- Nous commençons par quelques visualisations des données statiques.
 <!-- comment -->
-- We create an interactive visualization of accident frequency over time.
+- Nous créons une visualisation interactive de la fréquence des accidents dans le temps.
 <!-- comment -->
-- We create a interactive data viz with four plots, showing monthly accident trends, daily details, and a map of counter locations.
+- Nous créons une visualisation interactive des données avec quatre graphiques, montrant les tendances mensuelles des accidents, les détails quotidiens et une carte des emplacements des compteurs.
 
 <!-- paragraph -->
 
-## Static figures {#static}
+## Chiffres statiques {#static}
 
 <!-- paragraph -->
 
-We begin by loading the `montreal.bikes` data set, which is not available in the CRAN release of animint2, in order to save space on CRAN.
+Nous commençons par charger le fichier `montreal.bikes` qui n'est pas disponible dans la version CRAN de animint2, afin d'économiser de l'espace sur le CRAN.
 <!-- comment -->
-Therefore to access this data set, you will need to install animint2 from GitHub:
+Par conséquent, pour accéder à ce jeu de données, vous devrez installer animint2 depuis GitHub :
 
 <!-- paragraph -->
 
@@ -52,7 +58,7 @@ tryCatch({
 
 <!-- paragraph -->
 
-We begin by examining the accidents data table.
+Nous commençons par examiner le tableau de données sur les accidents.
 
 <!-- paragraph -->
 
@@ -76,13 +82,13 @@ str(accidents.dt)
 
 <!-- paragraph -->
 
-Each accident has data about its date, time, location, and counts of death and slight/severe injury.
+Chaque accident comporte des données sur sa date, son heure, sa localisation et le nombre de morts et de blessés légers/graves.
 <!-- comment -->
-Some of the values are in French (e.g. position Voie de circulation, location En intersection, etc).
+Certaines valeurs sont en français (par exemple : position Voie de circulation, localisation En intersection, etc).
 
 <!-- paragraph -->
 
-We calculate the time period of the accidents below.
+Nous calculons la période de temps des accidents ci-dessous.
 
 <!-- paragraph -->
 
@@ -97,7 +103,7 @@ range(accidents.dt$month.str)
 
 <!-- paragraph -->
 
-Below we also compute the range of months for the bike counter data table.
+Ci-dessous, nous calculons également la plage (ou l'intervalle) des mois pour le tableau de données du compteur de vélos.
 
 <!-- paragraph -->
 
@@ -110,7 +116,7 @@ range(counts.dt$month.str)
 
 <!-- paragraph -->
 
-The bike counts are time series data which we visualize below.
+Les comptages de vélos sont des données de séries temporelles que nous visualisons ci-dessous.
 
 <!-- paragraph -->
 
@@ -130,13 +136,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-Plotting with `geom_point` makes it easy to see the difference between zeros and missing values.
+Tracé avec `geom_point` permet de voir facilement la différence entre les zéros et les valeurs manquantes.
 
 <!-- paragraph -->
 
-We will compute a summary of all accidents per month in this time period, so we first create a data table for each month below.
+Nous allons calculer un résumé de tous les accidents par mois au cours de cette période, c'est pourquoi nous commençons par créer un tableau de données pour chaque mois ci-dessous.
 <!-- comment -->
-(and make sure to set the locale to C for English month names)
+(et assurez-vous de définir l'environnement linguistique sur C pour les noms de mois en anglais)
 
 <!-- paragraph -->
 
@@ -165,7 +171,7 @@ month.levs <- months[order(month01.POSIXct), month.str]
 
 <!-- paragraph -->
 
-Note that we created a `month` column which is a factor ordered by `month.levs`.
+Notez que nous avons créé un `month` qui est un facteur ordonné par `month.levs`.
 
 <!-- paragraph -->
 
@@ -196,7 +202,7 @@ stopifnot(!is.na(accidents.dt$month.POSIXct))
 
 <!-- paragraph -->
 
-We plot the accidents per month below.
+Nous traçons ci-dessous les accidents par mois.
 
 <!-- paragraph -->
 
@@ -222,9 +228,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-In each accident, there are counts of people who died, along with people who suffered severe and slight injuries.
+Pour chaque accident, on dénombre les personnes décédées, les personnes gravement blessées et les personnes légèrement blessées.
 <!-- comment -->
-Below we classify the severity of each accident according to the worst outcome among the people affected.
+Ci-dessous, nous classons la gravité de chaque accident en fonction du résultat le plus grave pour les personnes touchées.
 
 <!-- paragraph -->
 
@@ -244,9 +250,9 @@ accidents.dt[
 
 <!-- paragraph -->
 
-The output above shows that accidents with only slight injuries are most frequent, and accidents with at least one death are least frequent.
+Le résultat ci-dessus montre que les accidents avec des blessures légères sont les plus fréquents et que les accidents avec au moins un décès sont les moins fréquents.
 <!-- comment -->
-Below we compute counts per month.
+Ci-dessous, nous calculons les nombres par mois.
 
 <!-- paragraph -->
 
@@ -283,11 +289,11 @@ counts.per.month[days < days.in.month, {
 
 <!-- paragraph -->
 
-As shown above, some months do not have observations for all days.
+Comme indiqué ci-dessus, certains mois ne comportent pas d'observations pour tous les jours.
 
 <!-- paragraph -->
 
-## Interactive viz of accident frequency {#regression}
+## Viz interactive de la fréquence des accidents {#regression}
 
 <!-- paragraph -->
 
@@ -374,21 +380,21 @@ animint(
 
 <!-- paragraph -->
 
-The data viz above shows two data visualizations of city-wide accident frequency over time.
+La visualisation des données ci-dessus présente deux visualisations des données relatives à la fréquence des accidents à l'échelle de la ville au fil du temps.
 <!-- comment -->
-The plot on the left shows that the number of accidents grows with the number of cyclists.
+Le graphique de gauche montre que le nombre d'accidents augmente avec le nombre de cyclistes.
 <!-- comment -->
-The plot on the right shows the frequency of accidents over time.
+Le graphique de droite montre la fréquence des accidents au fil du temps.
 
 <!-- paragraph -->
 
-## Interactive viz with map and details {#details}
+## Viz interactive avec carte et détails {#details}
 
 <!-- paragraph -->
 
-The plot below is a dotplot of accidents for each month.
+Le graphique ci-dessous est un dotplot des accidents pour chaque mois.
 <!-- comment -->
-Each dot represents one person who got in an accident.
+Chaque point représente une personne qui a eu un accident.
 
 <!-- paragraph -->
 
@@ -442,9 +448,9 @@ velo.counts <- table(counts.dt$location)
 
 <!-- paragraph -->
 
-The counter locations above will be plotted below.
+Les localisations des compteurs ci-dessus seront tracées ci-dessous.
 <!-- comment -->
-Note that we use `showSelected=month` and `clickSelects=location`.
+Notez que nous utilisons `showSelected=month` et `clickSelects=location`.
 
 <!-- paragraph -->
 
@@ -505,9 +511,9 @@ mtl.map
 
 <!-- paragraph -->
 
-The plot below shows the time period that each counter was in operation.
+Le graphique ci-dessous montre la période pendant laquelle chaque compteur a fonctionné.
 <!-- comment -->
-Note that we use `geom_tallrect` with `clickSelects` to select the month.
+Notez que nous utilisons `geom_tallrect` avec `clickSelects` pour sélectionner le mois.
 
 <!-- paragraph -->
 
@@ -546,7 +552,7 @@ print(MonthSummary)
 
 <!-- paragraph -->
 
-The plot below shows the bike counts at each location and day.
+Le graphique ci-dessous présente les comptages de vélos à chaque localisation et chaque jour.
 
 <!-- paragraph -->
 
@@ -587,7 +593,7 @@ print(TimeSeries)
 
 <!-- paragraph -->
 
-The plot below shows the same data but for each month.
+Le graphique ci-dessous reprend les mêmes données mais pour chaque mois.
 
 <!-- paragraph -->
 
@@ -816,27 +822,27 @@ animint(
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Change location to a multiple selection variable.
+- Modifier la localisation à une variable de sélection multiple.
 <!-- comment -->
-- Add a plot for the map to the data viz.
+- Ajouter un graphique pour la carte à la visualisation des données.
 <!-- comment -->
-- On the map, draw a circle for each location, with size that changes based on the `count` of the accidents in the currently selected `month`.
+- Sur la carte, dessinez un cercle pour chaque localisation, dont la taille varie en fonction de l'indice de référence. `count` des accidents dans la zone sélectionnée. `month`.
 <!-- comment -->
-- On the `MonthSummary` plot, add a background rectangle that can be used to select the `month`.
+- Sur le site de la `MonthSummary` graphique, ajoutez un rectangle d'arrière-plan qui peut être utilisé pour sélectionner les `month`.
 <!-- comment -->
-- Remove the `MonthSummary` plot and add a similar visualization as a third panel in the `MonthFacet` plot.
+- Supprimer le `MonthSummary` et ajouter une visualisation similaire dans un troisième panneau de l'écran. `MonthFacet` graphique.
 
 <!-- paragraph -->
 
-Next, [Chapter 10](Ch10-nearest-neighbors.html) explains how to visualize the K-Nearest-Neighbors machine learning model.
+Suivant, [Chapitre 10](Ch10-nearest-neighbors.html) explique comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
 
 <!-- paragraph -->
 
