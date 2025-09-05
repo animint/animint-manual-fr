@@ -41,7 +41,8 @@ base de données,database
 tableau de données (data frame),dataframe
 jeu de données,dataset
 tableau de données,data table
-visualisation de données,data visualization
+visualisation des données,data visualization
+visualisation des données,data viz
 reconstruction de code (deparse),deparse
 obsolète,deprecated
 déviance,deviance
@@ -168,7 +169,7 @@ esquisse,sketching
 matrice anti-symétrique,skew-symmetric
 caractère barre oblique droite '/',slash
 slot,slot
-transitions fluides,smooth transitions
+transitions en douceur,smooth transitions
 capture d'écran,snapshot
 connecteur logiciel (socket),socket
 source,source
