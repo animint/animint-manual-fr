@@ -449,3 +449,50 @@ Translate_FR_EN(file_name = "Ch07-limitations",
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
 )
+
+
+
+##### Chapitre 08 ######
+
+# Traduction Chapitre 08 par Jeremi Lepage
+
+ConvertRmd_comments(file_name = "Ch08-WorldBank-facets",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch08"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch08-"
+)
+
+Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch08"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
+
+
+# Traduction Chapitre 09 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch09-Montreal-bikes",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch09"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch09-"
+)
+
+Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch09"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE
+)
