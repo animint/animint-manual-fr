@@ -1,12 +1,18 @@
 ---
-title: World Bank data viz
+title: Visualisation des données de la Banque mondiale viz
 layout: default
 output: bookdown::html_chapter
 ---
 
+
+
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
+[Ch08-WorldBank-facets](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch08-WorldBank-facets.Rmd)
+
+
 <!-- paragraph -->
 
-# Chapter 8, World Bank data viz
+# Chapitre 8, visualisation des données de la Banque mondiale viz
 
 <!-- paragraph -->
 
@@ -16,29 +22,29 @@ knitr::opts_chunk$set(fig.path="Ch08-figures/")
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of the World Bank data set.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données de la Banque mondiale.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by loading the World Bank data set and defining some helper functions for creating a multi-panel ggplot with several geoms.
+- Nous commençons par charger le jeu de données de la Banque mondiale et par définir quelques fonctions d'aide pour créer un ggplot multi-panneaux avec plusieurs geoms.
 <!-- comment -->
-- We then create a time series plot for life expectancy.
+- Nous créons ensuite un graphique de série chronologique pour l'espérance de vie.
 <!-- comment -->
-- We then add a scatterplot of life expectancy versus fertility rate as a second panel.
+- Nous ajoutons ensuite un nuage de points de l'espérance de vie en fonction du taux de fécondité dans un deuxième panneau.
 <!-- comment -->
-- We then add a third panel with a time series for fertility rate.
+- Nous ajoutons ensuite un troisième panneau avec une série temporelle pour le taux de fécondité.
 
 <!-- paragraph -->
 
-## Load data and define helper functions {#load}
+## Chargement des données et définition des fonctions d'aide {#load}
 
 <!-- paragraph -->
 
-First we load the WorldBank data set, and consider only the subset which has both non-missing values for both life.expectancy and fertility.rate.
+Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale, et nous ne considérons que le sous-ensemble qui a des valeurs non manquantes à la fois pour l'espérance de vie et le taux de fécondité.
 
 <!-- paragraph -->
 
@@ -54,9 +60,9 @@ not.na <- data.table(
 
 <!-- paragraph -->
 
-We will also be plotting the population variable using a size legend.
+Nous allons également tracer la variable population à l'aide d'une légende de taille.
 <!-- comment -->
-Before plotting, we will make sure that none of the values are missing.
+Avant de tracer le graphique, nous nous assurerons qu'aucune valeur n'est manquante.
 
 <!-- paragraph -->
 
@@ -67,11 +73,11 @@ not.na[is.na(not.na$population)]
 
 <!-- paragraph -->
 
-The table above shows that there are three rows with missing values for the population variable.
+Le tableau de contingence ci-dessus montre qu'il y a trois lignes avec des valeurs manquantes pour la variable population.
 <!-- comment -->
-They are for the country Kuwait during 1992-1994.
+Elles concernent le pays Koweït pour la période 1992-1994.
 <!-- comment -->
-The table below shows the data from the neighboring years, 1991-1995.
+Le tableau de contingence ci-dessous reprend les données des années voisines, 1991-1995.
 
 <!-- paragraph -->
 
@@ -82,9 +88,9 @@ not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
 
 <!-- paragraph -->
 
-The table above shows that the population of Kuwait decreased over the period 1991-1995, consistent with the Gulf War of that time period.
+Le tableau de contingence ci-dessus montre que la population du Koweït a diminué au cours de la période 1991-1995, ce qui correspond à la guerre du Golfe de cette période.
 <!-- comment -->
-We fill in those missing values below.
+Nous remplissons les valeurs manquantes ci-dessous.
 
 <!-- paragraph -->
 
@@ -97,7 +103,7 @@ not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
 
 <!-- paragraph -->
 
-Next, we define the following helper function, which will be used to add columns to data sets in order to assign geoms to facets.
+Ensuite, nous définissons la fonction d'aide suivante, qui sera utilisée pour ajouter des colonnes aux ensembles de données afin d'affecter des geoms aux facettes.
 
 <!-- paragraph -->
 
@@ -111,11 +117,11 @@ FACETS <- function(df, top, side){
 
 <!-- paragraph -->
 
-Note that the factor levels will specify the order of the facets in the ggplot.
+Notez que les niveaux des facteurs spécifieront l'ordre des facettes dans le ggplot.
 <!-- comment -->
-This is an example of the [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
+Il s'agit d'un exemple de la méthode [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
 <!-- comment -->
-Below, we define three helper functions, one for each facet.
+Nous définissons ci-dessous trois fonctions d'aide, une pour chaque facette.
 
 <!-- paragraph -->
 
@@ -127,11 +133,11 @@ TS.ABOVE <- function(df)FACETS(df, "Fertility rate", "Years")
 
 <!-- paragraph -->
 
-## First time series plot {#first-ts}
+## Premier graphique de la série temporelle {#first-ts}
 
 <!-- paragraph -->
 
-First we define a data set with one row for each year, which we will use for selecting years using a `geom_tallrect` in the background.
+Nous définissons d'abord un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'une fonction `geom_tallrect` en arrière-plan.
 
 <!-- paragraph -->
 
@@ -141,7 +147,7 @@ years <- unique(not.na[, .(year)])
 
 <!-- paragraph -->
 
-We define the ggplot with a `geom_tallrect` in the background, and a `geom_line` for the time series.
+Nous définissons le ggplot avec un `geom_tallrect` en arrière-plan, et un `geom_line` pour les séries temporelles.
 
 <!-- paragraph -->
 
@@ -160,17 +166,17 @@ ts.right
 
 <!-- paragraph -->
 
-Note that we specified `clickSelects=year` so that clicking a tallrect will change the selected year, and `clickSelects=country` so that clicking a line will select or de-select a country.
+Notez que nous avons spécifié `clickSelects=year` pour que le fait de cliquer sur un tallrect modifie l'année sélectionnée, et `clickSelects=country` pour que le fait de cliquer sur une ligne permette de sélectionner ou de désélectionner un pays.
 <!-- comment -->
-Also note that we used `TS.RIGHT` to specify columns that we will use in the facet specification (next section).
+Notez également que nous avons utilisé `TS.RIGHT` pour spécifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
 
 <!-- paragraph -->
 
-## Add a scatterplot facet {#add-scatter}
+## Ajouter une facette de nuage de points {#add-scatter}
 
 <!-- paragraph -->
 
-We begin by simply adding facets to the previous time series plot.
+Nous commençons par ajouter simplement des facettes au graphique de la série temporelle précédente.
 
 <!-- paragraph -->
 
@@ -186,13 +192,13 @@ ts.facet
 
 <!-- paragraph -->
 
-We set the `panel.margin` to 0, which is always a good idea to [save space in a ggplot with facets](Ch99-appendix.html#space-saving-facets) .
+Nous définissons l'élément `panel.margin` à 0, ce qui est toujours une bonne idée pour [d'économiser de l'espace dans un ggplot à facettes](Ch99-appendix.html#space-saving-facets) .
 <!-- comment -->
-We use `scales="free"` and hide the axis labels, in an example of the [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
+Nous utilisons `scales="free"` et masquons les étiquettes des axes, dans un exemple de la méthode [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
 <!-- comment -->
-Instead, we use the facet label to show the variable encoded on each axis.
+Au lieu de cela, nous utilisons l'étiquette de la facette pour montrer la variable encodée sur chaque axe.
 <!-- comment -->
-Below, we add a scatterplot facet with a point for each year and country.
+Ci-dessous, nous ajoutons une facette de nuage de points avec un point pour chaque année et chaque pays.
 
 <!-- paragraph -->
 
@@ -213,11 +219,11 @@ ts.scatter
 
 <!-- paragraph -->
 
-Note how we use `scale_size_animint` to specify the range of sizes in pixels, and the breaks in the legend.
+Notez que nous utilisons `scale_size_animint` pour spécifier la plage des tailles en pixels, et les bornes des classes (histogrammes).
 <!-- comment -->
-Also note that we use `SCATTER` to specify `top` and `side` columns which are used in the facet specification.
+Notez également que nous utilisons `SCATTER` pour spécifier `top` et `side` qui sont utilisées dans la spécification de la facette.
 <!-- comment -->
-We also render this ggplot interactively below.
+Nous affichons également ce ggplot de manière interactive ci-dessous.
 
 <!-- paragraph -->
 
@@ -227,15 +233,15 @@ animint(ts.scatter)
 
 <!-- paragraph -->
 
-Note that single selection is used by default for both year and country.
+Notez que la sélection unique est utilisée par défaut pour l'année et le pays.
 
 <!-- paragraph -->
 
-## Adding another time series facet {#add-ts}
+## Ajout d'une autre facette pour les séries temporelles {#add-ts}
 
 <!-- paragraph -->
 
-Below we add widerects for selecting years, and paths for showing fertility rate.
+Ci-dessous, nous ajoutons des widerects pour sélectionner les années, et des chemins d'accès pour afficher le taux de fécondité.
 
 <!-- paragraph -->
 
@@ -254,9 +260,9 @@ scatter.both
 
 <!-- paragraph -->
 
-Note that `TS.ABOVE` was used to specify facet columns `top` and `side`.
+Notez que `TS.ABOVE` a été utilisé pour spécifier les colonnes des facettes `top` et `side`.
 <!-- comment -->
-We render an interactive version below.
+Nous affichons une version interactive ci-dessous.
 
 <!-- paragraph -->
 
@@ -273,35 +279,35 @@ viz.scatter.both <- animint(
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- paragraph -->
 
-We showed how to create a multi-layer, multi-panel (but single-plot) visualization of the World Bank data.
+Nous avons montré comment créer une visualisation multicouche et multi-panneaux (mais à un seul graphique) des données de la Banque mondiale.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Add a points on each time series plot, with size proportional to population as in the scatterplot.
+- Ajoutez un point sur chaque graphique de série temporelle, dont la taille est proportionnelle à la population, comme dans le nuage de points.
 <!-- comment -->
-The points should appear only when the country is selected, and clicking the points should de-select that country.
+Les points ne doivent apparaître que lorsque le pays est sélectionné, et un clic sur les points doit désélectionner ce pays.
 <!-- comment -->
-- Add text labels to the time series plot on the right, with names for each country.
+- Ajoutez des étiquettes de texte au graphique de la série temporelle sur la droite, avec des noms pour chaque pays.
 <!-- comment -->
-Each label should appear only when the country is selected, and should disappear after clicking on the label.
+Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
 <!-- comment -->
-- Add a text label to the scatterplot to indicate the selected year.
+- Ajouter une étiquette de texte au nuage de points pour indiquer l'année sélectionnée.
 <!-- comment -->
-- Add text labels to the scatterplot, with names for each country.
+- Ajouter des étiquettes de texte au nuage de points, avec des noms pour chaque pays.
 <!-- comment -->
-Each label should appear only when the country is selected, and should disappear after clicking on the label.
+Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
 
 <!-- paragraph -->
 
-Next, [Chapter 9](Ch09-Montreal-bikes.html) explains how to visualize the Montreal bike data set.
+Suivant, [Chapitre 9](Ch09-Montreal-bikes.html) explique comment visualiser les données sur les vélos à Montréal.
 
 <!-- paragraph -->
 
