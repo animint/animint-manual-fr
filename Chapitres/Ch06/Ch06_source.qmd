@@ -117,7 +117,7 @@ animint(
 
 <!-- paragraph -->
 
-Essayez de placer le curseur sur l'un des points de données.
+Placez le curseur sur l'un des points de données.
 <!-- comment -->
 Vous devriez voir apparaître une petite boîte contenant le nom du pays et la population pour ce point de données.
 
@@ -152,7 +152,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez comment `gsub` est utilisé pour convertir les espaces en tirets bas (underscores), puisqu'un identifiant bien défini ne doit pas contenir d'espaces.
+Notez que pour qu'un identifiant soit bien défini il ne doit pas contenir d'espaces, nous utilisons donc `gsub` pour convertir les espaces en tirets bas (underscores).
 <!-- comment -->
 Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d'un polygone par état/région, et chaque identifiant doit être unique sur une page web.
 <!-- comment -->
@@ -172,13 +172,13 @@ Les développeurs d'`animint2` utilisent cette fonctionnalité [pour tester le c
 
 <!-- paragraph -->
 
-En général, les noms des sélecteurs sont définis dans `showSelected` ou `clickSelects`.
+En général, les noms de sélecteurs sont définis dans `showSelected` ou `clickSelects`.
 <!-- comment -->
 Par exemple, `showSelected=c("année", "pays")` signifie que deux variables de sélection seront créées (nommées `année` et `pays`).
 <!-- comment -->
 Cependant, cette méthode devient peu pratique si vous avez de nombreux sélecteurs dans votre visualisation des données.
 <!-- comment -->
-Pour illustrer, nous considérons l'exemple théorique suivant (le code présenté dans cette section n'est pas directement exécutable).
+Considérons par exemple le cas théorique suivant (le code présenté dans cette section n'est pas directement exécutable).
 <!-- comment -->
 Supposons que vous souhaitez utiliser 20 noms de variables de sélecteurs différents, `selector1value`...
 <!-- comment -->
@@ -220,7 +220,7 @@ vis$points <- vis$points +
 
 Cette méthode est mauvaise car elle est lente pour construire `vis` et la visualisation compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point`.
 <!-- comment -->
-La méthode préférable est de rajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
+La méthode à privilégier préférable est de rajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
 <!-- comment -->
 Les noms doivent être utilisés pour indiquer la colonne qui contient le nom de la variable du sélecteur.
 <!-- comment -->
@@ -241,7 +241,7 @@ vis <- list(
 
 Le compilateur d'`animint2` parcourt le data.frame `all.data` et crée des sélecteurs pour chacune des valeurs distinctes de `all.data$selector.name`.
 <!-- comment -->
-En cliquant sur l'un des points de données, le sélecteur correspondant est mis à jour avec la valeur indiquée par `all.data$selector.value`.
+Lorsqu'on clique sur l'un des points de données, le sélecteur correspondant est mis à jour avec la valeur indiquée par `all.data$selector.value`.
 
 <!-- paragraph -->
 
@@ -249,7 +249,7 @@ De la même manière, vous pouvez rajouter des noms au vector `showSelected`, au
 
 <!-- paragraph -->
 
-Cette fonctionnalité est utile non seulement pour éviter les répétitions dans la définition de la visualisation des données, mais aussi puisqu'elle est plus efficace sur le plan computationnel.
+Cette fonctionnalité est utile non seulement pour éviter les répétitions dans la définition de la visualisation des données, mais aussi pour augmenter l'efficacité sur le plan computationnel.
 <!-- comment -->
 Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace disque, voir le [chapitre 14](Ch14-PeakSegJoint.html) .
 
@@ -259,9 +259,9 @@ Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace di
 
 <!-- paragraph -->
 
-Dans `animint2`, il existe plusieurs options au niveau du geom : `chunk_vars` permet de spécifier comment diviser les ensembles de données pour leur stockage sur disque, et les paramètres `*_off` sont utilisés pour définir comment un geom `clickSelects` devrait être affiché lorsqu'il n'est pas sélectionné.
+Dans `animint2`, il existe plusieurs options de personalisation pour les geoms. Par exemple, `chunk_vars` permet de spécifier la division des des ensembles de données pour leur stockage sur disque. Quant aux paramètres `*_off`, ils sont utilisés pour définir l'affichage d'un geom `clickSelects` lorsqu'il n'est pas sélectionné.
 <!-- comment -->
-De plus, les paramètres `help` et `title` peuvent être spécifiés, afin d'ajouter des informations à la visite guidée.
+De plus, les paramètres `help` et `title` peuvent être définis, pour ajouter des informations à la visite guidée.
 
 <!-- paragraph -->
 
@@ -273,11 +273,11 @@ Le paramètre `chunk_vars` définit les variables de sélection qui sont utilis�
 <!-- comment -->
 Un fichier TSV est créé pour chaque combinaison de valeurs des variables `chunk_vars`.
 <!-- comment -->
-Plus vous spécifiez de variables de sélection dans `chunk_vars`, plus l'ensemble de données sera divisé en différents fichiers TSV, chacun d'une taille plus petite.
+Plus le nombre de variables de sélection spécifiées dans `chunk_vars` est élevé, plus l'ensemble de données sera divisé en fichiers TSV distincts, chacun ayant une taille plus petite.
 
 <!-- paragraph -->
 
-Le paramètre `chunk_vars` doit être spécifiée comme argument d'une fonction `geom_*`, et sa valeur doit être un vecteur de caractères contenant les noms des variables de sélection.
+L'option `chunk_vars` doit être spécifiée comme argument d'une fonction `geom_*`, et sa valeur doit être un vecteur de caractères contenant le nom des variables de sélection.
 <!-- comment -->
 Lorsque `chunk_vars=character(0)`, soit un vecteur de caractères de longueur zéro, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
