@@ -75,11 +75,11 @@ library(animint2)
 USpolygons <- map_data("state")
 animint(
   map=ggplot()+
-    ggtitle("click a state to read its Wikipedia page")+
+    ggtitle("cliquez sur un state pour lire sa page Wikipedia")+
     coord_equal()+
     geom_polygon(aes(
       x=long, y=lat, group=group,
-      href=paste0("http://en.wikipedia.org/wiki/", region)),
+      href=paste0("http://fr.wikipedia.org/wiki/", région)),
       data=USpolygons, fill="black", colour="grey"))
 ```
 
@@ -104,15 +104,15 @@ Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans
 <!-- paragraph -->
 
 ```{r Ch06-viz-tooltip}
-data(WorldBank)
-WorldBank1975 <- subset(WorldBank, year == 1975)
+data(BanqueMondiale)
+BanqueMondiale1975 <- subset(BanqueMondiale, année == 1975)
 animint(
   scatter=ggplot()+
     geom_point(aes(
-      x=life.expectancy, y=fertility.rate,
-      tooltip=paste(country, "population =", population)),
+      x=espérance.de.vie, y=taux.de.fertilité,
+      tooltip=paste(pays, "population =", population)),
       size=5,
-      data=WorldBank1975))
+      data=BanqueMondiale1975))
 ```
 
 <!-- paragraph -->
@@ -142,11 +142,11 @@ Puisque tout ce qui est tracé par `animint()` est affiché comme un élément [
 ```{r Ch06-viz-id}
 animint(
   map=ggplot()+
-    ggtitle("each state/region/group has a unique id")+
+    ggtitle("chaque state/région/groupe a un id unique")+
     coord_equal()+
     geom_polygon(aes(
       x=long, y=lat, group=group,
-      id=gsub(" ", "_", paste(region, group))),
+      id=gsub(" ", "_", paste(région, group))),
       data=USpolygons, fill="black", colour="grey"))
 ```
 
@@ -189,7 +189,7 @@ La façon habituelle de définir votre visualisation de données serait la suiva
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-viz <- list(
+vis <- list(
   points=ggplot()+
     geom_point(clickSelects="selector1value", data=data1)+
     ...
@@ -207,11 +207,11 @@ Une autre façon de procéder serait d'utiliser une boucle `for`:
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-viz <- list(points=ggplot())
+vis <- list(points=ggplot())
 for(selector.name in paste0("selector", 1:20, "value")){
   data.for.selector <- all.data.list[[selector.name]]
 <!-- comment -->
-viz$points <- viz$points +
+vis$points <- vis$points +
     geom_point(clickSelects=selector.name, data=data.for.selector)
 }
 ```
@@ -229,7 +229,7 @@ Par exemple :
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-viz <- list(
+vis <- list(
   points=ggplot()+
     geom_point(
       clickSelects=c(selector.name="selector.value"),
@@ -323,7 +323,7 @@ fp.fn.dt <- error.type.dt[, list(
   error.value=sum(error)
 ), by=.(error.type, segments, bases.per.probe)]
 errorPlot <- ggplot()+
-  ggtitle("select data and segments")+
+  ggtitle("selectionner les données et les segments")+
   theme_bw()+
   geom_tallrect(aes(
     xmin=segments-0.5, xmax=segments+0.5),
@@ -410,7 +410,7 @@ Ci-dessous, nous utilisons l'option `du` programme en ligne de commande pour dé
 
 ```{r}
 tsvSizes <- function(segment.chunk.vars){
-  viz <- list(
+  vis <- list(
     error=errorPlot,
     signal=signalPlot+
       geom_vline(aes(
@@ -421,7 +421,7 @@ tsvSizes <- function(segment.chunk.vars){
         linetype="dashed",
         data=breakpoints$breaks)
   )
-  info <- animint2dir(viz, open.browser=FALSE)
+  info <- animint2dir(vis, open.browser=FALSE)
   cmd <- paste("du -ks", info$out.dir)
   kb.dt <- fread(cmd=cmd)
   setnames(kb.dt, c("kb", "dir"))
@@ -489,7 +489,7 @@ set.seed(1)
 demo_df <- data.frame(i=1:N, num=rnorm(N,2))
 animint(
   defaults=ggplot()+
-    ggtitle("Defaults, no *_off")+
+    ggtitle("Paramètres par défaut, sans *_off")+
     geom_tile(aes(
       i, 0),
       size=5,
@@ -501,7 +501,7 @@ animint(
       clickSelects="i",
       data=demo_df),
   off=ggplot()+
-    ggtitle("User specified alpha_off, fill_off, color_off")+
+    ggtitle("Paramètres définis par l'utilisateur  : alpha_off, fill_off, color_off")+
     geom_tile(aes(
       i, 0, fill=i),
       clickSelects="i",
@@ -551,21 +551,21 @@ Pour personnaliser ce qui est affiché pour chaque geom, vous pouvez spécifier 
 animint(
   scatter=ggplot()+
     geom_point(aes(
-      x=life.expectancy, y=fertility.rate, color=region),
+      x=espérance.de.vie, y=taux.de.fertilité, color=région),
       size=5,
-      showSelected="year",
-      clickSelects="country",
-      help="One point drawn for each country in the selected year",
+      showSelected="année",
+      clickSelects="pays",
+      help="Un point est tracé pour chaque pays dans l'année sélectionnée",
       alpha=0.7,
-      data=WorldBank)+
+      data=BanqueMondiale)+
     geom_text(aes(
-      x=life.expectancy, y=fertility.rate, label=country),
-      data=WorldBank,
-      title="Selected country",
-      showSelected=c("year","country")),
+      x=espérance.de.vie, y=taux.de.fertilité, label=pays),
+      data=BanqueMondiale,
+      title="Pays sélectionné",
+      showSelected=c("année","pays")),
   first=list(
-    country="France",
-    year=1980))
+    pays="France",
+    année=1980))
 ```
 
 <!-- paragraph -->
@@ -641,20 +641,20 @@ Pour comprendre pourquoi, examinons les exemples suivants.
 <!-- paragraph -->
 
 ```{r Ch06-viz-scale-size}
-scatter1975 <- ggplot()+
+nuage1975 <- ggplot()+
   geom_point(
-    aes(x=life.expectancy, y=fertility.rate, size=population),
-    WorldBank1975,
+    aes(x=espérance.de.vie, y=taux.de.fertilité, size=population),
+    BanqueMondiale1975,
     shape=21,
     color="red",
     fill="black")
 (viz.scale.size <- animint(
-  ggplotDefault=scatter1975+
-    ggtitle("no scale specified"),
-  animintDefault=scatter1975+
+  ggplotDefault=nuage1975+
+    ggtitle("Aucune échelle spécifiée"),
+  animintDefault=nuage1975+
     ggtitle("scale_size_animint()")+
     scale_size_animint(),
-  animintOptions=scatter1975+
+  animintOptions=nuage1975+
     ggtitle("scale_size_animint(pixel.range, breaks)")+
     scale_size_animint(pixel.range=c(5, 15), breaks=10^(10:1))))
 ```
@@ -686,19 +686,19 @@ A l'intérieur `theme` vous pouvez utiliser des nombres directement pour modifie
 <!-- paragraph -->
 
 ```{r Ch06-viz-text-size}
-scatter1975 <- ggplot()+
+nuage1975 <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region),
-    data=WorldBank1975)
+    x=espérance.de.vie, y=taux.de.fertilité, color=région),
+    data=BanqueMondiale1975)
 (viz.text.size <- animint(
-  animintDefault=scatter1975+
+  animintDefault=nuage1975+
     theme_animint(width=500, height=500)+
-    ggtitle("no axes and legend size specified"),
-  animintAxesOptions=scatter1975+
+    ggtitle("Aucun axe ni taille de légende spécifiés"),
+  animintAxesOptions=nuage1975+
     theme_animint(width=500, height=500)+
     theme(axis.text=element_text(size=20))+
     ggtitle("axis.text=element_text(size=20)"),
-  animintLegendOptions=scatter1975+
+  animintLegendOptions=nuage1975+
     theme_animint(width=500, height=500)+
     theme(
       legend.title=element_text(size=24),
@@ -757,9 +757,9 @@ Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-de
 <!-- paragraph -->
 
 ```{r}
-viz.title <- viz.scale.size
-viz.title$title <- "Several size scales"
-animint2dir(viz.title, "Ch06-viz-title")
+vis.title <- viz.scale.size
+vis.title$title <- "Plusieurs échelles de taille"
+animint2dir(vis.title, "Ch06-viz-title")
 ```
 
 <!-- paragraph -->
@@ -822,10 +822,10 @@ animint(
   video="https://vimeo.com/1050117030",
   scatter=ggplot()+
     geom_point(aes(
-      x=life.expectancy, y=fertility.rate, color=region),
-      clickSelects="country",
+      x=espérance.de.vie, y=taux.de.fertilité, color=région),
+      clickSelects="pays",
       alpha=0.7,
-      data=WorldBank1975))
+      data=BanqueMondiale1975))
 ```
 
 <!-- paragraph -->
