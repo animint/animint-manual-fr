@@ -104,7 +104,7 @@ Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans
 <!-- paragraph -->
 
 ```{r Ch06-viz-tooltip}
-data(BanqueMondiale)
+data(BanqueMondiale, package="animint2fr")
 BanqueMondiale1975 <- subset(BanqueMondiale, année == 1975)
 animint(
   scatter=ggplot()+
@@ -146,7 +146,7 @@ animint(
     coord_equal()+
     geom_polygon(aes(
       x=long, y=lat, group=group,
-      id=gsub(" ", "_", paste(région, group))),
+      id=gsub(" ", "_", paste(region, group))),
       data=USpolygons, fill="black", colour="grey"))
 ```
 
