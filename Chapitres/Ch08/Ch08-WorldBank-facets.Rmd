@@ -50,11 +50,11 @@ Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale, et n
 
 ```{r}
 library(animint2)
-data(WorldBank)
-WorldBank$Region <- sub(" (all income levels)", "", WorldBank$region, fixed=TRUE)
+data(BanqueMondiale, package="animint2fr")
+BanqueMondiale$Region <- sub(" (all income levels)", "", BanqueMondiale$region, fixed=TRUE)
 library(data.table)
 not.na <- data.table(
-  WorldBank)[!(is.na(life.expectancy) | is.na(fertility.rate))]
+  BanqueMondiale)[!(is.na(espérance.de.vie) | is.na(taux.de.fertilité))]
 <!-- comment -->
 ```
 
@@ -82,7 +82,7 @@ Le tableau de contingence ci-dessous reprend les données des années voisines, 
 <!-- paragraph -->
 
 ```{r}
-not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
+not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
 <!-- comment -->
 ```
 
@@ -97,7 +97,7 @@ Nous remplissons les valeurs manquantes ci-dessous.
 ```{r}
 not.na[is.na(population), population := 1700000]
 <!-- comment -->
-not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
+not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
 <!-- comment -->
 ```
 
@@ -110,8 +110,8 @@ Ensuite, nous définissons la fonction d'aide suivante, qui sera utilisée pour 
 ```{r}
 FACETS <- function(df, top, side){
   data.frame(df,
-             top=factor(top, c("Fertility rate", "Years")),
-             side=factor(side, c("Years", "Life expectancy")))
+             top=factor(top, c("Taux de fertilité", "Années")),
+             side=factor(side, c("Années", "Espérance de vie")))
 }
 ```
 
@@ -126,9 +126,9 @@ Nous définissons ci-dessous trois fonctions d'aide, une pour chaque facette.
 <!-- paragraph -->
 
 ```{r}
-TS.RIGHT <- function(df)FACETS(df, "Years", "Life expectancy")
-SCATTER <- function(df)FACETS(df, "Fertility rate", "Life expectancy")
-TS.ABOVE <- function(df)FACETS(df, "Fertility rate", "Years")
+TS.RIGHT <- function(df)FACETS(df, "Années", "Espérance de vie")
+SCATTER <- function(df)FACETS(df, "Taux de fertilité", "Espérance de vie")
+TS.ABOVE <- function(df)FACETS(df, "Taux de fertilité", "Années")
 ```
 
 <!-- paragraph -->
@@ -142,7 +142,7 @@ Nous définissons d'abord un ensemble de données avec une ligne pour chaque ann
 <!-- paragraph -->
 
 ```{r}
-years <- unique(not.na[, .(year)])
+années <- unique(not.na[, .(année)])
 ```
 
 <!-- paragraph -->
@@ -154,19 +154,19 @@ Nous définissons le ggplot avec un `geom_tallrect` en arrière-plan, et un `geo
 ```{r}
 ts.right <- ggplot()+
   geom_tallrect(aes(
-    xmin=year-1/2, xmax=year+1/2),
-    clickSelects="year",
-    data=TS.RIGHT(years), alpha=1/2)+
+    xmin=année-1/2, xmax=année+1/2),
+    clickSelects="année",
+    data=TS.RIGHT(années), alpha=1/2)+
   geom_line(aes(
-    year, life.expectancy, group=country, colour=Region),
-    clickSelects="country",
+    année, espérance.de.vie, group=pays, colour=Region),
+    clickSelects="pays",
     data=TS.RIGHT(not.na), size=4, alpha=3/5)
 ts.right
 ```
 
 <!-- paragraph -->
 
-Notez que nous avons spécifié `clickSelects=year` pour que le fait de cliquer sur un tallrect modifie l'année sélectionnée, et `clickSelects=country` pour que le fait de cliquer sur une ligne permette de sélectionner ou de désélectionner un pays.
+Notez que nous avons spécifié `clickSelects=année` pour que le fait de cliquer sur un tallrect modifie l'année sélectionnée, et `clickSelects=pays` pour que le fait de cliquer sur une ligne permette de sélectionner ou de désélectionner un pays.
 <!-- comment -->
 Notez également que nous avons utilisé `TS.RIGHT` pour spécifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
 
@@ -206,12 +206,12 @@ Ci-dessous, nous ajoutons une facette de nuage de points avec un point pour chaq
 ts.scatter <- ts.facet+
   theme_animint(width=600)+
   geom_point(aes(
-    fertility.rate, life.expectancy,
+    taux.de.fertilité, espérance.de.vie,
     colour=Region, size=population,
-    key=country), # key aesthetic for animated transitions!
+    key=pays), # key aesthetic for animated transitions!
 <!-- comment -->
-clickSelects="country",
-    showSelected="year",
+clickSelects="pays",
+    showSelected="année",
     data=SCATTER(not.na))+
   scale_size_animint(pixel.range=c(2, 20), breaks=10^(9:5))
 ts.scatter
@@ -248,12 +248,12 @@ Ci-dessous, nous ajoutons des widerects pour sélectionner les années, et des c
 ```{r}
 scatter.both <- ts.scatter+
   geom_widerect(aes(
-    ymin=year-1/2, ymax=year+1/2),
-    clickSelects="year",
-    data=TS.ABOVE(years), alpha=1/2)+
+    ymin=année-1/2, ymax=année+1/2),
+    clickSelects="année",
+    data=TS.ABOVE(années), alpha=1/2)+
   geom_path(aes(
-    fertility.rate, year, group=country, colour=Region),
-    clickSelects="country",
+    taux.de.fertilité, année, group=pays, colour=Region),
+    clickSelects="pays",
     data=TS.ABOVE(not.na), size=4, alpha=3/5)
 scatter.both
 ```
@@ -268,13 +268,13 @@ Nous affichons une version interactive ci-dessous.
 
 ```{r Ch08-viz-scatter-both}
 viz.scatter.both <- animint(
-  title="World Bank data (multiple selection, facets)",
+  title="Données de la Banque mondiale (multiple selection, facets)",
   scatterBoth=scatter.both+
     theme_animint(width=1000, height=800),
-  duration=list(year=1000),
-  time=list(variable="year", ms=3000),
-  first=list(year=1975, country=c("United States", "Vietnam")),
-  selector.types=list(country="multiple"))
+  duration=list(année=1000),
+  time=list(variable="année", ms=3000),
+  first=list(année=1975, pays=c("United States", "Vietnam")),
+  selector.types=list(pays="multiple"))
 ```
 
 <!-- paragraph -->
