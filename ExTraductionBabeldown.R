@@ -10,7 +10,7 @@ path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-bo
 
 path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/master"
 
-#DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b"
+
 
 # Installation du package babeldown
 
@@ -25,7 +25,7 @@ install.packages("aeolus",
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-deepl_key <- Sys.setenv(DEEPL_API_KEY = "be91ea27-bdcd-4395-a727-ab621b2ffc9b")
+deepl_key <- Sys.setenv(DEEPL_API_KEY = "KEY")
 Sys.setenv(DEEPL_AUTH_KEY = deepl_key)
 
 
@@ -336,5 +336,3 @@ Translate_FR_EN(file_name = "Ch05-sharing",
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
 )
-
-#quarto::quarto_render(input = "Chapitres/Ch05/Ch05-sharing.Rmd")

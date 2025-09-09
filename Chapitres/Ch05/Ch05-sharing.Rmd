@@ -153,7 +153,8 @@ Si vous n'avez pas accès à un serveur web personnel ou de laboratoire, essayez
 
 <!-- paragraph -->
 
-[Netlify Drop](https://app.netlify.com/drop) est un service d'hébergement de sites web statiques. Pour y publier votre visualisation de données, il suffit de faire glisser un dossier sur cette page web (il peut s'agir d'un dossier issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
+[Netlify Drop](https://app.netlify.com/drop) est un service d'hébergement de sites web statiques.
+Pour y publier votre visualisation de données, il suffit de faire glisser un dossier sur cette page web (il peut s'agir d'un dossier issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
 <!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce dossier.
 <!-- comment -->
@@ -198,7 +199,9 @@ Si vous voulez mettre à jour un animint qui a déjà été publié sur GitHub P
 
 Attention, GitHub Pages impose une limite de 100MB par fichier.
 <!-- comment -->
-Pour la plupart des visualisations, cette limite ne devrait pas poser de problème. Si votre visualisation de données contient un fichier TSV de plus de 100 Mo, vous pouvez utiliser l'option [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options) pour convertir ce grand fichier en plusieurs fichiers plus petits.
+Pour la plupart des visualisations, cette limite ne devrait pas poser de problème.
+<!-- comment -->
+Si votre visualisation de données contient un fichier TSV de plus de 100 Mo, vous pouvez utiliser l'option [chunk_vars](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch06-other.html#geom-options) pour convertir ce grand fichier en plusieurs fichiers plus petits.
 
 <!-- paragraph -->
 
