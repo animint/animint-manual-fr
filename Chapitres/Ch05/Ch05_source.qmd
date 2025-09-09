@@ -81,7 +81,7 @@ animint(
   point=ggplot()+
     geom_point(aes(
       x, y), 
-      data=ten.points),
+      data=dix.points),
   out.dir="Ch05-partager-dix-points"
 )
 ```
@@ -109,7 +109,7 @@ vis <- animint(
   point=ggplot()+
     geom_point(aes(
       x, y), 
-      data=ten.points))
+      data=dix.points))
 animint2dir(
   vis, 
   out.dir="Ch05-partager-dix-points-again", 
