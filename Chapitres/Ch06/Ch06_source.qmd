@@ -38,7 +38,7 @@ Après avoir lu ce chapitre, vous comprendrez comment personnaliser vos graphiqu
 <!-- comment -->
 - les légendes et les options de hauteur/largeur propres au graphique
 <!-- comment -->
-- options de visualisation des données globales.
+- les options globales.
 
 <!-- paragraph -->
 
@@ -220,7 +220,7 @@ vis$points <- vis$points +
 
 Cette méthode est mauvaise car elle est lente pour construire `vis` et la visualisation compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point`.
 <!-- comment -->
-La méthode à privilégier préférable est de rajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
+La méthode à privilégier est de rajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
 <!-- comment -->
 Les noms doivent être utilisés pour indiquer la colonne qui contient le nom de la variable du sélecteur.
 <!-- comment -->
@@ -245,11 +245,11 @@ Lorsqu'on clique sur l'un des points de données, le sélecteur correspondant es
 
 <!-- paragraph -->
 
-De la même manière, vous pouvez rajouter des noms au vector `showSelected`, au lieu de créer plusieurs geoms, chacun avec une valeur différente pour `showSelected`.
+De la même manière, vous pouvez rajouter des noms au vecteur `showSelected`, au lieu de créer plusieurs geoms, ayant une valeur différente pour `showSelected`.
 
 <!-- paragraph -->
 
-Cette fonctionnalité est utile non seulement pour éviter les répétitions dans la définition de la visualisation des données, mais aussi pour augmenter l'efficacité sur le plan computationnel.
+Cette fonctionnalité évite non seulement les répétitions dans la définition de la visualisation des données, mais elle augmente aussi l'efficacité sur le plan computationnel.
 <!-- comment -->
 Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace disque, voir le [chapitre 14](Ch14-PeakSegJoint.html) .
 
