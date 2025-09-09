@@ -50,13 +50,13 @@ If  `viz`  is an animint (list  of ggplots and options with class animint), then
 
 ```{r}
 set.seed(1)
-dix.points <- data.frame(x=0:9, y=rnorm(10))
+ten.points <- data.frame(x=0:9, y=rnorm(10))
 library(animint2)
 animint(
   point=ggplot()+
     geom_point(aes(
       x, y), 
-      data=dix.points)
+      data=ten.points)
 )
 ```
 
@@ -105,7 +105,7 @@ viz <- animint(
   point=ggplot()+
     geom_point(aes(
       x, y), 
-      data=dix.points))
+      data=ten.points))
 animint2dir(
   viz, 
   out.dir="Ch05-sharing-ten-points-again", 
