@@ -4,15 +4,8 @@ layout: default
 output: bookdown::html_chapter
 ---
 
-
-
-Traduction de [English](https://github.com/tdhock/animint-book/)
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 [Ch05-sharing](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch05-sharing.Rmd)
-
-
-<!-- paragraph -->
-
-# Chapitre 5, Partager des animints
 
 <!-- paragraph -->
 
