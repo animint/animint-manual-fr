@@ -45,6 +45,10 @@ Considérons, par exemple, [la courbe de Keeling du chapitre 1 présentée ci-de
 
 <!-- comment -->
 
+![Esquisse de la courbe de Keeling](Ch03-viz-co2.png)
+
+<!-- comment -->
+
 L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les mois sélectionnés.
 <!-- comment -->
 En revanche, puisque `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
@@ -164,6 +168,30 @@ Nous utilisons les termes "manipulation directe" et "manipulation indirecte" pou
 La manipulation directe est généralement plus facile à comprendre, parce qu'il s'agit de cliquer sur les objets que l'on souhaite modifier dans le graphique.
 <!-- comment -->
 De leur coté, les techniques de manipulation indirecte, telles que les menus, sont utiles dans d'autres cas (par exemple, la sélection du nom d'un pays).
+<!-- comment -->
+Dans la visualisation ci-dessus, vous pouvez modifier la valeur de `région` en utilisant soit la légende, soit le menu.
+<!-- comment -->
+L'utilisation de la légende est une technique de manipulation plus directe, puisque la légende est dessinée plus près du nuage de points qui sera mis à jour.
+
+<!-- comment -->
+
+D'autres variables de sélection, comme `année`, ont une sélection simple par défaut, de sorte qu'une seule valeur est sélectionnée et affichée à la fois.      Essayez de modifier la valeur sélectionnée pour la variable `année` à l'aide du menu de sélection.
+<!-- comment -->
+Vous devriez voir le nuage de points se mettre à jour immédiatement pour afficher le taux de fertilité et l'espérance de vie de tous les pays au cours de l'année que vous avez sélectionnée.
+
+<!-- comment -->
+
+Exercice couches multiples : ajoutez un autre geom à ce nuage de points interactif.
+<!-- comment -->
+Comme dans le [chapitre 2](Ch02-ggplot2.html#multi-layer), vous pouvez utiliser un `geom_text` pour afficher le nom de chaque pays (facile), ou un `geom_text` pour afficher l'année sélectionnée (moyen), ou un `geom_path` pour afficher les données des 5 années précédentes (difficile).
+<!-- comment -->
+Astuce : utilisez `showSelected=année` dans tous les geoms.
+
+<!-- comment -->
+
+Exercice multi-plot : ajoutez une série temporelle à la visualisation de données ci-dessus.
+<!-- comment -->
+Comme dans le [chapitre 2](Ch02-ggplot2.html#multi-plot), vous pouvez utiliser un `geom_line` pour afficher le taux de fertilité de chaque pays, pour toutes les années.
 <!-- comment -->
 Ajoutez un `geom_vline` avec `showSelected=année` pour mettre en évidence l'année sélectionnée.
 
