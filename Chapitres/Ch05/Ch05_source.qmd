@@ -54,7 +54,7 @@ Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), 
 
 <!-- paragraph -->
 
-```{r}
+```{r Ch05-viz-dix-points}
 set.seed(1)
 dix.points <- data.frame(x=0:9, y=rnorm(10))
 library(animint2)
@@ -76,7 +76,7 @@ Si vous voulez sauvegarder l'animint dans le fichier `"Ch05-partager-dix-points"
 
 <!-- paragraph -->
 
-```{r}
+```{r Ch05-viz-partager-dix-points}
 animint(
   point=ggplot()+
     geom_point(aes(
