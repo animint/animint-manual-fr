@@ -614,7 +614,8 @@ for(afficher.année in c(1975, 1985, 1995)){
       BanqueMondiale, année==afficher.année))
   afficher.path.list[[paste(afficher.année)]] <- data.frame(
     afficher.année, subset(
-      BanqueMondiale, afficher.année - 5 <= année & année <= afficher.année))
+      BanqueMondiale,
+      afficher.année - 5 <= année & année <= afficher.année))
 }
 afficher.point <- do.call(rbind, afficher.point.list)
 afficher.path <- do.call(rbind, afficher.path.list)
