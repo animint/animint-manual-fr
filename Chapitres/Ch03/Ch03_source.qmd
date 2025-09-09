@@ -148,7 +148,7 @@ subset(trois.ans, pays=="Kosovo")
 ```
 
 On voit bien que les données sur le taux de fertilité et sur l’espérance de vie sont absentes du tableau pour le Kosovo en 1979 et en 1980.
-Il ne serait donc pas logique d’effectuer une transition en douceur pour ce pays, puisque les données ne sont présentes ni avant ni après la transition. 
+Il ne serait donc pas logique d’effectuer une transition fluide pour ce pays, puisque les données ne sont présentes ni avant ni après la transition.
 Comment le spécifier dans la visualisation de données? 
 Dans le code ci-dessous, nous utilisons `aes(key=pays)` pour spécifier que la variable `pays` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection.
 
@@ -176,7 +176,7 @@ Si vous cliquez sur "Show animation controls" (Afficher les contrôles d'animati
 Si vous changez la sélection de 1980 à 1981, vous devriez voir une transition correcte.
 
 De façon générale, `aes(key)` doit être spécifié pour tous les geoms qui utilisent le mot-clé `showSelected` avec une variable qui apparaît dans l'option `duration`.
-Dans cet exemple, nous avons utilisé l'option `duration` pour spécifier une transition en douceur pour la variable `année`.
+Dans cet exemple, nous avons utilisé l'option `duration` pour spécifier une transition fluide pour la variable `année`.
 Puisque nous utilisons `showSelected=année` dans `geom_point` nous avons également spécifié `aes(key)` pour ce geom.
 
 ## Animation : l'option `time` {#animation-time}
