@@ -475,6 +475,7 @@ Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 <!-- comment -->
 
 Un ggplot peut avoir des facettes (panneaux), qui sont des sous-graphiques, chacun d'eux présentant un sous-ensemble de données différent.
+On utilise le mot « facette » pour les fonctions `facet_*` correspondantes.
 <!-- comment -->
 L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques avec plusieurs facettes.
 <!-- comment -->
