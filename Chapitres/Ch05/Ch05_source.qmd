@@ -57,6 +57,7 @@ Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), 
 ```{r}
 set.seed(1)
 ten.points <- data.frame(x=0:9, y=rnorm(10))
+library(animint2)
 animint(
   point=ggplot()+
     geom_point(aes(
