@@ -1,5 +1,5 @@
 ---
-title: Visualisation des données de la Banque mondiale viz
+title: Visualisation des données de la Banque mondiale
 layout: default
 output: bookdown::html_chapter
 ---
@@ -12,7 +12,7 @@ Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 
 <!-- paragraph -->
 
-# Chapitre 8, visualisation des données de la Banque mondiale viz
+# Chapitre 8, visualisation des données de la Banque mondiale
 
 <!-- paragraph -->
 
@@ -32,11 +32,11 @@ Plan du chapitre :
 
 - Nous commençons par charger le jeu de données de la Banque mondiale et par définir quelques fonctions d'aide pour créer un ggplot multi-panneaux avec plusieurs geoms.
 <!-- comment -->
-- Nous créons ensuite un graphique de série chronologique pour l'espérance de vie.
+- Nous créons ensuite un graphique de série temporelle pour l'espérance de vie.
 <!-- comment -->
-- Nous ajoutons ensuite un nuage de points de l'espérance de vie en fonction du taux de fécondité dans un deuxième panneau.
+- Nous ajoutons ensuite un nuage de points de l'espérance de vie en fonction du taux de fertilité dans un deuxième panneau.
 <!-- comment -->
-- Nous ajoutons ensuite un troisième panneau avec une série temporelle pour le taux de fécondité.
+- Nous ajoutons ensuite un troisième panneau avec une série temporelle pour le taux de fertilité.
 
 <!-- paragraph -->
 
@@ -44,7 +44,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale, et nous ne considérons que le sous-ensemble qui a des valeurs non manquantes à la fois pour l'espérance de vie et le taux de fécondité.
+Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale, et nous ne considérons que le sous-ensemble qui a des valeurs non manquantes à la fois pour `espérance.de.vie` et `taux.de.fertilité`.
 
 <!-- paragraph -->
 
@@ -73,11 +73,11 @@ not.na[is.na(not.na$population)]
 
 <!-- paragraph -->
 
-Le tableau de contingence ci-dessus montre qu'il y a trois lignes avec des valeurs manquantes pour la variable population.
+Le tableau ci-dessus montre qu'il y a trois lignes avec des valeurs manquantes pour la variable population.
 <!-- comment -->
 Elles concernent le pays Koweït pour la période 1992-1994.
 <!-- comment -->
-Le tableau de contingence ci-dessous reprend les données des années voisines, 1991-1995.
+Le tableau ci-dessous présente les données des années voisines, de 1991 à 1995.
 
 <!-- paragraph -->
 
@@ -88,7 +88,7 @@ not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
 
 <!-- paragraph -->
 
-Le tableau de contingence ci-dessus montre que la population du Koweït a diminué au cours de la période 1991-1995, ce qui correspond à la guerre du Golfe de cette période.
+Le tableau ci-dessus montre que la population du Koweït a diminué au cours de la période 1991-1995, ce qui concorde avec la guerre du Golfe survenue à cette époque.
 <!-- comment -->
 Nous remplissons les valeurs manquantes ci-dessous.
 
@@ -119,7 +119,7 @@ FACETS <- function(df, top, side){
 
 Notez que les niveaux des facteurs spécifieront l'ordre des facettes dans le ggplot.
 <!-- comment -->
-Il s'agit d'un exemple de la méthode [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
+Ceci est un exemple de [l'idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet) .
 <!-- comment -->
 Nous définissons ci-dessous trois fonctions d'aide, une pour chaque facette.
 
@@ -137,7 +137,7 @@ TS.ABOVE <- function(df)FACETS(df, "Taux de fertilité", "Années")
 
 <!-- paragraph -->
 
-Nous définissons d'abord un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'une fonction `geom_tallrect` en arrière-plan.
+Tout d'abord, nous définissons un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'un `geom_tallrect` en arrière-plan.
 
 <!-- paragraph -->
 
@@ -168,7 +168,7 @@ ts.right
 
 Notez que nous avons spécifié `clickSelects=année` pour que le fait de cliquer sur un tallrect modifie l'année sélectionnée, et `clickSelects=pays` pour que le fait de cliquer sur une ligne permette de sélectionner ou de désélectionner un pays.
 <!-- comment -->
-Notez également que nous avons utilisé `TS.RIGHT` pour spécifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
+Notez également que nous avons utilisé `TS.RIGHT` pour identifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
 
 <!-- paragraph -->
 
@@ -192,11 +192,11 @@ ts.facet
 
 <!-- paragraph -->
 
-Nous définissons l'élément `panel.margin` à 0, ce qui est toujours une bonne idée pour [d'économiser de l'espace dans un ggplot à facettes](Ch99-appendix.html#space-saving-facets) .
+Nous définissons `panel.margin` à 0, ce qui est toujours une bonne idée pour [économiser de l'espace dans un ggplot avec des facettes](Ch99-appendix.html#space-saving-facets).
 <!-- comment -->
-Nous utilisons `scales="free"` et masquons les étiquettes des axes, dans un exemple de la méthode [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) .
+Nous utilisons `scales="free"` et masquons les étiquettes des axes, dans un exemple de [l'idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet) .
 <!-- comment -->
-Au lieu de cela, nous utilisons l'étiquette de la facette pour montrer la variable encodée sur chaque axe.
+À la place, nous utilisons le libellé de la facette pour indiquer la variable encodée sur chaque axe.
 <!-- comment -->
 Ci-dessous, nous ajoutons une facette de nuage de points avec un point pour chaque année et chaque pays.
 
@@ -219,9 +219,9 @@ ts.scatter
 
 <!-- paragraph -->
 
-Notez que nous utilisons `scale_size_animint` pour spécifier la plage des tailles en pixels, et les bornes des classes (histogrammes).
+Remarquez comment nous utilisons `scale_size_animint` pour spécifier l'échelle des tailles en pixels, et les intervalles (`breaks`) dans la légende.
 <!-- comment -->
-Notez également que nous utilisons `SCATTER` pour spécifier `top` et `side` qui sont utilisées dans la spécification de la facette.
+Notez également que nous utilisons `SCATTER` pour spécifier les colonnes `top` et `side` qui sont utilisées dans la spécification de la facette.
 <!-- comment -->
 Nous affichons également ce ggplot de manière interactive ci-dessous.
 
@@ -241,7 +241,7 @@ Notez que la sélection unique est utilisée par défaut pour l'année et le pay
 
 <!-- paragraph -->
 
-Ci-dessous, nous ajoutons des widerects pour sélectionner les années, et des chemins d'accès pour afficher le taux de fécondité.
+Ci-dessous, nous ajoutons des `widerects` pour sélectionner les années, et des chemins d'accès ("path") pour afficher le taux de fertilité.
 
 <!-- paragraph -->
 
@@ -283,7 +283,7 @@ viz.scatter.both <- animint(
 
 <!-- paragraph -->
 
-Nous avons montré comment créer une visualisation multicouche et multi-panneaux (mais à un seul graphique) des données de la Banque mondiale.
+Nous avons montré comment créer une visualisation multicouche et multipanneaux (mais à graphique unique) des données de la Banque mondiale.
 
 <!-- paragraph -->
 
@@ -295,19 +295,19 @@ Exercices :
 <!-- comment -->
 Les points ne doivent apparaître que lorsque le pays est sélectionné, et un clic sur les points doit désélectionner ce pays.
 <!-- comment -->
-- Ajoutez des étiquettes de texte au graphique de la série temporelle sur la droite, avec des noms pour chaque pays.
+- Ajoutez des étiquettes de texte au graphique de la série temporelle situé à droite, avec les noms de chaque pays.
 <!-- comment -->
 Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
 <!-- comment -->
-- Ajouter une étiquette de texte au nuage de points pour indiquer l'année sélectionnée.
+- Ajoutez une étiquette de texte au nuage de points pour indiquer l'année sélectionnée.
 <!-- comment -->
-- Ajouter des étiquettes de texte au nuage de points, avec des noms pour chaque pays.
+- Ajoutez des étiquettes de texte au nuage de points, avec des noms pour chaque pays.
 <!-- comment -->
 Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 9](Ch09-Montreal-bikes.html) explique comment visualiser les données sur les vélos à Montréal.
+Ensuite, le [chapitre 9](Ch09-Montreal-bikes.html) explique comment visualiser les données sur les vélos à Montréal.
 
 <!-- paragraph -->
 
