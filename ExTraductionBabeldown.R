@@ -40,7 +40,7 @@ for (pkg in c("babeldown", "aeolus")) {
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-deepl_key <- Sys.setenv(DEEPL_API_KEY = "KEY")
+deepl_key <- Sys.getenv("DEEPL_API_KEY")
 Sys.setenv(DEEPL_AUTH_KEY = deepl_key)
 
 
@@ -490,6 +490,7 @@ Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
                 ajoutFR = FALSE
 )
 
+##### Chapitre 09 ######
 
 # Traduction Chapitre 09 par Anna Artiges
 
@@ -512,6 +513,34 @@ Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
                 ajoutFR = FALSE
 )
 
+
+##### Chapitre 10 ######
+
+# Traduction Chapitre 10 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "Ch10-nearest-neighbors",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch10"
+)
+
+Translate_FR_EN(file_name = "Ch10-nearest-neighbors",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE,
+                Chx = "Ch10"
+)
+
+
+
+##### Chapitre 11 ######
 
 # Traduction Chapitre 11 par Anna Artiges
 
