@@ -124,6 +124,8 @@ Below, we translate this sketch into R code.
 
 <!-- comment -->
 
+<!-- comment -->
+
 ```{r}
 library(animint2)
 data(WorldBank)
@@ -146,6 +148,8 @@ Note that since `color=region` was specified, animint also automatically uses `r
 <!-- comment -->
 
 In constrast, rendering the same ggplot using animint yields the interactive data visualization below.
+
+<!-- comment -->
 
 <!-- comment -->
 
@@ -246,22 +250,20 @@ Smooth transitions only make sense for data points that exist both before and af
 In the R code below we compute a table of counts of data points that can be plotted in each of these three years.
 
 <!-- comment -->
-
-```{r}
-three.years <- subset(WorldBank, 1979 <= year & year <= 1981)
-can.plot <- with(three.years, {
- (!is.na(life.expectancy)) & (!is.na(fertility.rate))
-})
-table(three.years$year, can.plot)
-```
-
-<!-- comment -->
-
 It is clear from the table above that there are 187 points that can be plotted in 1979 and 1980.
 <!-- comment -->
 However, in 1981 there is one more data point, corresponding to a country for which we did not have data in 1980.
 <!-- comment -->
 Below we show the data for that country, Kosovo.
+
+<!-- comment -->
+=======
+Le tableau de contingence ci-dessus montre clairement que 187 points peuvent être tracés en 1979 et 1980. 
+<!-- comment -->
+Cependant, en 1981, il y a un point de données supplémentaire correspondant à un pays pour lequel nous n'avions pas de données en 1980. 
+<!-- comment -->
+Nous présentons ci-dessous les données de ce pays, le Kosovo.
+>>>>>>> main
 
 <!-- comment -->
 
