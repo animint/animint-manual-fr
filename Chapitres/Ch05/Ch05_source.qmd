@@ -111,8 +111,8 @@ vis <- animint(
       x, y), 
       data=dix.points))
 animint2dir(
-  vis, 
-  out.dir="Ch05-partager-dix-points-again", 
+  vis,
+  out.dir="Ch05-partager-dix-points",
   open.browser=FALSE)
 ```
 
