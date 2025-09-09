@@ -475,6 +475,7 @@ Pour obtenir cet effet, nous utilisons les facettes dans la section suivante.
 <!-- comment -->
 
 Un ggplot peut avoir des facettes (panneaux), qui sont des sous-graphiques, chacun d'eux présentant un sous-ensemble de données différent.
+On utilise le mot « facette » pour les fonctions `facet_*` correspondantes.
 <!-- comment -->
 L'un des principaux atouts de ggplots est qu'il est relativement facile de créer différents types de graphiques avec plusieurs facettes.
 <!-- comment -->
@@ -613,7 +614,8 @@ for(afficher.année in c(1975, 1985, 1995)){
       BanqueMondiale, année==afficher.année))
   afficher.path.list[[paste(afficher.année)]] <- data.frame(
     afficher.année, subset(
-      BanqueMondiale, afficher.année - 5 <= année & année <= afficher.année))
+      BanqueMondiale,
+      afficher.année - 5 <= année & année <= afficher.année))
 }
 afficher.point <- do.call(rbind, afficher.point.list)
 afficher.path <- do.call(rbind, afficher.path.list)
