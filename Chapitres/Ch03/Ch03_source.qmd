@@ -257,15 +257,6 @@ However, in 1981 there is one more data point, corresponding to a country for wh
 Below we show the data for that country, Kosovo.
 
 <!-- comment -->
-=======
-Le tableau de contingence ci-dessus montre clairement que 187 points peuvent être tracés en 1979 et 1980. 
-<!-- comment -->
-Cependant, en 1981, il y a un point de données supplémentaire correspondant à un pays pour lequel nous n'avions pas de données en 1980. 
-<!-- comment -->
-Nous présentons ci-dessous les données de ce pays, le Kosovo.
->>>>>>> main
-
-<!-- comment -->
 
 ```{r}
 subset(three.years, country=="Kosovo")
