@@ -354,7 +354,7 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch03-"
+                    Chx = "Ch03"
 )
 
 Translate_FR_EN(file_name = "Ch03-showSelected",
@@ -382,7 +382,7 @@ ConvertRmd_comments(file_name = "Ch04-clickSelects",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch04-"
+                    Chx = "Ch04"
 )
 
 Translate_FR_EN(file_name = "Ch04-clickSelects",
@@ -406,7 +406,7 @@ ConvertRmd_comments(file_name = "Ch05-sharing",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch05-"
+                    Chx = "Ch05"
 )
 
 Translate_FR_EN(file_name = "Ch05-sharing",
@@ -430,7 +430,7 @@ ConvertRmd_comments(file_name = "Ch06-other",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch06-"
+                    Chx = "Ch06"
 )
 
 Translate_FR_EN(file_name = "Ch06-other",
@@ -454,7 +454,7 @@ ConvertRmd_comments(file_name = "Ch07-limitations",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch07-"
+                    Chx = "Ch07"
 )
 
 Translate_FR_EN(file_name = "Ch07-limitations",
@@ -479,7 +479,7 @@ ConvertRmd_comments(file_name = "Ch08-WorldBank-facets",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch08-"
+                    Chx = "Ch08"
 )
 
 Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
@@ -502,7 +502,7 @@ ConvertRmd_comments(file_name = "Ch09-Montreal-bikes",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch09-"
+                    Chx = "Ch09"
 )
 
 Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
