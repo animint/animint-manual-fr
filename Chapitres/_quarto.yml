@@ -44,6 +44,7 @@ book:
       - Ch02/Ch02-viz.qmd
       - Ch03/Ch03-viz.qmd
       - Ch04/Ch04-viz.qmd
+      - Ch05/Ch05-viz.qmd
     - part: "Exemples avancés"
       chapters:
       - Ch06/Ch06-viz.qmd

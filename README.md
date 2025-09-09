@@ -11,7 +11,7 @@ Diapositives en [Anglais](https://docs.google.com/presentation/d/1QDwo9x4OM7UKAX
 `animint2` est un package R permettant de générer et de partager des visualisations de données qui sont à la fois interactives et animées.
 C'est un fork de [ggplot2](https://ggplot2.tidyverse.org/), qui est pour la création des visualisations non-interactives.
 
-<a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."></a> 
+<a href="https://rcdata.nau.edu/genomic-ml/WorldBank-facets/"><img src="man/figures/world_bank_screencast.gif" alt="Une visualisation de données interactive affichant des données sur la fertilité de la Banque mondiale. L'utilisateur tape dans le menu de sélection et clique sur la légende, ce qui entraîne des changements dans la visualisation. GIF."></a>
 
 Jouer avec [cette visualisation interactive de données de la Banque mondiale.](https://rcdata.nau.edu/genomic-ml/WorldBank-facets/) ou [une version plus récente qui comprend également une carte du monde](https://tdhock.github.io/2025-08-BanqueMondiale-facets-map/).
 Pour plus d'exemples, voir les galeries en-dessous, qui présentent des captures d'écran ainsi que des liens vers l'affichage interactif et le code source :
