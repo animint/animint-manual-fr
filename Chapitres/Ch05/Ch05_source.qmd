@@ -9,7 +9,8 @@ Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
 
 <!-- paragraph -->
 
-```{r setup, echo=FALSE}
+```{r}
+#| echo: FALSE
 knitr::opts_chunk$set(fig.path="Ch05-figures/")
 ```
 
@@ -55,8 +56,7 @@ animint(
   point=ggplot()+
     geom_point(aes(
       x, y), 
-      data=dix.points)
-)
+      data=dix.points))
 ```
 
 <!-- paragraph -->
@@ -75,8 +75,7 @@ animint(
     geom_point(aes(
       x, y), 
       data=dix.points),
-  out.dir="Ch05-partager-dix-points"
-)
+  out.dir="Ch05-partager-dix-points")
 ```
 
 <!-- paragraph -->
