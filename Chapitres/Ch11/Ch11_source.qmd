@@ -75,6 +75,7 @@ Below we fit the full path of lasso solutions using the `lars` package.
 <!-- paragraph -->
 
 ```{r}
+if(!requireNamespace("lars"))install.packages("lars")
 library(lars)
 fit <- lars(x,y,type="lasso")
 fit$lambda
