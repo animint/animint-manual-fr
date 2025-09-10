@@ -92,7 +92,9 @@ Si la page web est vide, il se peut que vous deviez configurer votre navigateur 
 
 <!-- paragraph -->
 
-En interne, R appelle la méthode S3 `print.animint`, qui appelle `animint2dir` pour le compiler dans un nouveau dossier temporaire sur votre ordinateur personnel. En général, nous conseillons d'éviter d'appeler `animint2dir` directement, mais c'est utile si vous voulez éviter d'ouvrir plusieurs fenêtres similaires dans le navigateur lorsque vous révisez et affichez un animint de manière répétée. Vous pouvez empêcher l'ouverture par défaut d'une fenêtre du navigateur via :
+En interne, R appelle la méthode S3 `print.animint`, laquelle appelle `animint2dir` afin de compiler la visualisation dans un nouveau dossier temporaire sur votre ordinateur personnel.
+<!-- comment -->
+En général, nous déconseillons d'appeler `animint2dir` directement, mais cela peut être utile si vous voulez éviter d'ouvrir plusieurs fenêtres similaires dans le navigateur lorsque vous révisez un animint. Vous pouvez empêcher l'ouverture par défaut d'une fenêtre du navigateur avec :
 
 <!-- paragraph -->
 
