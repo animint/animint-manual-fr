@@ -149,9 +149,13 @@ ConvertRmd_comments <- function(file_name = "README",
  # Mod 09 septembre 2025
  # output_path <- paste0(dest_filepath,
  #                       "/",file_name,ifelse(TestFile,"_Test",""),file_extension)
+
+ # Mod 10 septembre 2025    
+ # output_path <- paste0(dest_filepath,
+ #                       "/",Chx,"_source",ifelse(TestFile,"_Test",""),file_extension)
   
   output_path <- paste0(dest_filepath,
-                        "/",Chx,"_source",ifelse(TestFile,"_Test",""),file_extension)
+                        "/",Chx,"_source",ifelse(TestFile,"_Test",""),".qmd")
   
   # Définition du répertoire temporaire et suppression des anciens fichiers
   temp_dir <- tempdir()
@@ -170,8 +174,12 @@ ConvertRmd_comments <- function(file_name = "README",
  # temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
  #                       fileext = file_extension)
   
+ # Mod 10 seotembre 2025  
+ # temp_file <- tempfile(pattern = paste0(Chx,"_source","_Temp"),
+ #                       fileext = file_extension)
+  
   temp_file <- tempfile(pattern = paste0(Chx,"_source","_Temp"),
-                        fileext = file_extension)
+                        fileext = ".qmd")
   
   # Téléchargement du fichier
   download.file(url = paste0(source_filepath,"/",file_name,file_extension),
@@ -246,8 +254,12 @@ Translate_FR_EN <- function(file_name = "README",
   
   # Chemins d'accès
   
-  output_path <- paste0(dest_filepath, "/", Chx,"_source", ifelse(ajoutFR, "_FR", ""), file_extension)
-  Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", file_extension)
+  output_path <- paste0(dest_filepath, "/", Chx,"_source", ifelse(ajoutFR, "_FR", ""), ".qmd")
+  Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", ".qmd")
+  
+  # Mod 10 septembre 2025
+  # output_path <- paste0(dest_filepath, "/", Chx,"_source", ifelse(ajoutFR, "_FR", ""), file_extension)
+  # Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", file_extension)
   
   # mod 09 septembre 2025
   # output_path <- paste0(dest_filepath, "/", file_name, ifelse(ajoutFR, "_FR", ""), file_extension) 
@@ -562,4 +574,30 @@ Translate_FR_EN(file_name = "Ch11-lasso",
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE,
                 Chx = "Ch11"
+)
+
+
+
+##### Chapitre 99 ######
+
+# Traduction Chapitre 99 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "Ch99-appendix",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch99"
+)
+
+Translate_FR_EN(file_name = "Ch99-appendix",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE,
+                Chx = "Ch99"
 )
