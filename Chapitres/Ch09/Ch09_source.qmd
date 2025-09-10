@@ -24,9 +24,11 @@ Chapter outline:
 
 <!-- paragraph -->
 
--   We begin with some static data visualizations. <!-- comment -->
--   We create an interactive visualization of accident frequency over time. <!-- comment -->
--   We create a interactive data viz with four plots, showing monthly accident trends, daily details, and a map of counter locations.
+- We begin with some static data visualizations.
+<!-- comment -->
+- We create an interactive visualization of accident frequency over time.
+<!-- comment -->
+- We create a interactive data viz with four plots, showing monthly accident trends, daily details, and a map of counter locations.
 
 <!-- paragraph -->
 
@@ -35,7 +37,8 @@ Chapter outline:
 <!-- paragraph -->
 
 We begin by loading the `montreal.bikes` data set, which is not available in the CRAN release of animint2, in order to save space on CRAN.
-<!-- comment --> Therefore to access this data set, you will need to install animint2 from GitHub:
+<!-- comment -->
+Therefore to access this data set, you will need to install animint2 from GitHub:
 
 <!-- paragraph -->
 
@@ -70,7 +73,8 @@ str(accidents.dt)
 <!-- paragraph -->
 
 Each accident has data about its date, time, location, and counts of death and slight/severe injury.
-<!-- comment --> Some of the values are in French (e.g. position Voie de circulation, location En intersection, etc).
+<!-- comment -->
+Some of the values are in French (e.g. position Voie de circulation, location En intersection, etc).
 
 <!-- paragraph -->
 
@@ -125,7 +129,8 @@ Plotting with `geom_point` makes it easy to see the difference between zeros and
 <!-- paragraph -->
 
 We will compute a summary of all accidents per month in this time period, so we first create a data table for each month below.
-<!-- comment --> (and make sure to set the locale to C for English month names)
+<!-- comment -->
+(and make sure to set the locale to C for English month names)
 
 <!-- paragraph -->
 
@@ -210,7 +215,8 @@ ggplot()+
 <!-- paragraph -->
 
 In each accident, there are counts of people who died, along with people who suffered severe and slight injuries.
-<!-- comment --> Below we classify the severity of each accident according to the worst outcome among the people affected.
+<!-- comment -->
+Below we classify the severity of each accident according to the worst outcome among the people affected.
 
 <!-- paragraph -->
 
@@ -230,7 +236,8 @@ accidents.dt[
 <!-- paragraph -->
 
 The output above shows that accidents with only slight injuries are most frequent, and accidents with at least one death are least frequent.
-<!-- comment --> Below we compute counts per month.
+<!-- comment -->
+Below we compute counts per month.
 
 <!-- paragraph -->
 
@@ -347,8 +354,10 @@ animint(
 <!-- paragraph -->
 
 The data viz above shows two data visualizations of city-wide accident frequency over time.
-<!-- comment --> The plot on the left shows that the number of accidents grows with the number of cyclists.
-<!-- comment --> The plot on the right shows the frequency of accidents over time.
+<!-- comment -->
+The plot on the left shows that the number of accidents grows with the number of cyclists.
+<!-- comment -->
+The plot on the right shows the frequency of accidents over time.
 
 <!-- paragraph -->
 
@@ -357,7 +366,8 @@ The data viz above shows two data visualizations of city-wide accident frequency
 <!-- paragraph -->
 
 The plot below is a dotplot of accidents for each month.
-<!-- comment --> Each dot represents one person who got in an accident.
+<!-- comment -->
+Each dot represents one person who got in an accident.
 
 <!-- paragraph -->
 
@@ -409,7 +419,8 @@ velo.counts <- table(counts.dt$location)
 <!-- paragraph -->
 
 The counter locations above will be plotted below.
-<!-- comment --> Note that we use `showSelected=month` and `clickSelects=location`.
+<!-- comment -->
+Note that we use `showSelected=month` and `clickSelects=location`.
 
 <!-- paragraph -->
 
@@ -462,7 +473,8 @@ mtl.map
 <!-- paragraph -->
 
 The plot below shows the time period that each counter was in operation.
-<!-- comment --> Note that we use `geom_tallrect` with `clickSelects` to select the month.
+<!-- comment -->
+Note that we use `geom_tallrect` with `clickSelects` to select the month.
 
 <!-- paragraph -->
 
@@ -774,14 +786,20 @@ Exercises:
 
 <!-- paragraph -->
 
--   Change location to a multiple selection variable. <!-- comment -->
--   Add a plot for the map to the data viz. <!-- comment -->
--   On the map, draw a circle for each location, with size that changes based on the `count` of the accidents in the currently selected `month`. <!-- comment -->
--   On the `MonthSummary` plot, add a background rectangle that can be used to select the `month`. <!-- comment -->
--   Remove the `MonthSummary` plot and add a similar visualization as a third panel in the `MonthFacet` plot.
+- Change location to a multiple selection variable.
+<!-- comment -->
+- Add a plot for the map to the data viz.
+<!-- comment -->
+- On the map, draw a circle for each location, with size that changes based on the `count` of the accidents in the currently selected `month`.
+<!-- comment -->
+- On the `MonthSummary` plot, add a background rectangle that can be used to select the `month`.
+<!-- comment -->
+- Remove the `MonthSummary` plot and add a similar visualization as a third panel in the `MonthFacet` plot.
 
 <!-- paragraph -->
 
 Next, [Chapter 10](Ch10-nearest-neighbors.html) explains how to visualize the K-Nearest-Neighbors machine learning model.
 
 <!-- paragraph -->
+
+
