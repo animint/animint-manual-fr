@@ -32,17 +32,17 @@ Après avoir lu ce chapitre, vous serez en mesure de visualiser des animints :
 
 <!-- paragraph -->
 
-## Compiler dans un dossier local {#animint2dir}
+## Compiler un animint dans un dossier local {#animint2dir}
 
 <!-- paragraph -->
 
-Lorsque vous expérimentez différentes conceptions de visualisation de données interactives, il est utile de les prévisualiser sur votre ordinateur personnel avant de les publier sur le web.
+Lorsque vous testez différentes visualisations de données interactives, il est utile de les prévisualiser sur votre ordinateur personnel avant de les publier sur le web.
 <!-- comment -->
 Cette section traite de deux méthodes pour compiler les animints dans un répertoire local.
 
 <!-- paragraph -->
 
-Jusqu'à présent, dans les chapitres précédents, nous n'avons abordé qu'une seule méthode pour créer des visualisations de données interactives.
+Dans les chapitres précédents, nous n'avons abordé qu'une seule méthode pour créer des visualisations de données interactives.
 <!-- comment -->
 Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), alors `print(vis)`va compiler cet animint dans un dossier temporaire, en utilisant un code comme celui-ci,
 
@@ -63,7 +63,7 @@ animint(
 
 Le code ci-dessus sauvegarde l'animint dans un nouveau dossier temporaire.
 <!-- comment -->
-Plutôt que de sauvegarder chaque animint dans un dossier temporaire séparé, vous pouvez spécifier un dossier de sortie via l'argument `out.dir` de la commande `animint`.
+Plutôt que de sauvegarder chaque animint dans un dossier temporaire séparé, vous pouvez définir un dossier de sortie via l'argument `out.dir` de la commande `animint`.
 <!-- comment -->
 Si vous voulez sauvegarder l'animint dans le fichier `"Ch05-partager-dix-points"`  utilisez :
 
@@ -80,13 +80,13 @@ animint(
 
 <!-- paragraph -->
 
-Si le parent d'`out.dir` n'existe pas, c'est une erreur (vous pouvez utiliser `dir.create` pour créer le parent si nécessaire).
+Si le dossier  parent d'`out.dir` n'existe pas, vous générerez une erreur (vous pouvez utiliser `dir.create` pour créer le parent si nécessaire).
 <!-- comment -->
 Si `out.dir` n'existe pas, il sera créé.
 <!-- comment -->
 Si `out.dir` existe (et contient un fichier nommé `animint.js`), tous les fichiers de ce répertoire seront écrasés.
 <!-- comment -->
-Pour regarder la visualisation, il suffit d'aller à `Ch05-partager-dix-points/index.html` dans un navigateur web (ce qui devrait être fait automatiquement / par défaut).
+Pour afficher la visualisation, il suffit d'aller à `Ch05-partager-dix-points/index.html` dans un navigateur web (ce qui devrait être fait automatiquement / par défaut).
 <!-- comment -->
 Si la page web est vide, il se peut que vous deviez configurer votre navigateur pour autoriser l'exécution du code JavaScript local, [comme expliqué dans notre FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank).
 
