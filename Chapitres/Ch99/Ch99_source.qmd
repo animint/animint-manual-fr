@@ -33,9 +33,7 @@ ggplot()+
   geom_point(aes(Petal.Width, Sepal.Width), iris)+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
-  facet_grid(.
-<!-- comment -->
-~ Species)
+  facet_grid(. ~ Species)
 ```
 
 <!-- paragraph -->
@@ -78,14 +76,10 @@ outer.data.list <- list()
 inner.data.list <- list()
 for(outer in outer.vec){
   outer.dt <- computeOuter(outer)
-  outer.data.list[[paste(outer)]]
-<!-- comment -->
-<- data.table(outer, outer.dt)
+  outer.data.list[[paste(outer)]] <- data.table(outer, outer.dt)
   for(inner in inner.vec){
     inner.dt <- computeInner(outer.dt, inner)
-    inner.data.list[[paste(outer, inner)]]
-<!-- comment -->
-<-
+    inner.data.list[[paste(outer, inner)]] <-
       data.table(outer, inner, inner.dt)
   }
 }
@@ -147,9 +141,7 @@ animint(
   geom_line(aes(
     x=year, y=fertility.rate, color=region, group=country),
     data=addColumn(WorldBank, "1960-2010"))+
-  facet_grid(.
-<!-- comment -->
-~ time.period, scales="free")+
+  facet_grid(. ~ time.period, scales="free")+
   xlab(""))
 ```
 
