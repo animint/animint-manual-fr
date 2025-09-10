@@ -99,13 +99,13 @@ adapted_unleash <- function(path,
         content <- xml2::xml_text(child)
       }
       
-      
-    # Retire les espaces superflues  
+      #combined_md <- paste0(combined_md, content, " ") TEST 12 aout 2025
+      combined_md <- paste0(combined_md, content, "")
+      # Retire les espaces superflues  
       content <- trimws(content)
       combined_md <- sub("\\s+$", "", combined_md)
       combined_md <- paste0(combined_md, " ", content) # OG
       combined_md <- gsub("`\\s+([,.])", "`\\1", combined_md)
-      
     }
     
     combined_md <- trimws(combined_md)
@@ -307,9 +307,8 @@ Translate_FR_EN <- function(file_name = "README",
   }
   
   # Conversion finale des paragraphes en commentaires
- # cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
-  
-  
+  # cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
+
   # Injection du header personnalisé
   yaml_end <- which(cleaned_lines == "---")[2]
   header <- c(
