@@ -45,11 +45,16 @@ book:
       - Ch03/Ch03-viz.qmd
       - Ch04/Ch04-viz.qmd
       - Ch05/Ch05-viz.qmd
+      - Ch06/Ch06-viz.qmd
+      - Ch07/Ch07-viz.qmd
     - part: "Exemples avancés"
       chapters:
-      - Ch06/Ch06-viz.qmd
+      - Ch08/Ch08-viz.qmd
+      - Ch09/Ch09-viz.qmd
+      - Ch10/Ch10-viz.qmd
+      - Ch11/Ch11-viz.qmd
   appendices:
-      - Ch07/Ch07-viz.qmd
+      - Ch99/Ch99-viz.qmd
 
 bibliography: refs.bib
 
