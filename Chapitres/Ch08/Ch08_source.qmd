@@ -49,7 +49,6 @@ WorldBank$Region <- sub(" (all income levels)", "", WorldBank$region, fixed=TRUE
 library(data.table)
 not.na <- data.table(
   WorldBank)[!(is.na(life.expectancy) | is.na(fertility.rate))]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -62,7 +61,6 @@ Before plotting, we will make sure that none of the values are missing.
 
 ```{r}
 not.na[is.na(not.na$population)]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -77,7 +75,6 @@ The table below shows the data from the neighboring years, 1991-1995.
 
 ```{r}
 not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -90,9 +87,7 @@ We fill in those missing values below.
 
 ```{r}
 not.na[is.na(population), population := 1700000]
-<!-- comment -->
 not.na[country == "Kuwait" & 1991 <= year & year <= 1995]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -203,7 +198,6 @@ ts.scatter <- ts.facet+
     fertility.rate, life.expectancy,
     colour=Region, size=population,
     key=country), # key aesthetic for animated transitions!
-<!-- comment -->
 clickSelects="country",
     showSelected="year",
     data=SCATTER(not.na))+
