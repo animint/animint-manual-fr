@@ -58,12 +58,15 @@ We begin by examining the accidents data table.
 
 ```{r accidents}
 library(animint2)
+library(dplyr)
 data(montreal.bikes) #only present if installed from github
-Sys.setlocale(locale="en_US.UTF-8")
-if(! "Brébeuf" %in% montreal.bikes$counter.counts$location){
-  Encoding(levels(montreal.bikes$counter.counts$location)) <- "UTF-8"
+Sys.setlocale("LC_ALL", "")
+
+montreal.bikes$counter.locations <- montreal.bikes$counter.locations %>%
+  mutate(across(where(is.character), ~ iconv(.x, from = "latin1", to = "UTF-8")))
+
   print(table(montreal.bikes$counter.counts$location))
-}
+
 
 library(data.table)
 accidents.dt <- data.table(montreal.bikes$accidents)
