@@ -55,7 +55,6 @@ BanqueMondiale$Region <- sub(" (all income levels)", "", BanqueMondiale$region, 
 library(data.table)
 not.na <- data.table(
   BanqueMondiale)[!(is.na(espérance.de.vie) | is.na(taux.de.fertilité))]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -68,7 +67,6 @@ Avant de tracer le graphique, nous nous assurerons qu'aucune valeur n'est manqua
 
 ```{r}
 not.na[is.na(not.na$population)]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -83,7 +81,6 @@ Le tableau ci-dessous présente les données des années voisines, de 1991 à 19
 
 ```{r}
 not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -96,9 +93,7 @@ Nous remplissons les valeurs manquantes ci-dessous.
 
 ```{r}
 not.na[is.na(population), population := 1700000]
-<!-- comment -->
 not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
-<!-- comment -->
 ```
 
 <!-- paragraph -->
@@ -209,8 +204,7 @@ ts.scatter <- ts.facet+
     taux.de.fertilité, espérance.de.vie,
     colour=Region, size=population,
     key=pays), # key aesthetic for animated transitions!
-<!-- comment -->
-clickSelects="pays",
+    clickSelects="pays",
     showSelected="année",
     data=SCATTER(not.na))+
   scale_size_animint(pixel.range=c(2, 20), breaks=10^(9:5))
