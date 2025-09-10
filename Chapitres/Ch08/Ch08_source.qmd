@@ -304,5 +304,3 @@ Each label should appear only when the country is selected, and should disappear
 Next, [Chapter 9](Ch09-Montreal-bikes.html) explains how to visualize the Montreal bike data set.
 
 <!-- paragraph -->
-
-

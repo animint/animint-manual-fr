@@ -1,8 +1,17 @@
 # Traduction avec Babeldown
 
+#########################################
+################################################################################
+################################################################################
+# NE PAS TOUCHER À CE SCRIPT DANS LE MAIN
+# DO NOT MODIFY THIS SCRIPT IN THE MAIN
+################################################################################
+################################################################################
+#########################################
+
 # Réglage de l'environnement de travail
 
-path_local_animint2_fr <- "/home/anton/projetR/animint-manual-fr"
+path_local_animint2_fr <- "C:/Users/lepj1/OneDrive/Desktop/animint-manual-fr"
 
 path_github_animint2 <- "https://raw.githubusercontent.com/animint/animint2/master"
 
@@ -31,7 +40,7 @@ for (pkg in c("babeldown", "aeolus")) {
 # Clé API de Jeremi pour DEEPL
 
 Sys.setenv(DEEPL_API_URL = "https://api.deepl.com")
-deepl_key <- Sys.setenv(DEEPL_API_KEY = "KEY")
+deepl_key <- Sys.getenv("DEEPL_API_KEY")
 Sys.setenv(DEEPL_AUTH_KEY = deepl_key)
 
 
@@ -132,23 +141,36 @@ ConvertRmd_comments <- function(file_name = "README",
                                 ajoutFR = TRUE,
                                 TestFile = TRUE,
                                 github_tree_filepath = path_tree_github_animint_book,
-                                Chx = "Ch05-") {
+                                Chx = "Ch05") {
+                                #Chx = "Ch05-") { mod 09 septembre 2025
   
   # Traduction utilisant babeldown et le glossaire maison  
-  output_path <- paste0(dest_filepath,
-                        "/",file_name,ifelse(TestFile,"_Test",""),file_extension)
   
+ # Mod 09 septembre 2025
+ # output_path <- paste0(dest_filepath,
+ #                       "/",file_name,ifelse(TestFile,"_Test",""),file_extension)
+  
+  output_path <- paste0(dest_filepath,
+                        "/",Chx,"_source",ifelse(TestFile,"_Test",""),file_extension)
   
   # Définition du répertoire temporaire et suppression des anciens fichiers
   temp_dir <- tempdir()
-  existing_temp_files <- list.files(temp_dir, pattern = paste0(file_name, "_Temp"), full.names = TRUE)
+  
+ # Mod 09 septembre 2025 
+ # existing_temp_files <- list.files(temp_dir, pattern = paste0(file_name, "_Temp"), full.names = TRUE)
+  
+  existing_temp_files <- list.files(temp_dir, pattern = paste0(Chx,"_source", "_Temp"), full.names = TRUE)
   
   if (length(existing_temp_files) > 0) {
     file.remove(existing_temp_files)
   }
   
   # Création d'un fichier temporaire
-  temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
+ # Mod 09 septembre 2025
+ # temp_file <- tempfile(pattern = paste0(file_name,"_Temp"),
+ #                       fileext = file_extension)
+  
+  temp_file <- tempfile(pattern = paste0(Chx,"_source","_Temp"),
                         fileext = file_extension)
   
   # Téléchargement du fichier
@@ -178,14 +200,6 @@ ConvertRmd_comments <- function(file_name = "README",
   yaml_end <- which(translated_text == "---")[2]  # Trouver la fin du YAML (deuxième occurrence)
   
   
-  # Ajouter le header personnalisé
-  #  header <- c("",ifelse(file_name == "README", "# animint-manual-fr", ""), "", "ConvertRmd_comments /n Traduction de [English](https://github.com/tdhock/animint-book/)",paste0("[",file_name,"]","(",source_filepath,"/",file_name,file_extension,")"),"")
-  
-  # Assembler le nouveau contenu
-  #  updated_text <- c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)])
-  
-  #full_text <- paste(c(translated_text[1:yaml_end], header, translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
-  
   full_text <- paste(c(translated_text[1:yaml_end],translated_text[(yaml_end + 1):length(translated_text)]), collapse = "\n")
   
   
@@ -202,22 +216,13 @@ ConvertRmd_comments <- function(file_name = "README",
   )
   library(stringr)
 
-text_with_phrase_comments <-str_replace_all(
-  updated_with_comments,
-  regex("(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
-        ignore_case = TRUE, 
-        multiline = TRUE)
-  , 
-  replacement = " "
+text_with_phrase_comments <-gsub(
+  "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
+        "\n<!-- comment -->\n",
+        updated_with_comments,
+        perl = TRUE
 )
-#  text_with_phrase_comments <- gsub(
-#    "(?<!\\b(ex|etc|e\\.g|i\\.e|Dr|Mr|Mme|M|e\\.g\\.|\\(e\\.g))(?<=[\\.\\!\\?]|\\])\\s+(?!<!-- paragraph -->)(?!\\n{1,2}<!-- paragraph -->)",
-#    "\n<!-- comment -->\n",
-#    updated_with_comments, 
-#    perl = TRUE
-#  )
-  
-  
+
   # Écrire le contenu modifié dans le fichier
   writeLines(text_with_phrase_comments, output_path, useBytes = TRUE)
   
@@ -234,13 +239,19 @@ Translate_FR_EN <- function(file_name = "README",
                             file_extension = ".md",
                             source_filepath = path_github_animint2,
                             dest_filepath = path_local_animint2_fr,
-                            ajoutFR = TRUE) {
+                            ajoutFR = TRUE,
+                            Chx = "Ch05") {
   
   library(stringr)
   
   # Chemins d'accès
-  output_path <- paste0(dest_filepath, "/", file_name, ifelse(ajoutFR, "_FR", ""), file_extension)
-  Rmd_OG_path <- paste0(dest_filepath, "/", file_name, file_extension)
+  
+  output_path <- paste0(dest_filepath, "/", Chx,"_source", ifelse(ajoutFR, "_FR", ""), file_extension)
+  Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", file_extension)
+  
+  # mod 09 septembre 2025
+  # output_path <- paste0(dest_filepath, "/", file_name, ifelse(ajoutFR, "_FR", ""), file_extension) 
+  #Rmd_OG_path <- paste0(dest_filepath, "/", file_name, file_extension)
   
   # Traduction via babeldown
   if (file_extension == ".qmd") {
@@ -314,7 +325,7 @@ Translate_FR_EN <- function(file_name = "README",
     "",
     ifelse(file_name == "README", "# animint-manual-fr", ""),
     "",
-    "Traduction de [English](https://github.com/tdhock/animint-book/)",
+    "Traduction de l'[anglais](https://github.com/tdhock/animint-book/)",
     paste0("[", file_name, "](", source_filepath, "/", file_name, file_extension, ")"),
     ""
   )
@@ -343,7 +354,7 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch03-"
+                    Chx = "Ch03"
 )
 
 Translate_FR_EN(file_name = "Ch03-showSelected",
@@ -371,7 +382,7 @@ ConvertRmd_comments(file_name = "Ch04-clickSelects",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch04-"
+                    Chx = "Ch04"
 )
 
 Translate_FR_EN(file_name = "Ch04-clickSelects",
@@ -395,7 +406,7 @@ ConvertRmd_comments(file_name = "Ch05-sharing",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch05-"
+                    Chx = "Ch05"
 )
 
 Translate_FR_EN(file_name = "Ch05-sharing",
@@ -419,7 +430,7 @@ ConvertRmd_comments(file_name = "Ch06-other",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch06-"
+                    Chx = "Ch06"
 )
 
 Translate_FR_EN(file_name = "Ch06-other",
@@ -443,7 +454,7 @@ ConvertRmd_comments(file_name = "Ch07-limitations",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch07-"
+                    Chx = "Ch07"
 )
 
 Translate_FR_EN(file_name = "Ch07-limitations",
@@ -468,7 +479,7 @@ ConvertRmd_comments(file_name = "Ch08-WorldBank-facets",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch08-"
+                    Chx = "Ch08"
 )
 
 Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
@@ -479,6 +490,7 @@ Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
                 ajoutFR = FALSE
 )
 
+##### Chapitre 09 ######
 
 # Traduction Chapitre 09 par Anna Artiges
 
@@ -490,7 +502,7 @@ ConvertRmd_comments(file_name = "Ch09-Montreal-bikes",
                     #UpdateDoc = TRUE,
                     ajoutFR = FALSE,
                     TestFile = FALSE,
-                    Chx = "Ch09-"
+                    Chx = "Ch09"
 )
 
 Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
@@ -499,4 +511,55 @@ Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch09"),
                 #UpdateDoc = TRUE,
                 ajoutFR = FALSE
+)
+
+
+##### Chapitre 10 ######
+
+# Traduction Chapitre 10 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "Ch10-nearest-neighbors",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch10"
+)
+
+Translate_FR_EN(file_name = "Ch10-nearest-neighbors",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE,
+                Chx = "Ch10"
+)
+
+
+
+##### Chapitre 11 ######
+
+# Traduction Chapitre 11 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch11-lasso",
+                    file_extension = ".Rmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch11"),
+                    github_tree_filepath = path_tree_github_animint_book,
+                    #UpdateDoc = TRUE,
+                    ajoutFR = FALSE,
+                    TestFile = FALSE,
+                    Chx = "Ch11"
+)
+
+Translate_FR_EN(file_name = "Ch11-lasso",
+                file_extension = ".Rmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch11"),
+                #UpdateDoc = TRUE,
+                ajoutFR = FALSE,
+                Chx = "Ch11"
 )

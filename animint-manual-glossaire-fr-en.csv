@@ -58,6 +58,7 @@ environnement,environment
 chargement complet,explicit loading
 facteur,factor
 repli,fallback
+taux de fertilité,fertility rate
 fifo,fifo
 nom de fichier,filename
 corps du fichier,file stream
@@ -169,7 +170,7 @@ esquisse,sketching
 matrice anti-symétrique,skew-symmetric
 caractère barre oblique droite '/',slash
 slot,slot
-transitions en douceur,smooth transitions
+transitions graduelles,smooth transitions
 capture d'écran,snapshot
 connecteur logiciel (socket),socket
 source,source
