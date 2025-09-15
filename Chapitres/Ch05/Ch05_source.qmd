@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Chapter 5, Sharing animints
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch05-figures/")
 ```
