@@ -72,7 +72,7 @@ En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point` `an
 
 Notez que les mots-clés `clickSelects`  ne sont pas limités aux légendes interactives.
 <!-- comment -->
-Chaque geom a sa propre définition de `clickSelects` qui détermine quelle variable de sélection est mise à jour après avoir cliqué sur ce geom.
+Chaque geom a sa propre définition de `clickSelects` qui détermine la variable de sélection qui doit être mise à jour lorsqu'on clique sur ce geom.
 <!-- comment -->
 Dans la section suivante, nous donnerons plusieurs exemples sur la manière dont `clickSelects` peut être utilisé en combinaison avec `showSelected` pour créer des visualisations de données interactives.
 
@@ -129,7 +129,7 @@ Vous devriez voir la valeur de la variable `pays`  changer après avoir cliqué 
 <!-- comment -->
 Vous devriez également voir que le point de données pour le pays sélectionné est plus foncé que les autres.
 <!-- comment -->
-Cela permet de mettre en évidence la sélection en cours, et est effectué automatiquement pour chaque geom avec `clickSelects` .
+Cela permet de mettre en évidence la sélection en cours, cette surbrillance est générée automatiquement pour chaque geom avec `clickSelects` .
 <!-- comment -->
 Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
@@ -153,7 +153,7 @@ animint(
 
 <!-- paragraph -->
 
-La visualisation de données ci-dessus affiche le nom du pays actuellement sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous la forme d'une étiquette de texte sur le nuage de points.
+La visualisation de données ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous forme d'une étiquette de texte sur le nuage de points.
 <!-- comment -->
 Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `showSelected` :
 
@@ -188,7 +188,7 @@ En cliquant sur "Next", vous obtiendrez des informations sur le prochain geom, e
 <!-- comment -->
 La fonction "Start Tour" peut être utile aux nouveaux utilisateurs de votre visualisation de données pour découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
-Les informations affichées pendant la visite peuvent être personnalisées, en spécifiant les paramètres `help` et `title` de chaque geom.
+Les informations affichées pendant la visite peuvent être personnalisées, en définissant les paramètres `help` et `title` de chaque geom.
 
 <!-- paragraph -->
 
@@ -222,7 +222,7 @@ Les deux techniques sont utiles, mais à des fins différentes :
 
 <!-- paragraph -->
 
-- La manipulation directe en cliquant sur les points de données est utile pour trouver les noms des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
+- La manipulation directe, soit de cliquer sur les points de données, est utile pour trouver le nom des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
 <!-- comment -->
 Par exemple, pour l'année 1960, en cliquant sur le point en bas à gauche du graphique, on découvre le nom du pays, le Gabon.
 <!-- comment -->
@@ -232,7 +232,7 @@ Par exemple, il serait difficile de trouver la France en cliquant sur tous les d
 
 <!-- paragraph -->
 
-Notez que lorsque la visualisation ci-dessus est affichée pour la première fois, le pays sélectionné est Andorra et l'année sélectionnée est 1960.
+Notez que lorsque la visualisation ci-dessus est affichée pour la première fois, le pays sélectionné est Andorre et l'année sélectionnée est 1960.
 <!-- comment -->
 Comme les données pour Andorre sont manquantes en 1960, aucune étiquette de texte n'est affichée au départ.
 <!-- comment -->
@@ -273,7 +273,7 @@ Dans la section suivante, nous expliquerons comment l'option `selector.types` pe
 
 <!-- paragraph -->
 
-Dans cette section, notre objectif est de produire une version légèrement plus compliquée du nuage de points de la section précédente.
+Dans cette section, notre objectif est de produire une version légèrement plus complexe du nuage de points de la section précédente.
 <!-- comment -->
 L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esquisse de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
 
@@ -311,7 +311,7 @@ vis.multiple
 
 <!-- paragraph -->
 
-Lorsque la visualisation de données ci-dessus est affichée pour la première fois, elle montre des points de données de l'année 1970, pour chaque pays d'Amérique du Nord et d'Asie du Sud.
+Lorsque la visualisation de données ci-dessus est affichée pour la première fois, elle montre les points de données de l'année 1970 pour chaque pays d'Amérique du Nord et d'Asie du Sud.
 <!-- comment -->
 Elle affiche également une étiquette de texte pour le Canada.
 
@@ -325,7 +325,7 @@ Toutefois, dans cette visualisation de données en particulier, il n'est pas si 
 
 <!-- paragraph -->
 
-Exercice :  Recréer la visualisation des données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
+Exercice :  Recréez la visualisation des données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
 <!-- comment -->
 Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text`.
 
@@ -353,9 +353,9 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 Notez que l'esquisse ci-dessus comprend `geom_tallrect`, un nouveau geom introduit dans `animint2`.
 <!-- comment -->
-Il est "grand" car il occupe tout l'espace vertical du graphique, et ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
+Il est qualifié de "grand" car il occupe tout l'espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
-Spécifier `clickSelects=année` signifie que nous voulons pouvoir tracer un `tallrect` pour chaque année, et cliquer sur un `tallrect` pour changer l'année sélectionnée.
+En spécifiant `clickSelects=année` nous indiquons que nous voulons tracer un `tallrect` pour chaque année, et que cliquer sur un `tallrect` changera l'année sélectionnée.
 <!-- comment -->
 Nous devons donc créer un nouvel ensemble de données appelé `années` avec une ligne pour chaque année des données `BanqueMondiale`.
 
@@ -393,11 +393,11 @@ vis.timeSeries
 
 Essayez de cliquer sur l'arrière-plan de la série temporelle dans la visualisation de données ci-dessus.
 <!-- comment -->
-Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition fluide vers leur position correspondant à l'année nouvellement sélectionnée.
+Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition graduelle vers une position correspondant à l'année nouvellement sélectionnée.
 
 <!-- paragraph -->
 
-Exercice d'animation : rendez la visualisation de données animée en spécifiant l'option `time`, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time).
+Exercice  : animez la visualisation de données en spécifiant l'option `time`, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time).
 
 <!-- paragraph -->
 
@@ -532,9 +532,9 @@ Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` �
 
 Dans ce chapitre, nous avons vu l'utilisation de `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
 <!-- comment -->
-Nous avons utilisé l'ensemble des données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour spécifier différentes interactions pour chacun des geoms tracés.
+Nous avons utilisé l'ensemble de données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour définir différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
-Nous avons expliqué comment l'option `first` peut être utilisée pour spécifier les valeurs sélectionnées qui sont utilisées lorsque le `animint2` est affiché pour la première fois.
+Nous avons expliqué comment l'option `first` peut être utilisée pour préciser les valeurs à utiliser lorsque le `animint2` est affiché pour la première fois.
 <!-- comment -->
 Nous avons également expliqué comment l'option `selector.types` peut être utilisée pour préciser le type de sélection (unique ou multiple).
 
@@ -544,11 +544,11 @@ Exercices :
 
 <!-- paragraph -->
 
-- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) les légendes interactives, (2) les menus de sélection et (3) le fait de cliquer sur les données à l'aide de `clickSelects`.
+- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) utiliser des légendes interactives, (2) utiliser des menus de sélection et (3) cliquer sur les données à l'aide de `clickSelects`.
 <!-- comment -->
 Classez ces trois techniques de manipulation, de la plus directe, à la moins directe.
 <!-- comment -->
-Quelle technique est préférable dans quelles circonstances ?
+Quelle technique privilégier et selon quelles circonstances ?
 <!-- comment -->
 - Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
 <!-- comment -->
@@ -566,17 +566,17 @@ Pourquoi ?
 <!-- comment -->
 - Ajoutez un `geom_text`  au nuage de points de la Banque mondiale qui montre l'année sélectionnée.
 <!-- comment -->
-- Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher les noms des pays sélectionnés.
+- Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher le nom des pays sélectionnés.
 <!-- comment -->
 - Ajoutez un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
 <!-- comment -->
 - Utilisez l'option `time` pour créer une version animée de `vis.facets`.
 <!-- comment -->
-- Utiliser `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer une tour guidée plus informative sur ce qui est affiché dans chaque geom.
+- Utilisez `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer un tour guidé qui fournit plus d'informations sur ce qui est affiché dans chaque geom.
 
 <!-- paragraph -->
 
-Ensuite, [Chapitre 5](Ch05-sharing.html) explique différentes méthodes pour publier et partager des animints sur le web.
+Dans le [Chapitre 5](Ch05-sharing.html) nous expliquons les différentes méthodes pour publier et partager des animints sur le web.
 
 <!-- paragraph -->
 
