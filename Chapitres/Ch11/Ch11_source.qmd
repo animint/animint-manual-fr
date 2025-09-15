@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Chapter 11, Lasso
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch11-figures/")
 ```
