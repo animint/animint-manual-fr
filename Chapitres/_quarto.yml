@@ -50,6 +50,9 @@ book:
     - part: "Exemples avancés"
       chapters:
       - Ch08/Ch08-viz.qmd
+      - Ch09/Ch09-viz.qmd
+      - Ch010/Ch10-viz.qmd
+      - Ch11/Ch11-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
 
