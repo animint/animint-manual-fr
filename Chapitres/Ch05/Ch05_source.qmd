@@ -140,7 +140,7 @@ J'ai copié ce dossier sur le serveur web de mon laboratoire à l'aide de la com
 
 <!-- paragraph -->
 
-Si vous n'avez pas accès à un serveur web personnel ou de laboratoire, essayez d'utiliser l'une des méthodes décrites ci-dessous, qui sont gratuites pour tout le monde.
+Si vous n'avez pas accès à un serveur web personnel ou par le biais d'un laboratoire, vous pouvez utiliser l'une des méthodes décrites ci-dessous, elles sont gratuites et accessibles à tous.
 
 <!-- paragraph -->
 
@@ -153,9 +153,9 @@ Pour y publier votre visualisation de données, il suffit de faire glisser un do
 <!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce dossier.
 <!-- comment -->
-Aucun enregistrement/connexion n'est requis, mais si vous n'enregistrez pas de compte, vos données seront supprimées au bout d'une heure.
+Aucun enregistrement ou connexion n'est nécessaire, mais si vous n'avez pas de compte enregistré, vos données seront supprimées après une heure.
 <!-- comment -->
-Vous pouvez vous inscrire pour un compte gratuit si vous souhaitez que vos vis données soient disponibles plus longtemps.
+Vous pouvez souscrire à un compte gratuit si vous souhaitez que vos vis données soient disponibles pour une plus longue période.
 
 <!-- paragraph -->
 
@@ -169,7 +169,7 @@ Pour publier un animint sur GitHub Pages, vous avez besoin d'un compte GitHub et
 <!-- comment -->
 Tout d'abord, installez ces packages. Si vous n'avez pas de compte GitHub, vous pouvez [vous inscrire gratuitement](https://github.com/join).
 <!-- comment -->
-Ensuite, assurez-vous d'indiquer à R quel nom et courriel utiliser pour les commits git :
+Ensuite, assurez-vous d'indiquer à R le nom et le courriel à utiliser pour la publication des commits git :
 
 <!-- paragraph -->
 
@@ -180,11 +180,11 @@ gert::git_config_global_set("user.email", "<votre_courriel>")
 
 <!-- paragraph -->
 
-Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_dépôt")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_dépôt` (à noter que `votre_identifiant_github`  n'est pas écrit dans le code, parce que `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
+Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_dépôt")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_dépôt` (à noter que `votre_identifiant_github`  n'est pas écrit dans le code, puisque `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
 <!-- comment -->
-Un message devrait s'afficher vous indiquant l'URL/le lien où votre visualisation de données sera accessible.
+Un message devrait s'afficher vous indiquant l'URL ou le lien pour accéder à votre visualisation de données.
 <!-- comment -->
-Il faut compter quelques minutes (généralement pas plus de cinq) entre le moment où vous lancez `animint2pages` et le moment où la visualisation est publiée sur GitHub Pages.
+Il faut compter quelques minutes (généralement pas plus de cinq) entre le moment où vous lancez `animint2pages` et celui où la visualisation est publiée sur GitHub Pages.
 
 <!-- paragraph -->
 
@@ -234,15 +234,15 @@ Pour ajouter un nouvel animint à la galerie qui est publiée sur la branche `gh
 
 <!-- paragraph -->
 
-- Créez un nouveau animint dans le code R, et assurez-vous de définir les options `source` et `title`.
+- créez un nouveau animint dans le code R, et assurez-vous de définir les options `source` et `title`;
 <!-- comment -->
-- utilisez `animint2pages(vis, "dépôt_de_vis")` pour publier cet animint sur la branche `gh-pages` de `votre_identifiant_github/dépôt_de_vis`.
+- utilisez `animint2pages(vis, "dépôt_de_vis")` pour publier cet animint sur la branche `gh-pages` de `votre_identifiant_github/dépôt_de_vis`;
 <!-- comment -->
-- prenez une capture d'écran de cette animint, et valider/pousser cette capture d'écran dans un fichier nommé `Capture.PNG` (sensible à la casse), dans la branche`gh-pages` de `votre_identifiant_github/dépôt_de_vis` .
+- prenez une capture d'écran de cet `animint2`, et validez/poussez cette capture d'écran dans un fichier nommé `Capture.PNG` (sensible à la casse), dans la branche`gh-pages` de `votre_identifiant_github/dépôt_de_vis` ;
 <!-- comment -->
-- ajoutez `votre_identifiant_github/dépôt_de_vis` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/galerie`.
+- ajoutez `votre_identifiant_github/dépôt_de_vis` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/galerie`;
 <!-- comment -->
-- exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu'un clone du dossier de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Il lira `galerie/repos.txt`, lira les méta-données (`title`, `source`, `Capture.PNG`) de chaque dossier qui n'est pas déjà présent dans `galerie/meta.csv`, écrira les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera, et poussera vers `origin`.
+- exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu'un clone du dossier de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Le code R lira `galerie/repos.txt`, puis les méta-données (`title`, `source`, `Capture.PNG`) de chaque dossier qui n'est pas déjà présent dans `galerie/meta.csv`, il écrira ensuite les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera les fichiers et les poussera vers `origin`.
 <!-- comment -->
 - la galerie mise à jour devrait pouvoir être consultée sur le web, à l'adresse suivante [(https://votre_identifiant_github.github.io/galerie)](https://votre_identifiant_github.github.io/galerie) après quelques minutes (généralement pas plus de cinq).
 
@@ -264,9 +264,9 @@ Exercices :
 <!-- comment -->
 - Utilisez Netlify Drop pour publier cette animation sur le web.
 <!-- comment -->
-- Utilisez `animint2pages` pour publier cette animint dans un nouveau dépôt GitHub. Faites une capture d'écran et enregistrez-la en tant que `Capture.PNG`  dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt à la galerie principale de l'animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
+- Utilisez `animint2pages` pour publier cet animint dans un nouveau dépôt GitHub. Faites une capture d'écran et enregistrez la en tant que `Capture.PNG`  dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt à la galerie principale de l'animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
 <!-- comment -->
-- Créez votre propre galerie animint, et ajoutez deux ou plusieurs de vos propres animints à cette galerie.
+- Créez votre propre galerie animint, et ajoutez y au moins deux de vos propres animints.
 
 <!-- paragraph -->
 
