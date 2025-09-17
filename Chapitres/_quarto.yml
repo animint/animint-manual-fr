@@ -33,7 +33,7 @@ book:
     search: true
   page-footer:
     left: |
-      All content licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) <br> &copy; Toby Dylan Hocking.
+      All content licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <br> &copy; Toby Dylan Hocking.
     center: "[GitHub](https://github.com/animint/animint2) | [Galerie](https://animint.github.io/gallery-fr)"
     right: Built with [Quarto](https://quarto.org/).
     background: "#f8f9fa"
