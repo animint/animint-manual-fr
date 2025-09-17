@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Chapter 11, Lasso
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch11-figures/")
 ```
@@ -61,12 +57,10 @@ input.cols <- c(
   "lcavol", "lweight", "age", "lbph", "svi", "lcp", "gleason", 
   "pgg45")
 prostate.inputs <- prostate[, ..input.cols]
-<!-- comment -->
 is.train <- prostate$train == "T"
 x <- as.matrix(prostate.inputs[is.train])
 head(x)
 y <- prostate[is.train, lpsa]
-<!-- comment -->
 head(y)
 ```
 
@@ -77,6 +71,7 @@ Below we fit the full path of lasso solutions using the `lars` package.
 <!-- paragraph -->
 
 ```{r}
+if(!requireNamespace("lars"))install.packages("lars")
 library(lars)
 fit <- lars(x,y,type="lasso")
 fit$lambda
@@ -95,10 +90,7 @@ arclength <- rowSums(abs(beta))
 path.list <- list()
 for(variable in colnames(beta)){
   standardized.coef <- beta[, variable]
-<!-- comment -->
-path.list[[variable]]
-<!-- comment -->
-<- data.table::data.table(
+  path.list[[variable]] <- data.table::data.table(
     step=seq_along(standardized.coef),
     lambda=c(fit$lambda, 0),
     variable,
@@ -163,10 +155,7 @@ coef.grid.list <- list()
 coef.grid.mat <- scale(pred.fraction$coefficients, FALSE, 1/fit$normx)
 for(fraction.i in seq_along(fraction)){
   standardized.coef <- coef.grid.mat[fraction.i,]
-<!-- comment -->
-coef.grid.list[[fraction.i]]
-<!-- comment -->
-<- data.table::data.table(
+  coef.grid.list[[fraction.i]] <- data.table::data.table(
     fraction=fraction[[fraction.i]],
     variable=colnames(x),
     standardized.coef,
@@ -221,9 +210,7 @@ for(set in c("train", "validation")){
   val <- if(set=="train")TRUE else FALSE
   is.set <- is.train == val
   mse <- colMeans(squares.mat[is.set, ])
-  mean.error.list[[paste(set)]]
-<!-- comment -->
-<- data.table::data.table(
+  mean.error.list[[paste(set)]] <- data.table::data.table(
     set, mse, fraction,
     arclength=rowSums(abs(coef.grid.mat)))
 }
@@ -233,7 +220,6 @@ addY <- function(dt, y){
   data.table::data.table(dt, y.var=factor(y, c("error", "weights")))
 }
 tallrect.dt <- coef.grid[variable==variable[1],]
-<!-- comment -->
 gg.path <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
@@ -264,9 +250,7 @@ Finally, we add a plot of residuals versus actual values.
 ```{r}
 lasso.res.list <- list()
 for(fraction.i in seq_along(fraction)){
-  lasso.res.list[[fraction.i]]
-<!-- comment -->
-<- data.table::data.table(
+  lasso.res.list[[fraction.i]] <- data.table::data.table(
     observation.i=1:nrow(prostate),
     fraction=fraction[[fraction.i]],
     residual=residual.mat[, fraction.i],
@@ -340,10 +324,7 @@ tallrect.show.list <- list()
 for(a in tallrect.dt$arclength){
   is.selected <- tallrect.dt$arclength == a
   not.selected <- tallrect.dt[!is.selected]
-<!-- comment -->
-tallrect.show.list[[paste(a)]]
-<!-- comment -->
-<- data.table::data.table(
+  tallrect.show.list[[paste(a)]] <- data.table::data.table(
     not.selected, show.val=a, show.var="arclength")
 }
 tallrect.show <- do.call(rbind, tallrect.show.list)

@@ -20,24 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install headless chromium
-        run: quarto tools install chromium
-
       - name: Render book
         run: R --vanilla < render.R
 
       - name: netlify deploy
-        uses: animint/animint-actions/quarto-netlify@main
+        uses: animint/animint-actions/netlify-deploy-comment@main
         with:
           netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pat_github_pr: ${{ secrets.PAT_GITHUB_PR }}
           path: Chapitres/_book
           netlify_url: animint-manual-fr.netlify.app
-
-      - name: Upload pdf book
-        uses: actions/upload-artifact@v4
-        with:
-          name: animint2frbookpdf
-          path: Chapitres/_book/Animint2-dans-R-pour-la-visualisation-de-données.pdf
-          retention-days: 1
