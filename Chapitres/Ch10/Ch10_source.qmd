@@ -92,7 +92,7 @@ Nous commençons par charger l'ensemble des données.
 
 ```{r}
 if(!file.exists("ESL.mixture.rda")){
-  download.file(
+  curl::curl_download(
     "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/ESL.mixture.rda",
     "ESL.mixture.rda")
 }
