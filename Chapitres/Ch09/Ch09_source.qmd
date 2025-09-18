@@ -38,13 +38,13 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Chiffres statiques {#static}
+## Graphiques statiques {#static}
 
 <!-- paragraph -->
 
-Nous commençons par charger le fichier `montreal.bikes` qui n'est pas disponible dans la version CRAN de animint2, afin d'économiser de l'espace sur le CRAN.
+Nous commençons par charger le fichier `montreal.bikes` qui n'est pas disponible dans la version CRAN de `animint2`, afin d'économiser de l'espace sur le CRAN.
 <!-- comment -->
-Par conséquent, pour accéder à ce jeu de données, vous devrez installer animint2 depuis GitHub :
+Par conséquent, pour accéder à ce jeu de données, vous devrez installer `animint2` depuis GitHub :
 
 <!-- paragraph -->
 
@@ -133,7 +133,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Tracé avec `geom_point` permet de voir facilement la différence entre les zéros et les valeurs manquantes.
+Tracer avec `geom_point` permet de voir facilement la différence entre les zéros et les valeurs manquantes.
 
 <!-- paragraph -->
 
@@ -166,7 +166,7 @@ month.levs <- months[order(month01.POSIXct), month.str]
 
 <!-- paragraph -->
 
-Notez que nous avons créé un `month` qui est un facteur ordonné par `month.levs`.
+Notez que nous avons créé une colonne `month` qui est un facteur ordonné par `month.levs`.
 
 <!-- paragraph -->
 
@@ -286,7 +286,7 @@ Comme indiqué ci-dessus, certains mois ne comportent pas d'observations pour to
 
 <!-- paragraph -->
 
-## Viz interactive de la fréquence des accidents {#regression}
+## Visualisation interactive de la fréquence des accidents {#regression}
 
 <!-- paragraph -->
 
@@ -370,7 +370,7 @@ Le graphique de droite montre la fréquence des accidents au fil du temps.
 
 <!-- paragraph -->
 
-## Viz interactive avec carte et détails {#details}
+## Visualisation interactive avec carte et détails {#details}
 
 <!-- paragraph -->
 
@@ -799,15 +799,15 @@ Exercices :
 <!-- comment -->
 - Ajouter un graphique pour la carte à la visualisation des données.
 <!-- comment -->
-- Sur la carte, dessinez un cercle pour chaque localisation, dont la taille varie en fonction de l'indice de référence. `count` des accidents dans la zone sélectionnée. `month`.
+- Sur la carte, dessiner un cercle pour chaque localisation, dont la taille varie en fonction du comptage `count` des accidents dans le mois `month` sélectionné.
 <!-- comment -->
 - Sur le site de la `MonthSummary` graphique, ajoutez un rectangle d'arrière-plan qui peut être utilisé pour sélectionner les `month`.
 <!-- comment -->
-- Supprimer le `MonthSummary` et ajouter une visualisation similaire dans un troisième panneau de l'écran. `MonthFacet` graphique.
+- Supprimer le `MonthSummary` et ajouter une visualisation similaire dans un troisième panneau de l'écran dans le graphique `MonthFacet`.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 10](Ch10-nearest-neighbors.html) explique comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
+Ensuite, le [Chapitre 10](Ch10-nearest-neighbors.html) explique comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
 
 <!-- paragraph -->
 
