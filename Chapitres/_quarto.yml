@@ -27,8 +27,8 @@ book:
   cover-image: Figures/logo.png
   downloads: [pdf]
   sidebar:
-    style: "floating"
-    collapse-level: 1
+    style: "docked"
+    collapse-level: 2
     border: true
     search: true
   page-footer:
