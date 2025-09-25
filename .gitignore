@@ -6,7 +6,8 @@
 Ch*-viz*
 Ch*viz*
 Ch*-figures
-Ch*_cache
+*_cache
+*_files
 Chapitres/*.tex
 _book
 site_libs
