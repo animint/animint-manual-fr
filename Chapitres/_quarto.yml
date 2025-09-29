@@ -107,15 +107,14 @@ format:
 
 knitr:
   opts_chunk:
-    cache: true
-    cache.lazy: false
+    cache: false
     dpi: 100
     fig.width: 8
     fig.height: 5
     out.width: "100%"
     split: true
     R.options:
-      knitr.graphics.auto_pdf: true
+      animint2.chromote_sleep_seconds: 3
       datatable.print.nrows: 10
       datatable.print.class: false
       datatable.print.keys: false
