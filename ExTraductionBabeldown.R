@@ -13,13 +13,10 @@
 
 path_local_animint2_fr <- "C:/Users/lepj1/OneDrive/Desktop/animint-manual-fr"
 
-path_github_animint2 <- "https://raw.githubusercontent.com/animint/animint2/master"
+# mod 30 sep 2025 JL
+# path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-book/master"
 
-path_github_animint_book <- "https://raw.githubusercontent.com/tdhock/animint-book/master"
-
-path_tree_github_animint_book <- "https://github.com/tdhock/animint-book/tree/master"
-
-
+path_github_animint_book <- "https://raw.githubusercontent.com/animint/animint-manual-en/main/chapters"
 
 # Installation du package babeldown
 
@@ -139,7 +136,7 @@ adapted_unleash <- function(path,
 ConvertRmd_comments <- function(
     file_name = "README",
     file_extension = ".md",
-    source_filepath = path_github_animint2,
+    source_filepath = path_github_animint_book,
     dest_filepath = path_local_animint2_fr,
     TestFile = TRUE,
     Chx = "Ch05"
@@ -157,30 +154,76 @@ ConvertRmd_comments <- function(
   if (length(old_temp) > 0) file.remove(old_temp)
   
   # Download source file
+
+# mod 30 sep 2025 JL
+#  download.file(
+#    url = file.path(source_filepath, paste0(file_name, file_extension)),
+#    destfile = temp_file,
+#    mode = "wb"
+#  )
+  
   download.file(
-    url = file.path(source_filepath, paste0(file_name, file_extension)),
+    url = file.path(source_filepath, Chx, paste0(file_name, file_extension)),
     destfile = temp_file,
     mode = "wb"
   )
   
   # Copy related images
-  png_files <- list.files("animint-book", pattern = paste0("^", Chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
+
+# mod 30 sep 2025 JL  
+#  png_files <- list.files("animint-book", pattern = paste0("^", Chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
+  
+  png_files <- list.files(
+    file.path("animint-manual-en","chapters", Chx),
+    pattern = paste0("^",Chx,".*\\.png$"),
+    recursive = TRUE,
+    full.names = TRUE
+  )
+  
   file.copy(png_files, dest_filepath, overwrite = TRUE)
   
   # Run unleash and copy to output
-  adapted_unleash(temp_file, temp_file)
+  
+# mod 30 sep 2025 JL  - adding the if .rmd and .qmd
+  
+  if(file_extension == ".Rmd") {
+    
+    adapted_unleash(temp_file, temp_file,FALSE)
+    
+  } else {
+    
+    unleash(temp_file,temp_file)
+
+# mod 30 sep 2025 JL - fix for bullets not gluing      
+  glue_bullets <- function(lines) {
+      result <- c()
+      for (line in lines) {
+        if (grepl("^\\s{2,}", line) && length(result) > 0 && grepl("^\\s*-\\s", result[length(result)])) {
+          result[length(result)] <- paste(result[length(result)], trimws(line))
+        } else {
+          result <- c(result, line)
+        }
+      }
+      result
+    }
+    
+  }
+ 
   file.copy(temp_file, output_path, overwrite = TRUE)
   
   # Read and clean text
   translated_text <- readLines(output_path, encoding = "UTF-8")
   translated_text <- gsub("\\\\_", "_", translated_text)
+# mod 30 sep 2025 JL - fix for bullets not gluing         
+  translated_text <- glue_bullets(translated_text)
   
   # Detect YAML end
   yaml_end <- which(translated_text == "---")[2]
   full_text <- paste(translated_text, collapse = "\n")
   
   # Split into chunks
-  chunks <- str_split(full_text, "(?<=```\\n)|(?=```\\{r)", simplify = FALSE)[[1]]
+
+ chunks <- str_split(full_text, "(?<=```\\n)|(?=```\\{r)", simplify = FALSE)[[1]]
   
   # Function to process prose chunks
   add_comments <- function(chunk) {
@@ -218,14 +261,13 @@ ConvertRmd_comments <- function(
 ################################################################
 
 
-
 #################################
 
 # Fonction de la traduction FR <- EN utilisant babeldown
 
 Translate_FR_EN <- function(file_name = "README",
                             file_extension = ".md",
-                            source_filepath = path_github_animint2,
+                            source_filepath = path_github_animint_book,
                             dest_filepath = path_local_animint2_fr,
                             Chx = "Ch05") {
   
@@ -315,8 +357,8 @@ Translate_FR_EN <- function(file_name = "README",
     "",
     ifelse(file_name == "README", "# animint-manual-fr", ""),
     "",
-    "Traduction de l'[anglais](https://github.com/tdhock/animint-book/)",
-    paste0("[", file_name, "](", source_filepath, "/", file_name, file_extension, ")"),
+    "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
+    paste0("[", file_name, "](", source_filepath, "/",Chx,"/", file_name, file_extension, ")"),
     ""
   )
   #print(cleaned_lines)
@@ -332,7 +374,7 @@ Translate_FR_EN <- function(file_name = "README",
 
 # Traduction du README avec la fonction Translate_FR_EN
 
-
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 # Traduction Chapitre 03 par Jeremi Lepage
 
@@ -351,9 +393,7 @@ Translate_FR_EN(file_name = "Ch03-showSelected",
                 Chx = "Ch03"
 )
 
-
-quarto::quarto_render(input = "Chapitres/Ch03/Ch03-showSelected_ConvertRmd_comments.Rmd")
-
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 ##### Chapitre 04 ####
 
@@ -375,6 +415,7 @@ Translate_FR_EN(file_name = "Ch04-clickSelects",
                 Chx = "Ch04"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 ##### Chapitre 05 ######
 
@@ -395,6 +436,7 @@ Translate_FR_EN(file_name = "Ch05-sharing",
                 Chx = "Ch05"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 ##### Chapitre 06 ######
 
@@ -414,6 +456,8 @@ Translate_FR_EN(file_name = "Ch06-other",
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
                 Chx = "Ch06"
 )
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 
 ##### Chapitre 07 ######
@@ -435,6 +479,7 @@ Translate_FR_EN(file_name = "Ch07-limitations",
                 Chx = "Ch07"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 
 ##### Chapitre 08 ######
@@ -456,6 +501,8 @@ Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
                 Chx = "Ch08"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
 ##### Chapitre 09 ######
 
 # Traduction Chapitre 09 par Anna Artiges
@@ -475,6 +522,7 @@ Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
                 Chx = "Ch09"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 ##### Chapitre 10 ######
 
@@ -495,7 +543,7 @@ Translate_FR_EN(file_name = "Ch10-nearest-neighbors",
                 Chx = "Ch10"
 )
 
-
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
 
 ##### Chapitre 11 ######
 
@@ -516,6 +564,47 @@ Translate_FR_EN(file_name = "Ch11-lasso",
                 Chx = "Ch11"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 12 ######
+
+# Traduction Chapitre 12 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "Ch12-SVM",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch12"),
+                    TestFile = FALSE,
+                    Chx = "Ch12"
+)
+
+Translate_FR_EN(file_name = "Ch12-SVM",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch12"),
+                Chx = "Ch12"
+)
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 13 ######
+
+# Traduction Chapitre 13 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch13-poisson-regression",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch13"),
+                    TestFile = FALSE,
+                    Chx = "Ch13"
+)
+
+Translate_FR_EN(file_name = "Ch13-poisson-regression",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch13"),
+                Chx = "Ch13"
+)
 
 
 ##### Chapitre 99 ######
