@@ -1,4 +1,4 @@
-# Support Vector Machines
+# Machines à vecteurs de support
 
 <!-- paragraph -->
 
@@ -8,27 +8,27 @@ knitr::opts_chunk$set(fig.path="Ch12-figures/")
 
 <!-- paragraph -->
 
-This goal of this chapter is to create an interactive data visualization that explains the [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine), a machine learning model for binary classification.
+L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique les [machine à vecteur de support](https://en.wikipedia.org/wiki/Support_vector_machine) un modèle d'apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
-Chapter summary:
+Résumé du chapitre :
 
 <!-- paragraph -->
 
-- We begin by simulating some data for binary classification in two dimensions, and making some static plots.
+- Nous commençons par simuler quelques données pour une classification binaire en deux dimensions, et par faire quelques graphiques statiques.
 <!-- comment -->
-- In the second section, we make an interactive data visualization to show how the linear Support Vector Machine decision boundary changes as a function of the cost hyper-parameter.
+- Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision de la machine à vecteur de support linéaire change en fonction de l'hyperparamètre de coût.
 <!-- comment -->
-- In the last section, we make an interactive data visualization to show how the decision boundary of the polynomial kernel Support Vector Machine changes as a function of the two hyper-parameters (cost and degree).
+- Dans la dernière section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision de la machine à vecteur de soutien à noyau polynomial change en fonction des deux hyperparamètres (coût et degré).
 
 <!-- paragraph -->
 
-## Generate and plot some data {#generate}
+## Générer et tracer des données {#generate}
 
 <!-- paragraph -->
 
-We begin by generating two input features, `x1` and `x2`.
+Nous commençons par générer deux fonctionnalités en entrée, `x1` et `x2`.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot below shows the same data, after computing two additional input features (the squares of the original two inputs).
+Le graphique ci-dessous montre les mêmes données, après avoir calculé deux fonctionnalités d'entrée supplémentaires (les carrés des deux entrées d'origine).
 
 <!-- paragraph -->
 
@@ -70,9 +70,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-In our simulation, we assume that the output score `f` is a linear function of `x1.sq`, and ignores `x2.sq`.
+Dans notre simulation, nous supposons que le score de sortie `f` est une fonction linéaire de `x1.sq` et ne tient pas compte de `x2.sq`.
 <!-- comment -->
-The plot below visualizes the output scores using the point fill aesthetic.
+Le graphique ci-dessous permet de visualiser les scores de sortie à l'aide de l'esthétique de remplissage des points.
 
 <!-- paragraph -->
 
@@ -91,13 +91,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-In particular, we assume that the label `y` is negative (-1) if `x1.sq + noise < threshold`, and positive (1) otherwise.
+En particulier, nous supposons que l'étiquette `y` est négatif (-1) si `x1.sq + noise < threshold` et positive (1) dans le cas contraire.
 <!-- comment -->
-The plot below visualizes the scores and labels, as a function of the input feature `x1`.
+Le graphique ci-dessous permet de visualiser les scores et les étiquettes, en fonction de la fonctionnalité d'entrée. `x1`.
 <!-- comment -->
-It also shows the true score function in black.
+La fonction de score réel apparaît également en noir.
 <!-- comment -->
-Of course, we would not be able to make this visualization with real data (only the labels are known in real data, not the scores).
+Bien sûr, nous ne pourrions pas faire cette visualisation avec des données réelles (seules les étiquettes sont connues dans les données réelles, pas les scores).
 
 <!-- paragraph -->
 
@@ -134,9 +134,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot below shows the scores and labels, as a function of the squared feature `x1.sq`.
+Le graphique ci-dessous montre les scores et les étiquettes en fonction du carré de la fonctionnalité. `x1.sq`.
 <!-- comment -->
-It is clear that the score function that we want to learn is linear in `x1.sq`.
+Il est clair que la fonction de score que nous voulons apprendre est linéaire en `x1.sq`.
 
 <!-- paragraph -->
 
@@ -159,9 +159,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-Next, we visualize the labels in the two-dimensional squared feature space.
+Ensuite, nous visualisons les étiquettes dans l'espace bidimensionnel des fonctionnalités au carré.
 <!-- comment -->
-It is clear that the decision boundary is linear in this space.
+Il est clair que la limite de décision est linéaire dans cet espace.
 
 <!-- paragraph -->
 
@@ -182,9 +182,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot below shows the input feature space (`x1` and `x2`).
+Le graphique ci-dessous montre l'espace des fonctionnalités d'entrée (`x1` et `x2`).
 <!-- comment -->
-It is clear that the decision boundary is non-linear in `x1`.
+Il est clair que la frontière de décision n'est pas linéaire en `x1`.
 
 <!-- paragraph -->
 
@@ -205,9 +205,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-The animint below uses `clickSelects` to show which points in the input and squared space correspond.
+L'animint ci-dessous utilise `clickSelects` pour montrer quels points de l'espace d'entrée et de l'espace quadrillé correspondent.
 <!-- comment -->
-We just need to create an `data.i` variable that has a unique ID for each data point.
+Il suffit de créer un `data.i` qui possède un identifiant unique pour chaque point de données.
 
 <!-- paragraph -->
 
@@ -275,15 +275,15 @@ animint(
 
 <!-- paragraph -->
 
-Note how we used two multi-panel plots with the [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) idiom, rather than creating four separate plots.
+Notez que nous avons utilisé deux graphiques multi-panneaux avec l'option [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) plutôt que de créer quatre graphiques distincts.
 <!-- comment -->
-This emphasizes the fact that some plots/facets have a common `x1` or `x1.sq`axis.
+Cela met l'accent sur le fait que certains graphiques/façades ont une `x1` ou `x1.sq`l'axe.
 <!-- comment -->
-Note that we also hid the color legend in the first plot, since it is sufficient to just have one color legend.
+Notez que nous avons également caché la légende des couleurs dans le premier graphique, puisqu'il suffit d'avoir une seule légende des couleurs.
 
 <!-- paragraph -->
 
-## Linear SVM {#linear-svm}
+## SVM linéaire {#linear-svm}
 
 <!-- paragraph -->
 
@@ -313,7 +313,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-We begin by fitting a linear SVM to the train data in the squared feature space, and visualizing the true labels `y` along with the predicted labels `pred.y`.
+Nous commençons par ajuster un SVM linéaire aux données d'entraînement dans l'espace des fonctionnalités au carré, et par visualiser les vraies étiquettes. `y` ainsi que les étiquettes prédites `pred.y`.
 
 <!-- paragraph -->
 
@@ -334,9 +334,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-It is clear from the plot above that there are several mis-classified train data points.
+Le graphique ci-dessus montre clairement qu'il existe plusieurs points de données de train mal classés.
 <!-- comment -->
-In the plot below we visualize the decision boundary and margin.
+Le graphique ci-dessous permet de visualiser la limite et la marge de décision.
 
 <!-- paragraph -->
 
@@ -391,13 +391,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above shows the true decision boundary using a grey `vline`.
+Le graphique ci-dessus montre la véritable limite de décision à l'aide d'un `vline`.
 <!-- comment -->
-It also uses`geom_contour` to display the decision boundary (solid black line, predicted score 0) and the margin (dashed black line, predicted score -1 and 1).
+Il utilise également`geom_contour` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire en pointillés, score prédit -1 et 1).
 <!-- comment -->
-Since the decision boundary and margin are linear in this space, we can also use `geom_abline` to display them.
+Puisque la limite de décision et la marge sont linéaires dans cet espace, nous pouvons également utiliser `geom_abline` pour les afficher.
 <!-- comment -->
-To do that we need to do some math, and work out the equations for the slope and intercepts of those lines (as a function of the learned bias `b(fit)` and `weight.vec`, as well as the scale parameters `mu` and `sigma`).
+Pour ce faire, nous devons faire un peu de mathématiques et calculer les équations de la pente et de l'ordonnée à l'origine de ces droites (en fonction du biais appris). `b(fit)` et `weight.vec` ainsi que des paramètres d'échelle `mu` et `sigma`).
 
 <!-- paragraph -->
 
@@ -453,9 +453,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above confirms that our computation of the slope and intercepts (green lines) agrees with the contours (black lines).
+Le graphique ci-dessus confirme que notre calcul de la pente et des intercepts (lignes vertes) est en accord avec les contours (lignes noires).
 <!-- comment -->
-In the plot below, we show the learned `alpha` coefficients, and add a `geom_segment` to visualize the slack.
+Dans le graphique ci-dessous, nous montrons les savants `alpha` et ajoutons un `geom_segment` pour visualiser la marge de manœuvre.
 
 <!-- paragraph -->
 
@@ -501,15 +501,15 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above shows the slack in grey segments, and the decision and margin lines in black.
+Le graphique ci-dessus montre le mou dans les segments gris, et les lignes de décision et de marge en noir.
 <!-- comment -->
-The Bayes decision boundary is shown in the background as a vertical violet line.
+La limite de décision de Bayes est représentée en arrière-plan par une ligne verticale violette.
 <!-- comment -->
-The support vectors are the points with non-zero alpha coefficients.
+Les vecteurs de support sont les points dont les coefficients alpha ne sont pas nuls.
 <!-- comment -->
-Black filled support vectors are on the margin, and grey support vectors are on the wrong side of the margin (and have non-zero slack).
+Les vecteurs de support pris en charge en noir sont sur la marge, et les vecteurs de support en gris sont du mauvais côté de la marge (et ont un mou non nul).
 <!-- comment -->
-The plot below shows the model that was learned in the original feature space,
+Le graphique ci-dessous montre le modèle qui a été appris dans l'espace des fonctionnalités d'origine,
 
 <!-- paragraph -->
 
@@ -560,7 +560,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-The goal below will be to make an animint that shows how the decision boundary, margin, and slack change as a function of the cost parameter.
+L'objectif ci-dessous est de créer une animation qui montre comment la frontière de décision, la marge et le jeu évoluent en fonction du paramètre de coût.
 
 <!-- paragraph -->
 
@@ -739,13 +739,13 @@ viz.linear.svm
 
 <!-- paragraph -->
 
-## Non-linear polynomial kernel SVM {#nonlinear-polynomial-kernel-svm}
+## SVM à noyau polynomial non linéaire {#nonlinear-polynomial-kernel-svm}
 
 <!-- paragraph -->
 
-In the previous section we fit a linear kernel in the squared feature space, which resulted in learning a function which is non-linear in terms of the original feature space.
+Dans la section précédente, nous avons ajusté un noyau linéaire dans l'espace des fonctionnalités au carré, ce qui a entraîné l'apprentissage d'une fonction non linéaire en termes d'espace des fonctionnalités d'origine.
 <!-- comment -->
-In this section we directly fit a non-linear polynomial kernel in the original space.
+Dans cette section, nous procédons à l'ajustement direct d'un noyau polynomial non linéaire dans l'espace d'origine.
 
 <!-- paragraph -->
 
@@ -842,35 +842,35 @@ animint(
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch12-exercises}
+## Résumé du chapitre et exercices {#Ch12-exercises}
 
 <!-- paragraph -->
 
-We used ggplots to visualize the Support Vector Machine model for binary classification.
+Nous avons utilisé ggplots pour visualiser le modèle de machine à vecteur de support pour la classification binaire.
 <!-- comment -->
-We used animint and interactivity to show how the SVM decision boundary changes as a function of the model hyper-parameters.
+Nous avons utilisé l'animint et l'interactivité pour montrer comment la frontière de décision du SVM change en fonction des hyper-paramètres du modèle.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Use [HTML table layout](../ch06/ch06-other#html-table-layout) for [`viz.linear.svm`](#linear-svm), so that the two feature space plots appear beside each other, and the "Select regularization parameter" plot appears above or below.
+- Utiliser [la mise en page d'un tableau HTML](../ch06/ch06-other#html-table-layout) pour [`viz.linear.svm`](#linear-svm) de manière à ce que les deux graphiques de l'espace des fonctionnalités apparaissent l'un à côté de l'autre et que le graphique "Sélectionner le paramètre de régularisation" apparaisse au-dessus ou au-dessous.
 <!-- comment -->
-- Use `rbfdot` as the kernel function.
+- Utiliser `rbfdot` comme fonction noyau.
 <!-- comment -->
-Compute subtrain and validation error, then add a new panel to the "select hyper parameters" plot.
+Calculer l'erreur de sous-entraînement et de validation, puis ajouter un nouveau panneau au graphique "select hyper parameters".
 <!-- comment -->
-- Default scales use the same two colors for the **y** and **set** legends, which could be confusing.
+- Les échelles standardisées utilisent les deux mêmes couleurs pour le graphique de l **y** et **fixer** ce qui peut prêter à confusion.
 <!-- comment -->
-Change the colors in one of the two legends so that they are different.
+Modifiez les couleurs de l'une des deux légendes pour qu'elles soient différentes.
 <!-- comment -->
-- Use `color` and `color_off` parameters to change the appearance of the `geom_tile` when selected or not, as explained in [Chapter 6, section Specifying how selection state is displayed](../Ch06/Ch06-other.html#display-selection-state).
+- Utiliser `color` et `color_off` pour modifier l'apparence de l'écran. `geom_tile` lorsqu'il est sélectionné ou non, comme expliqué dans [Chapitre 6, section Spécifier l'affichage de l'état de la sélection](../Ch06/Ch06-other.html#display-selection-state).
 
 <!-- paragraph -->
 
-Next, [Chapter 13](../Ch13/Ch13-poisson-regression.html) explains how to visualize the Poisson regression model.
+Suivant, [Chapitre 13](../Ch13/Ch13-poisson-regression.html) explique comment visualiser le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
