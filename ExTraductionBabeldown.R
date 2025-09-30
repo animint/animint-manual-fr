@@ -353,25 +353,32 @@ Translate_FR_EN <- function(file_name = "README",
   # Conversion finale des paragraphes en commentaires
   # cleaned_lines <- str_replace_all(cleaned_lines, "<!-- paragraph -->", "<!-- comment -->")
 
-  # Injection du header personnalisé
-  yaml_end <- which(cleaned_lines == "---")[2]
-  header <- c(
-    "",
-    ifelse(file_name == "README", "# animint-manual-fr", ""),
-    "",
-    "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
-    paste0("[", file_name, "](", source_filepath, "/",Chx,"/", file_name, file_extension, ")"),
-    ""
-  )
-  #print(cleaned_lines)
-  final_lines <- c(
-    cleaned_lines[1:yaml_end],
-    header,
-    cleaned_lines[(yaml_end + 1):length(cleaned_lines)]
-  )
-  
-  # Écriture du fichier final
-  writeLines(final_lines, output_path, useBytes = TRUE)
+  if(FALSE){
+    # Injection du header personnalisé
+    yaml_end <- which(cleaned_lines == "---")[2]
+    header <- c(
+      "",
+      ifelse(file_name == "README", "# animint-manual-fr", ""),
+      "",
+      "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
+      paste0("[", file_name, "](", source_filepath, "/",Chx,"/", file_name, file_extension, ")"),
+      ""
+    )
+    #print(cleaned_lines)
+    final_lines <- c(
+      cleaned_lines[1:yaml_end],
+      header,
+      cleaned_lines[(yaml_end + 1):length(cleaned_lines)]
+    )
+    
+    # Écriture du fichier final
+    writeLines(final_lines, output_path, useBytes = TRUE)
+    
+  } else {
+    
+    # Écriture du fichier final
+    writeLines(cleaned_lines, output_path, useBytes = TRUE)
+  }
 }
 
 # Traduction du README avec la fonction Translate_FR_EN
