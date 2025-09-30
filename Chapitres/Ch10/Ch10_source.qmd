@@ -578,7 +578,7 @@ set.colors <- c(
   Bayes="#984EA3",#purple
   train="black")
 errorPlot <- ggplot()+
-  ggtitle("Select number of neighbors")+
+  ggtitle("Sélection du nombre de voisins")+
   theme_bw()+
   theme_animint(height=500)+
   geom_text(aes(
@@ -598,9 +598,9 @@ errorPlot <- ggplot()+
   scale_fill_manual(values=set.colors)+
   guides(fill="none", linetype="none")+
   scale_linetype_manual(values=classifier.linetypes)+
-  ylab("Misclassification Errors")+
+  ylab("Taux d’erreur de classification")+
   scale_x_continuous(
-    "Number of Neighbors",
+    "Nombre de Voisins",
     limits=c(-1, 30),
     breaks=c(1, 10, 20, 29))+
   geom_ribbon(aes(
@@ -713,11 +713,11 @@ Enfin, nous redéfinissons le ggplot, en utilisant neighbors comme variable show
 
 ```{r}
 scatterPlot <- ggplot()+
-  ggtitle("Mis-classification errors in train set")+
+  ggtitle("Erreurs de classification dans l’ensemble d’entraînement")+
   theme_bw()+
   theme_animint(width=500, height=500)+
-  xlab("Input feature 1")+
-  ylab("Input feature 2")+
+  xlab("Fonctionnalité d'entrée 1")+
+  ylab("Fonctionnalité d'entrée 2")+
   coord_equal()+
   scale_color_manual(values=label.colors)+
   scale_linetype_manual(values=classifier.linetypes)+
@@ -868,7 +868,7 @@ facets <- function(df, facet){
   data.frame(df, facet=factor(facet, c("n.folds", "Misclassification Errors")))
 }
 errorPlotNew <- ggplot()+
-  ggtitle("Select number of folds and neighbors")+
+  ggtitle("Sélection du nombre de plis et de voisins")+
   theme_bw()+
   theme_animint(height=500)+
   theme(panel.margin=grid::unit(0, "cm"))+
@@ -892,7 +892,7 @@ errorPlotNew <- ggplot()+
   scale_linetype_manual(values=classifier.linetypes)+
   ylab("")+
   scale_x_continuous(
-    "Number of Neighbors",
+    "Nombre de Voisins",
     limits=c(-1, 30),
     breaks=c(1, 10, 20, 29))+
   geom_ribbon(aes(
