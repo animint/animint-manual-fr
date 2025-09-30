@@ -287,15 +287,17 @@ Translate_FR_EN <- function(file_name = "README",
   #Rmd_OG_path <- paste0(dest_filepath, "/", file_name, file_extension)
   
   # Traduction via babeldown
-  if (file_extension == ".qmd") {
-    babeldown::deepl_translate_quarto(
-      path = Rmd_OG_path,
-      source_lang = "EN",
-      target_lang = "FR",
-      out_path = output_path,
-      glossary_name = "animint-manual-glossaire-fr-en"
-    )
-  } else {
+
+# mod 30 sep 2025 JL - pas besoin de specifier quarto, ca fait juste bugger     
+#   if (file_extension == ".qmd") {
+#    babeldown::deepl_translate_quarto(
+#      path = Rmd_OG_path,
+#      source_lang = "EN",
+#      target_lang = "FR",
+#      out_path = output_path,
+#      glossary_name = "animint-manual-glossaire-fr-en"
+#    )
+#  } else {
     babeldown::deepl_translate(
       path = Rmd_OG_path,
       source_lang = "EN",
@@ -303,8 +305,8 @@ Translate_FR_EN <- function(file_name = "README",
       out_path = output_path,
       glossary_name = "animint-manual-glossaire-fr-en"
     )
-  }
-  
+#  }
+    
   # Lire le fichier traduit
   translated_text <- readLines(output_path, encoding = "UTF-8")
   
