@@ -45,7 +45,7 @@ getInput <- function(){
 data.dt <- data.table(
   x1=getInput(),
   x2=getInput())
-library(animint2)
+library(animint2fr)
 ggplot()+
   geom_point(aes(
     x1, x2),
@@ -219,7 +219,7 @@ YVAR <- function(dt, y.var){
 }
 animint(
   input=ggplot()+
-    ggtitle("input feature space")+
+    ggtitle("espace des fonctionnalités d'entrée")+
     theme_bw()+
     theme(panel.margin=grid::unit(0, "lines"))+
     facet_grid(y.var ~ ., scales="free")+
@@ -246,7 +246,7 @@ animint(
       alpha=0.7,
       data=YVAR(data.dt, "f")),
   square=ggplot()+
-    ggtitle("squared feature space")+
+    ggtitle("espace des fonctionnalités au carré")+
     theme_bw()+
     theme(panel.margin=grid::unit(0, "lines"))+
     facet_grid(y.var ~ ., scales="free")+
@@ -817,7 +817,7 @@ animint(
       data=validationErrors),
   inputSpace=ggplot()+
     theme_bw()+
-    ggtitle("Input space features")+
+    ggtitle("Espace des fonctionnalités d'entrée")+
     scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
     geom_vline(aes(
       xintercept=boundary),
