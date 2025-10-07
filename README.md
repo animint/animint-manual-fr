@@ -1,7 +1,7 @@
 # Manuel francophone pour animint2 : visualisation de données dans R
 
 Grâce à un financement de [FabriqueREL](https://fabriquerel.org/), nous travaillons sur une traduction du
-[Animint2 Manual](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html),
+[Animint2 Manual](https://animint-manual-en.netlify.app/),
 pour la visualisation interactive de données dans R.
 
 Regarder notre travail en cours sur
