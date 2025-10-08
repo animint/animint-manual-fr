@@ -164,7 +164,7 @@ animint(
 
 <!-- paragraph -->
 
-`Animint` ne prend pas en charge une brosse rectangulaire ou un lasso pour définir interactivement un ensemble de valeurs prises en charge.
+`animint2` ne prend pas en charge une brosse rectangulaire ou un lasso pour définir interactivement un ensemble de valeurs prises en charge.
 <!-- comment -->
 Au lieu de cela, `animint` prend en charge la sélection multiple en ajoutant des valeurs une par une à l'ensemble de sélection multiple.
 <!-- comment -->
@@ -178,7 +178,7 @@ Utilisez l'option [selector.types](Ch04-clickSelects.html#selector-types-option)
 
 Pour l'alignement horizontal du texte, animint prend en charge l'utilisation de `hjust` dans R avec les valeurs les plus courantes : 0 pour l'alignement à gauche, 0,5 pour l'alignement au milieu et 1 pour l'alignement à droite.
 <!-- comment -->
-`Animint2` traduit ces trois valeurs `hjust` en propriété `text-anchor` dans la visualisation de données générée.
+`animint2` traduit ces trois valeurs `hjust` en propriété `text-anchor` dans la visualisation de données générée.
 
 <!-- paragraph -->
 
@@ -372,7 +372,7 @@ Les options de thème suivantes peuvent être définies par `element_blank` pour
 
 <!-- paragraph -->
 
-`Animint2` prend en charge `facet_grid` pour créer des visualisations de données à plusieurs panneaux, mais ne prend en charge que de manière limitée les variables multiples par axe.
+`animint2` prend en charge `facet_grid` pour créer des visualisations de données à plusieurs panneaux, mais ne prend en charge que de manière limitée les variables multiples par axe.
 <!-- comment -->
 Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui se traduit par deux étiquettes de bande lorsqu'elles sont générées avec `ggplot2`.
 
