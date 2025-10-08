@@ -45,7 +45,7 @@ getInput <- function(){
 data.dt <- data.table(
   x1=getInput(),
   x2=getInput())
-library(animint2fr)
+library(animint2)
 ggplot()+
   geom_point(aes(
     x1, x2),
