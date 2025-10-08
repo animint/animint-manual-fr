@@ -53,6 +53,8 @@ book:
       - Ch09/Ch09-viz.qmd
       - Ch10/Ch10-viz.qmd
       - Ch11/Ch11-viz.qmd
+      - Ch12/Ch12-viz.qmd
+      - Ch13/Ch13-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
 
