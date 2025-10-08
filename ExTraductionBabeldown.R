@@ -615,6 +615,47 @@ Translate_FR_EN(file_name = "Ch13-poisson-regression",
                 Chx = "Ch13"
 )
 
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 14 ######
+
+# Traduction Chapitre 14 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "Ch14-PeakSegJoint",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch14"),
+                    TestFile = FALSE,
+                    Chx = "Ch14"
+)
+
+Translate_FR_EN(file_name = "Ch14-PeakSegJoint",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch14"),
+                Chx = "Ch14"
+)
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 15 ######
+
+# Traduction Chapitre 15 par Anna Artiges
+
+ConvertRmd_comments(file_name = "Ch15-Newton",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch15"),
+                    TestFile = FALSE,
+                    Chx = "Ch15"
+)
+
+Translate_FR_EN(file_name = "Ch15-Newton",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch15"),
+                Chx = "Ch15"
+)
 
 ##### Chapitre 99 ######
 
