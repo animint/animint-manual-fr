@@ -26,7 +26,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commencerons par la visualisation statique originale des données, repensée sous la forme de deux ggplots affichés par animint.
+- Nous commencerons par la visualisation statique originale des données, repensée sous la forme de deux ggplots affichés par `animint2`.
 <!-- comment -->
 Il y a un graphique de l'erreur de validation croisée 10 fois, et un graphique des prédictions du classificateur 7-voisins les plus proches.
 <!-- comment -->
@@ -82,7 +82,7 @@ A gauche : courbes d'erreur de classification, en fonction du nombre de voisins.
 
 <!-- paragraph -->
 
-### Tracé des courbes d'erreurs de classification {#static-error}
+### Graphique des courbes d'erreurs de mauvaise classification {#static-error}
 
 <!-- paragraph -->
 
@@ -116,7 +116,7 @@ Nous utiliserons les éléments suivants de cet ensemble de données :
 <!-- comment -->
 - `px1`, la grille de points pour le premier élément d'entrée (69 valeurs numériques comprises entre -2,6 et 4,2).
 <!-- comment -->
-Ces points seront utilisés pour calculer la limite de décision de Bayes à l'aide de la fonction contourLines.
+Ces points seront utilisés pour calculer la limite de décision de Bayes à l'aide de la fonction `contourLines`.
 <!-- comment -->
 - `px2` la grille de points pour la deuxième caractéristique d'entrée (99 valeurs numériques comprises entre -2 et 2,9).
 <!-- comment -->
@@ -301,7 +301,7 @@ cbind(set.linetypes, set.colors)
 
 <!-- paragraph -->
 
-Le code ci-dessous reproduit le tracé des courbes d'erreur de la figure originale.
+Le code ci-dessous reproduit le graphique des courbes d'erreur de la figure originale.
 
 <!-- paragraph -->
 
@@ -479,7 +479,7 @@ scatterPlotStatic
 
 <!-- paragraph -->
 
-Enfin, nous combinons les deux ggplots et les affichons sous forme d'animint.
+Enfin, nous combinons les deux `ggplots` et les affichons sous forme d'`animint2`.
 
 <!-- paragraph -->
 
@@ -501,11 +501,11 @@ Dans cette section, nous proposons une nouvelle conception interactive qui perme
 
 <!-- paragraph -->
 
-![Viz KNN interactif](Ch10-viz-interactive.png)
+![Visualisation KNN interactive](Ch10-viz-interactive.png)
 
 <!-- paragraph -->
 
-### Tracé cliquable des courbes d'erreur {#neighbors-error}
+### Graphique cliquable des courbes d'erreur {#neighbors-error}
 
 <!-- paragraph -->
 
@@ -517,13 +517,13 @@ Notez les changements suivants :
 
 <!-- paragraph -->
 
-- ajouter un sélecteur pour le nombre de voisins ( `geom_tallrect` ).
+- ajoutez un sélecteur pour le nombre de voisins ( `geom_tallrect` ).
 <!-- comment -->
-- changer la limite de décision de Bayes de `geom_hline` avec une entrée de légende, à un `geom_segment` avec une étiquette de texte.
+- changez la limite de décision de Bayes de `geom_hline` avec une entrée de légende, à un `geom_segment` avec une étiquette de texte.
 <!-- comment -->
-- ajouter une légende de type ligne pour distinguer les taux d'erreur des modèles Bayes et KNN.
+- ajoutez une légende de type de ligne pour distinguer les taux d'erreur des modèles de Bayes et de KNN.
 <!-- comment -->
-- changer les barres d'erreur ( `geom_linerange` ) en bandes d'erreur ( `geom_ribbon` ).
+- changez les barres d'erreur ( `geom_linerange` ) en bandes d'erreur ( `geom_ribbon` ).
 
 <!-- paragraph -->
 
@@ -563,9 +563,9 @@ Notez que
 
 <!-- paragraph -->
 
-- Nous utilisons showSelected dans `geom_text` et `geom_ribbon` afin qu'elles soient masquées lorsque l'on clique sur les légendes interactives.
+- Nous utilisons `showSelected` dans `geom_text` et `geom_ribbon` afin qu'ils soient masqués lorsque l'on clique sur les légendes interactives.
 <!-- comment -->
-- Nous utilisons clickSelects dans `geom_tallrect` pour sélectionner le nombre de voisins.
+- Nous utilisons `clickSelects` dans `geom_tallrect` pour sélectionner le nombre de voisins.
 <!-- comment -->
 Les geoms cliquables doivent être placés en dernier (couche supérieure) afin de ne pas être masqués par les geoms non cliquables (couches inférieures).
 
@@ -642,7 +642,7 @@ Notre nouvelle conception comprend les changements suivants :
 
 <!-- paragraph -->
 
-- Nous utilisons les voisins comme variable showSelected.
+- Nous utilisons les voisins comme variable `showSelected`.
 <!-- comment -->
 - Nous ajoutons une légende pour indiquer les points de données d'entraînement mal classés.
 <!-- comment -->
@@ -695,7 +695,7 @@ other.error[, V2.bottom := rep(
 
 <!-- paragraph -->
 
-Ci-dessous, nous redéfinissons les données de l'erreur de Bayes sans colonne de voisins, afin qu'elles apparaissent dans chaque sous-ensemble showSelected.
+Ci-dessous, nous redéfinissons les données de l'erreur de Bayes sans colonne de voisins, afin qu'elles apparaissent dans chaque sous-ensemble `showSelected`.
 
 <!-- paragraph -->
 
@@ -707,7 +707,7 @@ Bayes.error <- data.table(
 
 <!-- paragraph -->
 
-Enfin, nous redéfinissons le ggplot, en utilisant neighbors comme variable showSelected dans les geoms point, chemin et texte.
+Enfin, nous redéfinissons le `ggplot`, en utilisant les voisins ("neighbors") comme variable `showSelected` dans les geoms point, "path" et texte.
 
 <!-- paragraph -->
 
@@ -775,7 +775,7 @@ scatterPlot <- ggplot()+
 
 <!-- paragraph -->
 
-Avant de compiler la visualisation des données interactive, nous imprimons un ggplot statique avec une facette pour chaque valeur de voisins.
+Avant de compiler la visualisation des données interactive, nous imprimons un `ggplot` statique avec une facette pour chaque valeur de voisins.
 
 <!-- paragraph -->
 
@@ -817,7 +817,7 @@ Dans cette section, nous discutons d'une deuxième refonte qui permet à l'utili
 
 <!-- paragraph -->
 
-La boucle for ci-dessous calcule la courbe d'erreur de validation pour plusieurs valeurs différentes de `n.folds`.
+La boucle `for` ci-dessous calcule la courbe d'erreur de validation pour plusieurs valeurs différentes de `n.folds`.
 
 <!-- paragraph -->
 
@@ -926,7 +926,7 @@ errorPlotNew <- ggplot()+
 
 <!-- paragraph -->
 
-Le code ci-dessous prévisualise le nouveau tracé de la courbe d'erreur, en ajoutant une facette supplémentaire pour la variable showSelected.
+Le code ci-dessous prévisualise le nouveau graphique de la courbe d'erreur, en ajoutant une facette supplémentaire pour la variable `showSelected`.
 
 <!-- paragraph -->
 
@@ -936,7 +936,7 @@ errorPlotNew+facet_grid(facet ~ n.folds, scales="free")
 
 <!-- paragraph -->
 
-Le code ci-dessous crée une visualisation des données interactive à l'aide du nouveau tracé de la courbe d'erreur.
+Le code ci-dessous crée une visualisation des données interactive à l'aide du nouveau graphique de la courbe d'erreur.
 
 <!-- paragraph -->
 
@@ -969,9 +969,9 @@ Exercices :
 
 - Faites en sorte que les taux d'erreur du texte en bas à gauche du deuxième graphique soient cachés après avoir cliqué sur les entrées de la légende pour Bayes, train, test.
 <!-- comment -->
-Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans [Chapitre 14](Ch14-PeakSegJoint.html) ) ou deux `geom_text` chacun avec un paramètre showSelected différent.
+Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](Ch14-PeakSegJoint.html) ) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
-- La colonne probabilité du tableau de données show.grid est la probabilité prédite de la classe 1.
+- La colonne de probabilité ("probability") du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->
 Comment modifieriez-vous la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
 <!-- comment -->
@@ -981,7 +981,7 @@ Vous pourriez utiliser une échelle de remplissage continue, mais vous devriez a
 <!-- comment -->
 - Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles de formation, de validation et de test.
 <!-- comment -->
-Assurez-vous que la taille tracée des ensembles de validation et d'entraînement change en fonction de la valeur sélectionnée pour le paramètre `n.folds`.
+Assurez-vous que la taille tracée des ensembles de validation et d'entraînement change en fonction de la valeur sélectionnée de `n.folds`.
 <!-- comment -->
 - Jusqu'à présent, les graphiques de l'espace des caractéristiques ne montraient que les prédictions et les erreurs du modèle pour l'ensemble des données de train (validation.fold==0).
 <!-- comment -->
