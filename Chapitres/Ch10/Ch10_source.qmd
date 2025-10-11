@@ -1,5 +1,5 @@
 ---
-title: Exemple de K-Voisins les plus proches
+title: Méthode des K plus proches voisins
 layout: default
 output: bookdown::html_chapter
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(fig.path="Ch10-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données du classificateur des K-voisins les plus proches (KNN).
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
 
 <!-- paragraph -->
 
@@ -50,7 +50,7 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-A gauche : courbes d'erreur de classification, en fonction du nombre de voisins.
+A gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
 
 <!-- paragraph -->
 
@@ -106,11 +106,11 @@ Nous utiliserons les éléments suivants de cet ensemble de données :
 
 <!-- paragraph -->
 
-- `x` la matrice d'entrée de l'ensemble de données d'apprentissage (200 observations x 2 caractéristiques numériques).
+- `x` la matrice d'entrée de l'ensemble de données d'apprentissage (200 observations x 2 fonctionnalités numériques).
 <!-- comment -->
 - `y`, le vecteur de sortie de l'ensemble de données d'apprentissage (200 étiquettes de classe, soit 0 ou 1).
 <!-- comment -->
-- `xnew` La grille de points dans l'espace d'entrée où nous montrerons les prédictions du classificateur (6831 points de la grille x 2 caractéristiques numériques).
+- `xnew` La grille de points dans l'espace d'entrée où seront affichées les prédictions du classificateur (6831 points de la grille x 2 fonctionnalités numériques).
 <!-- comment -->
 - `prob` La probabilité réelle de la classe 1 à chacun des points de la grille (6831 valeurs numériques comprises entre 0 et 1).
 <!-- comment -->
@@ -118,9 +118,9 @@ Nous utiliserons les éléments suivants de cet ensemble de données :
 <!-- comment -->
 Ces points seront utilisés pour calculer la limite de décision de Bayes à l'aide de la fonction `contourLines`.
 <!-- comment -->
-- `px2` la grille de points pour la deuxième caractéristique d'entrée (99 valeurs numériques comprises entre -2 et 2,9).
+- `px2` la grille de points pour la deuxième fonctionnalité d'entrée (99 valeurs numériques comprises entre -2 et 2,9).
 <!-- comment -->
-- `means` les 20 centres des distributions normales dans le modèle de simulation (20 centres x 2 caractéristiques d'entrée).
+- `means` les 20 centres des distributions normales dans le modèle de simulation (20 centres x 2 fonctionnalités d'entrée).
 
 <!-- paragraph -->
 
@@ -146,7 +146,7 @@ test.points
 
 <!-- paragraph -->
 
-Nous créons ensuite un tableau de données qui comprend tous les points de test et les points de la grille, que nous utiliserons dans l'argument de test de la fonction knn.
+Nous créons ensuite un tableau de données qui comprend tous les points de test et les points de la grille, que nous utiliserons dans l'argument de test de la fonction KPPV.
 
 <!-- paragraph -->
 
@@ -163,7 +163,7 @@ test.and.grid
 
 <!-- paragraph -->
 
-Nous assignons aléatoirement chaque observation de l'ensemble de données d'apprentissage à l'un des dix plis.
+Nous assignons aléatoirement chaque observation de l'ensemble de données d'apprentissage à l'un des 10 plis.
 
 <!-- paragraph -->
 
@@ -179,7 +179,7 @@ mixture
 
 Nous définissons les éléments suivants `OneFold` qui divise les 200 observations en un ensemble de formation et un ensemble de validation.
 <!-- comment -->
-Elle calcule ensuite la probabilité prédite par le classificateur des K-voisins les plus proches pour chacun des points de données dans tous les ensembles (formation, validation, test et grille).
+Elle calcule ensuite la probabilité prédite par le classificateur des K Plus Proches Voisins ("K-Nearest-Neighbors") pour chacun des points de données dans tous les ensembles (formation, validation, test et grille).
 
 <!-- paragraph -->
 
@@ -216,11 +216,11 @@ OneFold <- function(validation.fold){
 
 <!-- paragraph -->
 
-Ci-dessous, nous exécutons la commande `OneFold` en parallèle à l'aide de la fonction `future` package.
+Ci-dessous, nous exécutons la fonction `OneFold` en parallèle à l'aide du package `future`.
 <!-- comment -->
 Notez que les plis de validation 1:10 seront utilisés pour calculer l'erreur de l'ensemble de validation.
 <!-- comment -->
-Le pli de validation 0 traite l'ensemble des 200 observations comme un ensemble d'entraînement et sera utilisé pour visualiser les limites de décision apprises du classificateur K-voisins les plus proches.
+Le pli de validation 0 traite l'ensemble des 200 observations comme un ensemble d'entraînement et sera utilisé pour visualiser les limites de décision apprises du classificateur K Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -241,11 +241,11 @@ Le tableau de données des prédictions contient près de 3 millions d'observati
 <!-- comment -->
 Lorsqu'il y a autant de données, les visualiser toutes en même temps n'est ni pratique ni informatif.
 <!-- comment -->
-Au lieu de les visualiser toutes en même temps, nous allons calculer et tracer des statistiques sommaires.
+Au lieu de les visualiser simultanément, nous allons calculer et tracer des statistiques sommaires.
 <!-- comment -->
 Dans le code ci-dessous, nous calculons la moyenne et l'erreur standard de l'erreur de classification pour chaque modèle (sur les 10 plis de validation).
 <!-- comment -->
-Il s'agit d'un exemple de la fonction [résumer un tableau de données idiome](Ch99-appendix.html#summarize-data-table) qui est généralement utile pour calculer des statistiques sommaires pour un tableau de données unique.
+Ceci est un exemple de [l'idiome summarize data table](Ch99-appendix.html#summarize-data-table) qui est généralement utile pour calculer des statistiques sommaires pour un tableau de données unique.
 
 <!-- paragraph -->
 
@@ -280,7 +280,7 @@ head(other.error)
 
 <!-- paragraph -->
 
-Ci-dessous, nous construisons une palette de couleurs à partir de `dput(RColorBrewer::brewer.pal(Inf, "Set1"))` et des palettes de types de lignes.
+Ci-dessous, nous construisons une palette de couleurs à partir de `dput(RColorBrewer::brewer.pal(Inf, "Set1"))` et des palettes de types de lignes (`linetype`).
 
 <!-- paragraph -->
 
@@ -339,11 +339,11 @@ errorPlotStatic
 
 <!-- paragraph -->
 
-### Tracé des frontières de décision dans l'espace des caractéristiques d'entrée. {#static-features}
+### Graphique des limites de décision dans l'espace des fonctionnalités d'entrée. {#static-features}
 
 <!-- paragraph -->
 
-Pour la visualisation statique des données de l'espace des caractéristiques, nous ne montrons que le modèle avec 7 voisins.
+Pour la visualisation statique des données de l'espace des fonctionnalités, nous ne montrons que le modèle avec 7 voisins.
 
 <!-- paragraph -->
 
@@ -356,7 +356,7 @@ show.points
 
 <!-- paragraph -->
 
-Ensuite, nous calculons les taux d'erreur de classification Train, Test et Bayes que nous afficherons en bas à gauche du tracé de l'espace des caractéristiques.
+Ensuite, nous calculons les taux d'erreur de mauvaise classification de Formation ("Train"), Test et Bayes que nous afficherons en bas à gauche du graphique de l'espace des fonctionnalités.
 
 <!-- paragraph -->
 
@@ -397,7 +397,7 @@ getBoundaryDF <- function(prob.vec){
 
 <!-- paragraph -->
 
-Nous utilisons cette fonction pour calculer les limites de décision pour le classificateur appris des 7 plus proches voisins et pour le classificateur optimal de Bayes.
+Nous utilisons cette fonction pour calculer les limites de décision pour le classificateur appris des 7 plus proches voisins ("7-Nearest-Neighbors") et pour le classificateur optimal de Bayes.
 
 <!-- paragraph -->
 
@@ -427,7 +427,7 @@ show.grid
 
 <!-- paragraph -->
 
-Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale.
+Le nuage de points ci-dessous reproduit le classificateur des 7 Plus Proches Voisins de la figure originale.
 
 <!-- paragraph -->
 
@@ -489,7 +489,7 @@ animint(errorPlotStatic, scatterPlotStatic)
 
 <!-- paragraph -->
 
-Cette visualisation des données comporte trois légendes interactives, mais elle est statique en ce sens qu'elle n'affiche que les prédictions du modèle des 7 plus proches voisins.
+Bien que cette visualisation des données comporte trois légendes interactives, elle est statique dans le sens où elle n'affiche que les prédictions du modèle des 7 Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -497,7 +497,7 @@ Cette visualisation des données comporte trois légendes interactives, mais ell
 
 <!-- paragraph -->
 
-Dans cette section, nous proposons une nouvelle conception interactive qui permet à l'utilisateur de sélectionner K, le nombre de voisins dans le classificateur K-Voisins les plus proches.
+Dans cette section, nous proposons une refonte interactive qui permet à l'utilisateur de sélectionner K, le nombre de voisins dans le classificateur K Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -544,7 +544,7 @@ Bayes.segment$set <- "test"
 
 <!-- paragraph -->
 
-Nous ajoutons également aux tableaux de données une variable erreur qui contient l'erreur de prédiction des modèles de type K-voisins les plus proches.
+Nous ajoutons également aux tableaux de données une variable d'erreur qui contient l'erreur de prédiction des modèles de type KPPV.
 <!-- comment -->
 Cette variable d'erreur sera utilisée pour la légende du type de ligne.
 
@@ -630,7 +630,7 @@ errorPlot
 
 <!-- paragraph -->
 
-### Tracé de l'espace des caractéristiques qui montre le nombre de voisins sélectionnés. {#neighbors-features}
+### Graphique de l'espace des éléments montrant le nombre de voisins sélectionnés. {#neighbors-features}
 
 <!-- paragraph -->
 
@@ -638,7 +638,7 @@ Ensuite, nous nous concentrons sur une refonte du graphique de l'espace des cara
 <!-- comment -->
 Dans la section précédente, nous n'avons considéré que le sous-ensemble de données du modèle à 7 voisins.
 <!-- comment -->
-Notre nouvelle conception comprend les changements suivants :
+Notre refonte comprend les changements suivants :
 
 <!-- paragraph -->
 
@@ -646,7 +646,7 @@ Notre nouvelle conception comprend les changements suivants :
 <!-- comment -->
 - Nous ajoutons une légende pour indiquer les points de données d'entraînement mal classés.
 <!-- comment -->
-- Nous utilisons des coordonnées à espacement égal afin que la distance visuelle (pixels) soit la même que la distance euclidienne dans l'espace des caractéristiques.
+- Nous utilisons des coordonnées à espacement égal afin que la distance visuelle (pixels) soit la même que la distance euclidienne dans l'espace des fonctionnalités.
 
 <!-- paragraph -->
 
@@ -658,7 +658,7 @@ show.points
 
 <!-- paragraph -->
 
-Ci-dessous, nous calculons les limites de décision prédites séparément pour chaque modèle de K-voisins les plus proches.
+Ci-dessous, nous calculons les limites de décision prédites séparément pour chaque modèle de K Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -673,7 +673,7 @@ pred.boundary
 
 <!-- paragraph -->
 
-Au lieu d'afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un `geom_text` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
+Au lieu d'afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
 
 <!-- paragraph -->
 
@@ -813,7 +813,7 @@ Notez que les voisins sont utilisés comme variable temporelle, de sorte que l'a
 
 <!-- paragraph -->
 
-Dans cette section, nous discutons d'une deuxième refonte qui permet à l'utilisateur de sélectionner le nombre de plis utilisés pour calculer la courbe d'erreur de validation.
+Dans cette section, nous discutons de la deuxième refonte qui permet à l'utilisateur de sélectionner le nombre de plis utilisés pour calculer la courbe d'erreur de validation.
 
 <!-- paragraph -->
 
@@ -953,11 +953,11 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K-voisins les plus proches.
+Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K Plus Proches Voisins ("K-Nearest-Neighbors").
 <!-- comment -->
-Nous avons commencé par une visualisation des données statique qui ne montrait que les prédictions du modèle des 7 plus proches voisins.
+Nous avons commencé par une visualisation des données statique qui ne montrait que les prédictions du modèle des 7 Plus Proches Voisins.
 <!-- comment -->
-Ensuite, nous avons créé une nouvelle conception interactive qui permettait de sélectionner K, le nombre de voisins.
+Ensuite, nous avons créé une refonte interactive qui permettait de sélectionner K, le nombre de voisins.
 <!-- comment -->
 Nous avons procédé à une autre refonte en ajoutant une facette permettant de sélectionner le nombre de plis de validation croisée.
 
@@ -973,23 +973,23 @@ Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selector
 <!-- comment -->
 - La colonne de probabilité ("probability") du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->
-Comment modifieriez-vous la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
+Comment feriez-vous la refonte de la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
 <!-- comment -->
-La principale difficulté est que la probabilité est une variable numérique, mais ggplot2 impose que chaque échelle soit continue ou discrète (pas les deux).
+La difficulté principale est que la probabilité est une variable numérique, mais que `ggplot2` impose que chaque échelle soit exclusivement continue ou discrète (pas les deux).
 <!-- comment -->
-Vous pourriez utiliser une échelle de remplissage continue, mais vous devriez alors utiliser une échelle différente pour montrer la variable de prédiction.
+Vous pourriez utiliser une échelle de remplissage continue ("continuous fill scale"), mais vous devrez alors utiliser une échelle différente pour montrer la variable de prédiction.
 <!-- comment -->
-- Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles de formation, de validation et de test.
+- Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles d'entrainement ("train"), de validation et de test.
 <!-- comment -->
 Assurez-vous que la taille tracée des ensembles de validation et d'entraînement change en fonction de la valeur sélectionnée de `n.folds`.
 <!-- comment -->
-- Jusqu'à présent, les graphiques de l'espace des caractéristiques ne montraient que les prédictions et les erreurs du modèle pour l'ensemble des données de train (validation.fold==0).
+- Jusqu'à présent, les graphiques de l'espace des fonctionnalités ne montraient que les prédictions et les erreurs du modèle pour l'ensemble des données d'entrainement (`validation.fold==0`).
 <!-- comment -->
 Créer une nouvelle conception qui inclut un nouveau graphique ou une nouvelle facette pour sélectionner validation.fold, et un graphique de l'espace des caractéristiques à facettes (une facette pour l'ensemble de données de formation, une facette pour l'ensemble de données de validation).
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 11](Ch11-lasso.html) explique comment visualiser le Lasso, un modèle d'apprentissage automatique.
+Dans le [chapitre 11](Ch11-lasso.html), nous vous expliquerons comment visualiser le `Lasso`, un modèle d'apprentissage automatique.
 
 <!-- paragraph -->
 
