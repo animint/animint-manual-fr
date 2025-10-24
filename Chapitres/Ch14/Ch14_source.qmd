@@ -1,4 +1,4 @@
-# Named clickSelects/showSelected
+# Nommé clickSelects/showSelected
 
 <!-- paragraph -->
 
@@ -8,35 +8,35 @@ knitr::opts_chunk$set(fig.path="Ch14-figures/")
 
 <!-- paragraph -->
 
-This chapter explains how to use [named clickSelects/showSelected variables](../Ch06/Ch06-other.html#data-driven-selectors) for creating data-driven selector names.
+Ce chapitre explique comment utiliser [les variables nommées clickSelects/showSelected](../Ch06/Ch06-other.html#data-driven-selectors) pour créer des noms de sélecteurs basés sur des données.
 <!-- comment -->
-This feature makes it easier to write animint code, and makes it faster to compile.
+Cette fonctionnalité facilite l'écriture du code animint et accélère la compilation.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by downloading the `PSJ` data set and computing the data to plot.
+- Nous commençons par télécharger le client \<- serveur>. `PSJ` et à calculer les données à tracer.
 <!-- comment -->
-- We show one method of defining an animint with many selectors, using for loops.
+- Nous montrons une méthode pour définir une animint avec de nombreux sélecteurs, en utilisant des boucles for.
 <!-- comment -->
-This method is technically correct, but computationally inefficient.
+Cette méthode est techniquement correcte, mais calculatoirement inefficace.
 <!-- comment -->
-- We then explain the preferred method for defining an animint with many selectors, using named clickSelects/showSelected.
+- Nous expliquons ensuite la méthode préférée pour définir une animint avec de nombreux sélecteurs, en utilisant les noms clickSelects/showSelected.
 <!-- comment -->
-This method is more computationally efficient, and easier to code.
+Cette méthode est plus efficace en termes de calcul et plus facile à coder.
 
 <!-- paragraph -->
 
-## Download data set {#download}
+## Téléchargement client \<- serveur {#download}
 
 <!-- paragraph -->
 
-The example data come from the [PeakSegJoint package](https://github.com/tdhock/PeakSegJoint).
+Les données de l'exemple proviennent de la base de données [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint).
 <!-- comment -->
-The code below downloads the data set.
+Le code ci-dessous télécharge le jeu de données.
 
 <!-- paragraph -->
 
@@ -48,11 +48,11 @@ data(PSJ, package="animint2data")
 
 <!-- paragraph -->
 
-## Compute data to plot {#compute-data-to-plot}
+## Calcul des données à tracer {#compute-data-to-plot}
 
 <!-- paragraph -->
 
-The section below computes some common data that we will use in two data visualizations below.
+La section ci-dessous calcule quelques données courantes que nous utiliserons dans deux visualisations des données ci-dessous.
 
 <!-- paragraph -->
 
@@ -96,11 +96,11 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
 
 <!-- paragraph -->
 
-## Define data viz using for loops {#define-using-for-loops}
+## Visualisation des données à l'aide de boucles "for". {#define-using-for-loops}
 
 <!-- paragraph -->
 
-The R code below constructs a data viz using for loops.
+Le code R ci-dessous construit une visualisation des données à l'aide de boucles for.
 
 <!-- paragraph -->
 
@@ -266,11 +266,11 @@ print(timing.for.construct <- system.time({
 
 <!-- paragraph -->
 
-Note the timing of the code above.
+Notez la synchronisation du code ci-dessus.
 <!-- comment -->
-It takes a long time just to evaluate the R code that defines this data viz, since it has so many geoms.
+L'évaluation du code R qui définit cette visualisation des données prend beaucoup de temps, car il y a beaucoup de geoms.
 <!-- comment -->
-Next, we compile the data visualization.
+Ensuite, nous compilons la visualisation des données.
 
 <!-- paragraph -->
 
@@ -282,21 +282,21 @@ print(timing.for.compile <- system.time({
 
 <!-- paragraph -->
 
-Note that the compilation also takes a long time, since there are so many geoms.
+Notez que la compilation prend également beaucoup de temps, car il y a beaucoup de geoms.
 <!-- comment -->
-The data viz can be viewed on [Ch14-for/index.html](../Ch14/Ch14-for/index.html).
+La visualisation des données peut être consultée à l'adresse suivante [Ch14-pour/index.html](../Ch14/Ch14-for/index.html).
 <!-- comment -->
-In the next section we will create the same data viz, but more efficiently.
+Dans la section suivante, nous allons créer la même visualisation des données, mais de manière plus efficace.
 
 <!-- paragraph -->
 
-## Define data viz using named clickSelects/showSelected {#define-using-named}
+## Visualisation des données à l'aide de clickSelects/showSelected {#define-using-named}
 
 <!-- paragraph -->
 
-In this section we use named clickSelects/showSelected to create a more efficient version of the previous data visualization.
+Dans cette section, nous utilisons named clickSelects/showSelected pour créer une version plus efficace de la visualisation des données précédente.
 <!-- comment -->
-In general, any data visualization defined using for loops in R code can be made more efficient by instead using this method.
+En général, toute visualisation des données définie à l'aide de boucles for dans le code R peut être rendue plus efficace en utilisant à la place cette méthode.
 
 <!-- paragraph -->
 
@@ -455,9 +455,9 @@ print(timing.named.construct <- system.time({
 
 <!-- paragraph -->
 
-It is clear that it takes much less time to evaluate the R code above which uses the named clickSelects/showSelected.
+Il est clair qu'il faut beaucoup moins de temps pour évaluer le code R ci-dessus qui utilise le nom clickSelects/showSelected.
 <!-- comment -->
-We compile it below.
+Nous le compilons ci-dessous.
 
 <!-- paragraph -->
 
@@ -469,19 +469,19 @@ print(timing.named.compile <- system.time({
 
 <!-- paragraph -->
 
-The animint produced above can be viewed on [Ch14-named/index.html](../Ch14/Ch14-named/index.html).
+L'animation produite ci-dessus peut être visualisée sur [Ch14-nommé/index.html](../Ch14/Ch14-named/index.html).
 <!-- comment -->
-Note that it should appear to be the same as the other data viz above.
+Notez qu'il devrait être identique à l'autre visualisation des données ci-dessus.
 <!-- comment -->
-The timings above show that named clickSelects/showSelected are much faster than for loops, in both the definition and compilation steps.
+Les temps ci-dessus montrent que les fonctions clickSelects/showSelected nommées sont beaucoup plus rapides que les boucles for, à la fois dans les étapes de définition et de compilation.
 
 <!-- paragraph -->
 
-## Disk usage comparison {#disk-usage}
+## Comparaison de l'utilisation du disque {#disk-usage}
 
 <!-- paragraph -->
 
-In this section we compute the disk usage of both methods.
+Dans cette section, nous calculons l'utilisation du disque pour les deux méthodes.
 
 <!-- paragraph -->
 
@@ -496,17 +496,17 @@ kb.dt
 
 <!-- paragraph -->
 
-The table above shows that the data viz defined using for loops takes about twice as much disk space as the data viz that used named clickSelects/showSelected.
+Le tableau ci-dessus montre que la visualisation des données définie à l'aide de boucles for prend environ deux fois plus d'espace disque que la visualisation des données utilisant les fonctions clickSelects/showSelected.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch14-exercises}
+## Résumé du chapitre et exercices {#Ch14-exercises}
 
 <!-- paragraph -->
 
-The table below summarizes the disk usage and timings presented in this chapter.
+Le tableau ci-dessous résume l'utilisation du disque et les temporisations présentées dans ce chapitre.
 <!-- comment -->
-It is clear that named clickSelects/showSelected are more efficient in both respects, and should be used instead of for loops.
+Il est clair que les fonctions clickSelects/showSelects nommées sont plus efficaces dans les deux cas et devraient être utilisées à la place des boucles for.
 
 <!-- paragraph -->
 
@@ -524,15 +524,15 @@ data.frame(
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Use named clickSelects/showSelected to create a visualization of some data from your domain of expertise.
+- Utilisez named clickSelects/showSelected pour créer une visualisation de certaines données de votre domaine d'expertise.
 
 <!-- paragraph -->
 
-Next, [Chapter 15](../Ch15/Ch15-Newton.html) explains how to visualize root-finding algorithms.
+Suivant, [Chapitre 15](../Ch15/Ch15-Newton.html) explique comment visualiser les algorithmes de recherche de racines.
 
 <!-- paragraph -->
 
