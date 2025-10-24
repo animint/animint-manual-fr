@@ -1,6 +1,6 @@
 qmd.files <- c(
   Sys.glob("Chapitres/*qmd"),
-  Sys.glob("Chapitres/*/*.qmd"))
+  Sys.glob("Chapitres/*/*qmd"))
 violations <- list()
 for(qmd in qmd.files){
   code.R <- knitr::purl(qmd, documentation=0)
