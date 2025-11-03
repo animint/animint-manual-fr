@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.path="Ch09-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l'ensemble de données sur les vélos de Montréal.
+Dans ce chapitre, nous explorerons plusieurs visualisations des données pour l'ensemble de données portant sur les vélos de Montréal.
 
 <!-- paragraph -->
 
@@ -81,13 +81,13 @@ str(accidents.dt)
 
 <!-- paragraph -->
 
-Chaque accident comporte des données sur sa date, son heure, sa localisation et le nombre de morts et de blessés légers/graves.
+Pour chaque accident il y a des données sur la date, l'heure, la localisation et le nombre de morts et de blessés légers/graves.
 <!-- comment -->
 Certaines valeurs sont en français (par exemple : position Voie de circulation, localisation En intersection, etc).
 
 <!-- paragraph -->
 
-Nous calculons la période de temps des accidents ci-dessous.
+Nous calculons l'intervalle de temps des accidents ci-dessous.
 
 <!-- paragraph -->
 
@@ -102,7 +102,7 @@ range(accidents.dt$month.str)
 
 <!-- paragraph -->
 
-Ci-dessous, nous calculons également la plage (ou l'intervalle) des mois pour le tableau de données du compteur de vélos.
+Ci-dessous, nous calculons également la plage (ou l'intervalle) de mois pour le tableau de données du compteur de vélos.
 
 <!-- paragraph -->
 
@@ -114,7 +114,7 @@ range(counts.dt$month.str)
 
 <!-- paragraph -->
 
-Les comptages de vélos sont des données de séries temporelles que nous visualisons ci-dessous.
+Le comptage de vélos présente des données de séries temporelles que nous visualisons ci-dessous.
 
 <!-- paragraph -->
 
@@ -133,13 +133,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-Tracer avec `geom_point` permet de voir facilement la différence entre les zéros et les valeurs manquantes.
+Tracer les données avec `geom_point` permet de voir facilement la différence entre les zéros et les valeurs manquantes.
 
 <!-- paragraph -->
 
-Nous allons calculer un résumé de tous les accidents par mois au cours de cette période, c'est pourquoi nous commençons par créer un tableau de données pour chaque mois ci-dessous.
+Nous allons compiler un résumé de tous les accidents survenus dans le mois au cours de cet intervalle, c'est pourquoi nous commençons par créer un tableau de données pour chaque mois ci-dessous.
 <!-- comment -->
-(et assurez-vous de définir l'environnement linguistique sur C pour les noms de mois en anglais)
+(assurez-vous de définir l'environnement linguistique sur C pour les noms de mois en anglais)
 
 <!-- paragraph -->
 
@@ -246,7 +246,7 @@ accidents.dt[
 
 Le résultat ci-dessus montre que les accidents avec des blessures légères sont les plus fréquents et que les accidents avec au moins un décès sont les moins fréquents.
 <!-- comment -->
-Ci-dessous, nous calculons les nombres par mois.
+Ci-dessous, nous calculons le nombre de X par mois.
 
 <!-- paragraph -->
 
@@ -282,7 +282,7 @@ counts.per.month[days < days.in.month, {
 
 <!-- paragraph -->
 
-Comme indiqué ci-dessus, certains mois ne comportent pas d'observations pour tous les jours.
+On remarque que certains mois comportent des journées sans observations.
 
 <!-- paragraph -->
 
@@ -427,7 +427,7 @@ velo.counts <- table(counts.dt$location)
 
 <!-- paragraph -->
 
-Les localisations des compteurs ci-dessus seront tracées ci-dessous.
+L'emplacement des compteurs ci-dessus sera tracé ci-dessous.
 <!-- comment -->
 Notez que nous utilisons `showSelected=month` et `clickSelects=location`.
 
@@ -520,7 +520,7 @@ print(MonthSummary)
 
 <!-- paragraph -->
 
-Le graphique ci-dessous présente les comptages de vélos à chaque localisation et chaque jour.
+Le graphique ci-dessous présente le comptage de vélos à chaque localisation, chaque jour.
 
 <!-- paragraph -->
 
@@ -795,19 +795,19 @@ Exercices :
 
 <!-- paragraph -->
 
-- Modifier la localisation à une variable de sélection multiple.
+- Modifiez la localisation à une variable de sélection multiple.
 <!-- comment -->
-- Ajouter un graphique pour la carte à la visualisation des données.
+- Ajoutez un graphique pour la carte à la visualisation des données.
 <!-- comment -->
-- Sur la carte, dessiner un cercle pour chaque localisation, dont la taille varie en fonction du comptage `count` des accidents dans le mois `month` sélectionné.
+- Sur la carte, dessinez un cercle pour chaque localisation, dont la taille varie en fonction du comptage `count` des accidents dans le mois `month` sélectionné.
 <!-- comment -->
-- Sur le site de la `MonthSummary` graphique, ajoutez un rectangle d'arrière-plan qui peut être utilisé pour sélectionner les `month`.
+- Sur le graphique `MonthSummary`, ajoutez un rectangle en arrière-plan qui peut être utilisé pour sélectionner le mois `month`.
 <!-- comment -->
-- Supprimer le `MonthSummary` et ajouter une visualisation similaire dans un troisième panneau de l'écran dans le graphique `MonthFacet`.
+- Supprimez le graphique `MonthSummary` et ajoutez une visualisation similaire dans un troisième panneau de l'écran dans le graphique `MonthFacet`.
 
 <!-- paragraph -->
 
-Ensuite, le [Chapitre 10](Ch10-nearest-neighbors.html) explique comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
+Dans le [chapitre 10](Ch10-nearest-neighbors.html), nous vous expliquerons comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
 
 <!-- paragraph -->
 
