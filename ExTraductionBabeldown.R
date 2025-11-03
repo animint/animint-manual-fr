@@ -139,18 +139,18 @@ ConvertRmd_comments <- function(
     source_filepath = path_github_animint_book,
     dest_filepath = path_local_animint2_fr,
     TestFile = TRUE,
-    Chx = "Ch05"
+    chx = "ch05"
 ) {
   library(stringr)
   library(magick)
   
   # Define paths
-  output_path <- file.path(dest_filepath, paste0(Chx, "_source", ifelse(TestFile, "_Test", ""), ".qmd"))
-  temp_file <- tempfile(pattern = paste0(Chx, "_source_Temp"), fileext = ".qmd")
+  output_path <- file.path(dest_filepath, paste0(chx, "_index", ifelse(TestFile, "_Test", ""), ".qmd"))
+  temp_file <- tempfile(pattern = paste0(chx, "_index_Temp"), fileext = ".qmd")
   
   # Clean up old temp files
   temp_dir <- tempdir()
-  old_temp <- list.files(temp_dir, pattern = paste0(Chx, "_source_Temp"), full.names = TRUE)
+  old_temp <- list.files(temp_dir, pattern = paste0(chx, "_index_Temp"), full.names = TRUE)
   if (length(old_temp) > 0) file.remove(old_temp)
   
   # Download source file
@@ -163,7 +163,7 @@ ConvertRmd_comments <- function(
 #  )
   
   download.file(
-    url = file.path(source_filepath, Chx, paste0(file_name, file_extension)),
+    url = file.path(source_filepath, chx, paste0(file_name, file_extension)),
     destfile = temp_file,
     mode = "wb"
   )
@@ -171,11 +171,11 @@ ConvertRmd_comments <- function(
   # Copy related images
 
 # mod 30 sep 2025 JL  
-#  png_files <- list.files("animint-book", pattern = paste0("^", Chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
+#  png_files <- list.files("animint-book", pattern = paste0("^", chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
   
   png_files <- list.files(
-    file.path("animint-manual-en","chapters", Chx),
-    pattern = paste0("^",Chx,".*\\.png$"),
+    file.path("animint-manual-en","chapters", chx),
+    pattern = paste0("^",chx,".*\\.png$"),
     recursive = TRUE,
     full.names = TRUE
   )
@@ -269,18 +269,18 @@ Translate_FR_EN <- function(file_name = "README",
                             file_extension = ".md",
                             source_filepath = path_github_animint_book,
                             dest_filepath = path_local_animint2_fr,
-                            Chx = "Ch05") {
+                            chx = "ch05") {
   
   library(stringr)
   
   # Chemins d'accès
   
-  output_path <- paste0(dest_filepath, "/", Chx,"_source","", ".qmd")
-  Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", ".qmd")
+  output_path <- paste0(dest_filepath, "/", chx,"_index","", ".qmd")
+  Rmd_OG_path <- paste0(dest_filepath, "/", chx,"_index", ".qmd")
   
   # Mod 10 septembre 2025
-  # output_path <- paste0(dest_filepath, "/", Chx,"_source", ifelse(ajoutFR, "_FR", ""), file_extension)
-  # Rmd_OG_path <- paste0(dest_filepath, "/", Chx,"_source", file_extension)
+  # output_path <- paste0(dest_filepath, "/", chx,"_index", ifelse(ajoutFR, "_FR", ""), file_extension)
+  # Rmd_OG_path <- paste0(dest_filepath, "/", chx,"_index", file_extension)
   
   # mod 09 septembre 2025
   # output_path <- paste0(dest_filepath, "/", file_name, ifelse(ajoutFR, "_FR", ""), file_extension) 
@@ -361,7 +361,7 @@ Translate_FR_EN <- function(file_name = "README",
       ifelse(file_name == "README", "# animint-manual-fr", ""),
       "",
       "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
-      paste0("[", file_name, "](", source_filepath, "/",Chx,"/", file_name, file_extension, ")"),
+      paste0("[", file_name, "](", source_filepath, "/",chx,"/", file_name, file_extension, ")"),
       ""
     )
     #print(cleaned_lines)
@@ -392,14 +392,14 @@ ConvertRmd_comments(file_name = "Ch03-showSelected",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
                     TestFile = FALSE,
-                    Chx = "Ch03"
+                    chx = "Ch03"
 )
 
 Translate_FR_EN(file_name = "Ch03-showSelected",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch03"),
-                Chx = "Ch03"
+                chx = "Ch03"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -414,14 +414,14 @@ ConvertRmd_comments(file_name = "Ch04-clickSelects",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
                     TestFile = FALSE,
-                    Chx = "Ch04"
+                    chx = "Ch04"
 )
 
 Translate_FR_EN(file_name = "Ch04-clickSelects",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch04"),
-                Chx = "Ch04"
+                chx = "Ch04"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -435,14 +435,14 @@ ConvertRmd_comments(file_name = "Ch05-sharing",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
                     TestFile = FALSE,
-                    Chx = "Ch05"
+                    chx = "Ch05"
 )
 
 Translate_FR_EN(file_name = "Ch05-sharing",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch05"),
-                Chx = "Ch05"
+                chx = "Ch05"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -456,14 +456,14 @@ ConvertRmd_comments(file_name = "Ch06-other",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
                     TestFile = FALSE,
-                    Chx = "Ch06"
+                    chx = "Ch06"
 )
 
 Translate_FR_EN(file_name = "Ch06-other",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch06"),
-                Chx = "Ch06"
+                chx = "Ch06"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -478,14 +478,14 @@ ConvertRmd_comments(file_name = "Ch07-limitations",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
                     TestFile = FALSE,
-                    Chx = "Ch07"
+                    chx = "Ch07"
 )
 
 Translate_FR_EN(file_name = "Ch07-limitations",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch07"),
-                Chx = "Ch07"
+                chx = "Ch07"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -500,14 +500,14 @@ ConvertRmd_comments(file_name = "Ch08-WorldBank-facets",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch08"),
                     TestFile = FALSE,
-                    Chx = "Ch08"
+                    chx = "Ch08"
 )
 
 Translate_FR_EN(file_name = "Ch08-WorldBank-facets",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch08"),
-                Chx = "Ch08"
+                chx = "Ch08"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -521,14 +521,14 @@ ConvertRmd_comments(file_name = "Ch09-Montreal-bikes",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch09"),
                     TestFile = FALSE,
-                    Chx = "Ch09"
+                    chx = "Ch09"
 )
 
 Translate_FR_EN(file_name = "Ch09-Montreal-bikes",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch09"),
-                Chx = "Ch09"
+                chx = "Ch09"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -542,14 +542,14 @@ ConvertRmd_comments(file_name = "Ch10-nearest-neighbors",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
                     TestFile = FALSE,
-                    Chx = "Ch10"
+                    chx = "Ch10"
 )
 
 Translate_FR_EN(file_name = "Ch10-nearest-neighbors",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch10"),
-                Chx = "Ch10"
+                chx = "Ch10"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -563,14 +563,14 @@ ConvertRmd_comments(file_name = "Ch11-lasso",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch11"),
                     TestFile = FALSE,
-                    Chx = "Ch11"
+                    chx = "Ch11"
 )
 
 Translate_FR_EN(file_name = "Ch11-lasso",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch11"),
-                Chx = "Ch11"
+                chx = "Ch11"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -584,14 +584,14 @@ ConvertRmd_comments(file_name = "Ch12-SVM",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch12"),
                     TestFile = FALSE,
-                    Chx = "Ch12"
+                    chx = "Ch12"
 )
 
 Translate_FR_EN(file_name = "Ch12-SVM",
                 file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch12"),
-                Chx = "Ch12"
+                chx = "Ch12"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -605,14 +605,14 @@ ConvertRmd_comments(file_name = "Ch13-poisson-regression",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch13"),
                     TestFile = FALSE,
-                    Chx = "Ch13"
+                    chx = "Ch13"
 )
 
 Translate_FR_EN(file_name = "Ch13-poisson-regression",
                 file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch13"),
-                Chx = "Ch13"
+                chx = "Ch13"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -626,14 +626,14 @@ ConvertRmd_comments(file_name = "Ch14-PeakSegJoint",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch14"),
                     TestFile = FALSE,
-                    Chx = "Ch14"
+                    chx = "Ch14"
 )
 
 Translate_FR_EN(file_name = "Ch14-PeakSegJoint",
                 file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch14"),
-                Chx = "Ch14"
+                chx = "Ch14"
 )
 
 stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
@@ -647,14 +647,56 @@ ConvertRmd_comments(file_name = "Ch15-Newton",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch15"),
                     TestFile = FALSE,
-                    Chx = "Ch15"
+                    chx = "Ch15"
 )
 
 Translate_FR_EN(file_name = "Ch15-Newton",
                 file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch15"),
-                Chx = "Ch15"
+                chx = "Ch15"
+)
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 16 ######
+
+# Traduction Chapitre 16 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/ch16"),
+                    TestFile = FALSE,
+                    chx = "ch16"
+)
+
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/ch16"),
+                chx = "ch16"
+)
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 17 ######
+
+# Traduction Chapitre 17 par Anna Artiges
+
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/ch17"),
+                    TestFile = FALSE,
+                    chx = "ch17"
+)
+
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/ch17"),
+                chx = "ch17"
 )
 
 ##### Chapitre 99 ######
@@ -666,12 +708,12 @@ ConvertRmd_comments(file_name = "Ch99-appendix",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
                     TestFile = FALSE,
-                    Chx = "Ch99"
+                    chx = "Ch99"
 )
 
 Translate_FR_EN(file_name = "Ch99-appendix",
                 file_extension = ".Rmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
-                Chx = "Ch99"
+                chx = "Ch99"
 )
