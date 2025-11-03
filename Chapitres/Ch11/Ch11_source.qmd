@@ -18,7 +18,7 @@ knitr::opts_chunk$set(fig.path="Ch11-figures/")
 
 <!-- paragraph -->
 
-L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique les [Lasso](https://en.wikipedia.org/wiki/Lasso_%28statistics%29) un modèle d'apprentissage automatique pour la régression linéaire régularisée.
+L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique le [Lasso](https://en.wikipedia.org/wiki/Lasso_%28statistics%29), un modèle d'apprentissage automatique pour la régression linéaire régularisée.
 
 <!-- paragraph -->
 
@@ -26,15 +26,15 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par plusieurs visualisations de données statiques du chemin d'accès au lasso.
+- Nous commençons par plusieurs visualisations de données statiques du chemin ("path") du lasso.
 <!-- comment -->
-- Nous créons ensuite une version interactive avec une facette et un graphique montrant l'erreur de formation/validation et les résidus.
+- Nous créons ensuite une version interactive avec une facette et un graphique montrant l'erreur d'entraînement/validation et les résidus.
 <!-- comment -->
-- Enfin, nous remanions la visualisation interactive des données en simplifiant les légendes et en déplaçant les tallrects.
+- Enfin, nous remanions la visualisation interactive des données avec des légendes simplifiées et des `tallrects` mobiles.
 
 <!-- paragraph -->
 
-## Graphiques statiques du chemin d'accès à la régularisation du coefficient {#static-path-plots}
+## Graphiques statiques du chemin ("path") de la régularisation du coefficient {#static-path-plots}
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ head(prostate)
 
 <!-- paragraph -->
 
-Nous construisons un train d'entrées `x` et des sorties `y` à l'aide du code ci-dessous.
+Nous construisons un entrainement d'entrées `x` et des sorties `y` à l'aide du code ci-dessous.
 
 <!-- paragraph -->
 
@@ -72,7 +72,7 @@ head(y)
 
 <!-- paragraph -->
 
-Ci-dessous, nous procédons à l'ajustement du chemin d'accès complet des solutions lasso à l'aide de la fonction `lars` package.
+Ci-dessous, nous procédons à l'ajustement du chemin complet des solutions lasso à l'aide du package `lars`.
 
 <!-- paragraph -->
 
@@ -85,7 +85,7 @@ fit$lambda
 
 <!-- paragraph -->
 
-Le chemin d'accès de `lambda` ne sont pas régulièrement espacées.
+Les chemins des valeurs `lambda` ne sont pas uniformément espacés.
 
 <!-- paragraph -->
 
@@ -122,9 +122,9 @@ gg.lambda
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre l'ensemble du chemin d'accès au lasso, c'est-à-dire les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
+Le graphique ci-dessus montre l'ensemble du chemin de lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
 <!-- comment -->
-Le chemin d'accès commence à la solution des moindres carrés, lambda=0 à gauche.
+Le chemin commence à la solution des moindres carrés, `lambda=0` à gauche.
 <!-- comment -->
 Il se termine par le modèle à ordonnée à l'origine complètement régularisé à droite.
 <!-- comment -->
@@ -201,7 +201,7 @@ Plus précisément, étant donné que l'algorithme LARS ne calcule que les point
 
 <!-- paragraph -->
 
-Le graphique ci-dessous combine le chemin d'accès aux pondérations du lasso avec le tracé des erreurs de formation/test.
+Le graphique ci-dessous combine le chemin des pondérations du lasso avec le graphique des erreurs d'entraînement/test.
 
 <!-- paragraph -->
 
@@ -283,9 +283,9 @@ print(gg.res)
 
 <!-- paragraph -->
 
-Ci-dessous, nous combinons les ggplots ci-dessus en un seul animint.
+Ci-dessous, nous combinons les ggplots ci-dessus en un seul `animint2`.
 <!-- comment -->
-En cliquant sur le premier graphique, on modifie le paramètre de régularisation, et les résidus qui sont affichés dans le second graphique.
+En cliquant sur le premier graphique, on modifie le paramètre de régularisation et les résidus qui sont affichés dans le second graphique.
 
 <!-- paragraph -->
 
@@ -299,29 +299,29 @@ animint(
 
 <!-- paragraph -->
 
-## Remaniement avec déplacement des hauts-reliefs {#re-design}
+## Refonte avec des `tallrects` mobiles {#re-design}
 
 <!-- paragraph -->
 
-La refonte ci-dessous comporte deux changements.
+Le refonte ci-dessous comporte deux changements.
 <!-- comment -->
-Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de set différentes dans l'animint précédent (linetype=set dans le premier graphique de chemin d'accès, et color=set dans le second graphique de résidus).
+Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de "set" différentes dans l'`animint2` précédent (`linetype="set"` dans le premier graphique de chemin et `color="set"` dans le second graphique de résidus).
 <!-- comment -->
-Il serait plus facile pour le lecteur de décoder si la variable set n'avait qu'un seul mapper.
+Il serait plus facile pour le lecteur de décoder si la variable "set" n'est mappée qu'une seule fois.
 <!-- comment -->
-Ainsi, dans le remaniement ci-dessous, nous remplaçons la variable `geom_point` dans le deuxième graphique par un `geom_segment` par `linetype=set`.
+Ainsi, dans la refonte ci-dessous, nous remplaçons le `geom_point` dans le deuxième graphique par un `geom_segment` avec `linetype=set`.
 
 <!-- paragraph -->
 
-Deuxièmement, nous avons remplacé le tallrect unique du premier graphique par deux tallrects.
+Deuxièmement, nous avons remplacé le `tallrect` unique du premier graphique par deux `tallrects`.
 <!-- comment -->
-Le premier tallrect a `showSelected=arclength` et est utilisé pour afficher la longueur d'arc sélectionnée à l'aide d'un rectangle gris.
+Le premier `tallrect` a `showSelected=arclength` et est utilisé pour afficher la longueur d'arc ("arclength") sélectionnée à l'aide d'un rectangle gris.
 <!-- comment -->
-Puisque nous spécifions un `duration` pour le `arclength` et la même variable `key=1` valeur, nous observerons une transition graduelle du tallrect gris sélectionné.
+Puisque nous spécifions une durée `duration` pour la variable `arclength` et la même valeur `key=1`, nous observerons une transition graduelle du `tallrect` gris sélectionné.
 <!-- comment -->
 Le deuxième tallrect a `clickSelects=arclength` et le fait de cliquer dessus a pour effet de modifier la valeur sélectionnée de `arclength`.
 <!-- comment -->
-Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons la fonction [nommées clickSelects/showSelected variables](Ch06-other.html#data-driven-selectors) pour indiquer que `arclength` doit également être utilisée comme variable `showSelected` variable.
+Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables clickSelects/showSelected nommées](Ch06-other.html#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
 
 <!-- paragraph -->
 
@@ -412,7 +412,7 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons créé une visualisation du modèle d'apprentissage automatique Lasso, qui montre de manière simulée le chemin d'accès de régularisation et les courbes d'erreur.
+Nous avons créé une visualisation du modèle d'apprentissage automatique Lasso, qui montre de manière simultanée le chemin de régularisation et les courbes d'erreur.
 <!-- comment -->
 L'interactivité a été utilisée pour montrer les détails pour différentes valeurs du paramètre de régularisation.
 
@@ -422,19 +422,19 @@ Exercices :
 
 <!-- paragraph -->
 
-- Refaites cette visualisation des données, en incluant le même effet visuel pour les hauts-reliefs, en utilisant un seul `geom_tallrect`.
+- Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect`.
 <!-- comment -->
-Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de l'ensemble de données `make_tallrect_or_widerect` fonction.
+Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
 <!-- comment -->
-- Ajoutez un autre nuage de points qui montre les valeurs prédites en fonction de la réponse, avec un `geom_abline` en arrière-plan pour indiquer une prédiction parfaite.
+- Ajoutez un autre nuage de points qui montre les valeurs prédites contre la réponse, avec un `geom_abline` en arrière-plan pour indiquer une prédiction parfaite.
 <!-- comment -->
-- À quoi ressembleraient les courbes d'erreur si l'on choisissait d'autres répartitions entre la formation et la validation ?
+- À quoi ressembleraient les courbes d'erreur si l'on choisissait d'autres répartitions entraînement/validation ?
 <!-- comment -->
-Effectuez une validation croisée 4 fois et ajoutez un graphique qui peut être utilisé pour sélectionner le pli de test.
+Effectuez une validation croisée 4-plis et ajoutez un graphique qui peut être utilisé pour sélectionner le pli de test.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 12](Ch12-SVM.html) explique comment visualiser la machine à vecteurs de support.
+Dans le [chapitre 12](Ch12-SVM.html), nous vous expliquerons comment visualiser la machine à vecteurs de support.
 
 <!-- paragraph -->
 
