@@ -19,7 +19,7 @@ crossref:
   tbl-title: Tableau
   eq-title: Équation
 book:
-  title: "La visualisation interactive de données avec animint2 dans R"
+  title: "Visualisation interactive de données dans R avec animint2"
   repo-url: https://github.com/animint/animint-manual-fr
   repo-actions: [edit, issue, source]
   repo-subdir: Chapitres

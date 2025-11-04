@@ -1,4 +1,4 @@
-# La visualisation interactive de données avec `animint2` dans R
+# Visualisation interactive de données dans R avec `animint2`
 
 Grâce à un financement de [FabriqueREL](https://fabriquerel.org/), nous travaillons sur une traduction du manuel en anglais,
 [Animated interactive data visualization using animint2 in R](https://animint-manual-en.netlify.app/).
