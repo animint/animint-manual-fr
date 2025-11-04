@@ -1,4 +1,4 @@
-# Supervised change-point detection
+# Détection supervisée des points de changement
 
 <!-- paragraph -->
 
@@ -8,27 +8,27 @@ knitr::opts_chunk$set(fig.path="ch16-figures/")
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of supervised changepoint detection models.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données des modèles de détection supervisée des points de changement.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by making several static visualizations of the `intreg` data set.
+- Nous commençons par effectuer plusieurs visualisations statiques de la `intreg` données.
 <!-- comment -->
-- We then create an interactive visualization in which one plot can be click to select the number of changepoints/segments, and the other plot shows the corresponding model.
+- Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de points de changement/segments, et l'autre graphique montre le modèle correspondant.
 <!-- comment -->
-- We end by showing a static visualization of the max margin linear regression model, and suggesting exercises about creating an interactive version.
+- Nous terminons en montrant une visualisation statique du modèle de régression linéaire de la marge maximale, et en suggérant des exercices pour créer une version interactive.
 
 <!-- paragraph -->
 
-## Static figures {#static-change-point}
+## Figures statiques {#static-change-point}
 
 <!-- paragraph -->
 
-We begin by loading the `intreg` data set.
+Nous commençons par charger le fichier `intreg` données.
 
 <!-- paragraph -->
 
@@ -41,9 +41,9 @@ lapply(intreg, function(df)data.table(df)[1:2])
 
 <!-- paragraph -->
 
-As shown above, it is a named list of 7 related data.frames.
+Comme indiqué ci-dessus, il s'agit d'une liste nommée de 7 cadres de données apparentés.
 <!-- comment -->
-We begin our exploration of these data by plotting the signals in separate facets.
+Nous commençons notre exploration de ces données en traçant les signaux dans des facettes séparées.
 
 <!-- paragraph -->
 
@@ -62,21 +62,21 @@ gg.signals
 
 <!-- paragraph -->
 
-Each data point plotted above shows an approximate measurement of DNA copy number (logratio), as a function of base position on a chromosome.
+Chaque point de données tracé ci-dessus montre une mesure approximative du nombre de copies d'ADN (logratio), en fonction de la position des bases sur un chromosome.
 <!-- comment -->
-Such data come from high-throughput assays which are important for diagnosing certain types of cancer such as neuroblastoma.
+Ces données proviennent d'analyses à haut débit qui sont importantes pour diagnostiquer certains types de cancer comme le neuroblastome.
 
 <!-- paragraph -->
 
-An important part of the diagnosis is detecting "breakpoints" or abrupt changes, within a given chromosome (panel).
+Une partie importante du diagnostic consiste à détecter les "points de rupture" ou les changements abrupts au sein d'un chromosome donné (panel).
 <!-- comment -->
-It is clear from the plot above that there are several breakpoint in these data.
+Le graphique ci-dessus montre clairement qu'il y a plusieurs points de rupture dans ces données.
 <!-- comment -->
-In particular signal 4.2 appears to have three breakpoints, signal 4.3 appears to have one, etc.
+En particulier, le signal 4.2 semble avoir trois points de rupture, le signal 4.3 semble en avoir un, etc.
 <!-- comment -->
-In fact these data come from medical doctors at the Institute Curie (Paris, France) who have visually annotated regions with and without breakpoints.
+En fait, ces données proviennent de médecins de l'Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de cassure.
 <!-- comment -->
-These data are available as `intreg$annotations` and are plotted below.
+Ces données sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous.
 
 <!-- paragraph -->
 
@@ -97,19 +97,19 @@ gg.ann
 
 <!-- paragraph -->
 
-The plot above shows yellow regions where the doctors have determined that there are no significant breakpoints, and red regions where there is one breakpoint.
+Le graphique ci-dessus montre en jaune les régions où les médecins ont déterminé qu'il n'y a pas de point de rupture significatif, et en rouge les régions où il y a un point de rupture.
 <!-- comment -->
-The goal in analyzing these data is to learn from the limited labeled data (colored regions) and provide consistent breakpoint predictions throughout (even in un-labeled regions).
+L'objectif de l'analyse de ces données est d'apprendre à partir des données étiquetées limitées (régions colorées) et de fournir des prédictions cohérentes sur les points de rupture (même dans les régions non étiquetées).
 
 <!-- paragraph -->
 
-In order to detect these breakpoints we have fit some maximum likelihood segmentation models, using the efficient algorithm implemented in `jointseg::Fpsn`.
+Afin de détecter ces points de rupture, nous avons ajusté certains modèles de segmentation de vraisemblance maximale, en utilisant l'algorithme efficace implémenté dans le logiciel `jointseg::Fpsn`.
 <!-- comment -->
-The segment means are available in `intreg$segments` and the predicted breakpoints are available in `intreg$breaks`.
+Les moyens des segments sont disponibles dans `intreg$segments` et les points d'arrêt prédits sont disponibles dans `intreg$breaks`.
 <!-- comment -->
-For each signal there is a sequence of models from 1 to 20 segments.
+Pour chaque signal, il existe une séquence de modèles de 1 à 20 segments.
 <!-- comment -->
-First let's zoom in on one signal:
+Zoomons d'abord sur un signal :
 
 <!-- paragraph -->
 
@@ -136,7 +136,7 @@ gg.one
 
 <!-- paragraph -->
 
-We plot some of these models for one of the signals below:
+Nous traçons ci-dessous certains de ces modèles pour l'un des signaux :
 
 <!-- paragraph -->
 
@@ -163,9 +163,9 @@ gg.models
 
 <!-- paragraph -->
 
-The plot above shows the maximum likelihood segmentation models in green (from one to six segments).
+Le graphique ci-dessus montre les modèles de segmentation de vraisemblance maximale en vert (de un à six segments).
 <!-- comment -->
-Below we use the `penaltyLearning::labelError` function to compute the label error, which quantifies which models agree with which labels.
+Ci-dessous, nous utilisons le modèle `penaltyLearning::labelError` pour calculer l'erreur d'étiquette, qui quantifie quels modèles sont en accord avec quelles étiquettes.
 
 <!-- paragraph -->
 
@@ -181,9 +181,9 @@ sig.errors <- penaltyLearning::labelError(
 
 <!-- paragraph -->
 
-The `sig.errors$label.errors` data.table contains one row for every (model,label) combination.
+Le `sig.errors$label.errors` tableau de données contient une ligne pour chaque combinaison (modèle,étiquette).
 <!-- comment -->
-The`status` column can be used to show the label error: `false negative` for too few changes, `false positive` for too many changes, or `correct` for the right number of changes.
+Le tableau`status` peut être utilisée pour afficher l'erreur d'étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
 
 <!-- paragraph -->
 
@@ -206,13 +206,13 @@ gg.models+
 
 <!-- paragraph -->
 
-Looking at the label error plot above, it is clear that the model with four segments should be selected, because it achieves zero label errors.
+En examinant le graphique des erreurs d'étiquettes ci-dessus, il est clair que le modèle à quatre segments devrait être sélectionné, car il permet d'obtenir des erreurs d'étiquettes nulles.
 <!-- comment -->
-There are a number of criteria that can be used to select which one of these models is best.
+Un certain nombre de critères peuvent être utilisés pour sélectionner le meilleur modèle.
 <!-- comment -->
-One way to do that is by selecting the model with $s$ segments is $S^*(\\lambda)=L_s + \\lambda*s$, where $L_s$ is the total loss of the model with $s$ segments, and $\\lambda$ is a non-negative penalty.
+Une façon d'y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\\lambda)=L\_s + \\lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
-In the plot below we show the model selection function $S^\*(\\lambda)$ for this data set:
+Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle. $S^*(\lambda)$ pour cet ensemble de données :
 
 <!-- paragraph -->
 
@@ -231,17 +231,17 @@ gg.selection
 
 <!-- paragraph -->
 
-It is clear from the plot above that the model selection function is decreasing.
+Le graphique ci-dessus montre clairement que la fonction de sélection du modèle est décroissante.
 <!-- comment -->
-In the next section we make an interactive version of these two plots where we can actually click on the model selection plot in order to select the model.
+Dans la section suivante, nous réalisons une version interactive de ces deux graphiques dans laquelle nous pouvons cliquer sur le graphique de sélection de modèle afin de sélectionner le modèle.
 
 <!-- paragraph -->
 
-## Interactive figures for one signal {#interactive-one}
+## Figures interactives pour un signal {#interactive-one}
 
 <!-- paragraph -->
 
-We will create an interactive figure for one signal by adding a `geom_tallrect()` with `clickSelects=segments` to the plot above:
+Nous allons créer une figure interactive pour un signal en ajoutant un `geom_tallrect()` avec `clickSelects=segments` au graphique ci-dessus :
 
 <!-- paragraph -->
 
@@ -259,7 +259,7 @@ interactive.selection
 
 <!-- paragraph -->
 
-We will combine that with the non-facetted version of the data/models plot below, in which we have added `showSelected=segments` to the model geoms:
+Nous allons combiner cela avec la version non facettée du graphique données/modèles ci-dessous, dans lequel nous avons ajouté `showSelected=segments` aux geoms des modèles :
 
 <!-- paragraph -->
 
@@ -296,9 +296,9 @@ interactive.models
 
 <!-- paragraph -->
 
-Of course the plot above is not very informative because it is not interactive.
+Bien entendu, le graphique ci-dessus n'est pas très informatif car il n'est pas interactif.
 <!-- comment -->
-Below we combine the two interactive ggplots in a single linked animint:
+Ci-dessous, nous combinons les deux ggplots interactifs en un seul animint lié :
 
 <!-- paragraph -->
 
@@ -312,21 +312,21 @@ animint(
 
 <!-- paragraph -->
 
-Note that in the data viz above the model with 6 segments is not selectable for any value of lambda, so there is no way to click on the plot to select that model.
+Notez que dans la visualisation des données ci-dessus, le modèle à 6 segments ne peut être sélectionné pour aucune valeur de lambda. Il n'est donc pas possible de cliquer sur le graphique pour sélectionner ce modèle.
 <!-- comment -->
-However it is possible to select the model using the segments selection menu (click "Show selection menus" at the bottom of the data viz).
+Cependant, il est possible de sélectionner le modèle en utilisant le menu de sélection des segments (cliquez sur "Afficher les menus de sélection" au bas de l'image de données).
 
 <!-- paragraph -->
 
-## Static max margin regression plot {#max-margin}
+## Graphique de régression de la marge maximale statique {#max-margin}
 
 <!-- paragraph -->
 
-Another part of this data set is `intreg$intervals` which has one row for every signal.
+Une autre partie de cet ensemble de données est `intreg$intervals` qui comporte une ligne pour chaque signal.
 <!-- comment -->
-The columns`min.L` and `max.L` indicate the min/max values of the target interval, which is the largest range of log(penalty) values with minimum label errors.
+Les colonnes`min.L` et `max.L` indiquent les valeurs min/max de l'intervalle cible, qui correspond à la plage la plus large de valeurs de log(pénalité) avec des erreurs d'étiquette minimales.
 <!-- comment -->
-Below we plot this interval as a function of a feature of the data (log number of data points):
+Nous traçons ci-dessous cet intervalle en fonction d'une caractéristique des données (logarithme du nombre de points de données) :
 
 <!-- paragraph -->
 
@@ -350,13 +350,13 @@ gg.intervals
 
 <!-- paragraph -->
 
-The target intervals in the plot above denote the region of log(lambda) space that will select a model with minimum label errors.
+Les intervalles cibles dans le graphique ci-dessus indiquent la région de l'espace log(lambda) qui sélectionnera un modèle avec des erreurs d'étiquette minimales.
 <!-- comment -->
-There is one interval for each signal; we made an animint in the previous section for the signal indicated in black text.
+Il y a un intervalle pour chaque signal ; nous avons fait un animint dans la section précédente pour le signal indiqué en noir.
 <!-- comment -->
-Machine learning algorithms can be used to find a penalty function that intersects each of the intervals, and maximizes the margin (the distance between the regression function and the nearest interval limit).
+Des algorithmes d'apprentissage automatique peuvent être utilisés pour trouver une fonction de pénalité qui coupe chacun des intervalles et maximise la marge (la distance entre la fonction de régression et la limite de l'intervalle le plus proche).
 <!-- comment -->
-Data for the linear max margin regression function are in `intreg$model` which is shown in the plot below:
+Les données pour la fonction de régression linéaire de la marge maximale sont dans `intreg$model` ce qui est illustré dans le tracé ci-dessous :
 
 <!-- paragraph -->
 
@@ -379,59 +379,59 @@ gg.mm
 
 <!-- paragraph -->
 
-The plot above shows the linear max margin regression function f(x) as the solid red line.
+Le graphique ci-dessus montre la fonction de régression linéaire de la marge maximale f(x) sous la forme d'une ligne rouge continue.
 <!-- comment -->
-It is clear that it intersects each of the black target intervals, and maximizes the margin (red vertical dotted lines).
+Il est clair qu'elle coupe chacun des intervalles cibles noirs et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
-For more information on the subject of supervised changepoint detection, please see [my useR 2017 tutorial](https://github.com/tdhock/change-tutorial).
+Pour plus d'arguments sur le thème de la détection supervisée des points de changement, voir [mon tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
 
 <!-- paragraph -->
 
-Now that you know how to visualize each of the seven parts of the `intreg` data set, the rest of the chapter is devoted to exercises.
+Maintenant que vous savez comment visualiser chacune des sept parties du `intreg` de données, le reste du chapitre est consacré à des exercices.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#ch16-exercises}
+## Résumé du chapitre et exercices {#ch16-exercises}
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Add a `geom_text()` which shows the currently selected signal name at the top of the plot, in `interactive.models` in the first animint above.
+- Ajouter un `geom_text()` qui affiche le nom du signal actuellement sélectionné en haut du graphique, en `interactive.models` dans la première animation ci-dessus.
 <!-- comment -->
-- Make an animint with two plots that shows the data set that corresponds to each interval on the max margin regression plot.
+- Créez une animation avec deux graphiques qui montre l'ensemble de données correspondant à chaque intervalle sur le graphique de régression de la marge maximale.
 <!-- comment -->
-One plot should show an interactive version of the max margin regression plot where you can click on an interval to select a signal.
+L'un des graphiques doit montrer une version interactive du graphique de régression de la marge maximale où vous pouvez cliquer sur un intervalle pour sélectionner un signal.
 <!-- comment -->
-The other plot should show the data set for the currently selected signal.
+L'autre graphique doit afficher l'ensemble des données pour le signal sélectionné.
 <!-- comment -->
-- In the animint you created in the previous exercise, add a third plot with the model selection function for the currently selected signal.
+- Dans l'animint que vous avez créé dans l'exercice précédent, ajoutez un troisième graphique avec la fonction de sélection de modèle pour le signal actuellement sélectionné.
 <!-- comment -->
-- Re-design the previous animint so that instead of using a third plot, add a facet to the max margin regression regression plot such that the log(lambda) axes are aligned.
+- Refondez l'animint précédent de sorte qu'au lieu d'utiliser un troisième graphique, ajoutez une facette au graphique de régression de la marge maximale de sorte que les axes log(lambda) soient tracés.
 <!-- comment -->
-Add another facet that shows the number of incorrect labels (`intreg$selection$cost`) for each log(lambda) value.
+Ajoutez une autre facette qui indique le nombre d'étiquettes incorrectes (`intreg$selection$cost`) pour chaque valeur de log(lambda).
 <!-- comment -->
-- Add geoms for selecting the number of segments.
+- Ajouter des geoms pour sélectionner le nombre de segments.
 <!-- comment -->
-Clicking the model selection plot should select the number of segments, which should update the displayed model and label errors on the plot of the data for the currently selected signal.
+En cliquant sur le tracé de sélection du modèle, on devrait sélectionner le nombre de segments, ce qui devrait mettre à jour le modèle affiché et les erreurs d'étiquette sur le graphique des données pour le signal actuellement sélectionné.
 <!-- comment -->
-Furthermore add a visual indication of the selected model to the max margin regression plot.
+En outre, ajouter une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
-The result should look something [like this](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-01-28-Max-margin-interval-regression-for-supervised-segmentation-model-selection/index.html).
+Le résultat devrait ressembler à quelque chose comme [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-01-28-Max-margin-interval-regression-for-supervised-segmentation-model-selection/index.html).
 <!-- comment -->
-- Make another data viz by starting with the facetted `gg.signals` plot in the beginning of this chapter.
+- Créez une autre visualisation des données en commençant par la facette `gg.signals` au début de ce chapitre.
 <!-- comment -->
-Add a plot that can be used to select the number of segments for each signal.
+Ajouter un graphique permettant de sélectionner le nombre de segments pour chaque signal.
 <!-- comment -->
-For each signal in the facetted plot of the data, show the currently selected model for that signal (there should be a separate selection variable for each signal -- you can use named `clickSelects` and `showSelected` as explained in [Chapter 14](/ch14)).
+Pour chaque signal dans le graphique à facettes des données, montrez le modèle actuellement sélectionné pour ce signal (il devrait y avoir une variable de sélection distincte pour chaque signal -- vous pouvez utiliser les variables nommées `clickSelects` et `showSelected` comme expliqué dans [chapitre 14](/ch14)).
 <!-- comment -->
-The result should look something [like this](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
+Le résultat devrait ressembler à quelque chose comme [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
 
 <!-- paragraph -->
 
-Next, [Chapter 17](/ch17) explains how to visualize the K-means clustering algorithm.
+Suivant, [Chapitre 17](/ch17) explique comment visualiser l'algorithme d'agrégation des K-moyennes.
 
 <!-- paragraph -->
 
