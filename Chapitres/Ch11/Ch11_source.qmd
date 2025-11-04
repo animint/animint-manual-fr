@@ -197,7 +197,7 @@ Plus précisément, étant donné que l'algorithme LARS ne calcule que les point
 
 <!-- paragraph -->
 
-## Visualisation interactive du chemin d'accès à la régularisation {#interactive-path-viz}
+## Visualisation interactive du chemin (path) de la régularisation {#interactive-path-viz}
 
 <!-- paragraph -->
 
