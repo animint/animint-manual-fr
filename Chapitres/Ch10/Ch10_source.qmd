@@ -28,11 +28,11 @@ Plan du chapitre :
 
 - Nous commencerons par la visualisation statique originale des données, repensée sous la forme de deux ggplots affichés par `animint2`.
 <!-- comment -->
-Il y a un graphique de l'erreur de validation croisée 10 fois, et un graphique des prédictions du classificateur 7-voisins les plus proches.
+Voici un graphique de l'erreur de validation à 10 plis et un graphique des prédictions du classificateur 7 plus proches voisins.
 <!-- comment -->
-- Nous proposons une nouvelle conception qui permet de sélectionner le nombre de voisins utilisés pour les prédictions du modèle.
+- Nous proposons deux refontes. Grâce à la première vous pourrez sélectionner le nombre de voisins utilisés pour les prédictions du modèle
 <!-- comment -->
-- Nous proposons une deuxième refonte qui permet de sélectionner le nombre de plis utilisés pour calculer l'erreur de validation croisée.
+- et grâce à la seconde, le nombre de plis utilisés pour le calcul de l'erreur de validation croisée.
 
 <!-- paragraph -->
 
@@ -46,7 +46,7 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-![Viz KNN statique](Ch10-viz-static.png)
+![Visualisation statique de K-Plus-Proches-Voisins](Ch10-viz-static.png)
 
 <!-- paragraph -->
 
@@ -68,7 +68,7 @@ A gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de
 
 <!-- paragraph -->
 
-À droite : limites des données et des décisions dans l'espace bidimensionnel des caractéristiques d'entrée.
+À droite : les données et les limites de décision dans l'espace bidimensionnel des fonctionnalités d'entrée.
 
 <!-- paragraph -->
 
@@ -126,7 +126,7 @@ Ces points seront utilisés pour calculer la limite de décision de Bayes à l'a
 
 Tout d'abord, nous créons un ensemble de tests, en suivant le code d'exemple de `help(ESL.mixture)`.
 <!-- comment -->
-Notez que nous utilisons un `data.table` plutôt qu'un `data.frame` pour stocker ces big data, puisque `data.table` est souvent plus rapide et plus efficace en termes de mémoire pour les ensembles de données volumineux.
+Notez que nous utilisons un `data.table` plutôt qu'un `data.frame` pour stocker ces données volumineuses, puisque `data.table` est souvent plus rapide et plus économe en mémoire pour les ensembles de données volumineux.
 
 <!-- paragraph -->
 
@@ -177,7 +177,7 @@ mixture
 
 <!-- paragraph -->
 
-Nous définissons les éléments suivants `OneFold` qui divise les 200 observations en un ensemble de formation et un ensemble de validation.
+Nous définissons la fonction `OneFold` pour diviser les 200 observations en un ensemble de formation et un ensemble de validation.
 <!-- comment -->
 Elle calcule ensuite la probabilité prédite par le classificateur des K Plus Proches Voisins ("K-Nearest-Neighbors") pour chacun des points de données dans tous les ensembles (formation, validation, test et grille).
 
@@ -243,7 +243,7 @@ Lorsqu'il y a autant de données, les visualiser toutes en même temps n'est ni 
 <!-- comment -->
 Au lieu de les visualiser simultanément, nous allons calculer et tracer des statistiques sommaires.
 <!-- comment -->
-Dans le code ci-dessous, nous calculons la moyenne et l'erreur standard de l'erreur de classification pour chaque modèle (sur les 10 plis de validation).
+Dans le code ci-dessous, nous calculons la moyenne et l'erreur standard de l'erreur de mauvaise classification pour chaque modèle (sur les 10 plis de validation).
 <!-- comment -->
 Ceci est un exemple de [l'idiome summarize data table](Ch99-appendix.html#summarize-data-table) qui est généralement utile pour calculer des statistiques sommaires pour un tableau de données unique.
 
@@ -263,7 +263,7 @@ validation.error
 
 <!-- paragraph -->
 
-Nous construisons ci-dessous des tableaux de données pour l'erreur de Bayes (dont nous savons qu'elle est de 0,21 pour les données de l'exemple de mélange) et l'erreur de formation/essai.
+Nous construisons ci-dessous des tableaux de données pour l'erreur de formation/essai et pour  l'erreur de Bayes (nous savons qu'elle est de 0,21 pour les données de l'exemple de mélange).
 
 <!-- paragraph -->
 
@@ -509,7 +509,7 @@ Dans cette section, nous proposons une refonte interactive qui permet à l'utili
 
 <!-- paragraph -->
 
-Nous commençons par une refonte du graphique des courbes d'erreur.
+Examinons d'abord la refonte du graphique des courbes d'erreur.
 
 <!-- paragraph -->
 
@@ -529,7 +529,7 @@ Notez les changements suivants :
 
 Les seules nouvelles données que nous devons définir sont les points d'extrémité du segment que nous utiliserons pour tracer la frontière de décision de Bayes.
 <!-- comment -->
-Notez que nous redéfinissons également l'ensemble "test" pour souligner le fait que l'erreur de Bayes est le meilleur taux d'erreur réalisable pour les données de test.
+À noter que nous redéfinissons également l'ensemble "test" pour souligner que l'erreur de Bayes représente le meilleur taux d'erreur atteignable pour les données de test.
 
 <!-- paragraph -->
 
@@ -559,7 +559,7 @@ other.error$classifier <- "KNN"
 
 Nous redéfinissons le graphique des courbes d'erreur ci-dessous.
 <!-- comment -->
-Notez que
+À noter
 
 <!-- paragraph -->
 
@@ -634,7 +634,7 @@ errorPlot
 
 <!-- paragraph -->
 
-Ensuite, nous nous concentrons sur une refonte du graphique de l'espace des caractéristiques.
+Concentrons nous ensuite sur la refonte du graphique de l'espace des caractéristiques.
 <!-- comment -->
 Dans la section précédente, nous n'avons considéré que le sous-ensemble de données du modèle à 7 voisins.
 <!-- comment -->
@@ -684,7 +684,7 @@ show.text <- show.grid[, list(
 
 <!-- paragraph -->
 
-Nous calculons ci-dessous la position du texte en bas à gauche, que nous utiliserons pour afficher le taux d'erreur du modèle sélectionné.
+Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d'erreur du modèle sélectionné.
 
 <!-- paragraph -->
 
@@ -805,7 +805,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez que les voisins sont utilisés comme variable temporelle, de sorte que l'animation montre les prédictions des différents modèles.
+Notez que les voisins ("neighbors") sont utilisés comme variable de temps, de sorte que l'animation montre les prédictions des différents modèles.
 
 <!-- paragraph -->
 
@@ -967,7 +967,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Faites en sorte que les taux d'erreur du texte en bas à gauche du deuxième graphique soient cachés après avoir cliqué sur les entrées de la légende pour Bayes, train, test.
+- Faites en sorte que les taux d'erreur du texte affichés en bas à gauche du deuxième graphique soient masqués quand on clique  sur les entrées de la légende pour Bayes, train, test.
 <!-- comment -->
 Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](Ch14-PeakSegJoint.html) ) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
