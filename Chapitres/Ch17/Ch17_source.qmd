@@ -1,4 +1,4 @@
-# K-means clustering
+# Agrégation par K-means (groupe)
 
 <!-- paragraph -->
 
@@ -8,29 +8,29 @@ knitr::opts_chunk$set(fig.path="ch17-figures/")
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of K-means clustering, which is an unsupervised learning algorithm.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l'agrégation (groupe) par K-moyennes, qui est un algorithme d'apprentissage non supervisé.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by visualizing two features of the iris data.
+- Nous commençons par visualiser deux caractéristiques des données de l'iris.
 <!-- comment -->
-- We choose three random data points to use as cluster centers.
+- Nous choisissons trois points de données aléatoires à utiliser comme centres d'agrégation (groupe).
 <!-- comment -->
-- We show how all distances between data points and cluster centers can be computed and visualized.
+- Nous montrons comment toutes les distances entre les points de données et les centres d'agrégation (groupe) peuvent être calculées et visualisées.
 <!-- comment -->
-- We end by showing a visualization of how the k-means model parameters change with each iteration.
+- Nous terminons par une visualisation de l'évolution des paramètres du modèle k-means à chaque itération.
 
 <!-- paragraph -->
 
-## Visualize iris data with labels {#viz-iris}
+## Visualisation des données de l'iris avec des étiquettes {#viz-iris}
 
 <!-- paragraph -->
 
-We begin with a typical visualization of the iris data, including a color legend to indicate the Species.
+Nous commençons par une visualisation typique des données de l'iris, comprenant une légende de couleurs pour indiquer les Espèces.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-We will illustrate the K-means clustering algorithm using these two dimensions,
+Nous allons illustrer l'algorithme d'agrégation (groupe) K-means à l'aide de ces deux dimensions,
 
 <!-- paragraph -->
 
@@ -66,9 +66,9 @@ str(data.mat)
 
 <!-- paragraph -->
 
-To run K-means, the number of clusters hyper-parameter (K) must be fixed in advance.
+Pour exécuter K-means, l'hyperparamètre du nombre d'agrégations (K) doit être fixé à l'avance.
 <!-- comment -->
-Then K random data points are selected as the initial cluster centers,
+Ensuite, K points de données aléatoires sont sélectionnés comme centres d'agrégation initiaux,
 
 <!-- paragraph -->
 
@@ -96,9 +96,9 @@ gg.centers
 
 <!-- paragraph -->
 
-Above we displayed the two data sets (cluster centers and data) using two instances of `geom_point()`.
+Ci-dessus, nous avons affiché les deux ensembles de données (centres d'agrégation et données) à l'aide de deux instances de `geom_point()`.
 <!-- comment -->
-Below we compute the distance between each data point and each cluster center,
+Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d'agrégation (groupe),
 
 <!-- paragraph -->
 
@@ -110,7 +110,7 @@ pairs.dt <- data.table(expand.grid(
 
 <!-- paragraph -->
 
-These can be visualized via a `geom_point()`,
+Ces éléments peuvent être visualisés à l'aide d'un `geom_point()`,
 
 <!-- paragraph -->
 
@@ -129,9 +129,9 @@ gg.centers+
 
 <!-- paragraph -->
 
-There are `r nrow(seg.dt)` segments overplotted above, so interactivity would be useful to emphasize the segments connected to a particular data point.
+Il y a `r nrow(seg.dt)` segments surreprésentés ci-dessus, de sorte que l'interactivité serait utile pour mettre l'accent sur les segments connectés à un point de données particulier.
 <!-- comment -->
-To do that we create a`data.i` selection variable,
+Pour ce faire, nous créons un fichier`data.i` variable de sélection,
 
 <!-- paragraph -->
 
@@ -163,29 +163,29 @@ animint(
 
 <!-- paragraph -->
 
-In the data viz above you can click on a data point to show the distances from that data point to each cluster center.
+Dans la visualisation des données ci-dessus, vous pouvez cliquer sur un point de données pour afficher les distances entre ce point de données et chaque centre d'agrégation (groupe).
 
 <!-- paragraph -->
 
-Exercises for this section:
+Exercices pour cette section :
 
 <!-- paragraph -->
 
-- edit the x/y scales so that the same ticks are shown.
+- modifiez les échelles x/y de façon à ce que les mêmes tics soient représentés.
 <!-- comment -->
-- change the color of each segment so that it matches the corresponding cluster.
+- modifier la couleur de chaque segment pour qu'elle corresponde à l'agrégation (groupe) correspondante.
 <!-- comment -->
-- add a tooltip that shows the distance value.
+- ajouter une infobulle qui indique la valeur de la distance.
 <!-- comment -->
-- make the segment width depend on its optimality (segment connected to closest cluster center should be emphasized with greater width).
+- faire dépendre la largeur du segment de son optimalité (le segment connecté au centre de l'agrégation la plus proche devrait être mis en valeur avec une plus grande largeur).
 
 <!-- paragraph -->
 
-## Visualizing iterations of algorithm {#viz-iterations}
+## Visualisation des itérations de l'algorithme {#viz-iterations}
 
 <!-- paragraph -->
 
-Next we compute the closest cluster center for each data point,
+Ensuite, nous calculons le centre d'agrégation le plus proche pour chaque point de données,
 
 <!-- paragraph -->
 
@@ -213,7 +213,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Then we update the cluster centers,
+Ensuite, nous mettons à jour les centres d'agrégation (groupe),
 
 <!-- paragraph -->
 
@@ -237,9 +237,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-So the visualizations above show the steps of k-means: (1) updating cluster assignment based on closest center, then (2) updating center based on data assigned to that cluster.
+Les visualisations ci-dessus montrent donc les étapes de la méthode k-means : (1) mise à jour de l'agrégation sur la base du centre le plus proche, puis (2) mise à jour du centre sur la base des données affectées à cette agrégation.
 <!-- comment -->
-To visualize several iterations of the above two steps, we can use a for loop,
+Pour visualiser plusieurs itérations des deux étapes ci-dessus, nous pouvons utiliser une boucle for,
 
 <!-- paragraph -->
 
@@ -274,7 +274,7 @@ for(iteration in 1:20){
 
 <!-- paragraph -->
 
-First we create an overview plot with an error curve that will be used to select the model size,
+Nous commençons par créer un graphique d'ensemble avec une courbe d'erreur qui servira à sélectionner la taille du modèle,
 
 <!-- paragraph -->
 
@@ -289,7 +289,7 @@ gg.err <- ggplot()+
 
 <!-- paragraph -->
 
-We also make a plot which will show the current iteration,
+Nous créons également un graphique qui indique l'itération en cours,
 
 <!-- paragraph -->
 
@@ -309,7 +309,7 @@ gg.iteration
 
 <!-- paragraph -->
 
-Combining the two plots results in an interactive data viz,
+La combinaison des deux graphiques permet d'obtenir une visualisation des données interactive,
 
 <!-- paragraph -->
 
@@ -319,47 +319,47 @@ animint(gg.err, gg.iteration)
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#ch17-exercises}
+## Résumé du chapitre et exercices {#ch17-exercises}
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Make centers always show up in front (on top) of the data.
+- Faire en sorte que les centres apparaissent toujours devant (au-dessus) des données.
 <!-- comment -->
-- Add smooth transitions.
+- Ajouter des transitions graduelles.
 <!-- comment -->
-- Add animation on iteration variable.
+- Ajout d'une animation sur la variable d'itération.
 <!-- comment -->
-- Current code has fixed max number of iterations, so it is possible for the last few iterations to make no progress.
+- Le code actuel a fixé le nombre maximum d'itérations, il est donc possible que les dernières itérations ne progressent pas.
 <!-- comment -->
-For example in the viz above, iteration=16 was the last one that resulted in a decrease in error (iterations 17-20 resulted in no decrease).
+Par exemple, dans l'image ci-dessus, l'itération 16 a été la dernière à entraîner une diminution de l'erreur (les itérations 17 à 20 n'ont entraîné aucune diminution).
 <!-- comment -->
-Modify the code so that it stops iterating if there is no decrease in error.
+Modifiez le code pour qu'il arrête l'itération s'il n'y a pas de diminution de l'erreur.
 <!-- comment -->
-- Current viz has only one animation frame (`showSelected` subset) per iteration (the mean shown is before it is updated).
+- La viz actuelle n'a qu'un seul cadre d'animation (`showSelected` sous-ensemble) par itération (la réalisation ou d'un sous-ensemble est avant sa mise à jour).
 <!-- comment -->
-Add another animation frame that shows the mean after the update.
+Ajoutez un autre cadre d'animation qui montre la moyenne après la mise à jour.
 <!-- comment -->
-- Add interactive segments that show the distance from each data point to each cluster center (as in first animint on this page).
+- Ajoutez des segments interactifs qui montrent la distance entre chaque point de données et chaque centre d'agrégation (comme dans la première animation de cette page).
 <!-- comment -->
-- Add the features described in the exercises in the previous section on this page.
+- Ajoutez les fonctionnalités décrites dans les exercices de la section précédente sur cette page.
 <!-- comment -->
-- Compute results for several different random seeds, then display error rates for each seed on the error overview plot, and allow the user to select any of those results.
+- Calculer les résultats pour plusieurs graines aléatoires différentes, puis afficher les taux d'erreur pour chaque graine sur le graphique d'aperçu des erreurs, et permettre à l'utilisateur de sélectionner n'importe lequel de ces résultats.
 <!-- comment -->
-- Compute results for several different numbers of clusters (K).
+- Calculer les résultats pour plusieurs nombres différents d'agrégations (K).
 <!-- comment -->
-Compute the Adjusted Rand Index using `pdfCluster::adj.rand.index(species, cluster)` for each different K and seed.
+Calculer l'indice de Rand ajusté en utilisant `pdfCluster::adj.rand.index(species, cluster)` pour chaque K et graine aléatoire différents.
 <!-- comment -->
-Add an overview plot that shows the ARI value of each model, and allows selecting the number of clusters.
+Ajouter un graphique d'ensemble qui montre la valeur ARI de chaque modèle, et permet de sélectionner le nombre d'agrégations (groupes).
 <!-- comment -->
-- Make a similar visualization using another data set such as `data("penguins", package="palmerpenguins")`.
+- Effectuez une visualisation similaire en utilisant un autre ensemble de données tel que `data("penguins", package="palmerpenguins")`.
 
 <!-- paragraph -->
 
-Next, [Chapter 18](/ch18) explains how to visualize the gradient descent learning algorithm for neural network learning.
+Suivant, [Chapitre 18](/ch18) explique comment visualiser l'algorithme d'apprentissage par descente de gradient pour l'apprentissage des réseaux neuronaux.
 
 <!-- paragraph -->
 
