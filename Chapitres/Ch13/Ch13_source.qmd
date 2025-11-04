@@ -220,7 +220,7 @@ PoissonLoss <- function(label, seg.mean){
 
 <!-- paragraph -->
 
-Ci-dessous, nous calculons la perte pour plusieurs valeurs d'étiquettes, en utilisant la fonction [tableau de données idiome](../Ch99/Ch99-appendix.html#list-of-data-tables).
+Ci-dessous, nous calculons la perte pour plusieurs valeurs d'étiquettes, en utilisant l'idiome [tableau de données](../Ch99/Ch99-appendix.html#list-of-data-tables).
 
 <!-- paragraph -->
 
