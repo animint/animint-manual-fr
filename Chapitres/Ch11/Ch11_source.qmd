@@ -4,6 +4,12 @@ layout: default
 output: bookdown::html_chapter
 ---
 
+
+
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
+[Ch11-lasso](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch11-lasso.Rmd)
+
+
 <!-- paragraph -->
 
 ```{r setup, echo=FALSE}
@@ -12,33 +18,33 @@ knitr::opts_chunk$set(fig.path="Ch11-figures/")
 
 <!-- paragraph -->
 
-This goal of this chapter is to create an interactive data visualization that explains the [Lasso](https://en.wikipedia.org/wiki/Lasso_%28statistics%29) , a machine learning model for regularized linear regression.
+L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique le [Lasso](https://en.wikipedia.org/wiki/Lasso_%28statistics%29), un modèle d'apprentissage automatique pour la régression linéaire régularisée.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin with several static data visualizations of the lasso path.
+- Nous commençons par plusieurs visualisations de données statiques du chemin ("path") du lasso.
 <!-- comment -->
-- We then create an interactive version with a facet and plot showing train/validation error and residuals.
+- Nous créons ensuite une version interactive avec une facette et un graphique montrant l'erreur d'entraînement/validation et les résidus.
 <!-- comment -->
-- Finally we re-design the interactive data visualization with simplified legends and moving tallrects.
+- Enfin, nous remanions la visualisation interactive des données avec des légendes simplifiées et des `tallrects` mobiles.
 
 <!-- paragraph -->
 
-## Static plots of the coefficient regularization path {#static-path-plots}
+## Graphiques statiques du chemin ("path") de la régularisation du coefficient {#static-path-plots}
 
 <!-- paragraph -->
 
-We begin by loading the prostate cancer data set.
+Nous commençons par charger l'ensemble de données sur le cancer de la prostate.
 
 <!-- paragraph -->
 
 ```{r}
 if(!file.exists("prostate.data")){
-  download.file(
+  curl::curl_download(
     "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data",
     "prostate.data")
 }
@@ -48,7 +54,7 @@ head(prostate)
 
 <!-- paragraph -->
 
-We construct a train inputs `x` and outputs `y` using the code below.
+Nous construisons un entrainement d'entrées `x` et des sorties `y` à l'aide du code ci-dessous.
 
 <!-- paragraph -->
 
@@ -66,7 +72,7 @@ head(y)
 
 <!-- paragraph -->
 
-Below we fit the full path of lasso solutions using the `lars` package.
+Ci-dessous, nous procédons à l'ajustement du chemin complet des solutions lasso à l'aide du package `lars`.
 
 <!-- paragraph -->
 
@@ -79,7 +85,7 @@ fit$lambda
 
 <!-- paragraph -->
 
-The path of `lambda` values are not evenly spaced.
+Les chemins des valeurs `lambda` ne sont pas uniformément espacés.
 
 <!-- paragraph -->
 
@@ -116,13 +122,13 @@ gg.lambda
 
 <!-- paragraph -->
 
-The plot above shows the entire lasso path, the optimal weights in the L1-regularized least squares regression problem, for every regularization parameter lambda.
+Le graphique ci-dessus montre l'ensemble du chemin de lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
 <!-- comment -->
-The path begins at the least squares solution, lambda=0 on the left.
+Le chemin commence à la solution des moindres carrés, `lambda=0` à gauche.
 <!-- comment -->
-It ends at the completely regularized intercept-only model on the right.
+Il se termine par le modèle à ordonnée à l'origine complètement régularisé à droite.
 <!-- comment -->
-To see the equivalence with the ordinary least squares solution, we add dots in the plot below.
+Pour voir l'équivalence avec la solution des moindres carrés ordinaires, nous ajoutons des points dans le graphique ci-dessous.
 
 <!-- paragraph -->
 
@@ -141,7 +147,7 @@ gg.lambda+
 
 <!-- paragraph -->
 
-In the next plot below, we show the path as a function of L1 norm (arclength), with some more points on an evenly spaced grid that we will use later for animation.
+Dans le prochain graphique ci-dessous, nous montrons le chemin en fonction de la norme L1 (arclength), avec quelques points supplémentaires sur une grille régulièrement espacée que nous utiliserons plus tard pour l'animation.
 
 <!-- paragraph -->
 
@@ -183,19 +189,19 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above shows that the weights at the grid points are consistent with the lines that represent the entire path of solutions.
+Le graphique ci-dessus montre que les pondérations aux points de la grille sont cohérentes avec les lignes qui représentent l'ensemble du chemin des solutions.
 <!-- comment -->
-The LARS algorithm quickly provides Lasso solutions for as many grid points as you like.
+L'algorithme LARS fournit rapidement des solutions Lasso pour autant de points de grille que vous le souhaitez.
 <!-- comment -->
-More precisely, since the LARS only computes the change-points in the piecewise linear path, its time complexity only depends on the number of change-points (not the number of grid points).
+Plus précisément, étant donné que l'algorithme LARS ne calcule que les points de changement dans le chemin linéaire par morceaux, sa complexité temporelle ne dépend que du nombre de points de changement (et non du nombre de points de grille).
 
 <!-- paragraph -->
 
-## Interactive visualization of the regularization path {#interactive-path-viz}
+## Visualisation interactive du chemin (path) de la régularisation {#interactive-path-viz}
 
 <!-- paragraph -->
 
-The plot below combines the lasso weight path with the train/test error plot.
+Le graphique ci-dessous combine le chemin des pondérations du lasso avec le graphique des erreurs d'entraînement/test.
 
 <!-- paragraph -->
 
@@ -243,7 +249,7 @@ print(gg.path)
 
 <!-- paragraph -->
 
-Finally, we add a plot of residuals versus actual values.
+Enfin, nous ajoutons un graphique des résidus par rapport aux valeurs réelles.
 
 <!-- paragraph -->
 
@@ -277,9 +283,9 @@ print(gg.res)
 
 <!-- paragraph -->
 
-Below, we combine the ggplots above in a single animint below.
+Ci-dessous, nous combinons les ggplots ci-dessus en un seul `animint2`.
 <!-- comment -->
-Clicking the first plot changes the regularization parameter, and the residuals that are shown in the second plot.
+En cliquant sur le premier graphique, on modifie le paramètre de régularisation et les résidus qui sont affichés dans le second graphique.
 
 <!-- paragraph -->
 
@@ -293,29 +299,29 @@ animint(
 
 <!-- paragraph -->
 
-## Re-design with moving tallrects {#re-design}
+## Refonte avec des `tallrects` mobiles {#re-design}
 
 <!-- paragraph -->
 
-The re-design below has two changes.
+Le refonte ci-dessous comporte deux changements.
 <!-- comment -->
-First, you may have noticed that there are two different set legends in the previous animint (linetype=set in the first path plot, and color=set in the second residual plot).
+Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de "set" différentes dans l'`animint2` précédent (`linetype="set"` dans le premier graphique de chemin et `color="set"` dans le second graphique de résidus).
 <!-- comment -->
-It would be easier for the reader to decode if the set variable had just one mapping.
+Il serait plus facile pour le lecteur de décoder si la variable "set" n'est mappée qu'une seule fois.
 <!-- comment -->
-So in the re-design below we replace the `geom_point` in the second plot with a `geom_segment` with `linetype=set`.
+Ainsi, dans la refonte ci-dessous, nous remplaçons le `geom_point` dans le deuxième graphique par un `geom_segment` avec `linetype=set`.
 
 <!-- paragraph -->
 
-Second, we have replaced the single tallrect in the first plot with two tallrects.
+Deuxièmement, nous avons remplacé le `tallrect` unique du premier graphique par deux `tallrects`.
 <!-- comment -->
-The first tallrect has `showSelected=arclength` and is used to show the selected arclength using a grey rectangle.
+Le premier `tallrect` a `showSelected=arclength` et est utilisé pour afficher la longueur d'arc ("arclength") sélectionnée à l'aide d'un rectangle gris.
 <!-- comment -->
-Since we specify a `duration` for the `arclength` variable, and the same `key=1` value, we will observe a smooth transition of the selected grey tallrect.
+Puisque nous spécifions une durée `duration` pour la variable `arclength` et la même valeur `key=1`, nous observerons une transition graduelle du `tallrect` gris sélectionné.
 <!-- comment -->
-The second tallrect has `clickSelects=arclength` and so clicking it has the effect of changing the selected value of `arclength`.
+Le deuxième tallrect a `clickSelects=arclength` et le fait de cliquer dessus a pour effet de modifier la valeur sélectionnée de `arclength`.
 <!-- comment -->
-We specify a another data set with more rows, and use the [named clickSelects/showSelected variables](Ch06-other.html#data-driven-selectors) to indicate that `arclength` should also be used as a `showSelected` variable.
+Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables clickSelects/showSelected nommées](Ch06-other.html#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
 
 <!-- paragraph -->
 
@@ -402,33 +408,33 @@ animint(
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- paragraph -->
 
-We created a visualization of the Lasso machine learning model, which simulataneously shows the regularization path and error curves.
+Nous avons créé une visualisation du modèle d'apprentissage automatique Lasso, qui montre de manière simultanée le chemin de régularisation et les courbes d'erreur.
 <!-- comment -->
-Interactivity was used to show details for different values of the regularization parameter.
+L'interactivité a été utilisée pour montrer les détails pour différentes valeurs du paramètre de régularisation.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Re-make this data viz, including the same visual effect for the tallrects, using only one `geom_tallrect`.
+- Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect`.
 <!-- comment -->
-Hint: create another data set with `expand.grid(arclength.click=arclength, arclength.show=arclength)`, as in the definition of the `make_tallrect_or_widerect` function.
+Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
 <!-- comment -->
-- Add another scatterplot that shows predicted values versus response, with a `geom_abline` in the background to indicate perfect prediction.
+- Ajoutez un autre nuage de points qui montre les valeurs prédites contre la réponse, avec un `geom_abline` en arrière-plan pour indiquer une prédiction parfaite.
 <!-- comment -->
-- How would the error curves look if other train/validation splits were chosen?
+- À quoi ressembleraient les courbes d'erreur si l'on choisissait d'autres répartitions entraînement/validation ?
 <!-- comment -->
-Perform 4-fold cross-validation and add a plot that can be used to select test fold.
+Effectuez une validation croisée 4-plis et ajoutez un graphique qui peut être utilisé pour sélectionner le pli de test.
 
 <!-- paragraph -->
 
-Next, [Chapter 12](Ch12-SVM.html) explains how to visualize the Support Vector Machine.
+Dans le [chapitre 12](Ch12-SVM.html), nous vous expliquerons comment visualiser la machine à vecteurs de support.
 
 <!-- paragraph -->
 
