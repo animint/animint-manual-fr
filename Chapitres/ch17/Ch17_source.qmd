@@ -206,7 +206,6 @@ ggplot()+
   scale_size_manual(values=c(centers=5, data=3))+
   geom_point(aes(
     Petal.Length, Petal.Width, fill=cluster, size=type, color=type),
-    shape=21,
     data=both.dt)+
   coord_equal()+
   theme_bw()
@@ -231,7 +230,6 @@ ggplot()+
   scale_size_manual(values=c(centers=5, data=3))+
   geom_point(aes(
     Petal.Length, Petal.Width, fill=cluster, size=type, color=type),
-    shape=21,
     data=new.both)+
   coord_equal()+
   theme_bw()
@@ -302,7 +300,6 @@ gg.iteration <- ggplot()+
   scale_size_manual(values=c(centers=5, data=2))+
   geom_point(aes(
     Petal.Length, Petal.Width, fill=cluster, size=type, color=type),
-    shape=21,
     showSelected="iteration",
     data=data.and.centers)+
   coord_equal()+
