@@ -43,6 +43,7 @@ jeu de données,dataset
 tableau de données,data table
 visualisation des données,data visualization
 visualisation des données,data viz
+limite de décision,decision boundary
 reconstruction de code (deparse),deparse
 obsolète,deprecated
 déviance,deviance
@@ -77,6 +78,7 @@ historique des commandes,history
 image d'environnement,image
 implémenté,implemented
 indice,index
+variable d'entrée,input feature
 gestionnaire d'interruptions,interrupt handler
 incorrect,invalid
 E/S (entrées/sorties),IO
@@ -144,6 +146,7 @@ symbole de chaine de caractères,quote symbol
 règle des guillemets,quote rule
 raw (brut),raw
 plage (ou étendue ou intervalle),range
+refonte,re-design
 retraçage (ou rafraichissement),redraw
 expression régulière,regex
 expression régulière,regular expression
@@ -168,6 +171,7 @@ taille,size
 esquisse,sketch
 esquisse,sketching
 matrice anti-symétrique,skew-symmetric
+variables ressort,slack variables
 caractère barre oblique droite '/',slash
 slot,slot
 transitions graduelles,smooth transitions

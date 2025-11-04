@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Appendix, useful idioms
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch99-figures/")
 ```

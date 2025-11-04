@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Chapter 8, World Bank data viz
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch08-figures/")
 ```
