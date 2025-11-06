@@ -174,7 +174,7 @@ mois_dt[, mois.français := mois_français(mois.01)][]
 
 La sortie ci-dessus comprend une ligne pour chaque mois.
 <!-- comment -->
-Notez que nous avons créé une colonne `mois.français` de type `factor`, avec niveaux `mois.levs` qui définit l'ordre d'affichage.
+Notez que nous avons créé une colonne `mois.français` qui sera utilisé comme variable de sélection pour les mois.
 <!-- comment -->
 Dans le code ci-dessous, nous calculons la somme des accidents par mois.
 
@@ -243,11 +243,11 @@ La sortie ci-dessus contient une ligne pour chaque combinaison de lieu et mois, 
 * `passages_mean` : le moyenne de passages par jour.
 * `passages_sum` : le total nombre de passages.
 
-On remarque que certains mois comportent des journées manquantes. Par exemple, il n'y a que 29 jours pour `Berri` en avril 2009, et 18 jours pour `Totem_Laurier` en septembre 2013.
+On remarque que certains mois contiennent des journées manquantes. Par exemple, il n'y a que 29 jours pour `Berri` en avril 2009, et 18 jours pour `Totem_Laurier` en septembre 2013.
 <!-- comment -->
 Pour modeliser seulement les mois entiers, nous voulons enlever les mois avec jours manquants.
 <!-- comment -->
-Alors on utiliser le code ci-dessous pour calculer le nombre de jours dans chaque mois :
+Alors on utilise le code ci-dessous pour calculer le nombre de jours dans chaque mois :
 
 ```{r}
 un.jour <- 60 * 60 * 24
@@ -355,7 +355,7 @@ Dans cette partie, nous allons faire une visualisation avec plusieurs composants
 <!-- comment -->
 * Détails d'un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d'un compteur. Cliquer pour sélectionner un mois.
 <!-- comment -->
-* Détails d'un compteur et d'un mois : séries temporelles par jour, pour le mois sélectionné (les accidents, et le compteur sélectionné).
+* Détails d'un compteur et d'un mois : séries temporelles par jour, pour le mois sélectionné.
 
 ### Résumé des compteurs avec plan
 
@@ -519,9 +519,6 @@ Le graphique ci-dessous reprend les mêmes données mais pour chaque mois.
 <!-- paragraph -->
 
 ```{r}
-mois.text <- passages.par.mois[
-, .SD[which.max(passages_mean)]
-, by=lieu]
 FACET <- function(DT, facet)data.table(DT, facet)
 COMPTEURS <- function(DT)FACET(DT, "passages/jour")
 (MonthSeries <- ggplot()+
@@ -549,6 +546,9 @@ Le graphique ci-dessus contient une ligne pour chaque compteur.
 Dans le code ci-dessous, on rajoute deux geoms.
 
 ```{r}
+mois.text <- passages.par.mois[
+, .SD[which.max(passages_mean)]
+, by=lieu]
 (MonthText <- MonthSeries+
   geom_point(aes(
     mois_01(mois.str), passages_mean, color=lieu,
@@ -585,7 +585,7 @@ ACCIDENTS <- function(DT)FACET(DT, "accidents")
      data=ACCIDENTS(accidents.tall[order(-gravité)])))
 ```
 
-Dans la sortie ci-dessus, on voit deux séries temporelles.
+Dans la sortie ci-dessus, on voit les deux sources de données (accidents et compteurs).
 
 ### Détails pour un mois
 
@@ -612,12 +612,12 @@ jour_du_mois <- function(POSIXct)as.integer(strftime(POSIXct, "%d"))
 add_jour_mois <- function(DT)DT[, let(
   jour.du.mois = jour_du_mois(date),
   mois.français = mois_français(date))]
-(accidents.cumsum <- add_jour_mois(accidents_dt[
+accidents.cumsum <- add_jour_mois(accidents_dt[
   order(date, -gravité)
 ][
 , accident.i := seq_len(.N)
 , by=date
-]))
+])
 ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "cm"))+
