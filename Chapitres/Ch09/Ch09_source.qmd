@@ -369,7 +369,7 @@ Pour examiner ces données, il faut d'abord convertir le nom en unicode :
   nom_comptage=iconv(nom_comptage, "latin1", "UTF-8"))])
 ```
 
-Dans la sortie ci-dessus, on voit qu'il y a les colonnes `nom` et `nom_comptage` qui indiquent les lieux, mais ce ne sont pas exactement les mêmes valeurs que dans les données de passages.
+Dans la sortie ci-dessus, on voit que la colonne `nom_comptage` indique l'emplacement, mais ce ne sont pas exactement les mêmes valeurs que la colonne `lieu` dans les données de passages.
 <!-- comment -->
 On utilise le code ci-dessous pour établir une correspondence entre les tableaux :
 
