@@ -52,7 +52,7 @@ Nous allons calculer des résumés par mois dans ces deux séries temporelles.
 
 ### Compteurs
 
-Ci-dessous, nous affichons le tableau de données des compteurs de vélos.
+Pour commencer, nous affichons le tableau de données des compteurs de vélos.
 
 ```{r counterRange}
 mois_str <- function(POSIXct)strftime(POSIXct, "%Y-%m")
@@ -65,7 +65,7 @@ data(montreal.bikes, package="animint2")#works if installed from github
   passages=count)])
 ```
 
-Ci-dessous, nous voyons une ligne pour chaque combinaison de lieu et jour.
+Ci-dessus, nous voyons une ligne pour chaque combinaison de lieu et jour.
 <!-- comment -->
 Le comptage de vélos présente des données de séries temporelles que nous visualisons ci-dessous.
 
