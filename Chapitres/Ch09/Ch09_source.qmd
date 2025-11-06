@@ -16,7 +16,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par quelques séries temporelles non-interactifs.
+- Nous commençons par quelques séries temporelles non interactives.
 <!-- comment -->
 - Nous créons une visualisation interactive de la fréquence des accidents dans le temps.
 <!-- comment -->
