@@ -92,18 +92,7 @@ On voit bien la régularité au fil des saisons (moins de vélos en hiver).
 
 ### Accidents
 
-Pour examiner le tableau de données sur les accidents, il faut d'abord convertir certaines variables en unicode :
-
-<!-- paragraph -->
-
-```{r accidents}
-for(col_name in c("nom","nom_comptage","Etat")){
-  montreal.bikes$counter.locations[[col_name]] <- iconv(
-    montreal.bikes$counter.locations[[col_name]], "latin1", "UTF-8")
-}
-```
-
-Ensuite nous affichons une ligne :
+Pour commencer avec les données d'accidents, nous affichons une ligne :
 
 ```{r}
 montreal.bikes$accidents[1,]
@@ -371,10 +360,13 @@ Dans cette partie, nous allons faire une visualisation avec plusieurs composants
 ### Résumé des compteurs avec plan
 
 Les données `counter.locations` contient l'emplacement géographique de chaque compteur.
+<!-- comment -->
+Pour examiner ces données, il faut d'abord convertir le nom en unicode :
 
 ```{r}
 (counter.locations <- data.table(montreal.bikes$counter.locations)[, .(
-  lon = coord_X, lat = coord_Y, nom_comptage)])
+  lon = coord_X, lat = coord_Y,
+  nom_comptage=iconv(nom_comptage, "latin1", "UTF-8"))])
 ```
 
 Dans la sortie ci-dessus, on voit qu'il y a les colonnes `nom` et `nom_comptage` qui indiquent les lieux, mais ce ne sont pas exactement les mêmes valeurs que dans les données de passages.
