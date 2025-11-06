@@ -19,7 +19,7 @@ crossref:
   tbl-title: Tableau
   eq-title: Équation
 book:
-  title: "Animint2 dans R pour la visualisation de données"
+  title: "Visualisation interactive de données dans R avec animint2"
   repo-url: https://github.com/animint/animint-manual-fr
   repo-actions: [edit, issue, source]
   repo-subdir: Chapitres
@@ -54,6 +54,11 @@ book:
       - Ch10/Ch10-viz.qmd
       - Ch11/Ch11-viz.qmd
       - Ch12/Ch12-viz.qmd
+      - Ch13/Ch13-viz.qmd
+      - Ch14/Ch14-viz.qmd
+      - Ch15/Ch15-viz.qmd
+      - Ch16/Ch16-viz.qmd
+      - Ch17/Ch17-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
 
@@ -116,7 +121,8 @@ knitr:
     split: true
     R.options:
       animint2.chromote_sleep_seconds: 3
-      datatable.print.nrows: 10
+      datatable.print.nrows: 5
+      datatable.print.topn: 2
       datatable.print.class: false
       datatable.print.keys: false
-      datatable.print.trunc.cols: TRUE
+      datatable.print.trunc.cols: false

@@ -244,7 +244,7 @@ Pour ajouter un nouvel animint à la galerie qui est publiée sur la branche `gh
 <!-- comment -->
 - exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu'un clone du dossier de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Le code R lira `galerie/repos.txt`, puis les méta-données (`title`, `source`, `Capture.PNG`) de chaque dossier qui n'est pas déjà présent dans `galerie/meta.csv`, il écrira ensuite les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera les fichiers et les poussera vers `origin`.
 <!-- comment -->
-- la galerie mise à jour devrait pouvoir être consultée sur le web, à l'adresse suivante [(https://votre_identifiant_github.github.io/galerie)](https://votre_identifiant_github.github.io/galerie) après quelques minutes (généralement pas plus de cinq).
+- la galerie mise à jour devrait pouvoir être consultée sur le web, à l'adresse `https://votre_identifiant_github.github.io/galerie` après quelques minutes (généralement pas plus de cinq).
 
 <!-- paragraph -->
 

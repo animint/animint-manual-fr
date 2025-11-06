@@ -3,9 +3,11 @@
 .Rhistory
 .RData
 .Ruserdata
-Ch*-viz*
-Ch*viz*
-Ch*-figures
+Ch*-viz*/
+Ch*viz*.qmd
+Ch*viz*/
+unnamed*/
+Ch*-figures/
 *_cache
 *_files
 Chapitres/*.tex
