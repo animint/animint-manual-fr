@@ -291,6 +291,7 @@ Par exemple, considérons l'esquisse suivante qui ajoute une couche de `geom_pat
 Notez que l'esquisse ci-dessus comprend deux geoms différents (point et path).
 <!-- comment -->
 Les deux geoms partagent une définition commune des éléments `x`, `y`, et `color`, mais avec des ensembles de données différents.
+En plus, le `geom_path()` contient `group=pays`, ce qui signifie qu'il faut dessiner une courbe pour chaque différente valeur de `pays`.
 
 <!-- comment -->
 
