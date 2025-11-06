@@ -248,21 +248,18 @@ Le ggplot de la section précédente peut être affiché avec `animint2`, en uti
 animint(nuage_de_points)
 ```
 
+Lorsqu'il est visualisé dans un navigateur web, le graphique devrait paraître semblable aux versions statiques produites par les périphériques graphiques R standard,
 <!-- comment -->
-
+à la différence que la légende est interactive : en cliquant sur la légende, les points de cette couleur sont cachés ou affichés.
+<!-- comment -->
+A l'interne, la fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
+La fonction `animint2dir()` est appellé pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
+<!-- comment -->
+Dans RStudio, vous devrait voir le graphique afficher sous l'onglet « Visualiseur ».
+<!-- comment -->
 Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre [FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
-<!-- comment -->
-La fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
-<!-- comment -->
-La fonction `print.animint()` fait appel ensuite à notre compilateur, qui prend la liste en entrée et qui produit une page web avec une visualisation de données. 
-<!-- comment -->
-Le compilateur est la fonction `animint2dir()` qui compile `nuage_de_points` en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
 
 <!-- comment -->
-
-Lorsqu'il est visualisé dans un navigateur web, le graphique animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard,
-<!-- comment -->
-à la différence que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
 
 **Exercice**: essayez de modifier le contenu du `aes()` du ggplot, puis de créer une nouvelle visualisation.
 <!-- comment -->
