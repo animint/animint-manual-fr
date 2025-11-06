@@ -55,13 +55,13 @@ Nous allons calculer des résumés par mois dans ces deux séries temporelles.
 Ci-dessous, nous affichons le tableau de données des compteurs de vélos.
 
 ```{r counterRange}
-mois <- function(POSIXct)strftime(POSIXct, "%Y-%m")
+mois_str <- function(POSIXct)strftime(POSIXct, "%Y-%m")
 library(data.table)
 data(montreal.bikes, package="animint2")#works if installed from github
 (passages_dt <- data.table(montreal.bikes$counter.counts)[, .(
   lieu = location,
   date,
-  mois.str = mois(date),
+  mois.str = mois_str(date),
   passages=count)])
 ```
 
@@ -144,7 +144,7 @@ ymd2POSIXct <- function(date.str){
 (accidents_dt[
 , date := ymd2POSIXct(date.str)
 ][
-, mois.str := mois(date)
+, mois.str := mois_str(date)
 ][])
 ```
 
@@ -165,11 +165,9 @@ Nous allons compiler des résumés pour tous les mois, c'est pourquoi nous faiso
 
 ```{r months}
 uniq.mois.vec <- sort(unique(unlist(lapply(
-  data.list, function(DT)DT$mois.str))))
-mois2POSIXct <- function(mois, jour="01"){
-  ymd2POSIXct(paste0(mois, "-", jour))
-}
-mois_dt <- data.table(mois01 = mois2POSIXct(uniq.mois.vec))
+  data.list, "[[", "mois.str"))))
+mois_01 <- function(mois)ymd2POSIXct(paste0(mois, "-01"))
+mois_dt <- data.table(mois.01 = mois_01(uniq.mois.vec))
 ```
 
 Le code ci-dessous définit l'environnement linguistique (locale) pour avoir les noms de mois en français.
@@ -177,10 +175,10 @@ Le code ci-dessous définit l'environnement linguistique (locale) pour avoir les
 ```{r}
 old.locale <- Sys.setlocale(locale="fr_CA.UTF-8")
 mois_français_str <- function(POSIXct)strftime(POSIXct, "%B %Y")
-mois.levs <- mois_français_str(mois_dt$mois01)
+mois.levs <- mois_français_str(mois_dt$mois.01)
 mois_français <- function(POSIXct)factor(
   mois_français_str(POSIXct), mois.levs)
-mois_dt[, mois.français := mois_français(mois01)][]
+mois_dt[, mois.français := mois_français(mois.01)][]
 ```
 
 <!-- paragraph -->
@@ -225,7 +223,7 @@ gravité.colors <- c(
 ggplot()+
   theme_bw()+
   geom_bar(aes(
-    mois2POSIXct(mois.str), personnes, fill=gravité),
+    mois_01(mois.str), personnes, fill=gravité),
     stat="identity",
     data=accidents.tall)+
   scale_fill_manual(
@@ -264,12 +262,10 @@ Alors on utiliser le code ci-dessous pour calculer le nombre de jours dans chaqu
 
 ```{r}
 un.jour <- 60 * 60 * 24
-mois_suivant <- function(POSIXct){
-  mois2POSIXct(POSIXct + un.jour * 31)
-}
+mois_suivant <- function(POSIXct)mois_01(POSIXct + un.jour * 31)
 passages.par.mois[, jours.dans.mois := as.integer(round(difftime(
-  mois2POSIXct(mois(mois_suivant(mois2POSIXct(mois.str)))),
-  mois2POSIXct(mois.str),
+  mois_01(mois_str(mois_suivant(mois_01(mois.str)))),
+  mois_01(mois.str),
   units="days"
 )))][]
 ```
@@ -302,7 +298,7 @@ city.wide.accidents <- accidents_dt[, .(
 ), keyby=mois.str]
 (scatter.not.na <- city.wide.accidents[
   city.wide.complete, nomatch=0L
-][, mois01 := mois2POSIXct(mois.str)][])
+][, mois.01 := mois_01(mois.str)][])
 ```
 
 Dans la sortie ci-dessus, on voit une ligne pour chaque mois avec les données de compteurs et accidents.
@@ -322,7 +318,7 @@ Enfin, nous faisons un graphique interactif avec le code ci-dessous.
 ```{r Ch09-viz-regression}
 scatter.not.na[, let(
   pred.accidents = predict(fit),
-  mois.français = mois_français(mois01)
+  mois.français = mois_français(mois.01)
 )]
 animint(
   regression=ggplot()+
@@ -345,7 +341,7 @@ animint(
     ggtitle("Série temporelle : fréquence des accidents")+
     xlab("mois")+
     geom_point(aes(
-      mois01, total.accidents/total.passages),
+      mois.01, total.accidents/total.passages),
       clickSelects="mois.français",
       size=5,
       alpha=0.75,
@@ -450,10 +446,10 @@ Maintenant on calcule les dates extrêmes pour chaque compteur :
 ```{r}
 (location.ranges <- dcast(
   passages.par.mois[0 < passages_sum][
-  , mois01 := mois2POSIXct(mois.str)],
+  , mois.01 := mois_01(mois.str)],
   lieu ~ .,
   list(min, max),
-  value.var="mois01"))
+  value.var="mois.01"))
 ```
 
 Dans la sortie ci-dessus, on voit une ligne pour chaque compteur, avec des colonnes pour les dates extrêmes.
@@ -473,14 +469,14 @@ seg.size <- 10
   scale_color_manual(values=location.colors)+
   guides(color="none")+
   geom_segment(aes(
-    mois01_min, lieu,
-    xend=mois01_max, yend=lieu),
+    mois.01_min, lieu,
+    xend=mois.01_max, yend=lieu),
     showSelected="lieu",
     data=location.ranges,
     size=seg.size+2)+
   geom_segment(aes(
-    mois01_min, lieu,
-    xend=mois01_max, yend=lieu,
+    mois.01_min, lieu,
+    xend=mois.01_max, yend=lieu,
     color=lieu),
     clickSelects="lieu",
     data=location.ranges,
@@ -541,12 +537,12 @@ COMPTEURS <- function(DT)FACET(DT, "passages/jour")
   theme_bw()+
   facet_grid(facet ~ ., scales="free")+
   geom_tallrect(aes(
-    xmin=mois01-15*un.jour, xmax=mois01+15*un.jour),
+    xmin=mois.01-15*un.jour, xmax=mois.01+15*un.jour),
     clickSelects="mois.français",    
     data=mois_dt,
     alpha=1/2)+
   geom_line(aes(
-    mois2POSIXct(mois.str), passages_mean, group=lieu,
+    mois_01(mois.str), passages_mean, group=lieu,
     color=lieu),
     showSelected="lieu",
     clickSelects="lieu",
@@ -563,16 +559,16 @@ Dans le code ci-dessous, on rajoute deux geoms.
 ```{r}
 (MonthText <- MonthSeries+
   geom_point(aes(
-    mois2POSIXct(mois.str), passages_mean, color=lieu,
+    mois_01(mois.str), passages_mean, color=lieu,
     tooltip=paste(
       passages_mean, "vélos à",
-      lieu, "en", mois_français(mois2POSIXct(mois.str)))),
+      lieu, "en", mois_français(mois_01(mois.str)))),
     showSelected="lieu",
     clickSelects="lieu",
     size=5,
     data=COMPTEURS(passages.par.mois))+
   geom_text(aes(
-    mois2POSIXct(mois.str), passages_mean+300,
+    mois_01(mois.str), passages_mean+300,
     color=lieu, label=lieu),
     showSelected="lieu",
     clickSelects="lieu",
@@ -588,7 +584,7 @@ ACCIDENTS <- function(DT)FACET(DT, "accidents")
    scale_fill_manual(
      values=gravité.colors, breaks=names(gravité.colors))+
    geom_bar(aes(
-     mois2POSIXct(mois.str), personnes,
+     mois_01(mois.str), personnes,
      fill=gravité),
      showSelected="gravité",
      stat="identity",
@@ -647,8 +643,8 @@ Ensuite, on fait une grille de jours dans le code ci-dessous.
 
 ```{r}
 (days.dt <- mois_dt[, .(date=seq(
-  min(mois01),
-  max(mois_suivant(mois01)),
+  min(mois.01),
+  max(mois_suivant(mois.01)),
   by="day"
 ))][#jour de la semaine :
 , jds := strftime(date, "%a")
@@ -660,7 +656,9 @@ La sortie ci-dessus contient une ligne pour chaque jour dans la période où nou
 Dans le code ci-dessous, on fait un tableau pour souligner les fins de semaine.
 
 ```{r}
-(weekend.dt <- add_jour_mois(days.dt[jds %in% c("sam", "dim")])[])
+(weekend.dt <- add_jour_mois(days.dt[
+  grepl("sam|dim", jds)#windows="sam." ubuntu="sam"
+])[])
 ```
 
 La sortie ci-dessus contient une ligne pour chaque jour de fin de semaine.
