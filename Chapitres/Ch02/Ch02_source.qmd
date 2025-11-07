@@ -123,7 +123,7 @@ Pour installer une version de développement encore plus récente d' `animint2` 
 ```{r}
 if(!requireNamespace("animint2")){
   if(!requireNamespace("remotes"))install.packages("remotes")
-  remotes::install_github("tdhock/animint2")
+  remotes::install_github("animint/animint2")
 }
 ```
 
@@ -150,23 +150,37 @@ Chaque esquisse va comporter certains éléments qui nous permettra de facilemen
 Avant d'écrire le code R pour un graphique que vous voulez créer, nous vous encourageons de faire vos propres esquisses à la main, soit dans un cahier, soit sur un tableau.
 <!-- comment -->
 Nous utilisons comme exemple un ensemble de données de la Banque mondiale.
-Commençons par charger et examiner un sous-ensemble de ces données.
+Commençons par charger et examiner les noms des colonnes.
 
 <!-- comment -->
 
 ```{r}
+if(!requireNamespace("animint2fr")){
+  if(!requireNamespace("remotes"))install.packages("remotes")
+  remotes::install_github("animint/animint2fr")
+}
 data(BanqueMondiale, package="animint2fr")
-BanqueMondiale$Region <- sub(
-  " (all income levels)", "", BanqueMondiale$région, fixed=TRUE)
-subset(BanqueMondiale, pays=="Canada" & année==2010)
-dim(BanqueMondiale)
+names(BanqueMondiale)
 ```
 
+On voit 24 noms ci-dessus.
 <!-- comment -->
-
 Le jeu de données `BanqueMondiale` comprend des mesures telles que le taux de fertilité et l'espérance de vie pour chaque pays sur la période 1960-2010.
 <!-- comment -->
-Le code ci-dessus imprime la ligne pour Canada en 2010, ainsi que la dimension (lignes `r nrow(BanqueMondiale)` et colonnes `r ncol(BanqueMondiale)`) du tableau de données.
+Pour simplifier les sorties ci-dessous, nous considérons seulement le sous-ensemble pertinant pour les visualisations :
+
+
+```{r}
+banque_mondiale <- subset(
+  BanqueMondiale,
+  is.finite(taux.de.fertilité) & is.finite(espérance.de.vie),
+  select=c(région,pays,année,taux.de.fertilité,espérance.de.vie))
+tail(banque_mondiale)
+dim(banque_mondiale)
+```
+
+
+Le code ci-dessus imprime les dernières lignes, ainsi que les dimensions (lignes `r nrow(banque_mondiale)` et colonnes `r ncol(banque_mondiale)`) du tableau de données.
 <!-- comment -->
 Supposons que nous voulions voir s'il existe une relation entre l'espérance de vie et le taux de fertilité.
 <!-- comment -->
@@ -186,36 +200,35 @@ Ces éléments de l'esquisse peuvent être directement traduits en code R à l'a
 <!-- comment -->
 Tout d'abord, nous devons construire un tableau de données comportant une ligne par pays pour l'année 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 <!-- comment -->
-Le jeu de données `BanqueMondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
+Le jeu de données `banque_mondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
 
 <!-- comment -->
 
 ```{r}
-BanqueMondiale1975 <- subset(BanqueMondiale, année==1975)
-subset(BanqueMondiale1975, pays=="Canada")
+banque_mondiale_1975 <- subset(banque_mondiale, année==1975)
+tail(banque_mondiale_1975)
 ```
 
 <!-- comment -->
 
-Le code ci-dessus imprime la ligne pour Canada en 1975.
+Le code ci-dessus imprime les dernières lignes en 1975, une ligne par pays.
 <!-- comment -->
 L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec `aes()` qui fait correspondence entre variables et propriétés visuelles :
 
 <!-- comment -->
 
 ```{r Ch02-viz-scatter-ggplot}
-nuage_de_points <- ggplot()+
+(nuage_de_points <- ggplot()+
   geom_point(
     mapping=aes(x=espérance.de.vie, y=taux.de.fertilité, color=région),
-    data=BanqueMondiale1975)
-nuage_de_points
+    data=banque_mondiale_1975))
 ```
 
 <!-- comment -->
 
 La fonction `aes()` est appelée avec les noms des propriétés visuelles (`x`, `y`, `color`) et les valeurs des variables de données correspondantes (`espérance.de.vie`, `taux.de.fertilité`, `région`)
 <!-- comment -->
-Cette correspondance est appliquée aux variables du tableau de données `BanqueMondiale1975`, afin de créer les propriétés du `geom_point`.
+Cette correspondance est appliquée aux variables du tableau de données `banque_mondiale_1975`, afin de créer les propriétés du `geom_point`.
 <!-- comment -->
 Le ggplot a été sauvegardé dans une variable nommée `nuage_de_points` qui, lorsqu'imprimé sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
 <!-- comment -->
@@ -235,21 +248,19 @@ Le ggplot de la section précédente peut être affiché avec `animint2`, en uti
 animint(nuage_de_points)
 ```
 
+Lorsqu'il est visualisé dans un navigateur web, le graphique devrait paraître semblable aux versions statiques produites par les périphériques graphiques R standard,
 <!-- comment -->
-
+à la différence que la légende est interactive : en cliquant sur la légende, les points de cette couleur sont cachés ou affichés.
+<!-- comment -->
+A l'interne, la fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
+La fonction `animint2dir()` est appellé pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
+<!-- comment -->
+Dans RStudio, vous devrait voir le graphique afficher sous l'onglet « Visualiseur ».
+Vous pouvez configurer le navigateur d'affichage avec l'option `browser`, par exemple : `options(browser="firefox")`.
+<!-- comment -->
 Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre [FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
-<!-- comment -->
-La fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
-<!-- comment -->
-La fonction `print.animint()` fait appel ensuite à notre compilateur, qui prend la liste en entrée et qui produit une page web avec une visualisation de données. 
-<!-- comment -->
-Le compilateur est la fonction `animint2dir()` qui compile `nuage_de_points` en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
 
 <!-- comment -->
-
-Lorsqu'il est visualisé dans un navigateur web, le graphique animint devrait être pratiquement identique aux versions statiques produites par les périphériques graphiques R standard,
-<!-- comment -->
-à la différence que la légende de la région est interactive : en cliquant sur une entrée de la légende, les points de cette couleur sont cachés ou affichés.
 
 **Exercice**: essayez de modifier le contenu du `aes()` du ggplot, puis de créer une nouvelle visualisation.
 <!-- comment -->
@@ -278,6 +289,7 @@ Par exemple, considérons l'esquisse suivante qui ajoute une couche de `geom_pat
 Notez que l'esquisse ci-dessus comprend deux geoms différents (point et path).
 <!-- comment -->
 Les deux geoms partagent une définition commune des éléments `x`, `y`, et `color`, mais avec des ensembles de données différents.
+En plus, le `geom_path()` contient `group=pays`, ce qui signifie qu'il faut dessiner une courbe pour chaque différente valeur de `pays`.
 
 <!-- comment -->
 
@@ -286,22 +298,21 @@ Nous traduisons ci-dessous cette esquisse en code R.
 <!-- comment -->
 
 ```{r Ch02-viz-two-layer-viz}
-BanqueMondialeAvant1975 <- subset(
-  BanqueMondiale, 1970 <= année & année <= 1975)
+banque_mondiale_avant_1975 <- subset(
+  banque_mondiale, 1970 <= année & année <= 1975)
 gg_deux_couches <- nuage_de_points+
   geom_path(aes(
     x=espérance.de.vie, 
     y=taux.de.fertilité, 
     color=région,
     group=pays),
-    data=BanqueMondialeAvant1975)
-vis.deux.couches <- animint(gg_deux_couches)
-vis.deux.couches
+    data=banque_mondiale_avant_1975)
+(vis.deux.couches <- animint(gg_deux_couches))
 ```
 
 <!-- comment -->
 
-Dans le code ci-dessus, nous faisons un nouveau jeu de données `BanqueMondialeAvant1975`, et ensuite nous rajoutons un `geom_path` au `nuage_de_points` ce qui donnne `gg_deux_couches`, un ggplot avec deux couches.
+Dans le code ci-dessus, nous faisons un nouveau jeu de données `banque_mondiale_avant_1975`, et ensuite nous rajoutons un `geom_path` au `nuage_de_points` ce qui donnne `gg_deux_couches`, un ggplot avec deux couches.
 <!-- comment -->
 Ensuite nous sauvegardons la valeur rendue de l'appel à `animint()` dans l'objet `vis.deux.couches`, qu'on imprime pour l'afficher.
 <!-- comment -->
@@ -350,7 +361,7 @@ gg_trois_couches <- gg_deux_couches+
     y=taux.de.fertilité, 
     color=région,
     label=pays),
-    data=BanqueMondiale1975)
+    data=banque_mondiale_1975)
 animint(gg_trois_couches)
 ```
 
@@ -407,7 +418,7 @@ vis.deux.graphes$timeSeries <- ggplot()+
     y=taux.de.fertilité, 
     color=région, 
     group=pays),
-    data=BanqueMondiale)
+    data=banque_mondiale)
 ```
 
 <!-- comment -->
@@ -521,14 +532,14 @@ add.x.var <- function(df, x.var){
     theme_animint(width=600)+
     geom_point(aes(
       x=espérance.de.vie, y=taux.de.fertilité, color=région),
-      data=add.x.var(BanqueMondiale1975, "espérance de vie"))+
+      data=add.x.var(banque_mondiale_1975, "espérance de vie"))+
     geom_path(aes(
       x=espérance.de.vie, y=taux.de.fertilité, color=région,
       group=pays),
-      data=add.x.var(BanqueMondialeAvant1975, "espérance de vie"))+
+      data=add.x.var(banque_mondiale_avant_1975, "espérance de vie"))+
     geom_line(aes(
-      x=year, y=taux.de.fertilité, color=région, group=pays),
-      data=add.x.var(BanqueMondiale, "année"))+
+      x=année, y=taux.de.fertilité, color=région, group=pays),
+      data=add.x.var(banque_mondiale, "année"))+
     xlab("")+
     facet_grid(. ~ x.var, scales="free")))
 ```
@@ -611,10 +622,10 @@ afficher.path.list <- list()
 for(afficher.année in c(1975, 1985, 1995)){
   afficher.point.list[[paste(afficher.année)]] <- data.frame(
     afficher.année, subset(
-      BanqueMondiale, année==afficher.année))
+      banque_mondiale, année==afficher.année))
   afficher.path.list[[paste(afficher.année)]] <- data.frame(
     afficher.année, subset(
-      BanqueMondiale,
+      banque_mondiale,
       afficher.année - 5 <= année & année <= afficher.année))
 }
 afficher.point <- do.call(rbind, afficher.point.list)
@@ -713,7 +724,7 @@ Exercices :
 <!-- comment -->
 * Utilisez `aes(size=population)` dans le nuage de points pour indiquer la population de chaque pays. Indice : `scale_size_animint(pixel.range=c(5, 10))` signifie que des cercles d'un rayon de 5/10 pixels doivent être utilisés pour représenter la population minimale/maximale.
 <!-- comment -->
-* Créez une visualisation de données à plusieurs panneaux qui montre chaque année des données `BanqueMondiale` dans un différent panneau. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
+* Créez une visualisation de données à plusieurs panneaux qui montre chaque année des données `banque_mondiale` dans un différent panneau. Quelles sont les limites de l'utilisation de graphiques statiques pour visualiser ces données ?
 <!-- comment -->
 * Créez un `vis.alignée` en utilisant un système de tracé qui n'est pas basé sur la grammaire des graphiques. Par exemple, vous pouvez utiliser les fonctions du package `graphics` dans R (`plot`,`points`,`lines` etc.), ou `matplotlib` en Python. Quels sont les avantages de `ggplot2` et `animint` ?
 
