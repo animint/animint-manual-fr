@@ -1,6 +1,6 @@
 options(repos="http://cloud.r-project.org")
-for(p in c("nc","quarto","animint2"))if(!requireNamespace(p))install.packages(p)
-if(!requireNamespace("animint2fr"))remotes::install_github("animint/animint2fr")
+for(p in c("nc","penaltyLearning","future.apply","maps","lars","LambertW","kernlab","data.table","quarto","chromote","magick"))if(!requireNamespace(p))install.packages(p)
+remotes::install_github(c("animint/animint2","animint/animint2fr"))
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
   qmd_in <- qmd_vec[[qmd_i]]
@@ -27,6 +27,7 @@ if(FALSE){
   system("sudo apt install texlive-xetex")
 }
 quarto::quarto_render("Chapitres")
+
 animint_js_vec <- Sys.glob("Chapitres/*/*/animint.js")
 from_dir_vec <- dirname(animint_js_vec)
 to_dir_vec <- dirname(sub("/", "/_book/", from_dir_vec))
@@ -35,4 +36,16 @@ for(to_dir in names(from_to_list)){
   from_dir <- from_to_list[[to_dir]]
   file.copy(from_dir, to_dir, recursive=TRUE)
 }
+viz_html_vec <- Sys.glob("Chapitres/_book/*/*-viz.html")
+for(viz_html in viz_html_vec){
+  base_html <- basename(viz_html)
+  base_qmd <- sub("html", "qmd", base_html)
+  source_qmd <- sub("-viz", "_source", base_qmd)
+  sys::exec_wait("sed", c(
+    "-i",
+    sprintf("s/%s/%s/g", base_qmd, source_qmd),
+    viz_html))
+}
+##grep  -nH --null 'Ch[0-9]*-viz.qmd' Chapitres/_book/*/*-viz.html
+sys::exec_wait("grep", c("Ch[0-9]*-viz.qmd", "Chapitres/_book/*/*-viz.html"))
 if(interactive())servr::httd("Chapitres/_book/")
