@@ -210,7 +210,7 @@ En examinant le graphique des erreurs d'étiquettes ci-dessus, il est clair que 
 <!-- comment -->
 Un certain nombre de critères peuvent être utilisés pour sélectionner le meilleur modèle.
 <!-- comment -->
-Une façon d'y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\\lambda)=L\_s + \\lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
+Une façon d'y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
 Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle. $S^*(\lambda)$ pour cet ensemble de données :
 
