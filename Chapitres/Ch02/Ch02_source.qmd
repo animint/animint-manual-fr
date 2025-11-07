@@ -174,7 +174,9 @@ Pour simplifier les sorties ci-dessous, nous considérons seulement le sous-ense
 banque_mondiale <- subset(
   BanqueMondiale,
   is.finite(taux.de.fertilité) & is.finite(espérance.de.vie),
-  select=c(région,pays,année,taux.de.fertilité,espérance.de.vie))
+  select=c(
+    région, pays, année, taux.de.fertilité, espérance.de.vie,
+    population, revenu))
 tail(banque_mondiale)
 dim(banque_mondiale)
 ```
@@ -262,13 +264,12 @@ Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre
 
 <!-- comment -->
 
-**Exercice**: essayez de modifier le contenu du `aes()` du ggplot, puis de créer une nouvelle visualisation.
-<!-- comment -->
-Les variables quantitatives comme `population` sont mieux représentées par les axes (`x` ou `y`) ou par la taille du cercle (`size`).
-<!-- comment -->
-Les variables qualitatives comme `lending` sont mieux représentées en utilisant les propriétés visuelles `color` ou `fill`.
+**Exercices**: essayez de modifier le contenu du `aes()` du ggplot, puis de créer une nouvelle visualisation.
 
-<!-- comment -->
+* Essayez d'utiliser la variable qualitative `revenu` dans `aes(color)` ou `aes(fill)`, et vous allez voir une légende interactive.
+* Essayez `population` et `log10(population)` sur `x` ou `y`, et vous allez voir que la transformation logarithmique marche bien pour cette variable (`population` varie entre plusieurs ordres de grandeur).
+* Essayer `aes(size=log10(population))` et vous allez voir une légende quantitative, qui n'est pas interactive.
+* Pour avoir une légende interactive pour `population`, il faudra discretiser. Créez une nouvelle variable discrète `log10pop` avec définition `paste(round(log10(population)))`. Si vous utilisez `aes(size=log10pop)` vous allez voir une légende qualitative, qui est interactive.
 
 ## Graphiques multicouches (plusieurs geoms) {#multi-layer}
 
