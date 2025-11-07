@@ -256,6 +256,7 @@ A l'interne, la fonction `animint()` crée une liste de classe `"animint"`, puis
 La fonction `animint2dir()` est appellé pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
 <!-- comment -->
 Dans RStudio, vous devrait voir le graphique afficher sous l'onglet « Visualiseur ».
+Vous pouvez configurer le navigateur d'affichage avec l'option `browser`, par exemple : `options(browser="firefox")`.
 <!-- comment -->
 Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre [FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
 
