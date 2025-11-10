@@ -259,7 +259,7 @@ Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace di
 
 <!-- paragraph -->
 
-Dans `animint2`, il existe plusieurs options de personalisation pour les geoms. Par exemple, `chunk_vars` permet de spécifier la division des des ensembles de données pour leur stockage sur disque. Quant aux paramètres `*_off`, ils sont utilisés pour définir l'affichage d'un geom `clickSelects` lorsqu'il n'est pas sélectionné.
+Dans `animint2`, il existe plusieurs options de personalisation pour les geoms. Par exemple, `chunk_vars` permet de spécifier la division des ensembles de données pour leur stockage sur disque. Quant aux paramètres `*_off`, ils sont utilisés pour définir l'affichage d'un geom `clickSelects` lorsqu'il n'est pas sélectionné.
 <!-- comment -->
 De plus, les paramètres `help` et `title` peuvent être définis, pour ajouter des informations à la visite guidée.
 
@@ -281,7 +281,7 @@ L'option `chunk_vars` doit être spécifiée comme argument d'une fonction `geom
 <!-- comment -->
 Lorsque `chunk_vars=character(0)`, soit un vecteur de caractères de longueur zéro, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
-A l'autre extreme, lorsque `chunk_vars` contient tous les variables de `showSelected`, un fichier TSV est créé pour chaque combinaison des valeurs de ces variables (beaucoup de fichiers TSV, chacun de petite taille).
+À l'autre extrême, lorsque `chunk_vars` contient toutes les variables de `showSelected`, un fichier TSV est créé pour chaque combinaison des valeurs de ces variables (beaucoup de fichiers TSV, chacun de petite taille).
 
 <!-- paragraph -->
 
@@ -305,7 +305,7 @@ Pour illustrer l'utilisation de `chunk_vars`, considérez la visualisation suiva
 
 L'esquisse ci-dessus est composée de deux graphiques.
 <!-- comment -->
-Nous commençons par créer le graphique des courbes d'erreur situé à gauche.
+Nous commençons par créer le graphique des courbes d'erreurs situé à gauche.
 
 <!-- paragraph -->
 
@@ -375,7 +375,7 @@ signalPlot+facet_grid(segments ~ bases.per.probe)
 
 <!-- paragraph -->
 
-Le graphique non interactif ci-dessus comporte 80 `facets`, un pour chaque combinaison des deux variables `showSelected`, `bases.per.probe` et `segments`.
+Le graphique non interactif ci-dessus comporte 80 `facets`, un pour chaque combinaison des deux variables `showSelected`, c'est-à dire `bases.per.probe` et `segments`.
 <!-- comment -->
 Nous présentons ci-dessous une version interactive dans laquelle un seul de ces `facets` sera affiché.
 
@@ -400,11 +400,11 @@ Cliquez sur le bouton "Afficher le tableau de l'état des téléchargements", et
 <!-- comment -->
 Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
 <!-- comment -->
-Si une autre valeur de `chunk_vars` était spécifiée, elle créerait un nombre différent de fichiers TSV, mais l'apparence de la viz de données devrait être la même.
+Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l'apparence de la vvisualisation de données devrait être la même.
 
 <!-- paragraph -->
 
-Ci-dessous, nous utilisons l'option `du` programme en ligne de commande pour déterminer l'utilisation du disque de la viz de données pour différents choix de `chunk_vars`.
+Ci-dessous, nous utilisons le programme en ligne de commande `du` pour déterminer l'utilisation du disque de la visualisation de données pour différents choix de `chunk_vars`.
 
 <!-- paragraph -->
 
@@ -441,23 +441,23 @@ sizes.list <- lapply(chunk_vars_list, tsvSizes)
 
 <!-- paragraph -->
 
-Le tableau de contingence ci-dessus indique le nombre de kilo-octets pour les données, ainsi que le nombre de fichiers TSV pour les éléments suivants `geom6_vline_signal` et les autres geoms.
+Le tableau ci-dessus indique le nombre de kilo-octets pour la visualisation des données, ainsi que le nombre de fichiers TSV pour `geom6_vline_signal` et les autres geoms.
 <!-- comment -->
 Notez comment le choix de `chunk_vars` affecte le nombre de fichiers TSV et l'utilisation de l'espace disque.
 <!-- comment -->
 Depuis `chunk_vars` n'a été spécifié que pour les `geom6_vline_signal` le nombre de fichiers TSV pour les autres geoms ne change pas.
 <!-- comment -->
-Lorsque les deux `segments` et `bases.per.probe` sont spécifiés pour `chunk_vars` il y a 76 fichiers TSV pour `geom6_vline_signal` et les données prennent `r sizes["both", "kb"]` kilo-octets.
+Lorsque `segments` et `bases.per.probe` sont tous les deux spécifiés pour `chunk_vars`, il y a 76 fichiers TSV pour `geom6_vline_signal`, et la visualisation des données occupe `r sizes["both", "kb"]` kilo-octets.
 <!-- comment -->
-En revanche, `chunk_vars=character()` ne produit qu'un seul fichier TSV pour `geom6_vline_signal` et l'image de données utilise `r sizes["neither", "kb"]` kilo-octets.
+En revanche, `chunk_vars=character()` ne produit qu'un seul fichier TSV pour `geom6_vline_signal`, et la visualisation des données occupe `r sizes["neither", "kb"]` kilo-octets.
 
 <!-- paragraph -->
 
-En conclusion, l'outil de gestion de l'information spécifique au geom `chunk_vars` définit le nombre de fichiers TSV créés pour chaque geom.
+En conclusion, l'option spécifique au geom `chunk_vars` détermine le nombre de fichiers TSV créés pour chaque geom.
 <!-- comment -->
 Lors du choix de la valeur de l'option `chunk_vars` vous devez tenir compte de l'utilisation du disque et du temps de chargement.
 <!-- comment -->
-Quelques gros fichiers occupent moins d'espace disque mais sont plus lents à télécharger que de nombreux petits fichiers.
+Un petit nombre de gros fichiers occupent moins d'espace disque, mais sont plus lents à télécharger que de nombreux petits fichiers.
 
 <!-- paragraph -->
 
@@ -465,21 +465,21 @@ Quelques gros fichiers occupent moins d'espace disque mais sont plus lents à t�
 
 <!-- paragraph -->
 
-Animint a des valeurs par défaut raisonnables pour l'affichage de l'état de la sélection.
+`Animint2` a des valeurs par défaut raisonnables pour l'affichage de l'état de sélection.
 <!-- comment -->
 En particulier,
 
 <!-- paragraph -->
 
-- lorsqu'il y a un rectangle ou une tuile avec clickSelects, nous utilisons la couleur noire/la bordure pour montrer les éléments qui sont sélectionnés, et la couleur transparente pour les éléments qui ne sont pas sélectionnés.
+- lorsqu'il y a un `rect` ou un `tile` avec `clickSelects`, nous utilisons le noir pour `color/border` pour montrer les éléments qui sont sélectionnés, et le transparent pour les éléments qui ne sont pas sélectionnés.
 <!-- comment -->
-- pour tout autre geom avec clickSelects, nous utilisons l'opacité totale. `alpha` pour afficher les éléments sélectionnés, et `alpha-0.5` pour afficher les éléments qui ne sont pas sélectionnés.
+- pour tout autre geom avec `clickSelects`, nous utilisons une opacité complète `alpha` pour afficher les éléments sélectionnés, et une opacité réduite `alpha-0.5` pour les éléments non sélectionnés.
 
 <!-- paragraph -->
 
 Les valeurs par défaut expliquées ci-dessus sont illustrées dans le premier graphique ci-dessous.
 <!-- comment -->
-Ces valeurs par défaut peuvent être personnalisées en utilisant l'option `alpha_off`, `fill_off` et `color_off` comme dans le code ci-dessous,
+Ces valeurs par défaut peuvent être personnalisées en utilisant les paramètres du geom `alpha_off`, `fill_off` et `color_off` comme dans le code ci-dessous,
 
 <!-- paragraph -->
 
@@ -531,19 +531,19 @@ animint(
 
 <!-- paragraph -->
 
-Notez que lorsque vous utilisez l'une de ces propriétés visuelles dans l'élément `aes` ne doit pas être spécifiée en tant que paramètre geom.
+Notez que lorsque vous utilisez l'une de ces propriétés visuelles dans le mapping `aes`, elle ne doit pas être spécifiée en tant que paramètre geom.
 <!-- comment -->
-Par exemple, dans la tuile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill` et `fill_off` ne doivent pas être spécifiés en tant que paramètres pour ce geom (afin qu'il soit clair que le remplissage est utilisé pour afficher les valeurs des données, et non l'état de la sélection).
+Par exemple, dans le tile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill` et `fill_off` ne doivent pas être spécifiés en tant que paramètres pour ce geom (afin qu'il soit clair que `fill` est utilisé pour afficher les valeurs des données, et non l'état de sélection).
 
 <!-- paragraph -->
 
-### Spécifier le texte de la visite guidée {#custom-guided-tour}
+### Spécification du texte de la visite guidée {#custom-guided-tour}
 
 <!-- paragraph -->
 
-Depuis janvier 2025, animint prend en charge une visite guidée, qui affiche des informations sur les interactions possibles avec chaque geom.
+Depuis janvier 2025, `animint2` prend en charge une visite guidée, qui affiche des informations sur les interactions possibles avec chaque geom.
 <!-- comment -->
-Pour personnaliser ce qui est affiché pour chaque geom, vous pouvez spécifier l'option `help` et `title` comme dans le code ci-dessous.
+Pour personnaliser ce qui est affiché pour chaque geom, vous pouvez spécifier les paramètres `help` et `title`, comme dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -570,9 +570,9 @@ animint(
 
 <!-- paragraph -->
 
-Dans le code ci-dessus, nous spécifions `help` pour `geom_point` qui contrôle le sous-texte qui est affiché pour ce geom, après avoir cliqué sur le bouton "Démarrer la visite" au bas de la visualisation de données.
+Dans le code ci-dessus, nous spécifions `help` pour `geom_point`, qui contrôle le sous-texte pour ce geom après avoir cliqué sur le bouton "Start Tour" au bas de la visualisation de données.
 <!-- comment -->
-Après avoir cliqué sur le bouton "Suivant", nous pouvons voir l'image suivante `title` qui a été spécifié dans le code, affiché en haut de la fenêtre de visite, pour le `geom_text`.
+Après avoir cliqué sur le bouton "Next", nous pouvons voir le `title` qui a été spécifié dans le code, affiché en haut de la fenêtre de visite, pour le `geom_text`.
 <!-- comment -->
 Ce mécanisme peut être utilisé pour fournir des informations supplémentaires utiles aux utilisateurs de votre visualisation de données, afin qu'ils puissent comprendre plus facilement ce qui est affiché et quelles interactions sont possibles.
 
@@ -582,9 +582,9 @@ Ce mécanisme peut être utilisé pour fournir des informations supplémentaires
 
 <!-- paragraph -->
 
-Cette section traite des options qui sont spécifiques à un ggplot d'une viz de données.
+Cette section traite des options qui sont spécifiques à un ggplot d'une visualisation de données.
 <!-- comment -->
-Les options `theme_animint` est utilisée pour attacher des options animint aux objets ggplot.
+La fonction `theme_animint` est utilisée pour attacher des options `animint2` aux objets ggplot.
 
 <!-- paragraph -->
 
@@ -592,7 +592,7 @@ Les options `theme_animint` est utilisée pour attacher des options animint aux 
 
 <!-- paragraph -->
 
-Le `width` et `height` permettent de spécifier les dimensions (en pixels) d'un ggplot affiché par animint.
+Les options `width` et `height` permettent de spécifier les dimensions (en pixels) d'un ggplot affiché par `animint()`.
 <!-- comment -->
 Par exemple, considérons le remaniement suivant du graphique des États-Unis :
 
@@ -618,15 +618,15 @@ animint(
 
 <!-- paragraph -->
 
-Notez que le graphique ci-dessus a été affiché avec une largeur de 750 pixels et une hauteur de 500 pixels, en raison de l'utilisation de la fonction `theme_animint` options.
+Notez que le graphique ci-dessus a été généré avec une largeur de 750 pixels et une hauteur de 500 pixels, en raison des options `theme_animint`.
 <!-- comment -->
-Si l'une de ces options n'est pas spécifiée pour un ggplot, animint utilise une valeur par défaut de 400 pixels.
+Si l'une de ces options n'est pas définie pour un ggplot, `animint()` utilise une valeur par défaut de 400 pixels.
 
 <!-- paragraph -->
 
 Notez également que `theme` a été utilisé pour spécifier plusieurs éléments vides.
 <!-- comment -->
-Cela a pour effet de supprimer les axes et l'arrière-plan, et est généralement utile pour afficher des cartes.
+Cela a pour effet de supprimer les axes et l'arrière-plan, et est généralement utile pour générer des cartes.
 
 <!-- paragraph -->
 
@@ -634,9 +634,9 @@ Cela a pour effet de supprimer les axes et l'arrière-plan, et est généralemen
 
 <!-- paragraph -->
 
-Le `scale_size_animint` doit être utilisée dans tous les ggplots où vous spécifiez `aes(size)`.
+L'échelle `scale_size_animint` doit être utilisée dans tous les ggplots où vous précisez `aes(size)`.
 <!-- comment -->
-Pour comprendre pourquoi, examinons les exemples suivants.
+Pour comprendre pourquoi, consultez les exemples suivants.
 
 <!-- paragraph -->
 
@@ -661,17 +661,17 @@ nuage1975 <- ggplot()+
 
 <!-- paragraph -->
 
-Le premier ggplot ci-dessus n'a pas d'échelle spécifiée, il utilise donc l'échelle ggplot2 par défaut, ce qui pose deux problèmes.
+Le premier ggplot ci-dessus n'a pas d'échelle définie, il utilise donc l'échelle par défaut de ggplot2, posant ainsi deux problèmes.
 <!-- comment -->
-Le premier problème est qu'il semble que tous les pays aient à peu près la même taille, à l'exception des deux pays les plus grands.
+Le premier problème est qu'il semble que tous les pays aient à peu près la même taille, à l'exception des deux plus grands pays.
 <!-- comment -->
 Ce problème peut être résolu en ajoutant simplement `scale_size_animint()` au ggplot, ce qui donne le deuxième graphique ci-dessus.
 <!-- comment -->
-Cependant, un second problème est que les entrées de la légende ne montrent pas toute la plage (ou étendue ou intervalle) des données.
+Cependant, un second problème est que les entrées de la légende ne montrent pas toute l'étendue des données.
 <!-- comment -->
-Ce problème est résolu dans le troisième graphique ci-dessus, en spécifiant manuellement l'attribut `breaks` à utiliser pour les entrées de légende.
+Ce problème est résolu dans le troisième graphique ci-dessus, en spécifiant manuellement l'option `breaks` à utiliser pour les entrées de légende.
 <!-- comment -->
-Notez que l'élément `pixel.range` peut également être utilisé pour spécifier le rayon du plus grand et du plus petit cercle.
+Notez que l'argument `pixel.range` peut également être utilisé pour définir le rayon du plus grand et du plus petit cercle.
 
 <!-- paragraph -->
 
