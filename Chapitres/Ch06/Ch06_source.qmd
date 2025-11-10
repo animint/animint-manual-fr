@@ -455,7 +455,7 @@ En revanche, `chunk_vars=character()` ne produit qu'un seul fichier TSV pour `ge
 
 En conclusion, l'option spécifique au geom `chunk_vars` détermine le nombre de fichiers TSV créés pour chaque geom.
 <!-- comment -->
-Lors du choix de la valeur de l'option `chunk_vars` vous devez tenir compte de l'utilisation du disque et du temps de chargement.
+Lors du choix de la valeur de `chunk_vars`, vous devez tenir compte à la fois l'utilisation du disque et le temps de chargement.
 <!-- comment -->
 Un petit nombre de gros fichiers occupent moins d'espace disque, mais sont plus lents à télécharger que de nombreux petits fichiers.
 
@@ -679,9 +679,9 @@ Notez que l'argument `pixel.range` peut également être utilisé pour définir 
 
 <!-- paragraph -->
 
-La syntaxe de définition des axes et de la taille du texte de la légende(en pixels) est quasiment la même que celle de ggplot2.
+La syntaxe de définition des axes et de la taille du texte de la légende(en pixels) est quasiment la même que celle de `ggplot2`.
 <!-- comment -->
-A l'intérieur `theme` vous pouvez utiliser des nombres directement pour modifier la taille de la police, ou vous pouvez utiliser la fonction `rel()` pour définir la taille relative.
+À l'intérieur de `theme`, vous pouvez directement utiliser des nombres pour modifier la taille de la police, ou vous pouvez utiliser `rel()` pour définir la taille relative.
 
 <!-- paragraph -->
 
@@ -708,19 +708,19 @@ nuage1975 <- ggplot()+
 
 <!-- paragraph -->
 
-Cela permet de modifier la taille de la police tout en modifiant la taille du tracé pour lui donner une plus grande cohérence.
+Cela vous permet de modifier la taille de la police tout en ajustant la taille du graphique, afin d'obtenir un rendu plus cohérent.
 
 <!-- paragraph -->
 
-Notez que la taille de police par défaut dans animint est de 11px pour les axes et de 16px pour la légende.
+Notez que la taille de police par défaut dans `animint2` est de 11px pour les axes et de 16px pour la légende.
 
 <!-- paragraph -->
 
-## Options d'affichage des données globales {#global-options}
+## Options globales de la visualisation des données {#global-options}
 
 <!-- paragraph -->
 
-Les options d'affichage des données globales sont des éléments nommés de l'élément `viz` qui ne sont pas des ggplots.
+Les options globales de la visualisation des données sont tous les éléments nommés de la liste `vis` qui ne sont pas des ggplots.
 
 <!-- paragraph -->
 
@@ -728,29 +728,29 @@ Les options d'affichage des données globales sont des éléments nommés de l'�
 
 <!-- paragraph -->
 
-[Chapitre 3](Ch03-showSelected.html#duration-key) a présenté le `duration` pour spécifier la durée des transitions fluides.
+[Chapitre 3](Ch03-showSelected.html#duration-key) a introduit l'option `duration` qui permet de spécifier la durée des transitions en douceur.
 
 <!-- paragraph -->
 
-[Chapitre 3](Ch03-showSelected.html#animation-time) a présenté le `time` pour spécifier une variable de sélection qui est automatiquement mise à jour (animation).
+[Chapitre 3](Ch03-showSelected.html#animation-time) a introduit l'option `time` qui permet de spécifier une variable de sélection qui est automatiquement mise à jour (animation).
 
 <!-- paragraph -->
 
-[Chapitre 4](Ch04-clickSelects.html#first-option) a présenté le `first` qui permet de spécifier la sélection lorsque l'image de données est affichée pour la première fois.
+[Chapitre 4](Ch04-clickSelects.html#first-option) a introduit l'option `first` qui permet de spécifier la sélection lorsque la visualisation des données est générée pour la première fois.
 
 <!-- paragraph -->
 
-[Chapitre 4](Ch04-clickSelects.html#selector-types-option) a présenté le `selector.types` pour spécifier plusieurs variables de sélection.
+[Chapitre 4](Ch04-clickSelects.html#selector-types-option) a introduit l'option `selector.types` qui permet de spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
-### Titre de la page web avec l'option title {#title-option}
+### Titre de la page web avec l'option `title` {#title-option}
 
 <!-- paragraph -->
 
-Le `title` doit être une chaîne de caractères, et sera utilisée pour définir l'option `\<title>` de la page web.
+L'option `title` doit être une chaîne de caractères, et sera utilisée pour définir l'élément `\<title>` de la page web.
 <!-- comment -->
-Il n'est pas utile d'utiliser l'élément `title` dans un document Rmd tel que cette page.
+Il n'est pas utile d'utiliser l'option `title` dans un document Rmd tel que cette page.
 <!-- comment -->
 Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-dessous.
 
@@ -766,13 +766,13 @@ animint2dir(vis.title, "Ch06-viz-title")
 
 Notez que `viz.scale.size` possède déjà trois ggplots, chacun avec un `ggtitle`.
 <!-- comment -->
-Ajout de l'option global `title` a pour effet de définir un titre pour [la page web](Ch06-title/index.html) .
+Ajouter l'option globale `title` a pour effet de définir un titre pour [la page web](Ch06-viz-title/index.html) .
 
 <!-- paragraph -->
 
-Le chapitre 5 a présenté le [animint2pages](Ch05-sharing.html#pages) qui permet de publier un animint sur les pages GitHub.
+Le chapitre 5 a introduit la fonction [animint2pages](Ch05-sharing.html#pages) qui permet de publier un `animint2` sur GitHub Pages.
 <!-- comment -->
-Il faut que l'animint définisse l'élément `title` car ces méta-données sont nécessaires à l'organisation de l'animint dans une structure [galerie](Ch05-sharing.html#gallery) .
+Il faut que l'`animint2` définisse l'option `title` car ces méta-données sont nécessaires à l'organisation de l'`animint2` dans une [galerie](Ch05-sharing.html#gallery) .
 
 <!-- paragraph -->
 
@@ -780,7 +780,7 @@ Il faut que l'animint définisse l'élément `title` car ces méta-données sont
 
 <!-- paragraph -->
 
-Le `source` doit être une chaîne de caractères : un lien vers le code source R qui a été utilisé pour créer l'animint.
+L'option `source` doit être une chaîne de caractères : un lien vers le code source R qui a été utilisé pour créer l'`animint2`.
 
 <!-- paragraph -->
 
@@ -797,13 +797,13 @@ animint(
 
 <!-- paragraph -->
 
-Notez ci-dessus comment il y a un lien source au bas des données viz.
+Notez ci-dessus comment il y a un lien source au bas de la visualisation des données.
 
 <!-- paragraph -->
 
 Le chapitre 5 a introduit le [animint2pages](Ch05-sharing.html#pages) qui permet de publier un animint sur les pages GitHub.
 <!-- comment -->
-Il faut que l'animint définisse l'élément `source` car ces méta-données sont nécessaires à l'organisation de l'animint dans une structure [galerie](Ch05-sharing.html#gallery) .
+Il faut que l'`animint2` définisse l'option `source` car ces méta-données sont nécessaires à l'organisation de l'`animint2` dans une [galerie](Ch05-sharing.html#gallery) .
 
 <!-- paragraph -->
 
@@ -811,7 +811,7 @@ Il faut que l'animint définisse l'élément `source` car ces méta-données son
 
 <!-- paragraph -->
 
-Le `video` doit être une chaîne de caractères : un lien vers une vidéo qui montre des interactions typiques avec l'animint.
+L'option `video` doit être une chaîne de caractères : un lien vers une vidéo qui montre des interactions typiques avec l'`animint2`.
 <!-- comment -->
 Ce mécanisme peut être utilisé pour aider les utilisateurs de votre visualisation de données à comprendre ce qui est affiché, et quelles interactions ils peuvent utiliser.
 
@@ -832,33 +832,33 @@ animint(
 
 Dans la visualisation de données ci-dessus, remarquez le lien "vidéo" qui apparaît en bas à droite.
 <!-- comment -->
-En cliquant sur ce lien, on accède à une vidéo qui a été enregistrée pour expliquer une visualisation de données plus complexe basée sur les données de la Banque mondiale.
+En cliquant sur ce lien, on accède à une vidéo qui a été enregistrée pour expliquer une visualisation de données plus complexe basée sur les données de la Banque Mondiale.
 <!-- comment -->
-L'idée est que vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un lien vers la vidéo à l'aide de ce mécanisme, afin que vos utilisateurs puissent comprendre plus facilement ce qui est affiché, et quelles sont les interactions possibles.
+L'idée est que vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un lien vers cette vidéo à l'aide de ce mécanisme, afin que vos utilisateurs puissent comprendre plus facilement ce qui est affiché et quelles interactions sont possibles.
 
 <!-- paragraph -->
 
-### Afficher ou masquer les menus de sélection avec l'option selectize {#selectize-option}
+### Afficher ou masquer les menus de sélection avec l'option `selectize` {#selectize-option}
 
 <!-- paragraph -->
 
-L'option selectize doit être une liste nommée de valeurs booléennes.
+L'option `selectize` doit être une liste nommée de valeurs booléennes.
 <!-- comment -->
-Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non afficher un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/) .
+Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/) .
 <!-- comment -->
-Par défaut, animint affiche un menu de sélection pour chaque variable de sélection, à deux exceptions près :
+Par défaut, `animint2` va générer un menu de sélection pour chaque variable de sélection, à deux exceptions près :
 
 <!-- paragraph -->
 
-- les variables de sélection pilotées par les données qui sont définies à l'aide de l'option [namedclickSelects/showSelectedvariables](Ch06-other.html#data-driven-selectors) .
+- les variables de sélection basées sur les données qui sont définies à l'aide de [namedclickSelects/showSelectedvariables](Ch06-other.html#data-driven-selectors) .
 <!-- comment -->
-- les variables de sélection qui ont beaucoup de valeurs (elles sont lentes à afficher).
+- les variables de sélection qui ont beaucoup de valeurs (elles sont lentes à générer).
 
 <!-- paragraph -->
 
 Ces valeurs par défaut devraient convenir à la grande majorité des animints.
 <!-- comment -->
-Pour ceux qui sont intéressés par un exemple de la façon dont la fonction `selectize` veuillez consulter l'exemple de l'option [PredictedPeaks dans le code source de animint2](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer2-PredictedPeaks.R) .
+Pour ceux qui souhaitent voir un exemple du fonctionnement de l'option `selectize`, veuillez consulter [PredictedPeaks dans le code source de `animint2`](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer2-PredictedPeaks.R) .
 
 <!-- paragraph -->
 
@@ -866,7 +866,7 @@ Pour ceux qui sont intéressés par un exemple de la façon dont la fonction `se
 
 <!-- paragraph -->
 
-Ce chapitre a expliqué plusieurs options de personnalisation des animints au niveau de l'observation, du geom, du graphique et du global.
+Ce chapitre a expliqué plusieurs options de personnalisation des animints au niveau de l'observation, du geom, du graphique et au niveau global.
 
 <!-- paragraph -->
 
@@ -884,7 +884,7 @@ Le temps de chargement ?
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 7](Ch07-limitations.html) explique les limites de l'implémentation actuelle de animint2.
+Ensuite, [Chapitre 7](Ch07-limitations.html) explique les limites de l'implémentation actuelle de `animint2`.
 
 <!-- paragraph -->
 
