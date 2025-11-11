@@ -72,12 +72,12 @@ ann.colors <- c(
   peaks="#a445ee")
 (gg.cov <- ggplot()+
   scale_y_continuous(
-    "aligned read coverage",
+    "couverture des lectures alignées",
     breaks=function(limits){
       floor(limits[2])
     })+
   scale_x_continuous(
-    "position on chr11 (kilo bases = kb)")+
+    "position sur chr11 (kilobases = kb)")+
   coord_cartesian(xlim=c(118167.406, 118238.833))+
   geom_tallrect(aes(
     xmin=chromStart/1e3, xmax=chromEnd/1e3,
@@ -126,11 +126,11 @@ Le code ci-dessus a ajouté l'élément `y` qui est utilisée pour afficher les 
 
 ```{r}
 (gg.cov.prob <- gg.cov+
-  ggtitle("select problem")+
+  ggtitle("Sélection du problème")+
   geom_text(aes(
     chromStart/1e3, 0.9,
     label=sprintf(
-      "%d problems mean size %.1f kb",
+      "%d taille moyenne des problèmes %.1f kb",
       problems, mean.bases/1e3)),
     showSelected="bases.per.problem",
     data=PSJ$problem.labels,
@@ -168,8 +168,8 @@ Nous utilisons ces données pour tracer le graphique ci-dessous.
 
 ```{r}
 (gg.res.error <- ggplot()+
-  ggtitle("select problem size")+
-  ylab("minimum incorrectly predicted labels")+
+  ggtitle("choisir la taille du problème")+
+  ylab("nombre minimal d’erreurs de prédiction d’étiquettes")+
   geom_line(aes(
     bases.per.problem, errors),
     data=res.error)+
@@ -228,7 +228,7 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
   log.lambda=mean(log.lambda.range),
   peaks=max(peaks)+0.5)])
 (gg.model.selection <- ggplot()+
-   scale_x_continuous("log(penalty)")+
+   scale_x_continuous("log(penalité)")+
    geom_segment(aes(
      min.log.lambda, value,
      xend=max.log.lambda, yend=value),
@@ -238,7 +238,7 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
    geom_text(aes(
      log.lambda, peaks,
      label=sprintf(
-       "%.1f kb in problem %s",
+       "%.1f kb dans le problème %s",
        (problemEnd-problemStart)/1e3, problem.name)),
      showSelected=c("bases.per.problem", "problem.name"),
      data=data.frame(modelSelection.labels, variable="peaks"))+
@@ -291,7 +291,7 @@ Afficher cette visualisation des données préliminaires (incomplètes) dans le 
 ```{r ch14incomplete}
 before.incomplete <- Sys.time()
 viz.incomplete
-cat(elapsed.incomplete <- Sys.time()-before.incomplete, "seconds\n")
+cat(elapsed.incomplete <- Sys.time()-before.incomplete, "secondes\n")
 ```
 
 <!-- paragraph -->
@@ -338,10 +338,10 @@ Dans cette boucle for, nous ajoutons donc quelques couches avec `clickSelects="p
 viz.first <- viz.incomplete
 viz.first$first <- c(viz.incomplete$first, PSJ$first)
 viz.first$modelSelection <- viz.first$modelSelection+
-  ggtitle("select number of samples with peak in problem")
+  ggtitle("choisir le nombre d’échantillons avec un pic dans le problème")
 print(timing.for.construct <- system.time({
   viz.for <- viz.first
-  viz.for$title <- "PSJ with for loops"
+  viz.for$title <- "PSJ avec boucles for"
   for(problem.dot in names(PSJ$modelSelection.by.problem)){
     if(problem.dot %in% names(PSJ$peaks.by.problem)){
       peaks <- PSJ$peaks.by.problem[[problem.dot]]
@@ -439,7 +439,7 @@ Le`animint2dir()` crée une variable de sélection pour chaque valeur unique de 
 ```{r}
 print(timing.named.construct <- system.time({
   viz.named <- viz.first
-  viz.named$title <- "PSJ named clickSelects and showSelected"
+  viz.named$title <- "PSJ avec clickSelects et showSelected nommés"
   viz.named$coverage <- viz.named$coverage+
     geom_segment(aes(
       chromStart/1e3, 0,
