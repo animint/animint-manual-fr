@@ -40,7 +40,7 @@ The goal of this section is to create a data visualization that shows the probab
 
 <!-- paragraph -->
 
-![Poisson regression viz prob](../Ch13/Ch13-viz-prob.png)
+![Poisson regression viz prob](Ch13-viz-prob.png)
 
 <!-- paragraph -->
 
@@ -129,7 +129,7 @@ To add a panel for the cumulative distribution function, we will re-make the ggp
 
 <!-- paragraph -->
 
-![Poisson regression viz cum prob](../Ch13/Ch13-viz-cum-prob.png)
+![Poisson regression viz cum prob](Ch13-viz-cum-prob.png)
 
 <!-- paragraph -->
 
