@@ -329,6 +329,12 @@ viz.duration.time
 ```
 
 On dit que la visualisation ci-dessus est animée, parce que la sélection pour `année` va changer toutes les deux secondes.
+Pour contrôler l'animation, vous pouvez cliquer sur « Show animation controls » :
+
+* Cliquer sur « Pause » pour arrêter l'animation.
+* Cliquer sur « Play » pour rédemarrer l'animation.
+* Pour contrôler le temps entre les mises à jour de la variable d'animation, taper un nombre (en millisecondes) dans le champs « updates » et ensuite taper la touche d'entrée.
+* Quand vous faites des mises à jour, il faut que le temps entre les mises à jour d'animation « updates » soit plus grand que les autres délais, pour que les transitions fluides se terminent avant la prochaine mise à jour d'animation.
 
 <!-- comment -->
 
