@@ -90,30 +90,30 @@ L'objectif de cette section est de créer la visualisation suivante des données
 
 <!-- paragraph -->
 
-Pour commencer, considérons le code R suivant qui génère un nuage de points des données de la Banque mondiale :
-
-<!-- paragraph -->
+Pour commencer, considérons le code R suivant qui génère un nuage de points des données de la Banque mondiale.
 
 ```{r Ch04-viz-ggplot-nuage}
 library(animint2)
 data(BanqueMondiale, package="animint2fr")
-gg_nuage <- ggplot()+
+(gg_nuage <- ggplot()+
   geom_point(aes(
     x=espérance.de.vie, y=taux.de.fertilité, color=région,
     key=pays),
     showSelected="année",
     clickSelects="pays",
-    data=BanqueMondiale)
-gg_nuage
+    data=BanqueMondiale))
 ```
 
 <!-- paragraph -->
 
 Notez que le graphique ci-dessus n'est pas interactif, car il est affiché à l'aide du périphérique graphique R traditionnel.
 <!-- comment -->
-En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique interactif suivant :
+En revanche, afficher le même ggplot en utilisant `animint2` donne un graphique interactif : 
 
-<!-- paragraph -->
+* `showSelected="année"` indique qu'on affiche seulement les données pour l'année sélectionnée.
+* `duration=list(année=2000)` indique un délai de 2 sécondes pour les transitions fluides entre les années.
+* Nous avons vu dans [le chapitre 3](/ch03/ch03-viz#duration-key) qu'il est important d'utiliser `aes(key)` pour chaque geom avec transition fluide.
+* Nous avons donc utilisé `aes(key=pays)` pour indiquer que la variable `pays` sera utilisée pour les transitions fluides entre les années.
 
 ```{r Ch04-viz-nuage}
 (vis.nuage <- animint(
