@@ -1,8 +1,18 @@
 ---
-title: Limitations of animint2, and workarounds
+title: Limitations
 layout: default
 output: bookdown::html_chapter
 ---
+
+
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
+[Ch07-limitations](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch07-limitations.Rmd)
+
+<!-- paragraph -->
+
+# Chapitre 7, Limites d'`animint2` et solutions de contournement
+
+<!-- paragraph -->
 
 ```{r}
 #| echo: false
@@ -11,65 +21,65 @@ knitr::opts_chunk$set(fig.path="Ch07-figures/")
 
 <!-- paragraph -->
 
-This chapter explains several known limitations of animint2 for some interactive data visualization tasks.
+Ce chapitre expose les limites d'`animint2` pour certaines tâches de visualisation de données interactives
 <!-- comment -->
-It also explains some workarounds that you can use in these situations.
+et propose quelques solutions de contournement à utiliser dans ces situations.
 <!-- comment -->
-After reading this chapter, you will understand how to
+Après avoir lu ce chapitre, vous saurez comment
 
 <!-- paragraph -->
 
-- Use a normalized variable when different `showSelected` subsets have very different values of a variable you want to display.
+- Utiliser une variable normalisée lorsque différents sous-ensembles `showSelected` ont des valeurs très différentes pour une variable que vous souhaitez afficher.
 <!-- comment -->
-- Compute statistics for each `showSelected` subset, rather than relying on the `stat_*` functions in `ggplot2`.
+- Calculer les statistiques pour chaque sous-ensemble `showSelected` au lieu d'utiliser les fonctions `stat_*` de `ggplot2`.
 <!-- comment -->
-- Add data one at a time to a multiple selection variable set, rather than using a rectangular selection brush.
+- Ajouter des données une par une à un ensemble de variables à sélection multiple, plutôt que d'utiliser un pinceau de sélection rectangulaire.
 <!-- comment -->
-- Avoid using `vjust` and labels with multiple lines in `geom_text`.
+- Évite l'utilisation de `vjust` et d'étiquettes à lignes plusieurs lignes dans `geom_text`.
 <!-- comment -->
-- Order the plots on the page.
+- Ordonner les graphiques sur la page.
 <!-- comment -->
-- Avoid using some unsupported `theme` options.
+- Éviter l'utilisation des options `theme` non supportées.
 <!-- comment -->
-- Use facets with multiple variables per axis.
+- Utiliser des facettes avec plusieurs variables par axe.
 <!-- comment -->
-- Use the `shiny` web server package to interactively change the aesthetic mapping of an animint, or to perform computations based on selected values.
+- Utiliser le package de serveur web `shiny` pour modifier de manière interactive la cartographie esthétique d'un `animint`, ou pour effectuer des calculs basés sur des valeurs sélectionnées.
 
 <!-- paragraph -->
 
-If you have an idea for improving animint2 so that it overcomes one of these limitations, the animint2 developers would be more than happy to accept your [Pull Request](https://github.com/tdhock/animint2/compare) .
+Toute idée visant à améliorer `animint2` et contourner l'une de ces limites est la bienvenue. Les développeurs d'`animint2` seraient plus qu'heureux d'accepter votre [Pull Request](https://github.com/tdhock/animint2/compare) .
 
 <!-- paragraph -->
 
-## Use normalized variables to work with fixed scales {#normalized-variables}
+## Utiliser des variables normalisées pour travailler avec des échelles standardisées {#normalized-variables}
 
 <!-- paragraph -->
 
-We implement axes and legends in the same way ggplot2 does, by computing them once when the plot is first rendered.
+Nous implémentons les axes et les légendes de la même manière que dans `ggplot2` : en les calculant une seule fois lors de la première génération du graphique.
 <!-- comment -->
-As a consequence, the axes and legends in each animint plot are not interactive.
+Par conséquent, les axes et les légendes de chaque graphique animint ne sont pas interactifs.
 <!-- comment -->
-For most [animated data visualizations](Ch03-showSelected.html#animation-time) , fixed axes make it easy to understand how the data changes along with the `time` variable.
+Pour la plupart des [visualisations de données animées](Ch03-showSelected.html#animation-time) les axes fixes permettent de comprendre facilement comment les données changent en même temps que la variable `time`.
 
 <!-- paragraph -->
 
-There are some situations where it would be useful to have axes that interactively update.
+Dans certaines situations, il serait utile d'avoir des axes qui se mettent à jour de manière interactive, 
 <!-- comment -->
-One example is when different showSelected subsets have very different values for variables that are shown with an axis or legend.
+par exemple lorsque différents sous-ensembles `showSelected` ont des valeurs très différentes pour les variables qui sont affichées avec un axe ou une légende.
 <!-- comment -->
-In this case it would be useful to have interactive axes that update and change along with the data.
+Dans ce cas, il serait utile d'avoir des axes interactifs qui se mettent à jour et changent en même temps que les données.
 <!-- comment -->
-We have experimental support for this, see [the update axestest](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer4-update-axes-multiple-ss.R) for details.
+Nous disposons d'une prise en charge expérimentale pour cela, voir [la mise à jour axestest](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer4-update-axes-multiple-ss.R) pour plus de détails.
 
 <!-- paragraph -->
 
-## Compute statistics for each showSeleted subset {#stats}
+## Calcul des statistiques pour chaque sous-ensemble showSeleted (ou réalisation d'un sous-ensemble). {#stats}
 
 <!-- paragraph -->
 
-Animint does not support ggplot2 statistics with `showSelected`.
+`Animint` ne prend pas en charge les statistiques `ggplot2` avec `showSelected`.
 <!-- comment -->
-For example, consider the facetted ggplot below.
+Par exemple, considérons le ggplot à facettes ci-dessous.
 
 <!-- paragraph -->
 
@@ -97,7 +107,7 @@ ggstat+facet_grid(facet ~ .)
 
 <!-- paragraph -->
 
-Using `showSelected` instead of facets does not result in what you may expect.
+Utiliser `showSelected` au lieu des facettes ne donne pas le résultat escompté.
 
 <!-- paragraph -->
 
@@ -110,7 +120,7 @@ animint(
 
 <!-- paragraph -->
 
-A workaround is to compute what you want to display, and use position=identity.
+Une solution de contournement consiste à calculer ce que vous voulez afficher, puis à utiliser `position=identity`.
 
 <!-- paragraph -->
 
@@ -137,7 +147,7 @@ ggidentity+facet_grid(facet ~ .)
 
 <!-- paragraph -->
 
-Note how we used `geom_segment` instead of `geom_bar`, but their appearance is similar.
+Notez que nous avons utilisé `geom_segment` au lieu de `geom_bar` mais que l'apparence des facettes reste inchangée.
 
 <!-- paragraph -->
 
@@ -150,29 +160,29 @@ animint(
 
 <!-- paragraph -->
 
-## Add values to a multiple selection set one at a time {#multiple-selection}
+## Ajouter des valeurs à un ensemble de sélection multiple, une à la fois {#multiple-selection}
 
 <!-- paragraph -->
 
-Animint does not support a rectangular brush or lasso for interactively defining a set of selected values.
+`animint2` ne prend pas en charge la brosse rectangulaire ou le lasso pour définir interactivement un ensemble de valeurs prises en charge.
 <!-- comment -->
-Instead, animint supports multiple selection by adding values one by one to the multiple selection set.
+Au lieu de cela, `animint` prend en charge la sélection multiple en ajoutant des valeurs une par une à l'ensemble de sélection multiple.
 <!-- comment -->
-Use the [selector.types](Ch04-clickSelects.html#selector-types-option) option to declare a multiple selection variable.
+Il faut donc utiliser l'option [selector.types](Ch04-clickSelects.html#selector-types-option) pour déclarer une variable de sélection multiple.
 
 <!-- paragraph -->
 
-## Adjust y instead of using vjust {#vjust}
+## Ajuster y au lieu d'utiliser vjust {#vjust}
 
 <!-- paragraph -->
 
-For horizontal text alignment, animint supports using `hjust` in R with the most common values: 0 for left alignment, 0.5 for middle alignment, and 1 for right alignment.
+Pour l'alignement horizontal du texte, animint prend en charge l'utilisation de `hjust` dans R; les valeurs les plus courantes sont : 0 pour l'alignement à gauche, 0,5 pour l'alignement au milieu et 1 pour l'alignement à droite.
 <!-- comment -->
-Animint translates these three `hjust` values to the `text-anchor` property in the rendered data viz.
+`animint2` traduit ces trois valeurs `hjust` en propriété `text-anchor` dans la visualisation de données générée.
 
 <!-- paragraph -->
 
-However, animint does not support vertical text alignment using `vjust` in R, because there is no property that can be used for vertical text alignment in SVG.
+Cependant, `animint` ne prend pas en charge l'alignement vertical du texte à l'aide de `vjust` dans R, car il n'y a pas de propriété qui puisse être utilisée pour l'alignement vertical du texte en SVG.
 
 <!-- paragraph -->
 
@@ -195,11 +205,11 @@ gg.vjust+ggtitle("R graphics devices respect aes(vjust)")
 
 <!-- paragraph -->
 
-Note how both hjust and vjust are respected in the static ggplot above.
+Notez comment `hjust` et `vjust` sont respectés dans le ggplot statique ci-dessus.
 <!-- comment -->
-In contrast, consider the animint below.
+En revanche, considérons l'`animint` ci-dessous.
 <!-- comment -->
-The left plot should be the same as the ggplot above, but there are clear differences in terms of vertical placement of the text elements.
+Le graphique de gauche devrait être le même que le ggplot ci-dessus, mais il y a des différences évidentes en termes de placement vertical des éléments de texte.
 
 <!-- paragraph -->
 
@@ -217,29 +227,29 @@ The left plot should be the same as the ggplot above, but there are clear differ
 
 <!-- paragraph -->
 
-The workaround in animint is shown in the right panel above.
+La solution de contournement dans `animint2` est illustrée dans le panneau de droite ci-dessus.
 <!-- comment -->
-You can adjust the vertical position `y` values of the text elements for which you would have used `vjust`.
+Vous pouvez ajuster les valeurs de la position verticale `y` des éléments de texte pour lesquels vous auriez utilisé `vjust`.
 
 <!-- paragraph -->
 
-It is possible to implement `vjust` support in animint, but we haven't yet had time to work on it.
+Il est possible d'implémenter une prise en charge de `vjust` dans `animint2`, mais nous n'avons pas encore eu le temps d'y travailler.
 <!-- comment -->
-If you would like to implement it, we would be more than happy to accept a Pull Request.
+Toute contribution en ce sens sera accueillie avec grand plaisir : n'hésitez pas à soumettre une Pull Request.
 <!-- comment -->
-We already have an [issue explaining how to implement it](https://github.com/tdhock/animint/issues/148) .
+Nous avons déjà une [issue expliquant comment l'implémenter.](https://github.com/tdhock/animint/issues/148) .
 
 <!-- paragraph -->
 
-## Order the plots on the page {#order-plots}
+## Ordonner les graphiques sur la page {#order-plots}
 
 <!-- paragraph -->
 
-Currently the only way to organize a multi-plot data viz is using the order of the ggplots in the animint `viz` list.
+Actuellement, la seule façon d'organiser une visualisation des données multiplot est d'utiliser l'ordre des ggplots dans la liste `animint` `viz`.
 <!-- comment -->
-The plots will appear on the web page in the same order as they occur in the animint `viz` list.
+Les graphiques apparaîtront sur la page web selon leur ordre dans la liste `animint` `viz`.
 <!-- comment -->
-For example, compare the data viz below with the data viz from the previous section.
+Par exemple, comparez la visualisation de données ci-dessous avec la visualisation de données de la section précédente.
 
 <!-- paragraph -->
 
@@ -251,23 +261,23 @@ animint(
 
 <!-- paragraph -->
 
-Note how the order of plots is reversed with respect to the data viz from the previous section.
+Notez que l'ordre des graphiques est inversé par rapport à la visualisation de données de la section précédente.
 <!-- comment -->
-The main limitation of this method for plot layout is that only the order can be controlled.
+La principale limite de cette méthode de mise en page des graphiques est que seul l'ordre peut être contrôlé.
 <!-- comment -->
-For example, depending on the width of the web page element in which the data viz above is rendered, the second plot will appear either below the first plot, or to the right of it.
+Par exemple, selon la largeur de l'élément de page web, le deuxième graphique apparaîtra soit sous le premier graphique, soit à sa droite.
 
 <!-- paragraph -->
 
-If you have an idea for a better way to define the layout of plots in an animint, [please tell us](https://github.com/tdhock/animint2/issues) !
+Si vous avez une idée pour une meilleure façon de définir la mise en page des graphiques dans une animint, [merci de nous en faire part](https://github.com/tdhock/animint2/issues) !
 
 <!-- paragraph -->
 
-## Avoid line breaks in text labels {#line-breaks}
+## Éviter les sauts de ligne dans les étiquettes de texte {#line-breaks}
 
 <!-- paragraph -->
 
-When rendering a ggplot using regular R graphics devices, using a line break or newline `\n` in a `geom_text` label results in multiple lines of text on the plot.
+Lors de l'affichage d'un ggplot à l'aide des périphériques graphiques R habituels, l'utilisation d'un saut de ligne ou d'une nouvelle ligne `\n` dans une étiquette `geom_text` entraîne l'apparition de plusieurs lignes de texte sur le graphique.
 
 <!-- paragraph -->
 
@@ -282,7 +292,7 @@ gg.return
 
 <!-- paragraph -->
 
-However, animint only supports drawing the first line of text.
+Cependant, `animint2` ne prend en charge que le tracé de la première ligne de texte.
 
 <!-- paragraph -->
 
@@ -292,13 +302,13 @@ animint(gg.return)
 
 <!-- paragraph -->
 
-It would be nice to support multiple lines in `geom_text` labels, but we have not yet had time to implement that.
+La prise en charge de plusieurs lignes dans les étiquettes `geom_text` serait utile, mais nous n'avons pas encore eu le temps de l'implémenter.
 <!-- comment -->
-However, we have [an issue](https://github.com/tdhock/animint/issues/149) , and would be willing to accept a Pull Request which implements that.
+Nous avons créé [une issue](https://github.com/tdhock/animint/issues/149) à ce sujet, et toute Pull Request qui implémente cette fonctionnalité sera acceptée.
 
 <!-- paragraph -->
 
-Until then, the workaround is to use one `geom_text` layer for each line of text that you want to display:
+En attendant, la solution de contournement consiste à utiliser un seul `geom_text` pour chaque ligne de texte que vous souhaitez afficher :
 
 <!-- paragraph -->
 
@@ -318,53 +328,53 @@ animint(gg.two.lines)
 
 <!-- paragraph -->
 
-## Avoid some ggplot theme options {#theme-options}
+## Éviter certaines options du thème ggplot {#theme-options}
 
 <!-- paragraph -->
 
-One goal of animint is to support [all of the theme options](http://docs.ggplot2.org/current/theme.html) , but we have not yet had time to implement them all.
+L'un des objectifs d'`animint2` est de prendre en charge [toutes les options de thème](http://docs.ggplot2.org/current/theme.html), mais nous n'avons pas encore eu le temps de toutes les implémenter.
 <!-- comment -->
-If there is a theme option that you use and animint does not yet support, then please send us a Pull Request.
+Si vous utilisez une option de thème qu'`animint2` ne prend pas encore en charge, n'hésitez pas à nous envoyer une Pull Request.
 <!-- comment -->
-The following list documents all the `theme` options that animint currently supports.
+La liste suivante répertorie les options `theme` déjà prises en charge par `animint2`.
 
 <!-- paragraph -->
 
-- `panel.margin` designates the distance between panels, and is used in the [space saving facets idiom](Ch99-appendix.html#space-saving-facets) to eliminate the distance between panels.
+- `panel.margin` désigne la distance entre les panneaux, et est utilisé dans l' [idiome des facettes d'économie d'espace](Ch99-appendix.html#space-saving-facets) pour l'éliminer.
 <!-- comment -->
-- `panel.grid.major` is used to draw the the grid lines which are designated by the `breaks` argument to the scale.
+- `panel.grid.major` est utilisé pour dessiner à l'échelle, les lignes de la grille qui sont désignées par l'argument `breaks`.
 <!-- comment -->
-- `panel.grid.minor` is used to draw the grid lines between the major grid lines.
+- `panel.grid.minor` est utilisé pour dessiner les lignes de la grille entre ses lignes principales.
 <!-- comment -->
-- `panel.background` is used for the `<rect>` in background of each panel.
+- `panel.background` est utilisé pour le `<rect>` en arrière-plan de chaque panneau.
 <!-- comment -->
-- `panel.border` is used for the border `<rect>` of each panel (on top of the background `<rect>` ).
+- `panel.border` est utilisé pour la bordure `<rect>` de chaque panneau (sur l'arrière-plan `<rect>`).
 <!-- comment -->
-- `legend.position="none"` works for hiding all of the legends, but none of the other legend positions are supported (the legends always appear on the right of the plot).
+- `legend.position="none"` fonctionne pour cacher toutes les légendes, mais aucune des autres positions de légende n'est prise en charge (les légendes apparaissent toujours à droite du graphique).
 
 <!-- paragraph -->
 
-The following theme options can be set to `element_blank` to hide the axes.
+Les options de thème suivantes peuvent être définies par `element_blank` pour masquer les axes.
 
 <!-- paragraph -->
 
-- `axis.title`, `axis.title.x`, `axis.title.y` designate the axis title.
+- `axis.title`, `axis.title.x`, `axis.title.y` désignent le titre de l'axe.
 <!-- comment -->
-- `axis.ticks`, `axis.ticks.x`, `axis.ticks.y` designate teh axis ticks.
+- `axis.ticks`, `axis.ticks.x`, `axis.ticks.y` désignent les tics de l'axe.
 <!-- comment -->
-- `axis.line`, `axis.line.x`, `axis.line.y` designate the axis line.
+- `axis.line`, `axis.line.x`, `axis.line.y` désignent la ligne d'axe.
 <!-- comment -->
-- `axis.text`, `axis.text.x`, `axis.text.y` designate the axis tick label text, and support the `angle` and `hjust` arguments of `element_text`.
+- `axis.text`, `axis.text.x`, `axis.text.y` désignent l'étiquette de texte de l'axe, et prennent en charge les arguments `angle` et `hjust` de `element_text`.
 
 <!-- paragraph -->
 
-## Facets with multiple variables per axis {#facet-strips}
+## Facettes avec plusieurs variables par axe {#facet-strips}
 
 <!-- paragraph -->
 
-Animint supports `facet_grid` for creating multi-panel data visualizations, but only has limited support for multiple variables per axis.
+`animint2` prend en charge `facet_grid` pour créer des visualisations de données à plusieurs panneaux, mais ne prend en charge que de manière limitée les variables multiples par axe.
 <!-- comment -->
-For example the ggplot below uses two variables to create vertical facets, which results in two strip labels when rendered with ggplot2.
+Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui se traduit par deux étiquettes de bande lorsqu'elles sont générées avec `ggplot2`.
 
 <!-- paragraph -->
 
@@ -383,7 +393,7 @@ two.strips+ggtitle("two strip labels on the right")
 
 <!-- paragraph -->
 
-In contrast, animint renders the same ggplot below using only one strip label.
+En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n'utilisant qu'une seule étiquette de bande.
 
 <!-- paragraph -->
 
@@ -393,19 +403,19 @@ animint(two.strips+ggtitle("only one strip label"))
 
 <!-- paragraph -->
 
-It would be nice to support multiple strip labels per axis, but we have not yet had time to implement it.
+Il serait intéressant de prendre en charge plusieurs étiquettes de bande par axe, mais nous n'avons pas encore eu le temps de l'implémenter.
 <!-- comment -->
-If you would like to implement this feature, we would be happy to accept your Pull Request.
+Si vous souhaitez le faire, nous serions heureux d'accepter votre Pull Request.
 
 <!-- paragraph -->
 
-## Interactive definition of aesthetic mappings using shiny {#shiny-aes}
+## Définition interactive de mappings `aes()` à l'aide de shiny {#shiny-aes}
 
 <!-- paragraph -->
 
-Normally, aesthetic mappings are defined once in R code, and can not be changed after rendering an animint.
+Normalement, les mappings `aes()` sont définis une fois dans le code R, et ne peuvent pas être modifiés après l'affichage de l'`animint`.
 <!-- comment -->
-One way to overcome this limitation is by defining `shiny` inputs that are used as animint aesthetics, as in the following example.
+Une façon de surmonter cette limite est de définir des entrées `shiny` qui sont utilisées comme `aes()` d'`animint`, comme dans l'exemple suivant.
 
 <!-- paragraph -->
 
@@ -416,43 +426,42 @@ shiny::runApp(system.file(
 
 <!-- paragraph -->
 
-## Interactive computation {#shiny-computation}
+## Calcul interactif {#shiny-computation}
 
 <!-- paragraph -->
 
-Another limitation is that animint can only display data that can be computed and stored in a data table before creating the visualization.
+Une autre limitation d'`animint2` est de ne pouvoir afficher que des données préalablement calculées et stockées dans un tableau.
 <!-- comment -->
-This means that animint is not appropriate when there are more subsets of data to plot than you could ever compute.
+Cela signifie qu'`animint2` n'est pas approprié lorsqu'il y trop de sous-ensembles de données à tracer pour pouvoir les calculer tous.
 <!-- comment -->
-In that case, it would be better to use shiny.
+Dans ce cas, il serait préférable d'utiliser shiny.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch07-exercises}
+## Résumé du chapitre et exercices {#Ch07-exercises}
 
 <!-- paragraph -->
 
-We discussed limitations of the current implementation of animint2, and explained several workarounds.
+Nous avons discuté des limites de l'implémentation actuelle de `animint2` et présenté plusieurs solutions de contournement.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Make a facetted ggplot with `stat_bin` that will not work with animint when the facet variable is instead used as a showSelected variable.
+- Réalisez un ggplot à facettes avec `stat_bin` qui ne fonctionnera pas avec `animint2` lorsque la variable facette est utilisée en tant que variable `showSelected`.
 <!-- comment -->
-Compute the stat yourself for each facet, and use `stat_identity` to make it work with animint.
+Calculez le statut de chaque facette, et utilisez `stat_identity` pour que votre calcul fonctionne avec `animint2`.
 <!-- comment -->
-- Make a ggplot which displays fine using `facet_grid(.
+- Faites un ggplot qui s'affiche bien en utilisant `facet_grid(. ~ var, scales="free")` mais ne s'affiche pas correctement avec `showSelected=var`.
 <!-- comment -->
-~ var, scales="free")` but does not display well in animint with `showSelected=var`.
 <!-- comment -->
-To fix the problem, compute a normalized version of `var` and use that for the `showSelected` variable.
+Pour résoudre le problème, calculez une version normalisée de `var` et utilisez-la dans `showSelected`.
 
 <!-- paragraph -->
 
-Next, [Chapter 8](Ch08-WorldBank-facets.html) explains how to create a multi-panel visualization of the World Bank data.
+Dans le [chapitre 8](Ch08-WorldBank-facets.html), nous vous expliquerons comment créer une visualisation multi-panneaux des données de la Banque mondiale.
 
 <!-- paragraph -->
 
