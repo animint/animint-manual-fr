@@ -135,6 +135,11 @@ Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de trans
 <!-- comment -->
 Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection actuelle.
 
+* `aes(fill=région)` indique que la variable `région` détermine la couleur du remplissage des cercles.
+* `clickSelects=pays` indique qu'on peut cliquer pour changer la sélection de la variable `pays`,
+* `color="black"` indique que le pays sélectionné aura un contour noir,
+* `color_off=NA` indique que les pays non-sélectionnés auront un contour transparent.
+
 <!-- paragraph -->
 
 ```{r Ch04-viz-color-off}
@@ -143,11 +148,10 @@ animint(
     geom_point(aes(
       x=espérance.de.vie, y=taux.de.fertilité, fill=région,
       key=pays),
-      shape=21,
+      clickSelects="pays",
       color="black",
       color_off=NA,
       showSelected="année",
-      clickSelects="pays",
       data=BanqueMondiale))
 ```
 
