@@ -4,6 +4,11 @@ layout: default
 output: bookdown::html_chapter
 ---
 
+Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
+[Ch04-clickSelects](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch04-clickSelects.Rmd)
+
+<!-- paragraph -->
+
 ```{r}
 #| echo: false
 knitr::opts_chunk$set(fig.path="Ch04-figures/")
@@ -11,124 +16,124 @@ knitr::opts_chunk$set(fig.path="Ch04-figures/")
 
 <!-- paragraph -->
 
-This chapter explains clickSelects, one of the two main keywords that  animint introduces for interactive data visualization.
+Dans ce chapitre, nous expliquons `clickSelects`, l'un des deux principaux mots-clés qu'`animint2` propose pour la visualisation interactive de données.
 <!-- comment -->
-The  clickSelects keyword specifies a geom for which clicking updates a  selection variable.
+Le mot-clé `clickSelects` précise quelle variable de séléction sera mise à jour quand on clique sur le geom correspondant.
 <!-- comment -->
-Each geom in a data visualization has its own data  set, and its own definition of the clickSelects keyword.
+Chaque geom d'une visualisation de données possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
 <!-- comment -->
-So clicking  on different geoms can change different selection variables.
+Ainsi, en cliquant sur différents geoms, on peut modifier différentes variables de sélection.
 
 <!-- paragraph -->
 
-After reading this chapter, you will be able to
+Après avoir lu ce chapitre, vous serez en mesure de
 
 <!-- paragraph -->
 
-- Understand how interactive legends implicitly use clickSelects.
+- Comprendre comment les légendes interactives utilisent implicitement les `clickSelects`.
 <!-- comment -->
-- Use the clickSelects keyword in your plot sketches.
+- Utiliser le mot-clé `clickSelects` dans vos esquisses de graphiques.
 <!-- comment -->
-- Translate your plot sketches with clickSelects into R code.
+- Traduire vos esquisses de graphiques avec `clickSelects` en code R.
 <!-- comment -->
-- Use the  `selector.types`  option to specify multiple selection  variables.
+- Utiliser l'option `selector.types` pour spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
-## Interactive legends implicitly use clickSelects {#implicit-clickSelects}
+## Les légendes interactives utilisent implicitement `clickSelects` {#implicit-clickSelects}
 
 <!-- paragraph -->
 
-In this section, we will explain how the clickSelects keyword is  implicitly used in interactive legends.
+Dans cette section, nous expliquerons comment le mot-clé `clickSelects` est implicitement utilisé dans les légendes interactives.
 <!-- comment -->
-If you have read the previous  chapters, you have already implicitly used clickSelects, which was  automatically created for the interactive legends in the previous  chapters.
+Si vous avez lu les chapitres précédents, vous avez déjà utilisé implicitement `clickSelects`, qui a été créé automatiquement pour les légendes interactives dans les chapitres précédents.
 <!-- comment -->
-For example, consider the sketch of the World Bank data viz  from the last chapter.
+Considérons l'esquisse de la visualisation de données de la Banque mondiale présentée au dernier chapitre.
 
 <!-- paragraph -->
 
-![legend clickSelects](Ch04-legend-clickSelects.png)
+![légende clickSelects](Ch04-legend-clickSelects.png)
 
 <!-- paragraph -->
 
-Since the legend has  `clickSelects=region` , clicking an entry of that  legend updates the  `region`  selection variable.
+Puisque la légende a `clickSelects=région` , cliquer sur une entrée de cette légende met à jour la variable de sélection `région`.
 <!-- comment -->
-Note that animint  automatically makes every discrete legend interactive, so you do not  need to explicitly specify  `clickSelects=region`  for the legend.
+Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=région`  pour la légende.
 <!-- comment -->
-In  fact, when we specified  `color=region`  for the  `geom_point` , animint2  does two things automatically:
+En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point` `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
-- `showSelected=region`  is assigned to the same  `geom_point` .
+- `showSelected=région` est aussi affecté au même `geom_point` .
 <!-- comment -->
-- `clickSelects=region`  is assigned to the color legend.
+- `clickSelects=région`  est attribué à la légende des couleurs.
 
 <!-- paragraph -->
 
-Note that  `clickSelects`  keywords are not limited to interactive  legends.
+Notez que les mots-clés `clickSelects`  ne sont pas limités aux légendes interactives.
 <!-- comment -->
-Each geom has its own  `clickSelects`  variable, which  determines which selection variable is updated after clicking that  geom.
+Chaque geom a sa propre définition de `clickSelects` qui détermine la variable de sélection qui doit être mise à jour lorsqu'on clique sur ce geom.
 <!-- comment -->
-In the next section we will give several examples of how  `clickSelects`  can be used in combination with  `showSelected`  to create  interactive data visualizations.
+Dans la section suivante, nous donnerons plusieurs exemples sur la manière dont `clickSelects` peut être utilisé en combinaison avec `showSelected` pour créer des visualisations de données interactives.
 
 <!-- paragraph -->
 
-## Use clickSelects to identify points on a scatterplot {#clickSelects-keyword}
+## Utiliser `clickSelects` pour identifier des points sur un nuage de points {#clickSelects-keyword}
 
 <!-- paragraph -->
 
-The goal of this section is to create the following visualization of  the World Bank data.
+L'objectif de cette section est de créer la visualisation suivante des données de la Banque mondiale.
 
 <!-- paragraph -->
 
-![World Bank viz text](Ch04-viz-text-single.png)
+![Texte de la visualisation de la Banque mondiale](Ch04-viz-text-single.png)
 
 <!-- paragraph -->
 
-To start, consider the following R code which generates a  scatterplot of the World Bank data:
+Pour commencer, considérons le code R suivant qui génère un nuage de points des données de la Banque mondiale :
 
 <!-- paragraph -->
 
-```{r Ch04-viz-ggplot-scatter}
+```{r Ch04-viz-ggplot-nuage}
 library(animint2)
-data(WorldBank)
-scatter <- ggplot()+
+data(BanqueMondiale, package="animint2fr")
+gg_nuage <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region,
-    key=country),
-    showSelected="year",
-    clickSelects="country",
-    data=WorldBank)
-scatter
+    x=espérance.de.vie, y=taux.de.fertilité, color=région,
+    key=pays),
+    showSelected="année",
+    clickSelects="pays",
+    data=BanqueMondiale)
+gg_nuage
 ```
 
 <!-- paragraph -->
 
-Note that the plot above is not interactive, because it is rendered  using the traditional R graphics device.
+Notez que le graphique ci-dessus n'est pas interactif, car il est affiché à l'aide du périphérique graphique R traditionnel.
 <!-- comment -->
-In contrast,  rendering the same ggplot using animint2 results in the following  interactive plot:
+En revanche, afficher le même ggplot en utilisant `animint2` donne le graphique interactif suivant :
 
 <!-- paragraph -->
 
-```{r Ch04-viz-scatter}
-(viz.scatter <- animint(
-  scatter=scatter,
-  duration=list(year=2000)))
+```{r Ch04-viz-nuage}
+(vis.nuage <- animint(
+  nuage=gg_nuage,
+  duration=list(année=2000)))
 ```
 
 <!-- paragraph -->
 
-Try clicking data points in the scatterplot above.
+Essayez de cliquer sur des points de données dans le nuage de points ci-dessus.
 <!-- comment -->
-You should see the  value of the  `country`  selection menu change after clicking a data  point.
+Vous devriez voir la valeur de la variable `pays`  changer après avoir cliqué sur un point de données.
 <!-- comment -->
-You should also see that the data point for the selected  country is darker than the others.
+Vous devriez également voir que le point de données pour le pays sélectionné est plus foncé que les autres.
 <!-- comment -->
-This serves to highlight the  current selection, and is performed automatically for each geom with  `clickSelects` .
+Cela permet de mettre en évidence la sélection en cours, cette surbrillance est générée automatiquement pour chaque geom avec `clickSelects` .
 <!-- comment -->
-By default the selected point has alpha=1 (fully  opaque, no transparency), and the other points have alpha=0.5  (semi-transparent).
+Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
-These defaults can be customized; for example in  the code below a black outline is used to highlight the current selection.
+Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection actuelle.
 
 <!-- paragraph -->
 
@@ -136,441 +141,442 @@ These defaults can be customized; for example in  the code below a black outline
 animint(
   ggplot()+
     geom_point(aes(
-      x=life.expectancy, y=fertility.rate, fill=region,
-      key=country),
+      x=espérance.de.vie, y=taux.de.fertilité, fill=région,
+      key=pays),
       shape=21,
       color="black",
       color_off=NA,
-      showSelected="year",
-      clickSelects="country",
-      data=WorldBank))
+      showSelected="année",
+      clickSelects="pays",
+      data=BanqueMondiale))
 ```
 
 <!-- paragraph -->
 
-The data visualization above shows the currently selected country name in  the selection menu, but it would be better to show it as a text label  on the scatterplot.
+La visualisation de données ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous forme d'une étiquette de texte sur le nuage de points.
 <!-- comment -->
-We can do that by adding a  `geom_text`  layer with  two showSelected variables:
+Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `showSelected` :
 
 <!-- paragraph -->
 
 ```{r Ch04-viz-text}
-viz.text <- viz.scatter
-viz.text$scatter <- scatter+
+vis.text <- vis.nuage
+vis.text$nuage <- gg_nuage+
   geom_text(aes(
-    x=life.expectancy, y=fertility.rate, label=country,
-    key=country),
-    showSelected=c("year", "country"),
-    data=WorldBank)
-viz.text
+    x=espérance.de.vie, y=taux.de.fertilité, label=pays,
+    key=pays),
+    showSelected=c("année", "pays"),
+    data=BanqueMondiale)
+vis.text
 ```
 
 <!-- paragraph -->
 
-After clicking a data point in the scatterplot above, you should see a  text label with the country name appear.
+Après avoir cliqué sur un point de données dans le nuage de points ci-dessus, vous devriez voir apparaître une étiquette de texte avec le nom du pays.
 <!-- comment -->
-Furthermore,  try  changing  the year using the selection menu.
+Essayez également de changer l'année à l'aide du menu de sélection.
 <!-- comment -->
-You should see the text label move  in a smooth transition along with the corresponding data  point.
+Vous devriez voir l'étiquette de texte se déplacer dans une transition fluide en même temps que le point de données correspondant.
 
 <!-- paragraph -->
 
-The data visualization above contains more than one geom, each with  different interactive features.
+La visualisation de données ci-dessus contient plus d'un geom, chacun avec des caractéristiques interactives différentes.
 <!-- comment -->
-Try  clicking the "Start Tour"  button at the bottom of the data visualization, which will show what  interactive features are available for the first geom in the data  visualization.
+Essayez de cliquer sur le bouton "Démarrer la visite" au bas de la visualisation de données, qui affichera les fonctions interactives disponibles pour le premier geom de la visualisation de données.
 <!-- comment -->
-Clicking Next will show information for the next geom,  and clicking Done or the grey background will end the Tour.
+En cliquant sur "Next", vous obtiendrez des informations sur le prochain geom, et en cliquant sur "Done" ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
 <!-- comment -->
-The "Start  Tour" feature can be useful for new users of your data visualization  to discover what interactive features are present in each geom.
+La fonction "Start Tour" peut être utile aux nouveaux utilisateurs de votre visualisation de données pour découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
-The  information displayed during the tour can be customized, by specifying  the  `help`  and  `title`  params of each geom.
+Les informations affichées pendant la visite peuvent être personnalisées, en définissant les paramètres `help` et `title` de chaque geom.
 
 <!-- paragraph -->
 
-As explained in the last chapter, any variable specified using the  `showSelected`  argument of a geom is treated as an interactive variable.
+Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifiée à l'aide du mot-clé `showSelected` d'un geom est traitée comme une variable interactive.
 <!-- comment -->
-In the  example above, we specified two  `showSelected`  variables for the  `geom_text` .
+Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text`.
 <!-- comment -->
-This means to only draw a text label for the rows of the  `WorldBank`  data set that match the current values of both selection  variables.
+Cela signifie que l'on ne dessine qu'une étiquette de texte pour les lignes de la base de données `BanqueMondiale` qui correspondent aux valeurs actuelles des deux variables de sélection.
 <!-- comment -->
-Since each combination of  `country`  and  `year`  has one row  in these data, only one text label will be shown at a time.
+Étant donné que chaque combinaison de `pays` et `année` a une ligne dans ces données, une seule étiquette de texte sera affichée à la fois.
 
 <!-- paragraph -->
 
-Try  clicking the legend entry that corresponds to the region for  the currently selected country (e.g. if Canada is selected, try  clicking the North America legend entry).
+Essayez de cliquer sur l'entrée de la légende qui correspond à la région du pays actuellement sélectionné (par exemple, si le Canada est sélectionné, essayez de cliquer sur l'entrée de la légende Amérique du Nord).
 <!-- comment -->
-You should see the point  disappear, but the text stay displayed.
+Vous devriez voir le point disparaître, mais le texte rester affiché.
 
 <!-- paragraph -->
 
-Exercise:  how can you get the text to disappear along with the  point?
+Exercice : comment faire disparaître le texte en même temps que le point ?
 <!-- comment -->
-Hint: you need to add a keyword to the  `geom_text` .
+Indice : il faut ajouter un mot-clé au `geom_text`.
 
 <!-- paragraph -->
 
-In the last chapter, we introduced the terms "direct manipulation" and  "indirect manipulation" to describe interactions with legends and  menus.
+Dans le dernier chapitre, nous avons introduit les termes "manipulation directe" et "manipulation indirecte" pour décrire les interactions avec les légendes et les menus.
 <!-- comment -->
-In the data viz above, we can change the value of the  `country`  selection variable by either clicking a data point (direct  manipulation) or using the selection menu (indirect  manipulation).
+Dans la visualisation de données ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
 <!-- comment -->
-Both techniques are useful, but for different  purposes:
+Les deux techniques sont utiles, mais à des fins différentes :
 
 <!-- paragraph -->
 
-- Direct manipulation by clicking data points is useful to find the  names of countries with extreme values of fertility rate and life  expectancy.
+- La manipulation directe, soit de cliquer sur les points de données, est utile pour trouver le nom des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
 <!-- comment -->
-For example, for the year 1960, clicking the point at  the bottom left of the plot reveals the country name Gabon.
+Par exemple, pour l'année 1960, en cliquant sur le point en bas à gauche du graphique, on découvre le nom du pays, le Gabon.
 <!-- comment -->
-- Indirect manipulation using menus is useful to see the plotted  position of a country of interest.
+- La manipulation indirecte à l'aide des menus est utile pour voir la position tracée d'un pays d'intérêt.
 <!-- comment -->
-For example, it would be  difficult to find France by clicking all the different points, but  it is simple to find France by typing its name in the selection  menu.
+Par exemple, il serait difficile de trouver la France en cliquant sur tous les différents points, mais il est simple de trouver la France en tapant son nom dans le menu de sélection.
 
 <!-- paragraph -->
 
-Note that when the data viz above is first rendered, the selected  country is Andorra and the selected year is 1960.
+Notez que lorsque la visualisation ci-dessus est affichée pour la première fois, le pays sélectionné est Andorre et l'année sélectionnée est 1960.
 <!-- comment -->
-Since the data for  Andorra is missing in 1960, there is no text label drawn at first.
+Comme les données pour Andorre sont manquantes en 1960, aucune étiquette de texte n'est affichée au départ.
 <!-- comment -->
-To  change the first selection, you can specify the  `first`  option, as  explained in the next section.
+Pour modifier la première sélection, vous pouvez spécifier l'option `first`  comme expliqué dans la section suivante.
 
 <!-- paragraph -->
 
-## The first option {#first-option}
+## L'option `first` {#first-option}
 
 <!-- paragraph -->
 
-To specify the selection that should be shown when the data viz is  first rendered, use the  `first`  option.
+Pour spécifier la sélection qui doit être affichée lorsque la visualisation de données est exécutée pour la première fois, utilisez l'option `first`.
 <!-- comment -->
-It should be a named list with  entries for each selection variable.
+Il doit s'agir d'une liste nommée avec des entrées pour chaque variable de sélection.
 <!-- comment -->
-For example, the code below  specifies 1970 as the first year, United States as the first country,  and North America and South Asia as the first regions.
+Par exemple, le code ci-dessous spécifie 1970 comme première année, le Canada comme premier pays, et l'Amérique du Nord et l'Asie du Sud comme premières régions.
 
 <!-- paragraph -->
 
 ```{r Ch04-viz-first}
-viz.first <- viz.text
-viz.first$first <- list(
-  year=1970,
-  country="United States",
-  region=c("North America", "South Asia"))
-viz.first
+vis.first <- vis.text
+vis.first$first <- list(
+  année=1970,
+  pays="Canada",
+  région=c("Amérique du Nord", "Asie du Sud"))
+vis.first
 ```
 
 <!-- paragraph -->
 
-Note that in the data viz above, there is only one country selected at  a time.
+Notez que dans la visualisation des données ci-dessus, il n'y a qu'un seul pays sélectionné à la fois.
 <!-- comment -->
-In the next section, we will explain how the  `selector.types`  option can be used to change  `country`  to a multiple selection  variable.
+Dans la section suivante, nous expliquerons comment l'option `selector.types` peut être utilisée pour modifier la variable de sélection `pays` en une variable de sélection multiple.
 
 <!-- paragraph -->
 
-## The selector.types option {#selector-types-option}
+## L'option `selector.types` {#selector-types-option}
 
 <!-- paragraph -->
 
-In this section our goal is to produce a slightly more complicated  version of the scatterplot in the last section.
+Dans cette section, notre objectif est de produire une version légèrement plus complexe du nuage de points de la section précédente.
 <!-- comment -->
-The sketch below has  only one difference with respect to the sketch from the last section:  text labels are shown for more than one country.
+L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esquisse de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
 
 <!-- paragraph -->
 
-![World Bank viz text](Ch04-viz-text.png)
+![Banque mondiale vis texte](Ch04-viz-text.png)
 
 <!-- paragraph -->
 
-In animint, each selection variable has a type, either single or  multiple.
+Dans `animint2`, chaque variable de sélection a un type, soit simple, soit multiple.
 <!-- comment -->
-Single selection means that only one value can be selected  at a time.
+La sélection unique signifie qu'une seule valeur peut être sélectionnée à la fois.
 <!-- comment -->
-Multiple selection means that any number of values can be  selected at a time.
+La sélection multiple signifie qu'un nombre quelconque de valeurs peut être sélectionné à la fois.
 <!-- comment -->
-In the plots in the last section, multiple  selection was used for the  `region`  variable but not for the  `year`  and  `country`  variables.
+Dans les graphiques de la section précédente, la sélection multiple a été utilisée pour la variable `région` mais pas pour les variables `année` et `pays`.
 <!-- comment -->
-Why is that?
+Comment cela se fait-il ?
 
 <!-- paragraph -->
 
-By default, animint assigns multiple selection to all variables that  appear in interactive discrete legends, and single selection to other  variables.
+Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection unique aux autres variables.
 <!-- comment -->
-However, single or multiple selection can be specified by  using the  `selector.types`  option.
+Cependant, une sélection unique (`"single"`) ou multiple (`"multiple"`) peut être précisée en utilisant l'option `selector.types`.
 <!-- comment -->
-In the R code below, we use the  `selector.types`  option to specify that  `country`  should be treated as  a multiple selection variable.
+Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécifier que la variable `pays` doit être traitée comme une variable de sélection multiple.
 
 <!-- paragraph -->
 
 ```{r Ch04-viz-multiple}
-viz.multiple <- viz.first
-viz.multiple$selector.types <- list(country="multiple")
-viz.multiple
+vis.multiple <- vis.first
+vis.multiple$selector.types <- list(pays="multiple")
+vis.multiple
 ```
 
 <!-- paragraph -->
 
-When the data viz above is first rendered, it shows data points from  the year 1970, for each country in North America and South Asia.
+Lorsque la visualisation de données ci-dessus est affichée pour la première fois, elle montre les points de données de l'année 1970 pour chaque pays d'Amérique du Nord et d'Asie du Sud.
 <!-- comment -->
-It  also shows a text label for the United States.
+Elle affiche également une étiquette de texte pour le Canada.
 
 <!-- paragraph -->
 
-You may have noticed that it is easy to add countries to the current  selection, by clicking data points.
+Vous avez peut-être remarqué qu'il est facile d'ajouter des pays à la sélection actuelle en cliquant sur des points de données.
 <!-- comment -->
-Normally, clicking a selected data  point will remove that country from the current selection.
+Normalement, le fait de cliquer sur un point de données sélectionné supprime ce pays de la sélection actuelle.
 <!-- comment -->
-However, in  this particular data viz, it is not so easy to remove them, since the  text labels are rendered on top of the data points.
+Toutefois, dans cette visualisation de données en particulier, il n'est pas si facile de les supprimer, car les étiquettes de texte sont affichées au-dessus des points de données.
 
 <!-- paragraph -->
 
-Exercise:  Re-make the data viz above so that clicking a text label  removes that country from the selection set.
+Exercice :  Recréez la visualisation des données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
 <!-- comment -->
-Hint: you need to add  a  `clickSelects`  keyword to the  `geom_text` .
+Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text`.
 
 <!-- paragraph -->
 
-Note that in the data viz above, the year variable can only be changed  via the selection menu.
+Notez que dans la visualisation de données ci-dessus, la variable année ne peut être modifiée que par le menu de sélection.
 
 <!-- paragraph -->
 
-In the next section, we will add a facet with a geom that can be  directly clicked to change the year variable.
+Dans la section suivante, nous ajouterons une facette avec un geom directement cliquable pour changer la variable `année`.
 
 <!-- paragraph -->
 
-## Selecting a year on a time series plot {#time-series-plot}
+## Sélection d'une année sur un graphique de série temporelle {#time-series-plot}
 
 <!-- paragraph -->
 
-The goal of this section is to add a time series plot that can be  clicked to change the selected year.
+L'objectif de cette section est d'ajouter un graphique de série temporelle sur lequel on peut cliquer pour changer l'année sélectionnée.
 
 <!-- paragraph -->
 
-![World Bank time series](Ch04-ggplot-time-series-plot.png)
+![Série temporelle de la Banque mondiale](Ch04-ggplot-time-series-plot.png)
 
 <!-- paragraph -->
 
-Note that the sketch above includes  `geom_tallrect` , a new geom  introduced in animint.
+Notez que l'esquisse ci-dessus comprend `geom_tallrect`, un nouveau geom introduit dans `animint2`.
 <!-- comment -->
-It is "tall" because it occupies the entire  vertical space of the plot, and thus only requires definition of its  horizontal limits via the  `xmin`  and  `xmax`  aesthetics.
+Il est qualifié de "grand" car il occupe tout l'espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
-Specifying  `clickSelects=year`  means that we want to be able to draw one tallrect  for each year, and click a tallrect to change the selected year.
+En spécifiant `clickSelects=année` nous indiquons que nous voulons tracer un `tallrect` pour chaque année, et que cliquer sur un `tallrect` changera l'année sélectionnée.
 <!-- comment -->
-Thus  we need to create a new data set called  `years`  with one row for each  unique year of the  `WorldBank`  data.
+Nous devons donc créer un nouvel ensemble de données appelé `années` avec une ligne pour chaque année des données `BanqueMondiale`.
 
 <!-- paragraph -->
 
 ```{r}
-years <- data.frame(year=unique(WorldBank$year))
-head(years)
+années <- data.frame(année=unique(BanqueMondiale$année))
+head(années)
 ```
 
 <!-- paragraph -->
 
-Next, we add the time series ggplot to the existing data viz.
+Ensuite, nous ajoutons la série temporelle à la visualisation existante.
 
 <!-- paragraph -->
 
 ```{r Ch04-viz-timeSeries}
-viz.timeSeries <- viz.multiple
-viz.timeSeries$timeSeries <- ggplot()+
+vis.timeSeries <- vis.multiple
+vis.timeSeries$timeSeries <- ggplot()+
   geom_tallrect(aes(
-    xmin=year-0.5, xmax=year+0.5),
-    clickSelects="year",
+    xmin=année-0.5, xmax=année+0.5),
+    clickSelects="année",
     alpha=0.5,
-    data=years)+
+    data=années)+
   geom_line(aes(
-    x=year, y=fertility.rate, group=country, color=region),
-    clickSelects="country",
+    x=année, y=taux.de.fertilité, group=pays, color=région),
+    clickSelects="pays",
     size=3,
     alpha=0.6,
-    data=WorldBank)
-viz.timeSeries
+    data=BanqueMondiale)
+vis.timeSeries
 ```
 
 <!-- paragraph -->
 
-Try  clicking the background of the time series in the data viz  above.
+Essayez de cliquer sur l'arrière-plan de la série temporelle dans la visualisation de données ci-dessus.
 <!-- comment -->
-You should see the data points and text labels move in a  smooth transition to their places at the newly selected year.
+Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition graduelle vers une position correspondant à l'année nouvellement sélectionnée.
 
 <!-- paragraph -->
 
-Animation exercise:  make the data viz animated by specifying the  `time`  option,  [as explained in Chapter 3](Ch03-showSelected.html#animation-time) .
+Exercice  : animez la visualisation de données en spécifiant l'option `time`, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time).
 
 <!-- paragraph -->
 
-Multi-layer exercise:  add a  `geom_text`  that shows the current  year on the scatterplot.
+Exercices avec multicouches : ajoutez un `geom_text` qui indique l'année en cours sur le nuage de points.
 <!-- comment -->
-Add a  `geom_path`  that shows data for the  previous 5 years.
+Ajoutez un `geom_path` qui présente les données des 5 dernières années.
+Ajoutez un `geom_label_aligned` pour les pays sélectionnés dans la série temporelle.
 
 <!-- paragraph -->
 
-## Selecting a year on a time series facet {#time-series-facet}
+## Sélection d'une année sur une facette de série temporelle {#time-series-facet}
 
 <!-- paragraph -->
 
-The goal of this section is to add a facet with a time series plot  that can be clicked to change the selected year.
+L'objectif de cette section est d'ajouter une facette avec un graphique de série temporelle sur lequel on peut cliquer pour changer l'année sélectionnée.
 
 <!-- paragraph -->
 
-![World Bank scatter facet](Ch04-ggplot-scatterFacet.png)
+![Facette de dispersion de la Banque mondiale](Ch04-ggplot-scatterFacet.png)
 
 <!-- paragraph -->
 
-First, we re-create the scatterplot from the previous section using the  [addColumn then facet idiom](Ch99-appendix.html#addColumn-then-facet) ,  which is useful for creating ggplots  with aligned axes.
+Tout d'abord, nous recréons le nuage de points de la section précédente à l'aide de la méthode [Ajouter une variable ensuite des facettes](Ch99-appendix.html#addColumn-then-facet) qui est utile pour créer des ggplots avec des axes alignés.
 
 <!-- paragraph -->
 
-```{r Ch04-viz-ggplot-scatterFacet}
+```{r Ch04-viz-ggplot-nuageFacet}
 add.x.var <- function(df, x.var){
-  data.frame(df, x.var=factor(x.var, c("life expectancy", "year")))
+  data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
-scatterFacet <- ggplot()+
+nuageFacet <- ggplot()+
   geom_point(aes(
-    x=life.expectancy, y=fertility.rate, color=region,
-    key=country),
-    showSelected="year",
-    clickSelects="country",
-    data=add.x.var(WorldBank, "life expectancy"))+
+    x=espérance.de.vie, y=taux.de.fertilité, color=région,
+    key=pays),
+    showSelected="année",
+    clickSelects="pays",
+    data=add.x.var(BanqueMondiale, "espérance de vie"))+
   geom_text(aes(
-    x=life.expectancy, y=fertility.rate, label=country,
-    key=country),
-    clickSelects="country",
-    showSelected=c("year", "country", "region"),
-    data=add.x.var(WorldBank, "life expectancy"))+
+    x=espérance.de.vie, y=taux.de.fertilité, label=pays,
+    key=pays),
+    clickSelects="pays",
+    showSelected=c("année", "pays", "région"),
+    data=add.x.var(BanqueMondiale, "espérance de vie"))+
   facet_grid(. ~ x.var, scales="free")+
   xlab("")+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))
-scatterFacet
+nuageFacet
 ```
 
 <!-- paragraph -->
 
-Note that the ggplot above uses the same  `aes`  definitions as the  scatterplot from the previous section.
+Notez que le ggplot ci-dessus utilise les mêmes définitions `aes` que le nuage de points de la section précédente.
 <!-- comment -->
-The only difference is that we  have used an augmented  `WorldBank`  data set with an additional  `x.var`  variable that we use with  `facet_grid` .
+La seule différence est que nous avons utilisé un jeu de données `BanqueMondiale` enrichi avec une variable `x.var` supplémentaire que nous utilisons avec `facet_grid`.
 <!-- comment -->
-Below, we add  geoms for a time series plot that is aligned on the fertility rate  axis.
+Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui est aligné sur l'axe du taux de fertilité.
 
 <!-- paragraph -->
 
-```{r Ch04-viz-ggplot-scatterTS}
-scatterTS <- scatterFacet+
+```{r Ch04-viz-ggplot-nuage-série-temporelle}
+nuage_série_temporelle <- nuageFacet+
   geom_tallrect(aes(
-    xmin=year-0.5, xmax=year+0.5),
-    clickSelects="year",
+    xmin=année-0.5, xmax=année+0.5),
+    clickSelects="année",
     alpha=0.5,
-    data=add.x.var(years, "year"))+
+    data=add.x.var(années, "année"))+
   geom_line(aes(
-    x=year, y=fertility.rate, group=country, color=region),
-    clickSelects="country",
+    x=année, y=taux.de.fertilité, group=pays, color=région),
+    clickSelects="pays",
     size=3,
     alpha=0.6,
-    data=add.x.var(WorldBank, "year"))
-scatterTS
+    data=add.x.var(BanqueMondiale, "année"))
+nuage_série_temporelle
 ```
 
 <!-- paragraph -->
 
-The two geoms defined above occupy a new facet for the  `"year"`  value of the  `x.var`  variable (defined by the  `add.x.var`  function).
+Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur d'`année` de la variable `x.var` (définie par la fonction `add.x.var`).
 <!-- comment -->
-Since these two geoms have different definitions of  `clickSelects` , clicking each geom will update the plot in a different  way.
+Puisque ces deux geoms ont des définitions différentes de `clickSelects`, un clic sur chaque geom mettra à jour le graphique d'une manière différente.
 <!-- comment -->
-Note that for the  `geom_line`  we specify  `size=3` , which means a  line stroke width of 3 pixels.
+Notez que pour le `geom_line` nous spécifions `size=3` ce qui signifie une largeur de trait de 3 pixels.
 <!-- comment -->
-In general it is a good idea to  increase the size of geoms with  `clickSelects` , to make them easier to  click.
+En général, il est judicieux d'augmenter la taille des geoms avec `clickSelects`, afin de les rendre plus faciles à cliquer.
 
 <!-- paragraph -->
 
-Also note that we specified  `alpha=0.5`  for the  `geom_tallrect`  and  `alpha=0.6`  for the  `geom_line` .
+Notez également que nous avons spécifié `alpha=0.5` pour le `geom_tallrect` et `alpha=0.6` pour le `geom_line`.
 <!-- comment -->
-Since both of these geoms define  `clickSelects` , some plotted lines and tallrect will be selected, and  others will not be selected.
+Puisque ces deux geoms définissent `clickSelects`, certaines lignes et rectangles seront sélectionnées, et d'autres ne le seront pas.
 <!-- comment -->
-The alpha values in R code specify the  opacity of the selected objects, and other objects will have an  `alpha`  opacity which is 0.5 less than that value.
+Les valeurs `alpha` précisent l'opacité des objets sélectionnés, et les autres objets auront une valeur d'opacité de 0,5 inférieure à cette valeur.
 <!-- comment -->
-In the example  above, the un-selected lines will have  `alpha=0.1` , and the  un-selected tallrects will have  `alpha=0`  (completely transparent).
+Dans l'exemple ci-dessus, les lignes non sélectionnées auront `alpha=0.1` et les `tallrects` non sélectionnés auront `alpha=0`  (complètement transparent).
 
 <!-- paragraph -->
 
-As of September 2023, it is also possible to specify the opacity,  fill, and color for objects which are not currently selected  ( `alpha_off` ,  `fill_off` ,  `color_off` ).
+Depuis septembre 2023, il est également possible de spécifier l'opacité, le remplissage et la couleur des objets qui ne sont pas actuellement sélectionnés (`alpha_off`, `fill_off`, `color_off`).
 <!-- comment -->
-Users can specify these  parameters in the geom (not aes) to freely create a different  appearance for selected and un-selected items, instead of being forced  to rely on the behavior described above.
+Les utilisateurs peuvent spécifier ces paramètres dans le geom (pas dans le `aes`) afin de créer librement une apparence différente pour les éléments sélectionnés et non sélectionnés, au lieu d'être contraints de dépendre du comportement décrit ci-dessus.
 <!-- comment -->
-For more information, see the  discussion and example in  [Chapter 6, section Specifying how selectionstate is displayed](Ch06-other.html#display-selection-state) .
+Pour plus d'informations, voir la discussion et l'exemple dans [chapitre 6, section Préciser le mode d'affichage de l'état de la sélection](Ch06-other.html#display-selection-state) .
 
 <!-- paragraph -->
 
-Finally, we use the R code below to render the new aligned scatterplot  and time series using animint.
+Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle.
 
 <!-- paragraph -->
 
 ```{r Ch04-viz-facets}
-(viz.facets <- animint(scatterTS))
+(vis.facets <- animint(nuage_série_temporelle))
 ```
 
 <!-- paragraph -->
 
-The interactive data viz above contains a new panel with lines that  show a fertility rate time series over all years.
+La visualisation de données interactives ci-dessus contient un nouveau panneau avec des lignes qui montrent une série temporelle de taux de fertilité sur toutes les années.
 <!-- comment -->
-Since we specified  `clickSelects=country`  for the  `geom_line` , clicking a line updates  the set of selected countries.
+Puisque nous avons précisé `clickSelects=pays`  pour le `geom_line`, un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
 <!-- comment -->
-Since we specified  `clickSelects=year`  for the  `geom_tallrect` , clicking on a tallrect updates the selected  year.
+Puisque nous avons spécifié `clickSelects=année` pour le `geom_tallrect`, un clic sur un `tallrect` met à jour l'année sélectionnée.
 
 <!-- paragraph -->
 
-Exercise:  add  `time` ,  `duration` ,  `first` , and  `selector.types`  options to the data viz above.
+Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` à la visualisation de données ci-dessus.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch04-exercises}
+## Résumé du chapitre et exercices {#Ch04-exercises}
 
 <!-- paragraph -->
 
-This chapter explained  `clickSelects` , one of the two main keywords  that animint introduces for interactive data visualization design.
+Dans ce chapitre, nous avons vu l'utilisation de `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
 <!-- comment -->
-We  used the World Bank data set to show how  `clickSelects`  can be used to  specify different interactions for each of the plotted geoms.
+Nous avons utilisé l'ensemble de données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour définir différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
-We  explained how the  `first`  option can be used to specify the selected  values that are used when the animint is first rendered.
+Nous avons expliqué comment l'option `first` peut être utilisée pour préciser les valeurs à utiliser lorsque le `animint2` est affiché pour la première fois.
 <!-- comment -->
-We also  explained how the  `selector.types`  option can be used to specify  multiple selection variables.
+Nous avons également expliqué comment l'option `selector.types` peut être utilisée pour préciser le type de sélection (unique ou multiple).
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- So far we have seen three different ways to change selection  variables: (1) interactive legends, (2) selection menus, and (3)  clicking data with  `clickSelects` .
+- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) utiliser des légendes interactives, (2) utiliser des menus de sélection et (3) cliquer sur les données à l'aide de `clickSelects`.
 <!-- comment -->
-Order these three techniques in  terms from most to least direct manipulation.
+Classez ces trois techniques de manipulation, de la plus directe, à la moins directe.
 <!-- comment -->
-Which technique is  preferable in what circumstances?
+Quelle technique privilégier et selon quelles circonstances ?
 <!-- comment -->
-- When  `geom_point(clickSelects=something, alpha=0.75)`  is rendered  with the usual R graphics device, how much opacity/transparency is  present for all data points?
+- Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
 <!-- comment -->
-When animint2 renders the same geom,  some points will be selected and others not.
+Lorsque `animint2` affiche le même geom, certains points seront sélectionnés et d'autres non.
 <!-- comment -->
-What is the  opacity/transparency of selected points?
+Quelle est l'opacité/transparence des points sélectionnés ?
 <!-- comment -->
-What is the  opacity/transparency of points which are not selected?
+Quelle est l'opacité/transparence des points non sélectionnés ?
 <!-- comment -->
-- Add  `aes(size=population)`  to the points in the World Bank  scatterplot.
+- Ajouter `aes(size=population)`  aux points du nuage de points de la Banque mondiale.
 <!-- comment -->
-Is the size legend interactive?
+La légende de la taille est-elle interactive ?
 <!-- comment -->
-Why?
+Pourquoi ?
 <!-- comment -->
-- Add a  `geom_text`  to the World Bank scatterplot that shows the  selected year.
+- Ajoutez un `geom_text`  au nuage de points de la Banque mondiale qui montre l'année sélectionnée.
 <!-- comment -->
-- Add a  `geom_text`  to the World Bank time series to show the names of  the selected countries.
+- Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher le nom des pays sélectionnés.
 <!-- comment -->
-- Add a  `geom_path`  to the World Bank scatterplot to show data for the  last 5 years.
+- Ajoutez un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
 <!-- comment -->
-- Use the  `time`  option to make an animated version of  `viz.facets` .
+- Utilisez l'option `time` pour créer une version animée de `vis.facets`.
 <!-- comment -->
-- Use  `help`  and  `title`  params for each geom in  `viz.facets` , to make  a Tour which is more informative about what is displayed in each  geom.
+- Utilisez `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer un tour guidé qui fournit plus d'informations sur ce qui est affiché dans chaque geom.
 
 <!-- paragraph -->
 
-Next,  [Chapter 5](Ch05-sharing.html)  explains several different  methods for publishing and sharing animints on the web.
+Dans le [Chapitre 5](Ch05-sharing.html) nous expliquons les différentes méthodes pour publier et partager des animints sur le web.
 
 <!-- paragraph -->
 

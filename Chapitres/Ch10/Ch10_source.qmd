@@ -6,10 +6,6 @@ output: bookdown::html_chapter
 
 <!-- paragraph -->
 
-# Chapter 10, K-Nearest-Neighbors example
-
-<!-- paragraph -->
-
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch10-figures/")
 ```
@@ -90,7 +86,7 @@ We begin by loading the data set.
 
 ```{r}
 if(!file.exists("ESL.mixture.rda")){
-  download.file(
+  curl::curl_download(
     "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/ESL.mixture.rda",
     "ESL.mixture.rda")
 }
