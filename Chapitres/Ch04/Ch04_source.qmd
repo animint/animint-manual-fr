@@ -182,13 +182,14 @@ Vous devriez voir l'étiquette de texte se déplacer dans une transition fluide 
 
 La visualisation de données ci-dessus contient plus d'un geom, chacun avec des caractéristiques interactives différentes.
 <!-- comment -->
-Essayez de cliquer sur le bouton "Démarrer la visite" au bas de la visualisation de données, qui affichera les fonctions interactives disponibles pour le premier geom de la visualisation de données.
+Essayez de cliquer sur le bouton « Start Tour » au bas de la visualisation, qui signifie « démarrer la visite guidée ».
+Il affichera une fenêtre qui explique les fonctions interactives disponibles pour le premier geom.
 <!-- comment -->
-En cliquant sur "Next", vous obtiendrez des informations sur le prochain geom, et en cliquant sur "Done" ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
+En cliquant sur « Next », vous obtiendrez des informations sur le prochain geom, et en cliquant sur « Done » ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
 <!-- comment -->
-La fonction "Start Tour" peut être utile aux nouveaux utilisateurs de votre visualisation de données pour découvrir les fonctions interactives présentes dans chaque geom.
+La visite guidée peut être utile aux nouveaux utilisateurs, pour découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
-Les informations affichées pendant la visite peuvent être personnalisées, en définissant les paramètres `help` et `title` de chaque geom.
+Les informations affichées pendant la visite peuvent être personnalisées, en définissant les paramètres `help` et `title` de chaque geom ([voir chapitre 6 pour un exemple](/ch06/ch06-viz#custom-guided-tour)).
 
 <!-- paragraph -->
 
