@@ -801,7 +801,7 @@ Notez ci-dessus comment il y a un lien source au bas de la visualisation des don
 
 <!-- paragraph -->
 
-Le chapitre 5 a introduit le [animint2pages](Ch05-sharing.html#pages) qui permet de publier un animint sur les pages GitHub.
+Le chapitre 5 a introduit la fonction [animint2pages](Ch05-sharing.html#pages) qui permet de publier un `animint2` sur GitHub Pages.
 <!-- comment -->
 Il faut que l'`animint2` définisse l'option `source` car ces méta-données sont nécessaires à l'organisation de l'`animint2` dans une [galerie](Ch05-sharing.html#gallery) .
 
