@@ -67,9 +67,9 @@ not.na[is.na(not.na$population)]
 
 <!-- paragraph -->
 
-Le tableau ci-dessus montre qu'il y a trois lignes avec des valeurs manquantes pour la variable population.
+Le tableau ci-dessus montre que trois lignes ont des valeurs manquantes pour la variable population.
 <!-- comment -->
-Elles concernent le pays Koweït pour la période 1992-1994.
+concernant le Koweït entre 1992 et 1994.
 <!-- comment -->
 Le tableau ci-dessous présente les données des années voisines, de 1991 à 1995.
 
@@ -157,7 +157,7 @@ ts.right
 
 <!-- paragraph -->
 
-Notez que nous avons spécifié `clickSelects=année` pour que le fait de cliquer sur un tallrect modifie l'année sélectionnée, et `clickSelects=pays` pour que le fait de cliquer sur une ligne permette de sélectionner ou de désélectionner un pays.
+Remarquez que nous avons spécifié `clickSelects=année` pour qu'un clic sur un tallrect modifie l'année sélectionnée, et `clickSelects=pays` pour que le fait de cliquer sur une ligne sélectionne ou désélectionne un pays.
 <!-- comment -->
 Notez également que nous avons utilisé `TS.RIGHT` pour identifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
 
@@ -185,9 +185,9 @@ ts.facet
 
 Nous définissons `panel.margin` à 0, ce qui est toujours une bonne idée pour [économiser de l'espace dans un ggplot avec des facettes](Ch99-appendix.html#space-saving-facets).
 <!-- comment -->
-Nous utilisons `scales="free"` et masquons les étiquettes des axes, dans un exemple de [l'idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet) .
+Dans un des exemples tiré de, dans un exemple de [l'idiome addColumn then facet](Ch99-appendix.html#addColumn-then-facet),  nous utilisons `scales="free"` et nous masquons les étiquettes des axes  .
 <!-- comment -->
-À la place, nous utilisons le libellé de la facette pour indiquer la variable encodée sur chaque axe.
+Pour les remplacer, nous utilisons le libellé de la facette pour indiquer la variable encodée sur chaque axe.
 <!-- comment -->
 Ci-dessous, nous ajoutons une facette de nuage de points avec un point pour chaque année et chaque pays.
 
@@ -281,23 +281,23 @@ Exercices :
 
 <!-- paragraph -->
 
-- Ajoutez un point sur chaque graphique de série temporelle, dont la taille est proportionnelle à la population, comme dans le nuage de points.
+- Sur chaque graphique de série temporelle, ajoutez un point dont la taille est proportionnelle à la population, comme dans le nuage de points.
 <!-- comment -->
 Les points ne doivent apparaître que lorsque le pays est sélectionné, et un clic sur les points doit désélectionner ce pays.
 <!-- comment -->
 - Ajoutez des étiquettes de texte au graphique de la série temporelle situé à droite, avec les noms de chaque pays.
 <!-- comment -->
-Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
+Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître lorsqu'on clique sur l'étiquette.
 <!-- comment -->
 - Ajoutez une étiquette de texte au nuage de points pour indiquer l'année sélectionnée.
 <!-- comment -->
 - Ajoutez des étiquettes de texte au nuage de points, avec des noms pour chaque pays.
 <!-- comment -->
-Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître après avoir cliqué sur l'étiquette.
+Chaque étiquette ne doit apparaître que lorsque le pays est sélectionné, et doit disparaître lorsqu'on clique sur l'étiquette.
 
 <!-- paragraph -->
 
-Ensuite, le [chapitre 9](Ch09-Montreal-bikes.html) explique comment visualiser les données sur les vélos à Montréal.
+Le [chapitre 9](Ch09-Montreal-bikes.html) présente comment visualiser les données sur les vélos à Montréal.
 
 <!-- paragraph -->
 
