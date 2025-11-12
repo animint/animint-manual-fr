@@ -49,9 +49,17 @@ Considérons, par exemple, [la courbe de Keeling du chapitre 1 présentée ci-de
 
 <!-- comment -->
 
-L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les mois sélectionnés.
+L'esquisse ci-dessus se traduit en le code R suivant.
+
+```r
+ggplot(co2, aes(date, ppm))+
+  geom_point(aes(color=mois), showSelected="mois")+
+  geom_line()
+```
+
+Le code ci-dessus comprend `showSelected="mois"` pour le `geom_point()` ce qui signifie que le graphique affiche le sous-ensemble de données pour les mois sélectionnés.
 <!-- comment -->
-En revanche, puisque `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
+En revanche, puisque `geom_line()` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
 
 <!-- comment -->
 
@@ -61,7 +69,17 @@ Prenons un autre exemple : l'esquisse ci-dessous de la première visualisation d
 
 ![Esquisse Banque mondiale avec showSelected région](Ch03-viz-showSelectedColor.png)
 
-L'esquisse ci-dessus spécifie `showSelected=région` pour le `geom_point`, ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les régions sélectionnées.
+L'esquisse ci-dessus se traduit en le code R suivant.
+
+```r
+ggplot()+
+  geom_point(aes(
+    espérance.de.vie, taux.de.fertilité, color=région),
+    data=banque_mondiale_1975,
+    showSelected="région")
+```
+
+Le code R contient `showSelected="région"` pour le `geom_point()`, ce qui signifie que le graphique affiche le sous-ensemble de données pour les régions sélectionnées.
 
 <!-- comment -->
 
