@@ -197,7 +197,7 @@ gg.models+
     size=1,
     fill=NA)+
   scale_linetype_manual(
-    "error type",
+    "type d'erreur",
     values=c(
       correct=0,
       "false negative"=3,
@@ -286,7 +286,7 @@ interactive.models <- gg.one+
     color="black",
     fill=NA)+
   scale_linetype_manual(
-    "error type",
+    "type d'erreur",
     values=c(
       correct=0,
       "false negative"=3,
@@ -305,9 +305,9 @@ Ci-dessous, nous combinons les deux ggplots interactifs en un seul animint lié 
 ```{r interactiveOne}
 animint(
   models=interactive.models+
-    ggtitle("Selected model"),
+    ggtitle("Modèle sélectionné"),
   selection=interactive.selection+
-    ggtitle("Click to select number of segments"))
+    ggtitle("Cliquer pour choisir le nombre de segments"))
 ```
 
 <!-- paragraph -->
@@ -343,8 +343,8 @@ gg.intervals <- ggplot()+
     vjust=1,
     data=intreg$intervals)+
   scale_color_identity()+
-  ylab("output log(lambda)")+
-  xlab("input feature x")
+  ylab("sortie de log(lambda)")+
+  xlab("variable d’entrée x")
 gg.intervals
 ```
 
