@@ -383,7 +383,7 @@ Le graphique ci-dessus montre la fonction de régression linéaire de la marge m
 <!-- comment -->
 Il est clair qu'elle coupe chacun des intervalles cibles noirs et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
-Pour plus d'arguments sur le thème de la détection supervisée des points de changement, voir [mon tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
+Pour plus d'informations sur le thème de la détection supervisée des points de rupture, voir [mon tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
 
 <!-- paragraph -->
 
