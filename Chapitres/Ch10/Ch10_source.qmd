@@ -517,13 +517,13 @@ Notez les changements suivants :
 
 <!-- paragraph -->
 
-- ajoutez un sélecteur pour le nombre de voisins ( `geom_tallrect` ).
+- ajout d'un sélecteur pour le nombre de voisins (`geom_tallrect`).
 <!-- comment -->
-- changez la limite de décision de Bayes de `geom_hline` avec une entrée de légende, à un `geom_segment` avec une étiquette de texte.
+- changement de la limite de décision de Bayes de `geom_hline` avec une entrée de légende, vers un `geom_segment` avec une étiquette de texte.
 <!-- comment -->
-- ajoutez une légende de type de ligne pour distinguer les taux d'erreur des modèles de Bayes et de KNN.
+- ajout d'une légende de type de ligne pour distinguer les taux d'erreur des modèles de Bayes et de KNN.
 <!-- comment -->
-- changez les barres d'erreur ( `geom_linerange` ) en bandes d'erreur ( `geom_ribbon` ).
+- changement des barres d'erreur ( `geom_linerange` ) en bandes d'erreur (`geom_ribbon`).
 
 <!-- paragraph -->
 
@@ -985,7 +985,7 @@ Assurez-vous que la taille tracée des ensembles de validation et d'entraînemen
 <!-- comment -->
 - Jusqu'à présent, les graphiques de l'espace des fonctionnalités ne montraient que les prédictions et les erreurs du modèle pour l'ensemble des données d'entrainement (`validation.fold==0`).
 <!-- comment -->
-Créer une nouvelle conception qui inclut un nouveau graphique ou une nouvelle facette pour sélectionner validation.fold, et un graphique de l'espace des caractéristiques à facettes (une facette pour l'ensemble de données de formation, une facette pour l'ensemble de données de validation).
+Créez une refonte qui inclut un nouveau graphique ou une nouvelle facette pour sélectionner `validation.fold`, et un graphique de l'espace des fonctionnalités avec facettes (une facette pour l'ensemble de données d'entrainement, une facette pour l'ensemble de données de validation).
 
 <!-- paragraph -->
 
