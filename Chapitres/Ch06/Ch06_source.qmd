@@ -400,7 +400,7 @@ Cliquez sur le bouton "Afficher le tableau de l'état des téléchargements", et
 <!-- comment -->
 Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
 <!-- comment -->
-Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l'apparence de la vvisualisation de données devrait être la même.
+Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l'apparence de la visualisation de données devrait être la même.
 
 <!-- paragraph -->
 
