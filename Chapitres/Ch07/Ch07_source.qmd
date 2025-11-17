@@ -1,16 +1,4 @@
----
-title: Limitations
-layout: default
-output: bookdown::html_chapter
----
-
-
-Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
-[Ch07-limitations](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch07-limitations.Rmd)
-
-<!-- paragraph -->
-
-# Chapitre 7, Limites d'`animint2` et solutions de contournement
+# Limitations
 
 <!-- paragraph -->
 
