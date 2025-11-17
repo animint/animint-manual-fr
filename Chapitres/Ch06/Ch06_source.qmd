@@ -1,15 +1,4 @@
----
-title: Animint options
-layout: default
-output: bookdown::html_chapter
----
-
-Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
-[Ch06-other](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch06-other.Rmd)
-
-<!-- paragraph -->
-
-# Chapitre 6, Options Animint
+# Nouveautés
 
 <!-- paragraph -->
 
@@ -20,7 +9,7 @@ knitr::opts_chunk$set(fig.path="Ch06-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'`animint2` introduit dans la grammaire des graphiques.
+Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'`animint2` introduit dans la grammaire des graphiques (qui n'existe pas dans `ggplot2`).
 <!-- comment -->
 Après avoir lu ce chapitre, vous comprendrez comment personnaliser vos graphiques `animint2` via
 
@@ -64,15 +53,23 @@ Nous allons commencer par discuter des nouveaux `aes()` que nous avons déjà in
 
 ### Hyperliens utilisant `aes(href)` {#aes-href}
 
-<!-- paragraph -->
+On peut rajouter un hyperlien avec `aes(href)`.
+Par exemple, si nous avons une carte des États-Unis, on peut rajouter un lien vers le page Wikipédia de chaque état.
+On commence par charger les données pour tracer les frontières des états.
 
-Le code ci-dessous utilise `animint()` pour tracer une carte des États-Unis.
+```{r}
+library(animint2)
+if(!requireNamespace('maps'))install.packages('maps')
+USpolygons <- map_data("state")
+```
+
+Notez dans le code ci-dessus qu'il faut installer le package `maps` pour obtenir ces données.
+Ensuite, on utilise le code ci-dessous pour tracer la carte.
+On utilise `geom_polygon()` avec `aes(href)` qui donnera des hyperliens vers le page Wikipédia pour chaque état.
 
 <!-- paragraph -->
 
 ```{r Ch06-viz-href}
-library(animint2)
-USpolygons <- map_data("state")
 animint(
   map=ggplot()+
     ggtitle("cliquez sur un state pour lire sa page Wikipedia")+
@@ -87,7 +84,7 @@ animint(
 
 Essayez de cliquer sur un état dans la visualisation de données ci-dessus.
 <!-- comment -->
-Vous devriez voir la page wikipedia correspondante s'ouvrir dans un nouvel onglet.
+Vous devriez voir la page Wikipédia correspondante s'ouvrir dans un nouvel onglet.
 
 <!-- paragraph -->
 
@@ -396,7 +393,7 @@ Nous présentons ci-dessous une version interactive dans laquelle un seul de ces
 
 <!-- paragraph -->
 
-Cliquez sur le bouton "Afficher le tableau de l'état des téléchargements", et vous devriez voir des décomptes de chunks (fichiers TSV).
+Cliquez sur le bouton « Show download status table » , et vous devriez voir des décomptes de chunks (fichiers TSV).
 <!-- comment -->
 Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
 <!-- comment -->
@@ -844,7 +841,7 @@ L'idée est que vous pouvez enregistrer une vidéo pour chacun de vos animints, 
 
 L'option `selectize` doit être une liste nommée de valeurs booléennes.
 <!-- comment -->
-Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/) .
+Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/).
 <!-- comment -->
 Par défaut, `animint2` va générer un menu de sélection pour chaque variable de sélection, à deux exceptions près :
 
