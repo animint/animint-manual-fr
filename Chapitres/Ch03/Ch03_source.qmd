@@ -352,7 +352,7 @@ Pour contrôler l'animation, vous pouvez cliquer sur « Show animation controls 
 * Cliquez sur « Pause » pour arrêter l'animation.
 * Cliquez sur « Play » pour la rédemarrer.
 * Pour contrôler le temps entre les mises à jour de la variable d'animation, saisissez un nombre (en millisecondes) dans le champ « updates » et appuyez sur la touche d'entrée.
-* Quand vous faites des mises à jour, il faut que le temps entre les mises à jour d'animation « updates » soit plus grand que les autres délais, pour que les transitions fluides se terminent avant la prochaine mise à jour d'animation.
+* Quand vous changez les délais pour l'animation et les transitions fluides, il faut que le délai d'animation « updates » soit plus grand que les autres délais, pour que les transitions fluides se terminent avant la prochaine mise à jour d'animation.
 
 <!-- comment -->
 
