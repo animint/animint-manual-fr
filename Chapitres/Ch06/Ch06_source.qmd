@@ -385,7 +385,7 @@ Nous présentons ci-dessous une version interactive dans laquelle un seul de ces
 
 <!-- paragraph -->
 
-Cliquez sur le bouton "Afficher le tableau de l'état des téléchargements", et vous devriez voir des décomptes de chunks (fichiers TSV).
+Cliquez sur le bouton « Show download status table » , et vous devriez voir des décomptes de chunks (fichiers TSV).
 <!-- comment -->
 Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
 <!-- comment -->
