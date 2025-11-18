@@ -145,7 +145,7 @@ ConvertRmd_comments <- function(
   library(magick)
   
   # Define paths
-  output_path <- file.path(dest_filepath, paste0(chx, "_source", ifelse(TestFile, "_Test", ""), ".qmd"))
+  output_path <- file.path(dest_filepath, paste0(ifelse(chx=="Ch01","",chx), "_source", ifelse(TestFile, "_Test", ""), ".qmd"))
   temp_file <- tempfile(pattern = paste0(chx, "_source_Temp"), fileext = ".qmd")
   
   # Clean up old temp files
@@ -167,7 +167,7 @@ ConvertRmd_comments <- function(
     chx_lower <- paste0(tolower(substr(chx, 1, 1)), substr(chx, 2, nchar(chx)))
     
     download.file(
-      url = file.path(source_filepath, chx_lower, paste0(file_name, file_extension)),
+      url = file.path(source_filepath, ifelse(chx=="Ch01","", chx_lower), paste0(file_name, file_extension)),
       destfile = temp_file,
       mode = "wb"
     )
@@ -178,7 +178,7 @@ ConvertRmd_comments <- function(
     #  png_files <- list.files("animint-book", pattern = paste0("^", chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
     
     png_files <- list.files(
-      file.path("animint-manual-en","chapters", chx_lower),
+      file.path("animint-manual-en", "chapters",ifelse(chx=="Ch01","", chx_lower)),
       pattern = paste0("^",chx_lower,".*\\.png$"),
       recursive = TRUE,
       full.names = TRUE
@@ -757,14 +757,14 @@ ConvertRmd_comments(file_name = "index",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres"),
                     TestFile = FALSE,
-                    chx = ""
+                    chx = "Ch01"
 )
 
 Translate_FR_EN(file_name = "index",
                 file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres"),
-                chx = "Ch00&01"
+                chx = "Ch01"
 )
 
 
