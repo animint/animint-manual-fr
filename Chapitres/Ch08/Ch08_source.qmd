@@ -265,6 +265,7 @@ viz.scatter.both <- animint(
   time=list(variable="année", ms=3000),
   first=list(année=1975, pays=c("United States", "Vietnam")),
   selector.types=list(pays="multiple"))
+viz.scatter.both
 ```
 
 <!-- paragraph -->
