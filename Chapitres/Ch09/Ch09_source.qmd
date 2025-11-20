@@ -57,7 +57,6 @@ Pour commencer, nous affichons le tableau de données des compteurs de vélos.
 ```{r counterRange}
 mois_str <- function(POSIXct)strftime(POSIXct, "%Y-%m")
 library(data.table)
-data(montreal.bikes, package="animint2")#works if installed from github
 (passages_dt <- data.table(montreal.bikes$counter.counts)[, .(
   lieu = location,
   date,
@@ -73,7 +72,6 @@ Le comptage de vélos présente des données de séries temporelles que nous vis
 
 ```{r counterviz}
 passages_dt[, lieu.lines := gsub("[- _]", "\n", lieu)]
-library(animint2)
 ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
