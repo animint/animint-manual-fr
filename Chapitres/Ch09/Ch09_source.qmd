@@ -24,7 +24,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Graphiques statiques {#static}
+## Graphiques statiques {#bike-static}
 
 <!-- paragraph -->
 
@@ -765,7 +765,7 @@ La sortie ci-dessus contient 4 graphiques :
 <!-- comment -->
 * En bas à droite : lieux des compteurs sur le plan de Montréal.
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#ch09-exercises}
 
 Nous avons vu plusieurs graphiques pour visualiser les séries temporelles en rapport avec les vélos de Montréal.
 
