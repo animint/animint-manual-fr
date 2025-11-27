@@ -59,6 +59,8 @@ book:
       - Ch15/Ch15-viz.qmd
       - Ch16/Ch16-viz.qmd
       - Ch17/Ch17-viz.qmd
+      - Ch18/Ch18-viz.qmd
+      - Ch19/Ch19-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
 
