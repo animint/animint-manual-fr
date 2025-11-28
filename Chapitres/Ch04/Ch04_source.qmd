@@ -1,17 +1,8 @@
----
-title: Le mot-clé `clickSelects`
-layout: default
-output: bookdown::html_chapter
----
-
-Traduction de l'[anglais](https://github.com/tdhock/animint-book/)
-[Ch04-clickSelects](https://raw.githubusercontent.com/tdhock/animint-book/master/Ch04-clickSelects.Rmd)
-
-<!-- paragraph -->
+# Le mot-clé `clickSelects`
 
 ```{r}
 #| echo: false
-knitr::opts_chunk$set(fig.path="Ch04-figures/")
+knitr::opts_chunk$set(fig.path="ch04-figures/")
 ```
 
 <!-- paragraph -->
@@ -52,7 +43,7 @@ Considérons l'esquisse de la visualisation de données de la Banque mondiale pr
 
 <!-- paragraph -->
 
-![légende clickSelects](Ch04-legend-clickSelects.png)
+![Esquisse avec clickSelects sur légende](ch04-legend-clickSelects.png)
 
 <!-- paragraph -->
 
@@ -86,13 +77,13 @@ L'objectif de cette section est de créer la visualisation suivante des données
 
 <!-- paragraph -->
 
-![Texte de la visualisation de la Banque mondiale](Ch04-viz-text-single.png)
+![Esquisse avec texte pour un pays](ch04-viz-text-single.png)
 
 <!-- paragraph -->
 
 Pour commencer, considérons le code R suivant qui génère un nuage de points des données de la Banque mondiale.
 
-```{r Ch04-viz-ggplot-nuage}
+```{r ch04-viz-ggplot-nuage}
 library(animint2)
 data(BanqueMondiale, package="animint2fr")
 (gg_nuage <- ggplot()+
@@ -115,7 +106,7 @@ En revanche, afficher le même ggplot en utilisant `animint2` donne un graphique
 * Nous avons vu dans [le chapitre 3](/ch03/ch03-viz#duration-key) qu'il est important d'utiliser `aes(key)` pour chaque geom avec transition fluide.
 * Nous avons donc utilisé `aes(key=pays)` pour indiquer que la variable `pays` sera utilisée pour les transitions fluides entre les années.
 
-```{r Ch04-viz-nuage}
+```{r ch04-viz-nuage}
 (vis.nuage <- animint(
   nuage=gg_nuage,
   duration=list(année=2000)))
@@ -142,7 +133,7 @@ Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le cod
 
 <!-- paragraph -->
 
-```{r Ch04-viz-color-off}
+```{r ch04-viz-color-off}
 animint(
   ggplot()+
     geom_point(aes(
@@ -163,7 +154,7 @@ Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `s
 
 <!-- paragraph -->
 
-```{r Ch04-viz-text}
+```{r ch04-viz-text}
 vis.text <- vis.nuage
 vis.text$nuage <- gg_nuage+
   geom_text(aes(
@@ -257,7 +248,7 @@ Par exemple, le code ci-dessous spécifie 1970 comme première année, le Canada
 
 <!-- paragraph -->
 
-```{r Ch04-viz-first}
+```{r ch04-viz-first}
 vis.first <- vis.text
 vis.first$first <- list(
   année=1970,
@@ -284,7 +275,7 @@ L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-![Banque mondiale vis texte](Ch04-viz-text.png)
+![Esquisse avec texte pour plusieurs pays](ch04-viz-text.png)
 
 <!-- paragraph -->
 
@@ -308,7 +299,7 @@ Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécif
 
 <!-- paragraph -->
 
-```{r Ch04-viz-multiple}
+```{r ch04-viz-multiple}
 vis.multiple <- vis.first
 vis.multiple$selector.types <- list(pays="multiple")
 vis.multiple
@@ -352,7 +343,7 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-![Série temporelle de la Banque mondiale](Ch04-ggplot-time-series-plot.png)
+![Esquisse avec série temporelle](ch04-ggplot-time-series-plot.png)
 
 <!-- paragraph -->
 
@@ -377,7 +368,7 @@ Ensuite, nous ajoutons la série temporelle à la visualisation existante.
 
 <!-- paragraph -->
 
-```{r Ch04-viz-timeSeries}
+```{r ch04-viz-timeSeries}
 vis.timeSeries <- vis.multiple
 vis.timeSeries$timeSeries <- ggplot()+
   geom_tallrect(aes(
@@ -421,7 +412,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-![Facette de dispersion de la Banque mondiale](Ch04-ggplot-scatterFacet.png)
+![Esquisse avec facettes pour les données de la Banque mondiale](ch04-ggplot-scatterFacet.png)
 
 <!-- paragraph -->
 
@@ -429,7 +420,7 @@ Tout d'abord, nous recréons le nuage de points de la section précédente à l'
 
 <!-- paragraph -->
 
-```{r Ch04-viz-ggplot-nuageFacet}
+```{r ch04-viz-ggplot-nuageFacet}
 add.x.var <- function(df, x.var){
   data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
@@ -463,7 +454,7 @@ Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui e
 
 <!-- paragraph -->
 
-```{r Ch04-viz-ggplot-nuage-série-temporelle}
+```{r ch04-viz-ggplot-nuage-série-temporelle}
 nuage_série_temporelle <- nuageFacet+
   geom_tallrect(aes(
     xmin=année-0.5, xmax=année+0.5),
@@ -513,7 +504,7 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 <!-- paragraph -->
 
-```{r Ch04-viz-facets}
+```{r ch04-viz-facets}
 (vis.facets <- animint(nuage_série_temporelle))
 ```
 
@@ -531,7 +522,7 @@ Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` �
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#Ch04-exercises}
+## Résumé du chapitre et exercices {#ch04-exercises}
 
 <!-- paragraph -->
 

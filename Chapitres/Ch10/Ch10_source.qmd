@@ -36,7 +36,7 @@ Voici un graphique de l'erreur de validation à 10 plis et un graphique des pré
 
 <!-- paragraph -->
 
-## Figure statique originale {#static}
+## Figure statique originale {#knn-static}
 
 <!-- paragraph -->
 
@@ -949,7 +949,7 @@ animint(
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#ch10-exercises}
 
 <!-- paragraph -->
 
