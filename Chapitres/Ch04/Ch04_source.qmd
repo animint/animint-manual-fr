@@ -43,7 +43,7 @@ Considérons l'esquisse de la visualisation de données de la Banque mondiale pr
 
 <!-- paragraph -->
 
-![Esguisse avec clickSelects sur légende](ch04-legend-clickSelects.png)
+![Esquisse avec clickSelects sur légende](ch04-legend-clickSelects.png)
 
 <!-- paragraph -->
 
@@ -77,7 +77,7 @@ L'objectif de cette section est de créer la visualisation suivante des données
 
 <!-- paragraph -->
 
-![Esguisse avec texte pour un pays](ch04-viz-text-single.png)
+![Esquisse avec texte pour un pays](ch04-viz-text-single.png)
 
 <!-- paragraph -->
 
@@ -270,7 +270,7 @@ L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-![Esguisse avec texte pour plusieurs pays](ch04-viz-text.png)
+![Esquisse avec texte pour plusieurs pays](ch04-viz-text.png)
 
 <!-- paragraph -->
 
@@ -338,7 +338,7 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-![Esguisse avec série temporelle](ch04-ggplot-time-series-plot.png)
+![Esquisse avec série temporelle](ch04-ggplot-time-series-plot.png)
 
 <!-- paragraph -->
 
@@ -407,7 +407,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-![Esguisse avec facettes pour les données de la Banque mondiale](ch04-ggplot-scatterFacet.png)
+![Esquisse avec facettes pour les données de la Banque mondiale](ch04-ggplot-scatterFacet.png)
 
 <!-- paragraph -->
 
