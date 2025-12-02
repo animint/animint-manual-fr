@@ -505,7 +505,7 @@ Notez dans la sortie ci-dessus que l'activation ReLU met les valeurs négatives 
   input=seq(-5, 5, l=101)
 )[, output := relu(initial_node(input))$value][])
 ggplot()+
-  ggtitle("ReLU activation is non-linear")+
+  ggtitle("L’activation ReLU est non linéaire")+
   geom_line(aes(
     input, output),
     data=relu.dt)
@@ -672,17 +672,17 @@ it.by <- 10
 some <- function(DT)DT[iteration %in% as.integer(
   seq(1, max.iterations, by=it.by))]
 animint(
-  title="Neural network vs linear model",
+  title="Réseau de neurones vs modèle linéaire",
   out.dir="neural-networks-sim",
   loss=ggplot()+
-    ggtitle("Loss/error curves, click to select model/iteration")+
+    ggtitle("Courbes de perte/erreur, cliquer pour sélectionner le modèle/l’itération")+
     theme_bw()+
     theme_animint(width=600, height=350)+
     theme(panel.margin=grid::unit(1, "lines"))+
     facet_grid(variable ~ ., scales="free")+
     scale_y_continuous("")+
     scale_x_continuous(
-      "Iteration/epoch of learning")+
+      "Itération/époque d’entraînement")+
     geom_line(aes(
       iteration, value, color=set, group=set),
       data=loss.tall)+
@@ -697,7 +697,7 @@ animint(
       clickSelects="iteration",
       data=some(loss.tall[set=="subtrain"])),
   data=ggplot()+
-    ggtitle("Learned function at selected model/iteration")+
+    ggtitle("Fonction apprise au modèle/à l’itération sélectionné(e)")+
     theme_bw()+
     theme_animint(width=600)+
     facet_grid(. ~ set, labeller="label_both")+
