@@ -194,7 +194,7 @@ OneFold <- function(validation.fold){
       pred.label=="1", prob.winning.class, 1-prob.winning.class)
     fold.data[, pred.label := ifelse(0.5 < probability, "1", "0")]
     fold.data[, is.error := label != pred.label]
-    fold.data[, prediction := ifelse(is.error, "error", "correct")]
+    fold.data[, prediction := ifelse(is.error, "erronée", "correcte")]
     data.by.neighbors[[paste(neighbors)]] <- 
       data.table(neighbors, fold.data)
   }#for(neighbors
@@ -299,15 +299,16 @@ add_set_fr <- function(DT)DT[
 add_set_fr(other.error)
 add_set_fr(validation.error)
 add_set_fr(Bayes.error)
+legend.name.type <- "erreur"
 errorPlotStatic <- ggplot()+
   theme_bw()+
   geom_hline(aes(
     yintercept=error.prop, color=set_fr, linetype=set_fr),
     data=Bayes.error)+
   scale_color_manual(
-    "error type", values=set.colors, breaks=names(set.colors))+
+    legend.name.type, values=set.colors, breaks=names(set.colors))+
   scale_linetype_manual(
-    "error type", values=set.linetypes, breaks=names(set.linetypes))+
+    legend.name.type, values=set.linetypes, breaks=names(set.linetypes))+
   ylab("Taux d’erreur")+
   xlab("Nombre de voisins")+
   geom_linerange(aes(
@@ -461,7 +462,7 @@ scatterPlotStatic <- ggplot()+
     data=show.points)+
   geom_text(aes(
     text.V1.error, V2.bottom,
-    label=paste("Err.", labels_fr[set], ":")),
+    label=paste("Err.", set_fr, ":")),
     data=error.text,
     hjust=0)+
   geom_text(aes(
@@ -722,7 +723,7 @@ scatterPlot <- ggplot()+
     "méthode", values=classifier.linetypes)+
   scale_fill_manual(
     "prédiction",
-    values=c(error="black", correct="transparent"))+
+    values=c(erronée="black", correcte="transparent"))+
   scale_color_manual("classe", values=label.colors)+
   geom_point(aes(
     V1, V2, color=label),
