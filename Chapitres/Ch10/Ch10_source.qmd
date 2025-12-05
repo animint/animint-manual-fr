@@ -28,13 +28,13 @@ Voici un graphique de l'erreur de validation à 10 divisions et un graphique des
 
 <!-- paragraph -->
 
-Nous commençons par reproduire une version statique de la figure 13.4 à partir de [Elements of Statistical Learning par Hastie et al](http://statweb.stanford.edu/~tibs/ElemStatLearn/) .
+Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 dans le livre [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
 <!-- comment -->
 Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-![Visualisation statique de K-Plus-Proches-Voisins](Ch10-viz-static.png)
+![Esquisse pour K-Plus-Proches-Voisins](Ch10-viz-interactive.png)
 
 <!-- paragraph -->
 
@@ -496,13 +496,7 @@ Bien que cette visualisation des données comporte trois légendes interactives,
 
 <!-- paragraph -->
 
-Dans cette section, nous proposons une refonte interactive qui permet à l'utilisateur de sélectionner K, le nombre de voisins dans le classificateur K Plus Proches Voisins.
-
-<!-- paragraph -->
-
-![Visualisation KPPV interactive](Ch10-viz-interactive.png)
-
-<!-- paragraph -->
+Dans cette section, nous proposons une visualisation interactive qui permet à l'utilisateur de sélectionner K, le nombre de voisins.
 
 ### Graphique interactif des courbes d'erreur {#neighbors-error}
 
