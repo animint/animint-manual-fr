@@ -707,16 +707,15 @@ Exercices :
 <!-- comment -->
 * Quelles sont les deux raisons différentes de créer des graphiques à plusieurs facettes ? Laquelle est plus utile dans les visualisations interactives ?
 <!-- comment -->
-* Définissons "A < B" comme signifiant qu'"un B peut contenir plusieurs A". Laquelle des affirmations suivantes est vraie ?
-	* ggplot < panel
-  	* panel < ggplot
-  	* ggplot < animint
-  	* animint < ggplot
-  	* layer < panel
-  	* panel < layer
-  	* layer < ggplot
-  	* ggplot < layer
-  	
+* Définissons « A < B » comme : un B peut contenir plusieurs A. Laquelle des affirmations suivantes est vraie ?
+  * ggplot < facette
+  * facette < ggplot
+  * ggplot < animint
+  * animint < ggplot
+  * couche < facette
+  * facette < couche
+  * couche < ggplot
+  * ggplot < couche
 * Dans les facettes `vis.alignée`, pourquoi est-il important d'utiliser l'argument `scales="free"` ?
 <!-- comment -->
 * Dans `vis.alignée` nous avons montré un ggplot avec un panneau de nuage de points à gauche et un panneau de séries temporelles à droite. Réalisez une autre version de la visualisation de données avec le panneau des séries temporelles à gauche et le panneau du nuage de points à droite.
