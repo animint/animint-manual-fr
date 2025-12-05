@@ -439,7 +439,6 @@ scatterPlotStatic <- ggplot()+
     values=label.colors)+
   scale_linetype_manual(
     "méthode",
-    labels=labels_fr_method,
     values=classifier.linetypes)+
   geom_point(aes(
     V1, V2, color=label),
