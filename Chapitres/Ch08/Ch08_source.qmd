@@ -270,7 +270,7 @@ viz.scatter.both
 
 <!-- paragraph -->
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#ch08-exercises}
 
 <!-- paragraph -->
 
