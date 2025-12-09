@@ -61,6 +61,7 @@ book:
       - Ch17/Ch17-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
+      - references.qmd
 
 bibliography: refs.bib
 
