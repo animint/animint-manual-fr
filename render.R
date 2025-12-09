@@ -26,6 +26,7 @@ if(FALSE){
   # On Ubuntu xelatex is required for quarto book pdf.
   system("sudo apt install texlive-xetex")
 }
+file.copy("Chapitres/_source.qmd", "Chapitres/index.qmd", overwrite = TRUE)
 quarto::quarto_render("Chapitres")
 
 animint_js_vec <- Sys.glob("Chapitres/*/*/animint.js")
