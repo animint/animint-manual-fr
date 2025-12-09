@@ -8,13 +8,13 @@ knitr::opts_chunk$set(fig.path="Ch13-figures/")
 
 <!-- paragraph -->
 
-L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la régression de Poisson](https://en.wikipedia.org/wiki/Poisson_regression), un modèle d'apprentissage automatique permettant de prédire une sortie à valeur entière à partir d'entrées qui sont des vecteurs à valeur réelle.
+L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la régression de Poisson][(https://en.wikipedia.org/wiki/Poisson_regression)](https://fr.wikipedia.org/wiki/R%C3%A9gression_de_Poisson), un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
 <!-- comment -->
-Il s'agit d'un modèle de "régression linéaire" puisqu'il apprend une fonction linéaire entre les entrées et la sortie.
+Il s'agit d'un modèle de "régression linéaire" puisqu'il apprend une fonction linéaire des entrées à la sortie.
 <!-- comment -->
 Comme la régression par les moindres carrés, la régression de Poisson peut être formulée comme un problème de maximum de vraisemblance.
 <!-- comment -->
-Cependant, elle diffère de la régression linéaire par moindres carrés car elle utilise une distribution de Poisson pour modéliser les étiquettes de sortie, au lieu d'une distribution gaussienne.
+Cependant, elle en diffère car elle utilise une distribution de Poisson pour modéliser les étiquettes de sortie, au lieu d'une distribution gaussienne.
 <!-- comment -->
 Ce choix de modélisation est approprié lorsque les étiquettes de sortie sont des nombres entiers non négatifs.
 
@@ -125,7 +125,7 @@ Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabi
 
 <!-- paragraph -->
 
-Pour ajouter un panneau pour la fonction de distribution cumulative, nous allons refaire le ggplot sur la base de l'esquisse ci-dessous.
+Pour ajouter un panneau à la fonction de distribution cumulative, nous allons modifier le ggplot en suivant l'esquisse ci-dessous.
 
 <!-- paragraph -->
 
@@ -182,7 +182,7 @@ Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom
 
 <!-- paragraph -->
 
-Notez que nous avons également utilisé un `geom_hline` pour indiquer le seuil de la fonction de distribution cumulative, 0,99, qui a été utilisé pour déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
+Notez l'utilisation d'un `geom_hline` pour indiquer le seuil de la fonction de distribution cumulative, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
 <!-- comment -->
 Ceci est un exemple de "montrer vos choix arbitraires", l'un des principes généraux de la conception de bonnes visualisations de données interactives.
 
@@ -395,7 +395,7 @@ Exercices :
 
 - Le code ci-dessus utilisait les fonctions d'aide `addPanel` et `addX` avec plusieurs geoms pour créer des graphiques multi-panneaux, ce qui entraîne des répétitions.
 <!-- comment -->
-Pour éviter cette répétition, créez une nouvelle visualisation des données qui utilise un seul geom avec un ensemble de données plus important.
+Pour les éviter, créez une nouvelle visualisation des données qui utilise un seul geom avec un ensemble de données plus important.
 <!-- comment -->
 Par exemple, les points rouges dans les deux panneaux du premier graphique pourraient être définis à l'aide d'un seul `geom_point` avec un ensemble de données plus important (Conseil : utilisez `data.table::melt` avec `measure.vars=c("cum.prob", "probability")`).
 <!-- comment -->
@@ -403,7 +403,7 @@ Par exemple, les points rouges dans les deux panneaux du premier graphique pourr
 
 <!-- paragraph -->
 
-Ensuite, dans le [chapitre 14](../Ch14/Ch14-PeakSegJoint.html), nous vous expliquerons comment utiliser les `clickSelects/showSelected` nommés pour visualiser le modèle d'apprentissage automatique PeakSegJoint avec des variables de sélection basées sur les données.
+Dans le [chapitre 14](../Ch14/Ch14-PeakSegJoint.html), nous vous expliquerons comment utiliser les `clickSelects/showSelected` explicites pour visualiser le modèle d'apprentissage automatique PeakSegJoint avec des variables de sélection basées sur les données.
 
 <!-- paragraph -->
 
