@@ -280,8 +280,8 @@ Translate_FR_EN <- function(file_name = "README",
   
   # Chemins d'accès
   
-  output_path <- paste0(dest_filepath, "/", chx,"_source","", ".qmd")
-  Rmd_OG_path <- paste0(dest_filepath, "/", chx,"_source", ".qmd")
+  output_path <- paste0(dest_filepath, "/", ifelse(chx=="Ch01","",chx),"_source","", ".qmd")
+  Rmd_OG_path <- paste0(dest_filepath, "/", ifelse(chx=="Ch01","",chx),"_source", ".qmd")
   
   # Mod 10 septembre 2025
   # output_path <- paste0(dest_filepath, "/", chx,"_index", ifelse(ajoutFR, "_FR", ""), file_extension)
@@ -366,7 +366,7 @@ Translate_FR_EN <- function(file_name = "README",
       ifelse(file_name == "README", "# animint-manual-fr", ""),
       "",
       "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
-      paste0("[", file_name, "](", source_filepath, "/",chx,"/", file_name, file_extension, ")"),
+      paste0("[", file_name, "](", source_filepath, "/",ifelse(chx=="Ch01","",paste0(chx,"/")), file_name, file_extension, ")"),
       ""
     )
     #print(cleaned_lines)
