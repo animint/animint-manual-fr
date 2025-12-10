@@ -20,7 +20,9 @@ jobs:
         uses: eddelbuettel/github-actions/r2u-setup@master
       - name: install and update texlive
         run: /usr/bin/sudo DEBIAN_FRONTEND=noninteractive apt update -y -qq
-      - run: /usr/bin/sudo DEBIAN_FRONTEND=noninteractive apt install tidy texlive texlive-fonts-extra texlive-extra-utils r-recommended -y
+      - run: locale -a
+      - run: /usr/bin/sudo DEBIAN_FRONTEND=noninteractive apt install tidy texlive texlive-fonts-extra texlive-extra-utils language-pack-fr r-recommended -y
+      - run: locale -a
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Render book
         run: R --no-save < render.R
