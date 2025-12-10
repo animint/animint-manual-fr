@@ -39,7 +39,7 @@ Toute idée visant à améliorer `animint2` et contourner l'une de ces limites e
 
 <!-- paragraph -->
 
-## Utiliser des variables normalisées pour travailler avec des échelles standardisées {#normalized-variables}
+## Variables normalisées avec `showSelected` {#normalized-variables}
 
 <!-- paragraph -->
 
@@ -61,11 +61,11 @@ Nous disposons d'une prise en charge expérimentale pour cela, voir [la mise à 
 
 <!-- paragraph -->
 
-## Calcul des statistiques pour chaque sous-ensemble showSeleted (ou réalisation d'un sous-ensemble). {#stats}
+## Calcul des statistiques pour chaque sous-ensemble {#stats}
 
 <!-- paragraph -->
 
-`Animint` ne prend pas en charge les statistiques `ggplot2` avec `showSelected`.
+Les statistiques, `geom_*(stat=...)`, et les positions, `geom_*(position=...)`, sont calculées avec toutes les données (et non pour chaque valeur de `showSelected`).
 <!-- comment -->
 Par exemple, considérons le ggplot à facettes ci-dessous.
 
@@ -75,74 +75,69 @@ Par exemple, considérons le ggplot à facettes ci-dessous.
 set.seed(1)
 library(data.table)
 random.counts <- data.table(
-  letter = c(replicate(4, LETTERS[1:5])),
-  count = c(replicate(4, rbinom(5, 50, 0.5))),
-  stack = rep(rep(factor(
+  lettre = c(replicate(4, LETTERS[1:5])),
+  comptage = c(replicate(4, rbinom(5, 50, 0.5))),
+  groupe = rep(rep(factor(
     c("bas","haut"), c("haut","bas")
   ), each = 5), 2),
-  facet = rep(1:2, each = 10))
+  facette = rep(1:2, each = 10))
 library(animint2)
 ggstat <- ggplot() +
-  theme_bw()+
-  theme(panel.margin=grid::unit(0, "lines"))+
-  geom_bar(
-      aes(letter, count, fill = stack),
-      showSelected="facet",
+  geom_bar(aes(
+    lettre, comptage, key=paste(lettre, groupe), fill = groupe),
+    showSelected="facette",
     data = random.counts,
     stat = "identity",
-    position="stack"
-  )
-ggstat+facet_grid(facet ~ .)
+    position="stack")
+ggstat+facet_grid(facette ~ .)
 ```
 
-<!-- paragraph -->
-
-Utiliser `showSelected` au lieu des facettes ne donne pas le résultat escompté.
+Dans le graphique ci-dessus, on voit que `position="stack"` fait que le groupe `bas` est aligné avec `comptage=0` dans chaque facette.
+Utiliser `showSelected` au lieu des facettes ne donne pas le même résultat.
 
 <!-- paragraph -->
 
 ```{r Ch07-viz-stat}
-animint(ggstat, duration = list(facet = 1000))
+animint(ggstat, duration = list(facette = 1000))
 ```
 
-<!-- paragraph -->
-
-Une solution de contournement consiste à calculer ce que vous voulez afficher, puis à utiliser `position=identity`.
+Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour changer `facette=2`, vous voyez que le groupe `bas` n'est plus aligné avec `comptage=0`.
+Une solution de contournement consiste à calculer les valeurs que vous voulez afficher, puis à utiliser `position=identity`, comme dans le code ci-dessous.
 
 <!-- paragraph -->
 
 ```{r}
 random.cumsums <- random.counts[, data.table(
-  cumsum=cumsum(count), count, stack),
-  by=.(letter, facet)]
+  cumsum=cumsum(comptage), comptage, groupe),
+  by=.(lettre, facette)]
 ggidentity <- ggplot() +
   theme_bw()+
-  theme(panel.margin=grid::unit(0, "lines"))+
   geom_segment(aes(
-    x=letter, xend=letter,
-    y=cumsum, yend=cumsum-count,
-    color=stack),
-    showSelected="facet",
+    x=lettre, xend=lettre,
+    y=cumsum, yend=cumsum-comptage,
+    key=paste(groupe, lettre),
+    color=groupe),
+    showSelected="facette",
     data = random.cumsums,
     size=10,
     stat = "identity",
     position="identity")
-ggidentity+facet_grid(facet ~ .)
+ggidentity+facet_grid(facette ~ .)
 ```
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé `geom_segment` au lieu de `geom_bar` mais que l'apparence des facettes reste inchangée.
+Notez que nous avons utilisé `geom_segment()` au lieu de `geom_bar()`, mais que l'affichage est semblable.
 
 <!-- paragraph -->
 
 ```{r Ch07-viz-identity}
-animint(ggidentity, duration = list(facet = 1000))
+animint(ggidentity, duration = list(facette = 1000))
 ```
 
-<!-- paragraph -->
+Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour changer `facette=2`, vous voyez que le groupe `bas` reste aligné avec `cumsum=0`.
 
-## Ajouter des valeurs à un ensemble de sélection multiple, une à la fois {#multiple-selection}
+## Ajouter des valeurs à la sélection, une à la fois {#multiple-selection}
 
 <!-- paragraph -->
 
@@ -154,7 +149,7 @@ Il faut donc utiliser l'option [selector.types](Ch04-clickSelects.html#selector-
 
 <!-- paragraph -->
 
-## Ajuster y au lieu d'utiliser vjust {#vjust}
+## Ajuster `y` au lieu d'utiliser `vjust` {#vjust}
 
 <!-- paragraph -->
 
@@ -220,38 +215,6 @@ Il est possible d'implémenter une prise en charge de `vjust` dans `animint2`, m
 Toute contribution en ce sens sera accueillie avec grand plaisir : n'hésitez pas à soumettre une Pull Request.
 <!-- comment -->
 Nous avons déjà une [issue expliquant comment l'implémenter.](https://github.com/tdhock/animint/issues/148) .
-
-<!-- paragraph -->
-
-## Ordonner les graphiques sur la page {#order-plots}
-
-<!-- paragraph -->
-
-Actuellement, la seule façon d'organiser une visualisation des données multiplot est d'utiliser l'ordre des ggplots dans la liste `animint` `viz`.
-<!-- comment -->
-Les graphiques apparaîtront sur la page web selon leur ordre dans la liste `animint` `viz`.
-<!-- comment -->
-Par exemple, comparez la visualisation de données ci-dessous avec la visualisation de données de la section précédente.
-
-<!-- paragraph -->
-
-```{r Ch07-viz-order}
-animint(
-  first=viz.just$workaround,
-  second=viz.just$vjust)
-```
-
-<!-- paragraph -->
-
-Notez que l'ordre des graphiques est inversé par rapport à la visualisation de données de la section précédente.
-<!-- comment -->
-La principale limite de cette méthode de mise en page des graphiques est que seul l'ordre peut être contrôlé.
-<!-- comment -->
-Par exemple, selon la largeur de l'élément de page web, le deuxième graphique apparaîtra soit sous le premier graphique, soit à sa droite.
-
-<!-- paragraph -->
-
-Si vous avez une idée pour une meilleure façon de définir la mise en page des graphiques dans une animint, [merci de nous en faire part](https://github.com/tdhock/animint2/issues) !
 
 <!-- paragraph -->
 
@@ -416,7 +379,7 @@ Une autre limitation d'`animint2` est de ne pouvoir afficher que des données pr
 <!-- comment -->
 Cela signifie qu'`animint2` n'est pas approprié lorsqu'il y trop de sous-ensembles de données à tracer pour pouvoir les calculer tous.
 <!-- comment -->
-Dans ce cas, il serait préférable d'utiliser shiny.
+Dans ce cas, il serait préférable d'utiliser `shiny`.
 
 <!-- paragraph -->
 
@@ -437,7 +400,6 @@ Exercices :
 Calculez le statut de chaque facette, et utilisez `stat_identity` pour que votre calcul fonctionne avec `animint2`.
 <!-- comment -->
 - Faites un ggplot qui s'affiche bien en utilisant `facet_grid(. ~ var, scales="free")` mais ne s'affiche pas correctement avec `showSelected=var`.
-<!-- comment -->
 <!-- comment -->
 Pour résoudre le problème, calculez une version normalisée de `var` et utilisez-la dans `showSelected`.
 
