@@ -77,7 +77,9 @@ library(data.table)
 random.counts <- data.table(
   letter = c(replicate(4, LETTERS[1:5])),
   count = c(replicate(4, rbinom(5, 50, 0.5))),
-  stack = rep(rep(1:2, each = 5), 2),
+  stack = rep(rep(factor(
+    c("bas","haut"), c("haut","bas")
+  ), each = 5), 2),
   facet = rep(1:2, each = 10))
 library(animint2)
 ggstat <- ggplot() +
@@ -100,10 +102,7 @@ Utiliser `showSelected` au lieu des facettes ne donne pas le résultat escompté
 <!-- paragraph -->
 
 ```{r Ch07-viz-stat}
-animint(
-  plot = ggstat,
-  time = list(variable = "facet", ms = 1000),
-  duration = list(facet = 1000))
+animint(ggstat, duration = list(facet = 1000))
 ```
 
 <!-- paragraph -->
@@ -113,10 +112,8 @@ Une solution de contournement consiste à calculer ce que vous voulez afficher, 
 <!-- paragraph -->
 
 ```{r}
-random.cumsums <- random.counts[, list(
-  cumsum=cumsum(count),
-  count=count,
-  stack=stack),
+random.cumsums <- random.counts[, data.table(
+  cumsum=cumsum(count), count, stack),
   by=.(letter, facet)]
 ggidentity <- ggplot() +
   theme_bw()+
@@ -140,10 +137,7 @@ Notez que nous avons utilisé `geom_segment` au lieu de `geom_bar` mais que l'ap
 <!-- paragraph -->
 
 ```{r Ch07-viz-identity}
-animint(
-  plot = ggidentity,
-  time = list(variable = "facet", ms = 1000),
-  duration = list(facet = 1000))
+animint(ggidentity, duration = list(facet = 1000))
 ```
 
 <!-- paragraph -->

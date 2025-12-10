@@ -210,7 +210,7 @@ Looking at the label error plot above, it is clear that the model with four segm
 <!-- comment -->
 There are a number of criteria that can be used to select which one of these models is best.
 <!-- comment -->
-One way to do that is by selecting the model with $s$ segments is $S^*(\lambda)=L_s + \lambda*s$, where $L_s$ is the total loss of the model with $s$ segments, and $\lambda$ is a non-negative penalty.
+One way to do that is by selecting the model with $s$ segments is $S^*(\lambda)=L_s + \lambda s$, where $L_s$ is the total loss of the model with $s$ segments, and $\lambda$ is a non-negative penalty.
 <!-- comment -->
 In the plot below we show the model selection function $S^*(\lambda)$ for this data set:
 

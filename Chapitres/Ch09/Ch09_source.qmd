@@ -24,7 +24,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Graphiques statiques {#static}
+## Graphiques statiques {#bike-static}
 
 <!-- paragraph -->
 
