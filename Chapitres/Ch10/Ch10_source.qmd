@@ -483,7 +483,11 @@ Enfin, nous combinons les deux `ggplots` et les affichons sous forme d'`animint2
 <!-- paragraph -->
 
 ```{r Ch10-viz-static}
-animint(errorPlotStatic, scatterPlotStatic)
+animint(
+  errorPlotStatic+
+    theme_animint(width=300),
+  scatterPlotStatic+
+    theme_animint(last_in_row=TRUE))
 ```
 
 <!-- paragraph -->
@@ -574,7 +578,6 @@ legend.name <- "Ensemble"
 errorPlot <- ggplot()+
   ggtitle("Sélection du nombre de voisins")+
   theme_bw()+
-  theme_animint(height=500)+
   geom_text(aes(
     min.neighbors, error.prop,
     color=set_fr, label="Bayes"),
@@ -715,7 +718,6 @@ Enfin, nous redéfinissons le `ggplot`, en utilisant les voisins ("neighbors") c
 scatterPlot <- ggplot()+
   ggtitle("Erreurs de classification (entraînement)")+
   theme_bw()+
-  theme_animint(width=500, height=500)+
   xlab("Variable d'entrée 1")+
   ylab("Variable d'entrée 2")+
   coord_equal()+
@@ -796,8 +798,10 @@ Enfin, nous combinons les deux graphiques dans une visualisation des données un
 
 ```{r Ch10-viz-neighbors}
 animint(
-  errorPlot,
-  scatterPlot,
+  errorPlot+
+    theme_animint(width=300),
+  scatterPlot+
+    theme_animint(width=450, last_in_row=TRUE),
   first=list(neighbors=7),
   time=list(variable="neighbors", ms=3000))
 ```
@@ -869,7 +873,6 @@ facets <- function(df, facet){
 errorPlotNew <- ggplot()+
   ggtitle("Sélection du nombre de divisions et de voisins")+
   theme_bw()+
-  theme_animint(height=500)+
   theme(panel.margin=grid::unit(0, "cm"))+
   facet_grid(facet ~ ., scales="free")+
   geom_text(aes(
@@ -944,8 +947,10 @@ Le code ci-dessous crée une visualisation des données interactive à l'aide du
 
 ```{r Ch10-viz-folds}
 animint(
-  errorPlotNew,
-  scatterPlot,
+  errorPlotNew+
+    theme_animint(width=325),
+  scatterPlot+
+    theme_animint(width=450, last_in_row=TRUE),
   first=list(neighbors=7, n.folds=10))
 ```
 
