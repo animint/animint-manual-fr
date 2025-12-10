@@ -174,10 +174,10 @@ gg.lines <- ggplot()+
   geom_hline(aes(yintercept=just), data=line.df, color="grey")
 gg.vjust <- gg.lines+
   geom_text(aes(
-    hjust, vjust, label="qwerty", hjust=hjust, vjust=vjust),
+    hjust, vjust, label="bépo", hjust=hjust, vjust=vjust),
     size=10,
     data=text.df)
-gg.vjust+ggtitle("R graphics devices respect aes(vjust)")
+gg.vjust+ggtitle("aes(vjust) marche avec affichage non-interactif")
 ```
 
 <!-- paragraph -->
@@ -193,28 +193,33 @@ Le graphique de gauche devrait être le même que le ggplot ci-dessus, mais il y
 ```{r Ch07-viz-just}
 (viz.just <- animint(
   vjust=gg.vjust+
-    ggtitle("animint does not support aes(vjust)"),
+    ggtitle("aes(vjust) ne marche pas avec geom_text"),
   workaround=gg.lines+
-    ggtitle("workaround: no aes(vjust), add to y")+
+    ggtitle("solutions : geom_label_aligned ou modifier y")+
     geom_text(aes(
       hjust, vjust + (0.5-vjust)*0.03 - 0.01,
-      label="qwerty", hjust=hjust),
-      data=text.df)))
+      label="bépo", hjust=hjust),
+      data=text.df)+
+    geom_label_aligned(aes(
+      hjust+0.25, vjust, label="bépo", hjust=hjust, vjust=vjust),
+      data=text.df,
+      alignment="horizontal")))
 ```
 
 <!-- paragraph -->
 
 La solution de contournement dans `animint2` est illustrée dans le panneau de droite ci-dessus.
-<!-- comment -->
-Vous pouvez ajuster les valeurs de la position verticale `y` des éléments de texte pour lesquels vous auriez utilisé `vjust`.
+
+* Vous pouvez ajuster les valeurs de la position verticale `y` des éléments de texte pour lesquels vous auriez utilisé `vjust`.
+* Vous pouvez utiliser `geom_label_aligned()` qui marche avec `vjust`. Pour exemple, lire le [chapitre 8](/ch08).
 
 <!-- paragraph -->
 
-Il est possible d'implémenter une prise en charge de `vjust` dans `animint2`, mais nous n'avons pas encore eu le temps d'y travailler.
+Il est possible d'implémenter une prise en charge de `vjust` pour `geom_text()`, mais nous n'avons pas encore eu le temps d'y travailler.
 <!-- comment -->
 Toute contribution en ce sens sera accueillie avec grand plaisir : n'hésitez pas à soumettre une Pull Request.
 <!-- comment -->
-Nous avons déjà une [issue expliquant comment l'implémenter.](https://github.com/tdhock/animint/issues/148) .
+Nous avons déjà une [issue expliquant comment l'implémenter](https://github.com/tdhock/animint/issues/148).
 
 <!-- paragraph -->
 
