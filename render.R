@@ -3,7 +3,7 @@ ins.mat <- installed.packages()
 missing.pkgs <- setdiff(pkgs, rownames(ins.mat))
 install.packages(missing.pkgs)
 remotes::install_github("animint/animint2", dep=TRUE)
-remotes::install_github("animint/animint2data")
+remotes::install_github(c("animint/animint2data","animint/animint2fr"))
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
   qmd_in <- qmd_vec[[qmd_i]]
