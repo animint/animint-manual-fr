@@ -100,10 +100,7 @@ Utiliser `showSelected` au lieu des facettes ne donne pas le résultat escompté
 <!-- paragraph -->
 
 ```{r Ch07-viz-stat}
-animint(
-  plot = ggstat,
-  time = list(variable = "facet", ms = 1000),
-  duration = list(facet = 1000))
+animint(ggstat, duration = list(facet = 1000))
 ```
 
 <!-- paragraph -->
@@ -140,10 +137,7 @@ Notez que nous avons utilisé `geom_segment` au lieu de `geom_bar` mais que l'ap
 <!-- paragraph -->
 
 ```{r Ch07-viz-identity}
-animint(
-  plot = ggidentity,
-  time = list(variable = "facet", ms = 1000),
-  duration = list(facet = 1000))
+animint(ggidentity, duration = list(facet = 1000))
 ```
 
 <!-- paragraph -->
