@@ -1,4 +1,4 @@
-# Agrégation par K-means (groupe)
+# Agrégation par K-means
 
 <!-- paragraph -->
 
@@ -18,11 +18,11 @@ Plan du chapitre :
 
 - Nous commençons par visualiser deux caractéristiques des données de l'iris.
 <!-- comment -->
-- Nous choisissons trois points de données aléatoires à utiliser comme centres d'agrégation (groupe).
+- Nous choisissons trois points de données aléatoires à utiliser comme centres d'agrégation.
 <!-- comment -->
-- Nous montrons comment toutes les distances entre les points de données et les centres d'agrégation (groupe) peuvent être calculées et visualisées.
+- Nous montrons comment toutes les distances entre les points de données et les centres d'agrégation peuvent être calculées et visualisées.
 <!-- comment -->
-- Nous terminons par une visualisation de l'évolution des paramètres du modèle k-means à chaque itération.
+- Nous terminons par une visualisation de l'évolution des paramètres du modèle k-moyennes à chaque itération.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Nous allons illustrer l'algorithme d'agrégation (groupe) K-means à l'aide de ces deux dimensions,
+Nous allons illustrer l'algorithme d'agrégation K-moyennes à l'aide de ces deux dimensions,
 
 <!-- paragraph -->
 
@@ -66,7 +66,7 @@ str(data.mat)
 
 <!-- paragraph -->
 
-Pour exécuter K-means, l'hyperparamètre du nombre d'agrégations (K) doit être fixé à l'avance.
+Pour exécuter K-moyennes, l'hyperparamètre du nombre d'agrégations (K) doit être fixé à l'avance.
 <!-- comment -->
 Ensuite, K points de données aléatoires sont sélectionnés comme centres d'agrégation initiaux,
 
@@ -98,7 +98,7 @@ gg.centers
 
 Ci-dessus, nous avons affiché les deux ensembles de données (centres d'agrégation et données) à l'aide de deux instances de `geom_point()`.
 <!-- comment -->
-Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d'agrégation (groupe),
+Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d'agrégation,
 
 <!-- paragraph -->
 
@@ -131,7 +131,7 @@ gg.centers+
 
 Il y a `r nrow(seg.dt)` segments surreprésentés ci-dessus, de sorte que l'interactivité serait utile pour mettre l'accent sur les segments connectés à un point de données particulier.
 <!-- comment -->
-Pour ce faire, nous créons un fichier`data.i` variable de sélection,
+Pour ce faire, nous créons une variable de sélection `data.i`,
 
 <!-- paragraph -->
 
@@ -163,7 +163,7 @@ animint(
 
 <!-- paragraph -->
 
-Dans la visualisation des données ci-dessus, vous pouvez cliquer sur un point de données pour afficher les distances entre ce point de données et chaque centre d'agrégation (groupe).
+Dans la visualisation des données ci-dessus, vous pouvez cliquer sur un point de données pour afficher les distances entre ce point de données et chaque centre d'agrégation.
 
 <!-- paragraph -->
 
@@ -173,9 +173,9 @@ Exercices pour cette section :
 
 - modifiez les échelles x/y de façon à ce que les mêmes tics soient représentés.
 <!-- comment -->
-- modifier la couleur de chaque segment pour qu'elle corresponde à l'agrégation (groupe) correspondante.
+- modifiez la couleur de chaque segment pour qu'elle corresponde à l'agrégation correspondante.
 <!-- comment -->
-- ajouter une infobulle qui indique la valeur de la distance.
+- ajoutez une infobulle qui indique la valeur de la distance.
 <!-- comment -->
 - faire dépendre la largeur du segment de son optimalité (le segment connecté au centre de l'agrégation la plus proche devrait être mis en valeur avec une plus grande largeur).
 
@@ -213,7 +213,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Ensuite, nous mettons à jour les centres d'agrégation (groupe),
+Ensuite, nous mettons à jour les centres d'agrégation,
 
 <!-- paragraph -->
 
@@ -329,17 +329,17 @@ Exercices :
 
 - Faire en sorte que les centres apparaissent toujours devant (au-dessus) des données.
 <!-- comment -->
-- Ajouter des transitions graduelles.
+- Ajoutez des transitions graduelles.
 <!-- comment -->
-- Ajout d'une animation sur la variable d'itération.
+- Ajoutez une animation sur la variable d'itération.
 <!-- comment -->
-- Le code actuel a fixé le nombre maximum d'itérations, il est donc possible que les dernières itérations ne progressent pas.
+- Le code actuel a un nombre maximum d'itérations fixe, il est donc possible que les dernières itérations ne progressent pas.
 <!-- comment -->
 Par exemple, dans l'image ci-dessus, l'itération 16 a été la dernière à entraîner une diminution de l'erreur (les itérations 17 à 20 n'ont entraîné aucune diminution).
 <!-- comment -->
 Modifiez le code pour qu'il arrête l'itération s'il n'y a pas de diminution de l'erreur.
 <!-- comment -->
-- La viz actuelle n'a qu'un seul cadre d'animation (`showSelected` sous-ensemble) par itération (la réalisation ou d'un sous-ensemble est avant sa mise à jour).
+- La visualisation actuelle n'a qu'un seul cadre d'animation (sous-ensemble `showSelected`) par itération (la moyenne est affichée avant sa mise à jour).
 <!-- comment -->
 Ajoutez un autre cadre d'animation qui montre la moyenne après la mise à jour.
 <!-- comment -->
@@ -347,19 +347,19 @@ Ajoutez un autre cadre d'animation qui montre la moyenne après la mise à jour.
 <!-- comment -->
 - Ajoutez les fonctionnalités décrites dans les exercices de la section précédente sur cette page.
 <!-- comment -->
-- Calculer les résultats pour plusieurs graines aléatoires différentes, puis afficher les taux d'erreur pour chaque graine sur le graphique d'aperçu des erreurs, et permettre à l'utilisateur de sélectionner n'importe lequel de ces résultats.
+- Calculez les résultats pour plusieurs graines aléatoires différentes, puis afficher les taux d'erreur pour chaque graine sur le graphique d'aperçu des erreurs, et permettre à l'utilisateur de sélectionner n'importe lequel de ces résultats.
 <!-- comment -->
-- Calculer les résultats pour plusieurs nombres différents d'agrégations (K).
+- Calculez les résultats pour plusieurs nombres différents d'agrégations (K).
 <!-- comment -->
-Calculer l'indice de Rand ajusté en utilisant `pdfCluster::adj.rand.index(species, cluster)` pour chaque K et graine aléatoire différents.
+Calculez l'indice de Rand ajusté en utilisant `pdfCluster::adj.rand.index(species, cluster)` pour chaque K et graine aléatoire différents.
 <!-- comment -->
-Ajouter un graphique d'ensemble qui montre la valeur ARI de chaque modèle, et permet de sélectionner le nombre d'agrégations (groupes).
+Ajoutez un graphique d'ensemble qui montre la valeur ARI de chaque modèle et permet de sélectionner le nombre d'agrégations.
 <!-- comment -->
 - Effectuez une visualisation similaire en utilisant un autre ensemble de données tel que `data("penguins", package="palmerpenguins")`.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 18](/ch18) explique comment visualiser l'algorithme d'apprentissage par descente de gradient pour l'apprentissage des réseaux neuronaux.
+Ensuite, dans le [chapitre 18](/ch18), nous vous expliquerons comment visualiser l'algorithme d'apprentissage par descente de gradient pour l'apprentissage des réseaux neuronaux.
 
 <!-- paragraph -->
 
