@@ -77,7 +77,9 @@ library(data.table)
 random.counts <- data.table(
   letter = c(replicate(4, LETTERS[1:5])),
   count = c(replicate(4, rbinom(5, 50, 0.5))),
-  stack = factor(rep(rep(1:2, each = 5), 2)),
+  stack = rep(rep(factor(
+    c("bas","haut"), c("haut","bas")
+  ), each = 5), 2),
   facet = rep(1:2, each = 10))
 library(animint2)
 ggstat <- ggplot() +
