@@ -11,15 +11,15 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations qui compare la p
 
 <!-- comment -->
 
-* We begin by explaining the advantages of the `mlr3` framework.
+* Nous commençons avec une explication de l’utilité des packages `mlr3` pour la comparaison des algorithmes d’apprentissage artificiel.
 <!-- comment -->
-* We use `mlr3` to define and execute a benchmark comparison using several binary classification problems, and several learning algorithms (nearest neighbors, linear model, neural networks).
+* Nous définissons une comparaison sur plusieurs problèmes de classification binaire, avec plusieurs algorithmes d’apprentissage (plus proches voisins, modèle linaire, réseau de neurones).
 <!-- comment -->
-* We create various plots of test set error rates and Area Under the ROC curve.
+* Nous faisons des graphiques montrant les taux d’erreur et l’aire sous la courbe ROC.
 <!-- comment -->
-* We show how to add interactivity to ROC curves, including several levels of detail (data set, cross-validation iteration, FPR threshold).
+* Nous rajoutons l’interactivité aux courbes ROC, pour montrer plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
 <!-- comment -->
-* We plot validation set metrics, which are used to check model selection, and we discuss signs of over- and under-fitting.
+* Nous visualisons des mesures de fidelité et d’erreur par rapport à l’ensemble de validation, pour vérifier si nous avons bien évité le surapprentissage et le sous-apprentissage.
 
 <!-- comment -->
 
