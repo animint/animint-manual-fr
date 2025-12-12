@@ -23,27 +23,27 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations qui compare la p
 
 <!-- comment -->
 
-## What is `mlr3`? {#what-is-mlr3}
+## Motivation pour `mlr3` {#motivation-mlr3}
 
 <!-- comment -->
 
-There are many different packages which implement machine learning algorithms that can be used in R. For example,
+Il y a plusieurs packages R qui proposent des algorithmes d’apprentissage artificiel, par exemple :
 
 <!-- comment -->
 
-* `library(kknn)` provides K-Nearest Neighbors, which was explained in [Chapter 10](/ch10).
+* `library(kknn)` fournit K Plus Proches Voisins (KPPV), que nous avons exploré dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` provides L1-regularized linear models like the Lasso, which was explained in [Chapter 11](/ch11).
+* `library(glmnet)` fournit les modèles lineaires avec régularisation L1, commo le LASSO, que nous avons exploré dans le [chapitre 11](/ch11).
 <!-- comment -->
-* `library(torch)` provides neural networks, which were explained in [Chapter 18](/ch18).
+* `library(torch)` fournit les réseaux des neurones, que nous avons exploré dans le [chapitre 18](/ch18).
 
 <!-- comment -->
 
-When we want to machine learning to create a predictive model for a given data set, we typically want to try a variety of different algorithms, because we do not know in advance which algorithm will be most accurate for a given data set.
+Pour obtenir des bons résultats de prédiction sur un jeu de données, nous voulons typiquement entraîner plusieurs algorithmes différents, car nous ne savons pas quel algorithme aura les meilleures performances dans ces données.
 <!-- comment -->
-So we would like to run the learning algorithms which are implemented in these different R packages, and standardized the results so they can be analyzed together to determine which algorithm is most accurate.
+Alors nous voulons utiliser plusieurs différents packages, pour ensuite analyser les résultats ensemble, pour déterminer quel algorithme donne les meilleures prédictions.
 <!-- comment -->
-Each R package provides a function for model fitting, which has a different name and API in each package (some functions input matrices, others data frames, etc).
+Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
 Typically each package provides a `predict()` method, but the output format differs between packages (some packages output class labels, others output probabilities between 0 and 1, others output a real-valued score, etc).
 <!-- comment -->
