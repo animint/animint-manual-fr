@@ -7,7 +7,7 @@ if(FALSE){
 }
 ```
 
-In this chapter we will explore several data visualizations related to benchmarking machine learning algorithms using the `mlr3` framework.
+Dans ce chapitre, nous allons explorer plusieurs visualisations qui compare la performance des algorithmes d’apprentissage artificiel, avec les packages de `mlr3`.
 
 <!-- comment -->
 
