@@ -7,63 +7,63 @@ if(FALSE){
 }
 ```
 
-In this chapter we will explore several data visualizations related to benchmarking machine learning algorithms using the `mlr3` framework.
+Dans ce chapitre, nous allons explorer plusieurs visualisations qui compare la performance des algorithmes d’apprentissage artificiel, avec les packages de `mlr3`.
 
 <!-- comment -->
 
-* We begin by explaining the advantages of the `mlr3` framework.
+* Nous commençons avec une explication de l’utilité des packages `mlr3` pour la comparaison des algorithmes d’apprentissage artificiel.
 <!-- comment -->
-* We use `mlr3` to define and execute a benchmark comparison using several binary classification problems, and several learning algorithms (nearest neighbors, linear model, neural networks).
+* Nous définissons une comparaison sur plusieurs problèmes de classification binaire, avec plusieurs algorithmes d’apprentissage (plus proches voisins, modèle linaire, réseau de neurones).
 <!-- comment -->
-* We create various plots of test set error rates and Area Under the ROC curve.
+* Nous faisons des graphiques montrant les taux d’erreur et l’aire sous la courbe ROC.
 <!-- comment -->
-* We show how to add interactivity to ROC curves, including several levels of detail (data set, cross-validation iteration, FPR threshold).
+* Nous rajoutons l’interactivité aux courbes ROC, pour montrer plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
 <!-- comment -->
-* We plot validation set metrics, which are used to check model selection, and we discuss signs of over- and under-fitting.
+* Nous visualisons des mesures de fidelité et d’erreur par rapport à l’ensemble de validation, pour vérifier si nous avons bien évité le surapprentissage et le sous-apprentissage.
 
 <!-- comment -->
 
-## What is `mlr3`? {#what-is-mlr3}
+## Motivation pour `mlr3` {#motivation-mlr3}
 
 <!-- comment -->
 
-There are many different packages which implement machine learning algorithms that can be used in R. For example,
+Il y a plusieurs packages R qui proposent des algorithmes d’apprentissage artificiel, par exemple :
 
 <!-- comment -->
 
-* `library(kknn)` provides K-Nearest Neighbors, which was explained in [Chapter 10](/ch10).
+* `library(kknn)` fournit K Plus Proches Voisins (KPPV), que nous avons exploré dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` provides L1-regularized linear models like the Lasso, which was explained in [Chapter 11](/ch11).
+* `library(glmnet)` fournit les modèles lineaires avec régularisation L1, commo le LASSO, que nous avons exploré dans le [chapitre 11](/ch11).
 <!-- comment -->
-* `library(torch)` provides neural networks, which were explained in [Chapter 18](/ch18).
+* `library(torch)` fournit les réseaux des neurones, que nous avons exploré dans le [chapitre 18](/ch18).
 
 <!-- comment -->
 
-When we want to machine learning to create a predictive model for a given data set, we typically want to try a variety of different algorithms, because we do not know in advance which algorithm will be most accurate for a given data set.
+Pour obtenir des bons résultats de prédiction sur un jeu de données, nous voulons typiquement entraîner plusieurs algorithmes différents, car nous ne savons pas quel algorithme aura les meilleures performances dans ces données.
 <!-- comment -->
-So we would like to run the learning algorithms which are implemented in these different R packages, and standardized the results so they can be analyzed together to determine which algorithm is most accurate.
+Alors nous voulons utiliser plusieurs différents packages, pour ensuite analyser les résultats ensemble, pour déterminer quel algorithme donne les meilleures prédictions.
 <!-- comment -->
-Each R package provides a function for model fitting, which has a different name and API in each package (some functions input matrices, others data frames, etc).
+Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
-Typically each package provides a `predict()` method, but the output format differs between packages (some packages output class labels, others output probabilities between 0 and 1, others output a real-valued score, etc).
+Typiquement chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent entre packages (`factor` pour classe, `matrix` pour probabilités de chaque classe, et cætera).
 <!-- comment -->
-How can we adapt our data set to each package?
+Comment adapter chaque jeu de données pour chaque package ?
 <!-- comment -->
-And how can we convert each packages results into a standard format for analysis?
+Et comment convertir les prédictions de chaque package, pour avoir un type de sortie uniforme, qui permet la comparaison de résultats ?
 <!-- comment -->
-The `mlr3` framework provides a useful package for this purpose [@bischl2024applied].
+Le package `mlr3` fournit plusieurs fonctions qui simplifient ce genre d’analyse, qu’on appelle « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
-* Each data set is represented as a `Task` which is basically a data table with meta-data about which columns to use for inputs, outputs, etc.
+* Chaque jeu de données est un `Task` qui rélie un tableau de données d’apprentissage avec quelques méta-données sur quelles colonnes seront utilisées pour différents rôles (entrée, sortie, et cætera).
 <!-- comment -->
-* Each machine learning algorithm is represented as a `Learner` class that provides predicted values in a standard format (matrix of predicted probabilities for each class).
+* Chaque algorithme d’apprentissage est un `Learner` qui fournit les prédictions avec type uniforme (matrice de probabilités pour chaque classe).
 
 <!-- comment -->
 
-This chapter explains how to use `animint2` to create interactive visualizations that explore how well different learning algorithms predict in different data sets.
+Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
 <!-- comment -->
-Some of the code in this chapter is adapted from [a blog post](https://tdhock.github.io/blog/2025/mlr3torch-conv/) with some static visualizations.
+Le code dans ce chapitre est une version modifiée du code dans [ce blog](https://tdhock.github.io/blog/2025/mlr3torch-conv/), qui aborde la visualisation statique.
 
 <!-- comment -->
 
