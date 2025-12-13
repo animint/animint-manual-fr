@@ -45,25 +45,25 @@ Alors nous voulons utiliser plusieurs différents packages, pour ensuite analyse
 <!-- comment -->
 Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
-Typically each package provides a `predict()` method, but the output format differs between packages (some packages output class labels, others output probabilities between 0 and 1, others output a real-valued score, etc).
+Typiquement chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent entre packages (`factor` pour classe, `matrix` pour probabilités de chaque classe, et cætera).
 <!-- comment -->
-How can we adapt our data set to each package?
+Comment adapter chaque jeu de données pour chaque package ?
 <!-- comment -->
-And how can we convert each packages results into a standard format for analysis?
+Et comment convertir les prédictions de chaque package, pour avoir un type de sortie uniforme, qui permet la comparaison de résultats ?
 <!-- comment -->
-The `mlr3` framework provides a useful package for this purpose [@bischl2024applied].
+Le package `mlr3` fournit plusieurs fonctions qui simplifient ce genre d’analyse, qu’on appelle « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
-* Each data set is represented as a `Task` which is basically a data table with meta-data about which columns to use for inputs, outputs, etc.
+* Chaque jeu de données est un `Task` qui rélie un tableau de données d’apprentissage avec quelques méta-données sur quelles colonnes seront utilisées pour différents rôles (entrée, sortie, et cætera).
 <!-- comment -->
-* Each machine learning algorithm is represented as a `Learner` class that provides predicted values in a standard format (matrix of predicted probabilities for each class).
+* Chaque algorithme d’apprentissage est un `Learner` qui fournit les prédictions avec type uniforme (matrice de probabilités pour chaque classe).
 
 <!-- comment -->
 
-This chapter explains how to use `animint2` to create interactive visualizations that explore how well different learning algorithms predict in different data sets.
+Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
 <!-- comment -->
-Some of the code in this chapter is adapted from [a blog post](https://tdhock.github.io/blog/2025/mlr3torch-conv/) with some static visualizations.
+Le code dans ce chapitre est une version modifiée du code dans [ce blog](https://tdhock.github.io/blog/2025/mlr3torch-conv/), qui aborde la visualisation statique.
 
 <!-- comment -->
 
