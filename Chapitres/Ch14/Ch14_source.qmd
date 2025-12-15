@@ -531,13 +531,13 @@ Exercices :
 
 <!-- paragraph -->
 
-- Utiliser le nom `clickSelects` et `showSelected` pour créer une visualisation qui montre l'ajustement excessif et l'ajustement insuffisant, comme dans l'exemple suivant [cette visualisation du modèle linéaire et des plus proches voisins](https://tdhock.github.io/2023-12-04-degree-neighbors/).
+- Utilisez les `clickSelects` et `showSelected` nommés pour créer une visualisation illustrant le sur- et sous-ajustement, comme dans [cette visualisation du modèle linéaire et des plus proches voisins](https://tdhock.github.io/2023-12-04-degree-neighbors/).
 <!-- comment -->
-- Utiliser le nom `clickSelects` et `showSelected` pour créer une visualisation des données de votre domaine d'expertise.
+- Utilisez les `clickSelects` et `showSelected` nommés pour créer une visualisation de données de votre domaine d'expertise.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 15](/ch15) explique comment visualiser les algorithmes de recherche de racines.
+Dans le [chapitre 15](/ch15), nous vous expliquerons comment visualiser les algorithmes de recherche de racines (« zero-finding »).
 
 <!-- paragraph -->
 
