@@ -171,13 +171,13 @@ Exercices pour cette section :
 
 <!-- paragraph -->
 
-- modifiez les échelles x/y de façon à ce que les mêmes tics soient représentés.
+- Modifier les échelles x/y de façon à ce que les mêmes tics soient représentés.
 <!-- comment -->
-- modifiez la couleur de chaque segment pour qu'elle soit la même que l'agrégation correspondante.
+- Modifier la couleur de chaque segment pour qu'elle soit la même que l'agrégation correspondante.
 <!-- comment -->
-- ajoutez une infobulle qui indique la valeur de la distance.
+- Ajouter une infobulle qui indique la valeur de la distance.
 <!-- comment -->
-- faites varier la largeur du segment en fonction de son optimalité (le segment connecté au centre de l'agrégation la plus proche devrait être mis en évidence par une largeur plus élevée).
+- Faire varier la largeur du segment en fonction de son optimalité (le segment connecté au centre de l'agrégation la plus proche devrait être mis en évidence par une largeur plus élevée).
 
 <!-- paragraph -->
 
@@ -329,7 +329,7 @@ Exercices :
 
 - Faites en sorte que les centres apparaissent toujours au premier plan (au-dessus des données).
 <!-- comment -->
-- Ajoutez des transitions graduelles.
+- Ajoutez des transitions en douceur.
 <!-- comment -->
 - Ajoutez une animation sur la variable d'itération.
 <!-- comment -->
