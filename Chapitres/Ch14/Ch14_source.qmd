@@ -1,4 +1,4 @@
-# Nommé `clickSelects` et `showSelected`
+# `clickSelects` et `showSelected` nommés
 
 <!-- paragraph -->
 
@@ -8,9 +8,9 @@ knitr::opts_chunk$set(fig.path="ch14-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre explique comment utiliser [nommé `clickSelects` et `showSelected` variables](/ch06#data-driven-selectors) pour créer des noms de sélecteurs basés sur des données.
+Ce chapitre explique comment utiliser les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour créer des noms de sélecteurs basés sur des données.
 <!-- comment -->
-Cette fonctionnalité facilite l'écriture du code animint et accélère la compilation.
+Cette fonctionnalité facilite l'écriture du code `animint2` et accélère la compilation.
 
 <!-- paragraph -->
 
@@ -18,23 +18,23 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par joindre le `PSJ` et en calculant les données à tracer.
+- Nous commençons par joindre le jeu de données `PSJ` et compiler les données à tracer.
 <!-- comment -->
-- Nous montrons une méthode pour définir une animint avec de nombreux sélecteurs, en utilisant des boucles for.
+- Nous montrons une méthode pour définir un `animint` avec de nombreux sélecteurs, en utilisant des boucles `for`.
 <!-- comment -->
-Cette méthode est techniquement correcte, mais calculatoirement inefficace.
+Cette méthode est techniquement correcte, mais inefficace sur le plan computationnel.
 <!-- comment -->
 - Nous expliquons ensuite la méthode préférée pour définir une animint avec de nombreux sélecteurs, en utilisant des objets nommés `clickSelects` et `showSelected`.
 <!-- comment -->
-Cette méthode est plus efficace en termes de calcul et plus facile à coder.
+Cette méthode est plus efficace sur le plan computationnel et plus facile à coder.
 
 <!-- paragraph -->
 
-## Téléchargement client \<- serveur {#download}
+## Téléchargement du jeu de données {#download}
 
 <!-- paragraph -->
 
-Les données de l'exemple proviennent de la base de données [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint) qui permet de détecter des pics dans des séquences de données génomiques.
+Les données de l'exemple proviennent du [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint) qui permet de détecter des pics dans des séquences de données génomiques.
 <!-- comment -->
 Le code ci-dessous télécharge le jeu de données.
 
@@ -49,17 +49,17 @@ sapply(PSJ, class)
 
 <!-- paragraph -->
 
-Ci-dessus, nous voyons que `PSJ` est une liste de plusieurs listes et cadres de données.
+Ci-dessus, nous voyons que `PSJ` est une liste de plusieurs listes et tableaux de données.
 
 <!-- paragraph -->
 
-## Explorer `PSJ` données avec des ggplots statiques {#explore-data-with-static-ggplots}
+## Exploration des données `PSJ` avec des ggplots statiques {#explore-data-with-static-ggplots}
 
 <!-- paragraph -->
 
 Nous commençons par un graphique de quelques données ChIP-seq génomiques, qui sont des données séquentielles qui prennent de grandes valeurs lorsqu'il y a une zone active (typiquement des gènes activement transcrits).
 <!-- comment -->
-Dans le code ci-dessous, nous utilisons chaque échantillon dans un panneau séparé.
+Dans le code ci-dessous, nous affichons chaque échantillon dans un panneau séparé.
 
 <!-- paragraph -->
 
@@ -100,7 +100,7 @@ ann.colors <- c(
 
 <!-- paragraph -->
 
-La figure ci-dessus montre les données bruitées brutes sous forme de gris. `geom_line()`.
+La figure ci-dessus montre les données brutes et bruitées sous forme d'un `geom_line()` gris.
 <!-- comment -->
 Les rectangles de couleur représentent des étiquettes qui indiquent si le début ou la fin d'un pic doit être prédit dans une région et un échantillon donnés.
 <!-- comment -->
@@ -120,7 +120,7 @@ library(data.table)
 
 <!-- paragraph -->
 
-Le code ci-dessus a ajouté l'élément `y` qui est utilisée pour afficher les problèmes dans le code ci-dessous.
+Le code ci-dessus a ajouté la colonne `y` qui est utilisée pour afficher les problèmes dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -146,7 +146,7 @@ Le code ci-dessus a ajouté l'élément `y` qui est utilisée pour afficher les 
 
 <!-- paragraph -->
 
-Ci-dessus, nous voyons un bas de page `problems` a été ajouté au graphique précédent.
+Ci-dessus, on voit qu'un panneau inférieur intitulé `problems` a été ajouté au graphique précédent.
 <!-- comment -->
 Le graphique statique ci-dessus est surchargé ; la version interactive sera lisible parce qu'elle n'affichera qu'une seule valeur de `bases.per.problem` à la fois.
 <!-- comment -->
@@ -186,7 +186,7 @@ Nous utilisons ces données pour tracer le graphique ci-dessous.
 
 La figure ci-dessus montre le nombre minimum d'erreurs d'étiquettes en fonction de la taille du problème.
 <!-- comment -->
-Les rectangles gris permettent de sélectionner la taille du problème.
+Des rectangles gris seront utilisés pour sélectionner la taille du problème.
 
 <!-- paragraph -->
 
@@ -208,7 +208,7 @@ pdot <- function(L){
 
 <!-- paragraph -->
 
-Le code ci-dessus utilise l'élément `pdot()` qui utilise la fonction [tableau de données idiome](/ch99#list-of-data-tables) pour ajouter une colonne nommée `problem.dot` qui sera utilisée ci-dessous pour définir les sélecteurs dans la visualisation interactive.
+Le code ci-dessus utilise la fonction `pdot()` qui utilise l'idiome [liste de tableaux de données](/ch99#list-of-data-tables) pour ajouter une colonne nommée `problem.dot`, laquelle servira ensuite à définir les sélecteurs dans la visualisation interactive.
 <!-- comment -->
 Nous traçons ci-dessous le nombre de pics et d'erreurs d'étiquettes, en fonction du paramètre de pénalité de l'algorithme.
 
@@ -248,9 +248,9 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
 
 <!-- paragraph -->
 
-La figure ci-dessus montre `errors` (panneau supérieur) et `peaks` (panneau du bas) en fonction de `log(penalty)`.
+La figure ci-dessus montre `errors` (panneau supérieur) et `peaks` (panneau inférieur) en fonction de `log(penalty)`.
 <!-- comment -->
-Là encore, cette version statique est surreprésentée ; l'interactivité sera utilisée pour que cette figure soit lisible (elle ne montre que le sous-ensemble de données correspondant aux valeurs sélectionnées de`bases.per.problem` et `problem.name`).
+Là encore, cette version statique est surchargée ; l'interactivité sera utilisée pour rendre la figure lisible (n'affiche que le sous-ensemble de données correspondant aux valeurs sélectionnées de `bases.per.problem` et `problem.name`).
 
 <!-- paragraph -->
 
@@ -258,9 +258,9 @@ Là encore, cette version statique est surreprésentée ; l'interactivité sera 
 
 <!-- paragraph -->
 
-Dans cette section, nous combinons les ggplots de la section précédente en une visualisation des données interactive liée.
+Dans cette section, nous combinons les `ggplots` de la section précédente en une visualisation des données interactive liée.
 <!-- comment -->
-Le code ci-dessous utilise `theme_animint()` pour attacher certaines options d'affichage au graphique de couverture précédent, et ajoute l'attribut `first` pour spécifier quels sous-ensembles de données doivent être affichés en premier.
+Le code ci-dessous utilise `theme_animint()` pour attacher certaines options d'affichage au graphique de couverture précédent, et ajoute l'option `first` pour spécifier quels sous-ensembles de données doivent être affichés en premier.
 
 <!-- paragraph -->
 
@@ -284,7 +284,7 @@ timing.incomplete.construct <- system.time({
 
 La sortie temporelle ci-dessus montre que la définition initiale est rapide.
 <!-- comment -->
-Afficher cette visualisation des données préliminaires (incomplètes) dans le code ci-dessous est également rapide.
+Générer cette visualisation des données préliminaires (incomplètes) dans le code ci-dessous est également rapide.
 
 <!-- paragraph -->
 
@@ -308,11 +308,11 @@ Nous voyons ci-dessus une visualisation des données avec trois graphiques.
 
 <!-- paragraph -->
 
-## Ajouter de l'interactivité à l'aide de boucles for {#define-using-for-loops}
+## Ajouter de l'interactivité à l'aide de boucles `for` {#define-using-for-loops}
 
 <!-- paragraph -->
 
-Dans cette section, nous ajoutons des couches aux ggplots précédents en utilisant une boucle for, ce qui est sous-optimal, mais nous le montrons à titre de comparaison avec la meilleure approche (nommée `clickSelects` et `showSelected`) qui est présentée dans la section suivante.
+Dans cette section, nous ajoutons des couches aux `ggplots` précédents en utilisant une boucle `for`, ce qui est sous-optimal, mais nous le montrons à titre de comparaison avec la meilleure approche (`clickSelects` et `showSelected` nommés) qui est présentée dans la prochaine section.
 <!-- comment -->
 La visualisation de la section précédente est incomplète.
 <!-- comment -->
@@ -320,17 +320,17 @@ Nous aimerions ajouter
 
 <!-- paragraph -->
 
-- des rectangles dans le tracé en bas à gauche qui nous permettraient de sélectionner le nombre de pics prédits dans le problème donné.
+- des rectangles dans le graphique en bas à gauche qui nous permettraient de sélectionner le nombre de pics prédits dans le problème donné.
 <!-- comment -->
 - des segments et des rectangles dans le graphique du haut qui montreraient les pics prédits et les erreurs d'étiquette.
 
 <!-- paragraph -->
 
-Une façon (inefficace) d'ajouter ces éléments serait d'utiliser une boucle for, codée ci-dessous.
+Une façon (inefficace) d'ajouter ces éléments serait d'utiliser une boucle `for`, codée ci-dessous.
 <!-- comment -->
 Pour chaque problème, il existe un sélecteur (appelé `problem.dot`) pour le nombre de pics dans ce problème.
 <!-- comment -->
-Dans cette boucle for, nous ajoutons donc quelques couches avec `clickSelects="problem.dot"` ou `showSelected="problem.dot"` à l'élément `coverage` et `modelSelection` graphiques.
+Dans cette boucle `for`, nous ajoutons donc quelques couches avec `clickSelects="problem.dot"` ou `showSelected="problem.dot"` aux graphiques `coverage` et `modelSelection`.
 
 <!-- paragraph -->
 
@@ -374,7 +374,7 @@ print(timing.for.construct <- system.time({
 
 <!-- paragraph -->
 
-Notez le timing du code ci-dessus, qui évalue juste le code R qui définit ces données viz.
+Notez le temps d'exécution (« timing ») du code ci-dessus, qui évalue juste le code R qui définit cette visualisation des données.
 <!-- comment -->
 Ensuite, nous compilons la visualisation des données.
 
@@ -388,29 +388,29 @@ cat(elapsed.for <- Sys.time()-before.for, "seconds\n")
 
 <!-- paragraph -->
 
-Notez que la compilation prend plusieurs secondes, car il y a beaucoup de geoms (cliquez sur Afficher le tableau de l'état du téléchargement pour les voir tous).
+Notez que la compilation prend plusieurs secondes, car il y a beaucoup de geoms (cliquez sur « Show download status table » pour les voir tous).
 <!-- comment -->
 Par rapport à la visualisation des données de la section précédente, celle-ci a
 
 <!-- paragraph -->
 
-- des segments bleus qui apparaissent dans le tracé des données de couverture supérieure, pour indiquer les pics prédits.
+- des segments bleus qui apparaissent dans le graphique des données de couverture supérieure, pour indiquer les pics prédits.
 <!-- comment -->
 - des rectangles de sélection qui peuvent être cliqués dans le graphique en bas à droite, pour modifier le nombre d'échantillons présentant un pic dans le problème sélectionné.
 
 <!-- paragraph -->
 
-Dans la section suivante, nous allons créer la même visualisation des données, mais de manière plus efficace.
+Dans la prochaine section, nous allons créer la même visualisation des données, mais de manière plus efficace.
 
 <!-- paragraph -->
 
-## Ajouter de l'interactivité à l'aide de named `clickSelects` et `showSelected` {#define-using-named}
+## Ajouter de l'interactivité à l'aide de `clickSelects` et `showSelected` nommés {#define-using-named}
 
 <!-- paragraph -->
 
-Dans cette section, nous utilisons le nom `clickSelects` et `showSelected` pour créer une version plus efficace de la visualisation des données précédente.
+Dans cette section, nous utilisons les `clickSelects` et `showSelected` nommés pour créer une version plus efficace de la visualisation des données précédente.
 <!-- comment -->
-En général, toute visualisation des données définie à l'aide de boucles for dans le code R peut être rendue plus efficace en utilisant à la place cette méthode.
+En général, toute visualisation des données définie à l'aide de boucles `for` dans le code R peut être rendue plus efficace en utilisant à la place cette méthode.
 <!-- comment -->
 Tout d'abord, nous définissons quelques données communes.
 
@@ -422,17 +422,17 @@ Tout d'abord, nous définissons quelques données communes.
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre un tableau de contingence avec une ligne par pic qui peut être affiché, pour différents échantillons, problèmes, et choix interactifs de. `bases.per.problem` et `peaks` de manière interactive.
+La sortie ci-dessus montre un tableau de contingence avec une ligne par pic qui peut être affiché, pour différents échantillons, problèmes, et choix interactifs des paramètres `bases.per.problem` et `peaks`.
 <!-- comment -->
-Notez que le `problem.dot` qui définit le nom du sélecteur qui stockera le nombre de pics actuellement sélectionné pour ce problème.
+Notez que la colonne `problem.dot` qui définit le nom du sélecteur qui stockera le nombre de pics actuellement sélectionné pour ce problème.
 
 <!-- paragraph -->
 
 Dans le code ci-dessous, l'idée principale est que pour chaque problème, il existe un sélecteur défini par la colonne `problem.dot` pour le nombre de pics dans ce problème.
 <!-- comment -->
-Nous utilisons `showSelected=c(problem.dot="peaks")` et `clickSelects=c(problem.dot="peaks")` pour indiquer que le nom du sélecteur se trouve dans le fichier `problem.dot` et que la valeur de la sélection se trouve dans la colonne `peaks`colonne.
+Nous utilisons `showSelected=c(problem.dot="peaks")` et `clickSelects=c(problem.dot="peaks")` pour indiquer que le nom du sélecteur se trouve dans la colonne `problem.dot`, et que la valeur de la sélection se trouve dans la colonne `peaks`.
 <!-- comment -->
-Le`animint2dir()` crée une variable de sélection pour chaque valeur unique de `problem.dot` (et il utilise les valeurs correspondantes dans `peaks` pour définir/mettre à jour la/les valeur(s) sélectionnée(s)).
+Le compilateur `animint2dir()` crée une variable de sélection pour chaque valeur unique de `problem.dot` (et il utilise les valeurs correspondantes dans `peaks` pour définir/mettre à jour la/les valeur/geoms sélectionnée(s)).
 
 <!-- paragraph -->
 
@@ -459,7 +459,7 @@ print(timing.named.construct <- system.time({
 
 <!-- paragraph -->
 
-Il est clair qu'il faut beaucoup moins de temps pour évaluer le code R ci-dessus qui utilise le nom `clickSelects` et `showSelected`.
+Il est clair qu'il faut beaucoup moins de temps pour évaluer le code R ci-dessus qui utilise les `clickSelects` et `showSelected` nommés.
 <!-- comment -->
 Nous le compilons ci-dessous.
 
@@ -473,9 +473,9 @@ cat(elapsed.named <- Sys.time()-before.named, "seconds\n")
 
 <!-- paragraph -->
 
-La visualisation produite ci-dessus devrait être identique à l'autre visualisation des données de la section précédente.
+L'`animint` produit ci-dessus devrait être identique à l'autre visualisation des données de la section précédente.
 <!-- comment -->
-Les chronogrammes ci-dessus montrent que l'animint nommé `clickSelects` et `showSelected` sont beaucoup plus rapides que les boucles for, tant au niveau de la définition que de la compilation.
+Les temps d'exécution ci-dessus montrent que les `clickSelects` et `showSelected` nommés sont beaucoup plus rapides que les boucles `for`, tant au niveau de la définition que de la compilation.
 
 <!-- paragraph -->
 
@@ -496,7 +496,7 @@ viz.dirs.text <- paste(viz.dirs.vec, collapse=" ")
 
 <!-- paragraph -->
 
-Le tableau de contingence ci-dessus montre que la visualisation des données définie à l'aide de boucles for prend environ deux fois plus d'espace disque que la visualisation des données utilisant des boucles named. `clickSelects` et `showSelected`.
+Le tableau de contingence ci-dessus montre que la visualisation des données définie à l'aide de boucles `for` prend environ deux fois plus d'espace disque que la visualisation des données utilisant des `clickSelects` et `showSelected` nommés.
 
 <!-- paragraph -->
 
@@ -504,7 +504,7 @@ Le tableau de contingence ci-dessus montre que la visualisation des données dé
 
 <!-- paragraph -->
 
-Le tableau ci-dessous résume l'utilisation du disque et les temporisations présentées dans ce chapitre.
+Le tableau ci-dessous résume l'utilisation du disque et les temps d'exécution présentés dans ce chapitre.
 
 <!-- paragraph -->
 
@@ -523,7 +523,7 @@ data.table(
 
 <!-- paragraph -->
 
-Il ressort clairement du tableau de contingence ci-dessus que les personnes nommées `clickSelects` et `showSelected` sont plus efficaces à ces deux égards et devraient être utilisées à la place des boucles "for".
+Il ressort clairement du tableau de contingence ci-dessus que les `clickSelects` et `showSelected` nommés sont plus efficaces à ces deux égards et devraient être utilisés à la place des boucles `for`.
 
 <!-- paragraph -->
 
