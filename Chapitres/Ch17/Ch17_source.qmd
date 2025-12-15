@@ -1,4 +1,4 @@
-# Agrégation par K-means
+# K-moyennes
 
 <!-- paragraph -->
 
