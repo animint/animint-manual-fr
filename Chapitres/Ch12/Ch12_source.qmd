@@ -91,13 +91,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-En particulier, nous supposons que l'étiquette `y` est négative (-1) si `x1.sq + noise < threshold` et positive (1) dans le cas contraire.
+Concrètement, nous supposons que l'étiquette `y` est négative (-1) si `x1.sq + noise < threshold` et qu'elle est positive (1) dans le cas contraire.
 <!-- comment -->
 Le graphique ci-dessous permet de visualiser les scores et les étiquettes, en fonction de la fonctionnalité d'entrée `x1`.
 <!-- comment -->
-La fonction de score réel apparaît également en noir.
+Le graphique montre aussi la fonction de score réel (en noir).
 <!-- comment -->
-Bien sûr, nous ne pourrions pas faire cette visualisation avec des données réelles (seules les étiquettes sont connues dans les données réelles, pas les scores).
+Bien sûr, cette visualisation serait impossible avec des données réelles (seules les étiquettes sont connues dans les données réelles, pas les scores).
 
 <!-- paragraph -->
 
@@ -136,7 +136,7 @@ ggplot()+
 
 Le graphique ci-dessous montre les scores et les étiquettes en fonction du carré de la fonctionnalité `x1.sq`.
 <!-- comment -->
-Il est clair que la fonction de score que nous voulons apprendre est linéaire en `x1.sq`.
+Il est clair que la fonction de score est linéaire par rapport à `x1.sq`.
 
 <!-- paragraph -->
 
