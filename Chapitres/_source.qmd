@@ -2,7 +2,7 @@
 
 <!-- paragraph -->
 
-Ce manuel explique comment concevoir et créer des visualisations de données interactives à l'aide du package R. `animint2`.
+Ce manuel explique comment concevoir et créer des visualisations de données interactives à l'aide du package R `animint2`.
 
 <!-- paragraph -->
 
