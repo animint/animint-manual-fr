@@ -58,7 +58,7 @@ Le [chapitre 5](ch05) explique différentes façons de partager vos visualisatio
 
 <!-- paragraph -->
 
-[Chapitre 6](ch06) couvre d'autres caractéristiques de `animint2` y compris la manière de spécifier les hyperliens, les infobulles, les noms de variables de sélecteurs pilotés par les données.
+Le [chapitre 6](ch06) couvre d'autres fonctionnalités de `animint2`, y compris la manière de spécifier des hyperliens, des info-bulles et toutes les autres nouvelles fonctionnalités qui n’existe pas dans les graphiques statiques de `ggplot2`.
 
 <!-- paragraph -->
 
