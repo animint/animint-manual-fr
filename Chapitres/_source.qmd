@@ -40,7 +40,7 @@ Il explique comment les ggplots standards peuvent être générés sur des pages
 
 Le [chapitre 3](ch03) introduit `showSelected`, l'un des deux principaux mots-clés que `animint2` introduit pour la conception de visualisation des données interactives.
 <!-- comment -->
-Le chapitre 3 commence par expliquer les variables de sélection, qui fournissent le mécanisme d'interaction dans la visualisation de données. `animint2`.
+Le chapitre 3 commence par expliquer les variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
 <!-- comment -->
 Le chapitre 3 explique ensuite comment le`showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
