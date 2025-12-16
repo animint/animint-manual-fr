@@ -14,7 +14,7 @@ Les chapitres de ce manuel sont organisés comme suit.
 
 <!-- paragraph -->
 
-### Les chapitres `animint2` extensions de la grammaire graphique {#animint}
+### Les extensions `animint2`  à la grammaire des graphiques {#animint}
 
 <!-- paragraph -->
 
