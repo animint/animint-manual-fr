@@ -92,7 +92,7 @@ Le [chapitre 11](ch11) présente une visualisation des données qui explique le 
 
 <!-- paragraph -->
 
-[Chapitre 12](ch12) présente une visualisation des données qui explique les machines à vecteurs de support (SVM), un modèle d'apprentissage automatique pour la classification binaire.
+Le [chapitre 12](ch12) présente une visualisation des données qui explique la séparateur à vaste marge (aussi connu sous le nom « machine à vecteurs de support » ou SVM), un modèle d'apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
