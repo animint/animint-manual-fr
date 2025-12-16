@@ -88,7 +88,7 @@ Le [chapitre 10](ch10) explique comment créer une version interactive de la vis
 
 <!-- paragraph -->
 
-[Chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
+Le [chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
 
 <!-- paragraph -->
 
