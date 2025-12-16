@@ -205,7 +205,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-L'`animint2` ci-dessous utilise `clickSelects` pour montrer quels points de l'espace d'entrée et de l'espace quadrillé correspondent.
+L'`animint2` ci-dessous utilise `clickSelects` pour montrer les correspondances entre les points de l'espace d'entrée et de l'espace des fonctions au carré.
 <!-- comment -->
 Il suffit de créer un `data.i` qui possède un identifiant unique pour chaque point de données.
 
@@ -275,11 +275,11 @@ animint(
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé deux graphiques multi-panneaux avec l'option [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) plutôt que de créer quatre graphiques distincts.
+Notez que nous avons utilisé deux graphiques multi-panneaux avec l'option [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) au lieu de créer quatre graphiques distincts.
 <!-- comment -->
 Cela met l'accent sur le fait que certains graphiques/facettes ont un axe `x1` ou `x1.sq` commun.
 <!-- comment -->
-Notez que nous avons également masqué la légende des couleurs dans le premier graphique, puisqu'il suffit d'avoir une seule légende des couleurs.
+Notez que nous avons également masqué la légende des couleurs dans le premier graphique, puisqu'une seule légende suffit.
 
 <!-- paragraph -->
 
@@ -313,7 +313,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Nous commençons par ajuster un Séparateur à Vaste Marge (SVM) linéaire aux données d'entraînement dans l'espace des fonctionnalités au carré, et par visualiser les vraies étiquettes `y` avec les étiquettes prédites `pred.y`.
+Nous commençons par ajuster un SVM linéaire aux données d'entraînement dans l'espace des fonctionnalités au carré, puis nous visualisons les vraies étiquettes `y` de même que les étiquettes prédites `pred.y`.
 
 <!-- paragraph -->
 
@@ -393,11 +393,11 @@ ggplot()+
 
 Le graphique ci-dessus montre la véritable limite de décision à l'aide d'un `vline` gris.
 <!-- comment -->
-Il utilise également`geom_contour` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire en pointillés, score prédit -1 et 1).
+Il utilise également`geom_contour` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire pointillée, scores prédits -1 et 1).
 <!-- comment -->
 Puisque la limite de décision et la marge sont linéaires dans cet espace, nous pouvons également utiliser `geom_abline` pour les afficher.
 <!-- comment -->
-Pour ce faire, nous devons faire un peu de mathématiques et calculer les équations de la pente et de l'ordonnée à l'origine de ces droites (en fonction du biais appris `b(fit)` et `weight.vec`, ainsi que des paramètres d'échelle `mu` et `sigma`).
+Pour ce faire, nous devons effectuer quelques calculs mathématiques et trouver les équations de la pente et de l'ordonnée à l'origine de ces droites (en fonction du biais appris `b(fit)` et du `weight.vec`, ainsi que des paramètres d'échelle `mu` et `sigma`).
 
 <!-- paragraph -->
 
@@ -505,7 +505,7 @@ Le graphique ci-dessus montre le ressort (slack) dans les segments gris, et les 
 <!-- comment -->
 La limite de décision de Bayes est représentée en arrière-plan par une ligne verticale violette.
 <!-- comment -->
-Les vecteurs de support sont les points dont les coefficients alpha ne sont pas nuls.
+Les vecteurs de support sont les points pour lesquels les coefficients alpha ne sont pas nuls.
 <!-- comment -->
 Les vecteurs de support en noir (pleins) sont sur la marge et les vecteurs de support en gris sont du mauvais côté de la marge (et ont une marge de tolérance non nulle).
 <!-- comment -->
@@ -560,7 +560,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-L'objectif ci-dessous est de créer un `animint2` qui montre comment la limite de décision, la marge et le ressort ("slack") évoluent en fonction du paramètre de coût.
+L'objectif de la démonstration ci-dessous est de créer un `animint2` qui montre comment la limite de décision, la marge et le ressort ("slack") évoluent en fonction du paramètre de coût.
 
 <!-- paragraph -->
 
