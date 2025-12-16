@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="Ch12-figures/")
 
 <!-- paragraph -->
 
-L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique les [Séparateur à Vaste Marge](https://en.wikipedia.org/wiki/Support_vector_machine) un modèle d'apprentissage automatique pour la classification binaire.
+L'objectif de ce chapitre est de créer une visualisation des données interactive pour expliquer le concept de [séparateur à vaste marge](https://en.wikipedia.org/wiki/Support_vector_machine), un modèle d'apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
