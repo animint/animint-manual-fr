@@ -1,10 +1,4 @@
----
-title: K-Nearest-Neighbors example
-layout: default
-output: bookdown::html_chapter
----
-
-<!-- paragraph -->
+# K plus proches voisins
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch10-figures/")
@@ -12,75 +6,75 @@ knitr::opts_chunk$set(fig.path="Ch10-figures/")
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of the K-Nearest-Neighbors (KNN) classifier.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We will start with the original static data visualization, re-designed as two ggplots rendered by animint.
+- Nous commencerons par la visualisation statique originale des données, repensée sous la forme de deux ggplots affichés par `animint2`.
 <!-- comment -->
-There is a plot of 10-fold cross-validation error, and a plot of the predictions of the 7-Nearest-Neighbors classifier.
+Voici un graphique de l'erreur de validation à 10 divisions et un graphique des prédictions du classificateur 7 plus proches voisins.
 <!-- comment -->
-- We propose a re-design that allows selecting the number of neighbors used for the model predictions.
+- Nous proposons deux refontes. Grâce à la première vous pourrez sélectionner le nombre de voisins utilisés pour les prédictions du modèle
 <!-- comment -->
-- We propose a second re-design that allows selecting the number of folds used to compute the cross-validation error.
+- et grâce à la seconde, le nombre de divisions utilisés pour le calcul de l'erreur de validation croisée.
 
 <!-- paragraph -->
 
-## Original static figure {#static}
+## Figure statique originale {#knn-static}
 
 <!-- paragraph -->
 
-We start by reproducing a static version of Figure 13.4 from [Elements of Statistical Learning by Hastie et al](http://statweb.stanford.edu/~tibs/ElemStatLearn/) .
+Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 dans le livre [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
 <!-- comment -->
-That Figure consists of two plots:
+Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-![Static KNN viz](Ch10-viz-static.png)
+![Esquisse pour K-Plus-Proches-Voisins](Ch10-viz-interactive.png)
 
 <!-- paragraph -->
 
-Left: mis-classification error curves, as a function of the number of neighbors.
+A gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
 
 <!-- paragraph -->
 
-- `geom_line` and `geom_point` for the error curves.
+- `geom_line` et `geom_point` pour les courbes d'erreur.
 <!-- comment -->
-- `geom_linerange` for error bars of the validation error curve.
+- `geom_linerange` pour les barres d'erreur de la courbe d'erreur de validation.
 <!-- comment -->
-- `geom_hline` for the Bayes error.
+- `geom_hline` pour l'erreur de Bayes.
 <!-- comment -->
-- x = neighbors.
+- x = voisins.
 <!-- comment -->
-- y = percent error.
+- y = pourcentage d'erreur.
 <!-- comment -->
-- color = error type.
+- couleur = type d'erreur.
 
 <!-- paragraph -->
 
-Right: data and decision boundaries in the two-dimensional input feature space.
+À droite : les données et les limites de décision dans l'espace bidimensionnel des variables d'entrée.
 
 <!-- paragraph -->
 
-- `geom_point` for the data points.
+- `geom_point` pour les points de données.
 <!-- comment -->
-- `geom_point` for the classification predictions on the grid in the background.
+- `geom_point` pour les prédictions de classification sur la grille en arrière-plan.
 <!-- comment -->
-- `geom_path` for the decision boundaries.
+- `geom_path` pour les limites de décision.
 <!-- comment -->
-- `geom_text` for the train/test/Bayes error rates.
+- `geom_text` pour les taux d'erreur train/test/Bayes.
 
 <!-- paragraph -->
 
-### Plot of mis-classification error curves {#static-error}
+### Graphique des courbes d'erreurs de mauvaise classification {#static-error}
 
 <!-- paragraph -->
 
-We begin by loading the data set.
+Nous commençons par charger l'ensemble des données.
 
 <!-- paragraph -->
 
@@ -96,31 +90,31 @@ str(ESL.mixture)
 
 <!-- paragraph -->
 
-We will use the following components of this data set:
+Nous utiliserons les éléments suivants de cet ensemble de données :
 
 <!-- paragraph -->
 
-- `x`, the input matrix of the training data set (200 observations x 2 numeric features).
+- `x`, la matrice des variables d'entrée, de l'ensemble de données d'apprentissage (200 observations sur les lignes x 2 variables numériques sur les colonnes).
 <!-- comment -->
-- `y`, the output vector of the training data set (200 class labels, either 0 or 1).
+- `y`, le vecteur de sortie, de l'ensemble de données d'apprentissage (200 étiquettes de classe, soit 0 ou 1).
 <!-- comment -->
-- `xnew`, the grid of points in the input space where we will show the classifier predictions (6831 grid points x 2 numeric features).
+- `xnew`, la matrice représentant la grille de points dans l'espace des variables d'entrée, où seront affichées les prédictions de la fonction de classification (6831 points de la grille sur les lignes x 2 variables numériques sur les colonnes).
 <!-- comment -->
-- `prob`, the true probability of class 1 at each of the grid points (6831 numeric values between 0 and 1).
+- `prob`, la probabilité de la classe 1 à chacun des points de la grille (6831 valeurs numériques comprises entre 0 et 1).
 <!-- comment -->
-- `px1`, the grid of points for the first input feature (69 numeric values between -2.6 and 4.2).
+- `px1`, la grille de points pour le premier variable d'entrée (69 valeurs numériques comprises entre -2,6 et 4,2).
 <!-- comment -->
-These will be used to compute the Bayes decision boundary using the contourLines function.
+Ces points seront utilisés pour calculer la limite de décision de Bayes à l'aide de la fonction `contourLines`.
 <!-- comment -->
-- `px2`, the grid of points for the second input feature (99 numeric values between -2 and 2.9).
+- `px2`, la grille de points pour la deuxième variable d'entrée (99 valeurs numériques comprises entre -2 et 2,9).
 <!-- comment -->
-- `means`, the 20 centers of the normal distributions in the simulation model (20 centers x 2 input features).
+- `means`, les 20 centres des distributions normales dans le modèle de simulation (20 centres sur les lignes x 2 variables sur les colonnes).
 
 <!-- paragraph -->
 
-First, we create a test set, following the example code from `help(ESL.mixture)`.
+Tout d'abord, nous créons un ensemble de tests, en suivant le code d'exemple de `help(ESL.mixture)`.
 <!-- comment -->
-Note that we use a `data.table` rather than a `data.frame` to store these big data, since `data.table` is often faster and more memory efficient for big data sets.
+Notez que nous utilisons un `data.table` plutôt qu'un `data.frame` pour stocker ces données volumineuses, puisque `data.table` est souvent plus rapide et plus économe en mémoire pour les ensembles de données volumineux.
 
 <!-- paragraph -->
 
@@ -140,7 +134,7 @@ test.points
 
 <!-- paragraph -->
 
-We then create a data table which includes all test points and grid points, which we will use in the test argument to the knn function.
+Nous créons ensuite un tableau de données qui comprend tous les points de test et les points de la grille, que nous utiliserons dans l'argument de test de la fonction KPPV.
 
 <!-- paragraph -->
 
@@ -157,7 +151,7 @@ test.and.grid
 
 <!-- paragraph -->
 
-We randomly assign each observation of the training data set to one of ten folds.
+Nous assignons aléatoirement chaque observation de l'ensemble de données d'apprentissage à l'un des 10 divisions.
 
 <!-- paragraph -->
 
@@ -171,9 +165,9 @@ mixture
 
 <!-- paragraph -->
 
-We define the following `OneFold` function, which divides the 200 observations into one train and one validation set.
+Nous définissons la fonction `OneFold` pour diviser les 200 observations en un ensemble d’entraînement et un ensemble de validation.
 <!-- comment -->
-It then computes the predicted probability of the K-Nearest-Neighbors classifier for each of the data points in all sets (train, validation, test, and grid).
+Elle calcule ensuite la probabilité prédite par le classificateur des K Plus Proches Voisins pour chacun des points de données dans tous les ensembles (entraînement, validation, test et grille).
 
 <!-- paragraph -->
 
@@ -200,7 +194,7 @@ OneFold <- function(validation.fold){
       pred.label=="1", prob.winning.class, 1-prob.winning.class)
     fold.data[, pred.label := ifelse(0.5 < probability, "1", "0")]
     fold.data[, is.error := label != pred.label]
-    fold.data[, prediction := ifelse(is.error, "error", "correct")]
+    fold.data[, prediction := ifelse(is.error, "erronée", "correcte")]
     data.by.neighbors[[paste(neighbors)]] <- 
       data.table(neighbors, fold.data)
   }#for(neighbors
@@ -210,11 +204,11 @@ OneFold <- function(validation.fold){
 
 <!-- paragraph -->
 
-Below, we run the `OneFold` function in parallel using the `future` package.
+Ci-dessous, nous exécutons la fonction `OneFold` en parallèle à l'aide du package `future`.
 <!-- comment -->
-Note that validation folds 1:10 will be used to compute the validation set error.
+Pour `validation.fold` de 1 à 10, on calcule l'erreur de l'ensemble de validation.
 <!-- comment -->
-The validation fold 0 treats all 200 observations as a train set, and will be used for visualizing the learned decision boundaries of the K-Nearest-Neighbors classifier.
+Pour `validation.fold=0`, on traite l'ensemble des 200 observations comme un ensemble d'entraînement, qui sera utilisé pour visualiser les frontières de décision apprises avec K Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -224,22 +218,21 @@ data.all.folds.list <- future.apply::future_lapply(
   0:n.folds, function(validation.fold){
     one.fold <- OneFold(validation.fold)
     data.table(validation.fold, one.fold)
-  },
-  future.seed = NULL)
+  }, future.seed = NULL)
 (data.all.folds <- do.call(rbind, data.all.folds.list))
 ```
 
 <!-- paragraph -->
 
-The data table of predictions contains almost 3 million observations!
+Le tableau de données des prédictions contient près de 3 millions d'observations !
 <!-- comment -->
-When there are so many data, visualizing all of them at once is not practical or informative.
+Lorsqu'il y a autant de données, les visualiser toutes en même temps n'est ni pratique ni informatif.
 <!-- comment -->
-Instead of visualizing them all at once, we will compute and plot summary statistics.
+Au lieu de les visualiser simultanément, nous allons calculer et tracer des statistiques sommaires.
 <!-- comment -->
-In the code below we compute the mean and standard error of the mis-classification error for each model (over the 10 validation folds).
+Dans le code ci-dessous, nous calculons la moyenne et l'erreur standard de l'erreur de mauvaise classification pour chaque modèle (sur les 10 divisions dans la validation croisée).
 <!-- comment -->
-This is an example of the [summarize data table idiom](Ch99-appendix.html#summarize-data-table) which is generally useful for computing summary statistics for a single data table.
+Ceci est un exemple de [l'idiome summarize data table](Ch99-appendix.html#summarize-data-table) qui est généralement utile pour calculer des statistiques sommaires pour un tableau de données unique.
 
 <!-- paragraph -->
 
@@ -257,7 +250,7 @@ validation.error
 
 <!-- paragraph -->
 
-Below we construct data tables for the Bayes error (which we know is 0.21 for the mixture example data), and the train/test error.
+Nous construisons ci-dessous des tableaux de données pour l'erreur d’entraînement et pour l'erreur de Bayes (nous savons qu'elle est de 0,21 pour les données de l'exemple de mélange).
 
 <!-- paragraph -->
 
@@ -274,70 +267,77 @@ head(other.error)
 
 <!-- paragraph -->
 
-Below we construct a color palette from `dput(RColorBrewer::brewer.pal(Inf, "Set1"))`, and linetype palettes.
+Ci-dessous, nous construisons une palette de couleurs à partir de `dput(RColorBrewer::brewer.pal(Inf, "Set1"))` et des palettes de types de lignes (`linetype`).
 
 <!-- paragraph -->
 
 ```{r}
 set.colors <- c(
   test="#377EB8", #blue
-  validation="#4DAF4A",#green
   Bayes="#984EA3",#purple
-  train="#FF7F00")#orange
+  validation="#4DAF4A",#green
+  entraînement="#FF7F00")#orange
 classifier.linetypes <- c(
   Bayes="dashed",
-  KNN="solid")
+  KPPV="solid")
 set.linetypes <- set.colors
-set.linetypes[] <- classifier.linetypes[["KNN"]]
+set.linetypes[] <- classifier.linetypes[["KPPV"]]
 set.linetypes["Bayes"] <- classifier.linetypes[["Bayes"]]
 cbind(set.linetypes, set.colors)
 ```
 
 <!-- paragraph -->
 
-The code below reproduces the plot of the error curves from the original Figure.
+Le code ci-dessous reproduit le graphique des courbes d'erreur de la figure originale.
 
 <!-- paragraph -->
 
 ```{r}
 library(animint2)
+add_set_fr <- function(DT)DT[
+, set_fr := ifelse(set=="train", "entraînement", set)]
+add_set_fr(other.error)
+add_set_fr(validation.error)
+add_set_fr(Bayes.error)
+legend.name.type <- "erreur"
 errorPlotStatic <- ggplot()+
   theme_bw()+
   geom_hline(aes(
-    yintercept=error.prop, color=set, linetype=set),
+    yintercept=error.prop, color=set_fr, linetype=set_fr),
     data=Bayes.error)+
   scale_color_manual(
-    "error type", values=set.colors, breaks=names(set.colors))+
+    legend.name.type, values=set.colors, breaks=names(set.colors))+
   scale_linetype_manual(
-    "error type", values=set.linetypes, breaks=names(set.linetypes))+
-  ylab("Misclassification Errors")+
-  xlab("Number of Neighbors")+
+    legend.name.type, values=set.linetypes, breaks=names(set.linetypes))+
+  ylab("Taux d’erreur")+
+  xlab("Nombre de voisins")+
   geom_linerange(aes(
     neighbors, ymin=mean-sd, ymax=mean+sd,
-    color=set),
+    color=set_fr),
     data=validation.error)+
   geom_line(aes(
-    neighbors, mean, linetype=set, color=set),
+    neighbors, mean, linetype=set_fr, color=set_fr),
     data=validation.error)+
   geom_line(aes(
-    neighbors, error.prop, group=set, linetype=set, color=set),
+    neighbors, error.prop,
+    group=set_fr, linetype=set_fr, color=set_fr),
     data=other.error)+
   geom_point(aes(
-    neighbors, mean, color=set),
+    neighbors, mean, color=set_fr),
     data=validation.error)+
   geom_point(aes(
-    neighbors, error.prop, color=set),
+    neighbors, error.prop, color=set_fr),
     data=other.error)
 errorPlotStatic
 ```
 
 <!-- paragraph -->
 
-### Plot of decision boundaries in the input feature space {#static-features}
+### Graphique des limites de décision dans l'espace des variables d'entrée. {#static-features}
 
 <!-- paragraph -->
 
-For the static data visualization of the feature space, we show only the model with 7 neighbors.
+Pour la visualisation statique des données de l'espace des variables, nous ne montrons que le modèle avec 7 voisins.
 
 <!-- paragraph -->
 
@@ -350,7 +350,7 @@ show.points
 
 <!-- paragraph -->
 
-Next, we compute the Train, Test, and Bayes mis-classification error rates which we will show in the bottom left of the feature space plot.
+Ensuite, nous calculons les taux d'erreur de mauvaise classification, que nous afficherons en bas à gauche du graphique de l'espace des variables.
 
 <!-- paragraph -->
 
@@ -369,7 +369,7 @@ error.text
 
 <!-- paragraph -->
 
-We define the following function which we will use to compute the decision boundaries.
+Nous définissons la fonction suivante que nous utiliserons pour calculer les limites de décision.
 
 <!-- paragraph -->
 
@@ -391,7 +391,7 @@ getBoundaryDF <- function(prob.vec){
 
 <!-- paragraph -->
 
-We use this function to compute the decision boundaries for the learned 7-Nearest-Neighbors classifier, and for the optimal Bayes classifier.
+Nous utilisons cette fonction pour calculer les limites de décision pour les 7 plus proches voisins et pour la fonction optimale de Bayes.
 
 <!-- paragraph -->
 
@@ -399,7 +399,7 @@ We use this function to compute the decision boundaries for the learned 7-Neares
 boundary.grid <- show.data[set=="grid",]
 boundary.grid[, label := pred.label]
 pred.boundary <- getBoundaryDF(boundary.grid$probability)
-pred.boundary$classifier <- "KNN"
+pred.boundary$classifier <- "KPPV"
 Bayes.boundary <- getBoundaryDF(ESL.mixture$prob)
 Bayes.boundary$classifier <- "Bayes"
 Bayes.boundary
@@ -407,7 +407,7 @@ Bayes.boundary
 
 <!-- paragraph -->
 
-Below, we consider only the grid points that do not overlap the text labels.
+Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent pas les étiquettes de texte.
 
 <!-- paragraph -->
 
@@ -421,7 +421,7 @@ show.grid
 
 <!-- paragraph -->
 
-The scatterplot below reproduces the 7-Nearest-Neighbors classifier of the original Figure.
+Le nuage de points ci-dessous reproduit le classificateur des 7 Plus Proches Voisins de la figure originale.
 
 <!-- paragraph -->
 
@@ -434,9 +434,13 @@ scatterPlotStatic <- ggplot()+
   theme(axis.text=element_blank(),
         axis.ticks=element_blank(),
         axis.title=element_blank())+
-  ggtitle("7-Nearest Neighbors")+
-  scale_color_manual(values=label.colors)+
-  scale_linetype_manual(values=classifier.linetypes)+
+  ggtitle("7-Plus proches voisins")+
+  scale_color_manual(
+    "classe",
+    values=label.colors)+
+  scale_linetype_manual(
+    "méthode",
+    values=classifier.linetypes)+
   geom_point(aes(
     V1, V2, color=label),
     size=0.2,
@@ -457,7 +461,8 @@ scatterPlotStatic <- ggplot()+
     shape=21,
     data=show.points)+
   geom_text(aes(
-    text.V1.error, V2.bottom, label=paste(set, "Error:")),
+    text.V1.error, V2.bottom,
+    label=paste("Err.", set_fr, ":")),
     data=error.text,
     hjust=0)+
   geom_text(aes(
@@ -469,61 +474,59 @@ scatterPlotStatic
 
 <!-- paragraph -->
 
-### Combined plots {#static-combined}
+### Graphiques combinés {#static-combined}
 
 <!-- paragraph -->
 
-Finally, we combine the two ggplots and render them as an animint.
+Enfin, nous combinons les deux `ggplots` et les affichons sous forme d'`animint2`.
 
 <!-- paragraph -->
 
 ```{r Ch10-viz-static}
-animint(errorPlotStatic, scatterPlotStatic)
+animint(
+  errorPlotStatic+
+    theme_animint(width=300),
+  scatterPlotStatic+
+    theme_animint(last_in_row=TRUE))
 ```
 
 <!-- paragraph -->
 
-This data viz does have three interactive legends, but it is static in the sense that it displays only the model predictions for 7-Nearest Neighbors.
+Bien que cette visualisation des données comporte trois légendes interactives, elle est statique dans le sens où elle n'affiche que les prédictions du modèle des 7 Plus Proches Voisins.
 
 <!-- paragraph -->
 
-## Select the number of neighbors using interactivity {#neighbors}
+## Sélectionner le nombre de voisins à l'aide de l'interactivité {#neighbors}
 
 <!-- paragraph -->
 
-In this section we propose an interactive re-design which allows the user to select K, the number of neighbors in the K-Nearest-Neighbors classifier.
+Dans cette section, nous proposons une visualisation interactive qui permet à l'utilisateur de sélectionner K, le nombre de voisins.
+
+### Graphique interactif des courbes d'erreur {#neighbors-error}
 
 <!-- paragraph -->
 
-![Interactive KNN viz](Ch10-viz-interactive.png)
+Examinons d'abord la refonte du graphique des courbes d'erreur.
 
 <!-- paragraph -->
 
-### Clickable error curves plot {#neighbors-error}
+Notez les changements suivants :
 
 <!-- paragraph -->
 
-We begin with a re-design of the error curves plot.
-
-<!-- paragraph -->
-
-Note the following changes:
-
-<!-- paragraph -->
-
-- add a selector for the number of neighbors ( `geom_tallrect` ).
+- ajout d'un sélecteur pour le nombre de voisins (`geom_tallrect`).
 <!-- comment -->
-- change the Bayes decision boundary from `geom_hline` with a legend entry, to a `geom_segment` with a text label.
+- changement de la limite de décision de Bayes de `geom_hline` avec une entrée de légende, vers un `geom_segment` avec une étiquette de texte.
 <!-- comment -->
-- add a linetype legend to distinguish error rates from the Bayes and KNN models.
+- ajout d'une légende de type de ligne pour distinguer les taux d'erreur des modèles de Bayes et de KPPV.
 <!-- comment -->
-- change the error bars ( `geom_linerange` ) to error bands ( `geom_ribbon` ).
+- changement des barres d'erreur ( `geom_linerange` ) en bandes d'erreur (`geom_ribbon`).
 
 <!-- paragraph -->
 
-The only new data that we need to define are the endpoints of the segment that we will use to plot the Bayes decision boundary.
+Les seules nouvelles données que nous devons définir sont les points d'extrémité du segment que nous utiliserons pour tracer la frontière de décision de Bayes.
 <!-- comment -->
-Note that we also re-define the set "test" to emphasize the fact that the Bayes error is the best achievable error rate for test data.
+À noter que nous redéfinissons également l'ensemble "test" pour souligner que l'erreur de Bayes représente le meilleur taux d'erreur atteignable pour les données de test.
 
 <!-- paragraph -->
 
@@ -533,35 +536,35 @@ Bayes.segment <- data.table(
   classifier="Bayes",
   min.neighbors=1,
   max.neighbors=29)
-Bayes.segment$set <- "test"
+Bayes.segment$set_fr <- "test"
 ```
 
 <!-- paragraph -->
 
-We also add an error variable to the data tables that contain the prediction error of the K-Nearest-Neighbors models.
+Nous ajoutons également aux tableaux de données une variable d'erreur qui contient l'erreur de prédiction des modèles de type KPPV.
 <!-- comment -->
-This error variable will be used for the linetype legend.
+Cette variable d'erreur sera utilisée pour la légende du type de ligne.
 
 <!-- paragraph -->
 
 ```{r}
-validation.error$classifier <- "KNN"
-other.error$classifier <- "KNN"
+validation.error$classifier <- "KPPV"
+other.error$classifier <- "KPPV"
 ```
 
 <!-- paragraph -->
 
-We re-define the plot of the error curves below.
+Nous redéfinissons le graphique des courbes d'erreur ci-dessous.
 <!-- comment -->
-Note that
+À noter que :
 
 <!-- paragraph -->
 
-- We use showSelected in `geom_text` and `geom_ribbon`, so that they will be hidden when the interactive legends are clicked.
+- Nous utilisons `showSelected` dans `geom_text` et `geom_ribbon` afin qu'ils soient masqués lorsque l'on clique sur les légendes interactives.
 <!-- comment -->
-- We use clickSelects in `geom_tallrect`, to select the number of neighbors.
+- Nous utilisons `clickSelects` dans `geom_tallrect` pour sélectionner le nombre de voisins.
 <!-- comment -->
-Clickable geoms should be last (top layer) so that they are not obscured by non-clickable geoms (bottom layers).
+Les geoms cliquables doivent être placés en dernier (couche supérieure) afin de ne pas être masqués par les geoms non cliquables (couches inférieures).
 
 <!-- paragraph -->
 
@@ -570,47 +573,53 @@ set.colors <- c(
   test="#984EA3",#purple
   validation="#4DAF4A",#green
   Bayes="#984EA3",#purple
-  train="black")
+  entraînement="black")
+legend.name <- "Ensemble"
 errorPlot <- ggplot()+
-  ggtitle("Select number of neighbors")+
+  ggtitle("Sélection du nombre de voisins")+
   theme_bw()+
-  theme_animint(height=500)+
   geom_text(aes(
     min.neighbors, error.prop,
-    color=set, label="Bayes"),
+    color=set_fr, label="Bayes"),
     showSelected="classifier",
     hjust=1,
     data=Bayes.segment)+
   geom_segment(aes(
     min.neighbors, error.prop, 
     xend=max.neighbors, yend=error.prop,
-    color=set,
+    color=set_fr,
     linetype=classifier),
     showSelected="classifier", 
     data=Bayes.segment)+
-  scale_color_manual(values=set.colors, breaks=names(set.colors))+
-  scale_fill_manual(values=set.colors)+
+  scale_color_manual(
+    legend.name,
+    values=set.colors, breaks=names(set.colors))+
+  scale_fill_manual(
+    legend.name,
+    values=set.colors)+
+  scale_linetype_manual(
+    legend.name,
+    values=classifier.linetypes)+
   guides(fill="none", linetype="none")+
-  scale_linetype_manual(values=classifier.linetypes)+
-  ylab("Misclassification Errors")+
+  ylab("Taux d’erreur de classification")+
   scale_x_continuous(
-    "Number of Neighbors",
+    "Nombre de Voisins",
     limits=c(-1, 30),
     breaks=c(1, 10, 20, 29))+
   geom_ribbon(aes(
     neighbors, ymin=mean-sd, ymax=mean+sd,
-    fill=set),
-    showSelected=c("classifier", "set"),
+    fill=set_fr),
+    showSelected=c("classifier", "set_fr"),
     alpha=0.5,
     color="transparent",
     data=validation.error)+
   geom_line(aes(
-    neighbors, mean, color=set,
+    neighbors, mean, color=set_fr,
     linetype=classifier),
     showSelected="classifier", 
     data=validation.error)+
   geom_line(aes(
-    neighbors, error.prop, group=set, color=set,
+    neighbors, error.prop, group=set_fr, color=set_fr,
     linetype=classifier),
     showSelected="classifier", 
     data=other.error)+
@@ -624,23 +633,23 @@ errorPlot
 
 <!-- paragraph -->
 
-### Feature space plot that shows the selected number of neighbors {#neighbors-features}
+### Graphique de l'espace des éléments montrant le nombre de voisins sélectionnés. {#neighbors-features}
 
 <!-- paragraph -->
 
-Next, we focus on a re-design of the feature space plot.
+Concentrons nous ensuite sur la refonte du graphique de l'espace des caractéristiques.
 <!-- comment -->
-In the previous section we considered only the subset of data from the model with 7 neighbors.
+Dans la section précédente, nous n'avons considéré que le sous-ensemble de données du modèle à 7 voisins.
 <!-- comment -->
-Our re-design includes the following changes:
+Notre refonte comprend les changements suivants :
 
 <!-- paragraph -->
 
-- We use neighbors as a showSelected variable.
+- Nous utilisons les voisins comme variable `showSelected`.
 <!-- comment -->
-- We add a legend to show which training data points are mis-classified.
+- Nous ajoutons une légende pour indiquer les points de données d'entraînement mal classés.
 <!-- comment -->
-- We use equal spaced coordinates so that visual distance (pixels) is the same as the Euclidean distance in the feature space.
+- Nous utilisons des coordonnées à espacement égal afin que la distance visuelle (pixels) soit la même que la distance euclidienne dans l'espace des variables.
 
 <!-- paragraph -->
 
@@ -652,7 +661,7 @@ show.points
 
 <!-- paragraph -->
 
-Below, we compute the predicted decision boundaries separately for each K-Nearest-Neighbors model.
+Ci-dessous, nous calculons les limites de décision prédites séparément pour chaque modèle de K Plus Proches Voisins.
 
 <!-- paragraph -->
 
@@ -661,13 +670,13 @@ boundary.grid <- show.data[set=="grid",]
 boundary.grid[, label := pred.label]
 show.grid <- boundary.grid[!on.text(V1, V2),]
 pred.boundary <- boundary.grid[, getBoundaryDF(probability), by=neighbors]
-pred.boundary$classifier <- "KNN"
+pred.boundary$classifier <- "KPPV"
 pred.boundary
 ```
 
 <!-- paragraph -->
 
-Instead of showing the number of neighbors in the plot title, below we create a `geom_text` element that will be updated based on the number of selected neighbors.
+Au lieu d'afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
 
 <!-- paragraph -->
 
@@ -678,7 +687,7 @@ show.text <- show.grid[, list(
 
 <!-- paragraph -->
 
-Below we compute the position of the text in the bottom left, which we will use to display the error rate of the selected model.
+Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d'erreur du modèle sélectionné.
 
 <!-- paragraph -->
 
@@ -689,32 +698,35 @@ other.error[, V2.bottom := rep(
 
 <!-- paragraph -->
 
-Below we re-define the Bayes error data without a neighbors column, so that it appears in each showSelected subset.
+Ci-dessous, nous redéfinissons les données de l'erreur de Bayes sans colonne de voisins, afin qu'elles apparaissent dans chaque sous-ensemble `showSelected`.
 
 <!-- paragraph -->
 
 ```{r}
 Bayes.error <- data.table(
-  set="Bayes",
+  set_fr="Bayes",
   error.prop=0.21)
 ```
 
 <!-- paragraph -->
 
-Finally, we re-define the ggplot, using neighbors as a showSelected variable in the point, path, and text geoms.
+Enfin, nous redéfinissons le `ggplot`, en utilisant les voisins ("neighbors") comme variable `showSelected` dans les geoms point, "path" et texte.
 
 <!-- paragraph -->
 
 ```{r}
 scatterPlot <- ggplot()+
-  ggtitle("Mis-classification errors in train set")+
+  ggtitle("Erreurs de classification (entraînement)")+
   theme_bw()+
-  theme_animint(width=500, height=500)+
-  xlab("Input feature 1")+
-  ylab("Input feature 2")+
+  xlab("Variable d'entrée 1")+
+  ylab("Variable d'entrée 2")+
   coord_equal()+
-  scale_color_manual(values=label.colors)+
-  scale_linetype_manual(values=classifier.linetypes)+
+  scale_linetype_manual(
+    "méthode", values=classifier.linetypes)+
+  scale_fill_manual(
+    "prédiction",
+    values=c(erronée="black", correcte="transparent"))+
+  scale_color_manual("classe", values=label.colors)+
   geom_point(aes(
     V1, V2, color=label),
     showSelected="neighbors",
@@ -737,9 +749,8 @@ scatterPlot <- ggplot()+
     size=3,
     shape=21,
     data=show.points)+
-  scale_fill_manual(values=c(error="black", correct="transparent"))+
   geom_text(aes(
-    text.V1.error, text.V2.bottom, label=paste(set, "Error:")),
+    text.V1.error, text.V2.bottom, label=paste("Err.", set_fr, ":")),
     data=Bayes.error,
     hjust=0)+
   geom_text(aes(
@@ -747,7 +758,7 @@ scatterPlot <- ggplot()+
     data=Bayes.error,
     hjust=1)+
   geom_text(aes(
-    text.V1.error, V2.bottom, label=paste(set, "Error:")),
+    text.V1.error, V2.bottom, label=paste("Err.", set_fr, ":")),
     showSelected="neighbors",
     data=other.error,
     hjust=0)+
@@ -758,18 +769,14 @@ scatterPlot <- ggplot()+
     hjust=1)+
   geom_text(aes(
     V1, V2,
-    label=paste0(
-      neighbors,
-      " nearest neighbor",
-      ifelse(neighbors==1, "", "s"),
-      " classifier")),
+    label=paste0(neighbors, "-PPV")),
     showSelected="neighbors",
     data=show.text)
 ```
 
 <!-- paragraph -->
 
-Before compiling the interactive data viz, we print a static ggplot with a facet for each value of neighbors.
+Avant de compiler la visualisation des données interactive, nous imprimons un `ggplot` statique avec une facette pour chaque valeur de voisins.
 
 <!-- paragraph -->
 
@@ -781,37 +788,39 @@ scatterPlot+
 
 <!-- paragraph -->
 
-### Combined interactive data viz {#neighbors-combined}
+### Visualisation des données interactive combinée {#neighbors-combined}
 
 <!-- paragraph -->
 
-Finally, we combine the two plots in a single data viz with neighbors as a selector variable.
+Enfin, nous combinons les deux graphiques dans une visualisation des données unique avec les voisins comme variable de sélection.
 
 <!-- paragraph -->
 
 ```{r Ch10-viz-neighbors}
 animint(
-  errorPlot,
-  scatterPlot,
+  errorPlot+
+    theme_animint(width=300),
+  scatterPlot+
+    theme_animint(width=450, last_in_row=TRUE),
   first=list(neighbors=7),
   time=list(variable="neighbors", ms=3000))
 ```
 
 <!-- paragraph -->
 
-Note that neighbors is used as a time variable, so animation shows the predictions of the different models.
+Notez que les voisins ("neighbors") sont utilisés comme variable de temps, de sorte que l'animation montre les prédictions des différents modèles.
 
 <!-- paragraph -->
 
-## Select the number of cross-validation folds using interactivity {#folds}
+## Sélectionner le nombre de divisions dans la validation croisée {#folds}
 
 <!-- paragraph -->
 
-In this section we discuss a second re-design which allows the user to select the number of folds used to compute the validation error curve.
+Dans cette section, nous faisons une visualisation qui permet à l'utilisateur de sélectionner le nombre de divisions utilisés pour calculer la courbe d'erreur de validation.
 
 <!-- paragraph -->
 
-The for loop below computes the validation error curve for several different values of `n.folds`.
+La boucle `for` ci-dessous calcule la courbe d'erreur de validation pour plusieurs valeurs différentes de `n.folds`.
 
 <!-- paragraph -->
 
@@ -826,24 +835,24 @@ for(n.folds in c(3, 5, 15)){
     1:n.folds, function(validation.fold){
       one.fold <- OneFold(validation.fold)
       data.table(validation.fold, one.fold[set=="validation"])
-    })
+    }, future.seed=NULL)
   only.validation <- do.call(rbind, only.validation.list)
   only.validation.error <- only.validation[, list(
     error.prop=mean(is.error)
-  ), by=.(set, validation.fold, neighbors)]
+  ), by=.(set, set_fr=set, validation.fold, neighbors)]
   only.validation.stats <- only.validation.error[, list(
     mean=mean(error.prop),
     sd=sd(error.prop)/sqrt(.N)
-  ), by=.(set, neighbors)]
+  ), by=.(set, set_fr=set, neighbors)]
   error.by.folds[[paste(n.folds)]] <-
-    data.table(n.folds, only.validation.stats, classifier="KNN")
+    data.table(n.folds, only.validation.stats, classifier="KPPV")
 }
 validation.error.several <- do.call(rbind, error.by.folds)
 ```
 
 <!-- paragraph -->
 
-The code below computes the minimum of the error curve for each value of `n.folds`.
+Le code ci-dessous calcule le minimum de la courbe d'erreur pour chaque valeur de `n.folds`.
 
 <!-- paragraph -->
 
@@ -853,74 +862,76 @@ min.validation <- validation.error.several[, .SD[which.min(mean),], by=n.folds]
 
 <!-- paragraph -->
 
-The code below creates a new error curve plot with two facets.
+Le code ci-dessous crée un nouveau graphique de courbe d'erreur à deux facettes.
 
 <!-- paragraph -->
 
 ```{r}
 facets <- function(df, facet){
-  data.frame(df, facet=factor(facet, c("n.folds", "Misclassification Errors")))
+  data.frame(df, facet=factor(facet, c("Divisions", "Taux d’erreur")))
 }
 errorPlotNew <- ggplot()+
-  ggtitle("Select number of folds and neighbors")+
+  ggtitle("Sélection du nombre de divisions et de voisins")+
   theme_bw()+
-  theme_animint(height=500)+
   theme(panel.margin=grid::unit(0, "cm"))+
   facet_grid(facet ~ ., scales="free")+
   geom_text(aes(
     min.neighbors, error.prop,
-    color=set, label="Bayes"),
+    color=set_fr, label="Bayes"),
     showSelected="classifier",
     hjust=1,
-    data=facets(Bayes.segment, "Misclassification Errors"))+
+    data=facets(Bayes.segment, "Taux d’erreur"))+
   geom_segment(aes(
     min.neighbors, error.prop, 
     xend=max.neighbors, yend=error.prop,
-    color=set,
+    color=set_fr,
     linetype=classifier),
     showSelected="classifier",                
-    data=facets(Bayes.segment, "Misclassification Errors"))+
-  scale_color_manual(values=set.colors, breaks=names(set.colors))+
-  scale_fill_manual(values=set.colors, breaks=names(set.colors))+
+    data=facets(Bayes.segment, "Taux d’erreur"))+
+  scale_color_manual(
+    legend.name, values=set.colors, breaks=names(set.colors))+
+  scale_fill_manual(
+    legend.name, values=set.colors, breaks=names(set.colors))+
+  scale_linetype_manual(
+    legend.name, values=classifier.linetypes)+
   guides(fill="none", linetype="none")+
-  scale_linetype_manual(values=classifier.linetypes)+
   ylab("")+
   scale_x_continuous(
-    "Number of Neighbors",
+    "Nombre de Voisins",
     limits=c(-1, 30),
     breaks=c(1, 10, 20, 29))+
   geom_ribbon(aes(
     neighbors, ymin=mean-sd, ymax=mean+sd,
-    fill=set),
-    showSelected=c("classifier", "set", "n.folds"),
+    fill=set_fr),
+    showSelected=c("classifier", "set_fr", "n.folds"),
     alpha=0.5,
     color="transparent",
-    data=facets(validation.error.several, "Misclassification Errors"))+
+    data=facets(validation.error.several, "Taux d’erreur"))+
   geom_line(aes(
-    neighbors, mean, color=set,
+    neighbors, mean, color=set_fr,
     linetype=classifier),
     showSelected=c("classifier", "n.folds"),
-    data=facets(validation.error.several, "Misclassification Errors"))+
+    data=facets(validation.error.several, "Taux d’erreur"))+
   geom_line(aes(
-    neighbors, error.prop, group=set, color=set,
+    neighbors, error.prop, group=set_fr, color=set_fr,
     linetype=classifier),
     showSelected="classifier", 
-    data=facets(other.error, "Misclassification Errors"))+
+    data=facets(other.error, "Taux d’erreur"))+
   geom_tallrect(aes(
     xmin=neighbors-1, xmax=neighbors+1),
     clickSelects="neighbors",
     alpha=0.5,
     data=validation.error)+
   geom_point(aes(
-    neighbors, n.folds, color=set),
+    neighbors, n.folds, color=set_fr),
     clickSelects="n.folds",
     size=9,
-    data=facets(min.validation, "n.folds"))
+    data=facets(min.validation, "Divisions"))
 ```
 
 <!-- paragraph -->
 
-The code below previews the new error curve plot, adding an additional facet for the showSelected variable.
+Le code ci-dessous prévisualise le nouveau graphique de la courbe d'erreur, en ajoutant une facette supplémentaire pour la variable `showSelected`.
 
 <!-- paragraph -->
 
@@ -930,60 +941,62 @@ errorPlotNew+facet_grid(facet ~ n.folds, scales="free")
 
 <!-- paragraph -->
 
-The code below creates an interactive data viz using the new error curve plot.
+Le code ci-dessous crée une visualisation des données interactive à l'aide du nouveau graphique de la courbe d'erreur.
 
 <!-- paragraph -->
 
 ```{r Ch10-viz-folds}
 animint(
-  errorPlotNew,
-  scatterPlot,
+  errorPlotNew+
+    theme_animint(width=325),
+  scatterPlot+
+    theme_animint(width=450, last_in_row=TRUE),
   first=list(neighbors=7, n.folds=10))
 ```
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#ch10-exercises}
 
 <!-- paragraph -->
 
-We showed how to add two interactive features to a data visualization of predictions of the K-Nearest-Neighbors model.
+Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K Plus Proches Voisins ("K-Nearest-Neighbors").
 <!-- comment -->
-We started with a static data visualization which only showed predictions of the 7-Nearest-Neighbors model.
+Nous avons commencé par une visualisation des données statique qui ne montrait que les prédictions du modèle des 7 Plus Proches Voisins.
 <!-- comment -->
-Then, we created an interactive re-design which allowed selecting K, the number of neighbors.
+Ensuite, nous avons créé une refonte interactive qui permettait de sélectionner K, le nombre de voisins.
 <!-- comment -->
-We did another re-design which added a facet for selecting the number of cross-validation folds.
+Nous avons procédé à une autre refonte en ajoutant une facette permettant de sélectionner le nombre de divsions dans la validation croisée.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Make it so that text error rates in the bottom left of the second plot are hidden after clicking the legend entries for Bayes, train, test.
+- Faites en sorte que les taux d'erreur du texte affichés en bas à gauche du deuxième graphique soient masqués quand on clique  sur les entrées de la légende pour Bayes, train, test.
 <!-- comment -->
-Hint: you can either use one `geom_text` with `showSelected=c(selectorNameColumn="selectorValueColumn")` (as explained in [Chapter 14](Ch14-PeakSegJoint.html) ) or two `geom_text`, each with a different showSelected parameter.
+Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](Ch14-PeakSegJoint.html) ) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
-- The probability column of the show.grid data table is the predicted probability of class 1.
+- La colonne de probabilité ("probability") du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->
-How would you re-design the visualization to show the predicted probability rather than the predicted class at each grid point?
+Comment feriez-vous la refonte de la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
 <!-- comment -->
-The main challenge is that probability is a numeric variable, but ggplot2 enforces that each scale must be either continuous or discrete (not both).
+La difficulté principale est que la probabilité est une variable numérique, mais que `ggplot2` impose que chaque échelle soit exclusivement continue ou discrète (pas les deux).
 <!-- comment -->
-You could use a continuous fill scale, but then you would have to use a different scale to show the prediction variable.
+Vous pourriez utiliser une échelle de remplissage continue ("continuous fill scale"), mais vous devrez alors utiliser une échelle différente pour montrer la variable de prédiction.
 <!-- comment -->
-- Add a new plot that shows the relative sizes of the train, validation, and test sets.
+- Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles d'entrainement ("train"), de validation et de test.
 <!-- comment -->
-Make sure that the plotted size of the validation and train sets change based on the selected value of `n.folds`.
+Assurez-vous que la taille tracée des ensembles de validation et d'entraînement change en fonction de la valeur sélectionnée de `n.folds`.
 <!-- comment -->
-- So far, the feature space plots only showed model predictions and errors for the entire train data set (validation.fold==0).
+- Jusqu'à présent, les graphiques de l'espace des variables ne montraient que les prédictions et les erreurs du modèle pour l'ensemble des données d'entrainement (`validation.fold==0`).
 <!-- comment -->
-Create a re-design which includes a new plot or facet for selecting validation.fold, and a facetted feature space plot (one facet for train set, one facet for validation set).
+Créez une visualisation qui inclut un nouveau graphique ou une nouvelle facette pour sélectionner `validation.fold`, et un graphique de l'espace des variables avec facettes (une facette pour l'ensemble de données d'entrainement, une facette pour l'ensemble de données de validation).
 
 <!-- paragraph -->
 
-Next, [Chapter 11](Ch11-lasso.html) explains how to visualize the Lasso, a machine learning model.
+Dans le [chapitre 11](Ch11-lasso.html), nous vous expliquerons comment visualiser le `Lasso`, un modèle d'apprentissage automatique.
 
 <!-- paragraph -->
 

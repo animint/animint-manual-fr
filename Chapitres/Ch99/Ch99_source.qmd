@@ -1,18 +1,14 @@
----
-title: Appendix, useful idioms
-layout: default
-output: bookdown::html_chapter
----
+# Useful R programming idioms
 
 <!-- paragraph -->
 
 ```{r setup, echo=FALSE}
-knitr::opts_chunk$set(fig.path="Ch99-figures/")
+knitr::opts_chunk$set(fig.path="ch99-figures/")
 ```
 
 <!-- paragraph -->
 
-This appendix describes several idioms which are useful for creating animints.
+This appendix describes several R programming idioms which are useful for creating animints.
 
 <!-- paragraph -->
 
@@ -44,7 +40,7 @@ There are three parts of this idiom:
 <!-- comment -->
 This is necessary in order to see the boundaries between panels, since the ggplot default `theme_grey` uses grey panel backgrounds and no panel borders.
 <!-- comment -->
-- `facet_\*` creates a multi-panel ggplot.
+- `facet_*` creates a multi-panel ggplot.
 
 <!-- paragraph -->
 
@@ -122,9 +118,8 @@ First, define a function which takes as input a data table and one or more value
 <!-- paragraph -->
 
 ```{r, eval=FALSE}
-addColumn <- function(df, time.period){
-  data.frame(df, time.period=factor(time.period, c("1975", "1960-2010")))
-}
+addColumn <- function(df, time.period)data.frame(
+  df, time.period=factor(time.period, c("1975", "1960-2010")))
 animint(
   ggplot()+
   geom_point(aes(
@@ -168,7 +163,7 @@ For example to get the R code for the Set1 palette, we can write
 <!-- paragraph -->
 
 ```{r}
-dput(RColorBrewer::brewer.pal(Inf, "Set1"))
+dput(RColorBrewer::brewer.pal(7, "Set1"))
 ```
 
 <!-- paragraph -->
@@ -179,9 +174,9 @@ We can then copy that R code from the terminal and paste it into our text editor
 
 ```{r}
 data(WorldBank, package="animint2")
-region.colors <- 
-  c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", 
-    "#A65628", "#F781BF", "#999999")
+region.colors <- c(
+  "#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", 
+  "#A65628")
 names(region.colors) <- levels(WorldBank$region)
 region.colors
 ```

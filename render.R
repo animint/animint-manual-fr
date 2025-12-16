@@ -1,6 +1,9 @@
-options(repos="http://cloud.r-project.org")
-for(p in c("nc","penaltyLearning","future.apply","maps","lars","LambertW","kernlab","data.table","quarto","chromote","magick"))if(!requireNamespace(p))install.packages(p)
-remotes::install_github(c("animint/animint2","animint/animint2fr"))
+pkgs <- c("penaltyLearning","future.apply","maps","lars","LambertW","kernlab","data.table","quarto","chromote","magick","mlr3torch","glmnet","kknn","mlr3learners","mlr3tuning","WeightedROC","remotes","nc")
+ins.mat <- installed.packages()
+missing.pkgs <- setdiff(pkgs, rownames(ins.mat))
+install.packages(missing.pkgs)
+remotes::install_github("animint/animint2", dep=TRUE)
+remotes::install_github(c("animint/animint2data","animint/animint2fr"))
 qmd_vec <- Sys.glob("Chapitres/Ch*/Ch*_source.qmd")
 for(qmd_i in seq_along(qmd_vec)){
   qmd_in <- qmd_vec[[qmd_i]]

@@ -49,9 +49,17 @@ Considérons, par exemple, [la courbe de Keeling du chapitre 1 présentée ci-de
 
 <!-- comment -->
 
-L'esquisse ci-dessus comprend `showSelected=mois` pour le `geom_point` ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les mois sélectionnés.
+L'esquisse ci-dessus se traduit en le code R suivant.
+
+```r
+ggplot(co2, aes(date, ppm))+
+  geom_point(aes(color=mois), showSelected="mois")+
+  geom_line()
+```
+
+Le code ci-dessus comprend `showSelected="mois"` pour le `geom_point()` ce qui signifie que le graphique affiche le sous-ensemble de données pour les mois sélectionnés.
 <!-- comment -->
-En revanche, puisque `geom_line` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
+En revanche, puisque `geom_line()` n'inclut pas `showSelected`, il affiche toujours l'ensemble complet des données (peu importe les mois sélectionnés).
 
 <!-- comment -->
 
@@ -61,7 +69,17 @@ Prenons un autre exemple : l'esquisse ci-dessous de la première visualisation d
 
 ![Esquisse Banque mondiale avec showSelected région](Ch03-viz-showSelectedColor.png)
 
-L'esquisse ci-dessus spécifie `showSelected=région` pour le `geom_point`, ce qui signifie qu'elle doit afficher le sous-ensemble de données pour les régions sélectionnées.
+L'esquisse ci-dessus se traduit en le code R suivant.
+
+```r
+ggplot()+
+  geom_point(aes(
+    espérance.de.vie, taux.de.fertilité, color=région),
+    data=banque_mondiale_1975,
+    showSelected="région")
+```
+
+Le code R contient `showSelected="région"` pour le `geom_point()`, ce qui signifie que le graphique affiche le sous-ensemble de données pour les régions sélectionnées.
 
 <!-- comment -->
 
@@ -201,19 +219,19 @@ Ajoutez un `geom_vline` avec `showSelected=année` pour mettre en évidence l'an
 
 <!-- comment -->
 
-Vous avez peut-être remarqué la présence de boutons sous chaque visualisation de données créée par animint2.
+Vous avez peut-être remarqué la présence de boutons sous chaque visualisation de données créée par `animint2`.
 <!-- comment -->
-Cliquez sur le bouton "Show animation controls" de la visualisation présentée ci-dessus.
+Cliquez sur le bouton « Show animation controls » de la visualisation présentée ci-dessus.
 <!-- comment -->
 Vous verrez alors que ce tableau contient une ligne pour chaque variable de sélection.
 <!-- comment -->
-Les zones de texte indiquent le nombre de millisecondes utilisées pour les durées de transition après la mise à jour de chaque variable de sélection.
+Les zones de texte indiquent le nombre de millisecondes utilisées pour les transitions fluides après la mise à jour de chaque variable de sélection.
 <!-- comment -->
-Pour chaque variable de sélection, la durée de transition par défaut est 0, ce qui signifie que les données seront immédiatement placées à leur nouvelle position après la mise à jour de chaque variable.
+Pour chaque variable de sélection, la durée de transition par défaut est 0, ce qui signifie que les données seront immédiatement placées à leur nouvelle position (pas de transition fluide).
 
 <!-- comment -->
 
-Pour illustrer l'importance des durées de transition, essayez de changer la valeur de la durée de transition de la variable `année` pour 2000.
+Pour illustrer l'importance des transitions fluides, essayez de changer la durée de transition de la variable `année` pour 2000.
 <!-- comment -->
 Ensuite, utilisez le menu pour modifier la valeur sélectionnée de la variable `année`.
 <!-- comment -->
@@ -261,9 +279,9 @@ subset(trois.ans, pays=="Kosovo")
 
 On voit bien que les données sur le taux de fertilité et sur l’espérance de vie sont absentes du tableau pour le Kosovo en 1979 et en 1980.
 <!-- comment -->
-Il ne serait donc pas logique d’effectuer une transition fluide pour ce pays, puisque les données ne sont présentes ni avant ni après la transition.
+Il ne serait donc pas possible d’effectuer une transition fluide pour ce pays entre 1980 et 1981, puisque les données ne sont présentes qu'à partir du 1981.
 <!-- comment -->
-Comment le spécifier dans la visualisation de données? 
+Comment préciser qu'on veut utiliser `pays` comme clé d'identification de chaque point dessiné avec ce geom ?
 <!-- comment -->
 Dans le code ci-dessous, nous utilisons `aes(key=pays)` pour spécifier que la variable `pays` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection.
 
@@ -329,6 +347,12 @@ viz.duration.time
 ```
 
 On dit que la visualisation ci-dessus est animée, parce que la sélection pour `année` va changer toutes les deux secondes.
+Pour contrôler l'animation, vous pouvez cliquer sur « Show animation controls » :
+
+* Cliquez sur « Pause » pour arrêter l'animation.
+* Cliquez sur « Play » pour la rédemarrer.
+* Pour contrôler le temps entre les mises à jour de la variable d'animation, saisissez un nombre (en millisecondes) dans le champ « updates » et appuyez sur la touche d'entrée.
+* Quand vous changez les délais pour l'animation et les transitions fluides, il faut que le délai d'animation « updates » soit plus grand que les autres délais, pour que les transitions fluides se terminent avant la prochaine mise à jour d'animation.
 
 <!-- comment -->
 
