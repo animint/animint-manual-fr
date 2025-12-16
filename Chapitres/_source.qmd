@@ -42,7 +42,7 @@ Le [chapitre 3](ch03) introduit `showSelected`, l'un des deux principaux mots-cl
 <!-- comment -->
 Le chapitre 3 commence par expliquer les variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
 <!-- comment -->
-Le chapitre 3 explique ensuite comment le`showSelected` permet de tracer des sous-ensembles de données.
+Le chapitre 3 explique ensuite comment le mot-clé `showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
 Le chapitre 3 explique également comment utiliser des transitions graduelles et des animations.
 
