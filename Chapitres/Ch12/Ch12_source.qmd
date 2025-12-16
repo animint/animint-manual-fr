@@ -846,9 +846,9 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons utilisé des `ggplots` pour visualiser le modèle de Séparateur à Vaste Marge pour la classification binaire.
+Nous avons utilisé des `ggplots` pour visualiser le modèle de séparateur à vaste marge pour la classification binaire.
 <!-- comment -->
-Nous avons utilisé `animint()` et l'interactivité pour montrer comment la limite de décision du SVM change en fonction des hyper-paramètres du modèle.
+Nous avons utilisé `animint()` et l'interactivité pour montrer comment la limite de décision du SVM varie en fonction des hyperparamètres du modèle.
 
 <!-- paragraph -->
 
@@ -866,11 +866,11 @@ Calculez l'erreur de sous-entraînement et de validation, puis ajoutez un nouvea
 <!-- comment -->
 Modifiez les couleurs de l'une des deux légendes pour qu'elles soient différentes.
 <!-- comment -->
-- Utilisez les paramètres `color` et `color_off` pour modifier l'apparence de `geom_tile` lorsqu'il est sélectionné ou non, comme expliqué dans le [chapitre 6, section Préciser le mode d'affichage de l'état de la sélection](../Ch06/Ch06-other.html#display-selection-state).
+- Utilisez les paramètres `color` et `color_off` pour modifier l'apparence de `geom_tile` selon s'il est sélectionné ou non, comme expliqué dans le [chapitre 6, à la section Préciser le mode d'affichage de l'état de la sélection](../Ch06/Ch06-other.html#display-selection-state).
 
 <!-- paragraph -->
 
-Dans le [chapitre 13](../Ch13/Ch13-poisson-regression.html), nous allons expliquer comment visualiser le modèle de régression de Poisson.
+Dans le [chapitre 13](../Ch13/Ch13-poisson-regression.html), nous expliquerons comment visualiser le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
