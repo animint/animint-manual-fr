@@ -22,7 +22,7 @@ Les sept premiers chapitres doivent être lus de manière séquentielle, car ils
 
 <!-- paragraph -->
 
-A partir du [section Motivation](#motivation) ci-dessous, ce premier chapitre donne un aperçu de l'analyse et de la visualisation des données.
+A partir de la [section Motivation](#motivation) ci-dessous, ce premier chapitre donne un aperçu de l'analyse et de la visualisation de données.
 <!-- comment -->
 Il fournit une motivation et une base théorique pour les autres chapitres, et devrait être particulièrement utile aux lecteurs qui sont complètement novices en matière d'analyse de données.
 <!-- comment -->
