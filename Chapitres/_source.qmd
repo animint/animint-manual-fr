@@ -54,7 +54,7 @@ Le mot-clé `clickSelects` permet à l'utilisateur de modifier une variable de s
 
 <!-- paragraph -->
 
-[Chapitre 5](ch05) explique différentes façons de partager vos visualisations de données interactives sur le web.
+Le [chapitre 5](ch05) explique différentes façons de partager vos visualisations de données interactives sur le web.
 
 <!-- paragraph -->
 
