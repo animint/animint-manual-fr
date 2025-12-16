@@ -16,7 +16,7 @@ Résumé du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par simuler quelques données pour une classification binaire en deux dimensions et par faire quelques graphiques statiques.
+- Nous commençons par simuler des données pour une classification binaire en deux dimensions et nous les représentons par quelques graphiques statiques.
 <!-- comment -->
 - Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du Séparateur à Vaste Marge (SVM) linéaire change en fonction de l'hyperparamètre de coût.
 <!-- comment -->
