@@ -72,7 +72,7 @@ Il contient également quelques idées d'amélioration, pour ceux qui souhaitera
 
 <!-- paragraph -->
 
-Les autres chapitres peuvent être lus dans n'importe quel ordre, puisque chacun d'entre eux explique comment réaliser des visualisations des données pour un ensemble de données ou un algorithme statistique particulier.
+Les chapitres restants peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
 
 <!-- paragraph -->
 
