@@ -32,7 +32,7 @@ Il présente la méthode de prototypage de visualisation des données à l'aide 
 
 En commençant par le [chapitre 2](ch02), nous montrerons comment les esquisses de graphiques peuvent être traduites en code R.
 <!-- comment -->
-Le chapitre 2 explique les bases du tracé à l'aide des logiciels ggplots et `animint2` et devrait être plus utile aux lecteurs qui n'ont jamais utilisé les logiciels `ggplot2`.
+Le chapitre 2 explique les bases de la visualisation de données à l'aide de ggplots et `animint2`, et devrait être plus utile aux lecteurs qui n'ont jamais utilisé `ggplot2`.
 <!-- comment -->
 Il explique comment les ggplots standards peuvent être affichés sur des pages web en utilisant la commande `animint2`.
 
