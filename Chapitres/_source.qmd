@@ -48,7 +48,7 @@ Le chapitre 3 explique également comment utiliser des transitions graduelles et
 
 <!-- paragraph -->
 
-[Chapitre 4](ch04) introduit `clickSelects` l'autre mot-clé principal que `animint2` introduit pour la conception de visualisation des données interactives.
+Le [chapitre 4](ch04) introduit `clickSelects`, l'autre mot-clé principal que `animint2` introduit pour la conception de visualisation des données interactives.
 <!-- comment -->
 Les`clickSelects` permet à l'utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
 
