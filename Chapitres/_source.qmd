@@ -64,7 +64,7 @@ Le [chapitre 6](ch06) couvre d'autres fonctionnalités de `animint2`, y compris 
 
 Le [chapitre 7](ch07) couvre les limites de l'implémentation actuelle du package R `animint2`, et explique des solutions de contournement pour certains problèmes courants.
 <!-- comment -->
-Il contient également quelques idées d'amélioration, pour ceux qui souhaiteraient contribuer à l'amélioration du paquet R. `animint2`.
+Il contient également quelques idées d'amélioration, pour ceux qui souhaiteraient contribuer au développement de `animint2`.
 
 <!-- paragraph -->
 
