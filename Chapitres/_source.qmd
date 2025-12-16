@@ -68,7 +68,7 @@ Il contient également quelques idées d'amélioration, pour ceux qui souhaitera
 
 <!-- paragraph -->
 
-### Exemples d'application {#examples}
+### Exemples {#examples}
 
 <!-- paragraph -->
 
