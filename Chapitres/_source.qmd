@@ -76,7 +76,7 @@ Les chapitres restants peuvent être lus dans n'importe quel ordre, puisque chac
 
 <!-- paragraph -->
 
-[Chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
+Le [chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
 
 <!-- paragraph -->
 
