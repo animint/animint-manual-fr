@@ -24,7 +24,7 @@ Plan du chapitre :
 <!-- comment -->
 Cette méthode est techniquement correcte, mais inefficace sur le plan computationnel.
 <!-- comment -->
-- Nous expliquons ensuite la méthode préférée pour définir une animint avec de nombreux sélecteurs, en utilisant des objets nommés `clickSelects` et `showSelected`.
+- Nous expliquons ensuite la méthode à préférer pour définir un `animint` avec de nombreux sélecteurs, en utilisant des `clickSelects` et `showSelected` nommés.
 <!-- comment -->
 Cette méthode est plus efficace sur le plan computationnel et plus facile à coder.
 
