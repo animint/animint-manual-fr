@@ -80,7 +80,7 @@ Le [chapitre 8](ch08) explique comment créer une visualisation interactive mult
 
 <!-- paragraph -->
 
-[Chapitre 9](ch09) présente une visualisation des données concernant les cyclistes de Montréal.
+Le [chapitre 9](ch09) présente une visualisation des données provenant de cyclistes de Montréal.
 
 <!-- paragraph -->
 
