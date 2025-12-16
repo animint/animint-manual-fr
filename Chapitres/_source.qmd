@@ -84,7 +84,7 @@ Le [chapitre 9](ch09) présente une visualisation des données provenant de cycl
 
 <!-- paragraph -->
 
-[Chapitre 10](ch10) explique comment créer une refonte interactive de la visualisation des données sur les voisins les plus proches du livre Elements of Statistical Learning. [@Hastie2009] .
+Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre Elements of Statistical Learning [@Hastie2009].
 
 <!-- paragraph -->
 
