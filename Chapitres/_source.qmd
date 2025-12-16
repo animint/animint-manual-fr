@@ -100,7 +100,7 @@ Le [chapitre 13](ch13) explique comment créer une visualisation interactive qui
 
 <!-- paragraph -->
 
-[Chapitre 14](ch14) montre un exemple de création de sélecteurs pilotés par les données à l'aide de sélecteurs nommés `clickSelects` et `showSelected` dans une visualisation interactive d'un modèle de détection de pics.
+Le [chapitre 14](ch14) montre un exemple de création d’une visualisation avec nombreux sélecteurs, à l'aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive d'un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
