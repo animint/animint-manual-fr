@@ -96,7 +96,7 @@ Le [chapitre 12](ch12) présente une visualisation des données qui explique la 
 
 <!-- paragraph -->
 
-[Chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
+Le [chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
