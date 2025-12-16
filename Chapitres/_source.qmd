@@ -2,7 +2,7 @@
 
 <!-- paragraph -->
 
-Ce manuel explique comment concevoir et créer des visualisations de données interactives à l'aide du package R. `animint2`.
+Ce manuel explique comment concevoir et créer des visualisations de données interactives à l'aide du package R `animint2`.
 
 <!-- paragraph -->
 
@@ -14,7 +14,7 @@ Les chapitres de ce manuel sont organisés comme suit.
 
 <!-- paragraph -->
 
-### Les chapitres `animint2` extensions de la grammaire graphique {#animint}
+### Les extensions `animint2`  à la grammaire des graphiques {#animint}
 
 <!-- paragraph -->
 
@@ -22,7 +22,7 @@ Les sept premiers chapitres doivent être lus de manière séquentielle, car ils
 
 <!-- paragraph -->
 
-A partir du [section Motivation](#motivation) ci-dessous, ce premier chapitre donne un aperçu de l'analyse et de la visualisation des données.
+A partir de la [section Motivation](#motivation) ci-dessous, ce premier chapitre donne un aperçu de l'analyse et de la visualisation de données.
 <!-- comment -->
 Il fournit une motivation et une base théorique pour les autres chapitres, et devrait être particulièrement utile aux lecteurs qui sont complètement novices en matière d'analyse de données.
 <!-- comment -->
@@ -30,77 +30,77 @@ Il présente la méthode de prototypage de visualisation des données à l'aide 
 
 <!-- paragraph -->
 
-En commençant par [chapitre 2](ch02) nous montrerons comment les esquisses de graphiques peuvent être traduites en code R.
+En commençant par le [chapitre 2](ch02), nous montrerons comment les esquisses de graphiques peuvent être traduites en code R.
 <!-- comment -->
-Le chapitre 2 explique les bases du tracé à l'aide des logiciels ggplots et `animint2` et devrait être plus utile aux lecteurs qui n'ont jamais utilisé les logiciels `ggplot2`.
+Le chapitre 2 explique les bases de la visualisation de données à l'aide de ggplots et `animint2`, et devrait être plus utile aux lecteurs qui n'ont jamais utilisé `ggplot2`.
 <!-- comment -->
-Il explique comment les ggplots standards peuvent être affichés sur des pages web en utilisant la commande `animint2`.
+Il explique comment les ggplots standards peuvent être générés sur des pages web en utilisant `animint2`.
 
 <!-- paragraph -->
 
-[Chapitre 3](ch03) introduit `showSelected`, l'un des deux principaux mots-clés qui `animint2` introduit pour la conception de visualisation des données interactives.
+Le [chapitre 3](ch03) introduit `showSelected`, l'un des deux principaux mots-clés que `animint2` introduit pour la conception de visualisation des données interactives.
 <!-- comment -->
-Le chapitre 3 commence par expliquer les variables de sélection, qui fournissent le mécanisme d'interaction dans la visualisation de données. `animint2`.
+Le chapitre 3 commence par expliquer les variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
 <!-- comment -->
-Le chapitre 3 explique ensuite comment le`showSelected` permet de tracer des sous-ensembles de données.
+Le chapitre 3 explique ensuite comment le mot-clé `showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
 Le chapitre 3 explique également comment utiliser des transitions graduelles et des animations.
 
 <!-- paragraph -->
 
-[Chapitre 4](ch04) introduit `clickSelects` l'autre mot-clé principal que `animint2` introduit pour la conception de visualisation des données interactives.
+Le [chapitre 4](ch04) introduit `clickSelects`, l'autre mot-clé principal que `animint2` introduit pour la conception de visualisation des données interactives.
 <!-- comment -->
-Les`clickSelects` permet à l'utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
+Le mot-clé `clickSelects` permet à l'utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
 
 <!-- paragraph -->
 
-[Chapitre 5](ch05) explique différentes façons de partager vos visualisations de données interactives sur le web.
+Le [chapitre 5](ch05) explique différentes façons de partager vos visualisations de données interactives sur le web.
 
 <!-- paragraph -->
 
-[Chapitre 6](ch06) couvre d'autres caractéristiques de `animint2` y compris la manière de spécifier les hyperliens, les infobulles, les noms de variables de sélecteurs pilotés par les données.
+Le [chapitre 6](ch06) couvre d'autres fonctionnalités de `animint2`, y compris la manière de spécifier des hyperliens, des info-bulles et toutes les autres nouvelles fonctionnalités qui n’existe pas dans les graphiques statiques de `ggplot2`.
 
 <!-- paragraph -->
 
-[Chapitre 7](ch07) couvre les limites de l'implémenté actuel de la `animint2` et explique des solutions de contournement pour certains problèmes courants.
+Le [chapitre 7](ch07) couvre les limites de l'implémentation actuelle du package R `animint2`, et explique des solutions de contournement pour certains problèmes courants.
 <!-- comment -->
-Il contient également quelques idées d'amélioration, pour ceux qui souhaiteraient contribuer à l'amélioration du paquet R. `animint2`.
+Il contient également quelques idées d'amélioration, pour ceux qui souhaiteraient contribuer au développement de `animint2`.
 
 <!-- paragraph -->
 
-### Exemples d'application {#examples}
+### Exemples {#examples}
 
 <!-- paragraph -->
 
-Les autres chapitres peuvent être lus dans n'importe quel ordre, puisque chacun d'entre eux explique comment réaliser des visualisations des données pour un ensemble de données ou un algorithme statistique particulier.
+Les chapitres restants peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
 
 <!-- paragraph -->
 
-[Chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
+Le [chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
 
 <!-- paragraph -->
 
-[Chapitre 9](ch09) présente une visualisation des données concernant les cyclistes de Montréal.
+Le [chapitre 9](ch09) présente une visualisation des données provenant de cyclistes de Montréal.
 
 <!-- paragraph -->
 
-[Chapitre 10](ch10) explique comment créer une refonte interactive de la visualisation des données sur les voisins les plus proches du livre Elements of Statistical Learning. [@Hastie2009] .
+Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre Elements of Statistical Learning [@Hastie2009].
 
 <!-- paragraph -->
 
-[Chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
+Le [chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
 
 <!-- paragraph -->
 
-[Chapitre 12](ch12) présente une visualisation des données qui explique les machines à vecteurs de support (SVM), un modèle d'apprentissage automatique pour la classification binaire.
+Le [chapitre 12](ch12) présente une visualisation des données qui explique la séparateur à vaste marge (aussi connu sous le nom « machine à vecteurs de support » ou SVM), un modèle d'apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
-[Chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
+Le [chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
-[Chapitre 14](ch14) montre un exemple de création de sélecteurs pilotés par les données à l'aide de sélecteurs nommés `clickSelects` et `showSelected` dans une visualisation interactive d'un modèle de détection de pics.
+Le [chapitre 14](ch14) montre un exemple de création d’une visualisation avec nombreux sélecteurs, à l'aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive d'un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
