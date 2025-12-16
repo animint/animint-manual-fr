@@ -18,13 +18,13 @@ Résumé du chapitre :
 
 - Nous commençons par simuler des données pour une classification binaire en deux dimensions et nous les représentons par quelques graphiques statiques.
 <!-- comment -->
-- Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du Séparateur à Vaste Marge (SVM) linéaire change en fonction de l'hyperparamètre de coût.
+- Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du séparateur à vaste marge (SVM) linéaire varie en fonction de l'hyperparamètre de coût.
 <!-- comment -->
-- Dans la dernière section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du Séparateur à Vaste Marge à noyau polynomial change en fonction des deux hyperparamètres (coût et degré).
+- Dans la dernière section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du séparateur à vaste marge à noyau polynomial varie en fonction des deux hyperparamètres (coût et degré).
 
 <!-- paragraph -->
 
-## Générer et tracer des données {#generate}
+## Générer des données et les tracer  {#generate}
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessous montre les mêmes données, après avoir calculé deux fonctionnalités d'entrée supplémentaires (les carrés des deux entrées d'origine).
+Le graphique ci-dessous montre les mêmes données, pour lesquelles deux fonctionnalités d'entrée supplémentaires ont été calculées (les carrés des deux entrées d'origine).
 
 <!-- paragraph -->
 
