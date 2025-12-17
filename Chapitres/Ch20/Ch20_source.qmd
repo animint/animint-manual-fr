@@ -155,19 +155,19 @@ Le résultat ci-dessus est une liste représentant 5 problèmes de classificatio
 
 <!-- comment -->
 
-### Learners {#learners}
+### Les algorithmes d’apprentissage {#learners}
 
 <!-- comment -->
 
-In this section, we define which learning algorithms to run on the previously defined tasks.
+Dans cette section, nous définissons les algorithmes d’apprentissage à utiliser avec chaque jeu de données.
 <!-- comment -->
-The code below begins with a list of two learners:
+Le code ci-dessous commence avec une liste de deux algorithmes :
 
 <!-- comment -->
 
-* `cv_glmnet` is a linear model, with degree of L1 regularization automatically selected using 10-fold cross-validation.
+* `cv_glmnet` est un modèle linaire, avec régularisation L1 qui minimise le taux d’erreur dans la validation croisée à 10 divisions.
 <!-- comment -->
-* `featureless` is the standard baselines which ignores all of the input features, and always predicts the most frequent class that was seen in the training data.
+* `featureless` est le modèle qui n’utilise pas les variables d’entrée, et qui va toujours prédire la classe la plus fréquente dans les données d’apprentissage.
 
 <!-- comment -->
 
@@ -177,18 +177,18 @@ learner.list <- list(
   mlr3::LearnerClassifFeatureless$new()$configure(id="featureless"))
 ```
 
-Next, we define a K-nearest neighbor learner.
+Ensuite, nous rajoutons l’algorithme des plus proches voisins.
 
 ```{r}
 knn_learner <- mlr3learners::LearnerClassifKKNN$new()
 knn_learner$param_set$values$k <- paradox::to_tune(1, 40)
 ```
 
-The code above says that we will tune the number of neighbors hyper-parameter, `k`, from 1 to 40.
+Le code ci-dessus précise les bornes pour `k`, le nombre de voisins, entre 1 et 40.
 <!-- comment -->
-The code below means that we will choose `k` using grid search (default 10 values of `k`), with 3-fold cross-validation, maximizing mean ROC-AUC over validation sets.
+Le code ci-dessous précise la méthode pour la séléction de `k`, soit recherche avec 10 valeurs, avec validation croisée à 3 divisions, maximisant l’aire sous la courbe ROC, soit en anglais « Area Under the Curve » ou « AUC ».
 <!-- comment -->
-Note that to compute ROC-AUC, we must set `predict_type="prob"` so that the learned model outputs real-valued scores, instead of only predicted class labels.
+Rémarqons que si on veut calculer l’AUC, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
 ```{r}
 kfoldcv <- mlr3::rsmp("cv")
@@ -201,9 +201,9 @@ learner.list$knn <- mlr3tuning::auto_tuner(
   measure = mlr3::msr("classif.auc", minimize = FALSE))
 ```
 
-Next, we will define two learners that use `library(torch)`.
+Ensuite, nous rajoutons deux algorithmes qui utilise `library(torch)`.
 <!-- comment -->
-In this case, we need to define the learner using a list of pipe operations, which can be created using the helper function below.
+On utilise une fonction qui renvoye une liste d’opérateurs qui sera utilisé pour définir l’algorithme.
 
 ```{r}
 measure_list <- mlr3::msrs(c("classif.logloss", "classif.auc"))
@@ -235,15 +235,15 @@ make_po_list <- function(...)list(
     epochs = paradox::to_tune(upper = n.epochs, internal = TRUE)))
 ```
 
-Note in the code above that the `lr` parameter is the learning rate, which controls how fast the algorithm learns.
+Remarquons dans le code ci-dessus que `lr` est le taux d’apprentissage, ou « learning rate » en anglais.
 <!-- comment -->
-The helper function below is used to define a torch learner that
+La fonction ci-dessous définit que
 
 <!-- comment -->
 
-* uses half of the train data as the validation set (`validate = 0.5`), and the other half as the subtrain set (to compute gradients).
+* la moitié des données d’apprentissage comme ensemble de validation (`validate = 0.5`), et l’autre moitié est l’ensemble sous-entraînement (pour calculer les gradients).
 <!-- comment -->
-* chooses the number of epochs by minimizing the first item of `measure_list` (logistic loss).
+* le nombre d’époques est choisi en minimisant la première mesure dans la liste `measure_list` (perte logistique).
 
 ```{r}
 make_torch_learner <- function(id,...){
@@ -260,7 +260,7 @@ make_torch_learner <- function(id,...){
 }
 ```
 
-The code below adds two torch learners to the learner list.
+Le code ci-dessous rajoute deux algorithmes d’apprentissage.
 
 ```{r}
 if(torch::torch_is_installed()){
