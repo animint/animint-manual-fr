@@ -63,7 +63,7 @@ Le package `mlr3` fournit plusieurs fonctions qui simplifient ce genre d’analy
 
 Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
 <!-- comment -->
-Le code dans ce chapitre est une version modifiée du code dans [ce blog](https://tdhock.github.io/blog/2025/mlr3torch-conv/), qui aborde la visualisation statique.
+Le code dans ce chapitre est une version modifiée du code qui fait des visualisations statiques [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
@@ -188,7 +188,7 @@ Le code ci-dessus précise les bornes pour `k`, le nombre de voisins, entre 1 et
 <!-- comment -->
 Le code ci-dessous précise la méthode pour la séléction de `k`, soit recherche avec 10 valeurs, avec validation croisée à 3 divisions, maximisant l’aire sous la courbe ROC, soit en anglais « Area Under the Curve » ou « AUC ».
 <!-- comment -->
-Rémarqons que si on veut calculer l’AUC, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
+Rémarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
 ```{r}
 kfoldcv <- mlr3::rsmp("cv")
@@ -274,11 +274,11 @@ if(torch::torch_is_installed()){
 }
 ```
 
-### Running the benchmark {#running-the-benchmark}
+### Calculer les résultats {#running-the-benchmark}
 
 <!-- comment -->
 
-Before running a classification benchmark, it is important to ensure that `predict_type` of all learners is set to `prob` so that real-valued scores between 0 and 1 are output (allowing computation of evaluation metrics such as ROC-AUC).
+Avant de calculer les résultats pour des algorithmes de classification, on fait `predict_type=prob` pour s’assurer que les prédictions soient des valeurs réelles (pour pouvoir calculer les mesures d’évaluation comme l’AUC).
 
 ```{r}
 for(learner.i in seq_along(learner.list)){
@@ -286,7 +286,7 @@ for(learner.i in seq_along(learner.list)){
 }
 ```
 
-Next, we define the benchmark grid, which combines the tasks, learners, and a resampling method (3-fold cross-validation).
+Ensuite, nous combinons les jeux de données, les algorithmes d’apprentissage, et la méthode d’échantillonage (validation croisée à 3 divisions).
 
 ```{r}
 bench.grid <- mlr3::benchmark_grid(
@@ -295,7 +295,8 @@ bench.grid <- mlr3::benchmark_grid(
   kfoldcv)
 ```
 
-The code block below downloads the benchmark from `library(animint2data)`.
+Puisque notre but est d’expliquer la visualisation, nous avons déjà calculé et sauvegardé les résultats dans `library(animint2data)`.
+Le code ci-dessous télécharge ces résultats.
 
 ```{r}
 if(TRUE){
@@ -308,13 +309,13 @@ if(TRUE){
 }
 ```
 
-If you want to re-run the benchmark, you could run the line of code above.
+Si vous souhaitez recalculer ces résultats, vous pouvez exécuter la ligne avec `benchmark()` ci-dessus.
 <!-- comment -->
-This benchmark may take several minutes or hours, depending on the speed of your computer.
+Le calcul pourrait prendre plusieurs minutes ou même plusieurs heures, en fonction de votre ordinateur.
 <!-- comment -->
-Running `plan("multisession")` enables parallel execution, each task/learner/split on a different CPU of your computer.
+Le code `plan("multisession")` fait que chaque combinaison (données, algorithmes, divisions) est calculée sur un différent processeur.
 <!-- comment -->
-Read [the related blog post](https://tdhock.github.io/blog/2025/mlr3torch-conv/) to see some R code that can be used to parallelize using a compute cluster, which would be even faster.
+Pour aller encore plus vite, vous pouvez utiliser une grappe de calcul [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
