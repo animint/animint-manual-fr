@@ -1,4 +1,4 @@
-# Valeurs P
+# Valeurs-p
 
 <!-- paragraph -->
 
@@ -11,15 +11,15 @@ if(FALSE){
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données relatives à la [les valeurs P](https://en.wikipedia.org/wiki/P-value):
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données relatives à la [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
 
 <!-- paragraph -->
 
-- nous commençons par expliquer le concept de valeur P.
+- nous commençons par expliquer le concept de valeur-p.
 <!-- comment -->
 - nous simulons des données pour un test T à deux échantillons.
 <!-- comment -->
-- nous montrons comment créer un graphique en forme de volcan pour résumer un ensemble de valeurs P.
+- nous montrons comment créer un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
 <!-- comment -->
 - nous expliquons comment convertir un nuage de points surdéveloppé en une carte thermique liée et un nuage de points zoomé.
 <!-- comment -->
