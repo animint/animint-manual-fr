@@ -27,7 +27,7 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations des données rel
 
 <!-- paragraph -->
 
-## Qu'est-ce qu'une valeur P ?
+## Qu'est-ce qu'une valeur-p ?
 <!-- comment -->
 {#what-is-p-value}
 
@@ -35,7 +35,7 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations des données rel
 
 Une valeur P est utilisée pour mesurer la signification d'un test statistique.
 <!-- comment -->
-Les valeurs P peuvent être utilisées dans une plage étendue (ou intervalle), mais une application typique est le test de différence entre deux conditions :
+Les valeurs-p peuvent être utilisées dans une plage étendue (ou intervalle), mais une application typique est le test de différence entre deux conditions :
 
 <!-- paragraph -->
 
