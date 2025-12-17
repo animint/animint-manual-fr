@@ -1,4 +1,4 @@
-# P-values
+# Valeurs-p
 
 <!-- paragraph -->
 
@@ -11,80 +11,80 @@ if(FALSE){
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations related to [P-values](https://en.wikipedia.org/wiki/P-value):
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données relatives à la [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
 
 <!-- paragraph -->
 
-- we begin by explaining the concept of a P-value.
+- nous commençons par expliquer le concept de valeur-p.
 <!-- comment -->
-- we simulate some data for two-sample T-testing.
+- nous simulons des données pour un test T à deux échantillons.
 <!-- comment -->
-- we show how to create a volcano plot to summarize a set of P-values.
+- nous montrons comment créer un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
 <!-- comment -->
-- we explain how to convert an overplotted scatterplot into a linked heat map and zoomed scatterplot.
+- nous expliquons comment convertir un nuage de points surdéveloppé en une carte thermique liée et un nuage de points zoomé.
 <!-- comment -->
-- we end with another heat map of simulated parameter values, with a linked plot which shows the simulated data.
+- nous terminons par une autre carte thermique des valeurs des paramètres simulés, avec un graphique lié qui montre les données simulées.
 
 <!-- paragraph -->
 
-## What is a P-value?
+## Qu'est-ce qu'une valeur-p ?
 <!-- comment -->
 {#what-is-p-value}
 
 <!-- paragraph -->
 
-A P-value is used to measure significance of a statistical test.
+Une valeur P est utilisée pour mesurer la signification d'un test statistique.
 <!-- comment -->
-P-values can be used in a wide range of tests, but a typical application is testing for difference between two conditions:
+Les valeurs-p peuvent être utilisées dans une plage étendue (ou intervalle), mais une application typique est le test de différence entre deux conditions :
 
 <!-- paragraph -->
 
-- in a medical experiment, does the treatment do better than the control?
+- dans une expérience médicale, le traitement est-il plus efficace que le contrôle ?
 <!-- comment -->
-For example, with a weight loss drug, we would be interested to know if the treatment group weight is significantly less than the control group weight.
+Par exemple, dans le cas d'un médicament pour la perte de poids, nous aimerions savoir si le poids du groupe traité est significativement inférieur à celui du groupe témoin.
 <!-- comment -->
-Say we have 10 people assigned to the control group, and 15 people assigned to the treatment group.
+Supposons que 10 personnes soient assignées au groupe de contrôle et 15 au groupe de traitement.
 <!-- comment -->
-Then we could compute a P-value using an un-paired one-sided T-test to evaluate statistical significance (un-paired because each person in the treatment group does not have a corresponding member in the control group).
+Nous pourrions ensuite calculer une valeur P à l'aide d'un test T unilatéral non apparié pour évaluer la signification statistique (non apparié parce que chaque personne du groupe de traitement n'a pas de membre correspondant dans le groupe de contrôle).
 <!-- comment -->
-- in a machine learning experiment, is the neural network more accurate than the linear model?
+- Dans une expérience d'apprentissage automatique, le réseau neuronal est-il plus précis que le modèle linéaire ?
 <!-- comment -->
-For example, consider a benchmark image classification data set, and evaluation using 5-fold cross-validation.
+Par exemple, considérons un ensemble de données de référence de classification d'images, et une évaluation utilisant la validation croisée 5 fois.
 <!-- comment -->
-We would have five measures of test accuracy for each of the two learning algorithms (neural network and linear model).
+Nous aurions cinq mesures de la précision du test pour chacun des deux algorithmes d'apprentissage (réseau neuronal et modèle linéaire).
 <!-- comment -->
-Then we could compute a P-value using a paired one-sided T-test to evaluate statistical significance (paired because the fold 1 test accuracy for the linear model has a corresponding fold 1 test accuracy for the neural network, etc).
+Nous pourrions ensuite calculer une valeur P à l'aide d'un test T unilatéral apparié pour évaluer la signification statistique (apparié parce que la précision du test de pli 1 pour le modèle linéaire a une précision de test de pli 1 correspondante pour le réseau neuronal, etc.)
 
 <!-- paragraph -->
 
-After computing the measurements (weight of each person or test accuracy of each machine learning algorithm), we can use them as input to `t.test()`, which will compute a P-value (smaller for a more significant difference).
+Après avoir calculé les mesures (pondération de chaque personne ou précision des tests de chaque algorithme d'apprentissage automatique), nous pouvons les utiliser comme données d'entrée pour `t.test()` qui calculera une valeur P (plus elle est petite, plus la différence est significative).
 <!-- comment -->
-To understand the P-value, we must first adopt the *null hypothesis*: we assume there is no difference between the conditions.
+Pour comprendre la valeur P, nous devons d'abord adopter la méthode *hypothèse nulle* nous supposons qu'il n'y a pas de différence entre les conditions.
 <!-- comment -->
-Then, the P-value of the test is defined as the probability that we observe a difference as large as the given measurements, or larger.
+Ensuite, la valeur P du test est définie comme la probabilité que nous observions une différence aussi grande que les mesures données, ou plus grande.
 <!-- comment -->
-Since under the null hypothesis, there is no difference, it is extremely unlikely to see large differences, so that is why small P-values are more significant.
+Étant donné que l'hypothèse nulle est qu'il n'y a pas de différence, il est extrêmement improbable d'observer des différences importantes, c'est pourquoi les petites valeurs P sont plus significatives.
 
 <!-- paragraph -->
 
-## Simulated data {#p-value-simulated-data}
+## Données simulées {#p-value-simulated-data}
 
 <!-- paragraph -->
 
-We begin by simulating data for use with `t.test()`.
+Nous commençons par simuler des données à utiliser avec `t.test()`.
 <!-- comment -->
-Our simulation has four parameters:
+Notre simulation comporte quatre paramètres :
 
 <!-- paragraph -->
 
-- `true_offset` is the true difference between conditions,
-- `sd` is the standard deviation of the simulated data,
-- `sample` is a sample number (half of samples in one condition, half in the other),
-- `trial` is the number of times that we repeat the experiment (for each offset and standard deviation).
+- `true_offset` est la véritable différence entre les conditions,
+- `sd` est l'écart-type des données simulées,
+- `sample` est un nombre d'échantillons (la moitié des échantillons dans une condition, l'autre moitié dans l'autre condition),
+- `trial` est le nombre de fois que nous répétons l'expérience (pour chaque décalage et écart-type).
 
 <!-- paragraph -->
 
-The code below uses `CJ()` to define the values of each parameter:
+Le code ci-dessous utilise `CJ()` pour définir les valeurs de chaque paramètre :
 
 <!-- paragraph -->
 
@@ -111,25 +111,27 @@ set.seed(1)
 
 <!-- paragraph -->
 
-The result above shows several hundred thousand rows, one for each simulated random normal `value` (with mean depending on `true_offset` and `condition`).
+Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pour chaque normale aléatoire simulée. `value` (dont la moyenne dépend de `true_offset` et de `condition`).
 
 <!-- paragraph -->
 
-## T-test and volcano plot {#t-test-and-volcano-plot}
+## Test T et graphique du volcan {#t-test-and-volcano-plot}
 
 <!-- paragraph -->
 
-In this section we compute T-test results and visualize them using a volcano plot, which is a plot of negative log P-values versus estimated effect sizes.
+Dans cette section, nous calculons les résultats des tests T et les visualisons à l'aide d'un tracé en volcan, qui est un graphique des valeurs P en logarithme négatif par rapport aux tailles d'effet estimées.
 <!-- comment -->
-The test result visualization is called a volcano plot because the typical distribution of points resembles a volcano erupting from the origin upwards to the left and right.
-<!-- comment -->
-First, we add columns which we will use for visualization:
+La visualisation des résultats du test est appelée graphique en forme de volcan parce que la distribution typique des points ressemble à un volcan en éruption de l'origine vers le haut, vers la gauche et vers la droite.
+
+<!-- -- commentaire -->
+
+Tout d'abord, nous ajoutons les colonnes que nous utiliserons pour la visualisation :
 
 <!-- paragraph -->
 
-- `true_tile` is a text string for selecting a combination of one offset and one standard deviation.
+- `true_tile` est une chaîne de texte permettant de sélectionner une combinaison d'un décalage et d'un écart-type.
 <!-- comment -->
-- `Condition` is a string indicating the condition (either `zero` or `offset`).
+- `Condition` est une chaîne de caractères indiquant la condition (soit `zero` ou `offset`).
 
 <!-- paragraph -->
 
@@ -142,7 +144,7 @@ sim_dt[, let(
 
 <!-- paragraph -->
 
-Next, we do a reshape to obtain a table with a column for each condition (`zero` and `offset`).
+Ensuite, nous effectuons un remodelage pour obtenir un tableau avec une colonne pour chaque condition (`zero` et `offset`).
 
 <!-- paragraph -->
 
@@ -154,9 +156,9 @@ Next, we do a reshape to obtain a table with a column for each condition (`zero`
 
 <!-- paragraph -->
 
-The output above shows a table with half as many rows as the previous table.
+La sortie ci-dessus montre un tableau comportant deux fois moins de lignes que le tableau précédent.
 <!-- comment -->
-The code below computes a T-test for each repetition of the simulation:
+Le code ci-dessous calcule un test T pour chaque répétition de la simulation :
 
 <!-- paragraph -->
 
@@ -173,18 +175,18 @@ The code below computes a T-test for each repetition of the simulation:
 
 <!-- paragraph -->
 
-The output above has one row for each T-test, and columns for mean difference (`mean_zero`) and `p.value`.
+La sortie ci-dessus comporte une ligne pour chaque test T et des colonnes pour la différence moyenne (`mean_zero`) et la `p.value`.
 <!-- comment -->
-Since there are ten samples per trial, there are ten times fewer rows than the original simulated data table.
+Comme il y a dix échantillons par essai, il y a dix fois moins de lignes que dans le tableau de données simulé original.
 <!-- comment -->
-Each trial involves a T-test of 5 control/zero samples, versus 5 treatment/offset samples.
+Chaque essai implique un test T de 5 échantillons de contrôle/zéro, contre 5 échantillons de traitement/décalage.
 <!-- comment -->
-Next, we add columns for the volcano plot:
+Ensuite, nous ajoutons des colonnes pour le graphique du volcan :
 
 <!-- paragraph -->
 
-- `diff_means` is the difference between means of the two conditions, sometimes called the "effect size."
-- `neg.log10.p` is the negative log-transformed P-value (larger for more significant).
+- `diff_means` est la différence entre les moyennes des deux conditions, parfois appelée "taille de l'effet".
+- `neg.log10.p` est la valeur P transformée en logarithme négatif (plus elle est grande, plus elle est significative).
 
 <!-- paragraph -->
 
@@ -197,13 +199,13 @@ sim_p[, let(
 
 <!-- paragraph -->
 
-Next, we draw the volcano plot:
+Ensuite, nous dessinons le graphique volcan :
 
 <!-- paragraph -->
 
-- X axis shows the difference between conditions (effect size).
+- L'axe des X indique la différence entre les conditions (taille de l'effet).
 <!-- comment -->
-- Y axis shows negative log P-value.
+- L'axe des Y indique le logarithme négatif de la valeur P.
 
 <!-- paragraph -->
 
@@ -220,37 +222,37 @@ library(animint2)
 
 <!-- paragraph -->
 
-The static graphic above shows one dot per T-test result.
+Le graphique statique ci-dessus montre un point par résultat de test T.
 <!-- comment -->
-Dots close to the origin (0,0) represent tests which did not yield a significant difference, whereas dots with large Y values represent significant differences.
+Les points proches de l'origine (0,0) représentent des tests qui n'ont pas produit de différence significative, tandis que les points avec de grandes valeurs Y représentent des différences significatives.
 <!-- comment -->
-It also includes `fill=true_offset` and `color=sd` so we can see how the simulation parameters affect the volcano plot:
+Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions voir comment les paramètres de simulation affectent le graphique volcan :
 
 <!-- paragraph -->
 
-- Larger `sd` values appear at the bottom (more variance makes it more difficult to detect a difference).
+- Les valeurs de `sd` plus grandes apparaissent en bas (plus il y a de variance, plus il est difficile de détecter une différence).
 <!-- comment -->
-- Darker colors appear near the left/right edges (larger true offsets tend to result in larger computed differences in means).
+- Les couleurs plus foncées apparaissent près des bords gauche/droit (des décalages réels plus importants tendent à se traduire par des différences de moyennes calculées plus grandes).
 
 <!-- paragraph -->
 
-Finally, the plot above is overplotted, meaning we are unable to see all of the details, because there are too many data points plotted on top of one another.
+Enfin, le graphique ci-dessus est surreprésenté, ce qui signifie que nous ne pouvons pas voir tous les détails, car il y a trop de points de données tracés les uns sur les autres.
 
 <!-- paragraph -->
 
-## Fix overplotting by heat map and zoom {#fix-overplotting-heatmap-zoom}
+## Corriger le surdimensionnement par la carte thermique et le zoom {#fix-overplotting-heatmap-zoom}
 
 <!-- paragraph -->
 
-In this section, we show how the previous volcano plot can be revised to show more detail, using a heat map linked to a zoomed scatterplot.
+Dans cette section, nous montrons comment le graphique de volcan précédent peut être révisé pour montrer plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
 <!-- comment -->
-To begin, we define the `round_rel()` function below, which is used to add `round_*` and `rel_*` columns which we will use to define heat map tiles.
+Pour commencer, nous définissons l'élément `round_rel()` ci-dessous, qui est utilisée pour ajouter `round_*` et `rel_*` que nous utiliserons pour définir les tuiles de la carte thermique.
 
 <!-- paragraph -->
 
-- `round_*` columns are rounded to the nearest bin size (integer by default), and are used to define the heat map tile `x` and `y` positions.
+- `round_*` les colonnes sont arrondies à la taille de bac la plus proche (entière par défaut), et sont utilisées pour définir la tuile de la carte thermique. `x` et `y` de la carte thermique.
 <!-- comment -->
-- `rel_*` columns are used for `x` and `y` positions in the zoomed display, and are units relative to the corresponding `round_*` values.
+- `rel_*` sont utilisées pour `x` et `y` dans l'affichage zoomé, et sont des unités relatives à la valeur correspondante de `round_*` correspondantes.
 
 <!-- paragraph -->
 
@@ -267,7 +269,7 @@ round_rel(sim_p, "neg.log10.p")
 
 <!-- paragraph -->
 
-Next, we define `volcano_tile`, a text string combination of `round_*` variables, which will be used for selection.
+Ensuite, nous définissons `volcano_tile` une combinaison de chaînes de texte de `round_*` qui sera utilisée pour la sélection.
 
 <!-- paragraph -->
 
@@ -277,7 +279,7 @@ sim_p[, volcano_tile := paste(round_diff_means, round_neg.log10.p)]
 
 <!-- paragraph -->
 
-Next, we compute a table with one row per tile in the heat map we will display.
+Ensuite, nous calculons un tableau de contingence avec une ligne par carreau de la carte thermique que nous allons afficher.
 
 <!-- paragraph -->
 
@@ -289,9 +291,9 @@ Next, we compute a table with one row per tile in the heat map we will display.
 
 <!-- paragraph -->
 
-The output above shows one row per heat map tile, with the `tests` column indicating how many points appear in the corresponding area of the volcano plot.
+La sortie ci-dessus montre une ligne par tuile de la carte thermique, avec le paramètre `tests` indique le nombre de points apparaissant dans la zone correspondante du graphique du volcan.
 <!-- comment -->
-Below we create the volcano heat map.
+Ci-dessous, nous créons la carte thermique du volcan.
 
 <!-- paragraph -->
 
@@ -307,9 +309,9 @@ Below we create the volcano heat map.
 
 <!-- paragraph -->
 
-The output above is a heat map, with darker regions showing areas of the volcano plot which have more test results.
+Le résultat ci-dessus est une carte thermique, les régions plus foncées indiquant les zones du graphique du volcan qui ont plus de résultats de tests.
 <!-- comment -->
-The code below combines the volcano heat map with a zoomed scatterplot, using the `volcano_tile` selector to link them.
+Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, en utilisant la fonction `volcano_tile` pour les relier.
 
 <!-- paragraph -->
 
@@ -338,17 +340,17 @@ The code below combines the volcano heat map with a zoomed scatterplot, using th
 
 <!-- paragraph -->
 
-Above, after clicking the heat map on the left, the data shown in the right plot changes.
+Ci-dessus, après avoir cliqué sur la carte thermique de gauche, les données affichées dans le graphique de droite changent.
 
 <!-- paragraph -->
 
-## Visualizing grid of simulations {#viz-grid-simulations}
+## Visualisation d'une grille de simulations {#viz-grid-simulations}
 
 <!-- paragraph -->
 
-In this section, we create a new visualization to reveal details of each simulation parameter combination.
+Dans cette section, nous créons une nouvelle visualisation pour révéler les détails de chaque combinaison de paramètres de simulation.
 <!-- comment -->
-First, in the code below, we compute the mean effect size (`diff_means`) and negative log P-value (`neg.log10.p`), over all 100 repetitions of each parameter combination.
+Tout d'abord, dans le code ci-dessous, nous calculons la taille moyenne de l'effet (`diff_means`) et le logarithme négatif de la valeur P (`neg.log10.p`), sur l'ensemble des 100 répétitions de chaque combinaison de paramètres.
 
 <!-- paragraph -->
 
@@ -362,9 +364,9 @@ First, in the code below, we compute the mean effect size (`diff_means`) and neg
 
 <!-- paragraph -->
 
-The output above has one row per combination of simulation parameters (`true_offset` and `sd`).
+Le résultat ci-dessus comporte une ligne par combinaison de paramètres de simulation (`true_offset` et `sd`).
 <!-- comment -->
-We use the code below to visualize this grid of parameter combinations.
+Nous utilisons le code ci-dessous pour visualiser cette grille de combinaisons de paramètres.
 
 <!-- paragraph -->
 
@@ -388,21 +390,21 @@ height <- sd_by*0.45
 
 <!-- paragraph -->
 
-The figure above shows a rectangle for each simulation parameter combination.
+La figure ci-dessus montre un rectangle pour chaque combinaison de paramètres de simulation.
 <!-- comment -->
-It is clear that:
+Il est clair que :
 
 <!-- paragraph -->
 
-- the estimated effect size (`fill=diff_means`) is consistent with the true offset (X axis).
+- la taille estimée de l'effet (`fill=diff_means`) est cohérente avec le décalage réel (axe des X).
 <!-- comment -->
-- the more significant P-values (large `neg.log10.p`) are associated with small standard deviation parameters (because the signal to noise ratio is larger).
+- les valeurs P les plus significatives (grandes `neg.log10.p`) sont associées à des paramètres à faible écart-type (parce que le rapport signal/bruit est plus important).
 
 <!-- paragraph -->
 
-We will create a linked plot that shows details of the simulations for each parameter combination.
+Nous allons créer un graphique lié qui montre les détails des simulations pour chaque combinaison de paramètres.
 <!-- comment -->
-First we prototype the details plots by examining a subset:
+Nous commençons par établir le prototype des graphiques détaillés en examinant un sous-ensemble :
 
 <!-- paragraph -->
 
@@ -419,7 +421,7 @@ gg.true.tiles+
 
 <!-- paragraph -->
 
-The figure above shows two rectangles emphasized with a green outline, for which we create a facetted non-interactive plot using the code below.
+La figure ci-dessus montre deux rectangles soulignés d'un contour vert, pour lesquels nous créons un graphique à facettes non interactif à l'aide du code ci-dessous.
 
 <!-- paragraph -->
 
@@ -433,21 +435,21 @@ The figure above shows two rectangles emphasized with a green outline, for which
 
 <!-- paragraph -->
 
-The figure above shows a panel for each of the two parameter combinations emphasized in the previous plot.
+La figure ci-dessus montre un panneau pour chacune des deux combinaisons de paramètres mises en évidence dans le graphique précédent.
 <!-- comment -->
-The X axis represents `trial`, which ranges from 1 to 100, each one with different random values simulated using the same assumptions (`true_offset=0` or `2`).
+L'axe des X représente `trial`, qui s'étend de 1 à 100, chacune avec différentes valeurs aléatoires simulées à l'aide des mêmes hypothèses (`true_offset=0` ou `2`).
 <!-- comment -->
-The T-test is used to determine if there is any difference in means, between the two conditions.
+Le test T est utilisé pour déterminer s'il existe une différence de moyennes entre les deux conditions.
 
 <!-- paragraph -->
 
-- When `true_offset=0`, there is no difference between the two conditions, so the T-test should have a small effect size, and a large P-value.
+- Quand `true_offset=0` il n'y a pas de différence entre les deux conditions, de sorte que le test T devrait avoir une petite taille d'effet et une grande valeur P.
 <!-- comment -->
-- When `true_offset=2`, there is a larger difference between the two conditions, so the T-test should have a larger effect size, and a small P-value.
+- Lorsque `true_offset=2` il y a une plus grande différence entre les deux conditions, de sorte que le test T devrait avoir une taille d'effet plus importante et une petite valeur P.
 
 <!-- paragraph -->
 
-The code below creates a new `significant` column which indicates if the test rejects the null hypothesis at the traditional threshold of 5%.
+Le code ci-dessous crée un nouveau `significant` qui indique si le test rejette l'hypothèse nulle au seuil traditionnel de 5 %.
 
 <!-- paragraph -->
 
@@ -457,7 +459,7 @@ sim_p[, significant := p.value < 0.05]
 
 <!-- paragraph -->
 
-The code below adds a new `geom_point()` to emphasize the trials which showed a significant difference at the 5% level.
+Le code ci-dessous ajoute un nouveau `geom_point()` pour mettre l'accent sur les essais qui ont montré une différence significative au niveau de 5 %.
 
 <!-- paragraph -->
 
@@ -472,21 +474,21 @@ gg.some.values+
 
 <!-- paragraph -->
 
-The figure above shows a black dot for each trial with a significant difference.
+La figure ci-dessus montre un point noir pour chaque essai présentant une différence significative.
 
 <!-- paragraph -->
 
-- For `true_offset=0`, we see that there are `r nrow(some(only_significant)[true_offset==0])` trials with a significant difference, even though there is no difference in the true means in the simulation.
+- Pour `true_offset=0` nous voyons qu'il y a `r nrow(some(only_significant)[true_offset==0])` essais avec une différence significative, même s'il n'y a pas de différence dans les vraies moyennes dans la simulation.
 <!-- comment -->
-This number of false positives is consistent with the 5% P-value threshold (type I error rate) that we used to define significance.
+Ce nombre de faux positifs est cohérent avec le seuil de 5% de la valeur P (taux d'erreur de type I) que nous avons utilisé pour définir la significativité.
 <!-- comment -->
-- For `true_offset=2`, we see that only `r nrow(some(only_significant)[true_offset!=0])` of the trials are significant, even though there is a true difference in means.
+- Pour `true_offset=2`, nous voyons que seul `r nrow(some(only_significant)[true_offset!=0])` des essais sont significatifs, même s'il y a une vraie différence de moyenne.
 <!-- comment -->
-The estimated power (true positive rate) is therefore `r some(sim_p)[true_offset!=0, paste0(100*mean(significant),"%")]` and the type II error rate (false negative rate) is therefore `r some(sim_p)[true_offset!=0, paste0(100*mean(1-significant),"%")]`.
+La puissance estimée (taux de vrais positifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(significant),"%")]` et le taux d'erreur de type II (taux de faux négatifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(1-significant),"%")]`.
 
 <!-- paragraph -->
 
-Below we create a visualization which links the overview heat map to the details scatter plot, by replacing `facet_grid(true_offset ~ .)` in the code above, with `showSelected="true_tile"` in the code below.
+Ci-dessous, nous créons une visualisation qui relie la carte thermique d'ensemble au graphique de dispersion détaillé, en remplaçant `facet_grid(true_offset ~ .)` dans le code ci-dessus par `showSelected="true_tile"` dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -520,69 +522,69 @@ Below we create a visualization which links the overview heat map to the details
 
 <!-- paragraph -->
 
-In the visualization above, you can click on the top plot to select a simulation parameter combination.
+Dans la visualisation ci-dessus, vous pouvez cliquer sur le graphique du haut pour sélectionner une combinaison de paramètres de simulation.
 <!-- comment -->
-The 100 trials for the selected parameter combination are shown in the bottom plot.
+Les 100 essais pour la combinaison de paramètres sélectionnée sont affichés dans le graphique du bas.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#ch19-exercises}
+## Résumé du chapitre et exercices {#ch19-exercises}
 
 <!-- paragraph -->
 
-We have created several data visualizations using simulations to illustrate P-values.
+Nous avons créé plusieurs visualisations des données à l'aide de simulations pour illustrer les valeurs P.
 <!-- comment -->
-Since there were too many T-tests to show on the volcano plot, we instead used a heat map linked to a zoomed scatter plot.
+Comme il y avait trop de tests T à montrer sur le graphique du volcan, nous avons plutôt utilisé une carte thermique liée à un diagramme de dispersion zoomé.
 <!-- comment -->
-We also showed how to link a heat map of parameter combinations to a scatter plot which shows details of the corresponding values in the simulations.
+Nous avons également montré comment lier une carte thermique de combinaisons de paramètres à un graphique de dispersion qui montre les détails des valeurs correspondantes dans les simulations.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- In `viz.volcano`, when clicking on one of the bottom `volcanoTiles`, we see only have of the space occupied in `volcanoZoom`.
+- En `viz.volcano` En cliquant sur l'un des boutons de la partie inférieure de l'écran, on obtient une vue d'ensemble de la situation. `volcanoTiles` on ne voit qu'une partie de l'espace occupé en `volcanoZoom`.
 <!-- comment -->
-To fix this, and have all of the space occupied, go back to the definition of `round_neg.log10.p`, and use the `offset=0.5` argument in `round_rel()`, which will shift the relative values by a certain offset.
+Pour corriger ce problème et occuper tout l'espace, revenez à la définition de `round_neg.log10.p` et utiliser l'élément `offset=0.5` dans `round_rel()` qui décale les valeurs relatives d'un certain décalage.
 <!-- comment -->
-- In `viz.volcano`, add `aes(tooltip)` to `volcanoTiles` to show how many points are in each heat map tile.
+- En `viz.volcano`, ajouter `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
 <!-- comment -->
-- Note how two `geom_tile()` were used in `viz.volcano`, and two `geom_rect()` were used in `viz.parameters`.
+- Notez que deux `geom_tile()` ont été utilisés dans `viz.volcano` et deux `geom_rect()` ont été utilisés en `viz.parameters`.
 <!-- comment -->
-The first geom uses color and fill to visualize the data, whereas the second geom uses `fill="transparent"` with `color="green"` for selection.
+Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise la fonction `fill="transparent"` avec `color="green"` pour la sélection.
 <!-- comment -->
-Try a re-design with only one geom, which only uses `aes(fill)` and instead uses `color` as a geom parameter.
+Essayez une refonte avec un seul geom, qui n'utilise que des `aes(fill)` et utilise à la place `color` comme paramètre de geom.
 <!-- comment -->
-What are the disadvantages of the approach using only one geom?
+Quels sont les inconvénients de l'approche utilisant un seul geom ?
 <!-- comment -->
-- In `viz.parameters`, add `geom_hline()` to emphasize the selected value of the true offset.
+- En `viz.parameters`, ajouter `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
 <!-- comment -->
-- In `viz.parameters$zoom`, add `geom_segment()` to represent the difference between means in each trial, using `aes(linetype=signficant)` to show which differences are significant at the traditional P-value threshold of `0.05`.
+- En `viz.parameters$zoom`, ajouter `geom_segment()` pour représenter la différence entre les moyennes de chaque essai, en utilisant `aes(linetype=signficant)` pour montrer quelles différences sont significatives au seuil traditionnel de la valeur P de `0.05`.
 <!-- comment -->
-- In `viz.parameters$zoom`, add `geom_point()` to represent the mean in each trial and condition.
+- En `viz.parameters$zoom`, ajouter `geom_point()` pour représenter la moyenne de chaque essai et de chaque condition.
 <!-- comment -->
-Hint: you can either add two instances of `geom_point()`, or one `geom_point()` with a longer data table created via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
+Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Add graphical elements to `gg.volcano` to emphasize the traditional P-value threshold of `0.05`: `geom_hline()` can show the threshold, and `geom_text()` can show how many tests fall above or below the threshold (use text like "1500 tests not significant").
+- Ajouter des éléments graphiques à `gg.volcano` pour mettre l'accent sur le seuil traditionnel de la valeur P de `0.05`: `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme "1500 tests non significatifs").
 <!-- comment -->
-- Add `aes(tooltip)` to `gg.true.tiles` to show values of `neg.log10.p` and `diff_means`.
+- Ajouter `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->
-- Add animation to `viz.parameters` so that we see a new parameter combination every second.
+- Ajouter une animation à `viz.parameters` de manière à ce qu'une nouvelle combinaison de paramètres apparaisse toutes les secondes.
 <!-- comment -->
-- Add `first` option to `viz.parameters` so that the first selection we see is the same as one of the parameter combinations shown in the static facetted plot.
+- Ajouter `first` à l'option `viz.parameters` afin que la première sélection affichée corresponde à l'une des combinaisons de paramètres présentées dans le graphique statique à facettes.
 <!-- comment -->
-- Combine `viz.volcano` with `viz.parameters` to create a new data visualization with four linked plots.
+- Combiner `viz.volcano` avec `viz.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
 <!-- comment -->
-Different kinds of interactions are possible: - In `volcanoZoom`, use `clickSelects="true_tile"` so that interactivity can be used to map volcano plot points back into the simulation parameter space.
+Différents types d'interactions sont possibles : - En `volcanoZoom`, utiliser `clickSelects="true_tile"` pour que l'interactivité permette de mapper les points du graphique volcanique dans l'espace des paramètres de simulation.
 <!-- comment -->
-Add green dots with `showSelected="true_tile"` to `volcanoTiles` to show where the 100 trials for the selected parameter combination appear in volcano plot space.
+Ajouter des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais pour la combinaison de paramètres sélectionnée apparaissent dans l'espace du graphique du volcan.
 <!-- comment -->
-- Create a new selection variable that is a unique combination of `true_tile` and `trial`, then use it for `clickSelects` in both `volcanoZoom` and `viz.parameters$zoom`, so that we can see a correspondence between a point in volcano space, and a trial in the parameter zoom details plot.
+- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial` puis l'utiliser pour `clickSelects` dans les deux `volcanoZoom` et `viz.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l'espace volcanique et un essai dans le graphique des détails du zoom sur les paramètres.
 
 <!-- paragraph -->
 
-Next, [the appendix](/ch99) explains some R programming idioms that are generally useful for interactive data visualization design.
+Suivant, [l'annexe](/ch99) explique certains idiomes de programmation R qui sont généralement utiles pour la conception de visualisations de données interactives.
 
 <!-- paragraph -->
 
