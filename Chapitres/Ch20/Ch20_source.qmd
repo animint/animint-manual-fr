@@ -67,34 +67,34 @@ Le code dans ce chapitre est une version modifiée du code dans [ce blog](https:
 
 <!-- comment -->
 
-## Defining and running a benchmark {#running-a-benchmark}
+## Definition des données et algorithmes à comparer {#definition-comparaison}
 
 <!-- comment -->
 
-In the `mlr3` framework, a benchmark machine learning experiment typically consists of computing all combinations of:
+Dans `mlr3`, une comparaison « benchmark » comprend toutes les combinaisons de :
 
 <!-- comment -->
 
-* a list of `Tasks` or data sets,
+* une liste de jeux de données (`Tasks`),
 <!-- comment -->
-* a list of `Learners` or learning algorithms,
+* une liste d’algorithmes d’apprentissage (`Learners`),
 <!-- comment -->
-* and the iterations or splits of a `Resampling` method.
+* et toutes les itérations d’une méthode d’échantillonage (`Resampling`).
 
 <!-- comment -->
 
-### Tasks {#tasks}
+### Les jeux de données (`Tasks`) {#tasks}
 
 <!-- comment -->
 
-We begin by defining a list of two tasks that come already defined in the `mlr3` framework.
+Nous commençons avec une liste de deux jeux de données.
 
 ```{r}
 mlr.tasks <- c("spam","sonar")
 task_list <- mlr3::tsks(mlr.tasks)
 ```
 
-Next, we define a function for downloading data sets from the Elements of Statistical Learning book web site [@Hastie2009].
+Ensuite, nous définissons une fonction pour télécharger un jeu de données depuis le site web du livre « Elements of Statistical Learning » [@Hastie2009].
 
 ```{r}
 library(data.table)
@@ -111,7 +111,8 @@ cache.fread <- function(data.name, f){
 }
 ```
 
-Next, we loop over three data set names, downloading and reading the corresponding data files, and creating a binary classification task (involving just the first two classes).
+Ensuite, nous faisons un boucle pour télécharger trois jeux de données.
+Pour chacun, on rajoute un `Task` de classification binaire (avec seulement les deux premières classes).
 
 ```r
 data.sets <- c("vowel","waveform","zip")
@@ -138,19 +139,19 @@ for(data.name in data.sets){
 task_list
 ```
 
-The code above results in a task list with 5 binary classification tasks:
+Le résultat ci-dessus est une liste représentant 5 problèmes de classification binaire :
 
 <!-- comment -->
 
-* `spam` represents email classification into spam or not, based on a bag of words vector.
+* `spam` représente la classification des courriels (`spam` est pourriel non-désiré, `nonspam` est courriel désiré) à partir d’un vecteur de comtages de mots « bag of words ».
 <!-- comment -->
-* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) represents a problem of discriminating metal and rock, based on a vector of sonar frequency bands.
+* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente la classification de métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
 <!-- comment -->
-* `vowel` represents a problem of discriminating vowel sounds, using ten features extracted from audio data.
+* `vowel` représente la classification des sons voyelles, à partir de dix variables calculées depuis un fichier audio.
 <!-- comment -->
-* `waveform` is a simulated binary problem [@Hastie2009].
+* `waveform` est un jeu de données de simulation [@Hastie2009].
 <!-- comment -->
-* `zip` represents handwritten digit recognition, where features are a vector representing 16x16 pixel intensities.
+* `zip` représente la classification de chiffres écrits à la main, à partir d’une image de 16x16 pixels, en échelle de gris.
 
 <!-- comment -->
 
