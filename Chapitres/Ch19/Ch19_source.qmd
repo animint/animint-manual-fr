@@ -199,7 +199,7 @@ sim_p[, let(
 
 <!-- paragraph -->
 
-Ensuite, nous dessinons le tracé du volcan :
+Ensuite, nous dessinons le graphique volcan :
 
 <!-- paragraph -->
 
@@ -226,13 +226,13 @@ Le graphique statique ci-dessus montre un point par résultat de test T.
 <!-- comment -->
 Les points proches de l'origine (0,0) représentent des tests qui n'ont pas produit de différence significative, tandis que les points avec de grandes valeurs Y représentent des différences significatives.
 <!-- comment -->
-Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions voir comment les paramètres de simulation affectent le graphique du volcan :
+Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions voir comment les paramètres de simulation affectent le graphique volcan :
 
 <!-- paragraph -->
 
-- Plus grand `sd` apparaissent en bas (plus il y a de variance, plus il est difficile de détecter une différence).
+- Les valeurs de `sd` plus grandes apparaissent en bas (plus il y a de variance, plus il est difficile de détecter une différence).
 <!-- comment -->
-- Les couleurs plus foncées apparaissent près des côtés gauche/droit (des décalages réels plus importants tendent à se traduire par des différences de moyennes calculées plus grandes).
+- Les couleurs plus foncées apparaissent près des bords gauche/droit (des décalages réels plus importants tendent à se traduire par des différences de moyennes calculées plus grandes).
 
 <!-- paragraph -->
 
