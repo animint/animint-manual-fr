@@ -319,11 +319,11 @@ Pour aller encore plus vite, vous pouvez utiliser une grappe de calcul [@Hocking
 
 <!-- comment -->
 
-## Test error and accuracy plots {#test-error-and-accuracy-plots}
+## Graphiques d’erreur et d’aire sous la courbe {#test-error-and-accuracy-plots}
 
 <!-- comment -->
 
-First, we define a list of error/accuracy metrics, which are called `Measures` in `mlr3`.
+Nous commençons avec la définition des mesures à calculer pour évaluer les prédictions.
 
 <!-- comment -->
 
@@ -335,20 +335,21 @@ sapply(test_measure_list, function(M)M$label)
 
 <!-- comment -->
 
-The output above shows the mapping between measure names and abbreviations.
+La sortie ci-dessous affiche la correspondance entre les noms et les codes pour les mesures.
 <!-- comment -->
-Next, we run the `$score()` method of the benchmark result, to compute various evaluation metrics on the test set for each combination of task/learner/split.
+Ensuite, nous utilisons `$score()` pour calculer ces mesures sur les données test, dans chaque division de validation croisée.
 
 ```{r}
 score_dt <- bench.result$score(test_measure_list)
 score_dt[, .(task_id, learner_id, iteration, classif.auc, classif.ce)]
 ```
 
-The output above has one row per combination of task/learner/split, and two evaluation metrics: ROC-AUC and classification error.
+La sortie ci-dessus contient une ligne pour chaque combinaison de données, algorithme, division de validation croisée.
+Il y a des colonnes pour deux mesures : l’AUC et le taux d’erreur.
 <!-- comment -->
-The code below visualizes the corresponding test error values.
+Le code ci-dessous visualise les taux d’erreur.
 <!-- comment -->
-Note that we convert the error rate into a percent in order to save space in the X axis tick labels (30 versus 0.3 for example).
+Remarquons que nous convertissons le taux d’erreur en pourcentage afin d’economiser l’espace sur l’axe X (par exemple, 0.3 devient 30).
 
 ```{r}
 library(animint2)
@@ -363,11 +364,11 @@ ggplot()+
     limits=c(0,60))
 ```
 
-The figure above shows three dots per row, one for each train/test split.
+Le graphique ci-dessus affiche trois cercles pour chaque Y — un cercle pour chaque division de validation croisée.
 <!-- comment -->
-We can see that nearest neighbors has smallest error rate is some data (`vowel`), whereas the `torch_dense_50` neural network is best in others like `spam`.
+Nous voyons que l’algorithme des plus proches voisins a le plus petit taux d’erreur dans certains jeux de données (`vowel`), et le réseau de neurones (`torch_dense_50`) est meilleur dans d’autres données (`spam`).
 <!-- comment -->
-The goal in the rest of this chapter will be to make interactive versions of this figure, which show details for each train/test split.
+Le but dans ce chapitre est de rajouter l’interactivité à ce graphique, pour montrer des détails pour chaque division de validation croisée.
 
 <!-- comment -->
 
