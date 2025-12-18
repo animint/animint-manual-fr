@@ -542,15 +542,15 @@ Dans la visualisation, vous pouvez cliquer les points d’AUC en haut, ce qui af
 
 <!-- comment -->
 
-### Interactive ROC curves {#interactive-roc-curves}
+### Interaction avec courbes ROC {#interactive-roc-curves}
 
 <!-- comment -->
 
-In the previous section, we plotted points on the ROC curves, corresponding to the default thresholds of the algorithms' predicted scores.
+Dans la section précédente, nous avons affiché un point sur chaque courbe ROC pour représenter le seuil par défaut.
 <!-- comment -->
-These points occur at different False Positive Rates, between algorithms.
+Ces points correspondent aux différents taux de faux positifs, pour les différents algorithmes d’apprentissage.
 <!-- comment -->
-For a more fair comparison between algorithms, in this section we compare algorithms' best True Positive Rate, for a given False Positive Rate.
+Pour une comparaison plus juste entre les algorithmes, nous pouvons afficher le meilleur taux de vrais positifs, pour un seuil de faux positifs (à définir par la sélection interactive).
 
 ```{r}
 (best_TPR_dt <- roc_dt[, .(
@@ -558,9 +558,9 @@ For a more fair comparison between algorithms, in this section we compare algori
 ), by=.(task_id,iteration,task_it,learner_id,FPR)])
 ```
 
-The table above shows the best TPR for each possible FPR of each algorithm, in each task and cross-validation iteration.
+Le tableau ci-dessous contient le meilleur taux de vrai positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
 <!-- comment -->
-We want to display only the values for which all algorithms are present, so below we count the number of algorithms which has each FPR value.
+Nous voulons seulement afficher les seuils pour lesquelles il y a tous les algorithmes, alors nous contons le nombre d’algorithmes pour chaque seuil.
 
 ```{r}
 best_TPR_algos <- best_TPR_dt[, .(
@@ -569,11 +569,14 @@ best_TPR_algos <- best_TPR_dt[, .(
 table(best_TPR_algos$algos)
 ```
 
-The table above means that there are some FPR values which are present in only 1-3 learners.
+Dans le tableau ci-dessus, nous voyons que
+
+* il y a 30 seuils extrêmes avec tous les 5 algorithmes (y compris `featureless`),
+* il y a plusieurs seuils avec seulement entre 1 et 3 algorithmes, que nous ne voulons pas afficher.
 <!-- comment -->
-We only want to show FPR values which are present in at least 4, which is what is coded below.
+Nous voulons seulement garder les seuils avec au moins 4 algorithmes, ce que nous faisons avec le code ci-dessous.
 <!-- comment -->
-We additionally keep only a max of 40 FPR values, almost evenly spaced across the range of FPR values.
+En plus, pour que le nombre de seuils reste abordable pour la sélection interactive, nous imposons un maximum de 40 seuils, avec espacement presque régulier à travers les valeurs possible pour le taux de faux positifs.
 
 ```{r}
 (min.algos <- length(learner.list)-1)
@@ -583,9 +586,9 @@ max.FPR.values <- 40
 , by=.(task_id,iteration,task_it)][keep==TRUE])
 ```
 
-The output above is a table for each FPR value we would like the user to be able to select.
+Le tableau ci-dessus contient les seuils que nous pouvons sélectionner avec l’interactivité.
 <!-- comment -->
-We plot these values as vertical lines below.
+Dans le code ci-dessous, nous dessinons chaque seuil avec une ligne verticale.
 
 ```{r}
 gg.roc.fpr <- gg.roc.text+
@@ -599,9 +602,9 @@ gg.roc.fpr <- gg.roc.text+
 gg.roc.fpr+facet_grid(iteration ~ task_id)
 ```
 
-The output above shows a vertical line for each FPR threshold which will be selectable by the user.
+Le graphique ci-dessus affiche toutes les seuils, ce qui fait un fond noir.
 <!-- comment -->
-Below we create a plot which will show the best TPR values for the selected FPR threshold.
+Ensuite, nous faisons un nouveau graphique pour afficher les meilleurs taux de vrai positifs, pour le seuil sélectionné.
 
 ```{r}
 best_TPR_show <- best_TPR_dt[
@@ -620,9 +623,9 @@ best_TPR_show <- best_TPR_dt[
      showSelected=c("task_it","FPR")))
 ```
 
-Above we see a dot plot with text showing the TPR at each selectable FPR.
+Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de vrai positifs.
 <!-- comment -->
-Below we combine the previous plots into an interactive display.
+Ensuite nous combinons tous les graphiques précédants dans une visualisation interactive.
 
 ```{r viz-select-fpr}
 (viz.select.fpr <- animint(
@@ -636,23 +639,21 @@ Below we combine the previous plots into an interactive display.
     theme_animint(colspan=2, width=800, height=200)))
 ```
 
-The interactive display above shows
+La visualisation ci-dessus permet de
 
 <!-- comment -->
 
-* in the top plot, you can click test AUC values to select a data set and cross-validation iteration.
+* cliquer le graphique en haut à gauche pour choisir un jeux de données et une division de validation croisée (`task_it`),
 <!-- comment -->
-* in the bottom left plot, you can click a vertical line to select a FPR threshold.
+* cliquer le graphique en haut à droite pour choisir un seuil de taux de faux positifs (`FPR`),
 <!-- comment -->
-* in the bottom right plot, you can see the best TPR values for the selected FPR threshold.
+* ensuite de voir les meilleurs taux de vrais positifs, dans le graphique en bas.
 
 <!-- comment -->
 
-Try clicking various FPR thresholds in the sonar data set.
+Si vous cliquez les seuils dans les données `sonar`, vous allez voir que le meilleur algorithme dépende du choix de seuil.
 <!-- comment -->
-You should see that the algorithm ranking is different for different FPR thresholds.
-<!-- comment -->
-For example, `cv_glmnet` is worst for small FPR values, but it is best for larger FPR values.
+Par exemple, `cv_glmnet` est le pire pour `FPR` petit, mais il est le meilleur pour `FPR` plus grand.
 
 <!-- comment -->
 
