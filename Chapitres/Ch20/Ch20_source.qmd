@@ -657,15 +657,15 @@ Par exemple, `cv_glmnet` est le pire pour `FPR` petit, mais il est le meilleur p
 
 <!-- comment -->
 
-### Adding a zoom level {#adding-a-zoom-level}
+### Rajouter un niveau de zoom {#adding-a-zoom-level}
 
 <!-- comment -->
 
-The previous data visualizations used facets to display the test AUC of different data sets.
+Les visualisations précédentes utilisent facettes pour afficher l’AUC pour toutet les différents jeux de données.
 <!-- comment -->
-In this section, we propose a re-design that shows test AUC for only one data set at a time.
+Dans cette section, nous proposons d’afficher l’AUC pour seulement un jeu de données à la fois.
 <!-- comment -->
-We will use a display which allows data set selection in function of number of rows and max AUC, which we compute below.
+Nous allons faire un graphique qui permet la sélection d’un jeu de données en fonction du nombre d’observations, et du max AUC, qu’on calcule avec le code ci-dessous.
 
 ```{r}
 (summary_dt <- score_dt[, .(
@@ -674,9 +674,9 @@ We will use a display which allows data set selection in function of number of r
 ), by=task_id])
 ```
 
-The output above is a data table with one row per data set.
+Le tableau ci-dessus contient une ligne pour chaque jeu de données.
 <!-- comment -->
-We use these data in the scatter plot below.
+Nous utilisons ce tableau pour dessiner le nuage de points ci-dessous.
 
 ```{r}
 point_size <- 5
@@ -695,11 +695,11 @@ point_color_off <- "grey"
     data=summary_dt))
 ```
 
-The scatterplot above shows a summary, one dot per data set.
+Le graphique contient un point pour chaque jeu de données.
 <!-- comment -->
-Note in the code above we have `clickSelects="task_id"`, which only selects task (not cross-validation iteration).
+Remarquons dans le code ci-dessus que nous avons `clickSelects="task_id"`, ce qui permet la sélection d’un jeu de données seulement (pas la division de validation croisée).
 <!-- comment -->
-So in the code below we create a test AUC plot with `showSelected="task_id"` and `clickSelects="iteration"`.
+Ensuite nous créons un graphique avec `showSelected="task_id"` et `clickSelects="iteration"`.
 
 ```{r}
 gg.auc.show.task <- ggplot()+
@@ -716,11 +716,11 @@ gg.auc.show.task <- ggplot()+
 gg.auc.show.task+facet_grid(task_id ~ .)
 ```
 
-The output above shows a multi-panel display, with one panel for each data set.
+Le graphique contient un panneau pour chaque jeu de données.
 <!-- comment -->
-We notice that the AUC values are on very different scales between data sets, and featureless always has AUC=0.5 (as expected).
+Remarquons que les valeurs d’AUC sont très différent entre les jeux de données,et que `featureless` a toujours AUC=0.5, comme attendu.
 <!-- comment -->
-We therefore create a second version of this plot, without featureless, in the code below.
+Nous supprimons `featureless` dans le graphique ci-dessous.
 
 ```{r}
 gg.auc.show.task.zoom <- ggplot()+
@@ -737,9 +737,9 @@ gg.auc.show.task.zoom <- ggplot()+
 gg.auc.show.task.zoom+facet_grid(task_id ~ .)
 ```
 
-We no longer see featureless in the output above.
+Le graphique ci-dessus ne contient plus `featureless`.
 <!-- comment -->
-Next, we create a plot of ROC curves for selected iteration and task.
+Ensuite nous faisons un graphique des courbes ROC pour la sélection de `task_id` et `iteration`.
 
 ```{r}
 gg.roc.show.task.it <- ggplot()+
@@ -753,9 +753,9 @@ gg.roc.show.task.it <- ggplot()+
 gg.roc.show.task.it+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a panel for each task and iteration.
+Le graphique affiche un panneau pour chaque jeu de données, et pour chaque division de validation croisée.
 <!-- comment -->
-Below we combine the ggplots into an interactive data visualization.
+Le code ci-dessous combine ces graphiques dans une visualisation interactive.
 
 ```{r viz-two-selectors}
 animint(
@@ -775,15 +775,15 @@ animint(
       width=800, height=200, last_in_row=TRUE, colspan=2))
 ```
 
-The figure above shows
+Le graphique affiche
 
 <!-- comment -->
 
-* in the upper left, an overview for all data sets.
+* en haut à gauche, un résumé de tous les jeux de données (cliquez un point pour sélectionner un jeu de données).
 <!-- comment -->
-* at the bottom, two test AUC plots for the selected data set.
+* en bas, deux graphiques d’AUC sur les ensembles test, pour le jeu de données sélectionné (cliquez un point pour sélectionner une division de validation croisée).
 <!-- comment -->
-* in the upper right, ROC curves for the selected data set and iteration.
+* en haut à droite, les courbes ROC pour la sélection de `task_id` et `iteration`.
 
 <!-- comment -->
 
