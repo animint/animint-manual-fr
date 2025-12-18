@@ -336,6 +336,12 @@ sapply(test_measure_list, function(M)M$label)
 <!-- comment -->
 
 La sortie ci-dessous affiche la correspondance entre les noms et les codes pour les mesures.
+
+* `classif.auc` est l’aire sous la courbe ROC.
+* `classif.ce` est le taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre d’étiquettes total.
+* `classif.tpr` est le taux de vrai positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
+* `classif.fpr` est le taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
+
 <!-- comment -->
 Ensuite, nous utilisons `$score()` pour calculer ces mesures sur les données test, dans chaque division de validation croisée.
 
@@ -372,13 +378,13 @@ Le but dans ce chapitre est de rajouter l’interactivité à ce graphique, pour
 
 <!-- comment -->
 
-### ROC curves {#roc-curves}
+### Courbes ROC {#roc-curves}
 
 <!-- comment -->
 
-In this section, we will compute ROC curves, which are useful for evaluation in binary classification.
+Dans cette section, nous affichons des courbe ROC, qui sont utile pour l’évaluation dans la classification binaire.
 <!-- comment -->
-In fact, `$score()` has already computed the Area Under the Curve (AUC), which we plot below.
+En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC), que nous allons visualiser avec le code ci-dessous.
 
 ```{r}
 ggplot()+
@@ -388,13 +394,13 @@ ggplot()+
     data=score_dt)
 ```
 
-The figure above shows test AUC for every data set, learning algorithm, and train/test split in cross-validation.
+Le graphique ci-dessus affiche l’AUC sur l’ensemble test, pour chaque division de validation croisée, chaque jeu de données, et chaque algorithme d’apprentissage.
 <!-- comment -->
-Consistent with the error rate plot above, the AUC indicates that `zip` is the easiest problem, whereas `sonar` is the most difficult.
+Les résultats d’AUC suggèrent que `zip` est le plus facile, et `sonar` est le plus dificile, ce qui est consistent avec les taux d’erreur affichés dans le graphique précédent.
 <!-- comment -->
-It is clear that `featureless` always has AUC=0.5, as expected.
+Comme attendu, `featureless` (l’algorithme qui prédit toujours la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction qui est constante. 
 <!-- comment -->
-The code below hides the results for `featureless`, in order to emphasize the other non-trivial results.
+Le code ci-dessous enlève les résultats pour `featureless`, pour souligner les autres résultats.
 
 ```{r}
 ggplot()+
@@ -404,11 +410,11 @@ ggplot()+
     data=score_dt[learner_id!="featureless"])
 ```
 
-We see in the figure above that `featureless` is no longer present in the figure above.
+Nous ne voyons plus les résultats pour `featureless` dans le graphique ci-dessus.
 <!-- comment -->
-The code below implements a slightly more complex version of the previous AUC plot, which will be used for interactive display.
+Le code ci-dessous refait le même graphique, avec quelques additions pour l’affichage interactif.
 <!-- comment -->
-Note that we create a new `task_it` column which will be useful later as an interactive variable (for selecting `task_id` and `iteration` at the same time).
+Remarquons que la colonne `task_it` sera utile pour une variable de sélection (pour à la fois `task_id` et `iteration`).
 
 ```{r}
 score_dt[, task_it := paste(task_id, iteration)]
@@ -427,11 +433,11 @@ score_dt[, task_it := paste(task_id, iteration)]
      data=score_dt[learner_id!="featureless"]))
 ```
 
-Next, we compute ROC curves for each combination of `task_id`, `learner_id`, and cross-validation split (`iteration`).
+Ensuite, nous calculons une courbe ROC pour chaque combinaison de `task_id`, `learner_id`, et division de validation croisée (`iteration`).
 <!-- comment -->
-Note that R represents binary labels as a factor with two levels.
+Remarquons que le vecteur d’étiquettes à prédire dans la classification binaire est un facteur avec deux niveaux.
 <!-- comment -->
-The first factor level in R is considered the positive class in `mlr3`, so the code below computes the ROC curve using the first column in the `prob` scores matrix, and the `label01` binary label vector.
+Dans `mlr3`, le premier niveau est la classe positive, alors nous utilisons la première colonne de `prob` pour calculer la courbe ROC.
 
 ```{r}
 roc_dt <- score_dt[, {
@@ -443,11 +449,11 @@ roc_dt <- score_dt[, {
 roc_dt[, .(task_it, learner_id, threshold, FPR, TPR)]
 ```
 
-The output above is a table representing the ROC curves used for evaluation of the model predictions on the cross-validation test sets.
+Le tableau ci-dessus représente les courbes ROC à utiliser pour évaluer les prédictions sur les ensembles test.
 <!-- comment -->
-We can see that `FPR=TPR=1` when `threshold=0`, and `FPR=TPR=0` when `threshold=Inf`.
+Nous voyons que `FPR=TPR=1` quand `threshold=0`, et `FPR=TPR=0` quand `threshold=Inf`.
 <!-- comment -->
-The code below displays these ROC curves in separate panels.
+Le code ci-dessous affiche les courbes ROC dans différents facettes.
 
 ```{r}
 gg.roc <- ggplot()+
@@ -461,9 +467,9 @@ gg.roc <- ggplot()+
 gg.roc+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a ROC curve for each data set and cross-validation split.
+Nous voyons une facette pour chaque jeu de données, et pour chaque division de validation croisée.
 <!-- comment -->
-Below, we add a point to emphasize the default prediction threshold of each algorithm.
+Ensuite, nous rajoutons un point pour montrer le seuil par défaut pour chaque algorithme.
 
 ```{r}
 gg.roc.point <- gg.roc+
@@ -479,11 +485,11 @@ gg.roc.point <- gg.roc+
 gg.roc.point+facet_grid(iteration ~ task_id)
 ```
 
-The result above shows a ROC point at the default prediction threshold.
+Ci-dessus nous voyons un point pour le seuil par défaut.
 <!-- comment -->
-It is clear that different algorithms have different values for both FPR and TPR, by default.
+Il est évident que les différents algorithmes ont différents valeurs de `FPR` et `TPR`, par défaut.
 <!-- comment -->
-The code below adds text, which will be used with interactivity to display the currently selected data set and cross-validation split.
+Ensuite nous rajoutons texte pour afficher la sélection de données et division de validation croisée.
 
 ```{r}
 score_dt[, lev_str := {
@@ -501,9 +507,9 @@ gg.roc.text <- gg.roc.point+
 gg.roc.text+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a text label at the bottom of each panel.
+Le graphique affiche le texte en bas de chaque facette.
 <!-- comment -->
-Next, the code below computes the rank of each algorithm within each test set.
+Ensuite, nous calculons le rang de chaque algorithme dans chaque jeu de données et division.
 
 ```{r}
 score_dt[
@@ -511,9 +517,9 @@ score_dt[
 , by=.(task_id, iteration, task_it)]
 ```
 
-The ranks computed above will be used to display labels below.
+Les rangs sont utilisés dans l’affichage ci-dessous.
 <!-- comment -->
-The code below combines the ROC and AUC plots together into an interactive visualization.
+Nous créons une visualisation interactive à partir des graphiques de ROC et AUC.
 
 ```{r viz-auc-roc}
 animint(
@@ -532,7 +538,7 @@ animint(
       alignment="vertical"))
 ```
 
-In the visualization above, you can click the test AUC values in the top plot to show the corresponding ROC curve details in the bottom plot.
+Dans la visualisation, vous pouvez cliquer les points d’AUC en haut, ce qui affichera les courbes ROC correspondantes en bas.
 
 <!-- comment -->
 
