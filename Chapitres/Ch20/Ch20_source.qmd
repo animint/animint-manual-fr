@@ -787,13 +787,14 @@ Le graphique affiche
 
 <!-- comment -->
 
-### P-values for differences between learners {#p-values-learners}
+### Tests statistiques pour différences entre algorithmes {#p-values-learners}
 
 <!-- comment -->
 
-In this section, we compute and display P-values.
+Souvent nous voulons savoir s’il existe des différences significatives entre l’AUC de deux algorithmes (les deux avec AUC le plus grand).
+Dans cette section, nous calculons des valeurs-p pour évaluer combien les différences sont significatives.
 <!-- comment -->
-First, we compute mean and standard deviation over test folds.
+Nous commençons avec le calcul de moyenne et écart type, sur les divisions de validation croisée.
 
 ```{r}
 (score_stats <- dcast(
@@ -803,7 +804,7 @@ First, we compute mean and standard deviation over test folds.
   value.var="classif.auc"))
 ```
 
-We plot the numbers above using the code below.
+Nous visualisons ces statistiques avec le code ci-dessous.
 
 ```{r}
 score_stats[, let(
@@ -823,17 +824,17 @@ ggplot()+
     breaks=seq(0,1,by=0.1))
 ```
 
-Above we see mean and SD for each algorithm and data set.
+Ci-dessus nous voyons un point pour chaque moyenne, et un segment pour l’écart type.
 <!-- comment -->
-Next, we compute ranks.
+Ensuite nous calculons le rang de chaque algorithme, pour chaque jeu de données.
 
 ```{r}
 score_stats[, auc.task.rank := rank(-classif.auc_mean), by=task_id][]
 ```
 
-Above we see a new column `auc.task.rank` with values from 1 to 4.
+Ci-dessus nous voyons une nouelle colonne `auc.task.rank` avec valeurs entre 1 et 4.
 <!-- comment -->
-We plot ranks using the code below.
+Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous.
 
 ```{r}
 gg.rank <- ggplot()+
@@ -853,9 +854,9 @@ gg.rank <- ggplot()+
 gg.rank+facet_wrap("task_id", scales="free")
 ```
 
-Above we see ranks, but not algorithm names.
+Ci-dessus nous voyons les rangs, mais nous ne voyons pas les noms.
 <!-- comment -->
-Below, we add names.
+Nous rajoutons les noms ci-dessous.
 
 ```{r}
 gg.rank.text <- gg.rank+
@@ -870,7 +871,7 @@ gg.rank.text <- gg.rank+
 gg.rank.text+facet_wrap("task_id", scales="free")
 ```
 
-To test for significant differences, we do a self-join below.
+Pour tester les différences entre les rangs adjacents, nous faisons une jointure entre chaque rang (`auc.task.rank`) et le rang suivant (`next.rank`).
 
 ```{r}
 score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
@@ -878,27 +879,26 @@ score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
 (join_dt <- score_dt_rank[, next.rank := auc.task.rank+1][
   score_dt_rank,
   .(task_id, iteration,
-    auc.task.rank,
-    lo.auc=classif.auc,
-    hi.auc=i.classif.auc),
+    bad.rank=x.auc.task.rank,
+    good.rank=i.auc.task.rank,
+    bad.auc=x.classif.auc,
+    good.auc=i.classif.auc),
   on=.(task_id, iteration, auc.task.rank=next.rank),
   nomatch=0L])
 ```
 
-Below we compute P-values.
+Ensuite nous faisons des tests de Student.
 
 ```{r}
-(pval_dt <- join_dt[, {
+(pval_dt <- join_dt[, .SDcols=c("good.auc","bad.auc"), {
+  mean_dt <- lapply(.SD, mean)
   paired <- t.test(
-    lo.auc, hi.auc, alternative = "l", paired=TRUE)
-  data.table(
-    p.paired=paired$p.value,
-    mean.lo=mean(lo.auc),
-    mean.hi=mean(hi.auc))
-}, by=.(task_id, auc.task.rank)])
+    bad.auc, good.auc, alternative = "l", paired=TRUE)
+  c(mean_dt, p.paired=paired$p.value)
+}, keyby=.(task_id, good.rank, bad.rank)])
 ```
 
-Above we see a table with one row per T-test result.
+TODO Above we see a table with one row per T-test result.
 <!-- comment -->
 We plot the differences between means in red below.
 
