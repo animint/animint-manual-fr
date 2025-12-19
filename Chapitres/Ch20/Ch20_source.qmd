@@ -940,21 +940,21 @@ Le graphique affiche les valeurs-p.
 
 <!-- comment -->
 
-## Checking for over- and under-fitting {#over-under-fitting}
+## Vérification de la régularisation {#over-under-fitting}
 
 <!-- comment -->
 
-In this section, our goal is to make various figures that check if each algorithm is regularized appropriately.
+Dans cette section, nous voulons créer des graphiques pour vérifier que les algorithmes sont régularisés correctement.
 <!-- comment -->
-Each machine learning algorithm has a different hyper-parameter that is used to avoid under- and over-fitting.
+Chaque algorithme d’apprentissage a une différente méthode pour la régularisation, avec différents hyper-paramètres pour éviter à la fois le surapprentissage et le sous-apprentissage.
 
 <!-- comment -->
 
-* nearest neighbors has the number of neighbors: small number of neighbors may overfit, large number of neighbors may underfit.
+* Pour les plus proches voisins, nous augmentons le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage, et un grand nombre de voisins peut donner un sous-apprentissage.
 <!-- comment -->
-* `torch` learners has the number of gradient descent epochs: large number of epochs may overfit, small number of epochs may underfit.
+* Pour les algorithmes de `torch`, nous réduisons le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage, et un grand nombre d’époques peut donner un surapprentissage.
 <!-- comment -->
-* the `glmnet` L1-regularized linear model has the penalty `lambda`: small penalty may overfit, large penalty may underfit.
+* Pour le modèle lineaire avec régularisation L1 (`glmnet`), nous augmentons la penalité pour régulariser. Une petite penalité peut donner un surapprentissage, et une grande penalité peut donner un sous-apprentissage.
 
 <!-- comment -->
 
