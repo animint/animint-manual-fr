@@ -897,9 +897,9 @@ Ensuite nous faisons des tests de Student.
 }, keyby=.(task_id, good.rank, bad.rank)])
 ```
 
-TODO Above we see a table with one row per T-test result.
+Le tableau ci-dessus contient une ligne pour chaque test statistique.
 <!-- comment -->
-We plot the differences between means in red below.
+Ci-dessous, nous rajoutons des segments rouges pour souligner les différences entre moyennes.
 
 ```{r}
 gg.rank.seg <- gg.rank+
@@ -911,9 +911,9 @@ gg.rank.seg <- gg.rank+
 gg.rank.seg+facet_wrap("task_id", scales="free")
 ```
 
-Above we see red segments highlighting differences between adjacent means.
+Ci-dessus nous voyons un segment pour chaque test statistique.
 <!-- comment -->
-Below we add text to show P-values.
+Ensuite nous rajoutons texte qui affiche les valeurs-p.
 
 ```{r}
 gg.rank.p <- gg.rank.seg+
@@ -926,17 +926,17 @@ gg.rank.p <- gg.rank.seg+
 gg.rank.p+facet_wrap("task_id", scales="free")
 ```
 
-Above we see P-values have been added.
+Le graphique affiche les valeurs-p.
 
 <!-- comment -->
 
-* One P-value is less than 0.01, indicating a difference that is statistically significant, between ranks 2 and 3 in `sonar`.
+* Une valeur-p est infériure à 1% (`P<0.01`), ce qui indique une différence significative, entre les rangs 2 et 3 dans les données `sonar`.
 <!-- comment -->
-* Most P-values are greater than 0.05, indicating that these differences are not statistically significant.
+* Les autres valeurs-p sont supérieure à 5% (`P>0.05`), ce qui indique des différences non-significatives.
 <!-- comment -->
-* Because of the small sample size (3 train/test splits), increasing the number of cross-validation folds may decrease some of these P-values (exercise for the reader).
+* L’absence des différences significatives est partiellement dûe à la taille de l’échantillon utilisé pour le test de Student (seulement 3 divisions de validation croisée). Vous pourriez eventuellement obtenir des valeurs-p plus petit en augmentant le nombre de divisions de validation croisée (exercise pour le lecteur).
 <!-- comment -->
-* Exercise: combine P-values with algorithm names and mean/SD on the same plot. Use this plot instead of `testAUCzoom` in the previous animint.
+* Exercise : afficher les valeurs-p avec les noms des algorithmes et les statistiques (moyenne et écart type) sur le même graphique. Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédante.
 
 <!-- comment -->
 
