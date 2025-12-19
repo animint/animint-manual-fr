@@ -1026,7 +1026,7 @@ Nous voyons que
 
 * Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons max AUC avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons max AUC avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependent, 1 voisin est le plus petit nombre de voisins possible, alors ça ne pourrait pas être un sous-apprentissage, en nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
 <!-- comment -->
-* Pour deux jeux de données (`waveform`, `zip`) nous avons max AUC avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats suggèrent que nous pouvons eventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le max nombre de voisins, ce qui indique un recherche assez élargi.
+* Pour deux jeux de données (`waveform`, `zip`) nous avons max AUC avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats suggèrent que nous pouvons eventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le max nombre de voisins, ce qui indique une recherche assez élargie.
 
 <!-- comment -->
 
