@@ -958,13 +958,16 @@ Chaque algorithme d’apprentissage a une différente méthode pour la régulari
 
 <!-- comment -->
 
-### Nearest neighbors {#nearest-neighbors-selection}
+### Plus proches voisins {#nearest-neighbors-selection}
 
 <!-- comment -->
 
-In this section, we show how to verify is the number of neighbors was selected appropriately, to avoid over- and under-fitting.
+Dans cette section, nous vérifions le choix de nombre de voisins.
+Normalement, pour chaque division des données en test et entraînement, nous faisons ensuite une division d’entraînement en sous-entraînement et validation.
+Nous voulons choisir le nombre de voisins qui maximise l’AUC sur l’ensemble de validation, et ensuite utiliser ce nombre de voisins pour calculer les prédictions sur l’ensemble test.
+Pour chaque ensemble test, il pourrait avoir un différent nombre de voisins.
 <!-- comment -->
-First, we compute a table with one row per train/test split, and columns which contain information on how many neighbors were used for prediction.
+Nous commençons par calculer un tableau avec une ligne par division de validation croisée, et une colonne avec le nombre de voisins.
 
 ```{r}
 (best_dt <- score_dt[grep("knn", learner_id), {
@@ -975,17 +978,17 @@ First, we compute a table with one row per train/test split, and columns which c
 }, by=.(task_id, iteration, task_it)])
 ```
 
-The table above has columns
+Le tableau contient les colonnes
 
 <!-- comment -->
 
-* `k`, the number of neighbors selected as best.
+* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation.
 <!-- comment -->
-* `details`, a table of information about how that number of neighbors was selected.
+* `details`, un tableau d’informations sur le choix du nombre de voisins.
 
 <!-- comment -->
 
-Below, we create a new table by combining all of the details tables.
+Ensuite, nous faisons un tableau qui combine les détails pour chaque division.
 
 ```{r}
 details_dt <- best_dt[
@@ -994,9 +997,9 @@ details_dt <- best_dt[
 details_dt[, .(task_id, iteration, k, classif.auc, status)]
 ```
 
-The table above shows details about what was the validation AUC for each potential value of `k`, the number of neighbors.
+Le tableau ci-dessus contient une ligne pour chaque nombre de voisins testé sur les ensembles de validation.
 <!-- comment -->
-Below we plot the validation AUC as a function of the number of neighbors, emphasizing the selected value and the max.
+Ensuite nous visualisons l’AUC sur l’ensemble de validation, en fonction du nombre de voisins.
 
 ```{r}
 gg.neighbors <- ggplot()+
@@ -1012,17 +1015,22 @@ gg.neighbors <- ggplot()+
 gg.neighbors+facet_grid(task_id ~ iteration)
 ```
 
-Above we see how the AUC was selected for each task and iteration.
+Dans le graphique ci-dessus, nous utilisons
+
+* couleur pour souligner les meilleurs choix pour le nombre de voisins, et
+* une ligne verticale pour indiquer le choix retenu.
+
+Nous voyons que
 
 <!-- comment -->
 
-* Some data sets (`sonar`, `spam`, `vowel`) have a clear max at an intermediate number of neighbors, which avoids both over- and under-fitting. For `vowel` iteration 2, max AUC occurs at the extreme value of 1 neighbor, which is unusual, but does not suggest underfitting in this case, because there is no smaller value of neighbors than 1.
+* Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons max AUC avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons max AUC avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependent, 1 voisin est le plus petit nombre de voisins possible, alors ça ne pourrait pas être un sous-apprentissage, en nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
 <!-- comment -->
-* Some data sets (`waveform`, `zip`) have max AUC at the largest number of neighbors (40), which suggests overfitting. These data suggest that an even larger AUC may be obtained by increasing the number of neighbors past 40, until we see a clear decrease of the AUC values.
+* Pour deux jeux de données (`waveform`, `zip`) nous avons max AUC avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats suggèrent que nous pouvons eventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le max nombre de voisins, ce qui indique un recherche assez élargi.
 
 <!-- comment -->
 
-Below we make an interactive version of the same plot.
+Ensuite nous faisons une visualisation interactive pour explorer les choix du nombre de voisins.
 
 ```{r viz-neighbors}
 animint(
@@ -1033,9 +1041,10 @@ animint(
     theme_animint(update_axes="y", last_in_row=TRUE))
 ```
 
-Above we can click on the left plot to select a data set and cross-validation fold.
+Vous pouvez cliquer sur le graphique à gauche pour sélectionner un jeu de données et une division de validation croisée.
 <!-- comment -->
-Clicking on `zip` or `waveform`, the data sets with largest test AUC, shows that max validation AUC occurs for large numbers of neighbors.
+Si vous cliquez sur `zip` ou `waveform`, nous voyons max AUC pour le plus grand nombre de voisins (40), ce qui suggère un surapprentissage.
+Exercise : refaites l’apprentissage en augmentant le max nombre de voisins. Est-ce vous voyez le max AUC avec un nombre de voisins intermédiare ?
 
 <!-- comment -->
 
