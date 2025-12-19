@@ -875,14 +875,13 @@ Pour tester les différences entre les rangs adjacents, nous faisons une jointur
 
 ```{r}
 score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
-  score_dt, on=.(learner_id, task_id), nomatch=0L]
+  score_dt, on=.(learner_id, task_id), nomatch=0L
+][order(task_id, auc.task.rank)]
 (join_dt <- score_dt_rank[, next.rank := auc.task.rank+1][
-  score_dt_rank,
-  .(task_id, iteration,
-    bad.rank=x.auc.task.rank,
-    good.rank=i.auc.task.rank,
-    bad.auc=x.classif.auc,
-    good.auc=i.classif.auc),
+  score_dt_rank, .(
+    task_id, iteration,
+    good.rank=i.auc.task.rank, bad.rank=x.auc.task.rank,
+    good.auc =i.classif.auc,   bad.auc =x.classif.auc),
   on=.(task_id, iteration, auc.task.rank=next.rank),
   nomatch=0L])
 ```
@@ -905,8 +904,8 @@ We plot the differences between means in red below.
 ```{r}
 gg.rank.seg <- gg.rank+
   geom_segment(aes(
-    mean.lo, auc.task.rank+0.5,
-    xend=mean.hi, yend=auc.task.rank+0.5),
+    bad.auc, good.rank+0.5,
+    xend=good.auc, yend=good.rank+0.5),
     color="red",
     data=pval_dt)
 gg.rank.seg+facet_wrap("task_id", scales="free")
@@ -919,7 +918,7 @@ Below we add text to show P-values.
 ```{r}
 gg.rank.p <- gg.rank.seg+
   geom_text(aes(
-    mean.lo, auc.task.rank+0.5, label=ifelse(
+    bad.auc, good.rank+0.5, label=ifelse(
       p.paired<0.01, "P<0.01",
       sprintf("P=%.2f", p.paired))),
     color="red", hjust=1, size=10,
