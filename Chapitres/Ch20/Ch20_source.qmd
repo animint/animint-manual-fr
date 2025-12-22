@@ -1052,9 +1052,13 @@ Exercise : refaites l’apprentissage en augmentant le max nombre de voisins. E
 
 <!-- comment -->
 
-In this section, we explore early stopping regularization with `torch` learners.
+Dans cette section, nous explorons la régularisation d’arrêt prématuré, avec les algoritmes d’apprentissage dans le package `torch`.
+Ces algorithmes utilisent la descente de gradient, ce qui minimise une fonction de perte sur l’ensemble de sous-entraînement.
+Normalement la perte va aussi descendre sur l’ensemble de validation, jusqu’à un certain nombre d’époques, après quoi la perte va augmenter.
+Nous voulons arrêter la descente de gradient quand la perte est minimale sur l’ensemble de validation, ce qui est « prématuré » car la perte va toujours descendre sur l’ensemble de sous-entraînement.
+Nous allons vérifier que le nombre d’époques est choisi correctement, pour éviter le sous-apprentissage et le surapprentissage.
 <!-- comment -->
-First, we compute the selected number of epochs.
+Nous commençons avec le calcul d’une variable `best_epoch`, soit le nombre d’époques choisi (normalement le meilleur sur l’ensemble de validation).
 
 ```{r}
 score_torch <- score_dt[
@@ -1064,7 +1068,7 @@ score_torch <- score_dt[
 )]
 ```
 
-Below, we extract the model training history.
+Ensuite, nous créons un tableau représentant l’histoire d’entraînement, avec une ligne pour chaque époque.
 
 ```{r}
 (history_torch <- score_torch[, {
@@ -1074,17 +1078,17 @@ Below, we extract the model training history.
 }, by=.(task_id, learner_id, iteration, task_it)])
 ```
 
-The table above has one row for each epoch, and columns
+Le tableau ci-dessus contient une ligne pour chaque époque, et les colonnes suivantes.
 
 <!-- comment -->
 
-* `train.classif.logloss`, logistic (cross-entropy) loss on the set used to compute gradients, which always should decrease, if learning rate and batch size have been chosen appropriately. Note that “train” is a potentially confusing name for this set, so for increased clarity, we rename it to “subtrain” below.
+* `train.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble utilisé pour calculer les gradients, ce qui devrait toujours diminuer, si les hyper-paramètres sont appropriés (taux d’apprentissage, taille de lot, et cætera). Remarquons que le nom `train` « entraînement » pourrait faire croire qu’il faudra encore diviser ces données en sous-entraînement et validation, mais ce n’est pas le cas. Pour préciser, nous allons plutôt utiliser le nom `subtrain` « sous-entraînement » dans les codes et graphiques ci-dessous.
 <!-- comment -->
-* `valid.classif.logloss`, logistic (cross-entropy) loss on the held-out set used to regularize (not used to compute gradients), which was minimized to select the best regularization (here, the number of epochs). Similarly, `valid.classif.auc` could have been maximized, if `classif.auc` was the first item in `measure_list`.
+* `valid.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble qui n’est pas utilisé pour le calcul des gradients. Minimiser cette perte est la critère utilisée pour choisir le meilleur nombre d’époques, car `classif.logloss` était la première mesure dans `measure_list`.
 
 <!-- comment -->
 
-Below, we reshape and rename the previous history data.
+Ensuite, nous créons un tableau mieux adapté pour la visualisation.
 
 ```{r}
 (history_long <- nc::capture_melt_single(
@@ -1094,9 +1098,9 @@ Below, we reshape and rename the previous history data.
   measure=nc::alevels("logloss", auc="AUC")))
 ```
 
-The table above has new columns `set`, `measure`, and `value`.
+Le tableau ci-dessus contient les nouvelles colonnes `set`, `measure`, and `value`.
 <!-- comment -->
-In the code below, we plot these data for one data set and cross-validation iteration.
+Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble.
 
 ```{r}
 one_split <- function(DT,it=1)DT[iteration==it & task_id=="sonar"]
@@ -1109,17 +1113,17 @@ one_split_history <- one_split(history_long)
     data=one_split_history))
 ```
 
-The figure above shows learning curves that are typical of early stopping regularization using torch models.
+Le graphique ci-dessus contient des courbes d’apprentissage typique.
 
 <!-- comment -->
 
-* log loss always decreases, and AUC always increases, for the subtrain set (used to compute gradients).
+* La perte logistique descende, et l’AUC augmente, pour l’ensemble de sous-apprentissage (utilisé pour le calcul des gradients).
 <!-- comment -->
-* The typical U shape is clearly visible for the validation log loss. Typically we select the number of epochs which minimizes this curve (or maximizes the validation AUC).
+* La forme « U » est claire pour la perte sur l’ensemble de validation. Typiquement nous choissisons le nombre d’époques qui minimise cette courbe (ou bien, qui maximise l’AUC sur validation).
 
 <!-- comment -->
 
-Below we add points which emphasize the min log loss, and max AUC, of each curve.
+Ensuite nous rajoutons points pour souligner les min et max.
 
 ```{r}
 history_best <- history_long[, {
@@ -1135,19 +1139,19 @@ one_split_best <- one_split(history_best)
    scale_fill_manual(values=c(best="black")))
 ```
 
-Above we can see that
+Dans le graphique ci-dessus, nous voyons que
 
 <!-- comment -->
 
-* there is only one min for each log loss curve.
+* il n’y a qu’un min pour chaque courbe de perte logistique.
 <!-- comment -->
-* there are sometimes more than one max for the AUC curves.
+* il peut y avoir plus qu’un max pour chaque courbe d’AUC.
 <!-- comment -->
-* the subtrain AUC quickly maxes out at 1, whereas the log loss continues decreasing.
+* pour l’ensemble de sous-entraînement, l’AUC atteint rapidement le max de 1, mais la perte logistique continue à descendre.
 
 <!-- comment -->
 
-Below we add vertical lines and text to emphasize the number of epochs which was selected during training.
+Ensuite nous rajoutons lignes verticales pour souligner le nombre d’époques choisi.
 
 ```{r}
 one_split_score <- one_split(score_torch)
@@ -1161,9 +1165,9 @@ one_split_score <- one_split(score_torch)
     data=one_split_score))
 ```
 
-Above we can see that the selected number of epochs is consistent with the min validation log loss, which happens before the max validation AUC.
+Ci-dessus nous voyons que nous avons choisi le nombre d’époques qui minimise la perte logistique sur l’ensemble de validation.
 <!-- comment -->
-Next, we propose an overview, which displays the best epochs for each data set, learning algorithm, and cross-validation iteration.
+Ensuite, nous proposons un résumé, qui affiche le nombre d’époques pour chaque jeu de données, division de validation croisée, et algorithme d’apprentissage.
 
 ```{r}
 (history_best_wide <- dcast(
@@ -1173,9 +1177,9 @@ Next, we propose an overview, which displays the best epochs for each data set, 
   value.var="epoch"))
 ```
 
-The table above has additional columns for min, max, and mid number of epochs which are best (according to validation log loss or AUC).
+Le tableau contient colonnes pour les époques avec les meilleures mesures.
 <!-- comment -->
-We use the mid values as points in the overview plot below.
+Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin entre les min et max.
 
 ```{r}
 history_best_valid <- history_best_wide[set=="validation"]
@@ -1195,17 +1199,17 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-The plot above shows that 
+Dans le graphique ci-dessus, il est claire que
 
 <!-- comment -->
 
-* some data sets (`sonar` and `waveform`) have best validation loss and AUC at an intermediate number of epochs. This is evidence of a good fit (neither under- nor over-fitting).
+* la meilleure époque est plus petit que le max, pour quelques jeux de données (`sonar` and `waveform`). Ces résultats suggèrent un bon choix pour le nombre d’époques (ni surapprentissage, ni sous-apprentissage).
 <!-- comment -->
-* in some data sets (`vowel` and `zip`), the best validation log loss occurs at 200 epochs. This is evidence of underfitting (number of epochs could be increased to find better validation loss values).
+* la meilleure époque est le max (200 époques), pour quelques jeux de données (`vowel` and `zip`). Ces résultats suggèrent le sous-apprentissage (nous pouvons augmenter le nombre d’époques pour minimiser davantage la perte sur l’ensemble de validation).
 
 <!-- comment -->
 
-Below we add a segment to show the range of epochs which attain the best validation AUC.
+Ensuite nous rajoutons un segment pour afficher le min et max nombre d’époques qui atteignent le meilleur AUC sur l’ensemble de validation.
 
 ```{r}
 (gg.best.seg <- gg.best.valid+
@@ -1219,9 +1223,9 @@ Below we add a segment to show the range of epochs which attain the best validat
      data=history_best_valid))
 ```
 
-Above we see that there are some runs in `vowel` and `zip` for which there is a range of epochs that achieve the best validation AUC.
+Ci-dessus nous voyons qu’il y a plusieurs époques qui atteignent le max AUC, dans les ensembles validation de `vowel` et `zip`.
 <!-- comment -->
-Next, we prepare a plot of learning curve details, by first computing relative values between 0 and 1 (since values can be very different between data sets).
+Ensuite, nous préparons un graphique pour afficher les détails, avec des valeurs rélatives etre 0 et 1 (car les valeurs absolues sont très différentes entre les jeux de données).
 
 ```{r}
 norm01 <- function(x)(x-min(x))/(max(x)-min(x))
@@ -1238,7 +1242,7 @@ gg.log.auc <- ggplot()+
      data=history_long)
 ```
 
-Finally, we combine the two previous plots into an interactive visualization using the code below.
+Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 
 ```{r viz-torch}
 (viz.torch <- animint(
@@ -1249,22 +1253,22 @@ Finally, we combine the two previous plots into an interactive visualization usi
     ggtitle("Selected learning curves")))
 ```
 
-Above we can see a data visualization with two plots:
+Ci-dessous nous voyons deux graphiques_:
 
 <!-- comment -->
-* Clicking the top overview plot selects a data set and cross-validation iteration.
+* Cliquer le graphique en haut pour sélectionner un jeu de données et une division de validation croisée.
 <!-- comment -->
-* The bottom plot shows the learning curves for the current selection.
+* Le graphique en bas va ensuite afficher les courbes d’apprentissage pour la sélection.
 
 <!-- comment -->
 
-For some data sets, the AUC quickly attains a max near 1, and it is difficult to see how close it is to 1.
+Pour certains jeux de données, l’AUC atteint rapidement un max proche de 1, et il est dificile de voir combien la courbe est proche de 1.
 <!-- comment -->
-To more easily visualize those details, the code below computes inverse AUC (1-AUC).
+Pour visualiser ces détails, nous calculons l’inverse de l’AUC (1-AUC).
 <!-- comment -->
-The best value for AUC is 1, whereas it is 0 for inverse AUC.
+La meilleure valeur d’AUC est 1, mais la meilleure valeur pour l’inverse de l’AUC est 0.
 <!-- comment -->
-So using inverse AUC with a log scale, as in the code below, will show more details of how close it gets to 0.
+Alors nous pouvons utiliser l’échelle logarithmique, pour visualiser combien la courbe est proche de 0.
 
 ```{r}
 history_long[, let(
@@ -1284,9 +1288,9 @@ gg.log.scale <- ggplot()+
      data=history_long)
 ```
 
-Note in the code above that we use capital `Measure` and `Relative_values`, along with a log-scale Y axis.
+Remarquons dans le code ci-dessus que nous avons utilisé les variables majuscules (`Measure` et `Relative_values`), avet l’échelle logarithmique pour Y.
 <!-- comment -->
-The code below adds this new log-scale plot to the previous data visualization.
+Ensuite nous rajoutons ce graphique à la visualisation interactive.
 
 ```{r viz-torch-log}
 viz.torch.log <- viz.torch
@@ -1296,9 +1300,9 @@ viz.torch.log$detailsLog <- gg.log.scale+
 viz.torch.log
 ```
 
-The visualization above has an additional plot on the bottom right, which shows details for the selected data set and cross-validation iteration.
+La visualisation contient un graphique en bas à droite, qui affiche l’échelle logarithmique pour la sélection.
 <!-- comment -->
-For an example of additional details shown using inverse AUC, try selecting one of the cross-validation iterations in the `vowel` data set.
+En cliquant sur `vowel`, nous voyons des différences entre les graphiques de détails (en bas à droite, nous voyons mieux quelles époques sont les meilleures).
 
 ### glmnet {#glmnet}
 
