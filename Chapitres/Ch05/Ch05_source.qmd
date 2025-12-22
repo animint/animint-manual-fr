@@ -44,7 +44,7 @@ Cette section traite de deux méthodes pour compiler les animints dans un réper
 
 Dans les chapitres précédents, nous n'avons abordé qu'une seule méthode pour créer des visualisations de données interactives.
 <!-- comment -->
-Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), alors `print(vis)`va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci,
+Si `vis` est un animint (liste de ggplots et d'options avec la classe animint), alors `print(vis)` va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci,
 
 <!-- paragraph -->
 
@@ -180,7 +180,7 @@ gert::git_config_global_set("user.email", "<votre_courriel>")
 
 <!-- paragraph -->
 
-Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_dépôt")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_dépôt` (à noter que `votre_identifiant_github`  n'est pas écrit dans le code, puisque `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
+Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_répertoire")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_répertoire` (à noter que `votre_identifiant_github`  n'est pas écrit dans le code, puisque `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
 <!-- comment -->
 Un message devrait s'afficher vous indiquant l'URL ou le lien pour accéder à votre visualisation de données.
 <!-- comment -->
@@ -188,7 +188,7 @@ Il faut compter quelques minutes (généralement pas plus de cinq) entre le mome
 
 <!-- paragraph -->
 
-Si vous voulez mettre à jour un animint qui a déjà été publié sur GitHub Pages, vous pouvez simplement lancer `animint2pages(nouvelle_version, "dépôt_existant")` qui mettra à jour la branche `gh-pages` du dépôt spécifié.
+Si vous voulez mettre à jour un animint qui a déjà été publié sur GitHub Pages, vous pouvez simplement lancer `animint2pages(nouvelle_version, "répertoire_existant")` qui mettra à jour la branche `gh-pages` du répertoire spécifié.
 
 <!-- paragraph -->
 
@@ -217,15 +217,15 @@ Nous avons aussi [une galerie en français](https://animint.github.io/gallery-fr
 <!-- comment -->
 - La deuxième colonne `title` indique le nom de la visualisation (extrait de l'option `title` de chaque animint).
 <!-- comment -->
-- La troisième colonne `links` contient des liens vers son dépôt sur GitHub, ainsi que son code source et éventuellement une vidéo.
+- La troisième colonne `links` contient des liens vers son répertoire sur GitHub, ainsi que son code source et éventuellement une vidéo.
 
 <!-- paragraph -->
 
-Une galerie est un dépôt sur GitHub qui doit avoir deux fichiers sources dans la branche `gh-pages` :
+Une galerie est un répertoire sur GitHub qui doit avoir deux fichiers sources dans la branche `gh-pages` :
 
 <!-- paragraph -->
 
-- `repos.txt` (liste des dépôts sur GitHub qui contiennent des animints, un propriétaire/dépôt par ligne) et
+- `repos.txt` (liste des répertoires sur GitHub qui contiennent des animints, un propriétaire/répertoire par ligne) et
 - `index.Rmd` (source de la page web avec des liens vers animints).
 
 <!-- paragraph -->
@@ -236,11 +236,11 @@ Pour ajouter un nouvel animint à la galerie qui est publiée sur la branche `gh
 
 - créez un nouveau animint dans le code R, et assurez-vous de définir les options `source` et `title`;
 <!-- comment -->
-- utilisez `animint2pages(vis, "dépôt_de_vis")` pour publier cet animint sur la branche `gh-pages` de `votre_identifiant_github/dépôt_de_vis`;
+- utilisez `animint2pages(vis, "répertoire_de_vis")` pour publier cet animint sur la branche `gh-pages` de `votre_identifiant_github/répertoire_de_vis`;
 <!-- comment -->
-- prenez une capture d'écran de cet `animint2`, et validez/poussez cette capture d'écran dans un fichier nommé `Capture.PNG` (sensible à la casse), dans la branche`gh-pages` de `votre_identifiant_github/dépôt_de_vis` ;
+- prenez une capture d'écran de cet `animint2`, et validez/poussez cette capture d'écran dans un fichier nommé `Capture.PNG` (sensible à la casse), dans la branche`gh-pages` de `votre_identifiant_github/répertoire_de_vis` ;
 <!-- comment -->
-- ajoutez `votre_identifiant_github/dépôt_de_vis` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/galerie`;
+- ajoutez `votre_identifiant_github/répertoire_de_vis` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/galerie`;
 <!-- comment -->
 - exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu'un clone du répertoire de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Le code R lira `galerie/repos.txt`, puis les méta-données (`title`, `source`, `Capture.PNG`) de chaque répertoire qui n'est pas déjà présent dans `galerie/meta.csv`, il écrira ensuite les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera les fichiers et les poussera vers `origin`.
 <!-- comment -->
@@ -264,7 +264,7 @@ Exercices :
 <!-- comment -->
 - Utilisez Netlify Drop pour publier cette animation sur le web.
 <!-- comment -->
-- Utilisez `animint2pages` pour publier cet animint dans un nouveau dépôt GitHub. Faites une capture d'écran et enregistrez la en tant que `Capture.PNG`  dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt à la galerie principale de l'animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
+- Utilisez `animint2pages` pour publier cet animint dans un nouveau répertoire GitHub. Faites une capture d'écran et enregistrez la en tant que `Capture.PNG`  dans la branche `gh-pages` de ce répertoire. Ajoutez ce répertoire à la galerie principale de l'animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
 <!-- comment -->
 - Créez votre propre galerie animint, et ajoutez y au moins deux de vos propres animints.
 
