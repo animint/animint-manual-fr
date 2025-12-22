@@ -1,4 +1,4 @@
-# K plus proches voisins
+# K-plus -proches-voisins
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch10-figures/")
@@ -27,7 +27,7 @@ Voici un graphique de l'erreur de validation à 10 divisions et un graphique des
 
 <!-- paragraph -->
 
-Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 dans le livre [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
+Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 tirée de [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
 <!-- comment -->
 Cette figure se compose de deux graphiques :
 
@@ -37,7 +37,7 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-A gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
+À gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
 
 <!-- paragraph -->
 
