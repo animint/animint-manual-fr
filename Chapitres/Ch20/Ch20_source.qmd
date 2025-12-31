@@ -339,7 +339,7 @@ La sortie ci-dessous affiche la correspondance entre les noms et les codes pour 
 
 * `classif.auc` est l’aire sous la courbe ROC.
 * `classif.ce` est le taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre d’étiquettes total.
-* `classif.tpr` est le taux de vrai positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
+* `classif.tpr` est le taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
 * `classif.fpr` est le taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
 
 <!-- comment -->
@@ -558,7 +558,7 @@ Pour une comparaison plus juste entre les algorithmes, nous pouvons afficher le 
 ), by=.(task_id,iteration,task_it,learner_id,FPR)])
 ```
 
-Le tableau ci-dessous contient le meilleur taux de vrai positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
+Le tableau ci-dessous contient le meilleur taux de vrais positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
 <!-- comment -->
 Nous voulons seulement afficher les seuils pour lesquelles il y a tous les algorithmes, alors nous contons le nombre d’algorithmes pour chaque seuil.
 
@@ -604,7 +604,7 @@ gg.roc.fpr+facet_grid(iteration ~ task_id)
 
 Le graphique ci-dessus affiche toutes les seuils, ce qui fait un fond noir.
 <!-- comment -->
-Ensuite, nous faisons un nouveau graphique pour afficher les meilleurs taux de vrai positifs, pour le seuil sélectionné.
+Ensuite, nous faisons un nouveau graphique pour afficher les meilleurs taux de vrais positifs, pour le seuil sélectionné.
 
 ```{r}
 best_TPR_show <- best_TPR_dt[
@@ -623,7 +623,7 @@ best_TPR_show <- best_TPR_dt[
      showSelected=c("task_it","FPR")))
 ```
 
-Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de vrai positifs.
+Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de vrais positifs.
 <!-- comment -->
 Ensuite nous combinons tous les graphiques précédants dans une visualisation interactive.
 
@@ -1384,44 +1384,44 @@ En regardant les résultats précédants, nous voyons que
 
 <!-- comment -->
 
-## Chapter summary and exercises {#ch20-exercises}
+## Résumé du chapitre et exercises {#ch20-exercises}
 
 <!-- comment -->
 
-We have created several data visualizations related to `mlr3` benchmarks.
+Nous avons crée plusieurs visualisations des résultats d’apprentissage de `mlr3`.
 
 <!-- comment -->
 
-Exercises:
+Exercises :
 
 <!-- comment -->
 
-* In `viz.select.fpr`, there are no smooth transitions. Add a smooth transition for the `FPR` variable, and make sure to set `aes(key)` on the `geom_point()` and `geom_text()` in `gg.tpr`.
+* Dans `viz.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
 <!-- comment -->
-* In `viz.select.fpr`, a separate plot is used to display Best TPR for selected FPR. Remove that plot, and add a `geom_point()` and `geom_label_aligned()` to the ROC curve plot, which show the same information.
+* Dans `viz.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
 <!-- comment -->
-* In `gg.summary`, currently only the max AUC is shown. Add `geom_segment()` that shows the variation in AUC among algorithms.
+* Le graphique `gg.summary` affiche seulement le max AUC. Rajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
 <!-- comment -->
-* In `viz.select.fpr` we showed Best TPR for selected FPR.
+* Le graphique `viz.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
-  * Add a plot “Best error rate for selected FPR”. Hint: you will need to join the number of labels to the ROC curve table.
+  * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire un jointure entre le nombre d’étiquettes, et les courbes ROC.
 <!-- comment -->
-  * Add `geom_text()` which shows the selected value of FPR.
+  * Rajoutez un `geom_text()` qui affiche le taux séléctionné de faux positifs.
 <!-- comment -->
-  * Make a re-design that shows best FPR for selected TPR.
+  * Faites une visualisation qui affiche le meilleur taux de faux positifs, pour une sélection du taux de vrais positifs.
 <!-- comment -->
-* Change the color legends so that the two linear models (`cv_glmnet` and `torch_linear`) have different shades of the same color (for example dark and light purple).
+* Dans les légendes, les deux modèles lineaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pale et violet foncé).
 <!-- comment -->
-* In visualizations with ROC curves, add `aes(color)` or `aes(fill)` to the other plots, with a consistent color scheme that matches the ROC curves. Make sure there is only one legend (with entries ordered to match the order of Y axes that display `learner_id`), and that it can make all data for a learner disappear, across all plots.
+* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende consistente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
-* In `viz.torch.log`, add points and lines to emphasize the best and selected epochs.
+* Dans `viz.torch.log`, rajoutez points pour souligner les meilleures époques, et une ligne verticale pour souligner l’époque choisie par la validation croisée.
+* Chaque section du chapitre a presenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
 <!-- comment -->
-* Each section of this chapter has presented a different data visualization technique. Combine several different techniques in a single data visualization:
+  * Affichez tous les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch`, nearest neighbors).
 <!-- comment -->
-  * Show model selection plots for all three algorithms (`glmnet`, `torch`, nearest neighbors).
-<!-- comment -->
-  * Show interactive ROC curves at the same time.
+  * Affichez les courbes ROC interactives à côté des graphiques pour la vérification de la régularisation.
 
 <!-- comment -->
 
-Next, [the appendix](/ch99) explains some R programming idioms that are generally useful for interactive data visualization design.
+Ensuite, [l'annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
+
