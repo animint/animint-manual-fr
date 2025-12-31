@@ -1199,7 +1199,7 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-Dans le graphique ci-dessus, il est claire que
+Dans le graphique ci-dessus, il est clair que
 
 <!-- comment -->
 
@@ -1306,22 +1306,23 @@ En cliquant sur `vowel`, nous voyons des différences entre les graphiques de d�
 
 ### glmnet {#glmnet}
 
-In this section, we explore visualizations of the `glmnet` L1-regularized linear model.
+Dans cette section, nous explorons visualisations de l’algorithme de `glmnet`, un modéle lineaire avec régularisation L1.
 <!-- comment -->
-We begin by using the `plot()` method of the model stored in the learner object.
+Nous commençons avec la méthode `plot()` du premier modéle.
 
 ```{r}
 score_glmnet <- score_dt[grep("glmnet",learner_id)]
 L <- score_glmnet$learner[[1]]
 library(glmnet)
 plot(L$model)
+score_glmnet[1, title(paste(task_id, iteration), line=3)]
 ```
 
-The plot above shows the validation set Binomial Deviance (same as log loss in previous section) as a function of the model complexity (measured by negative log penalty).
+Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » sur l’ensemble de validation, en fonction de la taille du modéle (nombre de non-zéro coefficients en haut, négative log penalité en bas).
 <!-- comment -->
-We see the curve decrease, but not increase, which may indicate underfitting.
+Nous voyons une courbe qui descende, mais qui ne rémonte pas, ce qui suggère le sous-apprentissage.
 <!-- comment -->
-To reproduce this plot, we use the ggplot code below.
+Nous faisons une vérsion de ce graphique avec le code ci-dessous.
 
 ```{r}
 cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
@@ -1337,23 +1338,23 @@ cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
    scale_fill_gradient(low="white", high="red"))
 ```
 
-Above we see a ggplot display which is similar to the previous plot.
+Ci-dessus nous voyons un ggplot qui ressemble au graphique précédant, avec la couleur indiquante le nombre de non-zéro coefficients.
 <!-- comment -->
-Next, we add a label to show the number of active variables at various regularization parameters.
+Ensuite, nous rajoutons du texte pour souligner le nombre de non-zéro coefficients pour plusieurs niveaux de régularisation.
 
 ```{r}
 gg.glmnet+
   geom_text(aes(
     -log(lambda), Inf, label=nzero),
     vjust=1,
-    data=cv_glmnet_one[seq(1,.N,by=5)])
+    data=cv_glmnet_one[seq(1, .N, by=5)])
 ```
 
-The plot above has text labels at the top which show the number of non-zero weights for several regularization parameters.
+Le graphique ci-dessus affiche le nombre de non-zéro coefficients en haut, pour plusieurs niveaux de régularisation.
 <!-- comment -->
-The goal will be to make a similar interactive display.
+Notre but dans cette section est de faire une visualisation interactive avec ces informations.
 <!-- comment -->
-We compute a larger data table of results using the code below.
+Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modéles.
 
 ```{r}
 (cv_glmnet_all <- score_glmnet[, with(learner[[1]]$model, data.table(
@@ -1361,9 +1362,9 @@ We compute a larger data table of results using the code below.
 )), by=.(task_id, iteration, task_it)])
 ```
 
-The table above contains one row per data set, cross-validation iteration, and regularization parameter.
+Le tableau ci-dessus contient une ligne pour chaque jeu de données, chaque division de validation croisée, et chaque niveau de régularisation.
 <!-- comment -->
-Below we display the validation log loss for each iteration as a different line, with each data set as a different panel.
+Ensuite nous affichons la perte logistique sur l’ensemble de validation, avec une courbe pour chaque division de validation croisée, et un panneau pour chaque jeu de données.
 
 ```{r}
 ggplot()+
@@ -1374,7 +1375,12 @@ ggplot()+
   facet_wrap("task_id", scales="free")
 ```
 
-Above we can see that the linear model can overfit if not properly regularized in some data sets (`sonar`, `vowel`, `waveform`), whereas there is evidence of underfitting in other data sets (`spam` and `zip`).
+Ci-dessus nous voyons que le modéle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel`, `waveform`), si le niveau de régularisation est trop faible.
+Dans les autres jeux de données (`spam` and `zip`), nous voyons une courbe qui ne rémonte pas, ce qui suggère le sous-apprentissage.
+En regardant les résultats précédants, nous voyons que
+
+* Dans `spam`, nous voyons que `torch_dense_50` obtient des meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction lineaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
+* Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite. Nous en déduisons que ces données répresentent un problème de prédiction qui est trés facile pour tous les algorithmes (même le modèle lineaire).
 
 <!-- comment -->
 
