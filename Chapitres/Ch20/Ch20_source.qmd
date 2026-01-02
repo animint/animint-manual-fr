@@ -1,4 +1,4 @@
-# Machine learning benchmarks
+# Apprentissage artificiel avec `mlr3`
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="ch20-figures/")
