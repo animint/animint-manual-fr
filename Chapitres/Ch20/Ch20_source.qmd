@@ -1377,7 +1377,8 @@ ggplot()+
 
 Ci-dessus nous voyons que le modéle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel`, `waveform`), si le niveau de régularisation est trop faible.
 Dans les autres jeux de données (`spam` and `zip`), nous voyons une courbe qui ne rémonte pas, ce qui suggère le sous-apprentissage.
-En regardant les résultats précédants, nous voyons que
+Nous pourrions donc soupçonner qu’un modéle non-linéaire serait capable de donner des meilleurs résultats.
+En regardant les résultats précédants, nous pourrions vérifier cette hypothèse.
 
 * Dans `spam`, nous voyons que `torch_dense_50` obtient des meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction lineaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
 * Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite. Nous en déduisons que ces données répresentent un problème de prédiction qui est trés facile pour tous les algorithmes (même le modèle lineaire).
