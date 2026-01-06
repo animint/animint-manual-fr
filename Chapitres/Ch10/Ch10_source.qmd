@@ -6,7 +6,7 @@ knitr::opts_chunk$set(fig.path="Ch10-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
+Dans ce chapitre, nous explorerons plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
 
 <!-- paragraph -->
 
