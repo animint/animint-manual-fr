@@ -1,4 +1,4 @@
-# K plus proches voisins
+# K-plus -proches-voisins
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Ch10-figures/")
@@ -18,17 +18,16 @@ Plan du chapitre :
 <!-- comment -->
 Voici un graphique de l'erreur de validation à 10 divisions et un graphique des prédictions du classificateur 7 plus proches voisins.
 <!-- comment -->
-- Nous proposons deux refontes. Grâce à la première vous pourrez sélectionner le nombre de voisins utilisés pour les prédictions du modèle
+- Nous proposons une refonte permettant de sélectionner le nombre de voisins utilisés pour les prédictions du modèle.
 <!-- comment -->
-- et grâce à la seconde, le nombre de divisions utilisés pour le calcul de l'erreur de validation croisée.
-
+- Nous proposons une seconde refonte permettant de sélectionner le nombre de plis utilisés pour le calcul de l’erreur de validation croisée.
 <!-- paragraph -->
 
 ## Figure statique originale {#knn-static}
 
 <!-- paragraph -->
 
-Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 dans le livre [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
+Notre but dans ce chapitre est de reproduire une version interactive de la figure 13.4 tirée de [Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
 <!-- comment -->
 Cette figure se compose de deux graphiques :
 
@@ -38,7 +37,7 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-A gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
+À gauche : courbes d'erreur de mauvaise classification, en fonction du nombre de voisins.
 
 <!-- paragraph -->
 
