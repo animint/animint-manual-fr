@@ -212,7 +212,7 @@ Un certain nombre de critères peuvent être utilisés pour sélectionner le mei
 <!-- comment -->
 Une façon d'y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
-Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle. $S^*(\lambda)$ pour cet ensemble de données :
+Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle $S^*(\lambda)$ pour ce jeu de données :
 
 <!-- paragraph -->
 
@@ -233,7 +233,7 @@ gg.selection
 
 Le graphique ci-dessus montre clairement que la fonction de sélection du modèle est décroissante.
 <!-- comment -->
-Dans la section suivante, nous réalisons une version interactive de ces deux graphiques dans laquelle nous pouvons cliquer sur le graphique de sélection de modèle afin de sélectionner le modèle.
+Dans la prochaine section, nous réalisons une version interactive de ces deux graphiques dans laquelle nous pouvons cliquer sur le graphique de sélection de modèle afin de sélectionner le modèle.
 
 <!-- paragraph -->
 
@@ -298,7 +298,7 @@ interactive.models
 
 Bien entendu, le graphique ci-dessus n'est pas très informatif car il n'est pas interactif.
 <!-- comment -->
-Ci-dessous, nous combinons les deux ggplots interactifs en un seul animint lié :
+Ci-dessous, nous combinons les deux ggplots interactifs dans un `animint` :
 
 <!-- paragraph -->
 
@@ -314,7 +314,7 @@ animint(
 
 Notez que dans la visualisation des données ci-dessus, le modèle à 6 segments ne peut être sélectionné pour aucune valeur de lambda. Il n'est donc pas possible de cliquer sur le graphique pour sélectionner ce modèle.
 <!-- comment -->
-Cependant, il est possible de sélectionner le modèle en utilisant le menu de sélection des segments (cliquez sur "Afficher les menus de sélection" au bas de l'image de données).
+Cependant, il est possible de sélectionner le modèle en utilisant le menu de sélection des segments (cliquez sur « Show selection menus » au bas de la visualisation des données).
 
 <!-- paragraph -->
 
@@ -322,11 +322,11 @@ Cependant, il est possible de sélectionner le modèle en utilisant le menu de s
 
 <!-- paragraph -->
 
-Une autre partie de cet ensemble de données est `intreg$intervals` qui comporte une ligne pour chaque signal.
+Une autre partie de ce jeu de données est `intreg$intervals` qui comporte une ligne pour chaque signal.
 <!-- comment -->
-Les colonnes`min.L` et `max.L` indiquent les valeurs min/max de l'intervalle cible, qui correspond à la plage la plus large de valeurs de log(pénalité) avec des erreurs d'étiquette minimales.
+Les colonnes `min.L` et `max.L` indiquent les valeurs min/max de l'intervalle cible, qui correspond à la plage la plus large de valeurs de log(pénalité) avec des erreurs d'étiquette minimales.
 <!-- comment -->
-Nous traçons ci-dessous cet intervalle en fonction d'une caractéristique des données (logarithme du nombre de points de données) :
+Nous traçons ci-dessous cet intervalle en fonction du logarithme du nombre de données dans la séquence :
 
 <!-- paragraph -->
 
