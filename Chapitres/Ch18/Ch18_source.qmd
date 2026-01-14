@@ -242,7 +242,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Pour implémenter l'algorithme de descente de gradient pour l'apprentissage des paramètres du modèle de réseau de neurones, nous utiliserons un système simple d'auto-gradation.
+Pour implémenter l'algorithme de descente de gradient pour l'apprentissage des paramètres du modèle de réseau de neurones, nous utiliserons un système simple d'auto-grad.
 <!-- comment -->
 L'idée de l'auto-grad est que la structure du modèle de réseau neuronal doit être définie une seule fois et que cette structure doit être utilisée pour dériver les calculs de propagation vers l'avant (prédiction) et vers l'arrière (gradient).
 <!-- comment -->
@@ -281,7 +281,7 @@ Le code de la fonction ci-dessus commence par créer un nouvel environnement, pu
 <!-- comment -->
 - `backward` est une fonction qui doit être appelée par l'utilisateur sur le nœud final/de perte dans le graphe de calcul.
 <!-- comment -->
-Elle appelle `gradient` qui doit calculer le gradient de la perte par rapport aux nœuds parents, qui sont stockés dans le fichier `grad` dans chaque nœud parent correspondant, avant d'appeler récursivement `backward` sur chaque nœud parent.
+Elle appelle `gradient` qui doit calculer le gradient de la perte par rapport aux nœuds parents, qui sont stockés dans l'attribut `grad` dans chaque nœud parent correspondant, avant d'appeler récursivement `backward` sur chaque nœud parent.
 
 <!-- paragraph -->
 
@@ -297,7 +297,7 @@ initial_node <- function(mat){
 
 <!-- paragraph -->
 
-Le code ci-dessus indique qu'un nœud initial stocke simplement la matrice d'entrée `mat` comme valeur, et a une valeur `gradient` qui ne fait rien (parce que les nœuds initiaux dans le graphe de calcul n'ont pas de parents pour lesquels des gradients pourraient être calculés).
+Le code ci-dessus indique qu'un nœud initial stocke simplement la matrice d'entrée `mat` comme valeur, et a une fonction `gradient` qui ne fait rien (parce que les nœuds initiaux dans le graphe de calcul n'ont pas de parents pour lesquels des gradients pourraient être calculés).
 <!-- comment -->
 Le code ci-dessous définit `mm` un noeud dans le graphe de calcul qui représente une multiplication de matrice,
 
@@ -315,11 +315,11 @@ mm <- function(feature.node, weight.node)new_node(
 
 <!-- paragraph -->
 
-Le `mm` ci-dessus suppose qu'il existe un nœud de pondération ayant le même nombre de lignes que le nombre de colonnes (plus une pour l'interception) dans le nœud de caractéristique.
+La définition de `mm` ci-dessus suppose qu'il existe un nœud de pondération ayant le même nombre de lignes que le nombre de colonnes (plus une pour l'ordonnée à l'origine) dans le nœud pour les variables d’entrée.
 <!-- comment -->
 Les calculs d'avance/valeur et de gradient utilisent la multiplication matricielle.
 <!-- comment -->
-Par exemple, nous pouvons utiliser`mm` pour définir un modèle linéaire simple,
+Par exemple, nous pouvons utiliser `mm` de la manière suivante pour définir un modèle linéaire simple,
 
 <!-- paragraph -->
 
@@ -332,7 +332,7 @@ str(linear.pred.node$value)
 
 <!-- paragraph -->
 
-On peut voir dans le code ci-dessus que l'élément `mm` renvoie un nœud représentant les valeurs prédites, un pour chaque ligne de la matrice des fonctions).
+On peut voir dans le code ci-dessus que la fonction `mm` renvoie un nœud représentant les valeurs prédites, un pour chaque ligne de la matrice des variables d’entrée).
 <!-- comment -->
 Pour utiliser les caractéristiques de gradient, nous avons besoin d'une fonction de perte qui, dans le cas de la classification binaire, est la perte logistique (entropie croisée),
 
@@ -367,7 +367,7 @@ loss.node$value
 
 Maintenant que nous avons calculé la perte, nous pouvons calculer le gradient de la perte par rapport aux pondérations, qui est utilisé pour effectuer les mises à jour pendant l'apprentissage.
 <!-- comment -->
-Rappelez-vous que nous devons maintenant appeler`backward` (sur la perte de soustraction), qui devrait finalement stocker le gradient en tant que `weight.node$grad`.
+Rappelez-vous que nous devons maintenant appeler `backward` (sur la perte de sous-entrainement), qui devrait finalement stocker le gradient en tant que `weight.node$grad`.
 <!-- comment -->
 Ci-dessous, nous vérifions d'abord qu'il n'a pas encore été calculé, puis nous le calculons :
 
@@ -381,7 +381,7 @@ weight.node$grad
 
 <!-- paragraph -->
 
-Notez que, puisque `loss.node` contient des références récursives à ses nœuds parents (y compris les prédictions et les pondérations), l'élément `backward` ci-dessus est capable de calculer et de stocker de manière pratique les données de l'appel `weight.node$grad` le gradient de la perte par rapport aux paramètres de pondération.
+Notez que, puisque `loss.node` contient des références récursives à ses nœuds parents (y compris les prédictions et les pondérations), l'appel `backward` ci-dessus est capable de calculer et de stocker de manière pratique `weight.node$grad`, le gradient de la perte par rapport aux paramètres de pondération.
 <!-- comment -->
 Le gradient est la direction de la montée la plus raide, ce qui signifie que les pondérations de direction pourraient être modifiées pour maximiser la perte.
 <!-- comment -->
