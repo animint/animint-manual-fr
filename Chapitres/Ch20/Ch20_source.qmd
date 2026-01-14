@@ -11,7 +11,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 
 <!-- comment -->
 
-* Nous commençons avec une explication de l’utilité des packages `mlr3` pour la comparaison des algorithmes d’apprentissage artificiel.
+* Nous démontrons d'abord la pertinence des packages `mlr3` pour la comparaison d'algorithmes d’apprentissage artificiel.
 <!-- comment -->
 * Nous définissons une comparaison sur plusieurs problèmes de classification binaire, avec plusieurs algorithmes d’apprentissage (plus proches voisins, modèle linaire, réseau de neurones).
 <!-- comment -->
