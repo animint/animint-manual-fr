@@ -21,7 +21,7 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations des données rel
 <!-- comment -->
 - nous montrons comment créer un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
 <!-- comment -->
-- nous expliquons comment convertir un nuage de points surdéveloppé en une carte thermique liée et un nuage de points zoomé.
+- nous expliquons comment l’occlusion pourrait être problèmatique dans un graphique avec trop de points, et comment contourner ce problème avec une carte thermique liée à un graphique montrant un sous-ensemble de points.
 <!-- comment -->
 - nous terminons par une autre carte thermique des valeurs des paramètres simulés, avec un graphique lié qui montre les données simulées.
 
@@ -41,19 +41,19 @@ Les valeurs-p peuvent être utilisées dans une plage étendue (ou intervalle), 
 
 - dans une expérience médicale, le traitement est-il plus efficace que le contrôle ?
 <!-- comment -->
-Par exemple, dans le cas d'un médicament pour la perte de poids, nous aimerions savoir si le poids du groupe traité est significativement inférieur à celui du groupe témoin.
+Par exemple, dans le cas d'un médicament pour la perte de poids, nous aimerions savoir si le poids du groupe expérimental est significativement inférieur à celui du groupe témoin.
 <!-- comment -->
 Supposons que 10 personnes soient assignées au groupe de contrôle et 15 au groupe de traitement.
 <!-- comment -->
-Nous pourrions ensuite calculer une valeur P à l'aide d'un test T unilatéral non apparié pour évaluer la signification statistique (non apparié parce que chaque personne du groupe de traitement n'a pas de membre correspondant dans le groupe de contrôle).
+Nous pourrions ensuite calculer une valeur-p à l'aide d'un test de Student unilatéral pour évaluer la signification statistique (et non apparié parce que chaque personne du groupe de traitement n'a pas de membre correspondant dans le groupe témoin).
 <!-- comment -->
 - Dans une expérience d'apprentissage automatique, le réseau neuronal est-il plus précis que le modèle linéaire ?
 <!-- comment -->
-Par exemple, considérons un ensemble de données de référence de classification d'images, et une évaluation utilisant la validation croisée 5 fois.
+Par exemple, considérons un ensemble de données de référence de classification d'images, et une évaluation utilisant la validation croisée à 5 divisions.
 <!-- comment -->
-Nous aurions cinq mesures de la précision du test pour chacun des deux algorithmes d'apprentissage (réseau neuronal et modèle linéaire).
+Nous aurions cinq mesures du taux d’erreur pour chacun des deux algorithmes d'apprentissage (réseau neuronal et modèle linéaire).
 <!-- comment -->
-Nous pourrions ensuite calculer une valeur P à l'aide d'un test T unilatéral apparié pour évaluer la signification statistique (apparié parce que la précision du test de pli 1 pour le modèle linéaire a une précision de test de pli 1 correspondante pour le réseau neuronal, etc.)
+Nous pourrions ensuite calculer une valeur-p à l'aide d'un test de Student unilatéral, pour évaluer la signification statistique (apparié parce qu’il y a un taux d’erreur pour chacun des algorithmes, dans chaque division de la validation croisée)
 
 <!-- paragraph -->
 
