@@ -13,7 +13,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 
 * Nous démontrons d'abord la pertinence des packages `mlr3` pour la comparaison d'algorithmes d’apprentissage artificiel.
 <!-- comment -->
-* Nous définissons une comparaison sur plusieurs problèmes de classification binaire, avec plusieurs algorithmes d’apprentissage (plus proches voisins, modèle linaire, réseau de neurones).
+* Nous utilisons ensuite `mlr3` pour définir et exécuter une évaluation comparative de plusieurs problèmes de classification binaire, et de plusieurs algorithmes d’apprentissage (plus proches voisins, modèles linéaires, réseaux de neurones).
 <!-- comment -->
 * Nous faisons des graphiques montrant les taux d’erreur et l’aire sous la courbe ROC.
 <!-- comment -->
