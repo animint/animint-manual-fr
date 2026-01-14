@@ -21,7 +21,7 @@ Plan du chapitre :
 
 - Nous commençons par simuler et visualiser quelques données 2d pour une classification binaire.
 <!-- comment -->
-- Nous montrons ensuite comment une fonction de classification en 2d peut être visualisée en calculant les prédictions sur une grille, puis en utilisant la fonction de classification en 2d. `geom_tile()` ou `geom_path()` avec des lignes de contour.
+- Nous montrons ensuite comment une fonction de classification en 2d peut être visualisée en calculant les prédictions sur une grille, puis en utilisant `geom_tile()` ou `geom_path()` avec des lignes de contour.
 <!-- comment -->
 - Nous calculons les prédictions du modèle linéaire et les mises à jour de la descente de gradient à l'aide d'un système simple de différenciation automatique (auto-grad).
 <!-- comment -->
@@ -47,7 +47,7 @@ head(features.hidden)
 
 <!-- paragraph -->
 
-Dans la simulation, le tableau de données ci-dessus comporte les caractéristiques "cachées" qui sont utilisées pour créer les étiquettes, mais ne sont pas disponibles pour l'apprentissage.
+Dans la simulation, le tableau de données ci-dessus comporte les variables cachées (`hidden`) qui sont utilisées pour créer les étiquettes, mais ne sont pas disponibles pour l'apprentissage.
 <!-- comment -->
 La fonction latente/vraie utilisée pour la classification est la suivante,
 
@@ -174,7 +174,7 @@ Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données rep
 
 <!-- paragraph -->
 
-Le meilleur classificateur est visualisé ci-dessous dans l'espace des caractéristiques,
+La meilleure (`best`) fonction de classification est visualisée ci-dessous dans l'espace des variables d’entrée.
 
 <!-- paragraph -->
 
