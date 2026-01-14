@@ -34,7 +34,7 @@ Cette méthode est plus efficace sur le plan computationnel et plus facile à co
 
 <!-- paragraph -->
 
-Les données de l'exemple proviennent du [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint) qui permet de détecter des pics dans des séquences de données génomiques.
+Les données de l'exemple proviennent du [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint) qui détecte les pics dans des séquences de données génomiques.
 <!-- comment -->
 Le code ci-dessous télécharge le jeu de données.
 
@@ -49,15 +49,15 @@ sapply(PSJ, class)
 
 <!-- paragraph -->
 
-Ci-dessus, nous voyons que `PSJ` est une liste de plusieurs listes et tableaux de données.
+On peut voir, ci-dessus, que `PSJ` est une liste de plusieurs éléments (listes et tableaux de données).
 
 <!-- paragraph -->
 
-## Exploration des données `PSJ` avec des ggplots statiques {#explore-data-with-static-ggplots}
+## Exploration des données `PSJ` à l'aide de ggplots statiques {#explore-data-with-static-ggplots}
 
 <!-- paragraph -->
 
-Nous commençons par un graphique de quelques données ChIP-seq génomiques, qui sont des données séquentielles qui prennent de grandes valeurs lorsqu'il y a une zone active (typiquement des gènes activement transcrits).
+Nous commençons par un graphique de quelques données ChIP-seq génomiques, des données séquentielles dont les valeurs augmentent dans les zones actives (généralement lorsque des gènes sont transcrits).
 <!-- comment -->
 Dans le code ci-dessous, nous affichons chaque échantillon dans un panneau séparé.
 
@@ -100,13 +100,14 @@ ann.colors <- c(
 
 <!-- paragraph -->
 
-La figure ci-dessus montre les données brutes et bruitées sous forme d'un `geom_line()` gris.
+La figure ci-dessus montre les données brutes bruitées sous forme d'un `geom_line()` gris.
 <!-- comment -->
-Les rectangles de couleur représentent des étiquettes qui indiquent si le début ou la fin d'un pic doit être prédit dans une région et un échantillon donnés.
+Les rectangles de couleur indiquent si le début ou la fin d'un pic doit être prédit dans une région et un échantillon donnés.
 <!-- comment -->
-Ensuite, nous ajoutons un panneau pour les problèmes de segmentation, dans lequel un algorithme a cherché un pic commun à tous les échantillons.
+Ensuite, nous ajoutons un panneau pour les problèmes de segmentation.
+Dans chaque problème, un algorithme a cherché un pic commun à tous les échantillons.
 <!-- comment -->
-L'algorithme prédit les positions de début et de fin pour un pic de grandes valeurs de données, dans chaque problème.
+Pour chaque problème, l'algorithme prédit les positions de début et de fin du pic de valeur élevée.
 <!-- comment -->
 Le code ci-dessous calcule un tableau de contingence avec une ligne pour chaque problème de ce type.
 
@@ -120,7 +121,7 @@ library(data.table)
 
 <!-- paragraph -->
 
-Le code ci-dessus a ajouté la colonne `y` qui est utilisée pour afficher les problèmes dans le code ci-dessous.
+Dans le code ci-dessus une colonne `y` est ajoutée pour l'affichage des problèmes.
 
 <!-- paragraph -->
 
@@ -150,7 +151,7 @@ Ci-dessus, on voit qu'un panneau inférieur intitulé `problems` a été ajouté
 <!-- comment -->
 Le graphique statique ci-dessus est surchargé ; la version interactive sera lisible parce qu'elle n'affichera qu'une seule valeur de `bases.per.problem` à la fois.
 <!-- comment -->
-Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du problème), nous utiliserons un autre graphique, qui montre le meilleur taux d'erreur pour chaque taille de problème, comme dans les données ci-dessous.
+Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du problème), nous utiliserons un autre graphique, qui présentera le meilleur taux d'erreur pour chaque taille de problème, comme le montrent les données ci-dessous.
 
 <!-- paragraph -->
 
