@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="ch14-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre explique comment utiliser les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour créer des noms de sélecteurs basés sur des données.
+Dans ce chapitre nous expliquons comment utiliser les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour créer des noms de sélecteurs basés sur des données.
 <!-- comment -->
 Cette fonctionnalité facilite l'écriture du code `animint2` et accélère la compilation.
 
@@ -18,13 +18,13 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par joindre le jeu de données `PSJ` et compiler les données à tracer.
+- Nous commençons par charger le jeu de données `PSJ` et compiler les données à tracer.
 <!-- comment -->
-- Nous montrons une méthode pour définir un `animint` avec de nombreux sélecteurs, en utilisant des boucles `for`.
+- Nous présentons une méthode pour définir un `animint` avec de nombreux sélecteurs, en utilisant des boucles `for`.
 <!-- comment -->
-Cette méthode est techniquement correcte, mais inefficace sur le plan computationnel.
+Cette approche est techniquement correcte, mais peu efficace.
 <!-- comment -->
-- Nous expliquons ensuite la méthode à préférer pour définir un `animint` avec de nombreux sélecteurs, en utilisant des `clickSelects` et `showSelected` nommés.
+- Nous expliquons ensuite la méthode à privilégier pour définir un `animint` avec de nombreux sélecteurs, c'est-à-dire en utilisant des `clickSelects` et `showSelected` nommés.
 <!-- comment -->
 Cette méthode est plus efficace sur le plan computationnel et plus facile à coder.
 
