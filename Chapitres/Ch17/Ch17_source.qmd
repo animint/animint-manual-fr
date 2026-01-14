@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="ch17-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l'agrégation (groupe) par K-moyennes, un algorithme d'apprentissage non supervisé.
+Dans ce chapitre, nous allons explorer plusieurs visualisations de l'agrégation (clustering) par K-moyennes, un algorithme d'apprentissage non supervisé.
 
 <!-- paragraph -->
 
@@ -18,7 +18,7 @@ Plan du chapitre :
 
 - Nous commençons par visualiser deux caractéristiques des données Iris.
 <!-- comment -->
-- Nous choisissons trois points de données aléatoires à utiliser comme centres d'agrégation.
+- Nous choisissons de manière aléatoire K=trois points de données à utiliser comme centres d'agrégation.
 <!-- comment -->
 - Nous expliquons comment calculer et visualiser la distance entre les points de données et les centres d'agrégation.
 <!-- comment -->
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Nous allons illustrer l'algorithme d'agrégation K-moyennes à l'aide de ces deux dimensions,
+Nous allons illustrer l'algorithme d'agrégation K-moyennes à l'aide de ces deux dimensions.
 
 <!-- paragraph -->
 
@@ -343,9 +343,9 @@ Modifiez le code pour qu'il arrête l'itération s'il n'y a pas de diminution de
 <!-- comment -->
 Ajoutez un autre cadre d'animation qui montre la moyenne après la mise à jour.
 <!-- comment -->
-- Ajoutez des segments interactifs qui montrent la distance entre chaque point de données et chaque centre d'agrégation (comme dans la première animation de cette page).
+- Ajoutez des segments interactifs qui montrent la distance entre chaque point de données et chaque centre d'agrégation (comme dans le premier animint de cette page).
 <!-- comment -->
-- Ajoutez les fonctionnalités décrites dans les exercices de la section précédente sur cette page.
+- Ajoutez les fonctionnalités décrites dans les exercices de la section précédente.
 <!-- comment -->
 - Calculez les résultats pour différentes graines aléatoires, puis affichez les taux d'erreur correspondants sur le graphique d'aperçu des erreurs. Permettez ensuite à l'utilisateur de sélectionner n'importe lequel de ces résultats.
 <!-- comment -->
