@@ -16,7 +16,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par effectuer plusieurs visualisations statiques de la `intreg` données.
+- Nous commençons par effectuer plusieurs visualisations statiques du jeu de données `intreg`.
 <!-- comment -->
 - Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de points de changement/segments, et l'autre graphique montre le modèle correspondant.
 <!-- comment -->
@@ -28,7 +28,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Nous commençons par charger le fichier `intreg` données.
+Nous commençons par charger le jeu de données `intreg`.
 
 <!-- paragraph -->
 
@@ -41,7 +41,7 @@ lapply(intreg, function(df)data.table(df)[1:2])
 
 <!-- paragraph -->
 
-Comme indiqué ci-dessus, il s'agit d'une liste nommée de 7 cadres de données apparentés.
+Comme on peut voir ci-dessus, il s'agit d'une liste nommée de 7 `data.frames` apparentés.
 <!-- comment -->
 Nous commençons notre exploration de ces données en traçant les signaux dans des facettes séparées.
 
@@ -68,13 +68,13 @@ Ces données proviennent d'analyses à haut débit qui sont importantes pour dia
 
 <!-- paragraph -->
 
-Une partie importante du diagnostic consiste à détecter les "points de rupture" ou les changements abrupts au sein d'un chromosome donné (panel).
+Une partie importante du diagnostic consiste à détecter les "points de rupture" ou les changements abrupts au sein d'un chromosome donné (panneau).
 <!-- comment -->
 Le graphique ci-dessus montre clairement qu'il y a plusieurs points de rupture dans ces données.
 <!-- comment -->
 En particulier, le signal 4.2 semble avoir trois points de rupture, le signal 4.3 semble en avoir un, etc.
 <!-- comment -->
-En fait, ces données proviennent de médecins de l'Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de cassure.
+En fait, ces données proviennent de médecins de l'Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
 <!-- comment -->
 Ces données sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous.
 
@@ -103,9 +103,9 @@ L'objectif de l'analyse de ces données est d'apprendre à partir des données �
 
 <!-- paragraph -->
 
-Afin de détecter ces points de rupture, nous avons ajusté certains modèles de segmentation de vraisemblance maximale, en utilisant l'algorithme efficace implémenté dans le logiciel `jointseg::Fpsn`.
+Afin de détecter ces points de rupture, nous avons ajusté certains modèles de segmentation de vraisemblance maximale, en utilisant l'algorithme efficace implémenté dans `jointseg::Fpsn`.
 <!-- comment -->
-Les moyens des segments sont disponibles dans `intreg$segments` et les points d'arrêt prédits sont disponibles dans `intreg$breaks`.
+Les moyennes des segments sont disponibles dans `intreg$segments` et les points de rupture prédits sont disponibles dans `intreg$breaks`.
 <!-- comment -->
 Pour chaque signal, il existe une séquence de modèles de 1 à 20 segments.
 <!-- comment -->
@@ -165,7 +165,7 @@ gg.models
 
 Le graphique ci-dessus montre les modèles de segmentation de vraisemblance maximale en vert (de un à six segments).
 <!-- comment -->
-Ci-dessous, nous utilisons le modèle `penaltyLearning::labelError` pour calculer l'erreur d'étiquette, qui quantifie quels modèles sont en accord avec quelles étiquettes.
+Ci-dessous, nous utilisons la fonction `penaltyLearning::labelError` pour calculer l'erreur d'étiquette, qui quantifie quels modèles sont en accord avec quelles étiquettes.
 
 <!-- paragraph -->
 
@@ -181,9 +181,9 @@ sig.errors <- penaltyLearning::labelError(
 
 <!-- paragraph -->
 
-Le `sig.errors$label.errors` tableau de données contient une ligne pour chaque combinaison (modèle,étiquette).
+Le `data.table` (tableau de données) `sig.errors$label.errors` contient une ligne pour chaque combinaison (modèle, étiquette).
 <!-- comment -->
-Le tableau`status` peut être utilisée pour afficher l'erreur d'étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
+La colonne `status` peut être utilisée pour afficher l'erreur d'étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
 
 <!-- paragraph -->
 
