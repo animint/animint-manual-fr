@@ -188,7 +188,8 @@ Tout le monde peut créer des données, simplement en écrivant systématiquemen
 <!-- comment -->
 En général, les données sont créées pour répondre à une question spécifique et sont organisées en tableaux avec des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
 <!-- comment -->
-Le mot "données" vient du latin, sa forme plurielle "datum" fait référence à une observation/rangée d'un tableau de données.
+D’après Larousse, « donnée » signifie « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée]. https://www.larousse.fr/dictionnaires/francais/donnée
+La représentation conventionelle pour `animint2` est un tableau, avec une ligne pour chaque observation, et une colonne pour chaque variable.
 <!-- comment -->
 Nous utilisons le terme "ensemble de données" pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
 
@@ -224,7 +225,7 @@ Nous définissons l'"analyse des données" comme le processus consistant à rép
 <!-- comment -->
 Une catégorie très efficace de méthodes d'analyse des données est appelée "visualisation des données", qui cherche à fournir des réponses aux questions en convertissant un ensemble de données en une image informative.
 <!-- comment -->
-Le terme "visualisation des données" fait référence à la fois à l'image elle-même (également connue sous le nom de tracé, graphique, figure, diagramme, graphique ou visualisation des données) et au processus de création de l'image.
+Le terme "visualisation des données" fait référence à la fois à l'image elle-même (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation des données) et au processus de création de l'image.
 
 <!-- paragraph -->
 
@@ -263,7 +264,7 @@ Pour répondre à cette question, Fisher a préparé quatre tasses de thé avec 
 <!-- comment -->
 Fisher a ensuite placé les tasses dans un ordre aléatoire, a fait goûter les huit tasses de thé à la dame et lui a demandé d'identifier les quatre tasses dans lesquelles du lait avait été ajouté après le thé.
 <!-- comment -->
-Selon le`help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses dans lesquelles du lait a été ajouté après le thé.
+Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses dans lesquelles du lait a été ajouté après le thé.
 <!-- comment -->
 Fisher a ensuite noté les données suivantes : le nombre total de tasses (8), le nombre total de tasses dans lesquelles du lait a été ajouté (4) et le nombre total de tasses que la dame a correctement identifiées (3).
 <!-- comment -->
@@ -369,7 +370,7 @@ Keeling a noté que "le taux d'augmentation observé est proche de celui que l'o
 
 La visualisation des données révèle également l'intéressante tendance saisonnière qui atteint un maximum local chaque mois de mai et un minimum local chaque mois d'octobre.
 <!-- comment -->
-Cette tendance saisonnière peut être expliquée en considérant les forêts de l'hémisphère nord.
+Cette tendance saisonnière peut être expliquée en considérant les forêts de l'hémisphère Nord.
 <!-- comment -->
 Les feuilles des arbres de ces forêts réalisent la photosynthèse, c'est-à-dire la transformation chimique du CO2 en oxygène.
 <!-- comment -->
@@ -393,9 +394,9 @@ Cependant, comme nous le verrons dans la section suivante, la visualisation stat
 
 Certains ensembles de données sont si volumineux qu'il n'est pas possible ou souhaitable de tracer toutes les données à la fois dans une visualisation statique des données.
 <!-- comment -->
-Pour ces ensembles de "grandes données", les approches traditionnelles de l'analyse des données consistent à résumer les données, puis à visualiser le résumé.
+Pour de tels ensembles de "grandes données", les approches traditionnelles d'analyse des données consistent à résumer les données, puis à visualiser ce résumé.
 <!-- comment -->
-Cependant, le résumé peut être trompeur, car il ne montre pas tous les détails des données originales.
+Cependant, le résumé graphique peut être trompeur, car il ne montre pas tous les détails des données originales.
 <!-- comment -->
 Dans de telles situations, la "visualisation des données interactive" devient utile.
 
@@ -441,7 +442,7 @@ animint(
 
 Dans le graphique ci-dessus, l'accentuation par défaut est mai et octobre, mais l'utilisateur peut cliquer sur la légende pour mettre à jour l'accentuation.
 <!-- comment -->
-Cet exemple simple illustre l'idée principale de la visualisation interactive des données à l'aide d'animint.
+Cet exemple simple illustre l'idée principale de la visualisation interactive des données à l'aide d'`animint()`.
 <!-- comment -->
 De nombreux choix doivent être faits pour montrer les détails des ensembles de données volumineuses.
 <!-- comment -->
@@ -453,11 +454,11 @@ Dans l'exemple ci-dessus, nous avons utilisé une légende interactive qui perme
 
 <!-- paragraph -->
 
-L'exemple ci-dessus fournit également un bon exemple de `clickSelects` et `showSelected` les deux mots-clés introduits par animint pour permettre l'interaction.
+L'exemple ci-dessus fournit également un bon exemple de `clickSelects` et `showSelected`, les deux mots-clés introduits par `animint2` pour permettre l'interaction.
 <!-- comment -->
-Sans entrer dans les détails, le graphique ci-dessus utilise les éléments suivants `clickSelects=month` pour la légende interactive, ce qui signifie qu'un clic sur la légende devrait modifier les mois sélectionnés.
+Sans entrer dans les détails, le graphique ci-dessus utilise `clickSelects=mois` pour la légende interactive, ce qui signifie qu'un clic sur la légende devrait modifier les mois sélectionnés.
 <!-- comment -->
-En outre, nous avons utilisé `showSelected=month` pour les points, ce qui signifie que nous ne devons tracer que l'ensemble de points qui correspond aux mois actuellement sélectionnés.
+En outre, nous avons utilisé `showSelected=mois` pour les points, ce qui signifie que nous ne devons tracer que l'ensemble de points qui correspond aux mois actuellement sélectionnés.
 <!-- comment -->
 Dans les chapitres 3 et 4, nous expliquerons comment concevoir des visualisations de données en écrivant du code R à l'aide de ces deux nouveaux mots-clés.
 
@@ -471,13 +472,13 @@ Ce chapitre a expliqué quelques notions de base sur les données et a donné de
 
 <!-- paragraph -->
 
-- Sur la base des définitions présentées dans ce chapitre, quelle est la différence entre les petites et les moyennes données ?
+- Sur la base des définitions présentées dans ce chapitre, quelle est la différence entre les données petites et moyennes ?
 <!-- comment -->
-- Quelle est la différence entre les données moyennes et les données importantes ?
+- Quelle est la différence entre les données moyennes et grandes ?
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 2](ch02) explique comment la grammaire graphique peut être utilisée pour créer des visualisations des données.
+Ensuite, dans le [chapitre 2](ch02), nous vous expliquerons comment la grammaire graphique peut être utilisée pour créer des visualisations des données.
 
 <!-- paragraph -->
 
