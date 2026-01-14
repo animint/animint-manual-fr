@@ -1,4 +1,4 @@
-# Expressions utiles de la programmation R
+# Techniques de programmation pour la visualisation
 
 <!-- paragraph -->
 
