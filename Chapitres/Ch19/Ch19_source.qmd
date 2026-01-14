@@ -57,13 +57,13 @@ Nous pourrions ensuite calculer une valeur-p à l'aide d'un test de Student unil
 
 <!-- paragraph -->
 
-Après avoir calculé les mesures (pondération de chaque personne ou précision des tests de chaque algorithme d'apprentissage automatique), nous pouvons les utiliser comme données d'entrée pour `t.test()` qui calculera une valeur P (plus elle est petite, plus la différence est significative).
+Après avoir calculé les mesures (poids de chaque personne ou précision des tests de chaque algorithme d'apprentissage automatique), nous pouvons les utiliser comme données d'entrée pour `t.test()` qui calculera une valeur-p (plus elle est petite, plus la différence est significative).
 <!-- comment -->
-Pour comprendre la valeur P, nous devons d'abord adopter la méthode *hypothèse nulle* nous supposons qu'il n'y a pas de différence entre les conditions.
+Pour comprendre la valeur-p, nous devons d'abord adopter l’hypothèse nulle : nous supposons qu'il n'y a pas de différence entre les conditions.
 <!-- comment -->
-Ensuite, la valeur P du test est définie comme la probabilité que nous observions une différence aussi grande que les mesures données, ou plus grande.
+Ensuite, la valeur-p du test est définie comme la probabilité que nous observions une différence aussi grande que les mesures données, ou plus grande.
 <!-- comment -->
-Étant donné que l'hypothèse nulle est qu'il n'y a pas de différence, il est extrêmement improbable d'observer des différences importantes, c'est pourquoi les petites valeurs P sont plus significatives.
+Étant donné que l'hypothèse nulle est qu'il n'y a pas de différence, il est extrêmement improbable d'observer des différences importantes, c'est pourquoi les petites valeurs-p sont plus significatives.
 
 <!-- paragraph -->
 
@@ -80,7 +80,7 @@ Notre simulation comporte quatre paramètres :
 - `true_offset` est la véritable différence entre les conditions,
 - `sd` est l'écart-type des données simulées,
 - `sample` est un nombre d'échantillons (la moitié des échantillons dans une condition, l'autre moitié dans l'autre condition),
-- `trial` est le nombre de fois que nous répétons l'expérience (pour chaque décalage et écart-type).
+- `trial` est le nombre de fois que nous répétons l'expérience (pour chaque différence et écart-type).
 
 <!-- paragraph -->
 
@@ -111,17 +111,17 @@ set.seed(1)
 
 <!-- paragraph -->
 
-Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pour chaque normale aléatoire simulée. `value` (dont la moyenne dépend de `true_offset` et de `condition`).
+Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pour chaque `value` (valeur) normale aléatoire simulée (dont la moyenne dépend de `true_offset` et de `condition`).
 
 <!-- paragraph -->
 
-## Test T et graphique du volcan {#t-test-and-volcano-plot}
+## Test de Student et graphique volcan {#t-test-and-volcano-plot}
 
 <!-- paragraph -->
 
-Dans cette section, nous calculons les résultats des tests T et les visualisons à l'aide d'un tracé en volcan, qui est un graphique des valeurs P en logarithme négatif par rapport aux tailles d'effet estimées.
+Dans cette section, nous calculons les résultats des tests t et les visualisons à l'aide d'un graphique volcan, qui est un graphique des valeurs-p en logarithme négatif par rapport aux tailles d'effet estimées.
 <!-- comment -->
-La visualisation des résultats du test est appelée graphique en forme de volcan parce que la distribution typique des points ressemble à un volcan en éruption de l'origine vers le haut, vers la gauche et vers la droite.
+La visualisation des résultats du test est appelée graphique volcan parce que la distribution typique des points ressemble à un volcan en éruption de l'origine vers le haut, vers la gauche et vers la droite.
 
 <!-- -- commentaire -->
 
@@ -129,7 +129,7 @@ Tout d'abord, nous ajoutons les colonnes que nous utiliserons pour la visualisat
 
 <!-- paragraph -->
 
-- `true_tile` est une chaîne de texte permettant de sélectionner une combinaison d'un décalage et d'un écart-type.
+- `true_tile` est une chaîne de texte permettant de sélectionner une combinaison d'une différence et d'un écart-type.
 <!-- comment -->
 - `Condition` est une chaîne de caractères indiquant la condition (soit `zero` ou `offset`).
 
@@ -158,7 +158,7 @@ Ensuite, nous effectuons un remodelage pour obtenir un tableau avec une colonne 
 
 La sortie ci-dessus montre un tableau comportant deux fois moins de lignes que le tableau précédent.
 <!-- comment -->
-Le code ci-dessous calcule un test T pour chaque répétition de la simulation :
+Le code ci-dessous calcule un test de Student pour chaque répétition de la simulation :
 
 <!-- paragraph -->
 
