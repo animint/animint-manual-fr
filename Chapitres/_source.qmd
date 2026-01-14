@@ -2,7 +2,7 @@
 
 <!-- paragraph -->
 
-Ce manuel explique comment concevoir et créer des visualisations de données interactives à l'aide du package R `animint2`.
+Ce manuel explique comment concevoir et créer des visualisations de données interactives avec le package R `animint2`.
 
 <!-- paragraph -->
 
@@ -18,7 +18,7 @@ Les chapitres de ce manuel sont organisés comme suit.
 
 <!-- paragraph -->
 
-Les sept premiers chapitres doivent être lus de manière séquentielle, car ils fournissent un guide pas à pas pour la visualisation interactive des données à l'aide de `animint2`.
+On devrait lire les sept premiers chapitres de manière séquentielle, car ils fournissent les bases pour la visualisation interactive des données avec `animint2`.
 
 <!-- paragraph -->
 
@@ -104,23 +104,25 @@ Le [chapitre 14](ch14) montre un exemple de création d’une visualisation avec
 
 <!-- paragraph -->
 
-[Chapitre 15](ch15) explique comment créer une visualisation interactive de l'algorithme de recherche de racines de Newton.
+Le [chapitre 15](ch15) explique comment créer une visualisation interactive de l'algorithme de recherche de racines « root-finding » de Newton.
 
 <!-- paragraph -->
 
-[Chapitre 16](ch16) explique comment créer une visualisation interactive d'un modèle de détection optimale des points de changement.
+Le [chapitre 16](ch16) explique comment créer une visualisation interactive d'un modèle de détection de ruptures dans les données séquentielles.
 
 <!-- paragraph -->
 
-[Chapitre 17](ch17) explique comment créer une visualisation interactive de l'algorithme d'agrégation des k-moyennes.
+Le [chapitre 17](ch17) explique comment créer une visualisation interactive de l'algorithme d'agrégation « clustering », k-moyennes.
 
 <!-- paragraph -->
 
-[Chapitre 18](ch18) explique comment créer une visualisation interactive de l'algorithme de descente de gradient pour l'apprentissage des matrices de poids des réseaux de neurones.
+Le [chapitre 18](ch18) explique comment créer une visualisation interactive de l'algorithme de descente de gradient pour l'apprentissage d'un réseau de neurones.
 
 <!-- paragraph -->
 
-[Chapitre 19](ch19) explique comment visualiser les valeurs P, et notamment comment contourner les surreprésentations, à l'aide d'une carte thermique liée à un diagramme de dispersion zoomé.
+Le [chapitre 19](ch19) explique la visualisation des valeurs-p. Pour éviter l’occlusion dans un nuage de points avec trop de données, nous proposons une visualisation interactive avec carte thermique reliée à un nuage de points.
+
+Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différents algorithmes d’apprentissage artificiel, calculé avec le package `mlr3`.
 
 <!-- paragraph -->
 
