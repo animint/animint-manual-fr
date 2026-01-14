@@ -8,11 +8,11 @@ knitr::opts_chunk$set(fig.path="ch99-figures/")
 
 <!-- paragraph -->
 
-Cette annexe décrit plusieurs idiomes de programmation R qui sont utiles pour créer des animints.
+Cette annexe décrit plusieurs techniques de programmation R qui sont utiles pour créer des animints.
 
 <!-- paragraph -->
 
-## Facettes d'économie d'espace {#space-saving-facets}
+## Les facettes économes en espace {#space-saving-facets}
 
 <!-- paragraph -->
 
@@ -99,9 +99,9 @@ Toutefois, il peut y en avoir autant que nécessaire.
 <!-- comment -->
 Si vous n'effectuez que des opérations scalaires-scalaires dans votre boucle for interne, vous pouvez certainement améliorer les performances de votre code en supprimant cette boucle for et en réécrivant le calcul en termes d'opérations vectorielles-scalaires.
 <!-- comment -->
-- Les `paste` est utilisée pour assigner un `data.table` à un élément de liste nommé.
+- `paste()` est utilisée pour créer un nom pour le `data.table` dans la liste de résultats.
 <!-- comment -->
-Bien qu'en principe on puisse utiliser l'un ou l'autre des éléments suivants `data.frame` ou `data.table` mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
+En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
 <!-- comment -->
 - La dernière partie de l'idiome utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
 
@@ -146,7 +146,7 @@ Notez que `scales="free"` et `xlab("")` sont utilisés car les axes x ont mainte
 
 <!-- paragraph -->
 
-Colorier et remplir les légendes `ggplot2` peuvent être spécifiées manuellement par l'intermédiaire de `scale_color_manual` et `scale_fill_manual`.
+On peut utiliser `scale_color_manual()` et `scale_fill_manual()` pour préciser les couleurs dans les légendes pour `aes(color)` et `aes(fill)`.
 <!-- comment -->
 En règle générale, nous choisissons l'une des palettes ColorBrewer :
 
@@ -183,7 +183,7 @@ region.colors
 
 <!-- paragraph -->
 
-Nous pouvons ensuite l'utiliser avec `scale_color_manual`
+Nous pouvons ensuite l'utiliser avec `scale_color_manual()`.
 
 <!-- paragraph -->
 
