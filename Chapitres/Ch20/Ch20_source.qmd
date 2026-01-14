@@ -7,7 +7,7 @@ if(FALSE){
 }
 ```
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations qui compare la performance des algorithmes d’apprentissage artificiel, avec les packages de `mlr3`.
+Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel; nous utiliserons des packages `mlr3`.
 
 <!-- comment -->
 
