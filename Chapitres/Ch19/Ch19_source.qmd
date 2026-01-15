@@ -582,7 +582,7 @@ Add green dots with `showSelected="true_tile"` to `volcanoTiles` to show where t
 
 <!-- paragraph -->
 
-Next, [the appendix](/ch99) explains some R programming idioms that are generally useful for interactive data visualization design.
+Ensuite, dans le [chapitre 20](/ch19), nous expliquons la visualisation des résultats d’apprentissage artificiel avec le package `mlr3`.
 
 <!-- paragraph -->
 
