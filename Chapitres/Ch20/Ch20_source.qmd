@@ -19,7 +19,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 <!-- comment -->
 * Nous ajoutons l’interactivité aux courbes ROC, pour présenter plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
 <!-- comment -->
-* Nous visualisons des mesures de fidelité et d’erreur par rapport à l’ensemble de validation, pour vérifier si nous avons bien évité le surapprentissage et le sous-apprentissage.
+* Nous visualisons les mesures de fidélité et d’erreur par rapport à l’ensemble de validation, pour confirmer que le surapprentissage et le sous-apprentissage ont été évités.
 
 <!-- comment -->
 
@@ -41,13 +41,13 @@ Plusieurs packages R proposent des algorithmes d’apprentissage artificiel, par
 
 Pour obtenir de bons résultats de prédiction sur un jeu de données, nous entraînons plusieurs algorithmes, car nous ignorons quel algorithme aura les meilleures performances pour ces données.
 <!-- comment -->
-Alors nous voulons utiliser plusieurs différents packages, pour ensuite analyser les résultats ensemble, pour déterminer quel algorithme donne les meilleures prédictions.
+Nous utilisons donc différents packages et analysons ensuite les résultats pour déterminer quel algorithme fournit les meilleures prédictions.
 <!-- comment -->
 Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
 En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d'un package à l'autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
 <!-- comment -->
-Comment adapter chaque jeu de données pour chaque package ?
+Comment adapter un jeux de données à chaque package d’apprentissage ?
 <!-- comment -->
 Et comment convertir les prédictions de chaque package, pour avoir un type de sortie uniforme, qui permet la comparaison de résultats ?
 <!-- comment -->
