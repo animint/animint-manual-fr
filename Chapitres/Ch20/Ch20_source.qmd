@@ -1413,7 +1413,7 @@ Exercises :
 <!-- comment -->
 * Dans les légendes, les deux modèles lineaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pale et violet foncé).
 <!-- comment -->
-* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende consistente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
+* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
 * Dans `viz.torch.log`, rajoutez points pour souligner les meilleures époques, et une ligne verticale pour souligner l’époque choisie par la validation croisée.
 * Chaque section du chapitre a présenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
