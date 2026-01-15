@@ -1411,7 +1411,7 @@ Exercises :
 <!-- comment -->
   * Faites une visualisation qui affiche le meilleur taux de faux positifs, pour une sélection du taux de vrais positifs.
 <!-- comment -->
-* Dans les légendes, les deux modèles lineaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pale et violet foncé).
+* Dans les légendes, les deux modèles linéaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pâle et violet foncé).
 <!-- comment -->
 * Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
