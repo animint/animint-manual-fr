@@ -1405,7 +1405,7 @@ Exercises :
 <!-- comment -->
 * Le graphique `viz.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
-  * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire un jointure entre le nombre d’étiquettes, et les courbes ROC.
+  * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
 <!-- comment -->
   * Rajoutez un `geom_text()` qui affiche le taux séléctionné de faux positifs.
 <!-- comment -->
