@@ -17,7 +17,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 <!-- comment -->
 * Nous générons différents graphiques de taux d’erreur et d’aire sous la courbe ROC.
 <!-- comment -->
-* Nous rajoutons l’interactivité aux courbes ROC, pour montrer plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
+* Nous ajoutons l’interactivité aux courbes ROC, pour présenter plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
 <!-- comment -->
 * Nous visualisons des mesures de fidelité et d’erreur par rapport à l’ensemble de validation, pour vérifier si nous avons bien évité le surapprentissage et le sous-apprentissage.
 
@@ -27,37 +27,37 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 
 <!-- comment -->
 
-Il y a plusieurs packages R qui proposent des algorithmes d’apprentissage artificiel, par exemple :
+Plusieurs packages R proposent des algorithmes d’apprentissage artificiel, par exemple :
 
 <!-- comment -->
 
-* `library(kknn)` fournit K Plus Proches Voisins (KPPV), que nous avons exploré dans le [chapitre 10](/ch10).
+* `library(kknn)` offre des K Plus Proches Voisins (KPPV), présentés dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` fournit les modèles lineaires avec régularisation L1, commo le LASSO, que nous avons exploré dans le [chapitre 11](/ch11).
+* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le LASSO, que nous avons explorés dans le [chapitre 11](/ch11).
 <!-- comment -->
-* `library(torch)` fournit les réseaux des neurones, que nous avons exploré dans le [chapitre 18](/ch18).
+* `library(torch)` offre des réseaux des neurones, exposés dans le [chapitre 18](/ch18).
 
 <!-- comment -->
 
-Pour obtenir des bons résultats de prédiction sur un jeu de données, nous voulons typiquement entraîner plusieurs algorithmes différents, car nous ne savons pas quel algorithme aura les meilleures performances dans ces données.
+Pour obtenir de bons résultats de prédiction sur un jeu de données, nous entraînons plusieurs algorithmes, car nous ignorons quel algorithme aura les meilleures performances pour ces données.
 <!-- comment -->
 Alors nous voulons utiliser plusieurs différents packages, pour ensuite analyser les résultats ensemble, pour déterminer quel algorithme donne les meilleures prédictions.
 <!-- comment -->
 Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
-Typiquement chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent entre packages (`factor` pour classe, `matrix` pour probabilités de chaque classe, et cætera).
+En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d'un package à l'autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
 <!-- comment -->
 Comment adapter chaque jeu de données pour chaque package ?
 <!-- comment -->
 Et comment convertir les prédictions de chaque package, pour avoir un type de sortie uniforme, qui permet la comparaison de résultats ?
 <!-- comment -->
-Le package `mlr3` fournit plusieurs fonctions qui simplifient ce genre d’analyse, qu’on appelle « benchmark » [@bischl2024applied].
+Le package `mlr3` fournit plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
-* Chaque jeu de données est un `Task` qui rélie un tableau de données d’apprentissage avec quelques méta-données sur quelles colonnes seront utilisées pour différents rôles (entrée, sortie, et cætera).
+* Chaque jeu de données est représenté comme un `Task`, c'est-à-dire un tableau de données d’apprentissage accompagné de quelques métadonnées indiquant les colonnes à utiliser pour différents rôles (entrée, sortie, etc.).
 <!-- comment -->
-* Chaque algorithme d’apprentissage est un `Learner` qui fournit les prédictions avec type uniforme (matrice de probabilités pour chaque classe).
+* Chaque algorithme d’apprentissage est représenté comme une classe  `Learner` qui fournit les prédictions dans un type de sortie uniforme (une matrice de probabilités pour chaque classe).
 
 <!-- comment -->
 
