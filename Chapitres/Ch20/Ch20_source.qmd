@@ -63,7 +63,7 @@ Le package `mlr3` fournit plusieurs fonctions qui simplifient ce type d’analys
 
 Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
 <!-- comment -->
-Le code dans ce chapitre est une version modifiée du code qui fait des visualisations statiques [@Hocking2025-mlr3-cluster].
+Le code utilisé dans ce chapitre est une version modifiée d’un code pour la création des visualisations statiques [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
