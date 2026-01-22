@@ -1,8 +1,8 @@
-# Contenu et motivation
+# Contenu et contexte
 
 <!-- paragraph -->
 
-Ce manuel explique comment concevoir et créer les visualisations de données interactives avec le package R `animint2`.
+Dans ce manuel, nous expliquons comment planifier et créer des visualisations de données interactives avec le package R `animint2`.
 
 <!-- paragraph -->
 
@@ -10,47 +10,47 @@ Ce manuel explique comment concevoir et créer les visualisations de données in
 
 <!-- paragraph -->
 
-Les chapitres de ce manuel sont organisés comme suit.
+Ce manuel comporte trois volets que nous présentons dans les sections suivantes.
 
 <!-- paragraph -->
 
-### Les extensions `animint2`  à la grammaire des graphiques {#animint}
+### Extensions `animint2`  à la grammaire des graphiques {#animint}
 
 <!-- paragraph -->
 
-On devrait lire les sept premiers chapitres de manière séquentielle, car ils fournissent les bases pour la visualisation interactive des données avec `animint2`.
+Les sept premiers chapitres fournissent les bases de la visualisation interactive des données avec animint2 et vous devriez les lire dans l’ordre.
 
 <!-- paragraph -->
 
-A partir de la [section Motivation](#motivation) ci-dessous, ce premier chapitre donne un aperçu de l'analyse et de la visualisation de données.
+Dès la [section contexte](#contexte) ci-dessous, ce premier chapitre donne un aperçu de l’analyse et de la visualisation de données.
 <!-- comment -->
-Il fournit une motivation et une base théorique pour les autres chapitres, et devrait être particulièrement utile aux lecteurs qui sont complètement novices en matière d'analyse de données.
+Il apporte le contexte et la base théorique nécessaires à la compréhension des autres chapitres, ce qui sera particulièrement utile aux novices en matière d’analyse de données.
 <!-- comment -->
-Il présente la méthode de prototypage de visualisation des données à l'aide d'esquisses, sans introduire de code R.
+Il présente la méthode de prototypage de visualisation des données à l’aide d'esquisses, sans introduire de code R.
 
 <!-- paragraph -->
 
-En commençant par le [chapitre 2](ch02), nous montrerons comment les esquisses de graphiques peuvent être traduites en code R.
+À partir du [chapitre 2](ch02), nous démontrons comment traduire les esquisses de graphiques en code R.
 <!-- comment -->
-Le chapitre 2 explique les bases de la visualisation de données à l'aide de ggplots et `animint2`, et devrait être plus utile aux lecteurs qui n'ont jamais utilisé `ggplot2`.
+Ce chapitre présente les bases de la visualisation de données à l’aide de ggplots et de `animint2`, et sera une ressource précieuse pour les lecteurs qui n’ont jamais utilisé `ggplot2`.
 <!-- comment -->
-Il explique comment les ggplots standards peuvent être générés sur des pages web en utilisant `animint2`.
+Nous y expliquons comment générer des ggplots standards sur des pages web en utilisant `animint2`.
 
 <!-- paragraph -->
 
-Le [chapitre 3](ch03) introduit `showSelected`, l'un des deux principaux mots-clés que `animint2` introduit pour la conception de visualisation des données interactives.
+Le [chapitre 3](ch03) présente `showSelected`, l’un des deux principaux mots-clés introduits par `animint2`  pour la conception de visualisation des données interactives.
 <!-- comment -->
-Le chapitre 3 commence par expliquer les variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
+Ce chapitre s’ouvre sur une explication des variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
 <!-- comment -->
 Le chapitre 3 explique ensuite comment le mot-clé `showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
-Le chapitre 3 explique également comment utiliser des transitions graduelles et des animations.
+Nous expliquons également comment utiliser des transitions graduelles et des animations.
 
 <!-- paragraph -->
 
-Le [chapitre 4](ch04) introduit `clickSelects`, l'autre mot-clé principal que `animint2` introduit pour la conception de visualisation des données interactives.
+Le [chapitre 4](ch04) est consacré à  `clickSelects`, l'autre mot-clé important introduit par `animint2` pour la conception de visualisation des données interactives.
 <!-- comment -->
-Le mot-clé `clickSelects` permet à l'utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
+Le mot-clé `clickSelects` permet à l’utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
 
 <!-- paragraph -->
 
@@ -58,13 +58,13 @@ Le [chapitre 5](ch05) explique différentes façons de partager vos visualisatio
 
 <!-- paragraph -->
 
-Le [chapitre 6](ch06) couvre d'autres fonctionnalités de `animint2`, y compris la manière de spécifier des hyperliens, des info-bulles et toutes les autres nouvelles fonctionnalités qui n’existe pas dans les graphiques statiques de `ggplot2`.
+Le [chapitre 6](ch06) couvre d’autres fonctionnalités de `animint2`, y compris la manière de définir des hyperliens, des infobulles et toutes les autres nouvelles fonctionnalités qui n’existent pas dans les graphiques statiques de `ggplot2`.
 
 <!-- paragraph -->
 
-Le [chapitre 7](ch07) couvre les limites de l'implémentation actuelle du package R `animint2`, et explique des solutions de contournement pour certains problèmes courants.
+Le [chapitre 7](ch07) couvre les limites de l’implémentation actuelle du package R `animint2`, et propose des solutions de contournement pour certains problèmes courants.
 <!-- comment -->
-Il contient également quelques idées d'amélioration, pour ceux qui souhaiteraient contribuer au développement de `animint2`.
+De plus, il présente quelques idées d'amélioration, à l’intention de ceux qui souhaiteraient contribuer au développement de `animint2`.
 
 <!-- paragraph -->
 
