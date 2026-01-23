@@ -71,7 +71,7 @@ Le code utilisé dans ce chapitre est une version modifiée d’un code pour la 
 
 <!-- comment -->
 
-Dans `mlr3`, une comparaison « benchmark » comprend toutes les combinaisons de :
+Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes les combinaisons des éléments suivants :
 
 <!-- comment -->
 
