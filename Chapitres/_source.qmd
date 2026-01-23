@@ -130,15 +130,15 @@ Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différent
 
 <!-- paragraph -->
 
-[Expressions utiles](ch99) contient des explications détaillées sur plusieurs expressions idiomatiques du code R qui sont utilisées dans ce manuel.
+Le [Glossaire](ch99) contient l’explication détaillée de plusieurs expressions idiomatiques du code R utilisées dans ce manuel.
 
 <!-- paragraph -->
 
-[Le guide de contribution](contribute.html) contient des instructions sur la manière de contribuer à l'amélioration de ce manuel.
+Le [Guide de contribution](contribute.html) fournit des instructions sur la manière de contribuer à l'amélioration de ce manuel.
 
 <!-- paragraph -->
 
-## Motivation {#motivation}
+## Contexte {#contexte}
 
 <!-- paragraph -->
 
@@ -148,50 +148,50 @@ knitr::opts_chunk$set(fig.path="ch01-figures/")
 
 <!-- paragraph -->
 
-L'objectif de ce manuel est d'expliquer l'utilisation des éléments suivants `animint2`, un package R pour la visualisation interactive des données.
+L’objectif de ce manuel est d’expliquer l’utilisation des éléments suivants `animint2`, un package R pour la visualisation interactive des données.
 <!-- comment -->
-Ce chapitre d'introduction répond aux questions suivantes :
+Ce chapitre d’introduction répond aux questions suivantes :
 
 <!-- paragraph -->
 
-- Que sont les données et comment sont-elles analysées ?
+- Que sont les données et comment les analyser?
 <!-- comment -->
-- Qu'est-ce que la visualisation des données, et quand est-elle utile pour l'analyse des données ?
+- Qu’est-ce que la visualisation des données, et quand est-elle utile pour l’analyse des données?
 <!-- comment -->
-- Qu'est-ce que la visualisation des données interactive et quand est-elle utile ?
+- Qu’est-ce que la visualisation des données interactive et dans quelles situations est-elle utile?
 
 <!-- paragraph -->
 
-Ce chapitre introductif suit le plan suivant :
+La structure du chapitre est la suivante :
 
 <!-- paragraph -->
 
-- Qu'est-ce qu'une donnée ?
+- Qu’est-ce qu'une donnée?
 <!-- comment -->
-- Petites données -- la visualisation des données n'est pas nécessaire.
+- Petits ensembles de données -- la visualisation des données n’est pas nécessaire.
 <!-- comment -->
-- Données moyennes -- la visualisation statique des données est suffisante.
+- Moyens ensembles -- la visualisation statique des données est suffisante.
 <!-- comment -->
-- Grandes données - la visualisation interactive des données est utile.
+- Grands ensembles - la visualisation interactive est utile.
 
 <!-- paragraph -->
 
-### Qu'est-ce que l'analyse des données ?
+### Qu’est-ce que l’analyse des données?
 <!-- comment -->
 {#data}
 
 <!-- paragraph -->
 
-Les données sont des éléments d'information qui sont systématiquement enregistrés, soit sur papier, soit sur un ordinateur.
+Les données sont des éléments d'information enregistrés de manière systématique, que ce soit sur support papier ou informatique.
 <!-- comment -->
-Tout le monde peut créer des données, simplement en écrivant systématiquement des choses.
+Tout le monde peut créer des données, simplement en consignant méthodiquement des éléments.
 <!-- comment -->
-En général, les données sont créées pour répondre à une question spécifique et sont organisées en tableaux avec des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
+En général, les données sont créées pour répondre à une question précise et sont organisées en tableaux comportant des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
 <!-- comment -->
-D’après Larousse, « donnée » signifie « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée]. https://www.larousse.fr/dictionnaires/francais/donnée
-La représentation conventionelle pour `animint2` est un tableau, avec une ligne pour chaque observation, et une colonne pour chaque variable.
+D’après Larousse, « donnée » désigne la « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée]. https://www.larousse.fr/dictionnaires/francais/donnée
+Dans le cas de `animint2`, la représentation conventionnelle est un tableau, dans lequel chaque ligne correspond à une observation, et chaque colonne à une variable.
 <!-- comment -->
-Nous utilisons le terme "ensemble de données" pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
+Nous utilisons le terme « ensemble de données »  pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
 
 <!-- paragraph -->
 
@@ -199,34 +199,29 @@ Il existe de nombreux exemples de données qui pourraient être créées pour r�
 
 <!-- paragraph -->
 
-- Comment le temps qu'il fait cette année se compare-t-il à celui des années précédentes ?
+- Comment la météo de cette année se compare-t-elle à celle  des années précédentes?
 <!-- comment -->
-Y a-t-il eu plus ou moins de pluie que d'habitude ?
+La quantité de pluie est-elle supérieure ou inférieure à la normale? 
 <!-- comment -->
-Pour répondre à ces questions, nous pourrions créer un tableau de données avec des colonnes pour les mesures des différentes conditions météorologiques : température, précipitations, etc.
+Pour répondre à ces questions, nous pourrions créer un tableau de données avec des colonnes pour les mesures des différentes conditions météorologiques (température, précipitations, etc.), ainsi que des colonnes pour la date et l'heure de chaque observation, et une ligne pour chaque observation.
 <!-- comment -->
-Il devrait également y avoir des colonnes pour la date et l'heure de chaque observation, et une ligne pour chaque observation.
+- Quel est l'effet de mon régime alimentaire sur ma santé? 
 <!-- comment -->
-- Quel est l'effet de ce nouveau régime sur moi ?
+Si vous modifiez votre alimentation, vous pouvez noter ce que vous mangez et comment vous vous sentez après chaque repas dans un tableau de contingence comportant une ligne pour chaque repas et quatre colonnes (date, heure, aliments consommés, effets constatés). 
 <!-- comment -->
-Si vous essayez un nouveau régime, vous pouvez noter ce que vous mangez et comment vous vous sentez après chaque repas.
+- Ce nouveau traitement contre le cancer du poumon est-il plus efficace que l'ancien?
 <!-- comment -->
-Dans ce cas, vous pouvez créer un tableau de contingence avec une ligne pour chaque repas et quatre colonnes : la date, l'heure, ce que vous avez mangé et comment vous vous êtes senti après.
+Le médecin responsable d’un essai clinique répartit au hasard les patients en deux groupes : l’un recevant un nouveau traitement, l’autre l’ancien. 
 <!-- comment -->
-- Ce nouveau traitement contre le cancer du poumon est-il plus efficace que l'ancien ?
-<!-- comment -->
-Le médecin qui mène l'essai clinique répartit au hasard les patients entre le nouveau et l'ancien traitement.
-<!-- comment -->
-Le médecin créerait ensuite un tableau de données comportant une ligne pour chaque patient et plusieurs colonnes : nombre d'années de tabagisme du patient, type de traitement (nouveau ou ancien), âge du patient au moment du traitement, âge du patient au moment du décès, mesure des marqueurs tumoraux, etc.
+Le médecin créerait ensuite un tableau de données comportant une ligne pour chaque patient, et plusieurs colonnes : nombre d'années de tabagisme, type de traitement (nouveau ou ancien), âge au moment du traitement, âge au décès, mesure des marqueurs tumoraux, etc.
 
 <!-- paragraph -->
 
-Nous définissons l'"analyse des données" comme le processus consistant à répondre à ces questions en convertissant le tableau de données brut en d'autres formes plus compréhensibles.
+Nous définissons l’« analyse des données »  comme le processus visant à répondre à ces questions en convertissant le tableau de données brut en d'autres formes plus compréhensibles.
 <!-- comment -->
-Une catégorie très efficace de méthodes d'analyse des données est appelée "visualisation des données", qui cherche à fournir des réponses aux questions en convertissant un ensemble de données en une image informative.
+Parmi les méthodes d’analyse particulièrement efficaces figure la « visualisation des données », qui cherche à répondre aux questions en transposant un ensemble de données en une image informative. 
 <!-- comment -->
-Le terme "visualisation des données" fait référence à la fois à l'image elle-même (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation des données) et au processus de création de l'image.
-
+Le terme « visualisation des données » désigne à la fois l’image (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation de données) et le processus de création de l’image.
 <!-- paragraph -->
 
 Il existe de nombreuses façons différentes d'effectuer une analyse de données, et des ensembles de données de tailles différentes doivent être analysés à l'aide de techniques différentes.
