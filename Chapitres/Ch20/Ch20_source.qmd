@@ -186,9 +186,9 @@ knn_learner$param_set$values$k <- paradox::to_tune(1, 40)
 
 Le code ci-dessus précise les bornes pour `k`, le nombre de voisins, entre 1 et 40.
 <!-- comment -->
-Le code ci-dessous précise la méthode pour la séléction de `k`, soit recherche avec 10 valeurs, avec validation croisée à 3 divisions, maximisant l’aire sous la courbe ROC, soit en anglais « Area Under the Curve » ou « AUC ».
+Le code ci-dessous précise la méthode à utiliser pour la sélection de `k`, c'est-à-dire  une recherche avec 10 valeurs, avec validation croisée à 3 divisions, qui maximise l’aire sous la courbe ROC, (en anglais Area Under the Curve  ou AUC ).
 <!-- comment -->
-Rémarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
+Remarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
 ```{r}
 kfoldcv <- mlr3::rsmp("cv")
@@ -201,7 +201,7 @@ learner.list$knn <- mlr3tuning::auto_tuner(
   measure = mlr3::msr("classif.auc", minimize = FALSE))
 ```
 
-Ensuite, nous rajoutons deux algorithmes qui utilise `library(torch)`.
+Ensuite, nous rajoutons deux algorithmes qui utilisent `library(torch)`.
 <!-- comment -->
 On utilise une fonction qui renvoye une liste d’opérateurs qui sera utilisé pour définir l’algorithme.
 
