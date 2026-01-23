@@ -67,7 +67,7 @@ Le code utilisé dans ce chapitre est une version modifiée d’un code pour la 
 
 <!-- comment -->
 
-## Definition des données et algorithmes à comparer {#definition-comparaison}
+## Définition et exécution d'une analyse comparative {#exécution-comparaison}
 
 <!-- comment -->
 
