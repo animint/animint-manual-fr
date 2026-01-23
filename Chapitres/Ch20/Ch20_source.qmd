@@ -49,7 +49,7 @@ En général, chaque package contient une fonction `predict()` qui calcule les p
 <!-- comment -->
 Comment adapter un jeux de données à chaque package d’apprentissage ?
 <!-- comment -->
-Et comment convertir les prédictions de chaque package, pour avoir un type de sortie uniforme, qui permet la comparaison de résultats ?
+Comment uniformiser les types de sortie pour permettre la comparaison de résultats ?
 <!-- comment -->
 Le package `mlr3` fournit plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
 
