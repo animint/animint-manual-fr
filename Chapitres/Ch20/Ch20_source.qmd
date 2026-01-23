@@ -161,7 +161,7 @@ Le code ci-dessus produit une liste de 5 tâches de classification binaire :
 
 Dans cette section, nous définissons les algorithmes d’apprentissage à utiliser avec chaque jeu de données.
 <!-- comment -->
-Le code ci-dessous commence avec une liste de deux algorithmes :
+Le code ci-dessous commence par une liste de deux algorithmes :
 
 <!-- comment -->
 
