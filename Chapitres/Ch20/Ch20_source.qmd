@@ -51,7 +51,7 @@ Comment adapter un jeux de données à chaque package d’apprentissage ?
 <!-- comment -->
 Comment uniformiser les types de sortie pour permettre la comparaison de résultats ?
 <!-- comment -->
-Le package `mlr3` fournit plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
+Le package `mlr3` offre plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
