@@ -10,23 +10,23 @@ format:
 knitr::opts_chunk$set(fig.path="Ch02-figures/")
 ```
 
-Dans ce chapitre nous expliquons la grammaire des graphiques, un modèle puissant pour décrire une vaste gamme de visualisations de données.
+Dans ce chapitre, nous expliquons la grammaire des graphiques, un modèle puissant pour décrire une vaste gamme de visualisations de données.
 <!-- comment -->
-Après avoir lu ce chapitre, vous serez en mesure 
+Après avoir lu ce chapitre, vous serez en mesure :
 
 <!-- comment -->
 
-* De citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents de visualisation de données
+* de citer les avantages de la grammaire des graphiques par rapport aux systèmes précédents de visualisation de données;
 <!-- comment -->
-* D'installer le package R `animint2`
+* d’installer le package R `animint2`;
 <!-- comment -->
-* De traduire les esquisses de graphique en code ggplot dans R
+* de traduire les esquisses de graphique en code ggplot dans R;
 <!-- comment -->
-* D'afficher des ggplots sur des pages web en utilisant `animint2`
+* d’afficher des ggplots sur des pages web en utilisant `animint2`;
 <!-- comment -->
-* De créer des ggplots multicouches (avec plusieurs geoms)
+* de créer des ggplots multicouches (avec plusieurs geoms);
 <!-- comment -->
-* De créer des ggplots avec facettes
+* de créer des ggplots avec facettes.
 
 <!-- comment -->
 
@@ -34,53 +34,52 @@ Après avoir lu ce chapitre, vous serez en mesure
 
 <!-- comment -->
 
-La plupart des systèmes informatiques d'analyse de données offrent des fonctions de création de graphiques pour visualiser les tendances des données.
+La plupart des systèmes d’analyse de données offrent des outils de création de graphiques pour visualiser les tendances des données.
 <!-- comment -->
-Les systèmes les plus anciens proposent des fonctions très générales permettant de tracer les éléments de base d'un graphique, tels que des lignes et des points (par exemple, les packages `graphics` et `grid` dans R).
+Les systèmes les plus anciens proposent des fonctions très générales permettant de tracer les éléments de base d’un graphique, tels que des lignes et des points (par exemple, les packages `graphics` et `grid` dans R).
 <!-- comment -->
-Si vous utilisez l'un de ces systèmes généraux,  vous devez assembler vous-même les composants pour obtenir un graphique significatif et interprétable.
+Lorsqu’il recourt à l’un de ces systèmes généraux, l’utilisateur doit assembler lui-même les composantes pour obtenir un graphique significatif et interprétable.
 <!-- comment -->
-L'avantage des systèmes généraux réside dans le peu de limites imposées aux types de graphiques qui peuvent être créés.
+L’avantage de ces systèmes réside dans le peu de limites imposées aux types de graphiques qui peuvent être créés.
 <!-- comment -->
-Leur principal inconvénient est qu'ils  ne fournissent généralement pas de fonctions permettant d'automatiser les tâches courantes (axes, panneaux, légendes).
+Leur principal inconvénient est qu’ils ne fournissent généralement pas de fonctions pour automatiser les tâches courantes (axes, panneaux, légendes).
 
 <!-- comment -->
 
-Pour remédier aux inconvénients de ces systèmes de tracé généraux, des packages de visualisation tels que `lattice` ont été développés ([Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html)).
+Pour remédier aux inconvénients de ces systèmes, des packages de visualisation tels que `lattice` ont été développés ([Sarkar, 2008](http://lmdvr.r-forge.r-project.org/figures/figures.html)).
 <!-- comment -->
-Ils disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chaque type de graphique.
+Ils disposent de plusieurs types de graphiques prédéfinis et fournissent une fonction dédiée à la création de chacun d’eux.
 <!-- comment -->
-Par exemple, `lattice` fournit la fonction `bwplot` pour créer des diagrammes en boîte et des boîtes à moustaches.
+Par exemple, `lattice` offre la fonction `bwplot` pour concevoir des diagrammes en boîte et des boîtes à moustaches.
 <!-- comment -->
-L'avantage de ces systèmes est qu'ils facilitent grandement la création de  graphiques complets avec légendes et  panneaux.
+L’avantage de ces systèmes est qu’ils facilitent grandement la création de graphiques complets avec légendes et panneaux.
 <!-- comment -->
-Par contre, ils ont l'inconvénient d'offrir un ensemble de types de graphiques prédéfinis, ce qui fait qu'il n'est pas facile de créer des graphiques plus complexes.
-
+Par contre, ils proposent un ensemble de modèles de graphiques prédéfinis, ce qui complique la création de graphiques plus complexes.
 <!-- comment -->
 
 Les nouveaux systèmes basés sur la grammaire des graphiques se situent entre ces deux extrêmes.
 <!-- comment -->
-Ensuite, Leland Wilkinson propose la grammaire des graphiques pour décrire et  créer un grand éventail de graphiques ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
+Leland Wilkinson  a proposé la grammaire des graphiques pour décrire et créer un grand éventail de graphiques ([Wilkinson, 2005](http://www.springer.com/us/book/9780387245447?wt_mc=GoogleBooks.GoogleBooks.3.EN&token=gbgen#otherversion=9780387286952)).
 <!-- comment -->
 Hadley Wickham implémente ultérieurement plusieurs idées de la grammaire des graphiques dans le package R `ggplot2` ([Wickham, 2009](https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20)).
 <!-- comment -->
-Le package `ggplot2` présente plusieurs avantages par rapport aux systèmes précédents.
+Le package `ggplot2` présente plusieurs avantages par rapport aux systèmes précédents :
 
 <!-- comment -->
 
-* Comme les systèmes généraux, et contrairement à `lattice`, `ggplot2` impose peu de limites aux types de graphiques qui peuvent être créés (il n'y a pas de types de graphiques prédéfinis).
+* Comme les systèmes généraux, et contrairement à `lattice`, `ggplot2` impose peu de limites aux types de graphiques qui peuvent être créés (il n’y a pas de types de graphiques prédéfinis).
 <!-- comment -->
-* Contrairement aux systèmes généraux, et à l'instar de `lattice`, `ggplot2` permet d'inclure facilement des éléments de graphique courants tels que des axes, des panneaux et des légendes.
+* Contrairement aux systèmes généraux, et à l’instar de `lattice`, `ggplot2` permet d’inclure facilement des éléments de graphique courants, tels que des axes, des panneaux et des légendes.
 <!-- comment -->
-* Puisque `ggplot2` est basé sur la grammaire des graphiques, il est nécessaire de mapper explicitement les variables de données aux propriétés visuelles. Plus loin dans ce chapitre, nous expliquerons comment ce mappage permet la création d'esquisses qui peuvent être directement traduites en code R.
+* Puisque `ggplot2` est basé sur la grammaire des graphiques, il est nécessaire de mapper explicitement les variables de données aux propriétés visuelles. Plus loin dans ce chapitre, nous expliquerons comment ce mappage permet la création d’esquisses qui peuvent être directement traduites en code R.
 
 <!-- comment -->
 
-Enfin, tous les systèmes évoqués précédemment sont destinés à la création de graphiques statiques, qui peuvent être visualisés aussi bien sur un écran d'ordinateur que sur du papier.
+Enfin, tous les systèmes évoqués précédemment sont destinés à la création de graphiques statiques, qui peuvent être visualisés aussi bien sur un écran d’ordinateur que sur du papier.
 <!-- comment -->
 Cependant, le sujet principal de ce manuel est `animint2`, un package R pour les graphiques interactifs.
 <!-- comment -->
-Contrairement aux graphiques statiques, les graphiques interactifs sont conçus pour être visualisés sur un ordinateur équipé d'une souris et d'un clavier pour interagir avec le graphique.
+Contrairement aux graphiques statiques, les graphiques interactifs sont conçus pour être visualisés sur un ordinateur équipé d’une souris et d’un clavier pour interagir avec le graphique.
 <!-- comment -->
 Étant donné que de nombreux concepts des graphiques statiques sont également utiles dans les graphiques interactifs, le package `animint2` est implémenté en tant que fork du package `ggplot2`.
 <!-- comment -->
@@ -96,17 +95,17 @@ ce qui a conduit en 2018, à la création du package `animint2` qui copie les pa
 <!-- comment -->
 Désormais, `animint2` peut être utilisé sans que `ggplot2` soit installé.
 <!-- comment -->
-Il est en fait conseillé d'utiliser `library(animint2)` sans utiliser `library(ggplot2)`.
+Il est en fait conseillé d’utiliser `library(animint2)` sans utiliser `library(ggplot2)`.
 <!-- comment -->
-On peut cependant utiliser `animint2` avec des packages qui importent `ggplot2` (sans l'attacher).
+On peut cependant utiliser `animint2` avec des packages qui importent `ggplot2` (sans l’attacher).
 <!-- comment -->
-À titre d'exemple, voir le [Chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (lequel importe `ggplot2`).
+À titre d’exemple, voir le [chapitre 16](Ch16-change-point.html) qui utilise le package `penaltyLearning` (lequel importe `ggplot2`).
 
 ## Installer et attacher animint2 {#installing}
 
 <!-- comment -->
 
-Pour installer la dernière version d' `animint2` à partir du dépôt CRAN,
+Pour installer la dernière version de `animint2` à partir du dépôt CRAN :
 
 <!-- comment -->
 
@@ -116,7 +115,7 @@ if(!requireNamespace("animint2"))install.packages("animint2")
 
 <!-- comment -->
 
-Pour installer une version de développement encore plus récente d' `animint2` depuis GitHub,
+Pour installer une version de développement encore plus récente de `animint2` depuis GitHub :
 
 <!-- comment -->
 
@@ -144,13 +143,13 @@ library(animint2)
 <!-- comment -->
 
 Dans cette section, nous expliquons comment traduire une esquisse de graphique en code R.
-Dans ce livre, nous utilisons le mot « esquisse » dans le sens « Première forme, traitée à grands traits et généralement en dimensions réduites, de l'œuvre projetée » ([Larousse](https://www.larousse.fr/dictionnaires/francais/esquisse/31075)).
-Nous allons souvent présenter une esquisse, dessinée à la main, pour donner l'idée du graphique qu'on veut créer, avant d'écrire le code nécessaire.
-Chaque esquisse va comporter certains éléments qui nous permettra de facilement écrire le code correspondant.
-Avant d'écrire le code R pour un graphique que vous voulez créer, nous vous encourageons de faire vos propres esquisses à la main, soit dans un cahier, soit sur un tableau.
+Dans ce manuel, nous utilisons le mot « esquisse » dans le sens de « Première forme, traitée à grands traits et généralement en dimensions réduites, de l’œuvre projetée » ([Larousse](https://www.larousse.fr/dictionnaires/francais/esquisse/31075)).
+Nous vous présenterons souvent l’esquisse dessinée à la main du graphique à créer, avant d’écrire le code nécessaire.
+Chaque esquisse comportera certains éléments qui nous permettront d’écrire facilement le code correspondant.
+Nous vous encourageons à faire vos propres esquisses  dans un cahier ou sur un tableau avant d’écrire le code du graphique que vous voulez créer. 
 <!-- comment -->
-Nous utilisons comme exemple un ensemble de données de la Banque mondiale.
-Commençons par charger et examiner les noms des colonnes.
+Pour notre exemple, nous utilisons un ensemble de données de la Banque mondiale. 
+Commençons par charger et examiner le nom des colonnes.
 
 <!-- comment -->
 
@@ -165,9 +164,9 @@ names(BanqueMondiale)
 
 On voit 24 noms ci-dessus.
 <!-- comment -->
-Le jeu de données `BanqueMondiale` comprend des mesures telles que le taux de fertilité et l'espérance de vie pour chaque pays sur la période 1960-2010.
+Le jeu de données `BanqueMondiale` comprend des mesures telles que le taux de fertilité et l’espérance de vie pour chaque pays pour la période 1960-2010.
 <!-- comment -->
-Pour simplifier les sorties ci-dessous, nous considérons seulement le sous-ensemble pertinant pour les visualisations :
+Pour simplifier les sorties ci-dessous, nous considérons seulement le sous-ensemble pertinent pour les visualisations :
 
 
 ```{r}
@@ -184,11 +183,11 @@ dim(banque_mondiale)
 
 Le code ci-dessus imprime les dernières lignes, ainsi que les dimensions (lignes `r nrow(banque_mondiale)` et colonnes `r ncol(banque_mondiale)`) du tableau de données.
 <!-- comment -->
-Supposons que nous voulions voir s'il existe une relation entre l'espérance de vie et le taux de fertilité.
+Supposons que nous voulions voir s’il existe une relation entre l’espérance de vie et le taux de fertilité.
 <!-- comment -->
 Nous pourrions fixer une année, puis utiliser ces deux variables de données dans un nuage de points.
 <!-- comment -->
-L'esquisse ci-dessous contient les principaux éléments de cette visualisation de données.
+L’esquisse ci-dessous contient les principaux éléments de cette visualisation de données :
 
 <!-- comment -->
 
@@ -196,13 +195,13 @@ L'esquisse ci-dessous contient les principaux éléments de cette visualisation 
 
 <!-- comment -->
 
-L'esquisse ci-dessus montre l'espérance de vie sur l'axe horizontal (`x`), le taux de fertilité sur l'axe vertical (`y`) et une légende pour la région.
+L’esquisse ci-dessus montre l’espérance de vie sur l’axe horizontal (`x`), le taux de fertilité sur l’axe vertical (`y`) et une légende pour la région.
 <!-- comment -->
-Ces éléments de l'esquisse peuvent être directement traduits en code R à l'aide de la méthode suivante.
+Ces éléments de l’esquisse peuvent être directement traduits en code R à l’aide de la méthode suivante.
 <!-- comment -->
-Tout d'abord, nous devons construire un tableau de données comportant une ligne par pays pour l'année 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
+Tout d’abord, nous devons construire un tableau de données comportant une ligne par pays pour l’année 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 <!-- comment -->
-Le jeu de données `banque_mondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour l'année 1975 :
+Le jeu de données `banque_mondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour 1975 :
 
 <!-- comment -->
 
@@ -215,7 +214,7 @@ tail(banque_mondiale_1975)
 
 Le code ci-dessus imprime les dernières lignes en 1975, une ligne par pays.
 <!-- comment -->
-L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggplot avec `aes()` qui fait correspondence entre variables et propriétés visuelles :
+L’étape suivante consiste à utiliser les notes de l’esquisse pour coder un ggplot avec `aes()` qui établit la correspondance entre variables et propriétés visuelles :
 
 <!-- comment -->
 
@@ -228,21 +227,21 @@ L'étape suivante consiste à utiliser les notes de l'esquisse pour coder un ggp
 
 <!-- comment -->
 
-La fonction `aes()` est appelée avec les noms des propriétés visuelles (`x`, `y`, `color`) et les valeurs des variables de données correspondantes (`espérance.de.vie`, `taux.de.fertilité`, `région`)
+La fonction `aes()` est appelée avec les noms des propriétés visuelles (`x`, `y`, `color`) et les valeurs des variables de données correspondantes (`espérance.de.vie`, `taux.de.fertilité`, `région`).
 <!-- comment -->
 Cette correspondance est appliquée aux variables du tableau de données `banque_mondiale_1975`, afin de créer les propriétés du `geom_point`.
 <!-- comment -->
-Le ggplot a été sauvegardé dans une variable nommée `nuage_de_points` qui, lorsqu'imprimé sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
+Le ggplot a été sauvegardé dans une variable nommée `nuage_de_points` qui, lorsqu’imprimée sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
 <!-- comment -->
 Notez que nous avons automatiquement une légende `région` en couleur.
 
-## Afficher des ggplots sur des pages web à l'aide d'animint {#rendering-with-animint}
+## Afficher des ggplots sur des pages web à l'aide de animint {#rendering-with-animint}
 
 <!-- comment -->
 
 Cette section explique comment `animint2` peut être utilisé pour afficher des ggplots sur des pages web.
 <!-- comment -->
-Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint`
+Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint` :
 
 <!-- comment -->
 
@@ -250,32 +249,32 @@ Le ggplot de la section précédente peut être affiché avec `animint2`, en uti
 animint(nuage_de_points)
 ```
 
-Lorsqu'il est visualisé dans un navigateur web, le graphique devrait paraître semblable aux versions statiques produites par les périphériques graphiques R standard,
+Lorsqu’on le visualise dans un navigateur web, le graphique ressemble aux versions statiques produites par les périphériques graphiques R standard,
 <!-- comment -->
-à la différence que la légende est interactive : en cliquant sur la légende, les points de cette couleur sont cachés ou affichés.
+sauf pour la légende, qui est interactive : en cliquant sur celle-ci, les points de cette couleur sont cachés ou affichés.
 <!-- comment -->
-A l'interne, la fonction `animint()` crée une liste de classe `"animint"`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
-La fonction `animint2dir()` est appellé pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) qui peuvent être affichés dans un navigateur web.
+À l’interne, la fonction `animint()` crée une liste de classe `animint`, puis R exécute la fonction `print.animint()` grâce au [système d'objets S3](http://adv-r.had.co.nz/OO-essentials.html#s3).
+La fonction `animint2dir()` est appelée pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) affichables dans un navigateur web.
 <!-- comment -->
-Dans RStudio, vous devrait voir le graphique afficher sous l'onglet « Visualiseur ».
-Vous pouvez configurer le navigateur d'affichage avec l'option `browser`, par exemple : `options(browser="firefox")`.
+Dans RStudio, vous devriez voir le graphique s’afficher sous l'onglet « visualiseur ».
+Vous pouvez configurer le navigateur d’affichage avec l’option `browser`, par exemple : `options(browser="firefox")`.
 <!-- comment -->
-Lors de l'exécution du code ci-dessus, si l'animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple si vous voyez une page web vierge), veuillez consulter notre [FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank) qui vous aidera à trouver une solution.
+Lors de l'exécution du code ci-dessus, si l’animint ne s'affiche pas dans votre navigateur web pour une raison quelconque (par exemple, si vous voyez une page web vierge), veuillez consulter notre [FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank). 
 
 <!-- comment -->
 
-**Exercices**: essayez de modifier le contenu du `aes()` du ggplot, puis de créer une nouvelle visualisation.
+**Exercices**: modification du contenu du `aes()` du ggplot, puis création d’une nouvelle visualisation.
 
-* Essayez d'utiliser la variable qualitative `revenu` dans `aes(color)` ou `aes(fill)`, et vous allez voir une légende interactive.
-* Essayez `population` et `log10(population)` sur `x` ou `y`, et vous allez voir que la transformation logarithmique marche bien pour cette variable (`population` varie entre plusieurs ordres de grandeur).
-* Essayer `aes(size=log10(population))` et vous allez voir une légende quantitative, qui n'est pas interactive.
-* Pour avoir une légende interactive pour `population`, il faudra discretiser. Créez une nouvelle variable discrète `log10pop` avec définition `paste(round(log10(population)))`. Si vous utilisez `aes(size=log10pop)` vous allez voir une légende qualitative, qui est interactive.
+* Essayez d’utiliser la variable qualitative `revenu` dans `aes(color)` ou `aes(fill)`pour obtenir une légende interactive.
+* Essayez `population` et `log10(population)` sur `x` ou `y`, vous verrez que la transformation logarithmique fonctionne bien pour cette variable (`population` varie de plusieurs ordres de grandeur).
+* Essayez `aes(size=log10(population))`; vous obtiendrez une légende quantitative, qui ne sera pas interactive.
+* Pour avoir une légende interactive pour `population`, il faudra discrétiser la variable. Créez une nouvelle variable discrète `log10pop` avec définition `paste(round(log10(population)))`. Si vous utilisez `aes(size=log10pop)` vous verrez une légende qualitative interactive.
 
 ## Graphiques multicouches (plusieurs geoms) {#multi-layer}
 
 <!-- comment -->
 
-Dans les ggplots, nous utilisons le mot « couche » comme synonym de « geom » comme `geom_point` que nous avons utilisé ci-dessus.
+Dans ggplot, nous utilisons le mot « couche » comme synonyme de « geom » par exemple `geom_point` que nous avons utilisé ci-dessus.
 Il existe d'autres geoms comme `geom_line` et `geom_path` qu'on peut utiliser pour dessiner les courbes.
 On appelle un graphique « multicouche » quand on utilise plusieurs geoms dans le même graphique, dessinés les uns sur les autres.
 Un graphique multicouche est utile lorsque vous souhaitez afficher plusieurs geoms ou ensembles de données différents dans le même graphique.
