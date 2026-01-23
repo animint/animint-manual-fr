@@ -145,13 +145,13 @@ Le code ci-dessus produit une liste de 5 tâches de classification binaire :
 
 * `spam` représente une classification de courriels (`spam` étant un pourriel et `nonspam`  un courriel légitime) à partir d’un vecteur de comptage de mots « bag of words ».
 <!-- comment -->
-* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente la classification de métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
+* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente une classification entre métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
 <!-- comment -->
-* `vowel` représente la classification des sons voyelles, à partir de dix variables calculées depuis un fichier audio.
+* `vowel` représente une classification du son des voyelles, à partir de dix variables calculées depuis un fichier audio.
 <!-- comment -->
 * `waveform` est un jeu de données de simulation [@Hastie2009].
 <!-- comment -->
-* `zip` représente la classification de chiffres écrits à la main, à partir d’une image de 16x16 pixels, en échelle de gris.
+* `zip` représente une classification de chiffres manuscrits, à partir d’une image de 16x16 pixels, en échelle de gris.
 
 <!-- comment -->
 
