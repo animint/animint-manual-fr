@@ -23,7 +23,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la per
 
 <!-- comment -->
 
-## Motivation pour `mlr3` {#motivation-mlr3}
+## Avantages de `mlr3` {#avantages-mlr3}
 
 <!-- comment -->
 
