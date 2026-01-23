@@ -267,8 +267,8 @@ TeaTasting <- matrix(c(
   3, 1, 1, 3),
   nrow = 2,
   dimnames = list(
-    Choix de la dame = c("Lait-thé", "Thé-lait"),
-    Ordre réel = c("Lait-thé", "Thé-lait")))
+    "Choix de la dame" = c("Lait-thé", "Thé-lait"),
+    "Ordre réel" = c("Lait-thé", "Thé-lait")))
 print(TeaTasting)
 ```
 
