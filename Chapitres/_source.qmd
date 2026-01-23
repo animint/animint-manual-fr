@@ -224,46 +224,41 @@ Parmi les méthodes d’analyse particulièrement efficaces figure la « visuali
 Le terme « visualisation des données » désigne à la fois l’image (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation de données) et le processus de création de l’image.
 <!-- paragraph -->
 
-Il existe de nombreuses façons différentes d'effectuer une analyse de données, et des ensembles de données de tailles différentes doivent être analysés à l'aide de techniques différentes.
+Il existe de nombreuses façons différentes d'effectuer une analyse de données, et différentes techniques sont nécessaires selon la taille des ensembles de données. 
 <!-- comment -->
-Il existe de nombreuses façons de caractériser la taille des ensembles de données, et chaque auteur utilise une définition légèrement différente.
+Bien que les définitions varient d’un auteur à l’autre, nous adopterons dans ce manuel une classification en trois catégories : petits, moyens et grands ensembles de données.
 <!-- comment -->
-Dans ce manuel, nous utiliserons une classification des ensembles de données en trois tailles :
-petit, moyen et grand.
-<!-- comment -->
-Nous commençons par discuter des petits ensembles de données, pour lesquels la visualisation des données n'est pas nécessaire.
+Nous discutons d’abord des petits ensembles de données, pour lesquels la visualisation n’est pas nécessaire.
 
 <!-- paragraph -->
 
-### Analyse de petits ensembles de données sans visualisation {#small-data}
+### Analyse des petits ensembles de données sans visualisation {#small-data}
 
 <!-- paragraph -->
 
-Dans cette section, nous aborderons les "petites données", qui sont suffisamment petites pour que l'analyse des données puisse être effectuée en examinant simplement l'ensemble du tableau de données.
+Dans cette section, nous aborderons les « petits ensembles de données » dont la taille restreinte permet une analyse par simple examen du tableau de données.
 <!-- comment -->
-Pour les petits ensembles de données, il n'est pas nécessaire d'utiliser la visualisation des données.
-<!-- comment -->
-Au lieu de cela, les données peuvent simplement être présentées pour une visualisation des données dans un tableau.
+Pour ces ensembles, la visualisation graphique n’est pas nécessaire : la présentation sous forme de tableau est suffisante.
 
 <!-- paragraph -->
 
-Prenons un exemple concret [la célèbre expérience de dégustation de thé proposée par Ronald Fisher](https://en.wikipedia.org/wiki/Lady_tasting_tea).
+Prenons l’exemple de la célèbre [expérience de dégustation du thé  ](https://fr.wikipedia.org/wiki/The_lady_tasting_tea) conçue par Ronald Fisher.
 <!-- comment -->
-Une dame a affirmé qu'elle pouvait sentir la différence lorsque du lait est ajouté dans la tasse de thé avant ou après le thé.
+Une dame a affirmé pouvoir détecter si le lait d’une tasse de thé avait été ajouté avant ou après le thé.
 <!-- comment -->
-Fisher pose la question suivante : la dame peut-elle vraiment sentir la différence entre les deux types de thé ?
+Fisher s’est posé la question suivante : la dame peut-elle vraiment distinguer les deux types de préparation?
 
 <!-- paragraph -->
 
-Pour répondre à cette question, Fisher a préparé quatre tasses de thé avec du lait ajouté après, et quatre tasses de thé avec du lait ajouté avant.
+Pour répondre à cette question, Fisher a préparé huit tasses : quatre avec du lait ajouté après le thé, et quatre avec du lait ajouté avant.
 <!-- comment -->
-Fisher a ensuite placé les tasses dans un ordre aléatoire, a fait goûter les huit tasses de thé à la dame et lui a demandé d'identifier les quatre tasses dans lesquelles du lait avait été ajouté après le thé.
+Il les a ensuite fait goûter à la dame dans un ordre aléatoire en lui demandant d’identifier celles dans lesquelles le lait avait été ajouté après le thé.
 <!-- comment -->
-Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses dans lesquelles du lait a été ajouté après le thé.
+Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses.
 <!-- comment -->
-Fisher a ensuite noté les données suivantes : le nombre total de tasses (8), le nombre total de tasses dans lesquelles du lait a été ajouté (4) et le nombre total de tasses que la dame a correctement identifiées (3).
+Fisher a ensuite consigné les données suivantes : le nombre total de tasses (8), le nombre de tasses dans lesquelles du lait a été ajouté (4) et le nombre de tasses correctement identifiées (3).
 <!-- comment -->
-Dans R, cet ensemble de données peut être visualisé en imprimant un tableau de contingence des données de comptage :
+Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage :
 
 <!-- paragraph -->
 
@@ -272,24 +267,24 @@ TeaTasting <- matrix(c(
   3, 1, 1, 3),
   nrow = 2,
   dimnames = list(
-    Guess = c("Lait", "Thé"),
-    Truth = c("Lait", "Thé")))
+    Choix de la dame = c("Lait-thé", "Thé-lait"),
+    Ordre réel = c("Lait-thé", "Thé-lait")))
 print(TeaTasting)
 ```
 
 <!-- paragraph -->
 
-Dans ce cas, l'ensemble de données est suffisamment petit pour que l'on puisse répondre à la question de Fisher en examinant simplement le tableau de données lui-même.
+Dans ce cas, l’ensemble de données est suffisamment petit pour que l’on puisse répondre à la question de Fisher en examinant simplement le tableau de données lui-même.
 <!-- comment -->
-Si la dame avait pu identifier correctement les quatre coupes, elle aurait fait une démonstration très convaincante de ses capacités.
+Si la dame avait identifié correctement les quatre tasses, la démonstration de ses capacités aurait été très convaincante.
 <!-- comment -->
-Cependant, elle n'a apparemment pu identifier correctement que trois des quatre coupes, ce qui est moins convaincant.
+Cependant, elle n’a réussi que dans trois cas sur quatre, ce qui est moins concluant.
 
 <!-- paragraph -->
 
-Le sujet principal de ce manuel est la visualisation des données, ce qui n'est pas nécessaire pour des ensembles de données aussi petits.
+Le sujet principal de ce manuel est la visualisation des données, et elle n’est pas nécessaire pour des ensembles de données aussi petits.
 <!-- comment -->
-Nous nous concentrerons plutôt sur les ensembles de données trop volumineux pour être analysés par une visualisation manuelle du tableau de données.
+Concentrons-nous plutôt sur les ensembles de données trop volumineux pour être analysés par examen visuel direct du tableau de données.
 
 <!-- paragraph -->
 
