@@ -79,7 +79,7 @@ Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes le
 <!-- comment -->
 * une liste d’algorithmes d’apprentissage (`Learners`);
 <!-- comment -->
-* et toutes les itérations d’une méthode d’échantillonage (`Resampling`).
+* toutes les itérations d’une méthode de rééchantillonnage (`Resampling`).
 
 <!-- comment -->
 
