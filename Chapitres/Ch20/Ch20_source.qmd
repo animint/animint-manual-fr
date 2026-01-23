@@ -75,7 +75,7 @@ Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes le
 
 <!-- comment -->
 
-* une liste de jeux de données (`Tasks`),
+* une liste de jeux de données (`Tasks`);
 <!-- comment -->
 * une liste d’algorithmes d’apprentissage (`Learners`),
 <!-- comment -->
