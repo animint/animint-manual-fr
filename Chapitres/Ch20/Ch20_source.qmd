@@ -87,7 +87,7 @@ Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes le
 
 <!-- comment -->
 
-Nous commençons avec une liste de deux jeux de données.
+Nous utilisons d'abord une liste de deux jeux de données.
 
 ```{r}
 mlr.tasks <- c("spam","sonar")
@@ -111,8 +111,8 @@ cache.fread <- function(data.name, f){
 }
 ```
 
-Ensuite, nous faisons un boucle pour télécharger trois jeux de données.
-Pour chacun, on rajoute un `Task` de classification binaire (avec seulement les deux premières classes).
+Puis, nous créons une boucle pour télécharger trois jeux de données.
+On ajoute à chacun un `Task` de classification binaire (avec seulement les deux premières classes).
 
 ```r
 data.sets <- c("vowel","waveform","zip")
@@ -139,11 +139,11 @@ for(data.name in data.sets){
 task_list
 ```
 
-Le résultat ci-dessus est une liste représentant 5 problèmes de classification binaire :
+Le code ci-dessus produit une liste de 5 tâches de classification binaire :
 
 <!-- comment -->
 
-* `spam` représente la classification des courriels (`spam` est pourriel non-désiré, `nonspam` est courriel désiré) à partir d’un vecteur de comtages de mots « bag of words ».
+* `spam` représente une classification de courriels (`spam` étant un pourriel et `nonspam`  un courriel légitime) à partir d’un vecteur de comptage de mots « bag of words ».
 <!-- comment -->
 * [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente la classification de métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
 <!-- comment -->
