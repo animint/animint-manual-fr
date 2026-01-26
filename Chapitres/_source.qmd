@@ -72,57 +72,55 @@ De plus, il présente quelques idées d'amélioration, à l’intention de ceux 
 
 <!-- paragraph -->
 
-Les chapitres restants peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
+L’ordre de lecture des chapitres suivants n’est pas important, puisqu’ils expliquent comment réaliser des visualisations de données pour un ensemble de données ou à un algorithme statistique particulier. Chaque chapitre est associé à un modèle ou un algorithme, comme indiqué ci-dessous :
 
 <!-- paragraph -->
 
-Le [chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
+[Chapitre 8](ch08) : des données de la Banque mondiale (visualisation multipanneaux).
 
 <!-- paragraph -->
 
-Le [chapitre 9](ch09) présente une visualisation des données provenant de cyclistes de Montréal.
+[Chapitre 9](ch09) : des données provenant de cyclistes de Montréal.
+<!-- paragraph -->
+
+[Chapitre 10](ch10) : des données sur les plus proches voisins tirées du livre Elements of Statistical Learning (Hastie, Tibshirani, et Friedman, 2009) [@Hastie2009].
 
 <!-- paragraph -->
 
-Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre Elements of Statistical Learning [@Hastie2009].
+[Chapitre 11](ch11) : le Lasso, un modèle d’apprentissage automatique pour la régression régularisée.
 
 <!-- paragraph -->
 
-Le [chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
+[Chapitre 12](ch12) : le séparateur à vaste marge (aussi connu sous le nom de « machine à vecteurs de support » ou SVM), un modèle d’apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
-Le [chapitre 12](ch12) présente une visualisation des données qui explique la séparateur à vaste marge (aussi connu sous le nom « machine à vecteurs de support » ou SVM), un modèle d'apprentissage automatique pour la classification binaire.
+[Chapitre 13](ch13) : le modèle de régression de Poisson.
+<!-- paragraph -->
+
+[Chapitre 14](ch14) : une visualisation avec de nombreux sélecteurs, à l’aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive appliquée à un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
-Le [chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
+[Chapitre 15](ch15) : l’algorithme de recherche de racines « root-finding » de Newton.
 
 <!-- paragraph -->
 
-Le [chapitre 14](ch14) montre un exemple de création d’une visualisation avec nombreux sélecteurs, à l'aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive d'un modèle pour la détection de pics.
+[Chapitre 16](ch16) : un modèle de détection de ruptures dans les données séquentielles.
 
 <!-- paragraph -->
 
-Le [chapitre 15](ch15) explique comment créer une visualisation interactive de l'algorithme de recherche de racines « root-finding » de Newton.
+[Chapitre 17](ch17) : l’algorithme d’agrégation « clustering », k-moyennes.
 
 <!-- paragraph -->
 
-Le [chapitre 16](ch16) explique comment créer une visualisation interactive d'un modèle de détection de ruptures dans les données séquentielles.
+[Chapitre 18](ch18) : l’algorithme de descente de gradient pour l’apprentissage d’un réseau de neurones.
 
 <!-- paragraph -->
 
-Le [chapitre 17](ch17) explique comment créer une visualisation interactive de l'algorithme d'agrégation « clustering », k-moyennes.
+[Chapitre 19](ch19) : une visualisation de valeurs p avec carte thermique reliée à un nuage de points pour éviter l’occlusion causée par un trop grand nombre de données. 
 
-<!-- paragraph -->
-
-Le [chapitre 18](ch18) explique comment créer une visualisation interactive de l'algorithme de descente de gradient pour l'apprentissage d'un réseau de neurones.
-
-<!-- paragraph -->
-
-Le [chapitre 19](ch19) explique la visualisation des valeurs-p. Pour éviter l’occlusion dans un nuage de points avec trop de données, nous proposons une visualisation interactive avec carte thermique reliée à un nuage de points.
-
-Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différents algorithmes d’apprentissage artificiel, calculé avec le package `mlr3`.
+[Chapitre 20](ch20) : une comparaison de différents algorithmes d’apprentissage artificiel, calculée avec le package mlr3.
 
 <!-- paragraph -->
 
