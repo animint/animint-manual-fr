@@ -9,25 +9,25 @@ knitr::opts_chunk$set(fig.path="ch04-figures/")
 
 Dans ce chapitre, nous expliquons `clickSelects`, l'un des deux principaux mots-clés qu'`animint2` propose pour la visualisation interactive de données.
 <!-- comment -->
-Le mot-clé `clickSelects` précise quelle variable de séléction sera mise à jour quand on clique sur le geom correspondant.
+Le mot-clé `clickSelects` précise quelle variable de séléction sera mise à jour lorsqu'on clique sur le geom correspondant.
 <!-- comment -->
-Chaque geom d'une visualisation de données possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
+Chaque geom d'une visualisation possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
 <!-- comment -->
 Ainsi, en cliquant sur différents geoms, on peut modifier différentes variables de sélection.
 
 <!-- paragraph -->
 
-Après avoir lu ce chapitre, vous serez en mesure de
+Après avoir lu ce chapitre, vous serez en mesure de :
 
 <!-- paragraph -->
 
-- Comprendre comment les légendes interactives utilisent implicitement les `clickSelects`.
+- comprendre comment les légendes interactives utilisent implicitement les `clickSelects`;
 <!-- comment -->
-- Utiliser le mot-clé `clickSelects` dans vos esquisses de graphiques.
+- recourir au mot-clé `clickSelects` dans vos esquisses de graphiques;
 <!-- comment -->
-- Traduire vos esquisses de graphiques avec `clickSelects` en code R.
+- traduire vos esquisses de graphiques avec `clickSelects` en code R;
 <!-- comment -->
-- Utiliser l'option `selector.types` pour spécifier plusieurs variables de sélection.
+- spécifier plusieurs variables de sélection en utilisant l'option `selector.types`.
 
 <!-- paragraph -->
 
@@ -43,15 +43,15 @@ Considérons l'esquisse de la visualisation de données de la Banque mondiale pr
 
 <!-- paragraph -->
 
-![Esquisse avec clickSelects sur légende](ch04-legend-clickSelects.png)
+![Esquisse avec clickSelects en légende](ch04-legend-clickSelects.png)
 
 <!-- paragraph -->
 
-Puisque la légende a `clickSelects=région` , cliquer sur une entrée de cette légende met à jour la variable de sélection `région`.
+Puisque la légende indique `clickSelects=région`, cliquer sur une entrée de cette légende met à jour la variable de sélection `région`.
 <!-- comment -->
-Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=région`  pour la légende.
+Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=région` pour la légende.
 <!-- comment -->
-En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point` `animint2` fait deux choses automatiquement :
+En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point`, `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
@@ -61,9 +61,9 @@ En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point` `an
 
 <!-- paragraph -->
 
-Notez que les mots-clés `clickSelects`  ne sont pas limités aux légendes interactives.
+Notez que les mots-clés `clickSelects` ne sont pas limités aux légendes interactives.
 <!-- comment -->
-Chaque geom a sa propre définition de `clickSelects` qui détermine la variable de sélection qui doit être mise à jour lorsqu'on clique sur ce geom.
+Chaque geom possède sa propre définition de `clickSelects`, qui détermine la variable de sélection devant être mise à jour.
 <!-- comment -->
 Dans la section suivante, nous donnerons plusieurs exemples sur la manière dont `clickSelects` peut être utilisé en combinaison avec `showSelected` pour créer des visualisations de données interactives.
 
@@ -97,13 +97,13 @@ data(BanqueMondiale, package="animint2fr")
 
 <!-- paragraph -->
 
-Notez que le graphique ci-dessus n'est pas interactif, car il est affiché à l'aide du périphérique graphique R traditionnel.
+Notez que le graphique ci-dessus n'est pas interactif, car il s'affiche à l'aide du périphérique graphique R traditionnel.
 <!-- comment -->
-En revanche, afficher le même ggplot en utilisant `animint2` donne un graphique interactif : 
+En revanche, afficher le même ggplot en utilisant `animint2` produit un graphique interactif : 
 
-* `showSelected="année"` indique qu'on affiche seulement les données pour l'année sélectionnée.
-* `duration=list(année=2000)` indique un délai de 2 sécondes pour les transitions fluides entre les années.
-* Nous avons vu dans [le chapitre 3](/ch03/ch03-viz#duration-key) qu'il est important d'utiliser `aes(key)` pour chaque geom avec transition fluide.
+* `showSelected="année"` limite l'affichage aux données de l'année sélectionnée.
+* `duration=list(année=2000)` définit un délai de 2 sécondes pour les transitions fluides entre les années.
+* Nous avons vu dans le [chapitre 3](/ch03/ch03-viz#duration-key) qu'il est important d'utiliser `aes(key)` pour chaque geom avec transition fluide.
 * Nous avons donc utilisé `aes(key=pays)` pour indiquer que la variable `pays` sera utilisée pour les transitions fluides entre les années.
 
 ```{r ch04-viz-nuage}
@@ -116,19 +116,19 @@ En revanche, afficher le même ggplot en utilisant `animint2` donne un graphique
 
 Essayez de cliquer sur des points de données dans le nuage de points ci-dessus.
 <!-- comment -->
-Vous devriez voir la valeur de la variable `pays`  changer après avoir cliqué sur un point de données.
+Vous devriez voir la valeur de la variable `pays` changer après avoir cliqué sur un point de données.
 <!-- comment -->
-Vous devriez également voir que le point de données pour le pays sélectionné est plus foncé que les autres.
+Vous devriez également constater que le point corrspondant au pays sélectionné est plus foncé que les autres.
 <!-- comment -->
-Cela permet de mettre en évidence la sélection en cours, cette surbrillance est générée automatiquement pour chaque geom avec `clickSelects` .
+Cette mise en évidence de la sélection en cours est générée automatiquement pour chaque geom avec `clickSelects`.
 <!-- comment -->
 Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
-Ces valeurs par défaut peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection actuelle.
+Ces valeurs peuvent être personnalisées; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection en cours.
 
 * `aes(fill=région)` indique que la variable `région` détermine la couleur du remplissage des cercles.
-* `clickSelects=pays` indique qu'on peut cliquer pour changer la sélection de la variable `pays`,
-* `color="black"` indique que le pays sélectionné aura un contour noir,
+* `clickSelects=pays` indique qu'on peut cliquer pour changer la sélection de la variable `pays`.
+* `color="black"` indique que le pays sélectionné aura un contour noir.
 * `color_off=NA` indique que les pays non-sélectionnés auront un contour transparent.
 
 <!-- paragraph -->
@@ -148,7 +148,7 @@ animint(
 
 <!-- paragraph -->
 
-La visualisation de données ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous forme d'une étiquette de texte sur le nuage de points.
+La visualisation ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous forme d'une étiquette de texte sur le nuage de points.
 <!-- comment -->
 Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `showSelected` :
 
@@ -167,24 +167,22 @@ vis.text
 
 <!-- paragraph -->
 
-Après avoir cliqué sur un point de données dans le nuage de points ci-dessus, vous devriez voir apparaître une étiquette de texte avec le nom du pays.
+Après avoir cliqué sur un point dans le nuage ci-dessus, vous devriez voir apparaître une étiquette de texte avec le nom du pays.
 <!-- comment -->
-Essayez également de changer l'année à l'aide du menu de sélection.
-<!-- comment -->
-Vous devriez voir l'étiquette de texte se déplacer dans une transition fluide en même temps que le point de données correspondant.
+Essayez également de changer l'année à l'aide du menu de sélection; l'étiquette de texte devrait se déplacer dans une transition fluide en même temps que le point de données correspondant. 
 
 <!-- paragraph -->
 
-La visualisation de données ci-dessus contient plus d'un geom, chacun avec des caractéristiques interactives différentes.
+La visualisation ci-dessus contient plus d'un geom, chacun avec des caractéristiques interactives différentes.
 <!-- comment -->
-Essayez de cliquer sur le bouton « Start Tour » au bas de la visualisation, qui signifie « démarrer la visite guidée ».
-Il affichera une fenêtre qui explique les fonctions interactives disponibles pour le premier geom.
+Essayez de cliquer sur le bouton « Start Tour » (démarrer la visite guidée) au bas de la visualisation.
+Une fenêtre s’affichera pour expliquer les fonctions interactives disponibles pour le premier geom.
 <!-- comment -->
-En cliquant sur « Next », vous obtiendrez des informations sur le prochain geom, et en cliquant sur « Done » ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
+En cliquant sur « Next », vous obtiendrez des informations sur le prochain geom. Enn cliquant sur « Done » ou sur l'arrière-plan gris, vous mettrez fin à la visite guidée.
 <!-- comment -->
-La visite guidée peut être utile aux nouveaux utilisateurs, pour découvrir les fonctions interactives présentes dans chaque geom.
+La visite guidée aidera les nouveaux utilisateurs à découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
-Les informations affichées pendant la visite peuvent être personnalisées, en définissant les paramètres `help` et `title` de chaque geom ([voir chapitre 6 pour un exemple](/ch06/ch06-viz#custom-guided-tour)).
+Les informations affichées pendant la visite sont personnalisables, il suffit de définir les paramètres `help` et `title` de chaque geom (voir le[chapitre 6 ](/ch06/ch06-viz#custom-guided-tour) pour un exemple).
 
 <!-- paragraph -->
 
@@ -192,47 +190,47 @@ Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifié
 <!-- comment -->
 Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text`.
 <!-- comment -->
-Cela signifie que l'on ne dessine qu'une étiquette de texte pour les lignes de la base de données `BanqueMondiale` qui correspondent aux valeurs actuelles des deux variables de sélection.
+Cela signifie qu'une étiquette de texte ne sera dessinée que pour les lignes de la base de données `BanqueMondiale` qui correspondent aux valeurs actuelles des deux variables de sélection.
 <!-- comment -->
-Étant donné que chaque combinaison de `pays` et `année` a une ligne dans ces données, une seule étiquette de texte sera affichée à la fois.
+Étant donné que chaque combinaison de `pays` et `année` correspond à une ligne dans ces données, une seule étiquette sera affichée à la fois.
 
 <!-- paragraph -->
 
-Essayez de cliquer sur l'entrée de la légende qui correspond à la région du pays actuellement sélectionné (par exemple, si le Canada est sélectionné, essayez de cliquer sur l'entrée de la légende Amérique du Nord).
+Essayez de cliquer sur l'entrée de la légende qui correspond à la région du pays actuellement sélectionné (par exemple, si le Canada est sélectionné, cliquez sur l'entrée de la légende Amérique du Nord).
 <!-- comment -->
-Vous devriez voir le point disparaître, mais le texte rester affiché.
+Vous devriez voir le point disparaître, mais le texte restera affiché.
 
 <!-- paragraph -->
 
-Exercice : comment faire disparaître le texte en même temps que le point ?
+Exercice : comment faire disparaître le texte en même temps que le point?
 <!-- comment -->
 Indice : il faut ajouter un mot-clé au `geom_text`.
 
 <!-- paragraph -->
 
-Dans le dernier chapitre, nous avons introduit les termes "manipulation directe" et "manipulation indirecte" pour décrire les interactions avec les légendes et les menus.
+Dans le dernier chapitre, nous avons introduit les termes « manipulation directe » et « manipulation indirecte » pour décrire les interactions avec les légendes et les menus.
 <!-- comment -->
-Dans la visualisation de données ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
+Dans la visualisation ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
 <!-- comment -->
-Les deux techniques sont utiles, mais à des fins différentes :
+Les deux techniques répondent à des besoins différents :
 
 <!-- paragraph -->
 
-- La manipulation directe, soit de cliquer sur les points de données, est utile pour trouver le nom des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
+- La manipulation directe (cliquer sur les points de données) est utile pour trouver le nom des pays ayant des valeurs extrêmes de taux de fertilité et d'espérance de vie.
 <!-- comment -->
 Par exemple, pour l'année 1960, en cliquant sur le point en bas à gauche du graphique, on découvre le nom du pays, le Gabon.
 <!-- comment -->
-- La manipulation indirecte à l'aide des menus est utile pour voir la position tracée d'un pays d'intérêt.
+- La manipulation indirecte à l'aide des menus est utile pour voir la position d'un pays.
 <!-- comment -->
-Par exemple, il serait difficile de trouver la France en cliquant sur tous les différents points, mais il est simple de trouver la France en tapant son nom dans le menu de sélection.
+Par exemple, il serait difficile de localiser la France en cliquant sur différents points, mais plus simple de la trouver en tapant son nom dans le menu de sélection.
 
 <!-- paragraph -->
 
-Notez que lorsque la visualisation ci-dessus est affichée pour la première fois, le pays sélectionné est Andorre et l'année sélectionnée est 1960.
+Notez que lors du premier affichage de la visualisation ci-dessus, le pays sélectionné est Andorre, et l'année, 1960.
 <!-- comment -->
 Comme les données pour Andorre sont manquantes en 1960, aucune étiquette de texte n'est affichée au départ.
 <!-- comment -->
-Pour modifier la première sélection, vous pouvez spécifier l'option `first`  comme expliqué dans la section suivante.
+Pour modifier la première sélection, vous pouvez spécifier l'option `first` comme expliqué dans la section suivante.
 
 <!-- paragraph -->
 
