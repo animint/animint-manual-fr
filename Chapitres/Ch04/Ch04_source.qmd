@@ -240,9 +240,9 @@ Pour modifier la première sélection, vous pouvez spécifier l'option `first`  
 
 <!-- paragraph -->
 
-Pour spécifier la sélection qui doit être affichée lorsque la visualisation de données est exécutée pour la première fois, utilisez l'option `first`.
+Pour spécifier la sélection qui doit être affichée lors de la première exécution de la visualisation, utilisez l'option `first`.
 <!-- comment -->
-Il doit s'agir d'une liste nommée avec des entrées pour chaque variable de sélection.
+Il s'agit d'une liste nommée avec des entrées pour chaque variable de sélection.
 <!-- comment -->
 Par exemple, le code ci-dessous spécifie 1970 comme première année, le Canada comme premier pays, et l'Amérique du Nord et l'Asie du Sud comme premières régions.
 
@@ -259,9 +259,9 @@ vis.first
 
 <!-- paragraph -->
 
-Notez que dans la visualisation des données ci-dessus, il n'y a qu'un seul pays sélectionné à la fois.
+Notez que dans la visualisation ci-dessus, il n'y a qu'un seul pays sélectionné à la fois.
 <!-- comment -->
-Dans la section suivante, nous expliquerons comment l'option `selector.types` peut être utilisée pour modifier la variable de sélection `pays` en une variable de sélection multiple.
+Dans la section suivante, nous expliquerons comment l'option `selector.types` peut être utilisée pour transformer la variable `pays` en variable de sélection multiple.
 
 <!-- paragraph -->
 
@@ -271,7 +271,7 @@ Dans la section suivante, nous expliquerons comment l'option `selector.types` pe
 
 Dans cette section, notre objectif est de produire une version légèrement plus complexe du nuage de points de la section précédente.
 <!-- comment -->
-L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esquisse de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
+L'esquisse ci-dessous ne présente qu'une seule différence par rapport celle de la dernière section : les étiquettes de texte sont affichées pour plus d'un pays.
 
 <!-- paragraph -->
 
@@ -279,23 +279,21 @@ L'esquisse ci-dessous ne présente qu'une seule différence par rapport à l'esq
 
 <!-- paragraph -->
 
-Dans `animint2`, chaque variable de sélection a un type, soit simple, soit multiple.
+Dans `animint2`, chaque variable de sélection a un type (simple ou multiple).
 <!-- comment -->
-La sélection unique signifie qu'une seule valeur peut être sélectionnée à la fois.
-<!-- comment -->
-La sélection multiple signifie qu'un nombre quelconque de valeurs peut être sélectionné à la fois.
+La sélection simple signifie qu'une seule valeur peut être sélectionnée à la fois; la sélection multiple permet d'en choisir plusieurs simultanément.
 <!-- comment -->
 Dans les graphiques de la section précédente, la sélection multiple a été utilisée pour la variable `région` mais pas pour les variables `année` et `pays`.
 <!-- comment -->
-Comment cela se fait-il ?
+Pourquoi?
 
 <!-- paragraph -->
 
-Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection unique aux autres variables.
+Par défaut, `animint2` attribue une sélection multiple à toutes les variables qui apparaissent dans les légendes discrètes interactives, et une sélection simple aux autres variables.
 <!-- comment -->
-Cependant, une sélection unique (`"single"`) ou multiple (`"multiple"`) peut être précisée en utilisant l'option `selector.types`.
+Cependant, une sélection simple (`"single"`) ou multiple (`"multiple"`) peut être précisée en utilisant l'option `selector.types`.
 <!-- comment -->
-Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour spécifier que la variable `pays` doit être traitée comme une variable de sélection multiple.
+Dans le code R ci-dessous, nous utilisons l'option `selector.types` pour indiquer que la variable `pays` doit être traitée comme une variable de sélection multiple.
 
 <!-- paragraph -->
 
@@ -313,21 +311,21 @@ Elle affiche également une étiquette de texte pour le Canada.
 
 <!-- paragraph -->
 
-Vous avez peut-être remarqué qu'il est facile d'ajouter des pays à la sélection actuelle en cliquant sur des points de données.
+Il est facile d'ajouter des pays à la sélection actuelle en cliquant sur des points de données.
 <!-- comment -->
-Normalement, le fait de cliquer sur un point de données sélectionné supprime ce pays de la sélection actuelle.
+Normalement, le fait de cliquer sur un point supprime ce pays de la sélection en cours.
 <!-- comment -->
-Toutefois, dans cette visualisation de données en particulier, il n'est pas si facile de les supprimer, car les étiquettes de texte sont affichées au-dessus des points de données.
+Toutefois, dans cette visualisation en particulier, il n'est pas si facile de supprimer les pays parce que les étiquettes de texte sont affichées au-dessus des points de données.
 
 <!-- paragraph -->
 
-Exercice :  Recréez la visualisation des données ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays en question de l'ensemble de sélection.
+Exercice :  Recréez la visualisation ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays de l'ensemble de sélection.
 <!-- comment -->
 Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text`.
 
 <!-- paragraph -->
 
-Notez que dans la visualisation de données ci-dessus, la variable année ne peut être modifiée que par le menu de sélection.
+Notez que dans la visualisation ci-dessus, la variable année ne peut être modifiée que par le menu de sélection.
 
 <!-- paragraph -->
 
@@ -349,11 +347,11 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 Notez que l'esquisse ci-dessus comprend `geom_tallrect`, un nouveau geom introduit dans `animint2`.
 <!-- comment -->
-Il est qualifié de "grand" car il occupe tout l'espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
+Il est qualifié de « grand », car  il occupe tout l'espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
 En spécifiant `clickSelects=année` nous indiquons que nous voulons tracer un `tallrect` pour chaque année, et que cliquer sur un `tallrect` changera l'année sélectionnée.
 <!-- comment -->
-Nous devons donc créer un nouvel ensemble de données appelé `années` avec une ligne pour chaque année des données `BanqueMondiale`.
+Nous devons donc créer un nouvel ensemble de données appelé `années`, avec une ligne pour chaque année des données `BanqueMondiale`.
 
 <!-- paragraph -->
 
@@ -387,13 +385,13 @@ vis.timeSeries
 
 <!-- paragraph -->
 
-Essayez de cliquer sur l'arrière-plan de la série temporelle dans la visualisation de données ci-dessus.
+Essayez de cliquer sur l'arrière-plan de la série temporelle dans la visualisation ci-dessus.
 <!-- comment -->
-Vous devriez voir les points de données et les étiquettes de texte se déplacer dans une transition graduelle vers une position correspondant à l'année nouvellement sélectionnée.
+Vous devriez voir les points et les étiquettes se déplacer dans une transition graduelle vers la position correspondant à l'année nouvellement sélectionnée.
 
 <!-- paragraph -->
 
-Exercice  : animez la visualisation de données en spécifiant l'option `time`, [comme expliqué au chapitre 3](Ch03-showSelected.html#animation-time).
+Exercice  : animez la visualisation de données en spécifiant l'option `time`, comme expliqué au [chapitre 3](Ch03-showSelected.html#animation-time).
 
 <!-- paragraph -->
 
@@ -416,7 +414,7 @@ L'objectif de cette section est d'ajouter une facette avec un graphique de séri
 
 <!-- paragraph -->
 
-Tout d'abord, nous recréons le nuage de points de la section précédente à l'aide de la méthode [Ajouter une variable ensuite des facettes](Ch99-appendix.html#addColumn-then-facet) qui est utile pour créer des ggplots avec des axes alignés.
+Tout d'abord, nous recréons le nuage de points de la section précédente à l'aide de la méthode [Ajouter une variable ensuite des facettes](Ch99-appendix.html#addColumn-then-facet), utile pour créer des ggplots avec des axes alignés.
 
 <!-- paragraph -->
 
@@ -448,9 +446,9 @@ nuageFacet
 
 Notez que le ggplot ci-dessus utilise les mêmes définitions `aes` que le nuage de points de la section précédente.
 <!-- comment -->
-La seule différence est que nous avons utilisé un jeu de données `BanqueMondiale` enrichi avec une variable `x.var` supplémentaire que nous utilisons avec `facet_grid`.
+La seule différence est l'utilisation d'un jeu de données `BanqueMondiale` enrichi d'une variable `x.var` utilisée avec `facet_grid`.
 <!-- comment -->
-Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle qui est aligné sur l'axe du taux de fertilité.
+Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle aligné sur l'axe du taux de fertilité.
 
 <!-- paragraph -->
 
@@ -472,11 +470,11 @@ nuage_série_temporelle
 
 <!-- paragraph -->
 
-Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur d'`année` de la variable `x.var` (définie par la fonction `add.x.var`).
+Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur `année` de la variable `x.var` (définie par la fonction `add.x.var`).
 <!-- comment -->
 Puisque ces deux geoms ont des définitions différentes de `clickSelects`, un clic sur chaque geom mettra à jour le graphique d'une manière différente.
 <!-- comment -->
-Notez que pour le `geom_line` nous spécifions `size=3` ce qui signifie une largeur de trait de 3 pixels.
+Notez que pour le `geom_line` nous spécifions `size=3` ce qui correspond à une largeur de trait de 3 pixels.
 <!-- comment -->
 En général, il est judicieux d'augmenter la taille des geoms avec `clickSelects`, afin de les rendre plus faciles à cliquer.
 
@@ -484,19 +482,19 @@ En général, il est judicieux d'augmenter la taille des geoms avec `clickSelect
 
 Notez également que nous avons spécifié `alpha=0.5` pour le `geom_tallrect` et `alpha=0.6` pour le `geom_line`.
 <!-- comment -->
-Puisque ces deux geoms définissent `clickSelects`, certaines lignes et rectangles seront sélectionnées, et d'autres ne le seront pas.
+Puisque ces deux geoms définissent `clickSelects`, parmi les lignes et rectangles tracés, certains seront sélectionnés et d'autres non. 
 <!-- comment -->
-Les valeurs `alpha` précisent l'opacité des objets sélectionnés, et les autres objets auront une valeur d'opacité de 0,5 inférieure à cette valeur.
+Les valeurs `alpha` précisent l'opacité des objets sélectionnés, et les autres objets auront une valeur d'opacité de 0.5 inférieure à cette valeur.
 <!-- comment -->
-Dans l'exemple ci-dessus, les lignes non sélectionnées auront `alpha=0.1` et les `tallrects` non sélectionnés auront `alpha=0`  (complètement transparent).
+Dans l'exemple ci-dessus, les lignes non sélectionnées auront `alpha=0.1` et les `tallrects` non sélectionnés auront `alpha=0`  (complètement transparents).
 
 <!-- paragraph -->
 
-Depuis septembre 2023, il est également possible de spécifier l'opacité, le remplissage et la couleur des objets qui ne sont pas actuellement sélectionnés (`alpha_off`, `fill_off`, `color_off`).
+Depuis septembre 2023, il est également possible de spécifier l'opacité, le remplissage et la couleur des objets non sélectionnés  (`alpha_off`, `fill_off`, `color_off`).
 <!-- comment -->
-Les utilisateurs peuvent spécifier ces paramètres dans le geom (pas dans le `aes`) afin de créer librement une apparence différente pour les éléments sélectionnés et non sélectionnés, au lieu d'être contraints de dépendre du comportement décrit ci-dessus.
+Les utilisateurs peuvent définir ces paramètres dans le geom (pas dans le `aes`) afin de personnaliser l’apparence des éléments sélectionnés et non sélectionnés, au lieu de se limiter aux spécifications décrites ci-dessus.
 <!-- comment -->
-Pour plus d'informations, voir la discussion et l'exemple dans [chapitre 6, section Préciser le mode d'affichage de l'état de la sélection](Ch06-other.html#display-selection-state) .
+Pour plus d'informations, voir la discussion et l'exemple dans la section [Préciser le mode d'affichage de l'état de la sélection, au chapitre 6](Ch06-other.html#display-selection-state) .
 
 <!-- paragraph -->
 
@@ -510,11 +508,11 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 <!-- paragraph -->
 
-La visualisation de données interactives ci-dessus contient un nouveau panneau avec des lignes qui montrent une série temporelle de taux de fertilité sur toutes les années.
+La visualisation de données interactive ci-dessus contient un nouveau panneau avec des lignes qui montrent une série temporelle du taux de fertilité pour toutes les années.
 <!-- comment -->
 Puisque nous avons précisé `clickSelects=pays`  pour le `geom_line`, un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
 <!-- comment -->
-Puisque nous avons spécifié `clickSelects=année` pour le `geom_tallrect`, un clic sur un `tallrect` met à jour l'année sélectionnée.
+Puisque nous avons spécifié `clickSelects=année` pour le `geom_tallrect`, en cliquant sur un `tallrect` on met à jour l'année sélectionnée.
 
 <!-- paragraph -->
 
@@ -526,13 +524,13 @@ Exercice : ajoutez les options `time`, `duration`, `first` et `selector.types` �
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous avons vu l'utilisation de `clickSelects` , l'un des deux principaux mots-clés introduits par `animint2` pour la conception de visualisations de données interactives.
+Dans ce chapitre, nous avons vu l'utilisation de `clickSelects`, l'un des deux principaux mots-clés introduit par `animint2` pour la conception de visualisations de données interactives.
 <!-- comment -->
 Nous avons utilisé l'ensemble de données de la Banque mondiale pour montrer comment `clickSelects`  peut être utilisé pour définir différentes interactions pour chacun des geoms tracés.
 <!-- comment -->
-Nous avons expliqué comment l'option `first` peut être utilisée pour préciser les valeurs à utiliser lorsque le `animint2` est affiché pour la première fois.
+Nous avons expliqué comment l'option `first` peut servir à préciser les valeurs à utiliser lorsque le `animint2` est affiché pour la première fois.
 <!-- comment -->
-Nous avons également expliqué comment l'option `selector.types` peut être utilisée pour préciser le type de sélection (unique ou multiple).
+Nous avons également expliqué comment l'option `selector.types` peut être utilisée pour préciser le type de sélection (simple ou multiple).
 
 <!-- paragraph -->
 
@@ -540,27 +538,27 @@ Exercices :
 
 <!-- paragraph -->
 
-- Jusqu'à présent, nous avons vu trois façons différentes de modifier les variables de sélection : (1) utiliser des légendes interactives, (2) utiliser des menus de sélection et (3) cliquer sur les données à l'aide de `clickSelects`.
+- Jusqu'à présent, nous avons vu trois façons de modifier les variables de sélection : (1) utiliser des légendes interactives, (2) utiliser des menus de sélection et (3) cliquer sur les données à l'aide de `clickSelects`.
 <!-- comment -->
 Classez ces trois techniques de manipulation, de la plus directe, à la moins directe.
 <!-- comment -->
-Quelle technique privilégier et selon quelles circonstances ?
+Quelle technique privilégier et dans quelles circonstances?
 <!-- comment -->
-- Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données ?
+- Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données?
 <!-- comment -->
 Lorsque `animint2` affiche le même geom, certains points seront sélectionnés et d'autres non.
 <!-- comment -->
-Quelle est l'opacité/transparence des points sélectionnés ?
+Quelle est l'opacité/transparence des points sélectionnés?
 <!-- comment -->
-Quelle est l'opacité/transparence des points non sélectionnés ?
+Quelle est l'opacité/transparence des points non sélectionnés?
 <!-- comment -->
-- Ajouter `aes(size=population)`  aux points du nuage de points de la Banque mondiale.
+- Ajoutez `aes(size=population)` aux points du nuage de la Banque mondiale.
 <!-- comment -->
-La légende de la taille est-elle interactive ?
+La légende de la taille est-elle interactive?
 <!-- comment -->
-Pourquoi ?
+Pourquoi?
 <!-- comment -->
-- Ajoutez un `geom_text`  au nuage de points de la Banque mondiale qui montre l'année sélectionnée.
+- Ajoutez un `geom_text` au nuage de points de la Banque mondiale pour montrer l'année sélectionnée.
 <!-- comment -->
 - Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher le nom des pays sélectionnés.
 <!-- comment -->
@@ -568,11 +566,11 @@ Pourquoi ?
 <!-- comment -->
 - Utilisez l'option `time` pour créer une version animée de `vis.facets`.
 <!-- comment -->
-- Utilisez `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer un tour guidé qui fournit plus d'informations sur ce qui est affiché dans chaque geom.
+- Utilisez `help`  et `title`  pour chaque geom dans `vis.facets` afin de créer un tour guidé plus informatif sur ce qui est affiché dans chaque geom.
 
 <!-- paragraph -->
 
-Dans le [Chapitre 5](Ch05-sharing.html) nous expliquons les différentes méthodes pour publier et partager des animints sur le web.
+Dans le [chapitre 5](Ch05-sharing.html) nous expliquons différentes méthodes pour publier et partager des animints sur le web.
 
 <!-- paragraph -->
 
