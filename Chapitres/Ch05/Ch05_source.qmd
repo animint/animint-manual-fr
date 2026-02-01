@@ -18,7 +18,7 @@ knitr::opts_chunk$set(fig.path="Ch05-figures/")
 
 Dans ce chapitre, nous expliquons plusieurs méthodes pour partager vos visualisations de données interactives sur le web.
 <!-- comment -->
-Après avoir lu ce chapitre, vous serez en mesure de visualiser des animints :
+Après avoir lu ce chapitre, vous saurez comment partager des animints :
 
 <!-- paragraph -->
 
@@ -26,9 +26,9 @@ Après avoir lu ce chapitre, vous serez en mesure de visualiser des animints :
 <!-- comment -->
 - dans des documents [R Markdown](http://rmarkdown.rstudio.com/);
 <!-- comment -->
-- en utilisant n'importe quel serveur web, y compris [NetlifyDrop](https://app.netlify.com/drop);
+- en utilisant n'importe quel serveur web, notamment [NetlifyDrop](https://app.netlify.com/drop);
 <!-- comment -->
-- publiés en utilisant [GitHub Pages](https://pages.github.com/) et organisés dans une galerie.
+- en les publiant sur [GitHub Pages](https://pages.github.com/) et comment les organiser dans une galerie.
 
 <!-- paragraph -->
 
