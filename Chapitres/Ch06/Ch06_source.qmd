@@ -9,23 +9,23 @@ knitr::opts_chunk$set(fig.path="Ch06-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre donne une liste complète des nouvelles fonctionnalités qu'`animint2` introduit dans la grammaire des graphiques (qui n'existe pas dans `ggplot2`).
+Ce chapitre présente l'ensemble des nouvelles fonctionnalités qu'`animint2` ajoute à la grammaire des graphiques.
 <!-- comment -->
-Après avoir lu ce chapitre, vous comprendrez comment personnaliser vos graphiques `animint2` via
+Après l'avoir lu, vous saurez personnaliser vos graphiques `animint2` en utilisant :
 
 <!-- paragraph -->
 
-- les `aes()` `href`, `tooltip` et `id` pour les caractéristiques propres à l'observation ;
+- les `aes()` `href`, `tooltip` et `id` pour définir les caractéristiques propres à l'observation;
 <!-- comment -->
-- les éléments nommés de `clickSelects` et `showSelected` pour spécifier plusieurs variables de sélection à la fois ;
+- les éléments nommés de `clickSelects` et `showSelected` pour spécifier plusieurs variables de sélection simultanément;
 <!-- comment -->
-- l'option `chunk_vars` spécifique au geom ;
+- l'option `chunk_vars` spécifique au geom;
 <!-- comment -->
-- les paramètres de geom `color_off`, `fill_off`, et `alpha_off` pour spécifier comment l'état de la sélection est affiché;
+- les paramètres de geom `color_off`, `fill_off`, et `alpha_off` pour contrôler l'affichage de l'état de la sélection;
 <!-- comment -->
-- les paramètres de geom `help` et `title`, texte qui est affiché dans la visite guidée.
+- les paramètres de geom `help` et `title`, pour le texte affiché dans la visite guidée;
 <!-- comment -->
-- les légendes et les options de hauteur/largeur propres au graphique
+- les légendes et les options de hauteur/largeur propres au graphique;
 <!-- comment -->
 - les options globales.
 
@@ -43,19 +43,19 @@ Cette section explique les nouveaux `aes()` reconnus par `animint2`.
 
 <!-- paragraph -->
 
-Nous allons commencer par discuter des nouveaux `aes()` que nous avons déjà introduits dans les chapitres précédents.
+Discutons d'abord des nouveaux `aes()` déjà introduits dans les chapitres précédents.
 
 <!-- paragraph -->
 
-[Chapitre 3](Ch03-showSelected.html#duration-key) a également introduit `aes(key)` afin de désigner une variable à utiliser pour des transitions fluides et interprétables.
+`aes(key)` a été présenté au [chapitre 3](Ch03-showSelected.html#duration-key); il sert à désigner une variable à utiliser pour obtenir des transitions fluides et interprétables.
 
 <!-- paragraph -->
 
 ### Hyperliens utilisant `aes(href)` {#aes-href}
 
-On peut rajouter un hyperlien avec `aes(href)`.
-Par exemple, si nous avons une carte des États-Unis, on peut rajouter un lien vers le page Wikipédia de chaque état.
-On commence par charger les données pour tracer les frontières des états.
+Il est possible d'ajouter un hyperlien avec `aes(href)`.
+Par exemple, on peut insérer un lien vers la page Wikipédia de chaque État sur une carte des États-Unis.
+On commence par charger les données pour tracer les frontières des États.
 
 ```{r}
 library(animint2)
