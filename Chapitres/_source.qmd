@@ -72,7 +72,7 @@ De plus, il présente quelques idées d'amélioration, à l’intention de ceux 
 
 <!-- paragraph -->
 
-Les chapitres restants peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
+Les autres chapitres peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
 
 <!-- paragraph -->
 
@@ -84,7 +84,7 @@ Le [chapitre 9](ch09) présente une visualisation des données provenant de cycl
 
 <!-- paragraph -->
 
-Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre Elements of Statistical Learning [@Hastie2009].
+Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre *Elements of Statistical Learning* [@Hastie2009].
 
 <!-- paragraph -->
 
@@ -345,7 +345,8 @@ ggplot()+
 
 <!-- paragraph -->
 
-La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXe siècle.
+La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXᵉ siècle
+.
 <!-- comment -->
 Cette visualisation des données porte le nom de [courbe de Keeling](https://fr.wikipedia.org/wiki/Courbe_de_Keeling), du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique.
 <!-- comment -->
