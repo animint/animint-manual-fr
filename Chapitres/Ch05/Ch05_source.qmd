@@ -28,7 +28,7 @@ Après avoir lu ce chapitre, vous saurez comment partager des animints :
 <!-- comment -->
 - en utilisant n'importe quel serveur web, notamment [NetlifyDrop](https://app.netlify.com/drop);
 <!-- comment -->
-- en les publiant sur [GitHub Pages](https://pages.github.com/) et comment les organiser dans une galerie.
+- en les publiant sur [GitHub Pages](https://pages.github.com/) et en les organisant dans une galerie.
 
 <!-- paragraph -->
 
