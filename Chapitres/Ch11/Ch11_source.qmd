@@ -34,7 +34,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Graphiques statiques du chemin ("path") de la régularisation du coefficient {#static-path-plots}
+## Graphiques statiques de la régularisation {#static-path-plots}
 
 <!-- paragraph -->
 
@@ -61,7 +61,7 @@ input.cols <- c(
   "lcavol", "lweight", "age", "lbph", "svi", "lcp", "gleason", 
   "pgg45")
 prostate.inputs <- prostate[, ..input.cols]
-is.train <- prostate$train == "T"
+is.train <- prostate$train
 x <- as.matrix(prostate.inputs[is.train])
 head(x)
 y <- prostate[is.train, lpsa]
