@@ -43,13 +43,11 @@ Nous commençons par charger l'ensemble de données sur le cancer de la prostate
 <!-- paragraph -->
 
 ```{r}
-if(!file.exists("prostate.data")){
-  curl::curl_download(
-    "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data",
-    "prostate.data")
-}
-prostate <- data.table::fread("prostate.data")
-head(prostate)
+if(!requireNamespace("animint2data"))
+  remotes::install_github("animint/animint2data")
+data(prostate, package="animint2data")
+library(data.table)
+print(prostate, topn=1, trunc.cols = TRUE)
 ```
 
 <!-- paragraph -->
