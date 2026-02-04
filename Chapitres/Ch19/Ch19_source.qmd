@@ -175,18 +175,18 @@ Le code ci-dessous calcule un test de Student pour chaque répétition de la sim
 
 <!-- paragraph -->
 
-La sortie ci-dessus comporte une ligne pour chaque test T et des colonnes pour la différence moyenne (`mean_zero`) et la `p.value`.
+La sortie ci-dessus comporte une ligne pour chaque test de Student et des colonnes pour la différence moyenne (`mean_zero`) et la `p.value`.
 <!-- comment -->
-Comme il y a dix échantillons par essai, il y a dix fois moins de lignes que dans le tableau de données simulé original.
+Comme il y a dix échantillons par essai, il y a dix fois moins de lignes que dans le tableau de données simulées original.
 <!-- comment -->
-Chaque essai implique un test T de 5 échantillons de contrôle/zéro, contre 5 échantillons de traitement/décalage.
+Chaque essai implique un test de Student avec 5 échantillons dans le groupe témoin (`condition=zero`), contre 5 échantillons dans le groupe expérimentale (`condition=offset`).
 <!-- comment -->
-Ensuite, nous ajoutons des colonnes pour le graphique du volcan :
+Ensuite, nous ajoutons des colonnes pour le graphique volcan :
 
 <!-- paragraph -->
 
 - `diff_means` est la différence entre les moyennes des deux conditions, parfois appelée "taille de l'effet".
-- `neg.log10.p` est la valeur P transformée en logarithme négatif (plus elle est grande, plus elle est significative).
+- `neg.log10.p` est la probabilté critique, transformée en logarithme négatif (plus elle est grande, plus elle est significative).
 
 <!-- paragraph -->
 
@@ -222,7 +222,7 @@ library(animint2)
 
 <!-- paragraph -->
 
-Le graphique statique ci-dessus montre un point par résultat de test T.
+Le graphique statique ci-dessus montre un point par résultat de test de Student.
 <!-- comment -->
 Les points proches de l'origine (0,0) représentent des tests qui n'ont pas produit de différence significative, tandis que les points avec de grandes valeurs Y représentent des différences significatives.
 <!-- comment -->
@@ -236,7 +236,7 @@ Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions 
 
 <!-- paragraph -->
 
-Enfin, le graphique ci-dessus est surreprésenté, ce qui signifie que nous ne pouvons pas voir tous les détails, car il y a trop de points de données tracés les uns sur les autres.
+Enfin, on voit l’occlusion dans le nuage de points, ce qui signifie que nous ne pouvons pas voir tous les détails, car il y a trop de points de données tracés les uns sur les autres.
 
 <!-- paragraph -->
 
@@ -244,15 +244,15 @@ Enfin, le graphique ci-dessus est surreprésenté, ce qui signifie que nous ne p
 
 <!-- paragraph -->
 
-Dans cette section, nous montrons comment le graphique de volcan précédent peut être révisé pour montrer plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
+Dans cette section, nous montrons comment le graphique volcan précédent peut être révisé pour montrer plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
 <!-- comment -->
-Pour commencer, nous définissons l'élément `round_rel()` ci-dessous, qui est utilisée pour ajouter `round_*` et `rel_*` que nous utiliserons pour définir les tuiles de la carte thermique.
+Pour commencer, nous définissons la fonction `round_rel()` ci-dessous, qui est utilisée pour ajouter les colonnes `round_*` et `rel_*` que nous utiliserons pour définir les tuiles de la carte thermique.
 
 <!-- paragraph -->
 
-- `round_*` les colonnes sont arrondies à la taille de bac la plus proche (entière par défaut), et sont utilisées pour définir la tuile de la carte thermique. `x` et `y` de la carte thermique.
+- les colonnes `round_*` sont arrondies à la taille de bac la plus proche (entière par défaut), et sont utilisées pour définir les positions `x` et `y` de la tuile de la carte thermique.
 <!-- comment -->
-- `rel_*` sont utilisées pour `x` et `y` dans l'affichage zoomé, et sont des unités relatives à la valeur correspondante de `round_*` correspondantes.
+- les colonnes `rel_*` sont utilisées pour les positions `x` et `y` dans l'affichage zoomé, et sont des unités relatives à la valeur de `round_*` correspondante.
 
 <!-- paragraph -->
 
@@ -269,7 +269,7 @@ round_rel(sim_p, "neg.log10.p")
 
 <!-- paragraph -->
 
-Ensuite, nous définissons `volcano_tile` une combinaison de chaînes de texte de `round_*` qui sera utilisée pour la sélection.
+Ensuite, nous définissons `volcano_tile` une combinaison de chaînes de texte de variables `round_*` qui sera utilisée pour la sélection.
 
 <!-- paragraph -->
 
@@ -291,7 +291,7 @@ Ensuite, nous calculons un tableau de contingence avec une ligne par carreau de 
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre une ligne par tuile de la carte thermique, avec le paramètre `tests` indique le nombre de points apparaissant dans la zone correspondante du graphique du volcan.
+La sortie ci-dessus montre une ligne par tuile de la carte thermique, avec la colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
 <!-- comment -->
 Ci-dessous, nous créons la carte thermique du volcan.
 
