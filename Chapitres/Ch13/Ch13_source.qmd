@@ -1,4 +1,4 @@
-# Poisson regression
+# Régression de Poisson
 
 <!-- paragraph -->
 
@@ -8,39 +8,39 @@ knitr::opts_chunk$set(fig.path="Ch13-figures/")
 
 <!-- paragraph -->
 
-This goal of this chapter is to create an interactive data visualization that explains [Poisson regression](https://en.wikipedia.org/wiki/Poisson_regression), a machine learning model for predicting an integer-valued output from inputs that are real-valued vectors.
+L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la régression de Poisson][(https://en.wikipedia.org/wiki/Poisson_regression)](https://fr.wikipedia.org/wiki/R%C3%A9gression_de_Poisson), un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
 <!-- comment -->
-This is a "linear regression" model since it learns a linear function from the inputs to the output.
+Il s'agit d'un modèle de "régression linéaire" puisqu'il apprend une fonction linéaire des entrées à la sortie.
 <!-- comment -->
-Like least squares regression, Poisson regression can be formulated as a maximum likelihood problem.
+Comme la régression par les moindres carrés, la régression de Poisson peut être formulée comme un problème de maximum de vraisemblance.
 <!-- comment -->
-However, it differs from least squares linear regression since it uses a Poisson distribution to model the output labels, instead of a Gaussian distribution.
+Cependant, elle en diffère car elle utilise une distribution de Poisson pour modéliser les étiquettes de sortie, au lieu d'une distribution gaussienne.
 <!-- comment -->
-This modeling choice is appropriate when output labels are non-negative integers.
+Ce choix de modélisation est approprié lorsque les étiquettes de sortie sont des nombres entiers non négatifs.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by creating a plot that shows the probability mass function for a Poisson distribution mean parameter that can be interactively selected.
+- Nous commençons par créer un graphique qui montre la fonction de masse de probabilité pour un paramètre moyen de la distribution de Poisson qui peut être sélectionné de manière interactive.
 <!-- comment -->
-- We then add a second panel that shows the cumulative distribution function.
+- Nous ajoutons ensuite un deuxième panneau qui montre la fonction de distribution cumulative.
 <!-- comment -->
-- We then add a second plot which shows the Poisson loss, with a second selector for label value.
+- Nous ajoutons ensuite un second graphique qui montre la perte de Poisson, avec un second sélecteur pour la valeur de l'étiquette.
 
 <!-- paragraph -->
 
-## Plot the probability mass function and select the Poisson mean parameter {#plot-prob-mass}
+## Tracer la fonction de masse de probabilité et sélectionner le paramètre moyen de Poisson. {#plot-prob-mass}
 
 <!-- paragraph -->
 
-The goal of this section is to create a data visualization that shows the probability mass function for a selected Poisson mean parameter.
+L'objectif de cette section est de créer une visualisation des données qui montre la fonction de masse de probabilité pour un paramètre de moyenne de Poisson sélectionné.
 
 <!-- paragraph -->
 
-![Poisson regression viz prob](Ch13-viz-prob.png)
+![Visualisation des probabilités dans la régression de Poisson](../Ch13/Ch13-viz-prob.png)
 
 <!-- paragraph -->
 
@@ -66,7 +66,7 @@ poisson.prob
 
 <!-- paragraph -->
 
-The static data viz below shows one facet for each Poisson distribution.
+La visualisation des données statiques ci-dessous montre une facette pour chaque distribution de Poisson.
 
 <!-- paragraph -->
 
@@ -97,11 +97,11 @@ prob.mass+
 
 <!-- paragraph -->
 
-Note that we used `alpha=0.6` with `geom_tallrect`, which means that the tallrect for the selected mean has 0.6 opacity, and the other tallrects have 0.1 opacity.
+Notez que nous avons utilisé `alpha=0.6` avec `geom_tallrect` ce qui signifie que le `tallrect` correspondant à la moyenne sélectionnée a une opacité de 0,6 et que les autres `tallrects` ont une opacité de 0,1.
 <!-- comment -->
-Note also that we use`color="red"` and `size=5` with `geom_point` so that it is easier to see the points on a grey background, and to hover the cursor over the points to see the tooltip.
+Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point` afin qu'il soit plus facile de voir les points sur un fond gris et de passer le curseur sur les points pour voir l'infobulle.
 <!-- comment -->
-We next create an interactive version with animint.
+Nous allons maintenant créer une version interactive avec `animint2`.
 
 <!-- paragraph -->
 
@@ -111,29 +111,29 @@ animint(prob.mass)
 
 <!-- paragraph -->
 
-You can click the viz above to change the mean of the Poisson distribution.
+Vous pouvez cliquer sur la visualisation ci-dessus pour modifier la moyenne de la distribution de Poisson.
 <!-- comment -->
-You can also hover the cursor over a data point to see its probability.
+Vous pouvez également survoler un point de données avec le curseur pour voir sa probabilité.
 <!-- comment -->
-Note that for integer values of the Poisson mean, there are two labels that are the most probable (the mode of the Poisson distribution).
+Notez que pour les valeurs entières de la moyenne de Poisson, il existe deux étiquettes qui sont les plus probables (le mode de la distribution de Poisson).
 <!-- comment -->
-For example the Poisson distribution with a mean of 3 attains its maximum probability of about 0.224 at label values of 2 and 3.
+Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabilité maximale d'environ 0,224 pour des valeurs d'étiquettes de 2 et 3.
 
 <!-- paragraph -->
 
-## Add a panel for the cumulative distribution function {#panel-cdf}
+## Ajouter un panneau pour la fonction de répartition {#panel-cdf}
 
 <!-- paragraph -->
 
-To add a panel for the cumulative distribution function, we will re-make the ggplot based on the sketch below.
+Pour ajouter un panneau à la fonction de répartition, nous allons modifier le ggplot en suivant l'esquisse ci-dessous.
 
 <!-- paragraph -->
 
-![Poisson regression viz cum prob](Ch13-viz-cum-prob.png)
+![Visualisation des probabilités cumulées dans la régression de Poisson](../Ch13/Ch13-viz-cum-prob.png)
 
 <!-- paragraph -->
 
-When we specify the data sets, we will use the [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) idiom to add a `panel` variable.
+Lorsque nous spécifions les ensembles de données, nous utilisons l'idiome [addColumn then facet](../Ch99/Ch99-appendix.html#addColumn-then-facet) pour ajouter une variable `panel`.
 
 <!-- paragraph -->
 
@@ -176,23 +176,23 @@ animint(
 
 <!-- paragraph -->
 
-Note how we used `addPanel` to add a `panel` variable to all the data sets for each geom except `geom_tallrect`.
+Notez que nous avons utilisé `addPanel` pour ajouter une variable `panel` à tous les ensembles de données pour chaque geom, à l'exception de `geom_tallrect`.
 <!-- comment -->
-Using`panel` as a facet variable has the effect of drawing each geom in only one panel, except the `geom_tallrect` which is drawn in each panel.
+Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom dans un seul panneau, à l'exception de `geom_tallrect` qui est dessiné dans chaque panneau.
 
 <!-- paragraph -->
 
-Note that we also used a `geom_hline` to show 0.99, the cumulative distribution function threshold that was used to determine the set of points to plot for each Poisson distribution.
+Notez l'utilisation d'un `geom_hline` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
 <!-- comment -->
-This is an example of "show your arbitrary choices," one of the general principles of designing good interactive data visualizations.
+Ceci est un exemple de "montrer vos choix arbitraires", l'un des principes généraux de la conception de bonnes visualisations de données interactives.
 
 <!-- paragraph -->
 
-## Add a plot of the Poisson loss and a selector for label value {#plot-loss}
+## Ajout d'un graphique de la perte de Poisson et d'un sélecteur pour la valeur de l'étiquette. {#plot-loss}
 
 <!-- paragraph -->
 
-Next we will compute the Poisson loss for several values of the output label.
+Nous allons ensuite calculer la perte de Poisson pour plusieurs valeurs de l'étiquette de sortie.
 
 <!-- paragraph -->
 
@@ -220,7 +220,7 @@ PoissonLoss <- function(label, seg.mean){
 
 <!-- paragraph -->
 
-Below we compute the loss for several label values, using the [list of data tables idiom](../Ch99/Ch99-appendix.html#list-of-data-tables).
+Ci-dessous, nous calculons la perte pour plusieurs valeurs d'étiquettes, en utilisant la méthode [Liste de tableau de données](../Ch99/Ch99-appendix.html#list-of-data-tables).
 
 <!-- paragraph -->
 
@@ -243,7 +243,7 @@ loss.min <- do.call(rbind, loss.min.list)
 
 <!-- paragraph -->
 
-We also make a data table to display text labels for the selected mean and label values.
+Nous créons également un tableau de données afin d'afficher des étiquettes de texte pour les valeurs de moyenne et d'étiquette sélectionnées.
 
 <!-- paragraph -->
 
@@ -261,7 +261,7 @@ label.text <- data.table(
 
 <!-- paragraph -->
 
-Next we make a data viz with an additional panel.
+Ensuite, nous créons une visualisation des données avec un panneau supplémentaire.
 
 <!-- paragraph -->
 
@@ -326,7 +326,7 @@ Next we make a data viz with an additional panel.
 
 <!-- paragraph -->
 
-The data viz above shows the probability on the left and the Poisson loss on the right.
+La visualisation des données ci-dessus montre la probabilité à gauche et la perte de Poisson à droite.
 
 <!-- paragraph -->
 
@@ -381,29 +381,29 @@ viz.log.loss
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch13-exercises}
+## Résumé du chapitre et exercices {#Ch13-exercises}
 
 <!-- paragraph -->
 
-We explained how to visualize the Poisson distribution and loss, which are used for the Poisson regression model.
+Nous avons expliqué comment visualiser la distribution et la perte de Poisson, qui sont utilisées pour le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- The code above used `addPanel` and `addX` helper functions with several geoms to create multi-panel plots, which results in repetition.
+- Le code ci-dessus utilisait les fonctions d'aide `addPanel` et `addX` avec plusieurs geoms pour créer des graphiques multi-panneaux, ce qui entraîne des répétitions.
 <!-- comment -->
-To avoid that repetition, create a new data viz which uses a single geom with a larger data set.
+Pour les éviter, créez une nouvelle visualisation des données qui utilise un seul geom avec un ensemble de données plus important.
 <!-- comment -->
-For example, the red points in the two panels of the first plot could be defined using one `geom_point` with a larger data set (Hint: use `data.table::melt` with `measure.vars=c("cum.prob", "probability")`.
+Par exemple, les points rouges dans les deux panneaux du premier graphique pourraient être définis à l'aide d'un seul `geom_point` avec un ensemble de données plus important (Conseil : utilisez `data.table::melt` avec `measure.vars=c("cum.prob", "probability")`).
 <!-- comment -->
-- Create a similar sequence of data visualizations for the [Binomial regression](https://en.wikipedia.org/wiki/Binomial_regression) model.
+- Créez une séquence similaire de visualisation des données pour le modèle de [Régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression).
 
 <!-- paragraph -->
 
-Next, [Chapter 14](../Ch14/Ch14-PeakSegJoint.html) explains how to use the named clickSelects/showSelected to visualize the PeakSegJoint machine learning model with data-driven selector variables.
+Dans le [chapitre 14](../Ch14/Ch14-PeakSegJoint.html), nous vous expliquerons comment utiliser les `clickSelects/showSelected` explicites pour visualiser le modèle d'apprentissage automatique PeakSegJoint avec des variables de sélection basées sur les données.
 
 <!-- paragraph -->
 

@@ -585,7 +585,7 @@ Ajoutez des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour 
 
 <!-- paragraph -->
 
-Ensuite, [l'annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
+Ensuite, dans le [chapitre 20](/ch19), nous expliquons la visualisation des résultats d’apprentissage artificiel avec le package `mlr3`.
 
 <!-- paragraph -->
 

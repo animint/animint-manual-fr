@@ -61,8 +61,10 @@ book:
       - Ch17/Ch17-viz.qmd
       - Ch18/Ch18-viz.qmd
       - Ch19/Ch19-viz.qmd
+      - Ch20/Ch20-viz.qmd
   appendices:
       - Ch99/Ch99-viz.qmd
+      - references.qmd
 
 bibliography: refs.bib
 

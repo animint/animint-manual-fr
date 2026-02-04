@@ -24,7 +24,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Graphiques statiques {#static}
+## Graphiques statiques {#bike-static}
 
 <!-- paragraph -->
 
@@ -39,6 +39,7 @@ tryCatch({
   data(montreal.bikes, package="animint2")
 }, warning=function(w){
   devtools::install_github("animint/animint2")
+  data(montreal.bikes, package="animint2")
 })
 ```
 
@@ -57,7 +58,6 @@ Pour commencer, nous affichons le tableau de données des compteurs de vélos.
 ```{r counterRange}
 mois_str <- function(POSIXct)strftime(POSIXct, "%Y-%m")
 library(data.table)
-
 (passages_dt <- data.table(montreal.bikes$counter.counts)[, .(
   lieu = location,
   date,
@@ -765,7 +765,7 @@ La sortie ci-dessus contient 4 graphiques :
 <!-- comment -->
 * En bas à droite : lieux des compteurs sur le plan de Montréal.
 
-## Résumé du chapitre et exercices {#exercises}
+## Résumé du chapitre et exercices {#ch09-exercises}
 
 Nous avons vu plusieurs graphiques pour visualiser les séries temporelles en rapport avec les vélos de Montréal.
 
