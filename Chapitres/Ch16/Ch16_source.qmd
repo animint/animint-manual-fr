@@ -352,11 +352,11 @@ gg.intervals
 
 Les intervalles cibles dans le graphique ci-dessus indiquent la région de l'espace log(lambda) qui sélectionnera un modèle avec des erreurs d'étiquette minimales.
 <!-- comment -->
-Il y a un intervalle pour chaque signal ; nous avons fait un animint dans la section précédente pour le signal indiqué en noir.
+Il y a un intervalle pour chaque signal ; nous avons fait un `animint` dans la section précédente pour le signal indiqué dans le texte en noir.
 <!-- comment -->
 Des algorithmes d'apprentissage automatique peuvent être utilisés pour trouver une fonction de pénalité qui coupe chacun des intervalles et maximise la marge (la distance entre la fonction de régression et la limite de l'intervalle le plus proche).
 <!-- comment -->
-Les données pour la fonction de régression linéaire de la marge maximale sont dans `intreg$model` ce qui est illustré dans le tracé ci-dessous :
+Les données pour la fonction de régression linéaire de la marge maximale sont dans `intreg$model` ce qui est illustré dans le graphique ci-dessous :
 
 <!-- paragraph -->
 
@@ -379,7 +379,7 @@ gg.mm
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre la fonction de régression linéaire de la marge maximale f(x) sous la forme d'une ligne rouge continue.
+Le graphique ci-dessus montre la fonction de régression linéaire de la marge maximale f(x) sous la forme d'une ligne rouge pleine.
 <!-- comment -->
 Il est clair qu'elle coupe chacun des intervalles cibles noirs et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
@@ -387,7 +387,7 @@ Pour plus d'informations sur le thème de la détection supervisée des points d
 
 <!-- paragraph -->
 
-Maintenant que vous savez comment visualiser chacune des sept parties du `intreg` de données, le reste du chapitre est consacré à des exercices.
+Maintenant que vous savez comment visualiser chacune des sept parties du jeu de données `intreg`, le reste du chapitre est consacré à des exercices.
 
 <!-- paragraph -->
 
@@ -399,39 +399,39 @@ Exercices :
 
 <!-- paragraph -->
 
-- Ajouter un `geom_text()` qui affiche le nom du signal actuellement sélectionné en haut du graphique, en `interactive.models` dans la première animation ci-dessus.
+- Ajouter un `geom_text()` qui affiche le nom du signal actuellement sélectionné en haut du graphique, en `interactive.models` dans le premier `animint` ci-dessus.
 <!-- comment -->
 - Créez une animation avec deux graphiques qui montre l'ensemble de données correspondant à chaque intervalle sur le graphique de régression de la marge maximale.
 <!-- comment -->
 L'un des graphiques doit montrer une version interactive du graphique de régression de la marge maximale où vous pouvez cliquer sur un intervalle pour sélectionner un signal.
 <!-- comment -->
-L'autre graphique doit afficher l'ensemble des données pour le signal sélectionné.
+L'autre graphique doit afficher le jeu de données pour le signal sélectionné.
 <!-- comment -->
-- Dans l'animint que vous avez créé dans l'exercice précédent, ajoutez un troisième graphique avec la fonction de sélection de modèle pour le signal actuellement sélectionné.
+- Dans l'`animint` que vous avez créé dans l'exercice précédent, ajoutez un troisième graphique avec la fonction de sélection de modèle pour le signal actuellement sélectionné.
 <!-- comment -->
-- Refondez l'animint précédent de sorte qu'au lieu d'utiliser un troisième graphique, ajoutez une facette au graphique de régression de la marge maximale de sorte que les axes log(lambda) soient tracés.
+- Dans la visualisation précédente, enlever le troisième graphique, et ajoutez une facette avec les mêmes informations au graphique de régression, avec les axes alignés.
 <!-- comment -->
 Ajoutez une autre facette qui indique le nombre d'étiquettes incorrectes (`intreg$selection$cost`) pour chaque valeur de log(lambda).
 <!-- comment -->
-- Ajouter des geoms pour sélectionner le nombre de segments.
+- Ajoutez des geoms pour sélectionner le nombre de segments.
 <!-- comment -->
-En cliquant sur le tracé de sélection du modèle, on devrait sélectionner le nombre de segments, ce qui devrait mettre à jour le modèle affiché et les erreurs d'étiquette sur le graphique des données pour le signal actuellement sélectionné.
+En cliquant sur le graphique de sélection du modèle, on devrait sélectionner le nombre de segments, ce qui devrait mettre à jour le modèle affiché et les erreurs d'étiquette sur le graphique des données pour le signal actuellement sélectionné.
 <!-- comment -->
-En outre, ajouter une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
+En outre, ajoutez une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
-Le résultat devrait ressembler à quelque chose comme [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-01-28-Max-margin-interval-regression-for-supervised-segmentation-model-selection/index.html).
+Le résultat devrait ressembler à quelque chose [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-01-28-Max-margin-interval-regression-for-supervised-segmentation-model-selection/index.html).
 <!-- comment -->
-- Créez une autre visualisation des données en commençant par la facette `gg.signals` au début de ce chapitre.
+- Créez une autre visualisation des données en repartant du graphique à facettes `gg.signals` présenté au début de ce chapitre.
 <!-- comment -->
-Ajouter un graphique permettant de sélectionner le nombre de segments pour chaque signal.
+Ajoutez un graphique permettant de sélectionner le nombre de segments pour chaque signal.
 <!-- comment -->
-Pour chaque signal dans le graphique à facettes des données, montrez le modèle actuellement sélectionné pour ce signal (il devrait y avoir une variable de sélection distincte pour chaque signal -- vous pouvez utiliser les variables nommées `clickSelects` et `showSelected` comme expliqué dans [chapitre 14](/ch14)).
+Pour chaque signal dans le graphique à facettes des données, montrez le modèle actuellement sélectionné pour ce signal (il devrait y avoir une variable de sélection distincte pour chaque signal -- vous pouvez utiliser les `clickSelects` et `showSelected` nommés comme expliqué dans le [chapitre 14](/ch14)).
 <!-- comment -->
-Le résultat devrait ressembler à quelque chose comme [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
+Le résultat devrait ressembler à quelque chose [comme ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 17](/ch17) explique comment visualiser l'algorithme d'agrégation des K-moyennes.
+Dans le [chapitre 17](/ch17), nous vous expliquerons comment visualiser l'algorithme d'agrégation des K-moyennes.
 
 <!-- paragraph -->
 
