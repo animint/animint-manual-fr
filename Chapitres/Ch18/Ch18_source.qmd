@@ -1,4 +1,4 @@
-# Neural networks
+# Réseaux neuronaux
 
 <!-- paragraph -->
 
@@ -11,29 +11,29 @@ if(FALSE){
 
 <!-- paragraph -->
 
-In this chapter we will explore several data visualizations of the gradient descent learning algorithm for Neural networks.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l'algorithme d'apprentissage par descente de gradient pour les réseaux neuronaux.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by simulating and visualizing some 2d data for binary classification.
+- Nous commençons par simuler et visualiser quelques données 2d pour une classification binaire.
 <!-- comment -->
-- We then show how a classification function in 2d can be visualized by computing predictions on a grid, and then using `geom_tile()` or `geom_path()` with contour lines.
+- Nous montrons ensuite comment une fonction de classification en 2d peut être visualisée en calculant les prédictions sur une grille, puis en utilisant `geom_tile()` ou `geom_path()` avec des lignes de contour.
 <!-- comment -->
-- We compute linear model predictions, and gradient descent updates, using a simple automatic differentiation (auto-grad) system.
+- Nous calculons les prédictions du modèle linéaire et les mises à jour de la descente de gradient à l'aide d'un système simple de différenciation automatique (auto-grad).
 <!-- comment -->
-- We end by implementing gradient descent for a neural network, and using an interactive data visualization to show how the predictions get more accurate with iterations of the learning algorithm.
+- Nous terminons en implémentant la descente de gradient pour un réseau neuronal, et en utilisant une visualisation des données interactive pour montrer comment les prédictions deviennent plus précises avec les itérations de l'algorithme d'apprentissage.
 
 <!-- paragraph -->
 
-## Visualize simulated data {#viz-sim}
+## Visualisation des données simulées {#viz-sim}
 
 <!-- paragraph -->
 
-In this section, we simulate a simple data set with a non-linear pattern for binary classification.
+Dans cette section, nous simulons un ensemble de données simple avec un motif non linéaire pour la classification binaire.
 
 <!-- paragraph -->
 
@@ -47,9 +47,9 @@ head(features.hidden)
 
 <!-- paragraph -->
 
-In the simulation, the data table above has the "hidden" features which are used to create the labels, but are not available for learning.
+Dans la simulation, le tableau de données ci-dessus comporte les variables cachées (`hidden`) qui sont utilisées pour créer les étiquettes, mais ne sont pas disponibles pour l'apprentissage.
 <!-- comment -->
-The latent/true function used for classification is the following,
+La fonction latente/vraie utilisée pour la classification est la suivante,
 
 <!-- paragraph -->
 
@@ -63,7 +63,7 @@ table(label.vec)
 
 <!-- paragraph -->
 
-The binary labels above are created from the hidden features, but for learning we only have access to the noisy features below,
+Les étiquettes binaires ci-dessus sont créées à partir des caractéristiques cachées, mais pour l'apprentissage, nous n'avons accès qu'aux caractéristiques bruitées ci-dessous,
 
 <!-- paragraph -->
 
@@ -75,7 +75,7 @@ head(features.noisy)
 
 <!-- paragraph -->
 
-To plot the data and visualize the pattern, we use the code below,
+Pour tracer les données et visualiser le motif, nous utilisons le code ci-dessous,
 
 <!-- paragraph -->
 
@@ -92,23 +92,23 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above shows each row in the data set as a point, with the two features on the two axes, and the two labels in two different colors.
+Le graphique ci-dessus montre chaque ligne de l'ensemble de données comme un point, avec les deux caractéristiques sur les deux axes, et les deux étiquettes dans deux couleurs différentes.
 <!-- comment -->
-The lower right part of the feature space tends to have positive labels, and the left and top areas have negative labels.
+La partie inférieure droite de l'espace des caractéristiques a tendance à avoir des étiquettes positives, et les zones gauche et supérieure ont des étiquettes négatives.
 <!-- comment -->
-This is the pattern that the neural network will learn.
+Il s'agit du motif que le réseau neuronal va apprendre.
 <!-- comment -->
-To properly train a neural network, we need to split the data into two sets:
+Pour former correctement un réseau neuronal, nous devons diviser les données en deux ensembles :
 
 <!-- paragraph -->
 
-- subtrain: used to compute gradients, which are used to update weight parameters, and predicted values.
+- subtrain : utilisé pour calculer les gradients, qui servent à mettre à jour les paramètres de pondération, et les valeurs prédites.
 <!-- comment -->
-With enough iterations/epochs of the gradient descent learning algorithm, and a powerful enough neural network model (large enough number of hidden units/layers), it should be possible to get perfect prediction on the subtrain set.
+Avec un nombre suffisant d'itérations/époques de l'algorithme d'apprentissage par descente de gradient et un modèle de réseau neuronal suffisamment puissant (nombre suffisant d'unités/couches cachées), il devrait être possible d'obtenir une prédiction parfaite sur l'ensemble de sous-entraînement.
 <!-- comment -->
-- validation: used to avoid overfitting.
+- validation : utilisée pour éviter le surajustement.
 <!-- comment -->
-By computing the prediction error on the validation set, and choosing the number of gradient descent iterations/epochs which minimizes the validation error, we can ensure the learned model has good generalization properties (provides good predictions on not only the subtrain set, but also new data points like in the validation set).
+En calculant l'erreur de prédiction sur l'ensemble de validation et en choisissant le nombre d'itérations/époques de descente du gradient qui minimise l'erreur de validation, nous pouvons nous assurer que le modèle appris possède de bonnes propriétés de généralisation (il fournit de bonnes prédictions non seulement sur l'ensemble de sous-entraînement, mais aussi sur de nouveaux points de données comme dans l'ensemble de validation).
 
 <!-- paragraph -->
 
@@ -122,9 +122,9 @@ table(set.vec)
 
 <!-- paragraph -->
 
-The code above is used to randomly assign half of the data into each of the subtrain and validation sets.
+Le code ci-dessus est utilisé pour affecter aléatoirement la moitié des données à chacun des ensembles de sous-entraînement et de validation.
 <!-- comment -->
-Below, we plot the two sets in separate facets,
+Ci-dessous, nous traçons les deux ensembles dans des facettes séparées,
 
 <!-- paragraph -->
 
@@ -140,13 +140,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-## Visualize Bayes optimal classification function {#viz-bayes-fun}
+## Visualiser la fonction de classification optimale de Bayes {#viz-bayes-fun}
 
 <!-- paragraph -->
 
-To visualize the optimal/Bayes decision boundary, we need to evaluate the function on a 2d grid of points that spans the feature space.
+Pour visualiser la limite de décision optimale/Bayes, nous devons évaluer la fonction sur une grille de points 2d qui couvre l'espace des caractéristiques.
 <!-- comment -->
-To create such a grid, we first create a list which contains the two 1d grids for each feature,
+Pour créer une telle grille, nous commençons par créer une liste contenant les deux grilles 1d pour chaque caractéristique,
 
 <!-- paragraph -->
 
@@ -158,7 +158,7 @@ To create such a grid, we first create a list which contains the two 1d grids fo
 
 <!-- paragraph -->
 
-Then we use `CJ` (cross-join) to create a data table representing the 2d grid, for which we evaluate the best/Bayes classification function,
+Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données représentant la grille 2d, pour laquelle nous évaluons la fonction de classification best/Bayes,
 
 <!-- paragraph -->
 
@@ -174,7 +174,7 @@ Then we use `CJ` (cross-join) to create a data table representing the 2d grid, f
 
 <!-- paragraph -->
 
-The best classifier is visualized below in the feature space,
+La meilleure (`best`) fonction de classification est visualisée ci-dessous dans l'espace des variables d’entrée.
 
 <!-- paragraph -->
 
@@ -193,9 +193,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-The plot above shows that even using the best possible function, there are still some prediction errors (points on a background of different color).
+Le graphique ci-dessus montre que même en utilisant la meilleure fonction possible, il subsiste des erreurs de prédiction (points sur fond de couleur différente).
 <!-- comment -->
-Another way to visualize that best classification function is via the decision boundary, which can be computed using the code below,
+Une autre façon de visualiser la meilleure fonction de classification est d'utiliser la limite de décision, qui peut être calculée à l'aide du code ci-dessous,
 
 <!-- paragraph -->
 
@@ -220,7 +220,7 @@ get_boundary <- function(score){
 
 <!-- paragraph -->
 
-The best decision boundary is visualized in the feature space below,
+La meilleure limite de décision est visualisée dans l'espace des caractéristiques ci-dessous,
 
 <!-- paragraph -->
 
@@ -238,17 +238,17 @@ ggplot()+
 
 <!-- paragraph -->
 
-## Forward and back propagation in linear model {#forward-back-prop-linear}
+## Propagation avant et arrière dans un modèle linéaire {#forward-back-prop-linear}
 
 <!-- paragraph -->
 
-To implement the gradient descent algorithm for learning neural network model parameters, we will use a simple auto-grad system.
+Pour implémenter l'algorithme de descente de gradient pour l'apprentissage des paramètres du modèle de réseau de neurones, nous utiliserons un système simple d'auto-grad.
 <!-- comment -->
-Auto-grad is the idea that the neural network model structure should be defined once, and that structure should be used to derive both the forward (prediction) and backward (gradient) propagation computations.
+L'idée de l'auto-grad est que la structure du modèle de réseau neuronal doit être définie une seule fois et que cette structure doit être utilisée pour dériver les calculs de propagation vers l'avant (prédiction) et vers l'arrière (gradient).
 <!-- comment -->
-Below we use a simple auto-grad system where each node in the computation graph is represented by an R environment (a mutable data structure, necessary so that the gradients are back-propagated to all the model parameters).
+Nous utilisons ci-dessous un système auto-grad simple où chaque nœud du graphe de calcul est représenté par un environnement R (une structure de données mutable, nécessaire pour que les gradients soient rétropropagés à tous les paramètres du modèle).
 <!-- comment -->
-The function below is a constructor for the most basic building block of the auto-grad system, a node in the computation graph:
+La fonction ci-dessous est un constructeur pour l'élément le plus élémentaire du système auto-grad, un nœud dans le graphe de calcul :
 
 <!-- paragraph -->
 
@@ -271,21 +271,21 @@ new_node <- function(value, gradient=NULL, ...){
 
 <!-- paragraph -->
 
-The code in the function above starts by creating a new environment, then populates it with three objects:
+Le code de la fonction ci-dessus commence par créer un nouvel environnement, puis le remplit avec trois objets :
 
 <!-- paragraph -->
 
-- `value` is a matrix computed by forward propagation at this node in the computation graph.
+- `value` est une matrice calculée par propagation vers l'avant à ce nœud du graphe de calcul.
 <!-- comment -->
-- `parent.list` is a list of parent nodes, each of which is used to compute `value`.
+- `parent.list` est une liste de nœuds parents, chacun d'entre eux étant utilisé pour calculer `value`.
 <!-- comment -->
-- `backward` is a function which should be called by the user on the final/loss node in the computation graph.
+- `backward` est une fonction qui doit être appelée par l'utilisateur sur le nœud final/de perte dans le graphe de calcul.
 <!-- comment -->
-It calls `gradient`, which should compute the gradient of the loss with respect to the parent nodes, which are stored in the `grad` attribute in each corresponding parent node, before recursively calling `backward` on each parent node.
+Elle appelle `gradient` qui doit calculer le gradient de la perte par rapport aux nœuds parents, qui sont stockés dans l'attribut `grad` dans chaque nœud parent correspondant, avant d'appeler récursivement `backward` sur chaque nœud parent.
 
 <!-- paragraph -->
 
-The simplest kind of node is an initial node, defined by the code below,
+Le type de nœud le plus simple est le nœud initial, défini par le code ci-dessous,
 
 <!-- paragraph -->
 
@@ -297,9 +297,9 @@ initial_node <- function(mat){
 
 <!-- paragraph -->
 
-The code above says that an initial node simply stores the input matrix `mat` as the value, and has a `gradient` method that does nothing (because initial nodes in the computation graph have no parents for which gradients could be computed).
+Le code ci-dessus indique qu'un nœud initial stocke simplement la matrice d'entrée `mat` comme valeur, et a une fonction `gradient` qui ne fait rien (parce que les nœuds initiaux dans le graphe de calcul n'ont pas de parents pour lesquels des gradients pourraient être calculés).
 <!-- comment -->
-The code below defines `mm`, a node in the computation graph which represents a matrix multiplication,
+Le code ci-dessous définit `mm` un noeud dans le graphe de calcul qui représente une multiplication de matrice,
 
 <!-- paragraph -->
 
@@ -315,11 +315,11 @@ mm <- function(feature.node, weight.node)new_node(
 
 <!-- paragraph -->
 
-The `mm` definition above assumes that there is a weight node with the same number of rows as the number of columns (plus one for intercept) in the feature node.
+La définition de `mm` ci-dessus suppose qu'il existe un nœud de pondération ayant le même nombre de lignes que le nombre de colonnes (plus une pour l'ordonnée à l'origine) dans le nœud pour les variables d’entrée.
 <!-- comment -->
-The forward/value and gradient computations use matrix multiplication.
+Les calculs d'avance/valeur et de gradient utilisent la multiplication matricielle.
 <!-- comment -->
-For instance, we can use`mm` as follows to define a simple linear model,
+Par exemple, nous pouvons utiliser `mm` de la manière suivante pour définir un modèle linéaire simple,
 
 <!-- paragraph -->
 
@@ -332,9 +332,9 @@ str(linear.pred.node$value)
 
 <!-- paragraph -->
 
-It can be seen in the code above that the `mm` function returns a node representing predicted values, one for each row in the feature matrix.
+On peut voir dans le code ci-dessus que la fonction `mm` renvoie un nœud représentant les valeurs prédites, un pour chaque ligne de la matrice des variables d’entrée).
 <!-- comment -->
-To use the gradient features we need a loss function, which in the case of binary classification is the logistic (cross-entropy) loss,
+Pour utiliser les caractéristiques de gradient, nous avons besoin d'une fonction de perte qui, dans le cas de la classification binaire, est la perte logistique (entropie croisée),
 
 <!-- paragraph -->
 
@@ -351,9 +351,9 @@ log_loss <- function(pred.node, label.node)new_node(
 
 <!-- paragraph -->
 
-The code above defines the logistic loss and gradient, assuming the label is either -1 or 1, and the prediction is a real number (not necessarily between 0 and 1, maybe negative).
+Le code ci-dessus définit la perte logistique et le gradient, en supposant que l'étiquette est soit -1, soit 1, et que la prédiction est un nombre réel (pas nécessairement entre 0 et 1, peut-être négatif).
 <!-- comment -->
-The code below creates nodes for the labels and loss,
+Le code ci-dessous crée des noeuds pour les étiquettes et la perte,
 
 <!-- paragraph -->
 
@@ -365,11 +365,11 @@ loss.node$value
 
 <!-- paragraph -->
 
-Now that we have computed the loss, we can compute the gradient of the loss with respect to the weights, which is used to perform the updates during learning.
+Maintenant que nous avons calculé la perte, nous pouvons calculer le gradient de la perte par rapport aux pondérations, qui est utilisé pour effectuer les mises à jour pendant l'apprentissage.
 <!-- comment -->
-Remember that we should now call`backward` (on the subtrain loss), which should eventually store the gradient as `weight.node$grad`.
+Rappelez-vous que nous devons maintenant appeler `backward` (sur la perte de sous-entrainement), qui devrait finalement stocker le gradient en tant que `weight.node$grad`.
 <!-- comment -->
-Below we first verify that it has not yet been computed, then we compute it:
+Ci-dessous, nous vérifions d'abord qu'il n'a pas encore été calculé, puis nous le calculons :
 
 <!-- paragraph -->
 
@@ -381,11 +381,11 @@ weight.node$grad
 
 <!-- paragraph -->
 
-Note that since `loss.node` contains recursive back-references to its parent nodes (including predictions and weights), the `backward` call above is able to conveniently compute and store `weight.node$grad`, the gradient of the loss with respect to the weight parameters.
+Notez que, puisque `loss.node` contient des références récursives à ses nœuds parents (y compris les prédictions et les pondérations), l'appel `backward` ci-dessus est capable de calculer et de stocker de manière pratique `weight.node$grad`, le gradient de la perte par rapport aux paramètres de pondération.
 <!-- comment -->
-The gradient is the direction of steepest ascent, meaning the direction weights could be modified to maximize the loss.
+Le gradient est la direction de la montée la plus raide, ce qui signifie que les pondérations de direction pourraient être modifiées pour maximiser la perte.
 <!-- comment -->
-Because we want to minimize the loss, the learning algorithm performs updates in the negative gradient direction, of steepest descent.
+Comme nous voulons minimiser la perte, l'algorithme d'apprentissage effectue des mises à jour dans la direction du gradient négatif, de la descente la plus raide.
 
 <!-- paragraph -->
 
@@ -395,15 +395,15 @@ Because we want to minimize the loss, the learning algorithm performs updates in
 
 <!-- paragraph -->
 
-In gradient descent for this linear model, we update the weight vector in this direction.
+En descente de gradient pour ce modèle linéaire, nous mettons à jour le vecteur de pondération dans cette direction.
 <!-- comment -->
-Each update to the weight vector is referred to as an iteration or step.
+Chaque mise à jour du vecteur de pondération est appelée itération ou étape.
 <!-- comment -->
-A small step in this direction is guaranteed to decrease the loss, but too small of a step will not make much progress toward minimizing the loss.
+Un petit pas dans cette direction garantit une diminution de la perte, mais un pas trop petit ne permet pas de faire beaucoup de progrès vers la minimisation de la perte.
 <!-- comment -->
-It is unknown how far in this direction is best, so we typically need to search over a grid of step sizes (aka learning rates).
+On ne sait pas jusqu'où il est préférable d'aller dans cette direction, c'est pourquoi il faut généralement chercher dans une grille de tailles de pas (ou de taux d'apprentissage).
 <!-- comment -->
-Or we can perform a line search, which means making the following plot of loss as a function of step size, then choosing the step size with minimal loss.
+Nous pouvons également effectuer une recherche linéaire, c'est-à-dire tracer le graphique suivant de la perte en fonction de la taille du pas, puis choisir la taille du pas avec la perte minimale.
 
 <!-- paragraph -->
 
@@ -427,26 +427,25 @@ ggplot()+
       "min loss=%f at step size=%.1f",
       loss, step.size)),
     data=line.search.min,
-    size=4,
     hjust=0,
     vjust=1.5)
 ```
 
 <!-- paragraph -->
 
-The plot above shows that the min loss occurs at a step size of about 3, which means that the line search would choose that step size for this gradient descent parameter update/iteration, before re-computing the gradient in the next iteration.
+Le graphique ci-dessus montre que la perte minimale se produit à une taille de pas d'environ 3, ce qui signifie que la recherche linéaire choisirait cette taille de pas pour cette mise à jour/itération des paramètres de descente de gradient, avant de recalculer le gradient à l'itération suivante.
 
 <!-- paragraph -->
 
-## Neural network learning {#neural-network-learning}
+## Apprentissage par réseau neuronal {#neural-network-learning}
 
 <!-- paragraph -->
 
-Defining a linear model in the previous section was relatively simple, because there is only one weight matrix parameter (actually, a weight vector, with the same number of elements as the number of columns/features, plus one for an intercept).
+La définition d'un modèle linéaire dans la section précédente était relativement simple, car il n'y a qu'un seul paramètre de matrice de pondération (en fait, un vecteur de pondération, avec le même nombre d'éléments que le nombre de colonnes/caractéristiques, plus un pour l'ordonnée à l'origine).
 <!-- comment -->
-In contrast, a neural network has more than one weight matrix parameter to learn.
+En revanche, un réseau neuronal a plus d'un paramètre de matrice de pondération à apprendre.
 <!-- comment -->
-We initialize these weights as nodes in the code below,
+Nous initialisons ces pondérations sous forme de nœuds dans le code ci-dessous,
 
 <!-- paragraph -->
 
@@ -469,13 +468,14 @@ lapply(weight.node.list, function(node)dim(node$value))
 
 <!-- paragraph -->
 
-The output above shows that there is a single layer with 40 hidden units in the neural network, meaning there are two weight matrices to learn.
+La sortie ci-dessus montre qu'il y a une seule couche avec 40 unités cachées dans le réseau neuronal, ce qui signifie qu'il y a deux matrices de pondération à apprendre.
 <!-- comment -->
-Each of these weight matrices is used to predict the units in a given layer, from the units in the previous layer.
+Chacune de ces matrices de pondération est utilisée pour prédire les unités d'une couche donnée, à partir des unités de la couche précédente.
 <!-- comment -->
-In order to learn a prediction function which is a non-linear function of the features, each layer except for the last must have a non-linear activation function, applied element-wise to the units after matrix multiplication.
+Afin d'apprendre une fonction de prédiction qui est une fonction non linéaire des caractéristiques, chaque couche, à l'exception de la dernière, doit avoir une fonction d'activation non linéaire, appliquée élément par élément aux unités après la multiplication de la matrice.
 <!-- comment -->
-For example, a common and efficient non-linear activation function is the ReLU (Rectified Linear Units), which is implemented below,
+
+Par exemple, une fonction d'activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), qui est implémentée ci-dessous,
 
 <!-- paragraph -->
 
@@ -494,7 +494,7 @@ hidden.after.act$value[1:5,1:5]
 
 <!-- paragraph -->
 
-Note in the output above how the ReLU activation sets negative values to zero, and keeps positive values the same:
+Notez dans la sortie ci-dessus que l'activation ReLU met les valeurs négatives à zéro et maintient les valeurs positives inchangées :
 
 <!-- paragraph -->
 
@@ -503,7 +503,7 @@ Note in the output above how the ReLU activation sets negative values to zero, a
   input=seq(-5, 5, l=101)
 )[, output := relu(initial_node(input))$value][])
 ggplot()+
-  ggtitle("ReLU activation is non-linear")+
+  ggtitle("L’activation ReLU est non linéaire")+
   geom_line(aes(
     input, output),
     data=relu.dt)
@@ -511,7 +511,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Finally, the last node that we need to implement our neural network is a node for predictions, computed via the for loop over weight nodes in the function below,
+Enfin, le dernier nœud dont nous avons besoin pour implémenter notre réseau neuronal est un nœud pour les prédictions, calculé avec la boucle `for` sur les nœuds de pondération dans la fonction ci-dessous,
 
 <!-- paragraph -->
 
@@ -535,7 +535,7 @@ str(nn.pred.node$value)
 
 <!-- paragraph -->
 
-The `pred_node` function is also useful for computing predictions on the grid of features, which will be useful later for visualizing the learned function,
+La fonction `pred_node` est également utile pour calculer les prédictions sur la grille de caractéristiques, ce qui sera utile plus tard pour visualiser la fonction apprise,
 
 <!-- paragraph -->
 
@@ -547,9 +547,9 @@ str(nn.grid.node$value)
 
 <!-- paragraph -->
 
-The code below combines all of the pieces above into a gradient descent learning algorithm.
+Le code ci-dessous combine tous les éléments ci-dessus dans un algorithme d'apprentissage par descente de gradient.
 <!-- comment -->
-The hyper-parameters are the constant step size, and the maximum number of iterations.
+Les hyperparamètres sont la taille du pas constant et le nombre maximum d'itérations.
 
 <!-- paragraph -->
 
@@ -616,7 +616,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-In the code above we saved loss and predictions for all of the iterations of gradient descent, but in the code below we visualize only some of them, due to limited space:
+Dans le code ci-dessus, nous avons enregistré les pertes et les prédictions pour toutes les itérations de la descente de gradient, mais dans le code ci-dessous, nous ne visualisons que certaines d'entre elles, en raison de l'espace limité :
 
 <!-- paragraph -->
 
@@ -655,9 +655,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-From the plot above we can see that as the number of iterations increases, the predictions get more accurate.
+Le graphique ci-dessus montre qu'au fur et à mesure que le nombre d'itérations augmente, les prédictions deviennent plus précises.
 <!-- comment -->
-Finally, we conclude with an interactive plot where you can click the loss plot to select an iteration of gradient descent, for which the corresponding decision boundary is shown on the predictions plot.
+Enfin, nous terminons par un graphique interactif dans lequel vous pouvez cliquer sur le graphique des pertes pour sélectionner une itération de descente de gradient, pour laquelle la limite de décision correspondante est affichée sur le graphique des prédictions.
 
 <!-- paragraph -->
 
@@ -670,17 +670,17 @@ it.by <- 10
 some <- function(DT)DT[iteration %in% as.integer(
   seq(1, max.iterations, by=it.by))]
 animint(
-  title="Neural network vs linear model",
+  title="Réseau de neurones vs modèle linéaire",
   out.dir="neural-networks-sim",
   loss=ggplot()+
-    ggtitle("Loss/error curves, click to select model/iteration")+
+    ggtitle("Courbes de perte/erreur, cliquer pour sélectionner le modèle/l’itération")+
     theme_bw()+
     theme_animint(width=600, height=350)+
     theme(panel.margin=grid::unit(1, "lines"))+
     facet_grid(variable ~ ., scales="free")+
     scale_y_continuous("")+
     scale_x_continuous(
-      "Iteration/epoch of learning")+
+      "Itération/époque d’entraînement")+
     geom_line(aes(
       iteration, value, color=set, group=set),
       data=loss.tall)+
@@ -695,7 +695,7 @@ animint(
       clickSelects="iteration",
       data=some(loss.tall[set=="subtrain"])),
   data=ggplot()+
-    ggtitle("Learned function at selected model/iteration")+
+    ggtitle("Fonction apprise au modèle/à l’itération sélectionné(e)")+
     theme_bw()+
     theme_animint(width=600)+
     facet_grid(. ~ set, labeller="label_both")+
@@ -734,31 +734,31 @@ animint(
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#ch18-exercises}
+## Résumé du chapitre et exercices {#ch18-exercises}
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Add animation over the number of iterations.
+- Ajoutez l'animation sur le nombre d'itérations.
 <!-- comment -->
-- Add smooth transitions when changing the selected number of iterations.
+- Ajoutez des transitions fluides pour le nombre d'itérations.
 <!-- comment -->
-- Add a for loop over random seeds (or cross-validation folds) in the data splitting step, and create a visualization that shows how that affects the results.
+- Ajoutez une boucle `for` sur des graines aléatoires (ou des plis de validation croisée) dans l'étape de division des données, et créez une visualisation qui montre comment cela affecte les résultats.
 <!-- comment -->
-- Add a for loop over random seeds at the weight matrix initialization step, and create a visualization that shows how that affects the results.
+- Ajoutez une boucle `for` sur des graines aléatoires à l'étape d'initialisation de la matrice de pondération, et créez une visualisation qui montre comment cela affecte les résultats.
 <!-- comment -->
-- Compute results for another neural network architecture (and/or linear model, by adding a for loop over different values of `units.per.layer`).
+- Calculez les résultats pour une autre architecture de réseau neuronal (et/ou un modèle linéaire, en ajoutant une boucle `for` sur différentes valeurs de `units.per.layer`).
 <!-- comment -->
-Add another plot or facet which allows selecting the neural network architecture, and allows easy comparison of the min validation loss between models (for example, add facet columns to loss plot, and add horizontal lines to emphasize min loss).
+Ajoutez un autre graphique ou une facette permettant de sélectionner l'architecture du réseau neuronal et de comparer facilement la perte de validation minimale entre les modèles (par exemple, ajoutez des colonnes de facettes au graphique de perte et ajoutez des lignes horizontales pour mettre en évidence la perte minimale).
 <!-- comment -->
-- Modify the learning algorithm to use line search rather than constant step size, and then create a visualization which compares the two approaches in terms of min validation loss.
+- Modifiez l'algorithme d'apprentissage pour utiliser la recherche linéaire plutôt qu'une taille de pas constante, puis créez une visualisation qui compare les deux approches en termes de perte de validation minimale.
 
 <!-- paragraph -->
 
-Next, [Chapter 19](/ch19) explains how to visualize P-values, including how to work around overplotting, using a heat map linked to a zoomed scatter plot.
+Ensuite, dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs p) d’un test statistique.
 <!-- comment -->
 .
 
