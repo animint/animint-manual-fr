@@ -409,9 +409,9 @@ Dans la prochaine section, nous allons créer la même visualisation des donnée
 
 <!-- paragraph -->
 
-Dans cette section, nous utilisons les `clickSelects` et `showSelected` nommés pour créer une version plus efficace de la visualisation des données précédente.
+Dans cette section, nous créons une version plus efficace de la précédente visualisation des données en utilisant des `clickSelects` et des `showSelected` nommés.
 <!-- comment -->
-En général, toute visualisation des données définie à l'aide de boucles `for` dans le code R peut être rendue plus efficace en utilisant à la place cette méthode.
+En général, toute visualisation des données définie à l'aide de boucles `for` dans le code R peut être optimisée par cette méthode.
 <!-- comment -->
 Tout d'abord, nous définissons quelques données communes.
 
@@ -423,13 +423,13 @@ Tout d'abord, nous définissons quelques données communes.
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre un tableau de contingence avec une ligne par pic qui peut être affiché, pour différents échantillons, problèmes, et choix interactifs des paramètres `bases.per.problem` et `peaks`.
+La sortie ci-dessus montre un tableau avec une ligne par pic qui peut être affiché, pour différents échantillons, problèmes, et choix interactifs des variables `bases.per.problem` et `peaks`.
 <!-- comment -->
-Notez que la colonne `problem.dot` qui définit le nom du sélecteur qui stockera le nombre de pics actuellement sélectionné pour ce problème.
+Notez la colonne `problem.dot`: elle détermine le nom du sélecteur qui stockera le nombre de pics sélectionné pour le problème.
 
 <!-- paragraph -->
 
-Dans le code ci-dessous, l'idée principale est que pour chaque problème, il existe un sélecteur défini par la colonne `problem.dot` pour le nombre de pics dans ce problème.
+L'idée principale du code ci-dessous est celle-ci: pour chaque problème, un sélecteur est défini par la colonne `problem.dot` pour le nombre de pics dans ce problème.
 <!-- comment -->
 Nous utilisons `showSelected=c(problem.dot="peaks")` et `clickSelects=c(problem.dot="peaks")` pour indiquer que le nom du sélecteur se trouve dans la colonne `problem.dot`, et que la valeur de la sélection se trouve dans la colonne `peaks`.
 <!-- comment -->
@@ -460,7 +460,7 @@ print(timing.named.construct <- system.time({
 
 <!-- paragraph -->
 
-Il est clair qu'il faut beaucoup moins de temps pour évaluer le code R ci-dessus qui utilise les `clickSelects` et `showSelected` nommés.
+De toute évidence, le code R ci-dessus, qui utilise les `clickSelects` et `showSelected` nommés, est beaucoup plus rapide. 
 <!-- comment -->
 Nous le compilons ci-dessous.
 
@@ -524,7 +524,7 @@ data.table(
 
 <!-- paragraph -->
 
-Il ressort clairement du tableau de contingence ci-dessus que les `clickSelects` et `showSelected` nommés sont plus efficaces à ces deux égards et devraient être utilisés à la place des boucles `for`.
+Il ressort clairement du tableau de contingence ci-dessus que les `clickSelects` et `showSelected` nommés sont plus efficaces à ces deux égards et devraient être privilégiés aux boucles `for`.
 
 <!-- paragraph -->
 
@@ -532,9 +532,9 @@ Exercices :
 
 <!-- paragraph -->
 
-- Utilisez les `clickSelects` et `showSelected` nommés pour créer une visualisation illustrant le sur- et sous-ajustement, comme dans [cette visualisation du modèle linéaire et des plus proches voisins](https://tdhock.github.io/2023-12-04-degree-neighbors/).
+- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation illustrant le surapprentissage et le sous-apprentissage, comme nous l'avons fait dans [cette visualisation du modèle linéaire et des plus proches voisins](https://tdhock.github.io/2023-12-04-degree-neighbors/).
 <!-- comment -->
-- Utilisez les `clickSelects` et `showSelected` nommés pour créer une visualisation de données de votre domaine d'expertise.
+- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation de données dans votre domaine d'expertise.
 
 <!-- paragraph -->
 
