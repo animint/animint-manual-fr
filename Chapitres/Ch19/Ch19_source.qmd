@@ -1,4 +1,4 @@
-# Valeurs-p
+# Probabilités critiques (valeurs p)
 
 <!-- paragraph -->
 
@@ -11,7 +11,8 @@ if(FALSE){
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données relatives à la [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
+Dans ce chapitre, nous allons explorer plusieurs visualisations des tests statistiques.
+Plus précisement, nous allons visualiser la probabilité critique, aussi appelée la [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
 
 <!-- paragraph -->
 
