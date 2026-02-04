@@ -309,9 +309,9 @@ Ci-dessous, nous créons la carte thermique du volcan.
 
 <!-- paragraph -->
 
-Le résultat ci-dessus est une carte thermique, les régions plus foncées indiquant les zones du graphique du volcan qui ont plus de résultats de tests.
+Le résultat ci-dessus est une carte thermique, les régions plus foncées indiquant les zones du graphique volcan qui ont plus de résultats de tests.
 <!-- comment -->
-Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, en utilisant la fonction `volcano_tile` pour les relier.
+Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, en utilisant le sélecteur `volcano_tile` pour les relier.
 
 <!-- paragraph -->
 
@@ -439,17 +439,17 @@ La figure ci-dessus montre un panneau pour chacune des deux combinaisons de para
 <!-- comment -->
 L'axe des X représente `trial`, qui s'étend de 1 à 100, chacune avec différentes valeurs aléatoires simulées à l'aide des mêmes hypothèses (`true_offset=0` ou `2`).
 <!-- comment -->
-Le test T est utilisé pour déterminer s'il existe une différence de moyennes entre les deux conditions.
+Le test de Student est utilisé pour déterminer s'il existe une différence de moyennes entre les deux conditions.
 
 <!-- paragraph -->
 
-- Quand `true_offset=0` il n'y a pas de différence entre les deux conditions, de sorte que le test T devrait avoir une petite taille d'effet et une grande valeur P.
+- Quand `true_offset=0` il n'y a pas de différence entre les deux conditions, de sorte que le test de Student devrait avoir une petite taille d'effet et une grande probabilité critique.
 <!-- comment -->
-- Lorsque `true_offset=2` il y a une plus grande différence entre les deux conditions, de sorte que le test T devrait avoir une taille d'effet plus importante et une petite valeur P.
+- Lorsque `true_offset=2` il y a une plus grande différence entre les deux conditions, de sorte que le test de Student devrait avoir une taille d'effet plus importante et une petite probabilité critique.
 
 <!-- paragraph -->
 
-Le code ci-dessous crée un nouveau `significant` qui indique si le test rejette l'hypothèse nulle au seuil traditionnel de 5 %.
+Le code ci-dessous crée une nouvelle colonne `significant` qui indique si le test rejette l'hypothèse nulle au seuil traditionnel de 5 %.
 
 <!-- paragraph -->
 
@@ -534,7 +534,7 @@ Les 100 essais pour la combinaison de paramètres sélectionnée sont affichés 
 
 Nous avons créé plusieurs visualisations des données à l'aide de simulations pour illustrer les valeurs P.
 <!-- comment -->
-Comme il y avait trop de tests T à montrer sur le graphique du volcan, nous avons plutôt utilisé une carte thermique liée à un diagramme de dispersion zoomé.
+Comme il y avait trop de tests t à montrer sur le graphique volcan, nous avons plutôt utilisé une carte thermique liée à un diagramme de dispersion zoomé.
 <!-- comment -->
 Nous avons également montré comment lier une carte thermique de combinaisons de paramètres à un graphique de dispersion qui montre les détails des valeurs correspondantes dans les simulations.
 
@@ -544,13 +544,13 @@ Exercices :
 
 <!-- paragraph -->
 
-- En `viz.volcano` En cliquant sur l'un des boutons de la partie inférieure de l'écran, on obtient une vue d'ensemble de la situation. `volcanoTiles` on ne voit qu'une partie de l'espace occupé en `volcanoZoom`.
+- Dans `viz.volcano`, en cliquant sur l'une des `volcanoTiles` du bas, on ne voit qu'une partie de l'espace occupé dans `volcanoZoom`.
 <!-- comment -->
-Pour corriger ce problème et occuper tout l'espace, revenez à la définition de `round_neg.log10.p` et utiliser l'élément `offset=0.5` dans `round_rel()` qui décale les valeurs relatives d'un certain décalage.
+Pour corriger ce problème et occuper tout l'espace, revenez à la définition de `round_neg.log10.p` et utiliser l'argument `offset=0.5` dans `round_rel()` qui décale les valeurs relatives d'un certain décalage.
 <!-- comment -->
-- En `viz.volcano`, ajouter `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
+- Dans `viz.volcano`, ajoutez `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
 <!-- comment -->
-- Notez que deux `geom_tile()` ont été utilisés dans `viz.volcano` et deux `geom_rect()` ont été utilisés en `viz.parameters`.
+- Notez que deux `geom_tile()` ont été utilisés dans `viz.volcano` et deux `geom_rect()` ont été utilisés dans `viz.parameters`.
 <!-- comment -->
 Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise la fonction `fill="transparent"` avec `color="green"` pour la sélection.
 <!-- comment -->
