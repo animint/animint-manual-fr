@@ -331,7 +331,7 @@ Une façon (inefficace) d'ajouter ces éléments serait d'utiliser la boucle `fo
 <!-- comment -->
 Pour chaque problème, il existe un sélecteur (appelé `problem.dot`) pour le nombre de pics dans ce problème.
 <!-- comment -->
-Dans cette boucle `for`, nous ajoutons donc quelques couches avec `clickSelects="problem.dot"` ou `showSelected="problem.dot"` aux graphiques `coverage` et `modelSelection`.
+Dans cette boucle `for`, nous ajoutons donc quelques couches aux graphiques `coverage` et `modelSelection` à l'aide de `clickSelects="problem.dot"` ou `showSelected="problem.dot"` .
 
 <!-- paragraph -->
 
@@ -339,7 +339,7 @@ Dans cette boucle `for`, nous ajoutons donc quelques couches avec `clickSelects=
 viz.first <- viz.incomplete
 viz.first$first <- c(viz.incomplete$first, PSJ$first)
 viz.first$modelSelection <- viz.first$modelSelection+
-  ggtitle("choisir le nombre d’échantillons avec un pic dans le problème")
+  ggtitle("choisir le nombre d’échantillons ayant un pic commun")
 print(timing.for.construct <- system.time({
   viz.for <- viz.first
   viz.for$title <- "PSJ avec boucles for"
@@ -375,7 +375,7 @@ print(timing.for.construct <- system.time({
 
 <!-- paragraph -->
 
-Notez le temps d'exécution (« timing ») du code ci-dessus, qui évalue juste le code R qui définit cette visualisation des données.
+Notez le temps d'exécution du code ci-dessus, qui comprend uniquement l’évaluation du code R pour les ggplots (et non l’affichage).
 <!-- comment -->
 Ensuite, nous compilons la visualisation des données.
 
@@ -389,13 +389,13 @@ cat(elapsed.for <- Sys.time()-before.for, "seconds\n")
 
 <!-- paragraph -->
 
-Notez que la compilation prend plusieurs secondes, car il y a beaucoup de geoms (cliquez sur « Show download status table » pour les voir tous).
+Notez que la compilation nécessite plusieurs secondes, car il y a de nombreux geoms (cliquez sur « Show download status table » pour les voir tous).
 <!-- comment -->
-Par rapport à la visualisation des données de la section précédente, celle-ci a
+Par rapport à la visualisation des données de la section précédente, celle-ci présente
 
 <!-- paragraph -->
 
-- des segments bleus qui apparaissent dans le graphique des données de couverture supérieure, pour indiquer les pics prédits.
+- des segments bleus qui apparaissent dans le graphique des données de couverture supérieure, pour indiquer les pics prédits;
 <!-- comment -->
 - des rectangles de sélection qui peuvent être cliqués dans le graphique en bas à droite, pour modifier le nombre d'échantillons présentant un pic dans le problème sélectionné.
 
@@ -405,7 +405,7 @@ Dans la prochaine section, nous allons créer la même visualisation des donnée
 
 <!-- paragraph -->
 
-## Ajouter de l'interactivité à l'aide de `clickSelects` et `showSelected` nommés {#define-using-named}
+## Définition de l'interactivité à l'aide de `clickSelects` et `showSelected` nommés {#define-using-named}
 
 <!-- paragraph -->
 
