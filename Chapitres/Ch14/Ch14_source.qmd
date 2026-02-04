@@ -161,7 +161,7 @@ Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du pr
 
 <!-- paragraph -->
 
-Le tableau de contingence ci-dessus comporte une ligne par valeur de `bases.per.problem`, qui est un paramètre de taille de fenêtre coulissante, que nous allons explorer avec interactivité.
+Le tableau de contingence ci-dessus comporte une ligne par valeur de `bases.per.problem`, un paramètre de taille de fenêtre coulissante, que nous allons explorer à l'aide de l'interactivité.
 <!-- comment -->
 Nous utilisons ces données pour tracer le graphique ci-dessous.
 
@@ -191,7 +191,7 @@ Des rectangles gris seront utilisés pour sélectionner la taille du problème.
 
 <!-- paragraph -->
 
-Il existe un paramètre de pénalité qui contrôle le nombre d'échantillons avec un pic commun, comme défini dans le tableau de données de sélection de modèle dans le code ci-dessous.
+Un paramètre de pénalité contrôle le nombre d'échantillons avec un pic commun, il est défini dans le tableau de données de sélection de modèle dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -209,7 +209,7 @@ pdot <- function(L){
 
 <!-- paragraph -->
 
-Le code ci-dessus utilise la fonction `pdot()` qui utilise l'idiome [liste de tableaux de données](/ch99#list-of-data-tables) pour ajouter une colonne nommée `problem.dot`, laquelle servira ensuite à définir les sélecteurs dans la visualisation interactive.
+Le code ci-dessus utilise la fonction `pdot()` qui fait appel à la méthode [liste de tableaux de données](/ch99#list-of-data-tables) pour ajouter une colonne nommée `problem.dot`, laquelle servira ensuite à définir les sélecteurs dans la visualisation interactive.
 <!-- comment -->
 Nous traçons ci-dessous le nombre de pics et d'erreurs d'étiquettes, en fonction du paramètre de pénalité de l'algorithme.
 
@@ -229,7 +229,7 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
   log.lambda=mean(log.lambda.range),
   peaks=max(peaks)+0.5)])
 (gg.model.selection <- ggplot()+
-   scale_x_continuous("log(penalité)")+
+   scale_x_continuous("log(pénalité)")+
    geom_segment(aes(
      min.log.lambda, value,
      xend=max.log.lambda, yend=value),
@@ -251,7 +251,7 @@ modelSelection.labels <- unique(all.modelSelection[, data.table(
 
 La figure ci-dessus montre `errors` (panneau supérieur) et `peaks` (panneau inférieur) en fonction de `log(penalty)`.
 <!-- comment -->
-Là encore, cette version statique est surchargée ; l'interactivité sera utilisée pour rendre la figure lisible (n'affiche que le sous-ensemble de données correspondant aux valeurs sélectionnées de `bases.per.problem` et `problem.name`).
+Là encore, cette version statique est surchargée ; l'interactivité sera utilisée pour rendre la figure lisible (en n'affichant que le sous-ensemble de données correspondant aux valeurs sélectionnées de `bases.per.problem` et `problem.name`).
 
 <!-- paragraph -->
 
@@ -259,9 +259,9 @@ Là encore, cette version statique est surchargée ; l'interactivité sera utili
 
 <!-- paragraph -->
 
-Dans cette section, nous combinons les `ggplots` de la section précédente en une visualisation des données interactive liée.
+Dans cette section, nous combinons les `ggplots` de la section précédente pour créer une visualisation avec interactivité qui rélie les graphiques.
 <!-- comment -->
-Le code ci-dessous utilise `theme_animint()` pour attacher certaines options d'affichage au graphique de couverture précédent, et ajoute l'option `first` pour spécifier quels sous-ensembles de données doivent être affichés en premier.
+Le code ci-dessous utilise `theme_animint()` pour associer certaines options d'affichage au graphique de couverture précédent, et l'option `first` est ajoutée pour spécifier quels sous-ensembles de données doivent être affichés en premier.
 
 <!-- paragraph -->
 
@@ -301,7 +301,7 @@ Nous voyons ci-dessus une visualisation des données avec trois graphiques.
 
 <!-- paragraph -->
 
-- En haut, quatre profils de données ChIP-seq sont affichés, ainsi qu'un panneau de problèmes qui divise l'axe X en problèmes dans lesquels l'algorithme de segmentation s'exécute.
+- Dans la partie supérieure, quatre profils de données ChIP-seq sont affichés, ainsi qu'un panneau de problèmes qui divise l'axe X en sections dans lesquels l'algorithme de segmentation s'exécute.
 <!-- comment -->
 - En cliquant sur le graphique en bas à gauche, on sélectionne la taille du problème, ce qui met à jour les problèmes affichés en haut.
 <!-- comment -->
@@ -313,7 +313,7 @@ Nous voyons ci-dessus une visualisation des données avec trois graphiques.
 
 <!-- paragraph -->
 
-Dans cette section, nous ajoutons des couches aux `ggplots` précédents en utilisant une boucle `for`, ce qui est sous-optimal, mais nous le montrons à titre de comparaison avec la meilleure approche (`clickSelects` et `showSelected` nommés) qui est présentée dans la prochaine section.
+Dans cette section, nous ajoutons des couches aux `ggplots` précédents en utilisant une boucle `for`, une approche sous-optimale, que nous présentons pour la comparer à une meilleure approche (`clickSelects` et `showSelected` nommés), présentée dans la prochaine section.
 <!-- comment -->
 La visualisation de la section précédente est incomplète.
 <!-- comment -->
@@ -321,13 +321,13 @@ Nous aimerions ajouter
 
 <!-- paragraph -->
 
-- des rectangles dans le graphique en bas à gauche qui nous permettraient de sélectionner le nombre de pics prédits dans le problème donné.
+- des rectangles dans le graphique en bas à gauche pour nous permettre de sélectionner le nombre de pics prédits dans un problème donné;
 <!-- comment -->
-- des segments et des rectangles dans le graphique du haut qui montreraient les pics prédits et les erreurs d'étiquette.
+- des segments et des rectangles dans le graphique du haut pour montrer les pics prédits et les erreurs d'étiquettes.
 
 <!-- paragraph -->
 
-Une façon (inefficace) d'ajouter ces éléments serait d'utiliser une boucle `for`, codée ci-dessous.
+Une façon (inefficace) d'ajouter ces éléments serait d'utiliser la boucle `for` codée ci-dessous.
 <!-- comment -->
 Pour chaque problème, il existe un sélecteur (appelé `problem.dot`) pour le nombre de pics dans ce problème.
 <!-- comment -->
