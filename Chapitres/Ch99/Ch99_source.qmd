@@ -1,4 +1,4 @@
-# Useful R programming idioms
+# Techniques de programmation pour la visualisation
 
 <!-- paragraph -->
 
@@ -8,15 +8,15 @@ knitr::opts_chunk$set(fig.path="ch99-figures/")
 
 <!-- paragraph -->
 
-This appendix describes several R programming idioms which are useful for creating animints.
+Cette annexe décrit plusieurs techniques de programmation R qui sont utiles pour créer des animints.
 
 <!-- paragraph -->
 
-## Space saving facets {#space-saving-facets}
+## Les facettes économes en espace {#space-saving-facets}
 
 <!-- paragraph -->
 
-To emphasize the plotted data in facetted ggplots, eliminate the space between facets using the following idiom.
+Pour mettre l'accent sur les données graphiques dans les ggplots à facettes, éliminez l'espace entre les facettes à l'aide de l'idiome suivant.
 
 <!-- paragraph -->
 
@@ -30,35 +30,35 @@ ggplot()+
 
 <!-- paragraph -->
 
-There are three parts of this idiom:
+Cet idiome se compose de trois parties :
 
 <!-- paragraph -->
 
-- `panel.margin=0` eliminates space between panels.
+- `panel.margin=0` élimine l'espace entre les panneaux.
 <!-- comment -->
-- `theme_bw` activates a black and white theme (black panel borders and white panel backgrounds).
+- `theme_bw` active un thème noir et blanc (bordures de panneaux noires et arrière-plans de panneaux blancs).
 <!-- comment -->
-This is necessary in order to see the boundaries between panels, since the ggplot default `theme_grey` uses grey panel backgrounds and no panel borders.
+Ceci est nécessaire pour voir les limites entre les panneaux, puisque la fonction par défaut de ggplot `theme_grey` utilise des fonds de panneaux gris et pas de bordures de panneaux.
 <!-- comment -->
-- `facet_*` creates a multi-panel ggplot.
+- `facet_*` crée un ggplot multi-panneaux.
 
 <!-- paragraph -->
 
-Note that we use the grid unit `lines`, which equals the height of one line of text at the default size.
+Notez que nous utilisons l'unité de grille `lines` qui correspond à la hauteur d'une ligne de texte à la taille par défaut.
 <!-- comment -->
-This is the only grid unit which animint knows how to translate.
+C'est la seule unité de grille qu'animint sait traduire.
 <!-- comment -->
-It is not recommended to use other units such as `cm`.
+Il n'est pas recommandé d'utiliser d'autres unités telles que `cm`.
 
 <!-- paragraph -->
 
-## List of data tables {#list-of-data-tables}
+## Liste des tableaux de données {#list-of-data-tables}
 
 <!-- paragraph -->
 
-The list of data tables idiom is very useful for creating interactive data visualizations of arbitrary complexity.
+Le tableau de données est très utile pour créer des visualisations de données interactives d'une complexité arbitraire.
 <!-- comment -->
-The general form looks like
+La forme générale ressemble à
 
 <!-- paragraph -->
 
@@ -81,29 +81,29 @@ inner.data <- do.call(rbind, inner.data.list)
 
 <!-- paragraph -->
 
-Some comments:
+Quelques commentaires :
 
 <!-- paragraph -->
 
-- The first part of the idiom involves initializing empty lists.
+- La première partie de l'idiome consiste à initialiser des listes vides.
 <!-- comment -->
-Here there are two, `outer.data.list` and `inner.data.list`.
+Ici, il y en a deux, `outer.data.list` et `inner.data.list`.
 <!-- comment -->
-However there can be as many as necessary.
+Toutefois, il peut y en avoir autant que nécessaire.
 <!-- comment -->
-- The second part of the idiom is a bunch of nested for loops that assign data tables to elements of those lists.
+- La deuxième partie de l'idiome est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
 <!-- comment -->
-- Functions like `computeOuter` and `computeInner` can be used, or you can just do the computations directly inside the for loop.
+- Des fonctions comme `computeOuter` et `computeInner` peuvent être utilisées, ou vous pouvez simplement effectuer les calculs directement dans la boucle for.
 <!-- comment -->
-- To ensure that your code will run as fast as possible, use matrix-vector or vector-scalar operations in the innermost for loop.
+- Pour que votre code soit aussi rapide que possible, utilisez les opérations matrice-vecteur ou vecteur-scalaire dans la boucle for la plus interne.
 <!-- comment -->
-If you only do scalar-scalar operations in your innermost for loop, then you can definitely improve the performance of your code by removing that for loop and re-writing the computation in terms of vector-scalar operations.
+Si vous n'effectuez que des opérations scalaires-scalaires dans votre boucle for interne, vous pouvez certainement améliorer les performances de votre code en supprimant cette boucle for et en réécrivant le calcul en termes d'opérations vectorielles-scalaires.
 <!-- comment -->
-- The `paste` function is used to assign a `data.table` to a named list element.
+- `paste()` est utilisée pour créer un nom pour le `data.table` dans la liste de résultats.
 <!-- comment -->
-Although in principle one could use either `data.frame` or `data.table`, in practice `data.table` is often much faster during the last combination step.
+En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
 <!-- comment -->
-- The last part of the idiom uses `do.call` with `rbind` to combine the data tables stored during the for loops.
+- La dernière partie de l'idiome utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
 
 <!-- paragraph -->
 
@@ -111,9 +111,9 @@ Although in principle one could use either `data.frame` or `data.table`, in prac
 
 <!-- paragraph -->
 
-This idiom is useful for creating multi-panel ggplots with aligned axes.
+Cet idiome est utile pour créer des ggplots multi-panneaux avec des axes alignés.
 <!-- comment -->
-First, define a function which takes as input a data table and one or more values which will be used to add factors to that data table.
+Tout d'abord, définissez une fonction qui prend en entrée un tableau de données et une ou plusieurs valeurs qui seront utilisées pour ajouter des facteurs à ce tableau de données.
 
 <!-- paragraph -->
 
@@ -138,17 +138,17 @@ animint(
 
 <!-- paragraph -->
 
-Note that `scales="free"` and `xlab("")` are used since the x axes now have very different units (year and life expectancy).
+Notez que `scales="free"` et `xlab("")` sont utilisés car les axes x ont maintenant des unités très différentes (année et espérance de vie).
 
 <!-- paragraph -->
 
-## Manual color legends {#manual-color-legends}
+## Légendes de couleurs manuelles {#manual-color-legends}
 
 <!-- paragraph -->
 
-Color and fill legends in `ggplot2` can be manually specified via `scale_color_manual` and `scale_fill_manual`.
+On peut utiliser `scale_color_manual()` et `scale_fill_manual()` pour préciser les couleurs dans les légendes pour `aes(color)` et `aes(fill)`.
 <!-- comment -->
-Typically we will choose one of the ColorBrewer palettes:
+En règle générale, nous choisissons l'une des palettes ColorBrewer :
 
 <!-- paragraph -->
 
@@ -158,7 +158,7 @@ RColorBrewer::display.brewer.all()
 
 <!-- paragraph -->
 
-For example to get the R code for the Set1 palette, we can write
+Par exemple, pour obtenir le code R de la palette Set1, nous pouvons écrire
 
 <!-- paragraph -->
 
@@ -168,7 +168,7 @@ dput(RColorBrewer::brewer.pal(7, "Set1"))
 
 <!-- paragraph -->
 
-We can then copy that R code from the terminal and paste it into our text editor
+Nous pouvons ensuite copier ce code R depuis le terminal et le coller dans notre éditeur de texte
 
 <!-- paragraph -->
 
@@ -183,7 +183,7 @@ region.colors
 
 <!-- paragraph -->
 
-Then we can use it with `scale_color_manual`
+Nous pouvons ensuite l'utiliser avec `scale_color_manual()`.
 
 <!-- paragraph -->
 

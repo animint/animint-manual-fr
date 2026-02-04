@@ -1,4 +1,4 @@
-# Machine learning benchmarks
+# Apprentissage artificiel avec `mlr3`
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="ch20-figures/")
@@ -7,94 +7,94 @@ if(FALSE){
 }
 ```
 
-In this chapter we will explore several data visualizations related to benchmarking machine learning algorithms using the `mlr3` framework.
+Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel; nous utiliserons des packages `mlr3`.
 
 <!-- comment -->
 
-* We begin by explaining the advantages of the `mlr3` framework.
+* Nous démontrons d'abord la pertinence des packages `mlr3` pour la comparaison d'algorithmes d’apprentissage artificiel.
 <!-- comment -->
-* We use `mlr3` to define and execute a benchmark comparison using several binary classification problems, and several learning algorithms (nearest neighbors, linear model, neural networks).
+* Nous utilisons ensuite `mlr3` pour définir et exécuter une évaluation comparative de plusieurs problèmes de classification binaire, et de plusieurs algorithmes d’apprentissage (plus proches voisins, modèles linéaires, réseaux de neurones).
 <!-- comment -->
-* We create various plots of test set error rates and Area Under the ROC curve.
+* Nous générons différents graphiques de taux d’erreur et d’aire sous la courbe ROC.
 <!-- comment -->
-* We show how to add interactivity to ROC curves, including several levels of detail (data set, cross-validation iteration, FPR threshold).
+* Nous ajoutons l’interactivité aux courbes ROC, pour présenter plusieurs niveaux de détail (données, itération de validation croisée, seuil des faux positifs).
 <!-- comment -->
-* We plot validation set metrics, which are used to check model selection, and we discuss signs of over- and under-fitting.
+* Nous visualisons les mesures de fidélité et d’erreur par rapport à l’ensemble de validation, pour confirmer que le surapprentissage et le sous-apprentissage ont été évités.
 
 <!-- comment -->
 
-## What is `mlr3`? {#what-is-mlr3}
+## Avantages de `mlr3` {#avantages-mlr3}
 
 <!-- comment -->
 
-There are many different packages which implement machine learning algorithms that can be used in R. For example,
+Plusieurs packages R proposent des algorithmes d’apprentissage artificiel, par exemple :
 
 <!-- comment -->
 
-* `library(kknn)` provides K-Nearest Neighbors, which was explained in [Chapter 10](/ch10).
+* `library(kknn)` offre des K Plus Proches Voisins (KPPV), présentés dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` provides L1-regularized linear models like the Lasso, which was explained in [Chapter 11](/ch11).
+* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le LASSO, que nous avons explorés dans le [chapitre 11](/ch11).
 <!-- comment -->
-* `library(torch)` provides neural networks, which were explained in [Chapter 18](/ch18).
+* `library(torch)` offre des réseaux des neurones, exposés dans le [chapitre 18](/ch18).
 
 <!-- comment -->
 
-When we want to machine learning to create a predictive model for a given data set, we typically want to try a variety of different algorithms, because we do not know in advance which algorithm will be most accurate for a given data set.
+Pour obtenir de bons résultats de prédiction sur un jeu de données, nous entraînons plusieurs algorithmes, car nous ignorons quel algorithme aura les meilleures performances pour ces données.
 <!-- comment -->
-So we would like to run the learning algorithms which are implemented in these different R packages, and standardized the results so they can be analyzed together to determine which algorithm is most accurate.
+Nous utilisons donc différents packages et analysons ensuite les résultats pour déterminer quel algorithme fournit les meilleures prédictions.
 <!-- comment -->
-Each R package provides a function for model fitting, which has a different name and API in each package (some functions input matrices, others data frames, etc).
+Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
-Typically each package provides a `predict()` method, but the output format differs between packages (some packages output class labels, others output probabilities between 0 and 1, others output a real-valued score, etc).
+En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d'un package à l'autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
 <!-- comment -->
-How can we adapt our data set to each package?
+Comment adapter un jeux de données à chaque package d’apprentissage ?
 <!-- comment -->
-And how can we convert each packages results into a standard format for analysis?
+Comment uniformiser les types de sortie pour permettre la comparaison de résultats ?
 <!-- comment -->
-The `mlr3` framework provides a useful package for this purpose [@bischl2024applied].
+Le package `mlr3` offre plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
-* Each data set is represented as a `Task` which is basically a data table with meta-data about which columns to use for inputs, outputs, etc.
+* Chaque jeu de données est représenté comme un `Task`, c'est-à-dire un tableau de données d’apprentissage accompagné de quelques métadonnées indiquant les colonnes à utiliser pour différents rôles (entrée, sortie, etc.).
 <!-- comment -->
-* Each machine learning algorithm is represented as a `Learner` class that provides predicted values in a standard format (matrix of predicted probabilities for each class).
-
-<!-- comment -->
-
-This chapter explains how to use `animint2` to create interactive visualizations that explore how well different learning algorithms predict in different data sets.
-<!-- comment -->
-Some of the code in this chapter is adapted from [a blog post](https://tdhock.github.io/blog/2025/mlr3torch-conv/) with some static visualizations.
+* Chaque algorithme d’apprentissage est représenté comme une classe  `Learner` qui fournit les prédictions dans un type de sortie uniforme (une matrice de probabilités pour chaque classe).
 
 <!-- comment -->
 
-## Defining and running a benchmark {#running-a-benchmark}
+Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
+<!-- comment -->
+Le code utilisé dans ce chapitre est une version modifiée d’un code pour la création des visualisations statiques [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
-In the `mlr3` framework, a benchmark machine learning experiment typically consists of computing all combinations of:
+## Définition et exécution d'une analyse comparative {#exécution-comparaison}
 
 <!-- comment -->
 
-* a list of `Tasks` or data sets,
-<!-- comment -->
-* a list of `Learners` or learning algorithms,
-<!-- comment -->
-* and the iterations or splits of a `Resampling` method.
+Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes les combinaisons des éléments suivants :
 
 <!-- comment -->
 
-### Tasks {#tasks}
+* une liste de jeux de données (`Tasks`);
+<!-- comment -->
+* une liste d’algorithmes d’apprentissage (`Learners`);
+<!-- comment -->
+* toutes les itérations d’une méthode de rééchantillonnage (`Resampling`).
 
 <!-- comment -->
 
-We begin by defining a list of two tasks that come already defined in the `mlr3` framework.
+### Jeux de données (`Tasks`) {#tasks}
+
+<!-- comment -->
+
+Nous utilisons d'abord une liste de deux jeux de données.
 
 ```{r}
 mlr.tasks <- c("spam","sonar")
 task_list <- mlr3::tsks(mlr.tasks)
 ```
 
-Next, we define a function for downloading data sets from the Elements of Statistical Learning book web site [@Hastie2009].
+Ensuite, nous définissons une fonction pour télécharger un jeu de données depuis le site web du livre « Elements of Statistical Learning » [@Hastie2009].
 
 ```{r}
 library(data.table)
@@ -111,7 +111,8 @@ cache.fread <- function(data.name, f){
 }
 ```
 
-Next, we loop over three data set names, downloading and reading the corresponding data files, and creating a binary classification task (involving just the first two classes).
+Puis, nous créons une boucle pour télécharger trois jeux de données.
+On ajoute à chacun un `Task` de classification binaire (avec seulement les deux premières classes).
 
 ```r
 data.sets <- c("vowel","waveform","zip")
@@ -138,35 +139,35 @@ for(data.name in data.sets){
 task_list
 ```
 
-The code above results in a task list with 5 binary classification tasks:
+Le code ci-dessus produit une liste de 5 tâches de classification binaire :
 
 <!-- comment -->
 
-* `spam` represents email classification into spam or not, based on a bag of words vector.
+* `spam` représente une classification de courriels (`spam` étant un pourriel et `nonspam`  un courriel légitime) à partir d’un vecteur de comptage de mots « bag of words ».
 <!-- comment -->
-* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) represents a problem of discriminating metal and rock, based on a vector of sonar frequency bands.
+* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente une classification entre métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
 <!-- comment -->
-* `vowel` represents a problem of discriminating vowel sounds, using ten features extracted from audio data.
+* `vowel` représente une classification du son des voyelles, à partir de dix variables calculées depuis un fichier audio.
 <!-- comment -->
-* `waveform` is a simulated binary problem [@Hastie2009].
+* `waveform` est un jeu de données de simulation [@Hastie2009].
 <!-- comment -->
-* `zip` represents handwritten digit recognition, where features are a vector representing 16x16 pixel intensities.
+* `zip` représente une classification de chiffres manuscrits, à partir d’une image de 16x16 pixels, en échelle de gris.
 
 <!-- comment -->
 
-### Learners {#learners}
+### Algorithmes d’apprentissage {#learners}
 
 <!-- comment -->
 
-In this section, we define which learning algorithms to run on the previously defined tasks.
+Dans cette section, nous définissons les algorithmes d’apprentissage à utiliser avec chaque jeu de données.
 <!-- comment -->
-The code below begins with a list of two learners:
+Le code ci-dessous commence par une liste de deux algorithmes :
 
 <!-- comment -->
 
-* `cv_glmnet` is a linear model, with degree of L1 regularization automatically selected using 10-fold cross-validation.
+* `cv_glmnet` est un modèle linéaire, avec régularisation L1 qui minimise le taux d’erreur dans la validation croisée à 10 divisions (en anglais fold).
 <!-- comment -->
-* `featureless` is the standard baselines which ignores all of the input features, and always predicts the most frequent class that was seen in the training data.
+* `featureless` est le modèle constant, il n’utilise pas les variables d’entrée, et prédit toujours la classe la plus fréquente dans les données d’apprentissage.
 
 <!-- comment -->
 
@@ -176,18 +177,18 @@ learner.list <- list(
   mlr3::LearnerClassifFeatureless$new()$configure(id="featureless"))
 ```
 
-Next, we define a K-nearest neighbor learner.
+Nous ajoutons ensuite l’algorithme des plus proches voisins.
 
 ```{r}
 knn_learner <- mlr3learners::LearnerClassifKKNN$new()
 knn_learner$param_set$values$k <- paradox::to_tune(1, 40)
 ```
 
-The code above says that we will tune the number of neighbors hyper-parameter, `k`, from 1 to 40.
+Le code ci-dessus précise les bornes de `k` (le nombre de voisins) entre 1 et 40.
 <!-- comment -->
-The code below means that we will choose `k` using grid search (default 10 values of `k`), with 3-fold cross-validation, maximizing mean ROC-AUC over validation sets.
+Le code ci-dessous précise la méthode à utiliser pour la sélection de `k`, c'est-à-dire  une recherche avec 10 valeurs, avec validation croisée à 3 divisions, qui maximise l’aire sous la courbe ROC, (en anglais Area Under the Curve  ou AUC ).
 <!-- comment -->
-Note that to compute ROC-AUC, we must set `predict_type="prob"` so that the learned model outputs real-valued scores, instead of only predicted class labels.
+Remarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
 ```{r}
 kfoldcv <- mlr3::rsmp("cv")
@@ -200,9 +201,9 @@ learner.list$knn <- mlr3tuning::auto_tuner(
   measure = mlr3::msr("classif.auc", minimize = FALSE))
 ```
 
-Next, we will define two learners that use `library(torch)`.
+Ensuite, nous rajoutons deux algorithmes qui utilisent `library(torch)`.
 <!-- comment -->
-In this case, we need to define the learner using a list of pipe operations, which can be created using the helper function below.
+Nous employons une fonction qui renvoie une liste d’opérateurs servant à définir les algorithmes d’apprentissage.
 
 ```{r}
 measure_list <- mlr3::msrs(c("classif.logloss", "classif.auc"))
@@ -234,15 +235,15 @@ make_po_list <- function(...)list(
     epochs = paradox::to_tune(upper = n.epochs, internal = TRUE)))
 ```
 
-Note in the code above that the `lr` parameter is the learning rate, which controls how fast the algorithm learns.
+Remarquons que dans le code ci-dessus  `lr` est le taux d’apprentissage. (en anglais learning rate).
 <!-- comment -->
-The helper function below is used to define a torch learner that
+La fonction ci-dessous définit :
 
 <!-- comment -->
 
-* uses half of the train data as the validation set (`validate = 0.5`), and the other half as the subtrain set (to compute gradients).
+* la moitié des données d’apprentissage comme ensemble de validation (`validate = 0.5`), et l’autre moitié comme ensemble de sous-entraînement (pour calculer les gradients).
 <!-- comment -->
-* chooses the number of epochs by minimizing the first item of `measure_list` (logistic loss).
+* que le nombre d’époques est choisi en minimisant la première mesure dans la liste `measure_list` (perte logistique).
 
 ```{r}
 make_torch_learner <- function(id,...){
@@ -259,7 +260,7 @@ make_torch_learner <- function(id,...){
 }
 ```
 
-The code below adds two torch learners to the learner list.
+Le code ci-dessous rajoute deux algorithmes d’apprentissage.
 
 ```{r}
 if(torch::torch_is_installed()){
@@ -273,11 +274,11 @@ if(torch::torch_is_installed()){
 }
 ```
 
-### Running the benchmark {#running-the-benchmark}
+### Calcul des résultats {#running-the-benchmark}
 
 <!-- comment -->
 
-Before running a classification benchmark, it is important to ensure that `predict_type` of all learners is set to `prob` so that real-valued scores between 0 and 1 are output (allowing computation of evaluation metrics such as ROC-AUC).
+Avant de calculer les résultats pour des algorithmes de classification, il faut préciser que `predict_type=prob` pour faire en sorte que les prédictions soient des valeurs réelles (et pouvoir calculer des mesures d’évaluation comme l’AUC).
 
 ```{r}
 for(learner.i in seq_along(learner.list)){
@@ -285,7 +286,7 @@ for(learner.i in seq_along(learner.list)){
 }
 ```
 
-Next, we define the benchmark grid, which combines the tasks, learners, and a resampling method (3-fold cross-validation).
+Puis nous combinons les jeux de données, les algorithmes d’apprentissage et la méthode d’échantillonnage (validation croisée à 3 divisions).
 
 ```{r}
 bench.grid <- mlr3::benchmark_grid(
@@ -294,7 +295,8 @@ bench.grid <- mlr3::benchmark_grid(
   kfoldcv)
 ```
 
-The code block below downloads the benchmark from `library(animint2data)`.
+Puisque notre but est d’expliquer la visualisation, nous avons déjà calculé et sauvegardé les résultats dans `library(animint2data)`.
+Le code ci-dessous télécharge ces résultats.
 
 ```{r}
 if(TRUE){
@@ -307,21 +309,21 @@ if(TRUE){
 }
 ```
 
-If you want to re-run the benchmark, you could run the line of code above.
+Si vous souhaitez refaire le calcul pour obtenir ces résultats, exécutez la ligne `benchmark()` ci-dessus.
 <!-- comment -->
-This benchmark may take several minutes or hours, depending on the speed of your computer.
+L'exécution pourrait durer plusieurs minutes voire plusieurs heures, selon votre ordinateur.
 <!-- comment -->
-Running `plan("multisession")` enables parallel execution, each task/learner/split on a different CPU of your computer.
+Le code `plan("multisession")` implique que chaque combinaison (données, algorithmes, divisions) est traitée par un processeur différent.
 <!-- comment -->
-Read [the related blog post](https://tdhock.github.io/blog/2025/mlr3torch-conv/) to see some R code that can be used to parallelize using a compute cluster, which would be even faster.
+Pour accélérer le processus, vous pouvez utiliser une grappe de calcul [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
-## Test error and accuracy plots {#test-error-and-accuracy-plots}
+## Graphiques d’erreur et d’aire sous la courbe {#test-error-and-accuracy-plots}
 
 <!-- comment -->
 
-First, we define a list of error/accuracy metrics, which are called `Measures` in `mlr3`.
+Tout d'abord, nous définissons les mesures à calculer pour évaluer les prédictions.
 
 <!-- comment -->
 
@@ -333,20 +335,27 @@ sapply(test_measure_list, function(M)M$label)
 
 <!-- comment -->
 
-The output above shows the mapping between measure names and abbreviations.
+La sortie ci-dessous affiche la correspondance entre le nom et le code des mesures.
+
+* `classif.auc` est l’aire sous la courbe ROC.
+* `classif.ce` est le taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre total d’étiquettes.
+* `classif.tpr` est le taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
+* `classif.fpr` est le taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
+
 <!-- comment -->
-Next, we run the `$score()` method of the benchmark result, to compute various evaluation metrics on the test set for each combination of task/learner/split.
+Ensuite, nous utilisons `$score()` pour calculer ces mesures pour les données test, dans chaque division de validation croisée.
 
 ```{r}
 score_dt <- bench.result$score(test_measure_list)
 score_dt[, .(task_id, learner_id, iteration, classif.auc, classif.ce)]
 ```
 
-The output above has one row per combination of task/learner/split, and two evaluation metrics: ROC-AUC and classification error.
+La sortie ci-dessus contient une ligne pour chaque combinaison de données, algorithme, division de validation croisée.
+Il y a des colonnes pour deux mesures : l’AUC et le taux d’erreur.
 <!-- comment -->
-The code below visualizes the corresponding test error values.
+Le code ci-dessous visualise les taux d’erreur.
 <!-- comment -->
-Note that we convert the error rate into a percent in order to save space in the X axis tick labels (30 versus 0.3 for example).
+Remarquons que nous convertissons le taux d’erreur en pourcentage afin d’économiser l’espace sur l’axe X (par exemple, 0.3 devient 30).
 
 ```{r}
 library(animint2)
@@ -361,21 +370,21 @@ ggplot()+
     limits=c(0,60))
 ```
 
-The figure above shows three dots per row, one for each train/test split.
+Le graphique ci-dessus affiche trois cercles pour chaque Y — un cercle pour chaque division de validation croisée.
 <!-- comment -->
-We can see that nearest neighbors has smallest error rate is some data (`vowel`), whereas the `torch_dense_50` neural network is best in others like `spam`.
+Nous voyons que l’algorithme des plus proches voisins a le plus petit taux d’erreur dans certains jeux de données (`vowel`), tandis que le réseau de neurones (`torch_dense_50`) est meilleur dans d’autres données (`spam`).
 <!-- comment -->
-The goal in the rest of this chapter will be to make interactive versions of this figure, which show details for each train/test split.
+L'objectif de ce chapitre est d'ajouter l’interactivité à ce graphique, afin de montrer les détails de chaque division de validation croisée.
 
 <!-- comment -->
 
-### ROC curves {#roc-curves}
+### Courbes ROC {#roc-curves}
 
 <!-- comment -->
 
-In this section, we will compute ROC curves, which are useful for evaluation in binary classification.
+Dans cette section, nous affichons des courbes ROC, utiles à l’évaluation en classification binaire.
 <!-- comment -->
-In fact, `$score()` has already computed the Area Under the Curve (AUC), which we plot below.
+En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC), nous allons la visualiser avec le code ci-dessous.
 
 ```{r}
 ggplot()+
@@ -385,13 +394,13 @@ ggplot()+
     data=score_dt)
 ```
 
-The figure above shows test AUC for every data set, learning algorithm, and train/test split in cross-validation.
+Le graphique ci-dessus affiche l’AUC sur l’ensemble test, pour chaque division de validation croisée, chaque jeu de données, et chaque algorithme d’apprentissage.
 <!-- comment -->
-Consistent with the error rate plot above, the AUC indicates that `zip` is the easiest problem, whereas `sonar` is the most difficult.
+Les résultats d’AUC suggèrent que `zip` est le plus facile d’apprendre, et `sonar` est le plus difficile d’apprendre, ce qui est consistant avec les taux d’erreur affichés dans le graphique précédent.
 <!-- comment -->
-It is clear that `featureless` always has AUC=0.5, as expected.
+Comme attendu, `featureless` (l’algorithme qui prédit toujours la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction qui est constante. 
 <!-- comment -->
-The code below hides the results for `featureless`, in order to emphasize the other non-trivial results.
+Le code ci-dessous retire les résultats de `featureless`, pour mettre en évidence les autres résultats.
 
 ```{r}
 ggplot()+
@@ -401,11 +410,11 @@ ggplot()+
     data=score_dt[learner_id!="featureless"])
 ```
 
-We see in the figure above that `featureless` is no longer present in the figure above.
+Nous ne voyons plus les résultats pour `featureless` dans le graphique ci-dessus.
 <!-- comment -->
-The code below implements a slightly more complex version of the previous AUC plot, which will be used for interactive display.
+Le code ci-dessous produit le même graphique, avec quelques ajouts pour l’affichage interactif.
 <!-- comment -->
-Note that we create a new `task_it` column which will be useful later as an interactive variable (for selecting `task_id` and `iteration` at the same time).
+Remarquons que la colonne `task_it` sera utile comme variable de sélection (pour à la fois `task_id` et `iteration`).
 
 ```{r}
 score_dt[, task_it := paste(task_id, iteration)]
@@ -424,11 +433,11 @@ score_dt[, task_it := paste(task_id, iteration)]
      data=score_dt[learner_id!="featureless"]))
 ```
 
-Next, we compute ROC curves for each combination of `task_id`, `learner_id`, and cross-validation split (`iteration`).
+Nous calculons ensuite une courbe ROC pour chaque combinaison de `task_id`, `learner_id` et division de validation croisée (`iteration`).
 <!-- comment -->
-Note that R represents binary labels as a factor with two levels.
+Remarquons que le vecteur d’étiquettes à prédire dans la classification binaire est un facteur à deux niveaux.
 <!-- comment -->
-The first factor level in R is considered the positive class in `mlr3`, so the code below computes the ROC curve using the first column in the `prob` scores matrix, and the `label01` binary label vector.
+Dans `mlr3`, le premier niveau est la classe positive, alors nous utilisons la première colonne de `prob` pour calculer la courbe ROC.
 
 ```{r}
 roc_dt <- score_dt[, {
@@ -440,11 +449,11 @@ roc_dt <- score_dt[, {
 roc_dt[, .(task_it, learner_id, threshold, FPR, TPR)]
 ```
 
-The output above is a table representing the ROC curves used for evaluation of the model predictions on the cross-validation test sets.
+Le tableau ci-dessus représente les courbes ROC à utiliser pour évaluer les prédictions sur les ensembles test.
 <!-- comment -->
-We can see that `FPR=TPR=1` when `threshold=0`, and `FPR=TPR=0` when `threshold=Inf`.
+Nous voyons que `FPR=TPR=1` quand `threshold=0`, et que `FPR=TPR=0` quand `threshold=Inf`.
 <!-- comment -->
-The code below displays these ROC curves in separate panels.
+Le code ci-dessous affiche les courbes ROC dans différentes facettes.
 
 ```{r}
 gg.roc <- ggplot()+
@@ -458,9 +467,9 @@ gg.roc <- ggplot()+
 gg.roc+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a ROC curve for each data set and cross-validation split.
+Nous voyons une facette pour chaque jeu de données et pour chaque division de validation croisée.
 <!-- comment -->
-Below, we add a point to emphasize the default prediction threshold of each algorithm.
+Nous ajoutons maintenant un point pour montrer le seuil par défaut pour chaque algorithme.
 
 ```{r}
 gg.roc.point <- gg.roc+
@@ -476,11 +485,11 @@ gg.roc.point <- gg.roc+
 gg.roc.point+facet_grid(iteration ~ task_id)
 ```
 
-The result above shows a ROC point at the default prediction threshold.
+Ci-dessus nous voyons un point pour le seuil par défaut.
 <!-- comment -->
-It is clear that different algorithms have different values for both FPR and TPR, by default.
+Il est évident que les différents algorithmes ont différentes valeurs de `FPR` et `TPR`, par défaut.
 <!-- comment -->
-The code below adds text, which will be used with interactivity to display the currently selected data set and cross-validation split.
+Nous ajoutons également du texte pour l'affichage de la sélection de données et de division de validation croisée.
 
 ```{r}
 score_dt[, lev_str := {
@@ -498,9 +507,9 @@ gg.roc.text <- gg.roc.point+
 gg.roc.text+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a text label at the bottom of each panel.
+Le graphique affiche le texte sous chaque facette.
 <!-- comment -->
-Next, the code below computes the rank of each algorithm within each test set.
+Ensuite, nous calculons le rang de chaque algorithme dans chaque jeu de données et dans chaque division.
 
 ```{r}
 score_dt[
@@ -508,9 +517,9 @@ score_dt[
 , by=.(task_id, iteration, task_it)]
 ```
 
-The ranks computed above will be used to display labels below.
+Les rangs calculés ci-dessus sont utilisés dans l’affichage qui suit.
 <!-- comment -->
-The code below combines the ROC and AUC plots together into an interactive visualization.
+Nous créons une visualisation interactive à partir des graphiques de ROC et d’AUC.
 
 ```{r viz-auc-roc}
 animint(
@@ -529,19 +538,19 @@ animint(
       alignment="vertical"))
 ```
 
-In the visualization above, you can click the test AUC values in the top plot to show the corresponding ROC curve details in the bottom plot.
+Cliquer sur les points d’AUC de la visualisation, permet d'afficher les courbes ROC correspondantes en bas.
 
 <!-- comment -->
 
-### Interactive ROC curves {#interactive-roc-curves}
+### Interactivité des courbes ROC {#interactive-roc-curves}
 
 <!-- comment -->
 
-In the previous section, we plotted points on the ROC curves, corresponding to the default thresholds of the algorithms' predicted scores.
+Dans la section précédente, nous avons affiché un point sur chaque courbe ROC pour représenter le seuil par défaut.
 <!-- comment -->
-These points occur at different False Positive Rates, between algorithms.
+Ces points correspondent aux différents taux de faux positifs, pour les différents algorithmes d’apprentissage.
 <!-- comment -->
-For a more fair comparison between algorithms, in this section we compare algorithms' best True Positive Rate, for a given False Positive Rate.
+Pour améliorer la justesse de la comparaison entre les algorithmes, nous affichons le meilleur taux de vrais positifs, pour un seuil de faux positifs donné (à définir dans la sélection interactive).
 
 ```{r}
 (best_TPR_dt <- roc_dt[, .(
@@ -549,9 +558,9 @@ For a more fair comparison between algorithms, in this section we compare algori
 ), by=.(task_id,iteration,task_it,learner_id,FPR)])
 ```
 
-The table above shows the best TPR for each possible FPR of each algorithm, in each task and cross-validation iteration.
+Le tableau ci-dessous contient le meilleur taux de vrais positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
 <!-- comment -->
-We want to display only the values for which all algorithms are present, so below we count the number of algorithms which has each FPR value.
+Nous voulons afficher uniquement les seuils pour lesquels tous les algorithmes sont présents, nous comptons donc les algorithmes pour chaque seuil.
 
 ```{r}
 best_TPR_algos <- best_TPR_dt[, .(
@@ -560,11 +569,14 @@ best_TPR_algos <- best_TPR_dt[, .(
 table(best_TPR_algos$algos)
 ```
 
-The table above means that there are some FPR values which are present in only 1-3 learners.
+Remarquons que dans le tableau ci-dessus
+
+* il y a 30 seuils extrêmes pour lesquels les 5 algorithmes sont présents (y compris `featureless`),
+* il y a plusieurs seuils avec 3 algorithmes ou moins et nous ne voulons pas les afficher.
 <!-- comment -->
-We only want to show FPR values which are present in at least 4, which is what is coded below.
+Nous voulons conserver uniquement les seuils associés à au moins 4 algorithmes; le code ci-dessous nous le permet.
 <!-- comment -->
-We additionally keep only a max of 40 FPR values, almost evenly spaced across the range of FPR values.
+De plus, pour faciliter la sélection interactive, nous limitons le nombre de seuils à 40, répartis de manière quasi uniforme parmi les valeurs possibles pour le taux de faux positifs.
 
 ```{r}
 (min.algos <- length(learner.list)-1)
@@ -574,9 +586,9 @@ max.FPR.values <- 40
 , by=.(task_id,iteration,task_it)][keep==TRUE])
 ```
 
-The output above is a table for each FPR value we would like the user to be able to select.
+Le tableau ci-dessus contient les seuils sélectionnables avec l’interactivité.
 <!-- comment -->
-We plot these values as vertical lines below.
+Dans le code ci-dessous, nous représentons chaque seuil par une ligne verticale.
 
 ```{r}
 gg.roc.fpr <- gg.roc.text+
@@ -590,9 +602,9 @@ gg.roc.fpr <- gg.roc.text+
 gg.roc.fpr+facet_grid(iteration ~ task_id)
 ```
 
-The output above shows a vertical line for each FPR threshold which will be selectable by the user.
+Le graphique ci-dessus affiche une ligne verticale pour chaque seuil, si bien qu’il apparaît entièrement noir.
 <!-- comment -->
-Below we create a plot which will show the best TPR values for the selected FPR threshold.
+Nous créons ensuite un nouveau graphique pour afficher les meilleurs taux de vrais positifs, pour le seuil sélectionné.
 
 ```{r}
 best_TPR_show <- best_TPR_dt[
@@ -611,9 +623,9 @@ best_TPR_show <- best_TPR_dt[
      showSelected=c("task_it","FPR")))
 ```
 
-Above we see a dot plot with text showing the TPR at each selectable FPR.
+Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de vrais positifs.
 <!-- comment -->
-Below we combine the previous plots into an interactive display.
+Puis nous combinons tous les graphiques précédents dans une visualisation interactive.
 
 ```{r viz-select-fpr}
 (viz.select.fpr <- animint(
@@ -627,35 +639,33 @@ Below we combine the previous plots into an interactive display.
     theme_animint(colspan=2, width=800, height=200)))
 ```
 
-The interactive display above shows
+La visualisation ci-dessus permet de
 
 <!-- comment -->
 
-* in the top plot, you can click test AUC values to select a data set and cross-validation iteration.
+* cliquer sur le graphique en haut à gauche pour choisir un jeu de données et une division de validation croisée (`task_it`);
 <!-- comment -->
-* in the bottom left plot, you can click a vertical line to select a FPR threshold.
+* cliquer sur le graphique en haut à droite pour choisir un seuil de taux de faux positifs (`FPR`);
 <!-- comment -->
-* in the bottom right plot, you can see the best TPR values for the selected FPR threshold.
+* visualiser les meilleurs taux de vrais positifs, dans le graphique du bas.
 
 <!-- comment -->
 
-Try clicking various FPR thresholds in the sonar data set.
+En cliquant sur les seuils de FRP dans les données `sonar`, vous verrez que le meilleur algorithme dépend du seuil choisi.
 <!-- comment -->
-You should see that the algorithm ranking is different for different FPR thresholds.
-<!-- comment -->
-For example, `cv_glmnet` is worst for small FPR values, but it is best for larger FPR values.
+Par exemple, `cv_glmnet` est le moins bon pour un `FPR` faible, mais il est le meilleur pour un `FPR` plus élevé.
 
 <!-- comment -->
 
-### Adding a zoom level {#adding-a-zoom-level}
+### Ajout d’un niveau de zoom {#adding-a-zoom-level}
 
 <!-- comment -->
 
-The previous data visualizations used facets to display the test AUC of different data sets.
+Les visualisations précédentes recouraient à des facettes pour afficher l’AUC des différents jeux de données.
 <!-- comment -->
-In this section, we propose a re-design that shows test AUC for only one data set at a time.
+Dans cette section, nous proposons d’afficher l’AUC pour un seul jeu de données à la fois.
 <!-- comment -->
-We will use a display which allows data set selection in function of number of rows and max AUC, which we compute below.
+Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations, et de l'AUC maximale, valeurs que nous calculons avec le code ci-dessous.
 
 ```{r}
 (summary_dt <- score_dt[, .(
@@ -664,9 +674,9 @@ We will use a display which allows data set selection in function of number of r
 ), by=task_id])
 ```
 
-The output above is a data table with one row per data set.
+Le tableau ci-dessus contient une ligne pour chaque jeu de données.
 <!-- comment -->
-We use these data in the scatter plot below.
+Nous utilisons ce tableau pour dessiner le nuage de points ci-dessous.
 
 ```{r}
 point_size <- 5
@@ -685,11 +695,11 @@ point_color_off <- "grey"
     data=summary_dt))
 ```
 
-The scatterplot above shows a summary, one dot per data set.
+Le graphique contient un point pour chaque jeu de données.
 <!-- comment -->
-Note in the code above we have `clickSelects="task_id"`, which only selects task (not cross-validation iteration).
+Remarquons que, dans le code ci-dessus, le paramètre `clickSelects="task_id"`, permet uniquement la sélection d’un jeu de données  (et non de la division de validation croisée).
 <!-- comment -->
-So in the code below we create a test AUC plot with `showSelected="task_id"` and `clickSelects="iteration"`.
+Nous créons ensuite un graphique avec `showSelected="task_id"` et `clickSelects="iteration"`.
 
 ```{r}
 gg.auc.show.task <- ggplot()+
@@ -706,11 +716,11 @@ gg.auc.show.task <- ggplot()+
 gg.auc.show.task+facet_grid(task_id ~ .)
 ```
 
-The output above shows a multi-panel display, with one panel for each data set.
+Le graphique contient un panneau pour chaque jeu de données.
 <!-- comment -->
-We notice that the AUC values are on very different scales between data sets, and featureless always has AUC=0.5 (as expected).
+Nous constatons que les valeurs d’AUC varient énormément d'un jeu de données à l'autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
 <!-- comment -->
-We therefore create a second version of this plot, without featureless, in the code below.
+Nous supprimons `featureless` dans le graphique ci-dessous.
 
 ```{r}
 gg.auc.show.task.zoom <- ggplot()+
@@ -727,9 +737,9 @@ gg.auc.show.task.zoom <- ggplot()+
 gg.auc.show.task.zoom+facet_grid(task_id ~ .)
 ```
 
-We no longer see featureless in the output above.
+Le graphique ci-dessus ne contient plus `featureless`.
 <!-- comment -->
-Next, we create a plot of ROC curves for selected iteration and task.
+Nous créons maintenant un graphique des courbes ROC pour la sélection de `task_id` et `iteration`.
 
 ```{r}
 gg.roc.show.task.it <- ggplot()+
@@ -743,9 +753,9 @@ gg.roc.show.task.it <- ggplot()+
 gg.roc.show.task.it+facet_grid(iteration ~ task_id)
 ```
 
-The figure above shows a panel for each task and iteration.
+Le graphique affiche un panneau pour chaque jeu de données, et pour chaque division de validation croisée.
 <!-- comment -->
-Below we combine the ggplots into an interactive data visualization.
+Le code ci-dessous combine ces graphiques dans une visualisation interactive.
 
 ```{r viz-two-selectors}
 animint(
@@ -765,25 +775,26 @@ animint(
       width=800, height=200, last_in_row=TRUE, colspan=2))
 ```
 
-The figure above shows
+Le graphique affiche
 
 <!-- comment -->
 
-* in the upper left, an overview for all data sets.
+* en haut à gauche, un résumé de tous les jeux de données (cliquez sur un point pour sélectionner un jeu de données).
 <!-- comment -->
-* at the bottom, two test AUC plots for the selected data set.
+* en bas, deux graphiques de l’AUC pour les ensembles test, pour le jeu de données sélectionné (cliquez sur un point pour sélectionner une division de validation croisée).
 <!-- comment -->
-* in the upper right, ROC curves for the selected data set and iteration.
+* en haut à droite, les courbes ROC pour la sélection de `task_id` et `iteration`.
 
 <!-- comment -->
 
-### P-values for differences between learners {#p-values-learners}
+### Tests statistiques pour différences entre algorithmes {#p-values-learners}
 
 <!-- comment -->
 
-In this section, we compute and display P-values.
+Il est souvent utile de déterminer s’il existe des différences significatives entre l’AUC de deux algorithmes (les deux ayant l'AUC la plus grande).
+Dans cette section, nous calculons des valeurs p pour déterminer si les différences sont significatives.
 <!-- comment -->
-First, we compute mean and standard deviation over test folds.
+Nous calculons d’abord la moyenne et l’écart type, des divisions de validation croisée.
 
 ```{r}
 (score_stats <- dcast(
@@ -793,7 +804,7 @@ First, we compute mean and standard deviation over test folds.
   value.var="classif.auc"))
 ```
 
-We plot the numbers above using the code below.
+Nous visualisons ces statistiques grâce au code ci-dessous.
 
 ```{r}
 score_stats[, let(
@@ -813,17 +824,17 @@ ggplot()+
     breaks=seq(0,1,by=0.1))
 ```
 
-Above we see mean and SD for each algorithm and data set.
+Ci-dessus nous voyons un point pour chaque moyenne, et un segment pour l’écart type.
 <!-- comment -->
-Next, we compute ranks.
+Ensuite nous calculons le rang de chaque algorithme, pour chaque jeu de données.
 
 ```{r}
 score_stats[, auc.task.rank := rank(-classif.auc_mean), by=task_id][]
 ```
 
-Above we see a new column `auc.task.rank` with values from 1 to 4.
+Ci-dessus nous voyons une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
 <!-- comment -->
-We plot ranks using the code below.
+Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous.
 
 ```{r}
 gg.rank <- ggplot()+
@@ -843,9 +854,9 @@ gg.rank <- ggplot()+
 gg.rank+facet_wrap("task_id", scales="free")
 ```
 
-Above we see ranks, but not algorithm names.
+Ci-dessus nous voyons les rangs, mais pas les noms.
 <!-- comment -->
-Below, we add names.
+Nous ajoutons les noms ci-dessous.
 
 ```{r}
 gg.rank.text <- gg.rank+
@@ -860,56 +871,54 @@ gg.rank.text <- gg.rank+
 gg.rank.text+facet_wrap("task_id", scales="free")
 ```
 
-To test for significant differences, we do a self-join below.
+Pour tester les différences entre les rangs adjacents, nous faisons une jointure entre chaque rang (`auc.task.rank`) et le rang suivant (`next.rank`).
 
 ```{r}
 score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
-  score_dt, on=.(learner_id, task_id), nomatch=0L]
+  score_dt, on=.(learner_id, task_id), nomatch=0L
+][order(task_id, auc.task.rank)]
 (join_dt <- score_dt_rank[, next.rank := auc.task.rank+1][
-  score_dt_rank,
-  .(task_id, iteration,
-    auc.task.rank,
-    lo.auc=classif.auc,
-    hi.auc=i.classif.auc),
+  score_dt_rank, .(
+    task_id, iteration,
+    good.rank=i.auc.task.rank, bad.rank=x.auc.task.rank,
+    good.auc =i.classif.auc,   bad.auc =x.classif.auc),
   on=.(task_id, iteration, auc.task.rank=next.rank),
   nomatch=0L])
 ```
 
-Below we compute P-values.
+Ensuite nous effectuons des tests de Student.
 
 ```{r}
-(pval_dt <- join_dt[, {
+(pval_dt <- join_dt[, .SDcols=c("good.auc","bad.auc"), {
+  mean_dt <- lapply(.SD, mean)
   paired <- t.test(
-    lo.auc, hi.auc, alternative = "l", paired=TRUE)
-  data.table(
-    p.paired=paired$p.value,
-    mean.lo=mean(lo.auc),
-    mean.hi=mean(hi.auc))
-}, by=.(task_id, auc.task.rank)])
+    bad.auc, good.auc, alternative = "l", paired=TRUE)
+  c(mean_dt, p.paired=paired$p.value)
+}, keyby=.(task_id, good.rank, bad.rank)])
 ```
 
-Above we see a table with one row per T-test result.
+Le tableau ci-dessus contient une ligne pour chaque test statistique.
 <!-- comment -->
-We plot the differences between means in red below.
+Ci-dessous, nous rajoutons des segments rouges pour souligner les différences entre les moyennes.
 
 ```{r}
 gg.rank.seg <- gg.rank+
   geom_segment(aes(
-    mean.lo, auc.task.rank+0.5,
-    xend=mean.hi, yend=auc.task.rank+0.5),
+    bad.auc, good.rank+0.5,
+    xend=good.auc, yend=good.rank+0.5),
     color="red",
     data=pval_dt)
 gg.rank.seg+facet_wrap("task_id", scales="free")
 ```
 
-Above we see red segments highlighting differences between adjacent means.
+Ci-dessus nous voyons un segment pour chaque test statistique.
 <!-- comment -->
-Below we add text to show P-values.
+Nous rajoutons ensuite des éléments de texte pour afficher les valeurs p.
 
 ```{r}
 gg.rank.p <- gg.rank.seg+
   geom_text(aes(
-    mean.lo, auc.task.rank+0.5, label=ifelse(
+    bad.auc, good.rank+0.5, label=ifelse(
       p.paired<0.01, "P<0.01",
       sprintf("P=%.2f", p.paired))),
     color="red", hjust=1, size=10,
@@ -917,45 +926,48 @@ gg.rank.p <- gg.rank.seg+
 gg.rank.p+facet_wrap("task_id", scales="free")
 ```
 
-Above we see P-values have been added.
+Le graphique affiche les valeurs p.
 
 <!-- comment -->
 
-* One P-value is less than 0.01, indicating a difference that is statistically significant, between ranks 2 and 3 in `sonar`.
+* Une des valeur p est inférieure à 1% (`P<0.01`), ce qui indique une différence significative, entre les rangs 2 et 3 dans les données `sonar`.
 <!-- comment -->
-* Most P-values are greater than 0.05, indicating that these differences are not statistically significant.
+* Les autres valeurs p sont supérieures à 5% (`P>0.05`), ce qui indique des différences non-significatives.
 <!-- comment -->
-* Because of the small sample size (3 train/test splits), increasing the number of cross-validation folds may decrease some of these P-values (exercise for the reader).
+* L’absence de différences significatives est partiellement due à la taille réduite de l’échantillon utilisé pour le test de Student (seulement 3 divisions de validation croisée). Vous pourriez éventuellement obtenir des valeurs p plus petites en augmentant le nombre de divisions de validation croisée (voir exercice).
 <!-- comment -->
-* Exercise: combine P-values with algorithm names and mean/SD on the same plot. Use this plot instead of `testAUCzoom` in the previous animint.
+* Exercice : afficher les valeurs p avec le nom des algorithmes et les statistiques (moyenne et écart type) sur le même graphique. Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédente.
 
 <!-- comment -->
 
-## Checking for over- and under-fitting {#over-under-fitting}
+## Vérification de la régularisation {#over-under-fitting}
 
 <!-- comment -->
 
-In this section, our goal is to make various figures that check if each algorithm is regularized appropriately.
+Dans cette section, nous voulons créer des graphiques pour vérifier que les algorithmes sont régularisés correctement.
 <!-- comment -->
-Each machine learning algorithm has a different hyper-parameter that is used to avoid under- and over-fitting.
+Chaque algorithme d’apprentissage utilise une méthode différente de régularisation, et différents hyperparamètres pour éviter à la fois le surapprentissage et le sous-apprentissage.
 
 <!-- comment -->
 
-* nearest neighbors has the number of neighbors: small number of neighbors may overfit, large number of neighbors may underfit.
+* Pour les plus proches voisins, il faut augmenter le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage, et un grand nombre de voisins peut donner un sous-apprentissage.
 <!-- comment -->
-* `torch` learners has the number of gradient descent epochs: large number of epochs may overfit, small number of epochs may underfit.
+* Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage, et un grand nombre d’époques peut donner un surapprentissage.
 <!-- comment -->
-* the `glmnet` L1-regularized linear model has the penalty `lambda`: small penalty may overfit, large penalty may underfit.
+* Pour le modèle lineaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage, et une grande penalité peut donner un sous-apprentissage.
 
 <!-- comment -->
 
-### Nearest neighbors {#nearest-neighbors-selection}
+### Plus proches voisins {#nearest-neighbors-selection}
 
 <!-- comment -->
 
-In this section, we show how to verify is the number of neighbors was selected appropriately, to avoid over- and under-fitting.
+Dans cette section, nous vérifions le choix de nombre de voisins.
+Normalement, pour chaque division des données en test et entraînement, nous faisons ensuite une division d’entraînement en sous-entraînement et validation.
+Nous voulons choisir le nombre de voisins qui maximise l’AUC sur l’ensemble de validation, et ensuite utiliser ce nombre de voisins pour calculer les prédictions sur l’ensemble test.
+Pour chaque ensemble test, il y pourrait avoir un différent nombre de voisins.
 <!-- comment -->
-First, we compute a table with one row per train/test split, and columns which contain information on how many neighbors were used for prediction.
+Nous commençons par calculer un tableau avec une ligne par division de validation croisée, et une colonne avec le nombre de voisins.
 
 ```{r}
 (best_dt <- score_dt[grep("knn", learner_id), {
@@ -966,17 +978,17 @@ First, we compute a table with one row per train/test split, and columns which c
 }, by=.(task_id, iteration, task_it)])
 ```
 
-The table above has columns
+Le tableau contient les colonnes
 
 <!-- comment -->
 
-* `k`, the number of neighbors selected as best.
+* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation.
 <!-- comment -->
-* `details`, a table of information about how that number of neighbors was selected.
+* `details`, un tableau d’informations sur le choix du nombre de voisins.
 
 <!-- comment -->
 
-Below, we create a new table by combining all of the details tables.
+Ensuite, nous faisons un tableau qui combine les détails pour chaque division.
 
 ```{r}
 details_dt <- best_dt[
@@ -985,9 +997,9 @@ details_dt <- best_dt[
 details_dt[, .(task_id, iteration, k, classif.auc, status)]
 ```
 
-The table above shows details about what was the validation AUC for each potential value of `k`, the number of neighbors.
+Le tableau ci-dessus contient une ligne pour chaque nombre de voisins testé sur les ensembles de validation.
 <!-- comment -->
-Below we plot the validation AUC as a function of the number of neighbors, emphasizing the selected value and the max.
+Ensuite nous visualisons l’AUC sur l’ensemble de validation, en fonction du nombre de voisins.
 
 ```{r}
 gg.neighbors <- ggplot()+
@@ -1003,17 +1015,22 @@ gg.neighbors <- ggplot()+
 gg.neighbors+facet_grid(task_id ~ iteration)
 ```
 
-Above we see how the AUC was selected for each task and iteration.
+Dans le graphique ci-dessus, nous utilisons
+
+* couleur pour souligner les meilleurs choix pour le nombre de voisins, et
+* une ligne verticale pour indiquer le choix retenu.
+
+Nous voyons que
 
 <!-- comment -->
 
-* Some data sets (`sonar`, `spam`, `vowel`) have a clear max at an intermediate number of neighbors, which avoids both over- and under-fitting. For `vowel` iteration 2, max AUC occurs at the extreme value of 1 neighbor, which is unusual, but does not suggest underfitting in this case, because there is no smaller value of neighbors than 1.
+* Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons une AUC maximale avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons une AUC maximale avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre de voisins possible, il ne peut s'agir de sous-apprentissage; nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
 <!-- comment -->
-* Some data sets (`waveform`, `zip`) have max AUC at the largest number of neighbors (40), which suggests overfitting. These data suggest that an even larger AUC may be obtained by increasing the number of neighbors past 40, until we see a clear decrease of the AUC values.
+* Pour deux jeux de données (`waveform`, `zip`) nous avons une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que nous pourrions éventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le  nombre maximal de voisins, ce qui indique une recherche suffisamment élargie.
 
 <!-- comment -->
 
-Below we make an interactive version of the same plot.
+Nous créons ensuite une visualisation interactive pour comprendre le choix du nombre de voisins.
 
 ```{r viz-neighbors}
 animint(
@@ -1024,9 +1041,10 @@ animint(
     theme_animint(update_axes="y", last_in_row=TRUE))
 ```
 
-Above we can click on the left plot to select a data set and cross-validation fold.
+Le graphique de gauche permet de sélectionner un jeu de données et une division de validation croisée.
 <!-- comment -->
-Clicking on `zip` or `waveform`, the data sets with largest test AUC, shows that max validation AUC occurs for large numbers of neighbors.
+Si vous cliquez sur `zip` ou sur `waveform`, vous observerez une AUC maximale pour le plus grand nombre de voisins (40), ce qui suggère un surapprentissage.
+Exercice : refaites l’apprentissage en augmentant le max nombre de voisins. Est-ce vous voyez le max AUC avec un nombre de voisins intermédiaire ?
 
 <!-- comment -->
 
@@ -1034,9 +1052,13 @@ Clicking on `zip` or `waveform`, the data sets with largest test AUC, shows that
 
 <!-- comment -->
 
-In this section, we explore early stopping regularization with `torch` learners.
+Dans cette section, nous explorons la régularisation d’arrêt prématuré, avec les algoritmes d’apprentissage dans le package `torch`.
+Ces algorithmes utilisent la descente de gradient, ce qui minimise une fonction de perte sur l’ensemble de sous-entraînement.
+Normalement la perte va aussi descendre sur l’ensemble de validation, jusqu’à un certain nombre d’époques, après quoi la perte va augmenter.
+Nous voulons arrêter la descente de gradient quand la perte est minimale sur l’ensemble de validation, ce qui est « prématuré » car la perte va toujours descendre sur l’ensemble de sous-entraînement.
+Nous allons vérifier que le nombre d’époques est choisi correctement, pour éviter le sous-apprentissage et le surapprentissage.
 <!-- comment -->
-First, we compute the selected number of epochs.
+Nous commençons avec le calcul d’une variable `best_epoch`, soit le nombre d’époques choisi (normalement le meilleur sur l’ensemble de validation).
 
 ```{r}
 score_torch <- score_dt[
@@ -1046,7 +1068,7 @@ score_torch <- score_dt[
 )]
 ```
 
-Below, we extract the model training history.
+Ensuite, nous créons un tableau représentant l’histoire d’entraînement, avec une ligne pour chaque époque.
 
 ```{r}
 (history_torch <- score_torch[, {
@@ -1056,17 +1078,17 @@ Below, we extract the model training history.
 }, by=.(task_id, learner_id, iteration, task_it)])
 ```
 
-The table above has one row for each epoch, and columns
+Le tableau ci-dessus contient une ligne pour chaque époque, et les colonnes suivantes :
 
 <!-- comment -->
 
-* `train.classif.logloss`, logistic (cross-entropy) loss on the set used to compute gradients, which always should decrease, if learning rate and batch size have been chosen appropriately. Note that “train” is a potentially confusing name for this set, so for increased clarity, we rename it to “subtrain” below.
+* `train.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble utilisé pour calculer les gradients, ce qui devrait toujours diminuer, si les hyper-paramètres sont appropriés (taux d’apprentissage, taille de lot, etc.). Remarquons que le nom `train` « entraînement » pourrait faire croire qu’il faudra encore diviser ces données en sous-entraînement et validation, mais ce n’est pas le cas. Pour préciser, nous allons plutôt utiliser le nom `subtrain` « sous-entraînement » dans les codes et les graphiques ci-dessous.
 <!-- comment -->
-* `valid.classif.logloss`, logistic (cross-entropy) loss on the held-out set used to regularize (not used to compute gradients), which was minimized to select the best regularization (here, the number of epochs). Similarly, `valid.classif.auc` could have been maximized, if `classif.auc` was the first item in `measure_list`.
+* `valid.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble qui n’est pas utilisé pour le calcul des gradients. Minimiser cette perte est le critère utilisé pour choisir le meilleur nombre d’époques, car `classif.logloss` était la première mesure dans `measure_list`.
 
 <!-- comment -->
 
-Below, we reshape and rename the previous history data.
+Ensuite, nous créons un tableau mieux adapté à la visualisation.
 
 ```{r}
 (history_long <- nc::capture_melt_single(
@@ -1076,9 +1098,9 @@ Below, we reshape and rename the previous history data.
   measure=nc::alevels("logloss", auc="AUC")))
 ```
 
-The table above has new columns `set`, `measure`, and `value`.
+Le tableau ci-dessus contient les nouvelles colonnes `set`, `measure`, and `value`.
 <!-- comment -->
-In the code below, we plot these data for one data set and cross-validation iteration.
+Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble.
 
 ```{r}
 one_split <- function(DT,it=1)DT[iteration==it & task_id=="sonar"]
@@ -1091,17 +1113,17 @@ one_split_history <- one_split(history_long)
     data=one_split_history))
 ```
 
-The figure above shows learning curves that are typical of early stopping regularization using torch models.
+Le graphique ci-dessus contient des courbes d’apprentissage typiques.
 
 <!-- comment -->
 
-* log loss always decreases, and AUC always increases, for the subtrain set (used to compute gradients).
+* La perte logistique diminue, et l’AUC augmente, pour l’ensemble de sous-apprentissage (utilisé dans le calcul des gradients).
 <!-- comment -->
-* The typical U shape is clearly visible for the validation log loss. Typically we select the number of epochs which minimizes this curve (or maximizes the validation AUC).
+* Comme attendu, la perte sur l’ensemble de validation diminue en premier, pour ensuite remonter plus tard. Typiquement nous choissisons le nombre d’époques qui minimise cette courbe (ou bien, qui maximise l’AUC pous l’ensemble de validation).
 
 <!-- comment -->
 
-Below we add points which emphasize the min log loss, and max AUC, of each curve.
+Nous ajoutons maintenant des points pour mettre en évidence le minimum et le maximum.
 
 ```{r}
 history_best <- history_long[, {
@@ -1117,19 +1139,19 @@ one_split_best <- one_split(history_best)
    scale_fill_manual(values=c(best="black")))
 ```
 
-Above we can see that
+Le graphique ci-dessus révèle des caractéristiques importantes :
 
 <!-- comment -->
 
-* there is only one min for each log loss curve.
+* il n’y a qu’un minimum pour chaque courbe de perte logistique;
 <!-- comment -->
-* there are sometimes more than one max for the AUC curves.
+* il peut y avoir plus du’un maximum d’AUC;
 <!-- comment -->
-* the subtrain AUC quickly maxes out at 1, whereas the log loss continues decreasing.
+* pour l’ensemble de sous-entraînement, l’AUC atteint rapidement le maximum (1), mais la perte logistique continue de diminuer.
 
 <!-- comment -->
 
-Below we add vertical lines and text to emphasize the number of epochs which was selected during training.
+Nous rajoutons ensuite des lignes verticales pour mettre en évidence le nombre d’époques choisi.
 
 ```{r}
 one_split_score <- one_split(score_torch)
@@ -1143,9 +1165,9 @@ one_split_score <- one_split(score_torch)
     data=one_split_score))
 ```
 
-Above we can see that the selected number of epochs is consistent with the min validation log loss, which happens before the max validation AUC.
+Ci-dessus nous voyons que nous avons choisi le nombre d’époques qui minimise la perte logistique sur l’ensemble de validation.
 <!-- comment -->
-Next, we propose an overview, which displays the best epochs for each data set, learning algorithm, and cross-validation iteration.
+Ensuite, nous proposons un résumé, qui affiche le nombre d’époques pour chaque jeu de données, division de validation croisée et algorithme d’apprentissage.
 
 ```{r}
 (history_best_wide <- dcast(
@@ -1155,9 +1177,9 @@ Next, we propose an overview, which displays the best epochs for each data set, 
   value.var="epoch"))
 ```
 
-The table above has additional columns for min, max, and mid number of epochs which are best (according to validation log loss or AUC).
+Le tableau présente des colonnes pour les époques correspondant aux meilleures mesures.
 <!-- comment -->
-We use the mid values as points in the overview plot below.
+Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin.
 
 ```{r}
 history_best_valid <- history_best_wide[set=="validation"]
@@ -1177,17 +1199,17 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-The plot above shows that 
+Dans le graphique ci-dessus, il est clair que
 
 <!-- comment -->
 
-* some data sets (`sonar` and `waveform`) have best validation loss and AUC at an intermediate number of epochs. This is evidence of a good fit (neither under- nor over-fitting).
+* pour certains jeux de données (`sonar` and `waveform`), la meilleure époque a des valeurs inférieures au maximum. Ces résultats suggèrent que le choix pour le nombre d’époques est bon (ni surapprentissage ni sous-apprentissage).
 <!-- comment -->
-* in some data sets (`vowel` and `zip`), the best validation log loss occurs at 200 epochs. This is evidence of underfitting (number of epochs could be increased to find better validation loss values).
+* pour d’autres jeux de données (`vowel` and `zip`) la meilleure époque correspond au maximum (200 époques). Ces résultats suggèrent un sous-apprentissage (nous pouvons augmenter le nombre d’époques pour minimiser davantage la perte sur l’ensemble de validation).
 
 <!-- comment -->
 
-Below we add a segment to show the range of epochs which attain the best validation AUC.
+Ensuite nous rajoutons un segment pour afficher le min et max du nombre d’époques qui atteignent la meilleure AUC pour l’ensemble de validation.
 
 ```{r}
 (gg.best.seg <- gg.best.valid+
@@ -1201,9 +1223,9 @@ Below we add a segment to show the range of epochs which attain the best validat
      data=history_best_valid))
 ```
 
-Above we see that there are some runs in `vowel` and `zip` for which there is a range of epochs that achieve the best validation AUC.
+Ci-dessus nous voyons qu’il y a plusieurs époques qui atteignent le maximum d’AUC, dans les ensembles validation de `vowel` et `zip`.
 <!-- comment -->
-Next, we prepare a plot of learning curve details, by first computing relative values between 0 and 1 (since values can be very different between data sets).
+Nous préparons ensuite un graphique pour afficher les détails, avec des valeurs relatives entre 0 et 1 (car les valeurs absolues sont très différentes d’un jeu de données à l’autre).
 
 ```{r}
 norm01 <- function(x)(x-min(x))/(max(x)-min(x))
@@ -1220,7 +1242,7 @@ gg.log.auc <- ggplot()+
      data=history_long)
 ```
 
-Finally, we combine the two previous plots into an interactive visualization using the code below.
+Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 
 ```{r viz-torch}
 (viz.torch <- animint(
@@ -1231,22 +1253,22 @@ Finally, we combine the two previous plots into an interactive visualization usi
     ggtitle("Selected learning curves")))
 ```
 
-Above we can see a data visualization with two plots:
+Ci-dessous nous voyons deux graphiques :
 
 <!-- comment -->
-* Clicking the top overview plot selects a data set and cross-validation iteration.
+* Cliquez sur le graphique du haut pour sélectionner un jeu de données et une division de validation croisée.
 <!-- comment -->
-* The bottom plot shows the learning curves for the current selection.
+* Le graphique du bas affichera les courbes d’apprentissage pour la sélection.
 
 <!-- comment -->
 
-For some data sets, the AUC quickly attains a max near 1, and it is difficult to see how close it is to 1.
+Pour certains jeux de données, l’AUC atteint rapidement un maximum proche de 1, ce qui rend difficile d’observer à quel point la courbe se rapproche de 1.
 <!-- comment -->
-To more easily visualize those details, the code below computes inverse AUC (1-AUC).
+Pour visualiser ces détails, nous calculons l’inverse de l’AUC (1-AUC).
 <!-- comment -->
-The best value for AUC is 1, whereas it is 0 for inverse AUC.
+La meilleure valeur de l’AUC est 1, mais la meilleure valeur pour l’inverse de l’AUC est 0.
 <!-- comment -->
-So using inverse AUC with a log scale, as in the code below, will show more details of how close it gets to 0.
+Nous pouvons alors utiliser l’échelle logarithmique pour visualiser à quel point la courbe est proche de 0.
 
 ```{r}
 history_long[, let(
@@ -1266,9 +1288,9 @@ gg.log.scale <- ggplot()+
      data=history_long)
 ```
 
-Note in the code above that we use capital `Measure` and `Relative_values`, along with a log-scale Y axis.
+Remarquons que dans le code ci-dessus que nous avons utilisé des majuscules pour les variables `Measure` et `Relative_values`, et une échelle logarithmique pour Y.
 <!-- comment -->
-The code below adds this new log-scale plot to the previous data visualization.
+Nous ajoutons ensuite ce graphique à la visualisation interactive.
 
 ```{r viz-torch-log}
 viz.torch.log <- viz.torch
@@ -1278,28 +1300,29 @@ viz.torch.log$detailsLog <- gg.log.scale+
 viz.torch.log
 ```
 
-The visualization above has an additional plot on the bottom right, which shows details for the selected data set and cross-validation iteration.
+La visualisation contient un graphique en bas à droite, qui affiche l’échelle logarithmique pour la sélection.
 <!-- comment -->
-For an example of additional details shown using inverse AUC, try selecting one of the cross-validation iterations in the `vowel` data set.
+En cliquant sur `vowel`, nous voyons des différences entre les graphiques de détails (en bas à droite, nous voyons mieux quelles époques sont les meilleures).
 
 ### glmnet {#glmnet}
 
-In this section, we explore visualizations of the `glmnet` L1-regularized linear model.
+Dans cette section, nous explorons des visualisations de l’algorithme de `glmnet`, un modèle linéaire avec régularisation L1.
 <!-- comment -->
-We begin by using the `plot()` method of the model stored in the learner object.
+Nous commençons avec la méthode `plot()` du premier modèle.
 
 ```{r}
 score_glmnet <- score_dt[grep("glmnet",learner_id)]
 L <- score_glmnet$learner[[1]]
 library(glmnet)
 plot(L$model)
+score_glmnet[1, title(paste(task_id, iteration), line=3)]
 ```
 
-The plot above shows the validation set Binomial Deviance (same as log loss in previous section) as a function of the model complexity (measured by negative log penalty).
+Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de non-zéro coefficients en haut, négative log pénalité en bas).
 <!-- comment -->
-We see the curve decrease, but not increase, which may indicate underfitting.
+Nous voyons une courbe qui descend, mais qui ne remonte pas, ce qui suggère un sous-apprentissage.
 <!-- comment -->
-To reproduce this plot, we use the ggplot code below.
+Nous faisons une version de ce graphique avec le code ci-dessous.
 
 ```{r}
 cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
@@ -1315,23 +1338,23 @@ cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
    scale_fill_gradient(low="white", high="red"))
 ```
 
-Above we see a ggplot display which is similar to the previous plot.
+Ci-dessus nous voyons un ggplot qui ressemble au graphique précédant, avec la couleur indiquant le nombre de non-zéro coefficients.
 <!-- comment -->
-Next, we add a label to show the number of active variables at various regularization parameters.
+Ensuite, nous rajoutons du texte pour souligner le nombre de non-zéro coefficients pour plusieurs niveaux de régularisation.
 
 ```{r}
 gg.glmnet+
   geom_text(aes(
     -log(lambda), Inf, label=nzero),
     vjust=1,
-    data=cv_glmnet_one[seq(1,.N,by=5)])
+    data=cv_glmnet_one[seq(1, .N, by=5)])
 ```
 
-The plot above has text labels at the top which show the number of non-zero weights for several regularization parameters.
+Le graphique ci-dessus affiche le nombre de non-zéro coefficients en haut, pour plusieurs niveaux de régularisation.
 <!-- comment -->
-The goal will be to make a similar interactive display.
+Notre but dans cette section est de faire une visualisation interactive avec ces informations.
 <!-- comment -->
-We compute a larger data table of results using the code below.
+Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modèles.
 
 ```{r}
 (cv_glmnet_all <- score_glmnet[, with(learner[[1]]$model, data.table(
@@ -1339,9 +1362,9 @@ We compute a larger data table of results using the code below.
 )), by=.(task_id, iteration, task_it)])
 ```
 
-The table above contains one row per data set, cross-validation iteration, and regularization parameter.
+Le tableau ci-dessus contient une ligne pour chaque jeu de données, chaque division de validation croisée et chaque niveau de régularisation.
 <!-- comment -->
-Below we display the validation log loss for each iteration as a different line, with each data set as a different panel.
+Ensuite nous affichons la perte logistique sur l’ensemble de validation, avec une courbe pour chaque division de validation croisée et un panneau pour chaque jeu de données.
 
 ```{r}
 ggplot()+
@@ -1352,48 +1375,54 @@ ggplot()+
   facet_wrap("task_id", scales="free")
 ```
 
-Above we can see that the linear model can overfit if not properly regularized in some data sets (`sonar`, `vowel`, `waveform`), whereas there is evidence of underfitting in other data sets (`spam` and `zip`).
+Ci-dessus nous voyons que le modèle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel`, `waveform`), si le niveau de régularisation est trop faible.
+Dans les autres jeux de données (`spam` and `zip`), nous voyons une courbe qui ne remonte pas, ce qui suggère le sous-apprentissage.
+Nous pourrions donc soupçonner qu’un modèle non-linéaire serait capable de donner des meilleurs résultats.
+En regardant les résultats précédents, nous pourrions vérifier cette hypothèse.
+
+* Dans `spam`, nous voyons que `torch_dense_50` obtient de meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction linéaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
+* Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite (ou presque). Nous en déduisons que ces données réprésentent un problème de prédiction qui est très facile pour tous les algorithmes (même le modèle linéaire).
 
 <!-- comment -->
 
-## Chapter summary and exercises {#ch20-exercises}
+## Résumé du chapitre et exercices {#ch20-exercises}
 
 <!-- comment -->
 
-We have created several data visualizations related to `mlr3` benchmarks.
+Nous avons créé plusieurs visualisations des résultats d’apprentissage de `mlr3`.
 
 <!-- comment -->
 
-Exercises:
+Exercices :
 
 <!-- comment -->
 
-* In `viz.select.fpr`, there are no smooth transitions. Add a smooth transition for the `FPR` variable, and make sure to set `aes(key)` on the `geom_point()` and `geom_text()` in `gg.tpr`.
+* Dans `viz.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
 <!-- comment -->
-* In `viz.select.fpr`, a separate plot is used to display Best TPR for selected FPR. Remove that plot, and add a `geom_point()` and `geom_label_aligned()` to the ROC curve plot, which show the same information.
+* Dans `viz.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
 <!-- comment -->
-* In `gg.summary`, currently only the max AUC is shown. Add `geom_segment()` that shows the variation in AUC among algorithms.
+* Le graphique `gg.summary` affiche seulement le max AUC. Rajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
 <!-- comment -->
-* In `viz.select.fpr` we showed Best TPR for selected FPR.
+* Le graphique `viz.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
-  * Add a plot “Best error rate for selected FPR”. Hint: you will need to join the number of labels to the ROC curve table.
+  * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
 <!-- comment -->
-  * Add `geom_text()` which shows the selected value of FPR.
+  * Rajoutez un `geom_text()` qui affiche le taux séléctionné de faux positifs.
 <!-- comment -->
-  * Make a re-design that shows best FPR for selected TPR.
+  * Faites une visualisation qui affiche le meilleur taux de faux positifs, pour une sélection du taux de vrais positifs.
 <!-- comment -->
-* Change the color legends so that the two linear models (`cv_glmnet` and `torch_linear`) have different shades of the same color (for example dark and light purple).
+* Dans les légendes, les deux modèles linéaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pâle et violet foncé).
 <!-- comment -->
-* In visualizations with ROC curves, add `aes(color)` or `aes(fill)` to the other plots, with a consistent color scheme that matches the ROC curves. Make sure there is only one legend (with entries ordered to match the order of Y axes that display `learner_id`), and that it can make all data for a learner disappear, across all plots.
+* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
-* In `viz.torch.log`, add points and lines to emphasize the best and selected epochs.
+* Dans `viz.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
+* Chaque section du chapitre a présenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
 <!-- comment -->
-* Each section of this chapter has presented a different data visualization technique. Combine several different techniques in a single data visualization:
+  * Affichez les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch`, nearest neighbors).
 <!-- comment -->
-  * Show model selection plots for all three algorithms (`glmnet`, `torch`, nearest neighbors).
-<!-- comment -->
-  * Show interactive ROC curves at the same time.
+  * Affichez les courbes ROC interactives à côté des graphiques pour la vérification de la régularisation.
 
 <!-- comment -->
 
-Next, [the appendix](/ch99) explains some R programming idioms that are generally useful for interactive data visualization design.
+Ensuite, [l'annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
+

@@ -1,142 +1,144 @@
-# Contents and motivation
+# Contenu et contexte
 
 <!-- paragraph -->
 
-This manual explains how to design and create interactive data visualizations using the R package `animint2`.
+Dans ce manuel, nous expliquons comment planifier et créer des visualisations de données interactives avec le package R `animint2`.
 
 <!-- paragraph -->
 
-## Contents
+## Contenu
 
 <!-- paragraph -->
 
-The chapters of this manual are organized as follows.
+Ce manuel comporte trois volets que nous présentons dans les sections suivantes.
 
 <!-- paragraph -->
 
-### The `animint2` extensions to the grammar of graphics {#animint}
+### Extensions `animint2`  à la grammaire des graphiques {#animint}
 
 <!-- paragraph -->
 
-The first seven chapters should be read sequentially, since they give a step by step guide to interactive data visualization using `animint2`.
+Les sept premiers chapitres fournissent les bases de la visualisation interactive des données avec animint2 et vous devriez les lire dans l’ordre.
 
 <!-- paragraph -->
 
-Starting in the [Motivation section](#motivation) below, this first chapter gives an overview of data analysis and visualization.
+Dès la [section contexte](#contexte) ci-dessous, ce premier chapitre donne un aperçu de l’analyse et de la visualisation de données.
 <!-- comment -->
-It provides motivation and a theoretical foundation for the other chapters, and should be especially useful for readers who are completely new to data analysis.
+Il apporte le contexte et la base théorique nécessaires à la compréhension des autres chapitres, ce qui sera particulièrement utile aux novices en matière d’analyse de données.
 <!-- comment -->
-It introduces the method of data visualization prototyping using sketches, without introducing R code.
+Il présente la méthode de prototypage de visualisation des données à l’aide d'esquisses, sans introduire de code R.
 
 <!-- paragraph -->
 
-Starting with [chapter 2](ch02), we will show how plot sketches can be translated into R code.
+À partir du [chapitre 2](ch02), nous démontrons comment traduire les esquisses de graphiques en code R.
 <!-- comment -->
-Chapter 2 explains the basics of plotting using ggplots and `animint2`, and should be most useful for readers who have never used `ggplot2`.
+Ce chapitre présente les bases de la visualisation de données à l’aide de ggplots et de `animint2`, et sera une ressource précieuse pour les lecteurs qui n’ont jamais utilisé `ggplot2`.
 <!-- comment -->
-It explains how standard ggplots can be rendered on web pages using `animint2`.
+Nous y expliquons comment générer des ggplots standards sur des pages web en utilisant `animint2`.
 
 <!-- paragraph -->
 
-[Chapter 3](ch03) introduces `showSelected`, one of the two main keywords that `animint2` introduces for interactive data visualization design.
+Le [chapitre 3](ch03) présente `showSelected`, l’un des deux principaux mots-clés introduits par `animint2`  pour la conception de visualisation des données interactives.
 <!-- comment -->
-Chapter 3 begins by explaining selection variables, which provide the mechanism of interaction in `animint2`.
+Ce chapitre s’ouvre sur une explication des variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
 <!-- comment -->
-Chapter 3 then explains how the`showSelected` keyword makes it possible to plot data subsets.
+Le chapitre 3 explique ensuite comment le mot-clé `showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
-Chapter 3 also explains how to use smooth transitions and animation.
+Nous expliquons également comment utiliser des transitions graduelles et des animations.
 
 <!-- paragraph -->
 
-[Chapter 4](ch04) introduces `clickSelects`, the other main keyword that `animint2` introduces for interactive data visualization design.
+Le [chapitre 4](ch04) est consacré à  `clickSelects`, l'autre mot-clé important introduit par `animint2` pour la conception de visualisation des données interactives.
 <!-- comment -->
-The`clickSelects` keyword makes it possible for the user to change a selection variable by directly clicking on a plot element.
+Le mot-clé `clickSelects` permet à l’utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
 
 <!-- paragraph -->
 
-[Chapter 5](ch05) explains several different ways to share your interactive data visualizations on the web.
+Le [chapitre 5](ch05) explique différentes façons de partager vos visualisations de données interactives sur le web.
 
 <!-- paragraph -->
 
-[Chapter 6](ch06) covers some other features of `animint2`, including how to specify hyperlinks, tooltips, data-driven selector variable names.
+Le [chapitre 6](ch06) couvre d’autres fonctionnalités de `animint2`, y compris la manière de définir des hyperliens, des infobulles et toutes les autres nouvelles fonctionnalités qui n’existent pas dans les graphiques statiques de `ggplot2`.
 
 <!-- paragraph -->
 
-[Chapter 7](ch07) covers the limitations of the current implementation of the `animint2` R package, and explains workarounds for some common issues.
+Le [chapitre 7](ch07) couvre les limites de l’implémentation actuelle du package R `animint2`, et propose des solutions de contournement pour certains problèmes courants.
 <!-- comment -->
-It also includes some ideas for improvements, for those who would like to contribute to `animint2`.
+De plus, il présente quelques idées d'amélioration, à l’intention de ceux qui souhaiteraient contribuer au développement de `animint2`.
 
 <!-- paragraph -->
 
-### Examples {#examples}
+### Exemples {#examples}
 
 <!-- paragraph -->
 
-The remaining chapters can be read in any order, since each chapter explains how to make data visualizations for a particular data set or statistical algorithm.
+Les autres chapitres peuvent être lus dans n'importe quel ordre, puisque chacun explique comment réaliser des visualisations de données pour un ensemble de données ou un algorithme statistique particulier.
 
 <!-- paragraph -->
 
-[Chapter 8](ch08) explains how to create a multi-panel interactive World Bank data visualization.
+Le [chapitre 8](ch08) explique comment créer une visualisation interactive multi-panneaux des données de la Banque mondiale.
 
 <!-- paragraph -->
 
-[Chapter 9](ch09) shows a visualization of data from cyclists in Montreal.
+Le [chapitre 9](ch09) présente une visualisation des données provenant de cyclistes de Montréal.
 
 <!-- paragraph -->
 
-[Chapter 10](ch10) explains how to create an interactive re-design of the nearest neighbors data visualization from the Elements of Statistical Learning book [@Hastie2009].
+Le [chapitre 10](ch10) explique comment créer une version interactive de la visualisation des données sur les plus proches voisins du livre *Elements of Statistical Learning* [@Hastie2009].
 
 <!-- paragraph -->
 
-[Chapter 11](ch11) shows a data visualization that explains the Lasso, a machine learning model for regularized regression.
+Le [chapitre 11](ch11) présente une visualisation des données qui explique le Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
 
 <!-- paragraph -->
 
-[Chapter 12](ch12) shows a data visualization that explains support vector machines (SVM), a machine learning model for binary classification.
+Le [chapitre 12](ch12) présente une visualisation des données qui explique la séparateur à vaste marge (aussi connu sous le nom « machine à vecteurs de support » ou SVM), un modèle d'apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
-[Chapter 13](ch13) explains how to create an interactive visualization that explains the Poisson regression model.
+Le [chapitre 13](ch13) explique comment créer une visualisation interactive qui explique le modèle de régression de Poisson.
 
 <!-- paragraph -->
 
-[Chapter 14](ch14) shows an example of how to create data-driven selectors using named `clickSelects` and `showSelected` in an interactive visualization of a peak detection model.
+Le [chapitre 14](ch14) montre un exemple de création d’une visualisation avec nombreux sélecteurs, à l'aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive d'un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
-[Chapter 15](ch15) explains how to create an interactive visualization of the Newton root-finding algorithm.
+Le [chapitre 15](ch15) explique comment créer une visualisation interactive de l'algorithme de recherche de racines « root-finding » de Newton.
 
 <!-- paragraph -->
 
-[Chapter 16](ch16) explains how to create an interactive visualization of an optimal changepoint detection model.
+Le [chapitre 16](ch16) explique comment créer une visualisation interactive d'un modèle de détection de ruptures dans les données séquentielles.
 
 <!-- paragraph -->
 
-[Chapter 17](ch17) explains how to create an interactive visualization of the k-means clustering algorithm.
+Le [chapitre 17](ch17) explique comment créer une visualisation interactive de l'algorithme d'agrégation « clustering », k-moyennes.
 
 <!-- paragraph -->
 
-[Chapter 18](ch18) explains how to create an interactive visualization of the gradient descent algorithm for learning neural network weight matrices.
+Le [chapitre 18](ch18) explique comment créer une visualisation interactive de l'algorithme de descente de gradient pour l'apprentissage d'un réseau de neurones.
 
 <!-- paragraph -->
 
-[Chapter 19](ch19) explains how to visualize P-values, including how to work around overplotting, using a heat map linked to a zoomed scatter plot.
+Le [chapitre 19](ch19) explique la visualisation des valeurs-p. Pour éviter l’occlusion dans un nuage de points avec trop de données, nous proposons une visualisation interactive avec carte thermique reliée à un nuage de points.
+
+Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différents algorithmes d’apprentissage artificiel, calculé avec le package `mlr3`.
 
 <!-- paragraph -->
 
-### Appendices {#appendices}
+### Annexes {#appendices}
 
 <!-- paragraph -->
 
-[Useful idioms](ch99) contains detailed explanations of several R code idioms that are used throughout this manual.
+Le [Glossaire](ch99) contient l’explication détaillée de plusieurs expressions idiomatiques du code R utilisées dans ce manuel.
 
 <!-- paragraph -->
 
-[The contributing guide](contribute.html) contains instructions about how you can contribute improvments to this manual.
+Le [Guide de contribution](contribute.html) fournit des instructions sur la manière de contribuer à l'amélioration de ce manuel.
 
 <!-- paragraph -->
 
-## Motivation {#motivation}
+## Contexte {#contexte}
 
 <!-- paragraph -->
 
@@ -146,126 +148,117 @@ knitr::opts_chunk$set(fig.path="ch01-figures/")
 
 <!-- paragraph -->
 
-The purpose of this manual is to explain the usage of `animint2`, an R package for interactive data visualization.
+L’objectif de ce manuel est d’expliquer l’utilisation des éléments suivants `animint2`, un package R pour la visualisation interactive des données.
 <!-- comment -->
-This introductory chapter answers the following questions:
+Ce chapitre d’introduction répond aux questions suivantes :
 
 <!-- paragraph -->
 
-- What are data, and how are they analyzed?
+- Que sont les données et comment les analyser?
 <!-- comment -->
-- What is data visualization, and when is it useful for data analysis?
+- Qu’est-ce que la visualisation des données, et quand est-elle utile pour l’analyse des données?
 <!-- comment -->
-- What is interactive data visualization, and when is it useful?
+- Qu’est-ce que la visualisation des données interactive et dans quelles situations est-elle utile?
 
 <!-- paragraph -->
 
-This introductory chapter uses the following outline:
+La structure du chapitre est la suivante :
 
 <!-- paragraph -->
 
-- What is data?
+- Qu’est-ce qu'une donnée?
 <!-- comment -->
-- Small data -- data visualization is not necessary.
+- Petits ensembles de données -- la visualisation des données n’est pas nécessaire.
 <!-- comment -->
-- Medium data -- static data visualization is sufficient.
+- Moyens ensembles -- la visualisation statique des données est suffisante.
 <!-- comment -->
-- Large data -- interactive data visualization is useful.
+- Grands ensembles - la visualisation interactive est utile.
 
 <!-- paragraph -->
 
-### What is data analysis?
+### Qu’est-ce que l’analyse des données?
 <!-- comment -->
 {#data}
 
 <!-- paragraph -->
 
-Data are any pieces of information that are systematically recorded, either on paper or on a computer.
+Les données sont des éléments d'information enregistrés de manière systématique, que ce soit sur support papier ou informatique.
 <!-- comment -->
-Anybody can create data, just by systematically writing things down.
+Tout le monde peut créer des données, simplement en consignant méthodiquement des éléments.
 <!-- comment -->
-Typically, data are created in order to help answer a specific question, and are organized into tables with rows for observations and columns for variables or different types of information.
+En général, les données sont créées pour répondre à une question précise et sont organisées en tableaux comportant des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
 <!-- comment -->
-The word "data" comes from Latin, its plural form "datum," refers to one observation/row of a data table.
+D’après Larousse, « donnée » désigne la « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée]. https://www.larousse.fr/dictionnaires/francais/donnée
+Dans le cas de `animint2`, la représentation conventionnelle est un tableau, dans lequel chaque ligne correspond à une observation, et chaque colonne à une variable.
 <!-- comment -->
-We use the term "data set" to refer to a subset of observations/rows, or the entire data table.
+Nous utilisons le terme « ensemble de données »  pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
 
 <!-- paragraph -->
 
-There are many examples of data that could be created to answer questions based on everyday experiences:
+Il existe de nombreux exemples de données qui pourraient être créées pour répondre à des questions basées sur des expériences quotidiennes :
 
 <!-- paragraph -->
 
-- How does the weather this year compare to previous years?
+- Comment la météo de cette année se compare-t-elle à celle  des années précédentes?
 <!-- comment -->
-Have we had more or less rain than usual?
+La quantité de pluie est-elle supérieure ou inférieure à la normale? 
 <!-- comment -->
-To answer these questions, we could create a data table with column for measurements of different weather conditions: temperature, rainfall, etc.
+Pour répondre à ces questions, nous pourrions créer un tableau de données avec des colonnes pour les mesures des différentes conditions météorologiques (température, précipitations, etc.), ainsi que des colonnes pour la date et l'heure de chaque observation, et une ligne pour chaque observation.
 <!-- comment -->
-There should also be columns for the date and time of each observation, and a row for each observation.
+- Quel est l'effet de mon régime alimentaire sur ma santé? 
 <!-- comment -->
-- How is this new diet affecting me?
+Si vous modifiez votre alimentation, vous pouvez noter ce que vous mangez et comment vous vous sentez après chaque repas dans un tableau de contingence comportant une ligne pour chaque repas et quatre colonnes (date, heure, aliments consommés, effets constatés). 
 <!-- comment -->
-If you are trying a new diet, you may want to record what you eat and how you feel after each meal.
+- Ce nouveau traitement contre le cancer du poumon est-il plus efficace que l'ancien?
 <!-- comment -->
-In that case you could make a table with a row for each meal and four columns: date, time, what you ate, and how you felt after.
+Le médecin responsable d’un essai clinique répartit au hasard les patients en deux groupes : l’un recevant un nouveau traitement, l’autre l’ancien. 
 <!-- comment -->
-- Does this new lung cancer treatment work better than the old treatment?
-<!-- comment -->
-A doctor who conducts the clinical trial would randomly assign patients to receive either the new or old treatment.
-<!-- comment -->
-The doctor would then create a data table with a row for each patient, and several columns: years the patient has smoked, treatment type (new or old), patient age at treatment, patient age at death, tumoral marker measurement, etc.
+Le médecin créerait ensuite un tableau de données comportant une ligne pour chaque patient, et plusieurs colonnes : nombre d'années de tabagisme, type de traitement (nouveau ou ancien), âge au moment du traitement, âge au décès, mesure des marqueurs tumoraux, etc.
 
 <!-- paragraph -->
 
-We define "data analysis" as the process of answering these questions by converting the raw data table into other, more comprehensible forms.
+Nous définissons l’« analyse des données »  comme le processus visant à répondre à ces questions en convertissant le tableau de données brut en d'autres formes plus compréhensibles.
 <!-- comment -->
-One highly effective class of methods for data analysis is called "data visualization," which seeks to provide answers to questions by converting a data set into an informative picture.
+Parmi les méthodes d’analyse particulièrement efficaces figure la « visualisation des données », qui cherche à répondre aux questions en transposant un ensemble de données en une image informative. 
 <!-- comment -->
-The term "data visualization" refers to both the picture itself (also known as a plot, chart, figure, graph, graphic, or data viz), and the process of creating the picture.
+Le terme « visualisation des données » désigne à la fois l’image (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation de données) et le processus de création de l’image.
+<!-- paragraph -->
+
+Il existe de nombreuses façons différentes d'effectuer une analyse de données, et différentes techniques sont nécessaires selon la taille des ensembles de données. 
+<!-- comment -->
+Bien que les définitions varient d’un auteur à l’autre, nous adopterons dans ce manuel une classification en trois catégories : petits, moyens et grands ensembles de données.
+<!-- comment -->
+Nous discutons d’abord des petits ensembles de données, pour lesquels la visualisation n’est pas nécessaire.
 
 <!-- paragraph -->
 
-There are many different ways to perform data analysis, and data sets of different sizes should be analyzed using different techniques.
-<!-- comment -->
-There are many different ways to characterize the size of data sets, and every author uses a slightly different definition.
-<!-- comment -->
-In this manual we will use a classification of data sets into three sizes:
-small, medium, and large.
-<!-- comment -->
-We begin by discussing small data sets, for which data visualization is not necessary.
+### Analyse des petits ensembles de données sans visualisation {#small-data}
 
 <!-- paragraph -->
 
-### Small data analysis without visualization {#small-data}
+Dans cette section, nous aborderons les « petits ensembles de données » dont la taille restreinte permet une analyse par simple examen du tableau de données.
+<!-- comment -->
+Pour ces ensembles, la visualisation graphique n’est pas nécessaire : la présentation sous forme de tableau est suffisante.
 
 <!-- paragraph -->
 
-In this section, we will discuss "small data," which are small enough such that data analysis can be done by simply looking at the entire data table.
+Prenons l’exemple de la célèbre [expérience de dégustation du thé  ](https://fr.wikipedia.org/wiki/The_lady_tasting_tea) conçue par Ronald Fisher.
 <!-- comment -->
-For small data sets, there is no need to use data visualization.
+Une dame a affirmé pouvoir détecter si le lait d’une tasse de thé avait été ajouté avant ou après le thé.
 <!-- comment -->
-Instead, the data can simply be presented for visual inspection in a table.
+Fisher s’est posé la question suivante : la dame peut-elle vraiment distinguer les deux types de préparation?
 
 <!-- paragraph -->
 
-As a concrete example, consider [the famous tea tasting experiment proposed by Ronald Fisher](https://en.wikipedia.org/wiki/Lady_tasting_tea).
+Pour répondre à cette question, Fisher a préparé huit tasses : quatre avec du lait ajouté après le thé, et quatre avec du lait ajouté avant.
 <!-- comment -->
-A Lady claimed that she could taste the difference when milk is added to the teacup before or after the tea.
+Il les a ensuite fait goûter à la dame dans un ordre aléatoire en lui demandant d’identifier celles dans lesquelles le lait avait été ajouté après le thé.
 <!-- comment -->
-Fisher asked the question, can the Lady really taste the difference between the two types of tea?
-
-<!-- paragraph -->
-
-To answer that question, Fisher prepared four cups of tea with milk added after, and four cups of tea with milk added before.
+Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses.
 <!-- comment -->
-Fisher then placed the cups in a random order, had the Lady taste all eight cups of tea, and asked her to identify the four in which milk was added after the tea.
+Fisher a ensuite consigné les données suivantes : le nombre total de tasses (8), le nombre de tasses dans lesquelles du lait a été ajouté (4) et le nombre de tasses correctement identifiées (3).
 <!-- comment -->
-According to`help(fisher.test)` in R, the Lady correctly identified three of the four cups in which milk was added after the tea.
-<!-- comment -->
-Fisher than wrote down the following data: the total number of cups (8), the total number of cups with milk added (4), and the total number of cups that the Lady correctly identified (3).
-<!-- comment -->
-In R, this data set can be viewed by printing a contingency table of count data:
+Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage :
 
 <!-- paragraph -->
 
@@ -274,38 +267,38 @@ TeaTasting <- matrix(c(
   3, 1, 1, 3),
   nrow = 2,
   dimnames = list(
-    Guess = c("Milk", "Tea"),
-    Truth = c("Milk", "Tea")))
+    "Choix de la dame" = c("Lait-thé", "Thé-lait"),
+    "Ordre réel" = c("Lait-thé", "Thé-lait")))
 print(TeaTasting)
 ```
 
 <!-- paragraph -->
 
-In this case, the data set is small enough such that Fisher's question can be answered by simply looking at the data table itself.
+Dans ce cas, l’ensemble de données est suffisamment petit pour que l’on puisse répondre à la question de Fisher en examinant simplement le tableau de données lui-même.
 <!-- comment -->
-If the Lady had been able to correctly identify all four cups, then that would have been a very convincing demonstration of her ability.
+Si la dame avait identifié correctement les quatre tasses, la démonstration de ses capacités aurait été très convaincante.
 <!-- comment -->
-However, she was apparently only able to correctly identify three out of the four cups, which is less convincing.
+Cependant, elle n’a réussi que dans trois cas sur quatre, ce qui est moins concluant.
 
 <!-- paragraph -->
 
-The main topic of this manual is data visualization, which is not necessary for such small data sets.
+Le sujet principal de ce manuel est la visualisation des données, et elle n’est pas nécessaire pour des ensembles de données aussi petits.
 <!-- comment -->
-Instead, we will focus on data sets that are too big to be analyzed by manual visual inspection of the data table.
+Concentrons-nous plutôt sur les ensembles de données trop volumineux pour être analysés par examen visuel direct du tableau de données.
 
 <!-- paragraph -->
 
-### Medium data analysis with static data visualizations {#medium-data}
+### Analyse des moyens ensembles de données avec des visualisations de données statiques {#medium-data}
 
 <!-- paragraph -->
 
-For medium sized data sets, simply inspecting the data table is no longer sufficient to answer the questions posed during data analysis.
+Pour les ensembles de données de taille moyenne, la simple inspection du tableau de données ne suffit plus pour répondre aux questions posées lors de l’analyse des données.
 <!-- comment -->
-Medium data are big enough such that we need to use visualization to understand the data.
+Ces ensembles sont suffisamment volumineux pour nécessiter l’utilisation de la visualisation pour comprendre les données.
 
 <!-- paragraph -->
 
-For example, consider the following data on atmospheric carbon dioxide (CO2) concentrations, recorded monthly between 1959 and 1997.
+Prenons par exemple les données suivantes sur les concentrations de dioxyde de carbone (CO₂) dans l’atmosphère, enregistrées mensuellement de 1959 à 1997 :
 
 <!-- paragraph -->
 
@@ -329,12 +322,11 @@ co2.details
 
 <!-- paragraph -->
 
-Printing these data on the R command line shows that there are 468 rows/observations total.
+L’impression de ces données sur la ligne de commande R montre qu’il y a 468 lignes/observations au total.
 <!-- comment -->
-This is not a huge number of observations, but it is already big enough so that answering questions is not easy by simple visual inspection of the data table.
+Ce nombre n’est pas énorme, mais il est déjà suffisamment important pour qu’une simple inspection du tableau ne permette pas de répondre aux questions posées.
 <!-- comment -->
-Instead, we will create a static data visualization:
-
+Nous allons donc créer une visualisation des données statique :
 <!-- paragraph -->
 
 ```{r, echo=FALSE}
@@ -347,59 +339,58 @@ ggplot()+
   geom_point(aes(
     year.month.POSIXct, ppm, color=month),
     data=extremes)+
-  xlab("Time of measurement")+
-  ylab("Atmospheric carbon dioxide (parts per million)")
+  xlab("Moment de la mesure")+
+  ylab("CO₂ atmosphérique (ppm)")
 ```
 
 <!-- paragraph -->
 
-The static data visualization shows that CO2 concentrations increased over the second half of the twentieth century.
+La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXᵉ siècle
+.
 <!-- comment -->
-This particular data visualization is called a [Keeling Curve](https://en.wikipedia.org/wiki/Keeling_Curve).
+Cette visualisation des données porte le nom de [courbe de Keeling](https://fr.wikipedia.org/wiki/Courbe_de_Keeling), du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique.
 <!-- comment -->
-It is named after Charles David Keeling, the pioneering scientist who collected the first frequent regular data on atmospheric CO2.
+La tendance générale à l’augmentation peut être expliquée par le processus chimique de la combustion, qui transforme l’oxygène en CO₂. 
 <!-- comment -->
-The general increasing trend can be explained by considering the chemical process of combustion, which converts oxygen to CO2.
-<!-- comment -->
-Keeling noted that "the observed rate of increase is nearly that to be expected from the combustion of fossil fuel" [@keeling1960concentration].
+Keeling a noté que « le  taux d’augmentation observé est proche de celui que l’on peut attendre de la combustion de combustibles fossiles »  [@keeling1960concentration] .
 
 <!-- paragraph -->
 
-The data visualization also reveals the interesting seasonal trend that attains a local maximum each May and a local minimum each October.
+La visualisation des données révèle également une intéressante tendance saisonnière qui, chaque année, atteint son maximum en mai et son minimum en octobre.
 <!-- comment -->
-This seasonal trend can be explained by considering the forests in the Northern Hemisphere.
+Cette tendance saisonnière s’explique par l’activité des forêts de l’hémisphère Nord.
 <!-- comment -->
-The leaves on the trees in these forests perform photosynthesis, the chemical conversion of CO2 to oxygen.
+Les feuilles des arbres réalisent la photosynthèse, un processus chimique qui convertit le CO₂ en oxygène.
 <!-- comment -->
-During the winter months there are no leaves on the trees, so CO2 accumulates in the atmosphere until it peaks in May of each year.
+Or, dans l’hémisphère Nord, les arbres n’ont pas de feuilles en hiver et le CO₂ s’accumule dans l’atmosphère jusqu’à atteindre son maximum en mai. 
 <!-- comment -->
-When the leaves come back each year, they perform photosynthesis throughout Spring and Summer, which causes the atmospheric CO2 concentration to drop until it reaches its yearly minimum in October.
+La photosynthèse reprend lorsque le feuillage réapparaît au printemps et se poursuit tout au long de l’été, faisant baisser la concentration de CO₂ dans l’atmosphère jusqu’à son minimum annuel en octobre.
 
 <!-- paragraph -->
 
-We say that this data visualization is "static" or "non-interactive" because the reader can view it but can not change what is displayed.
+Nous disons que cette visualisation des données est « statique » ou « non interactive » parce que le lecteur peut la visualiser, mais ne peut pas modifier ce qui est affiché.
 <!-- comment -->
-That is fine for medium sized data sets, in which we can see all the details of the data set.
+Ce genre de visualisation convient parfaitement aux ensembles de données de taille moyenne, dans lesquels nous pouvons voir tous les détails de l’ensemble de données.
 <!-- comment -->
-However, as we discuss in the following section, static data visualization is not sufficient to show all the details in larger data sets.
+Cependant, comme nous le verrons dans la section suivante, la visualisation statique n’est pas suffisante pour montrer tous les détails des grands ensembles de données.
 
 <!-- paragraph -->
 
-### Large data analysis with interactive data visualization {#large-data}
+### Analyse de données volumineuses avec visualisation des données interactive {#large-data}
 
 <!-- paragraph -->
 
-Some data sets are so large that it is not possible or desirable to plot all of the data at once in a static data visualization.
+Certains ensembles de données sont si volumineux qu’il n’est ni possible ni souhaitable de tracer toutes les données à la fois dans une visualisation statique.
 <!-- comment -->
-For such "large data" sets, traditional approaches to data analysis include summarizing the data, and then visualizing the summary.
+Pour de tels ensembles, les approches traditionnelles d’analyse consistent à résumer les données, puis à visualiser ce résumé.
 <!-- comment -->
-However, the summary can be misleading, because it does not show all the details of the original data.
+Cependant, le résumé graphique peut être trompeur, car il ne révèle pas tous les détails des données originales.
 <!-- comment -->
-In such situations, "interactive data visualization" becomes useful.
+Dans de telles situations, la « visualisation des données interactive » devient utile.
 
 <!-- paragraph -->
 
-First, let us consider a slightly more complicated form of the Keeling Curve data visualization.
+Examinons tout d’abord une forme légèrement plus élaborée de la courbe de Keeling :
 
 <!-- paragraph -->
 
@@ -412,20 +403,20 @@ TimeSeries <- ggplot()+
   geom_point(aes(
     year.month.POSIXct, ppm, color=month),
     data=co2.details)+
-  xlab("Time of measurement")+
-  ylab("Atmospheric carbon dioxide (parts per million)")
+  xlab("Moment de la mesure")+
+  ylab("CO₂ atmosphérique (ppm)")
 TimeSeries
 ```
 
 <!-- paragraph -->
 
-The plot above shows colored points for each month of the year, rather than for only May and September, the yearly local minima that we wanted to emphasize.
+Le graphique ci-dessus présente des points colorés pour chaque mois de l’année, plutôt qu’uniquement pour mai et octobre, les pics que nous voulions mettre en évidence. 
 <!-- comment -->
-Since it lacks this emphasis, this static plot is not as informative as the previous plot.
+Ce graphique statique est moins instructif que le précédent, car il ne fait pas ressortir les extrêmes. 
 <!-- comment -->
-This is an example where it is not desirable to plot all of the data at once.
+Il s’agit d’un exemple où il n’est pas souhaitable de tracer toutes les données simultanément.
 <!-- comment -->
-We can solve this problem using the following interactive plot.
+Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant.
 
 <!-- paragraph -->
 
@@ -437,45 +428,45 @@ animint(
 
 <!-- paragraph -->
 
-In the plot above, the default emphasis is May and October, but the user can click the legend to update the emphasis.
+Dans le graphique ci-dessus, les mois de mai et octobre sont mis en évidence par défaut, mais l’utilisateur peut cliquer sur la légende pour mettre à jour l’accentuation.
 <!-- comment -->
-This simple example illustrates the main idea of interactive data visualization using animint.
+Cet exemple simple illustre l’idée principale de la visualisation interactive des données à l’aide de`animint()`.
 <!-- comment -->
-There are many choices that must be made to show details of big data sets.
+De nombreux choix doivent être effectués pour montrer les détails des ensembles de données volumineux.
 <!-- comment -->
-For example, the choice of which months to emphasize in the plot above.
+Par exemple, le choix des mois à mettre en valeur dans le graphique ci-dessus.
 <!-- comment -->
-Rather than fixing such choices in a static plot, the goal of interactive data visualization is to allow the reader to see what the plot looks like when different choices are made.
+Plutôt que de fixer de tels choix dans un graphique statique, l’objectif de la visualisation des données interactive est de permettre au lecteur de voir à quoi ressemble le graphique avec des choix différents.
 <!-- comment -->
-In the example above, we used an interactive legend which allows the user to select different months and see what the plot looks like after changing the selection.
+Dans l’exemple ci-dessus, nous avons utilisé une légende interactive qui permet à l’utilisateur de sélectionner différents mois et de voir les effets sur le graphique.
 
 <!-- paragraph -->
 
-The example above also provides a good example of `clickSelects` and `showSelected`, the two keywords that animint introduces to allow interaction.
+L’exemple ci-dessus illustre bien comment `clickSelects` et `showSelected`, les deux mots-clés introduits par `animint2` permettent l'interaction.
 <!-- comment -->
-Without going into too many details, the plot above uses `clickSelects=month` for the interactive legend, meaning that clicking the legend should change the selected months.
+Sans entrer dans les détails, le graphique ci-dessus utilise `clickSelects=mois` pour la légende interactive, ce qui signifie qu’un clic sur la légende modifiera les mois sélectionnés.
 <!-- comment -->
-Furthermore, we used `showSelected=month` for the points, meaning that we should only plot the set of points which corresponds to the currently selected months.
+En outre, nous avons utilisé `showSelected=mois` pour les points, de sorte que seuls les points correspondant aux mois sélectionnés par l’utilisateur sont affichés.
 <!-- comment -->
-In Chapters 3-4, we will explain how to design data visualizations by writing R code using these two new keywords.
+Dans les chapitres 3 et 4, nous expliquerons comment concevoir des visualisations de données en utilisant ces deux nouveaux mots-clés dans l’écriture du code R.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#exercises}
+## Résumé du chapitre et exercices {#exercises}
 
 <!-- paragraph -->
 
-This chapter explained some basic facts about data, and gave definitions of different sizes of data: small, medium, and large.
+Ce chapitre a introduit quelques notions de base sur les données et a proposé des définitions des différentes tailles d’ensembles de données : petite, moyenne et grande.
 
 <!-- paragraph -->
 
-- Based on the definitions introduced in this chapter, what is the difference between small and medium data?
+- Sur la base des définitions présentées dans ce chapitre, qu’est-ce qui distingue les petits ensembles des moyens?
 <!-- comment -->
-- What is the difference between medium and large data?
+- Quelle est la différence entre les moyens des grands ensembles?
 
 <!-- paragraph -->
 
-Next, [Chapter 2](ch02) explains how the grammar of graphics can be used to create data visualizations.
+Au [chapitre 2](ch02), nous vous expliquerons comment la grammaire graphique peut être utilisée pour créer des visualisations des données.
 
 <!-- paragraph -->
 
