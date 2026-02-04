@@ -81,7 +81,7 @@ not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
 
 <!-- paragraph -->
 
-Le tableau ci-dessus montre que la population du Koweït a diminué entre 1991 et1995, ce qui concorde avec la guerre du Golfe survenue dans cette période.
+Le tableau ci-dessus montre que la population du Koweït a diminué entre 1991 et 1995, ce qui concorde avec la guerre du Golfe survenue dans cette période.
 <!-- comment -->
 Nous remplissons les valeurs manquantes ci-dessous :
 
