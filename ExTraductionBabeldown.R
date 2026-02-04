@@ -145,7 +145,7 @@ ConvertRmd_comments <- function(
   library(magick)
   
   # Define paths
-  output_path <- file.path(dest_filepath, paste0(chx, "_source", ifelse(TestFile, "_Test", ""), ".qmd"))
+  output_path <- file.path(dest_filepath, paste0(ifelse(chx=="Ch01","",chx), "_source", ifelse(TestFile, "_Test", ""), ".qmd"))
   temp_file <- tempfile(pattern = paste0(chx, "_source_Temp"), fileext = ".qmd")
   
   # Clean up old temp files
@@ -167,7 +167,7 @@ ConvertRmd_comments <- function(
     chx_lower <- paste0(tolower(substr(chx, 1, 1)), substr(chx, 2, nchar(chx)))
     
     download.file(
-      url = file.path(source_filepath, chx_lower, paste0(file_name, file_extension)),
+      url = file.path(source_filepath, ifelse(chx=="Ch01","", chx_lower), paste0(file_name, file_extension)),
       destfile = temp_file,
       mode = "wb"
     )
@@ -178,7 +178,7 @@ ConvertRmd_comments <- function(
     #  png_files <- list.files("animint-book", pattern = paste0("^", chx, ".*\\.png$"), recursive = TRUE, full.names = TRUE)
     
     png_files <- list.files(
-      file.path("animint-manual-en","chapters", chx_lower),
+      file.path("animint-manual-en", "chapters",ifelse(chx=="Ch01","", chx_lower)),
       pattern = paste0("^",chx_lower,".*\\.png$"),
       recursive = TRUE,
       full.names = TRUE
@@ -280,8 +280,8 @@ Translate_FR_EN <- function(file_name = "README",
   
   # Chemins d'accès
   
-  output_path <- paste0(dest_filepath, "/", chx,"_source","", ".qmd")
-  Rmd_OG_path <- paste0(dest_filepath, "/", chx,"_source", ".qmd")
+  output_path <- paste0(dest_filepath, "/", ifelse(chx=="Ch01","",chx),"_source","", ".qmd")
+  Rmd_OG_path <- paste0(dest_filepath, "/", ifelse(chx=="Ch01","",chx),"_source", ".qmd")
   
   # Mod 10 septembre 2025
   # output_path <- paste0(dest_filepath, "/", chx,"_index", ifelse(ajoutFR, "_FR", ""), file_extension)
@@ -366,7 +366,7 @@ Translate_FR_EN <- function(file_name = "README",
       ifelse(file_name == "README", "# animint-manual-fr", ""),
       "",
       "Traduction de l'[anglais](https://github.com/animint/animint-manual-en/tree/main/chapters/)",
-      paste0("[", file_name, "](", source_filepath, "/",chx,"/", file_name, file_extension, ")"),
+      paste0("[", file_name, "](", source_filepath, "/",ifelse(chx=="Ch01","",paste0(chx,"/")), file_name, file_extension, ")"),
       ""
     )
     #print(cleaned_lines)
@@ -704,20 +704,84 @@ Translate_FR_EN(file_name = "index",
                 chx = "Ch17"
 )
 
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 18 ######
+
+# Traduction Chapitre 18 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch18"),
+                    TestFile = FALSE,
+                    chx = "Ch18"
+)
+
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch18"),
+                chx = "Ch18"
+)
+
+
+stop("Exécution interrompue volontairement pour éviter d'écraser les chapitres déjà traduits. \nExecution halted intentionally to avoid overwriting already translated chapters. \n\nCe segment du script doit être lancé manuellement.\nPlease run this section manually if needed.")
+
+##### Chapitre 19 ######
+
+# Traduction Chapitre 19 par Anna Artiges
+
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch19"),
+                    TestFile = FALSE,
+                    chx = "Ch19"
+)
+
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch19"),
+                chx = "Ch19"
+)
+
+##### Chapitre 00 & 1 ######
+
+# Traduction Chapitre 0 & 01 par Jérémi Lepage
+
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
+                    source_filepath = path_github_animint_book,
+                    dest_filepath = paste0(path_local_animint2_fr,"/Chapitres"),
+                    TestFile = FALSE,
+                    chx = "Ch01"
+)
+
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
+                source_filepath = path_github_animint_book,
+                dest_filepath = paste0(path_local_animint2_fr,"/Chapitres"),
+                chx = "Ch01"
+)
+
+
 ##### Chapitre 99 ######
 
 # Traduction Chapitre 99 par Jérémi Lepage
 
-ConvertRmd_comments(file_name = "Ch99-appendix",
-                    file_extension = ".Rmd",
+ConvertRmd_comments(file_name = "index",
+                    file_extension = ".qmd",
                     source_filepath = path_github_animint_book,
                     dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
                     TestFile = FALSE,
                     chx = "Ch99"
 )
 
-Translate_FR_EN(file_name = "Ch99-appendix",
-                file_extension = ".Rmd",
+Translate_FR_EN(file_name = "index",
+                file_extension = ".qmd",
                 source_filepath = path_github_animint_book,
                 dest_filepath = paste0(path_local_animint2_fr,"/Chapitres/Ch99"),
                 chx = "Ch99"

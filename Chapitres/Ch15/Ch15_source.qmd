@@ -1,4 +1,4 @@
-# Newton's root-finding method
+# Méthode de Newton pour la recherche de racines  
 
 <!-- paragraph -->
 
@@ -8,47 +8,47 @@ knitr::opts_chunk$set(fig.path="Ch15-figures/")
 
 <!-- paragraph -->
 
-Roots of a function `f(x)` are values `x` such that `f(x)=0`.
+Les racines d'une fonction `f(x)` sont les valeurs de `x` telles que `f(x)=0`.
 <!-- comment -->
-Some functions `f`have an explicit expression for their roots.
+Certaines fonctions `f` ont une expression explicite pour leurs racines.
 <!-- comment -->
-For example:
+Par exemple :
 
 <!-- paragraph -->
 
-- the linear function `f(x)=b*x+c=0` has a single root `x=-c/b`, if b is not zero.
+- la fonction linéaire `f(x)=b*x+c=0` a une seule racine `x=-c/b` lorsque b n'est pas nul.
 <!-- comment -->
-- the quadratic function `f(x)=a*x^2+b*x+c=0` has two roots `x=(-b±sqrt(b^2-4*a*c))/(2*a)`, if the discriminant is positive `b^2-4*a*c>0`.
+- la fonction quadratique `f(x)=a*x^2+b*x+c=0` a deux racines `x=(-b±sqrt(b^2-4*a*c))/(2*a)` si le discriminant est positif `b^2-4*a*c>0`.
 <!-- comment -->
-- the sin function `f(x)=sin(a*x)=0` has an infinite number of roots: `pi*z/a` for all integers `z`.
+- la fonction sin `f(x)=sin(a*x)=0` a un nombre infini de racines : `pi*z/a` pour tous les entiers `z`.
 
 <!-- paragraph -->
 
-However, there are some functions which have no explicit expression for their roots.
+Cependant, certaines fonctions n'ont pas d'expression explicite pour leurs racines.
 <!-- comment -->
-For example, the roots of the Poisson loss `f(x)=a*x+b*log(x)+c` have no explicit expression in terms of common mathematical functions.
+Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n'ont pas d'expression explicite comme on l'entend en termes de fonctions mathématiques courantes
 <!-- comment -->
-(actually it has a solution in terms of the [Lambert W function](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) but that function is not commonly available) This goal of this chapter is to create an interactive data visualization that explains [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method) for finding the roots of such functions.
+(en fait, il y a une solution faisant appel à la [fonction W de Lambert](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) mais cette fonction n'est généralement pas disponible). L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la méthode de Newton](https://en.wikipedia.org/wiki/Newton%27s_method) pour trouver les racines de telles fonctions.
 
 <!-- paragraph -->
 
-Chapter outline:
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- We begin by implementing the Newton method for the Poisson loss, to find the root which is larger than the minimum.
+- Nous implémentons d'abord la méthode de Newton pour la perte de Poisson, afin de trouver la racine qui est plus grande que le minimum.
 <!-- comment -->
-We create several static and one interactive data visualization.
+Nous créons plusieurs visualisations de données statiques et une visualisation interactive.
 <!-- comment -->
-- We then suggest an exercise for finding the root which is smaller than the minimum.
+- Nous proposons ensuite un exercice pour trouver la racine qui est plus petite que le minimum.
 
 <!-- paragraph -->
 
-## Larger root in mean space {#larger-root}
+## Plus grande racine dans l'espace moyen {#larger-root}
 
 <!-- paragraph -->
 
-We begin by defining coefficients of a Poisson Loss function with two roots.
+Nous commençons par définir les coefficients d'une fonction de perte de Poisson à deux racines.
 
 <!-- paragraph -->
 
@@ -77,11 +77,11 @@ print(gg.loss)
 
 <!-- paragraph -->
 
-Our goal is to find the two roots of this function.
+Notre but est de trouver les deux racines de cette fonction.
 <!-- comment -->
-Newton's root finding method starts from an arbitrary candidate root, and then repeatedly uses linear approximations to find more accurate candidate roots.
+La méthode de Newton pour la recherche de racines prend comme point de départ une racine candidate choisie arbitrairement, puis utilise de manière itérative des approximations linéaires pour trouver des racines candidates plus précises.
 <!-- comment -->
-To compute the linear approximation, we need the derivative:
+Pour calculer l'approximation linéaire, nous avons besoin de la dérivée :
 
 <!-- paragraph -->
 
@@ -93,7 +93,7 @@ loss.deriv <- function(Mean){
 
 <!-- paragraph -->
 
-We begin the root finding at a point larger than the minimum,
+Nous commençons la recherche de la racine à un point plus grand que le minimum:
 
 <!-- paragraph -->
 
@@ -110,7 +110,7 @@ gg.loss+
 
 <!-- paragraph -->
 
-We then use the following implementation of Newton's method to find a root,
+Nous utilisons ensuite l'implémentation suivante de la méthode de Newton pour trouver une racine:
 
 <!-- paragraph -->
 
@@ -137,11 +137,11 @@ gg.loss+
 
 <!-- paragraph -->
 
-The plot above shows the root that was found.
+Le graphique ci-dessus montre la racine qui a été trouvée.
 <!-- comment -->
-The stopping criterion was an absolute cost value less than `1e-6` so we know that this root is at least that accurate.
+Le critère d'arrêt était une valeur de coût absolu inférieure à `1e-6`, nous savons donc que cette racine est au moins aussi précise que ça.
 <!-- comment -->
-The following plot shows the accuracy of the root as a function of the number of iterations.
+Le graphique suivant montre la précision de la racine en fonction du nombre d'itérations.
 
 <!-- paragraph -->
 
@@ -173,17 +173,17 @@ print(gg.it)
 
 <!-- paragraph -->
 
-The plot above shows a horizontal line for the stopping criterion threshold, on the log scale.
+Le graphique ci-dessus montre une ligne horizontale pour le seuil du critère d'arrêt sur l'échelle logarithmique.
 <!-- comment -->
-It is clear that the red dot in the last iteration is much below that threshold.
+Il est clair que le point rouge de la dernière itération se situe bien en dessous de ce seuil.
 
 <!-- paragraph -->
 
-The plot below shows each step of the algorithm.
+Le graphique ci-dessous montre chaque étape de l'algorithme.
 <!-- comment -->
-The left panels show the linear approximation at the candidate root, along with the root of the linear approximation.
+Les panneaux de gauche montrent l'approximation linéaire de la racine candidate, ainsi que la racine de l'approximation linéaire.
 <!-- comment -->
-The right panels show the root of the linear approximation, along with the corresponding function value (the new candidate root).
+Les panneaux de droite montrent la racine de l'approximation linéaire, ainsi que la valeur de la fonction correspondante (la nouvelle racine candidate).
 
 <!-- paragraph -->
 
@@ -219,9 +219,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-It is clear that the algorithm quickly converges to the root.
+Il est clair que l'algorithme converge rapidement vers la racine.
 <!-- comment -->
-The following is an animated interactive version of the same data viz.
+Ce qui suit est une version interactive animée de la même visualisation des données.
 
 <!-- paragraph -->
 
@@ -271,11 +271,11 @@ animint(
 
 <!-- paragraph -->
 
-## Comparison with Lambert W solution {#lambert}
+## Comparaison avec la solution W de Lambert {#lambert}
 
 <!-- paragraph -->
 
-The code below uses the Lambert W function to compute a root, and compares its solution to the one we computed using Newton's method.
+Le code ci-dessous utilise la fonction W de Lambert pour calculer une racine et compare la solution trouvée à celle calculée par la méthode de Newton.
 
 <!-- paragraph -->
 
@@ -291,21 +291,21 @@ loss.fun(c(
 
 <!-- paragraph -->
 
-For these data, the Lambert W function yields a root which is slightly more accurate than our implementation of Newton's method.
+Pour ces données, on obtient grâce à la fonction W de Lambert une racine légèrement plus précise qu'avec l'implémentation de la méthode de Newton.
 
 <!-- paragraph -->
 
-## Root-finding in the log space {#log-space}
+## Recherche de racine dans l'espace logarithmique {#log-space}
 
 <!-- paragraph -->
 
-The previous section showed an algorithm for finding the root which is larger than the minimum.
+Dans la section précédente nous avons présenté un algorithme pour trouver la racine qui est plus grande que le minimum.
 <!-- comment -->
-In this section we explore an algorithm for finding the other root (smaller than the minimum).
+Dans cette section, nous explorons un algorithme permettant de trouver l'autre racine (plus petite que le minimum).
 <!-- comment -->
-Note that the Poisson loss is highly non-linear as mean goes to zero, so the linear approximation in the Newton root finding will not work very well.
+Notez que la perte de Poisson est fortement non linéaire lorsque la moyenne s'approche de zéro, de sorte que l'approximation linéaire dans la recherche de racine de Newton ne fonctionnera pas très bien.
 <!-- comment -->
-Instead, we equivalently perform root finding in the log space:
+Pour contourner ce problème, nous effectuons une recherche de racine équivalente dans l'espace logarithmique :
 
 <!-- paragraph -->
 
@@ -328,60 +328,60 @@ ggplot()+
 
 <!-- paragraph -->
 
-**Exercise:**
-derive and implement the Newton method for this function, in order to find the root that is smaller than the minimum.
+**Exercice :**
+Dérivez et implémentez la méthode de Newton pour cette fonction, afin de trouver la racine qui est plus petite que le minimum.
 <!-- comment -->
-Create an animint similar to the previous section.
+Créez un `animint2` similaire à la section précédente.
 
 <!-- paragraph -->
 
-## Chapter summary and exercises {#Ch15-exercises}
+## Résumé du chapitre et exercices {#Ch15-exercises}
 
 <!-- paragraph -->
 
-In this chapter we explored several visualizations of the Newton method for finding roots of smooth functions.
+Dans ce chapitre, nous avons exploré plusieurs visualisations de la méthode de Newton pour trouver les racines de fonctions en douceur.
 
 <!-- paragraph -->
 
-Exercises:
+Exercices :
 
 <!-- paragraph -->
 
-- Add a title to each plot.
+- Ajoutez un titre à chaque graphique.
 <!-- comment -->
-- Add a size legend to the first plot (black points larger than red), so that we can see when red and black have the same value.
+- Ajoutez une légende de taille au premier graphique (des points noirs  plus grands que les rouges), afin qu'on puisse voir les cas où les points ont la même valeur.
 <!-- comment -->
-- Add a `geom_hline` to emphasize the loss=0 value in the second plot.
+- Ajoutez une `geom_hline` pour mettre en évidence la valeur de perte=0 dans le second graphique.
 <!-- comment -->
-- Add a `geom_hline` to emphasize the stopping threshold in the first plot.
+- Ajoutez un `geom_hline` pour mettre en évidence le seuil d'arrêt dans le premier graphique.
 <!-- comment -->
-- Turn off one of the two legends, to save space.
+- Désactivez l'une des deux légendes pour gagner de la place.
 <!-- comment -->
-- How to specify smooth transitions between iterations?
+- Comment spécifier des transitions graduelles entre les itérations?
 <!-- comment -->
-- Instead of using iteration as the animation/time variable, create a new one in order to show two distinct states/steps for each iteration, i.e.
+- Au lieu d'utiliser l'itération comme variable d'animation/de temps, créez-en une nouvelle afin de montrer deux états/étapes distincts pour chaque itération, c.-à-d.
 <!-- comment -->
-the `step` variable in the facetted plot above.
+la variable `step` dans le graphique à facettes ci-dessus.
 <!-- comment -->
-- What happens to the rate of convergence when you try to find the larger root in the log space, or the smaller root in the original space?
+- Qu'arrive-t-il au taux de convergence lorsque vous essayez de trouver la racine la plus grande dans l'espace logarithmique, ou la racine la plus petite dans l'espace original ?
 <!-- comment -->
-Theoretically it should not converge as fast, since the functions are more nonlinear for those roots.
+Théoriquement, la convergence devrait être moins rapide, car les fonctions sont plus fortement non linéaires pour ces racines.
 <!-- comment -->
-Make a data visualization that allows you to select the starting value, and shows how many iterations it takes to converge to within the threshold.
+Réalisez une visualisation des données vous permettant de sélectionner la valeur de départ et qui montre le nombre d'itérations nécessaires pour converger, en respectant le seuil.
 <!-- comment -->
-- Create another plot that allows you to select the threshold.
+- Créez un autre graphique permettant de sélectionner le seuil.
 <!-- comment -->
-Plot the number of iterations as a function of threshold.
+Tracez le nombre d'itérations en fonction du seuil.
 <!-- comment -->
-- Derive the loss function for [Binomial regression](https://en.wikipedia.org/wiki/Binomial_regression), and visualize the corresponding Newton root finding method.
+- Dérivez la fonction de perte pour la [régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression) et visualisez la méthode de recherche de racines de Newton correspondante.
 <!-- comment -->
-- Refactor `gg.it` code to use only one `geom_point`, instead of the four geoms in the current code.
+- Refactorisez `gg.it` pour n'utiliser qu'un seul `geom_point` au lieu des quatre geoms du code actuel.
 <!-- comment -->
-Hint: use `rbind()` to create a single table with all of the data.
+Conseil : utilisez `rbind()` pour créer un seul tableau avec toutes les données.
 
 <!-- paragraph -->
 
-Next, [Chapter 16](../Ch16/Ch16-change-point.html) explains how to visualize change-point detection models.
+Ensuite, dans le [chapitre 16](../Ch16/Ch16-change-point.html), nous vous expliquerons comment visualiser les modèles de détection des points de changement.
 
 <!-- paragraph -->
 
