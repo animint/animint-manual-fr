@@ -36,7 +36,7 @@ Plus précisement, nous allons visualiser la probabilité critique, aussi appel�
 
 Une valeur P est utilisée pour mesurer la signification d'un test statistique.
 <!-- comment -->
-Les valeurs-p peuvent être utilisées dans une plage étendue (ou intervalle), mais une application typique est le test de différence entre deux conditions :
+Les probabilités critiques (valeurs p) peuvent être calculées pour n’importe quel test statistique, mais une application typique est un test de Student entre deux conditions :
 
 <!-- paragraph -->
 
@@ -553,39 +553,39 @@ Pour corriger ce problème et occuper tout l'espace, revenez à la définition d
 <!-- comment -->
 - Notez que deux `geom_tile()` ont été utilisés dans `viz.volcano` et deux `geom_rect()` ont été utilisés dans `viz.parameters`.
 <!-- comment -->
-Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise la fonction `fill="transparent"` avec `color="green"` pour la sélection.
+Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise `fill="transparent"` avec `color="green"` pour la sélection.
 <!-- comment -->
-Essayez une refonte avec un seul geom, qui n'utilise que des `aes(fill)` et utilise à la place `color` comme paramètre de geom.
+Essayez une refonte avec un seul geom, qui n'utilise que des `aes(fill)` et utilise `color` comme paramètre de geom.
 <!-- comment -->
 Quels sont les inconvénients de l'approche utilisant un seul geom ?
 <!-- comment -->
-- En `viz.parameters`, ajouter `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
+- Dans `viz.parameters`, ajoutez `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
 <!-- comment -->
-- En `viz.parameters$zoom`, ajouter `geom_segment()` pour représenter la différence entre les moyennes de chaque essai, en utilisant `aes(linetype=signficant)` pour montrer quelles différences sont significatives au seuil traditionnel de la valeur P de `0.05`.
+- Dans `viz.parameters$zoom`, ajoutez `geom_segment()` pour représenter la différence entre les moyennes de chaque essai, en utilisant `aes(linetype=signficant)` pour montrer quelles différences sont significatives au seuil traditionnel de la valeur-p de `0.05`.
 <!-- comment -->
-- En `viz.parameters$zoom`, ajouter `geom_point()` pour représenter la moyenne de chaque essai et de chaque condition.
+- Dans `viz.parameters$zoom`, ajoutez `geom_point()` pour représenter la moyenne de chaque essai et de chaque condition.
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Ajouter des éléments graphiques à `gg.volcano` pour mettre l'accent sur le seuil traditionnel de la valeur P de `0.05`: `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme "1500 tests non significatifs").
+- Ajoutez des éléments graphiques à `gg.volcano` pour mettre l'accent sur le seuil traditionnel de la valeur-p de `0.05`: `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme "1500 tests non significatifs").
 <!-- comment -->
-- Ajouter `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
+- Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->
-- Ajouter une animation à `viz.parameters` de manière à ce qu'une nouvelle combinaison de paramètres apparaisse toutes les secondes.
+- Ajoutez une animation à `viz.parameters` de manière à ce qu'une nouvelle combinaison de paramètres apparaisse toutes les secondes.
 <!-- comment -->
-- Ajouter `first` à l'option `viz.parameters` afin que la première sélection affichée corresponde à l'une des combinaisons de paramètres présentées dans le graphique statique à facettes.
+- Ajoutez `first` à `viz.parameters` afin que la première sélection affichée corresponde à l'une des combinaisons de paramètres présentées dans le graphique statique à facettes.
 <!-- comment -->
-- Combiner `viz.volcano` avec `viz.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
+- Combinez `viz.volcano` avec `viz.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
 <!-- comment -->
-Différents types d'interactions sont possibles : - En `volcanoZoom`, utiliser `clickSelects="true_tile"` pour que l'interactivité permette de mapper les points du graphique volcanique dans l'espace des paramètres de simulation.
+Différents types d'interactions sont possibles : - Dans `volcanoZoom`, utilisez `clickSelects="true_tile"` pour que l'interactivité permette de mapper les points du graphique volcan dans l'espace des paramètres de simulation.
 <!-- comment -->
-Ajouter des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais pour la combinaison de paramètres sélectionnée apparaissent dans l'espace du graphique du volcan.
+Ajoutez des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais pour la combinaison de paramètres sélectionnée apparaissent dans l'espace du graphique du volcan.
 <!-- comment -->
-- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial` puis l'utiliser pour `clickSelects` dans les deux `volcanoZoom` et `viz.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l'espace volcanique et un essai dans le graphique des détails du zoom sur les paramètres.
+- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial`, puis utilisez-la pour `clickSelects` dans les deux `volcanoZoom` et `viz.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l'espace volcan et un essai dans le graphique des détails du zoom sur les paramètres.
 
 <!-- paragraph -->
 
-Suivant, [l'annexe](/ch99) explique certains idiomes de programmation R qui sont généralement utiles pour la conception de visualisations de données interactives.
+Ensuite, [l'annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
 
 <!-- paragraph -->
 
