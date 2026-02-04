@@ -185,7 +185,7 @@ ts.facet
 
 Nous définissons `panel.margin` à 0, une bonne idée pour [économiser de l'espace dans un ggplot avec des facettes](Ch99-appendix.html#space-saving-facets).
 <!-- comment -->
-Dans un des exemples tiré de, dans un exemple de l'idiome [ add Column then facet](Ch99-appendix.html#addColumn-then-facet),  nous utilisons `scales="free"` et nous masquons les étiquettes des axes.
+Conformément à l'idiome [ add Column then facet](Ch99-appendix.html#addColumn-then-facet), nous utilisons `scales="free"` et nous masquons les étiquettes des axes.
 <!-- comment -->
 Pour les remplacer, nous utilisons le libellé de la facette pour indiquer la variable encodée sur chaque axe.
 <!-- comment -->
