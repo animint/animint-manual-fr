@@ -473,8 +473,7 @@ La sortie ci-dessus montre qu'il y a une seule couche avec 40 unités cachées d
 Chacune de ces matrices de pondération est utilisée pour prédire les unités d'une couche donnée, à partir des unités de la couche précédente.
 <!-- comment -->
 Afin d'apprendre une fonction de prédiction qui est une fonction non linéaire des caractéristiques, chaque couche, à l'exception de la dernière, doit avoir une fonction d'activation non linéaire, appliquée élément par élément aux unités après la multiplication de la matrice.
-
-<!-- -- commentaire -->
+<!-- comment -->
 
 Par exemple, une fonction d'activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), qui est implémentée ci-dessous,
 
@@ -512,7 +511,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Enfin, le dernier nœud dont nous avons besoin pour implémenter notre réseau neuronal est un nœud pour les prédictions, calculé via la boucle for sur les nœuds de pondération dans la fonction ci-dessous,
+Enfin, le dernier nœud dont nous avons besoin pour implémenter notre réseau neuronal est un nœud pour les prédictions, calculé avec la boucle `for` sur les nœuds de pondération dans la fonction ci-dessous,
 
 <!-- paragraph -->
 
@@ -536,7 +535,7 @@ str(nn.pred.node$value)
 
 <!-- paragraph -->
 
-Le `pred_node` est également utile pour calculer les prédictions sur la grille de caractéristiques, ce qui sera utile plus tard pour visualiser la fonction apprise,
+La fonction `pred_node` est également utile pour calculer les prédictions sur la grille de caractéristiques, ce qui sera utile plus tard pour visualiser la fonction apprise,
 
 <!-- paragraph -->
 
@@ -743,23 +742,23 @@ Exercices :
 
 <!-- paragraph -->
 
-- Ajouter l'animation sur le nombre d'itérations.
+- Ajoutez l'animation sur le nombre d'itérations.
 <!-- comment -->
-- Ajouter des transitions graduelles lors du changement du nombre d'itérations sélectionné.
+- Ajoutez des transitions fluides pour le nombre d'itérations.
 <!-- comment -->
-- Ajoutez une boucle for sur des graines aléatoires (ou des plis de validation croisée) dans l'étape de division des données, et créez une visualisation qui montre comment cela affecte les résultats.
+- Ajoutez une boucle `for` sur des graines aléatoires (ou des plis de validation croisée) dans l'étape de division des données, et créez une visualisation qui montre comment cela affecte les résultats.
 <!-- comment -->
-- Ajoutez une boucle for sur des graines aléatoires à l'étape d'initialisation de la matrice de pondération, et créez une visualisation qui montre comment cela affecte les résultats.
+- Ajoutez une boucle `for` sur des graines aléatoires à l'étape d'initialisation de la matrice de pondération, et créez une visualisation qui montre comment cela affecte les résultats.
 <!-- comment -->
-- Calculez les résultats pour une autre architecture de réseau neuronal (et/ou un modèle linéaire, en ajoutant une boucle for sur différentes valeurs de `units.per.layer`).
+- Calculez les résultats pour une autre architecture de réseau neuronal (et/ou un modèle linéaire, en ajoutant une boucle `for` sur différentes valeurs de `units.per.layer`).
 <!-- comment -->
-Ajouter un autre graphique ou une facette permettant de sélectionner l'architecture du réseau neuronal et de comparer facilement la perte de validation minimale entre les modèles (par exemple, ajouter des colonnes de facettes au graphique de perte et ajouter des lignes horizontales pour mettre en évidence la perte minimale).
+Ajoutez un autre graphique ou une facette permettant de sélectionner l'architecture du réseau neuronal et de comparer facilement la perte de validation minimale entre les modèles (par exemple, ajoutez des colonnes de facettes au graphique de perte et ajoutez des lignes horizontales pour mettre en évidence la perte minimale).
 <!-- comment -->
 - Modifiez l'algorithme d'apprentissage pour utiliser la recherche linéaire plutôt qu'une taille de pas constante, puis créez une visualisation qui compare les deux approches en termes de perte de validation minimale.
 
 <!-- paragraph -->
 
-Suivant, [Chapitre 19](/ch19) explique comment visualiser les valeurs de P, y compris comment contourner le surdimensionnement, à l'aide d'une carte thermique liée à un graphique de dispersion zoomé.
+Ensuite, dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs p) d’un test statistique.
 <!-- comment -->
 .
 
