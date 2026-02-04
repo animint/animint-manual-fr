@@ -79,12 +79,9 @@ Nous commençons par charger l'ensemble des données.
 <!-- paragraph -->
 
 ```{r}
-if(!file.exists("ESL.mixture.rda")){
-  curl::curl_download(
-    "https://web.stanford.edu/~hastie/ElemStatLearn/datasets/ESL.mixture.rda",
-    "ESL.mixture.rda")
-}
-load("ESL.mixture.rda")
+if(!requireNamespace("animint2data"))
+  remotes::install_github("animint/animint2data")
+data(ESL.mixture, package="animint2data")
 str(ESL.mixture)
 ```
 
