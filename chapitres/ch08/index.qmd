@@ -1,0 +1,289 @@
+# Données de la Banque mondiale
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(fig.path="ch08-figures/")
+```
+
+<!-- paragraph -->
+
+Dans ce chapitre, nous explorons plusieurs visualisations des données de la Banque mondiale.
+
+<!-- paragraph -->
+
+Plan du chapitre :
+
+<!-- paragraph -->
+
+- Nous commençons par charger le jeu de données de la Banque mondiale et définir quelques fonctions pour créer un ggplot multipanneaux avec plusieurs geoms.
+<!-- comment -->
+- Nous créons ensuite un graphique de série temporelle pour l'espérance de vie.
+<!-- comment -->
+- Nous ajoutons ensuite un nuage de points de l'espérance de vie en fonction du taux de fertilité dans un deuxième panneau.
+<!-- comment -->
+- Enfin, nous ajoutons un troisième panneau avec une série temporelle pour le taux de fertilité.
+
+<!-- paragraph -->
+
+## Chargement des données et définition des fonctions {#load}
+
+<!-- paragraph -->
+
+Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale. Nous ne considérons que le sous-ensemble qui a des valeurs définies à la fois pour `espérance.de.vie` et pour `taux.de.fertilité`.
+
+<!-- paragraph -->
+
+```{r}
+library(animint2)
+data(BanqueMondiale, package="animint2fr")
+BanqueMondiale$Region <- sub(
+  " (all income levels)", "", BanqueMondiale$region, fixed=TRUE)
+library(data.table)
+not.na <- data.table(
+  BanqueMondiale)[!(is.na(espérance.de.vie) | is.na(taux.de.fertilité))]
+```
+
+<!-- paragraph -->
+
+Nous allons également tracer la variable population à l'aide d'une légende de taille.
+<!-- comment -->
+Avant de tracer le graphique, nous nous assurerons qu'aucune valeur n'est manquante.
+
+<!-- paragraph -->
+
+```{r}
+not.na[is.na(not.na$population)]
+```
+
+<!-- paragraph -->
+
+Le tableau ci-dessus montre que trois lignes ont des valeurs manquantes pour la variable population,
+<!-- comment -->
+elles se rapportent au Koweït entre 1992 et 1994.
+<!-- comment -->
+Le tableau ci-dessous présente les données des années voisines, de 1991 à 1995 :
+
+<!-- paragraph -->
+
+```{r}
+not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
+```
+
+<!-- paragraph -->
+
+Le tableau ci-dessus montre que la population du Koweït a diminué entre 1991 et 1995, ce qui concorde avec la guerre du Golfe survenue dans cette période.
+<!-- comment -->
+Nous remplissons les valeurs manquantes ci-dessous :
+
+<!-- paragraph -->
+
+```{r}
+not.na[is.na(population), population := 1700000]
+not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
+```
+
+<!-- paragraph -->
+
+Nous définissons ensuite la fonction suivante utilisée pour ajouter des colonnes aux ensembles de données afin d'affecter des geoms aux facettes.
+
+<!-- paragraph -->
+
+```{r}
+FACETS <- function(df, top, side){
+  data.frame(df,
+             top=factor(top, c("Taux de fertilité", "Années")),
+             side=factor(side, c("Années", "Espérance de vie")))
+}
+```
+
+<!-- paragraph -->
+
+Notez que les niveaux des facteurs détermineront l'ordre des facettes dans le ggplot.
+<!-- comment -->
+Il s’agit d’un exemple de la méthode [rajouter une colonne pour facettes](/ch99#addColumn-then-facet).
+<!-- comment -->
+Nous définissons ci-dessous trois fonctions, une pour chaque facette :
+
+<!-- paragraph -->
+
+```{r}
+TS.RIGHT <- function(df)FACETS(
+  df, "Années", "Espérance de vie")
+SCATTER <- function(df)FACETS(
+  df, "Taux de fertilité", "Espérance de vie")
+TS.ABOVE <- function(df)FACETS(
+  df, "Taux de fertilité", "Années")
+```
+
+<!-- paragraph -->
+
+## Premier graphique de la série temporelle {#first-ts}
+
+<!-- paragraph -->
+
+Tout d'abord, nous définissons un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'un `geom_tallrect()` en arrière-plan.
+
+<!-- paragraph -->
+
+```{r}
+années <- unique(not.na[, .(année)])
+```
+
+<!-- paragraph -->
+
+Nous définissons le ggplot avec un `geom_tallrect()` en arrière-plan et un `geom_line()` pour les séries temporelles.
+
+<!-- paragraph -->
+
+```{r}
+ts.right <- ggplot()+
+  geom_tallrect(aes(
+    xmin=année-1/2, xmax=année+1/2),
+    clickSelects="année",
+    data=TS.RIGHT(années), alpha=1/2)+
+  geom_line(aes(
+    année, espérance.de.vie, group=pays, colour=Region),
+    clickSelects="pays",
+    data=TS.RIGHT(not.na), size=4, alpha=3/5)
+ts.right
+```
+
+<!-- paragraph -->
+
+Remarquez que nous avons spécifié `clickSelects=année` pour qu'un clic sur un tallrect modifie l'année sélectionnée, et `clickSelects=pays` pour qu'un clic sur une ligne sélectionne ou désélectionne un pays.
+<!-- comment -->
+Notez également que nous avons utilisé `TS.RIGHT` pour identifier les colonnes que nous utiliserons dans la spécification des facettes (section suivante).
+
+<!-- paragraph -->
+
+## Ajouter une facette de nuage de points {#add-scatter}
+
+<!-- paragraph -->
+
+Nous commençons par simplement ajouter des facettes au graphique de la série temporelle précédente.
+
+<!-- paragraph -->
+
+```{r}
+ts.facet <- ts.right+
+  theme_bw()+
+  theme(panel.margin=grid::unit(0, "lines"))+
+  facet_grid(side ~ top, scales="free")+
+  xlab("")+
+  ylab("")
+ts.facet
+```
+
+Nous définissons `panel.margin=0`, une bonne idée pour [économiser de l'espace dans un ggplot avec des facettes](/ch99#space-saving-facets).
+
+Ci-dessous, nous ajoutons une facette de nuage de points avec un point pour chaque année et chaque pays.
+
+```{r}
+ts.scatter <- ts.facet+
+  theme_animint(width=600)+
+  geom_point(aes(
+    taux.de.fertilité, espérance.de.vie,
+    colour=Region, size=population,
+    key=pays), # key aesthetic for animated transitions!
+    clickSelects="pays",
+    showSelected="année",
+    data=SCATTER(not.na))+
+  scale_size_animint(pixel.range=c(2, 20), breaks=10^(9:5))
+ts.scatter
+```
+
+<!-- paragraph -->
+
+Remarquez comment nous utilisons `scale_size_animint` pour spécifier l'échelle des tailles en pixels et les intervalles (`breaks`) dans la légende.
+<!-- comment -->
+Notez également que nous utilisons `SCATTER` pour spécifier les colonnes `top` et `side` utilisées dans la spécification de la facette.
+<!-- comment -->
+Nous affichons également ce ggplot de manière interactive ci-dessous :
+
+<!-- paragraph -->
+
+```{r ch08-viz-ts-scatter}
+animint(ts.scatter)
+```
+
+<!-- paragraph -->
+
+Notez que la sélection unique est utilisée par défaut pour l'année et le pays.
+
+<!-- paragraph -->
+
+## Ajout d'une autre facette pour les séries temporelles {#add-ts}
+
+<!-- paragraph -->
+
+Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité.
+
+<!-- paragraph -->
+
+```{r}
+scatter.both <- ts.scatter+
+  geom_widerect(aes(
+    ymin=année-1/2, ymax=année+1/2),
+    clickSelects="année",
+    data=TS.ABOVE(années), alpha=1/2)+
+  geom_path(aes(
+    taux.de.fertilité, année, group=pays, colour=Region),
+    clickSelects="pays",
+    data=TS.ABOVE(not.na), size=4, alpha=3/5)
+scatter.both
+```
+
+<!-- paragraph -->
+
+Notez que `TS.ABOVE` a été utilisé pour spécifier les colonnes des facettes `top` et `side`.
+<!-- comment -->
+Nous affichons une version interactive ci-dessous :
+
+<!-- paragraph -->
+
+```{r ch08-viz-scatter-both}
+viz.scatter.both <- animint(
+  title="Données de la Banque mondiale (multiple selection, facets)",
+  scatterBoth=scatter.both+
+    theme_animint(width=1000, height=800),
+  duration=list(année=1000),
+  time=list(variable="année", ms=3000),
+  first=list(année=1975, pays=c("United States", "Vietnam")),
+  selector.types=list(pays="multiple"))
+viz.scatter.both
+```
+
+<!-- paragraph -->
+
+## Résumé du chapitre et exercices {#ch08-exercises}
+
+<!-- paragraph -->
+
+Nous avons montré comment créer une visualisation multicouche et multipanneaux (mais à graphique unique) des données de la Banque mondiale.
+
+<!-- paragraph -->
+
+Exercices :
+
+<!-- paragraph -->
+
+- Sur chaque graphique de série temporelle, ajoutez un point dont la taille est proportionnelle à la population, comme dans le nuage de points.
+<!-- comment -->
+Les points ne doivent apparaître que lorsque le pays est sélectionné, et cliquer sur un point doit désélectionner ce pays.
+<!-- comment -->
+- Ajoutez des étiquettes de texte au graphique de la série temporelle situé à droite, avec le nom de chaque pays.
+<!-- comment -->
+L'étiquette ne doit apparaître que lorsque le pays est sélectionné, et disparaître lorsqu'on clique sur l'étiquette.
+<!-- comment -->
+- Ajoutez une étiquette de texte au nuage de points pour indiquer l'année sélectionnée.
+<!-- comment -->
+- Ajoutez des étiquettes au nuage de points, avec le nom de chaque pays.
+<!-- comment -->
+L'étiquette ne doit apparaître que lorsque le pays est sélectionné, et disparaître lorsqu'on clique sur l'étiquette.
+
+<!-- paragraph -->
+
+Le [chapitre 9](/ch09) présente comment visualiser les données sur les vélos à Montréal.
+
+<!-- paragraph -->
+
+

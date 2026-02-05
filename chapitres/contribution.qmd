@@ -1,0 +1,16 @@
+# Contribution
+
+Nous vous demandons de nous aider à améliorer ce manuel, en suivant les demarches ci-dessous.
+
+## Issues {#reporting-issues}
+
+Si vous ne comprenez pas quelque chose, SVP nous signaler, en écrivant un [issue](https://github.com/animint/animint-manual-fr/issues/new) dans ce dépôt sur GitHub.
+Ce lien « Signaler un problème ou formuler une suggestion » s’affiche aussi à droite sur chaque page.
+
+## Envoyer une modification {#submitting-edits}
+
+Si vous voyez une coquille, ou vous savez comment arranger un autre problème, alors nous vous prions de modifier la page, et nous envoyer un Pull Request.
+  
+* Cliquez « <i class="bi bi-github"></i>Modifier cette page » à droite.
+* Écrivez les modifications.
+* Envoyez un Pull Request qui comprend un message expliquant vos modifications, en français ou en anglais.
