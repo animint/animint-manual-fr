@@ -8,7 +8,8 @@ for(qmd in qmd.files){
   is.text <- (cumsum(is.fence) %% 2)==0
   qmd.text <- qmd.lines[is.text]
   not.backticks <- gsub("`.*?`", "", qmd.text)
-  quote.lines <- grep('".*?"', not.backticks, value=TRUE, perl=TRUE)
+  not.angle <- gsub("<.*?>", "", not.backticks)
+  quote.lines <- grep('".*?"', not.angle, value=TRUE, perl=TRUE)
   if(length(quote.lines)){
     violations[[qmd]] <- quote.lines
   }

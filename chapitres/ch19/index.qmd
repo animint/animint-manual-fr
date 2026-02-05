@@ -186,7 +186,7 @@ Ensuite, nous ajoutons des colonnes pour le graphique volcan :
 
 <!-- paragraph -->
 
-- `diff_means` est la différence entre les moyennes des deux conditions, parfois appelée "taille de l'effet".
+- `diff_means` est la différence entre les moyennes des deux conditions, parfois appelée « taille de l'effet ».
 - `neg.log10.p` est la probabilté critique, transformée en logarithme négatif (plus elle est grande, plus elle est significative).
 
 <!-- paragraph -->
@@ -567,7 +567,7 @@ Quels sont les inconvénients de l'approche utilisant un seul geom ?
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Ajoutez des éléments graphiques à `gg.volcano` pour mettre l'accent sur le seuil traditionnel de la valeur-p de `0.05`: `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme "1500 tests non significatifs").
+- Ajoutez des éléments graphiques à `gg.volcano` pour mettre l'accent sur le seuil traditionnel de la valeur-p de `0.05` : `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme « 1500 tests non significatifs »).
 <!-- comment -->
 - Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->

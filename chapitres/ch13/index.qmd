@@ -10,7 +10,7 @@ knitr::opts_chunk$set(fig.path="ch13-figures/")
 
 L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la régression de Poisson][(https://en.wikipedia.org/wiki/Poisson_regression)](https://fr.wikipedia.org/wiki/R%C3%A9gression_de_Poisson), un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
 <!-- comment -->
-Il s'agit d'un modèle de "régression linéaire" puisqu'il apprend une fonction linéaire des entrées à la sortie.
+Il s'agit d'un modèle de « régression linéaire » puisqu'il apprend une fonction linéaire dans l’espace des variables d’entrée.
 <!-- comment -->
 Comme la régression par les moindres carrés, la régression de Poisson peut être formulée comme un problème de maximum de vraisemblance.
 <!-- comment -->
@@ -183,8 +183,6 @@ Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom
 <!-- paragraph -->
 
 Notez l'utilisation d'un `geom_hline()` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
-<!-- comment -->
-Ceci est un exemple de "montrer vos choix arbitraires", l'un des principes généraux de la conception de bonnes visualisations de données interactives.
 
 <!-- paragraph -->
 

@@ -68,7 +68,7 @@ Ces données proviennent d'analyses à haut débit qui sont importantes pour dia
 
 <!-- paragraph -->
 
-Une partie importante du diagnostic consiste à détecter les "points de rupture" ou les changements abrupts au sein d'un chromosome donné (panneau).
+Une partie importante du diagnostic consiste à détecter les points de rupture, soit les changements abrupts au sein d'un chromosome donné (panneau).
 <!-- comment -->
 Le graphique ci-dessus montre clairement qu'il y a plusieurs points de rupture dans ces données.
 <!-- comment -->

@@ -825,7 +825,7 @@ animint(
 
 <!-- paragraph -->
 
-Dans la visualisation de données ci-dessus, remarquez le lien "vidéo" qui apparaît en bas à droite.
+Dans la visualisation de données ci-dessus, remarquez le lien `video` qui apparaît en bas à droite.
 <!-- comment -->
 En cliquant sur ce lien, on accède à une vidéo expliquant une visualisation de données plus complexe basée sur les données de la Banque mondiale.
 <!-- comment -->

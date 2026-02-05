@@ -14,7 +14,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par plusieurs visualisations de données statiques du chemin ("path") du lasso.
+- Nous commençons par plusieurs visualisations statiques du modèle Lasso, soit la régression linéaire avec régularisation L1.
 <!-- comment -->
 - Nous créons ensuite une version interactive avec une facette et un graphique montrant l'erreur d'entraînement/validation et les résidus.
 <!-- comment -->
@@ -289,21 +289,21 @@ animint(
 
 Le refonte ci-dessous comporte deux changements.
 <!-- comment -->
-Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de "set" différentes dans l'`animint2` précédent (`linetype="set"` dans le premier graphique de chemin et `color="set"` dans le second graphique de résidus).
+Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de `set` différentes dans la visualisation précédente (`linetype=set` dans le premier graphique de chemin et `color=set` dans le second graphique de résidus).
 <!-- comment -->
-Il serait plus facile pour le lecteur de décoder si la variable "set" n'est mappée qu'une seule fois.
+Il serait plus facile pour le lecteur de décoder si la variable `set` n'est mappée qu'une seule fois.
 <!-- comment -->
-Ainsi, dans la refonte ci-dessous, nous remplaçons le `geom_point()` dans le deuxième graphique par un `geom_segment()` avec `linetype=set`.
+Ainsi, dans la visualisation ci-dessous, nous remplaçons le `geom_point()` dans le deuxième graphique par un `geom_segment()` avec `linetype=set`.
 
 <!-- paragraph -->
 
-Deuxièmement, nous avons remplacé le `tallrect` unique du premier graphique par deux `tallrects`.
+Deuxièmement, nous avons remplacé le `geom_tallrect()` unique du premier graphique par deux.
 <!-- comment -->
-Le premier `tallrect` a `showSelected=arclength` et est utilisé pour afficher la longueur d'arc ("arclength") sélectionnée à l'aide d'un rectangle gris.
+Le premier `geom_tallrect()` a `showSelected="arclength"` et est utilisé pour afficher la norme L1 (`arclength`) sélectionnée, à l'aide d'un rectangle gris.
 <!-- comment -->
-Puisque nous spécifions une durée `duration` pour la variable `arclength` et la même valeur `key=1`, nous observerons une transition graduelle du `tallrect` gris sélectionné.
+Puisque nous spécifions une durée `duration` pour la variable `arclength` et `key=1`, nous observerons une transition graduelle du rectangle gris sélectionné.
 <!-- comment -->
-Le deuxième tallrect a `clickSelects=arclength` et le fait de cliquer dessus a pour effet de modifier la valeur sélectionnée de `arclength`.
+Le deuxième `geom_tallrect()` a `clickSelects="arclength"` et le fait de cliquer dessus a pour effet de modifier la valeur sélectionnée de `arclength`.
 <!-- comment -->
 Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
 

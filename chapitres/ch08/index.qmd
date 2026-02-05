@@ -215,7 +215,7 @@ Notez que la sélection unique est utilisée par défaut pour l'année et le pay
 
 <!-- paragraph -->
 
-Nous ajoutons ci dessous des `widerects` pour sélectionner les années, et des chemins d'accès ("path") pour afficher le taux de fertilité.
+Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité.
 
 <!-- paragraph -->
 

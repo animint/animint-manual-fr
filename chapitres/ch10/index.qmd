@@ -525,7 +525,7 @@ Notez les changements suivants :
 
 Les seules nouvelles données que nous devons définir sont les points d'extrémité du segment que nous utiliserons pour tracer la frontière de décision de Bayes.
 <!-- comment -->
-À noter que nous redéfinissons également l'ensemble "test" pour souligner que l'erreur de Bayes représente le meilleur taux d'erreur atteignable pour les données de test.
+À noter que nous redéfinissons également l'ensemble test pour souligner que l'erreur de Bayes représente le meilleur taux d'erreur atteignable pour les données de test.
 
 <!-- paragraph -->
 
@@ -709,7 +709,7 @@ Bayes.error <- data.table(
 
 <!-- paragraph -->
 
-Enfin, nous redéfinissons le `ggplot`, en utilisant les voisins ("neighbors") comme variable `showSelected` dans les geoms point, "path" et texte.
+Enfin, nous redéfinissons le graphique, en utilisant le nombre voisins (`neighbors`) comme variable `showSelected` dans plusieurs geoms.
 
 <!-- paragraph -->
 
@@ -791,7 +791,7 @@ scatterPlot+
 
 <!-- paragraph -->
 
-Enfin, nous combinons les deux graphiques dans une visualisation des données unique avec les voisins comme variable de sélection.
+Enfin, nous combinons les deux graphiques dans une visualisation des données unique avec le nombre de voisins (`neighbors`) comme variable de sélection.
 
 <!-- paragraph -->
 
@@ -807,7 +807,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez que les voisins ("neighbors") sont utilisés comme variable de temps, de sorte que l'animation montre les prédictions des différents modèles.
+Notez que le nombre de voisins (`neighbors`) sont utilisés comme variable de temps, de sorte que l'animation montre les prédictions des différents modèles.
 
 <!-- paragraph -->
 
@@ -960,13 +960,13 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K Plus Proches Voisins ("K-Nearest-Neighbors").
+Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K Plus Proches Voisins.
 <!-- comment -->
-Nous avons commencé par une visualisation des données statique qui ne montrait que les prédictions du modèle des 7 Plus Proches Voisins.
+Nous avons commencé par une visualisation statique qui n’affichait que les prédictions des 7 Plus Proches Voisins.
 <!-- comment -->
-Ensuite, nous avons créé une refonte interactive qui permettait de sélectionner K, le nombre de voisins.
+Ensuite, nous avons créé une visualisation interactive qui permettait de sélectionner K, le nombre de voisins.
 <!-- comment -->
-Nous avons procédé à une autre refonte en ajoutant une facette permettant de sélectionner le nombre de divsions dans la validation croisée.
+Nous avons procédé à une autre visualisation, en ajoutant une facette permettant de sélectionner le nombre de divsions dans la validation croisée.
 
 <!-- paragraph -->
 
@@ -978,15 +978,15 @@ Exercices :
 <!-- comment -->
 Conseil : vous pouvez soit utiliser un `geom_text()` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](/ch14)) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
-- La colonne de probabilité ("probability") du tableau de données `show.grid` est la probabilité prédite de la classe 1.
+- La colonne de probabilité (`probability`) du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->
 Comment feriez-vous la refonte de la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
 <!-- comment -->
-La difficulté principale est que la probabilité est une variable numérique, mais que `ggplot2` impose que chaque échelle soit exclusivement continue ou discrète (pas les deux).
+La difficulté principale est que la probabilité est une variable numérique, mais que `animint2` impose que chaque échelle soit exclusivement continue ou discrète (pas les deux).
 <!-- comment -->
-Vous pourriez utiliser une échelle de remplissage continue ("continuous fill scale"), mais vous devrez alors utiliser une échelle différente pour montrer la variable de prédiction.
+Vous pourriez utiliser une échelle continue pour `fill`, mais vous devrez alors utiliser une échelle différente pour montrer la variable de prédiction.
 <!-- comment -->
-- Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles d'entrainement ("train"), de validation et de test.
+- Ajoutez un nouveau graphique qui montre les tailles relatives des ensembles d'entraînement (`train`), de validation et de test.
 <!-- comment -->
 Assurez-vous que la taille tracée des ensembles de validation et d'entraînement change en fonction de la valeur sélectionnée de `n.folds`.
 <!-- comment -->
