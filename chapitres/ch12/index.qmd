@@ -698,36 +698,36 @@ Ensuite, nous créons un graphique affichant l’espace des variables d’entré
 
 ```{r}
 gg.entrée.linéaire <- ggplot()+
-    ggtitle("L’espace des variables d’entrée")+
-    scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
-    geom_vline(aes(
-      xintercept=boundary),
-      color="violet",
-      data=x1.boundaries)+
-    guides(color="none", fill="none", linetype="none")+
-    scale_linetype_manual(values=c(
-      "-1"="dashed",
-      "0"="solid",
-      "1"="dashed"))+
-    geom_path(aes(
-      x1, x2,
-      group=path.i,
-      linetype=level.fac),
-      showSelected=c("boundary", "cost.param"),
-      color="black",
-      data=inputBoundaries)+
-    geom_point(aes(
-      x1, x2, fill=status),
-      showSelected=c("status", "y", "data.i", "cost.param"),
-      size=5,
-      color="grey",
-      data=predictions)+
-    geom_point(aes(
-      x1, x2, color=y, fill=status),
-      showSelected=c("cost.param", "status", "y"),
-      clickSelects="data.i",
-      size=3,
-      data=predictions)
+  ggtitle("L’espace des variables d’entrée")+
+  scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
+  geom_vline(aes(
+    xintercept=boundary),
+    color="violet",
+    data=x1.boundaries)+
+  guides(color="none", fill="none", linetype="none")+
+  scale_linetype_manual(values=c(
+    "-1"="dashed",
+    "0"="solid",
+    "1"="dashed"))+
+  geom_path(aes(
+    x1, x2,
+    group=path.i,
+    linetype=level.fac),
+    showSelected=c("boundary", "cost.param"),
+    color="black",
+    data=inputBoundaries)+
+  geom_point(aes(
+    x1, x2, fill=status),
+    showSelected=c("status", "y", "data.i", "cost.param"),
+    size=5,
+    color="grey",
+    data=predictions)+
+  geom_point(aes(
+    x1, x2, color=y, fill=status),
+    showSelected=c("cost.param", "status", "y"),
+    clickSelects="data.i",
+    size=3,
+    data=predictions)
 gg.entrée.linéaire+facet_wrap("cost.param")
 ```
 
@@ -767,7 +767,7 @@ gg.carrée.linéaire <- ggplot()+
     xend=x1.sq.margin, yend=x2.sq.margin),
     showSelected=c("cost.param", "boundary"),
     color="grey",
-    data=slackSegs))
+    data=slackSegs)
 gg.carrée.linéaire+facet_wrap("cost.param")
 ```
 
