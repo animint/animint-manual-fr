@@ -560,7 +560,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-L'objectif de la démonstration ci-dessous est de créer un `animint2` qui montre comment la limite de décision, la marge et le ressort ("slack") évoluent en fonction du paramètre de coût.
+L'objectif de la démonstration ci-dessous est de créer une visualisation affichant l’évolution des variables (frontière de décision, marge, ressorts) en fonction du paramètre de coût.
+Le code ci-dessous contient une boucle sur les paramètres de coût.
+Pour chaque itération, nous utilisons le code du section précédent, avec la méthode [Liste de tableau de données](/ch99#list-of-data-tables).
 
 <!-- paragraph -->
 
@@ -632,8 +634,20 @@ inputBoundaries <- do.call(rbind, inputBoundaries.list)
 predictions <- do.call(rbind, predictions.list)
 slackSegs <- do.call(rbind, slackSegs.list)
 modelLines <- do.call(rbind, modelLines.list)
-modelInfo <- do.call(rbind, modelInfo.list)
 setErrors <- do.call(rbind, setErrors.list)
+(modelInfo <- do.call(rbind, modelInfo.list))
+```
+
+Ci-dessus nous voyons un tableau avec une ligne pour chaque coût.
+Les colonnes donnent les propriétés de chaque modèle :
+
+* `slack` est la quantité d’erreur donnée par les variables ressorts.
+* `norm` est la norme du vecteur du poids.
+* `margin` est la largeur entre les lignes de marge.
+
+Dans le code ci-dessous, nous restructurons les données dans une forme qui facilitera l’affichage.
+
+```{r}
 modelInfo.tall <- melt(modelInfo, id.vars="cost.param")
 grid.sq.dt$boundary <- "true"
 setErrors$variable <- "errors"
@@ -645,33 +659,46 @@ set.label.select <- data.table(
   set=c("validation", "subtrain"),
   hjust=c(1, 0))
 set.labels <- setErrors[set.label.select, on=list(cost.param, set)]
-viz.linear.svm <- animint(
-  selectModel=ggplot()+
-    ggtitle("Select regularization parameter")+
-    scale_x_continuous(limits=c(-1.5, 1.5))+
-    geom_tallrect(aes(
-      xmin=log10(cost.param)-cost.by/2,
-      xmax=log10(cost.param)+cost.by/2),
-      clickSelects="cost.param",
-      alpha=0.5,
-      data=modelInfo)+
-    theme_bw()+
-    facet_grid(variable ~ ., scales="free")+
-    geom_line(aes(
-      log10(cost.param), errors,
-      group=set, color=set),
-      data=setErrors)+
-    geom_text(aes(
-      log10(cost.param), errors-1, label=set,
-      hjust=hjust,
-      color=set),
-      data=set.labels)+
-    guides(color="none")+
-    geom_line(aes(
-      log10(cost.param), log10(value)),
-      data=modelInfo.tall),
-  inputSpace=ggplot()+
-    ggtitle("Input space features")+
+```
+
+Nous commençons la visualisation avec un graphique pour choisir la régularisation.
+
+```{r}
+(gg.choisir.reg <- ggplot()+
+  ggtitle("Choisir la régularisation")+
+  scale_x_continuous(
+    "log10(coût)",
+    limits=c(-1.5, 1.5))+
+  scale_y_continuous("")+
+  geom_tallrect(aes(
+    xmin=log10(cost.param)-cost.by/2,
+    xmax=log10(cost.param)+cost.by/2),
+    clickSelects="cost.param",
+    alpha=0.5,
+    data=modelInfo)+
+  theme_bw()+
+  facet_grid(variable ~ ., scales="free")+
+  geom_line(aes(
+    log10(cost.param), errors,
+    group=set, color=set),
+    data=setErrors)+
+  geom_text(aes(
+    log10(cost.param), errors-1, label=set,
+    hjust=hjust,
+    color=set),
+    data=set.labels)+
+  guides(color="none")+
+  geom_line(aes(
+    log10(cost.param), log10(value)),
+    data=modelInfo.tall))
+```
+
+Le graphique ci-dessus affiche les propriétés du modèle sur l’axe Y, en fonction du coût sur l’axe X.
+Ensuite, nous créons un graphique affichant l’espace des variables d’entrée.
+
+```{r}
+gg.entrée.linéaire <- ggplot()+
+    ggtitle("L’espace des variables d’entrée")+
     scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
     geom_vline(aes(
       xintercept=boundary),
@@ -700,42 +727,60 @@ viz.linear.svm <- animint(
       showSelected=c("cost.param", "status", "y"),
       clickSelects="data.i",
       size=3,
-      data=predictions),
-  kernelSpace=ggplot()+
-    ggtitle("Kernel space features")+
-    geom_vline(aes(
-      xintercept=boundary), color="violet",
-      data=x1sq.boundary)+
-    ##coord_cartesian(xlim=c(0, 1), ylim=c(0, 1))+
-    geom_abline(aes(
-      slope=slope, intercept=intercept, linetype=boundary),
-      showSelected="cost.param",
-      color="black",
-      data=modelLines)+
-    scale_linetype_manual(values=c(
-      decision="solid",
-      margin="dashed",
-      true="solid"))+
-    geom_point(aes(
-      x1.sq, x2.sq, fill=status),
-      showSelected=c("data.i", "cost.param"),
-      size=5,
-      color="grey",
-      data=predictions)+
-    geom_point(aes(
-      x1.sq, x2.sq, color=y, fill=status),
-      clickSelects="data.i",
-      showSelected="cost.param",
-      size=3,
-      data=predictions)+
-    scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
-    geom_segment(aes(
-      x1.sq, x2.sq, 
-      xend=x1.sq.margin, yend=x2.sq.margin),
-      showSelected=c("cost.param", "boundary"),
-      color="grey",
-      data=slackSegs))
-viz.linear.svm
+      data=predictions)
+gg.entrée.linéaire+facet_wrap("cost.param")
+```
+
+Dans le graphique ci-dessus, nous voyons une facette pour chaque paramètre de coût.
+Ensuite, nous faisons un graphique pour l’espace des variables carrées.
+
+```{r}
+gg.carrée.linéaire <- ggplot()+
+  ggtitle("L’espace du noyau")+
+  geom_vline(aes(
+    xintercept=boundary), color="violet",
+    data=x1sq.boundary)+
+  geom_abline(aes(
+    slope=slope, intercept=intercept, linetype=boundary),
+    showSelected="cost.param",
+    color="black",
+    data=modelLines)+
+  scale_linetype_manual(values=c(
+    decision="solid",
+    margin="dashed",
+    true="solid"))+
+  geom_point(aes(
+    x1.sq, x2.sq, fill=status),
+    showSelected=c("data.i", "cost.param"),
+    size=5,
+    color="grey",
+    data=predictions)+
+  geom_point(aes(
+    x1.sq, x2.sq, color=y, fill=status),
+    clickSelects="data.i",
+    showSelected="cost.param",
+    size=3,
+    data=predictions)+
+  scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
+  geom_segment(aes(
+    x1.sq, x2.sq,
+    xend=x1.sq.margin, yend=x2.sq.margin),
+    showSelected=c("cost.param", "boundary"),
+    color="grey",
+    data=slackSegs))
+gg.carrée.linéaire+facet_wrap("cost.param")
+```
+
+Ci-dessus nous voyons l’espace carrée, utilisée pour l’apprentissage avec le noyau polynome ordre 2.
+Enfin, le code ci-dessous combine les graphiques dans une visualisation interactive.
+
+```{r ch12-viz-linear-svm}
+(viz.linear.svm <- animint(
+  selectModel=gg.choisir.reg,
+  inputSpace=gg.entrée.linéaire+
+    theme_animint(last_in_row=TRUE),
+  kernelSpace=gg.carrée.linéaire+
+    theme_animint(width=700, colspan=2)))
 ```
 
 <!-- paragraph -->
