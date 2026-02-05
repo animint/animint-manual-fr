@@ -22,7 +22,7 @@ book:
   title: "Visualisation interactive de données dans R avec animint2"
   repo-url: https://github.com/animint/animint-manual-fr
   repo-actions: [edit, issue, source]
-  repo-subdir: Chapitres
+  repo-subdir: chapitres
   favicon: Figures/favicon.ico
   cover-image: Figures/logo.png
   downloads: [pdf]
