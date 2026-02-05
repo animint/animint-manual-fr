@@ -32,7 +32,7 @@ for(qmd in qmd.files){
   qmd.lines <- readLines(qmd)
   is.fence <- grepl("```", qmd.lines)
   is.text <- (cumsum(is.fence) %% 2)==0
-  is.comment <- grepl("<!--|http|::", qmd.lines)
+  is.comment <- grepl("<!--|http|::|`r", qmd.lines)
   can.rep <- is.text & !is.comment
   qmd.lines[can.rep] <- correct(qmd.lines[can.rep])
   writeLines(qmd.lines, qmd)
