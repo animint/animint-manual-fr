@@ -118,7 +118,7 @@ L’ordre de lecture des chapitres suivants n’est pas important, puisqu’ils 
 
 <!-- paragraph -->
 
-[Chapitre 19](ch19) : une visualisation de valeurs p avec carte thermique reliée à un nuage de points pour éviter l’occlusion causée par un trop grand nombre de données. 
+[Chapitre 19](ch19) : visualisations de probabilités critiques (valeurs p) d'un test statistique, pour évaluer la significativité des différences entre deux échantillons. Un trop grand nombre de données dans un nuage de points cause de l'occlusion, nous proposons donc une carte thermique reliée à un nuage comportant seulement les données sélectionnées. 
 
 [Chapitre 20](ch20) : une comparaison de différents algorithmes d’apprentissage artificiel, calculée avec le package mlr3.
 
