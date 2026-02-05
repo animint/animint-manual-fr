@@ -2,22 +2,29 @@ qmd.files <- c(
   Sys.glob("chapitres/*qmd"),
   Sys.glob("chapitres/*/*qmd"))
 bad.regex <- paste(c(
+  "idiom", # technique ou méthode
   "'", # ’ et non '
   "[^ ]:", # espace insécable avant deux points
   "«[^ ]", # espace fine insécable après guillemets ouvrants
-  "[^ ][»?!]"), # espace fine insécable avant »?!
+  "[^ ][»?!;]"), # espace fine insécable avant »?!;
   collapse="|")
 get_bad <- function(...){
   grep(bad.regex, c(...), value=TRUE)
 }
 good.vec <- c("C’est", "comme :")
+##TODO
+correct <- function(chr_vec){
+  chr_vec
+}
 bad.vec <- c("C'est", "comme :", "comme:")
 (bad.computed <- get_bad(good.vec, bad.vec))
 stopifnot(identical(bad.computed, bad.vec))
 violations <- list()
 for(qmd in qmd.files){
   qmd.lines <- readLines(qmd)
-  is.fence <- grepl("```", qmd.lines)
+  corrected <- correct(qmd.lines)
+  writeLines(corrected, qmd)
+  is.fence <- grepl("```", corrected)
   is.text <- (cumsum(is.fence) %% 2)==0
   qmd.text <- qmd.lines[is.text]
   no.comments <- grep("<!--", qmd.text, invert=TRUE, value=TRUE)
