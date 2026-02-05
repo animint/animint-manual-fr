@@ -1,4 +1,4 @@
-png_vec <- Sys.glob("Chapitres/*/*png")
+png_vec <- Sys.glob("chapitres/*/*png")
 library(data.table)
 out.list <- list()
 for(png in png_vec){

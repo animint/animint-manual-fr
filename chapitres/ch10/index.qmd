@@ -231,7 +231,7 @@ Dans le code ci-dessous, nous calculons la moyenne et l'erreur standard de l'err
 <!-- paragraph -->
 
 ```{r}
-labeled.data <- data.all.folds[!is.na(label),]
+labeled.data <- data.all.folds[!is.na(label)]
 error.stats <- labeled.data[, list(
   error.prop=mean(is.error)
   ), by=.(set, validation.fold, neighbors)]
@@ -255,7 +255,7 @@ Bayes.error <- data.table(
   neighbors=NA,
   error.prop=0.21)
 Bayes.error
-other.error <- error.stats[validation.fold==0,]
+other.error <- error.stats[validation.fold==0]
 head(other.error)
 ```
 
@@ -300,9 +300,13 @@ errorPlotStatic <- ggplot()+
     yintercept=error.prop, color=set_fr, linetype=set_fr),
     data=Bayes.error)+
   scale_color_manual(
-    legend.name.type, values=set.colors, breaks=names(set.colors))+
+    legend.name.type,
+    values=set.colors,
+    breaks=names(set.colors))+
   scale_linetype_manual(
-    legend.name.type, values=set.linetypes, breaks=names(set.linetypes))+
+    legend.name.type,
+    values=set.linetypes,
+    breaks=names(set.linetypes))+
   ylab("Taux d’erreur")+
   xlab("Nombre de voisins")+
   geom_linerange(aes(
@@ -337,8 +341,9 @@ Pour la visualisation statique des données de l'espace des variables, nous ne m
 
 ```{r}
 show.neighbors <- 7
-show.data <- data.all.folds[validation.fold==0 & neighbors==show.neighbors,]
-show.points <- show.data[set=="train",]
+show.data <- data.all.folds[
+  validation.fold==0 & neighbors==show.neighbors]
+show.points <- show.data[set=="train"]
 show.points
 ```
 
@@ -355,7 +360,7 @@ text.V2.bottom <- -2
 text.V1.error <- -2.6
 error.text <- rbind(
   Bayes.error,
-  other.error[neighbors==show.neighbors,])
+  other.error[neighbors==show.neighbors])
 error.text[, V2.top := text.V2.bottom + text.height * (1:.N)]
 error.text[, V2.bottom := V2.top - text.height]
 error.text
@@ -390,7 +395,7 @@ Nous utilisons cette fonction pour calculer les limites de décision pour les 7 
 <!-- paragraph -->
 
 ```{r}
-boundary.grid <- show.data[set=="grid",]
+boundary.grid <- show.data[set=="grid"]
 boundary.grid[, label := pred.label]
 pred.boundary <- getBoundaryDF(boundary.grid$probability)
 pred.boundary$classifier <- "KPPV"
@@ -409,7 +414,7 @@ Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent 
 on.text <- function(V1, V2){
   V2 <= max(error.text$V2.top) & V1 <= text.V1.prop
 }
-show.grid <- boundary.grid[!on.text(V1, V2),]
+show.grid <- boundary.grid[!on.text(V1, V2)]
 show.grid
 ```
 
@@ -648,9 +653,8 @@ Notre refonte comprend les changements suivants :
 <!-- paragraph -->
 
 ```{r}
-show.data <- data.all.folds[validation.fold==0,]
-show.points <- show.data[set=="train",]
-show.points
+show.data <- data.all.folds[validation.fold==0]
+(show.points <- show.data[set=="train"])
 ```
 
 <!-- paragraph -->
@@ -660,10 +664,11 @@ Ci-dessous, nous calculons les limites de décision prédites séparément pour 
 <!-- paragraph -->
 
 ```{r}
-boundary.grid <- show.data[set=="grid",]
+boundary.grid <- show.data[set=="grid"]
 boundary.grid[, label := pred.label]
-show.grid <- boundary.grid[!on.text(V1, V2),]
-pred.boundary <- boundary.grid[, getBoundaryDF(probability), by=neighbors]
+show.grid <- boundary.grid[!on.text(V1, V2)]
+pred.boundary <- boundary.grid[
+, getBoundaryDF(probability), by=neighbors]
 pred.boundary$classifier <- "KPPV"
 pred.boundary
 ```
@@ -851,7 +856,8 @@ Le code ci-dessous calcule le minimum de la courbe d'erreur pour chaque valeur d
 <!-- paragraph -->
 
 ```{r}
-min.validation <- validation.error.several[, .SD[which.min(mean),], by=n.folds]
+min.validation <- validation.error.several[
+, .SD[which.min(mean)], by=n.folds]
 ```
 
 <!-- paragraph -->

@@ -497,7 +497,7 @@ animint(
       clickSelects="i",
       data=demo_df),
   off=ggplot()+
-    ggtitle("Paramètres définis par l'utilisateur  : alpha_off, fill_off, color_off")+
+    ggtitle("Paramètres définis : alpha_off, fill_off, color_off")+
     geom_tile(aes(
       i, 0, fill=i),
       clickSelects="i",
@@ -551,7 +551,7 @@ animint(
       size=5,
       showSelected="année",
       clickSelects="pays",
-      help="Un point est tracé pour chaque pays dans l'année sélectionnée",
+      help="Un point pour chaque pays dans l'année sélectionnée",
       alpha=0.7,
       data=BanqueMondiale)+
     geom_text(aes(

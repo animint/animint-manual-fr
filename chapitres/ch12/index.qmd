@@ -637,7 +637,8 @@ setErrors <- do.call(rbind, setErrors.list)
 modelInfo.tall <- melt(modelInfo, id.vars="cost.param")
 grid.sq.dt$boundary <- "true"
 setErrors$variable <- "errors"
-inputBoundaries[, boundary := ifelse(level.num==0, "decision", "margin")]
+inputBoundaries[, boundary := ifelse(
+  level.num==0, "decision", "margin")]
 slackSegs$boundary <- "margin"
 set.label.select <- data.table(
   cost.param=range(setErrors$cost.param),

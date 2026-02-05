@@ -35,7 +35,8 @@ Tout d'abord, nous chargeons l'ensemble des données de la Banque mondiale. Nous
 ```{r}
 library(animint2)
 data(BanqueMondiale, package="animint2fr")
-BanqueMondiale$Region <- sub(" (all income levels)", "", BanqueMondiale$region, fixed=TRUE)
+BanqueMondiale$Region <- sub(
+  " (all income levels)", "", BanqueMondiale$region, fixed=TRUE)
 library(data.table)
 not.na <- data.table(
   BanqueMondiale)[!(is.na(espérance.de.vie) | is.na(taux.de.fertilité))]
@@ -105,9 +106,12 @@ Nous définissons ci-dessous trois fonctions d'aide, une pour chaque facette :
 <!-- paragraph -->
 
 ```{r}
-TS.RIGHT <- function(df)FACETS(df, "Années", "Espérance de vie")
-SCATTER <- function(df)FACETS(df, "Taux de fertilité", "Espérance de vie")
-TS.ABOVE <- function(df)FACETS(df, "Taux de fertilité", "Années")
+TS.RIGHT <- function(df)FACETS(
+  df, "Années", "Espérance de vie")
+SCATTER <- function(df)FACETS(
+  df, "Taux de fertilité", "Espérance de vie")
+TS.ABOVE <- function(df)FACETS(
+  df, "Taux de fertilité", "Années")
 ```
 
 <!-- paragraph -->

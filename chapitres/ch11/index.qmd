@@ -101,8 +101,7 @@ gg.lambda <- ggplot()+
   scale_color_manual(values=variable.colors)+
   geom_line(aes(
     lambda, standardized.coef, color=variable, group=variable),
-    data=path)+
-  ggtitle("LASSO path for prostate cancer data calculated using the LARS")
+    data=path)
 gg.lambda
 ```
 
@@ -155,7 +154,6 @@ for(fraction.i in seq_along(fraction)){
 }
 coef.grid <- do.call(rbind, coef.grid.list)
 ggplot()+
-  ggtitle("LASSO path for prostate cancer data calculated using the LARS")+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
   scale_color_manual(values=variable.colors)+

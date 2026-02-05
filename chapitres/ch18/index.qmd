@@ -673,7 +673,7 @@ animint(
   title="Réseau de neurones vs modèle linéaire",
   out.dir="neural-networks-sim",
   loss=ggplot()+
-    ggtitle("Courbes de perte/erreur, cliquer pour sélectionner le modèle/l’itération")+
+    ggtitle("Courbes d’erreur, sélectionner le modèle et l’itération")+
     theme_bw()+
     theme_animint(width=600, height=350)+
     theme(panel.margin=grid::unit(1, "lines"))+

@@ -1,6 +1,6 @@
 qmd.files <- c(
-  Sys.glob("Chapitres/*qmd"),
-  Sys.glob("Chapitres/*/*qmd"))
+  Sys.glob("chapitres/*qmd"),
+  Sys.glob("chapitres/*/*qmd"))
 violations <- list()
 for(qmd in qmd.files){
   qmd.lines <- readLines(qmd)
