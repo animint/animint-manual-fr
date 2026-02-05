@@ -1,0 +1,201 @@
+# Techniques de programmation pour la visualisation
+
+<!-- paragraph -->
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(fig.path="ch99-figures/")
+```
+
+<!-- paragraph -->
+
+Cette annexe décrit plusieurs techniques de programmation R qui sont utiles pour créer des animints.
+
+<!-- paragraph -->
+
+## Les facettes économes en espace {#space-saving-facets}
+
+<!-- paragraph -->
+
+Pour mettre l'accent sur les données graphiques dans les ggplots à facettes, éliminez l'espace entre les facettes à l'aide de l'idiome suivant.
+
+<!-- paragraph -->
+
+```{r, eval=FALSE}
+ggplot()+
+  geom_point(aes(Petal.Width, Sepal.Width), iris)+
+  theme_bw()+
+  theme(panel.margin=grid::unit(0, "lines"))+
+  facet_grid(. ~ Species)
+```
+
+<!-- paragraph -->
+
+Cet idiome se compose de trois parties :
+
+<!-- paragraph -->
+
+- `panel.margin=0` élimine l'espace entre les panneaux.
+<!-- comment -->
+- `theme_bw` active un thème noir et blanc (bordures de panneaux noires et arrière-plans de panneaux blancs).
+<!-- comment -->
+Ceci est nécessaire pour voir les limites entre les panneaux, puisque la fonction par défaut de ggplot `theme_grey` utilise des fonds de panneaux gris et pas de bordures de panneaux.
+<!-- comment -->
+- `facet_*` crée un ggplot multi-panneaux.
+
+<!-- paragraph -->
+
+Notez que nous utilisons l'unité de grille `lines` qui correspond à la hauteur d'une ligne de texte à la taille par défaut.
+<!-- comment -->
+C'est la seule unité de grille qu'animint sait traduire.
+<!-- comment -->
+Il n'est pas recommandé d'utiliser d'autres unités telles que `cm`.
+
+<!-- paragraph -->
+
+## Liste des tableaux de données {#list-of-data-tables}
+
+<!-- paragraph -->
+
+Le tableau de données est très utile pour créer des visualisations de données interactives d'une complexité arbitraire.
+<!-- comment -->
+La forme générale ressemble à
+
+<!-- paragraph -->
+
+```{r, eval=FALSE}
+library(data.table)
+outer.data.list <- list()
+inner.data.list <- list()
+for(outer in outer.vec){
+  outer.dt <- computeOuter(outer)
+  outer.data.list[[paste(outer)]] <- data.table(outer, outer.dt)
+  for(inner in inner.vec){
+    inner.dt <- computeInner(outer.dt, inner)
+    inner.data.list[[paste(outer, inner)]] <-
+      data.table(outer, inner, inner.dt)
+  }
+}
+outer.data <- do.call(rbind, outer.data.list)
+inner.data <- do.call(rbind, inner.data.list)
+```
+
+<!-- paragraph -->
+
+Quelques commentaires :
+
+<!-- paragraph -->
+
+- La première partie de l'idiome consiste à initialiser des listes vides.
+<!-- comment -->
+Ici, il y en a deux, `outer.data.list` et `inner.data.list`.
+<!-- comment -->
+Toutefois, il peut y en avoir autant que nécessaire.
+<!-- comment -->
+- La deuxième partie de l'idiome est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
+<!-- comment -->
+- Des fonctions comme `computeOuter` et `computeInner` peuvent être utilisées, ou vous pouvez simplement effectuer les calculs directement dans la boucle for.
+<!-- comment -->
+- Pour que votre code soit aussi rapide que possible, utilisez les opérations matrice-vecteur ou vecteur-scalaire dans la boucle for la plus interne.
+<!-- comment -->
+Si vous n'effectuez que des opérations scalaires-scalaires dans votre boucle for interne, vous pouvez certainement améliorer les performances de votre code en supprimant cette boucle for et en réécrivant le calcul en termes d'opérations vectorielles-scalaires.
+<!-- comment -->
+- `paste()` est utilisée pour créer un nom pour le `data.table` dans la liste de résultats.
+<!-- comment -->
+En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
+<!-- comment -->
+- La dernière partie de l'idiome utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
+
+<!-- paragraph -->
+
+## Rajouter une colonne et facettes {#addColumn-then-facet}
+
+<!-- paragraph -->
+
+Cet idiome est utile pour créer des ggplots multi-panneaux avec des axes alignés.
+<!-- comment -->
+Tout d'abord, définissez une fonction qui prend en entrée un tableau de données et une ou plusieurs valeurs qui seront utilisées pour ajouter des facteurs à ce tableau de données.
+
+<!-- paragraph -->
+
+```{r, eval=FALSE}
+addColumn <- function(df, time.period)data.frame(
+  df, time.period=factor(time.period, c("1975", "1960-2010")))
+animint(
+  ggplot()+
+  geom_point(aes(
+    x=life.expectancy, y=fertility.rate, color=region),
+    data=addColumn(WorldBank1975, "1975"))+
+  geom_path(aes(
+    x=life.expectancy, y=fertility.rate, color=region,
+    group=country),
+    data=addColumn(WorldBankBefore1975, "1975"))+
+  geom_line(aes(
+    x=year, y=fertility.rate, color=region, group=country),
+    data=addColumn(WorldBank, "1960-2010"))+
+  facet_grid(. ~ time.period, scales="free")+
+  xlab(""))
+```
+
+<!-- paragraph -->
+
+Notez que `scales="free"` et `xlab("")` sont utilisés car les axes x ont maintenant des unités très différentes (année et espérance de vie).
+
+<!-- paragraph -->
+
+## Légendes de couleurs manuelles {#manual-color-legends}
+
+<!-- paragraph -->
+
+On peut utiliser `scale_color_manual()` et `scale_fill_manual()` pour préciser les couleurs dans les légendes pour `aes(color)` et `aes(fill)`.
+<!-- comment -->
+En règle générale, nous choisissons l'une des palettes ColorBrewer :
+
+<!-- paragraph -->
+
+```{r, fig.height=8}
+RColorBrewer::display.brewer.all()
+```
+
+<!-- paragraph -->
+
+Par exemple, pour obtenir le code R de la palette Set1, nous pouvons écrire
+
+<!-- paragraph -->
+
+```{r}
+dput(RColorBrewer::brewer.pal(7, "Set1"))
+```
+
+<!-- paragraph -->
+
+Nous pouvons ensuite copier ce code R depuis le terminal et le coller dans notre éditeur de texte
+
+<!-- paragraph -->
+
+```{r}
+data(WorldBank, package="animint2")
+region.colors <- c(
+  "#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", 
+  "#A65628")
+names(region.colors) <- levels(WorldBank$region)
+region.colors
+```
+
+<!-- paragraph -->
+
+Nous pouvons ensuite l'utiliser avec `scale_color_manual()`.
+
+<!-- paragraph -->
+
+```{r}
+library(animint2)
+ggplot()+
+  scale_color_manual(values=region.colors)+
+  geom_point(aes(
+    x=life.expectancy, y=fertility.rate, color=region),
+    data=WorldBank)
+```
+
+<!-- paragraph -->
+
+

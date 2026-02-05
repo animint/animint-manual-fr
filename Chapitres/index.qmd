@@ -1,8 +1,0 @@
-Ce site est le travail en cours du projet de traduction en français du site en anglais [The `animint2` Manual](https://rcdata.nau.edu/genomic-ml/animint2-manual/Ch00-preface.html), financé par [FabriqueREL](https://fabriquerel.org/), livraison prévu pour mars 2026.
-
-Pour créer ce site web à partir des [fichiers source](https://github.com/animint/animint-manual-fr/), nous avons utilisé les versions suivantes :
-
-```{r}
-R.version.string
-packageVersion("animint2")
-```

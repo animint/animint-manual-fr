@@ -1,6 +1,6 @@
 qmd.files <- c(
-  Sys.glob("Chapitres/*qmd"),
-  Sys.glob("Chapitres/*/*qmd"))
+  Sys.glob("chapitres/*qmd"),
+  Sys.glob("chapitres/*/*qmd"))
 library(data.table)
 violations <- list()
 for(qmd in qmd.files){
@@ -24,4 +24,5 @@ for(qmd in qmd.files){
   }
 }
 print(violations)
+
 q(status=length(violations))
