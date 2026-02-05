@@ -483,9 +483,9 @@ La figure ci-dessus montre un point noir pour chaque essai présentant une diff�
 <!-- comment -->
 Ce nombre de faux positifs est cohérent avec le seuil de 5% de la valeur P (taux d’erreur de type I) que nous avons utilisé pour définir la significativité.
 <!-- comment -->
-- Pour `true_offset=2`, nous voyons que seul `r nrow(some(only_significant)[true_offset !=0])` des essais sont significatifs, même s’il y a une vraie différence de moyenne.
+- Pour `true_offset=2`, nous voyons que seul `r nrow(some(only_significant)[true_offset!=0])` des essais sont significatifs, même s’il y a une vraie différence de moyenne.
 <!-- comment -->
-La puissance estimée (taux de vrais positifs) est donc de `r some(sim_p)[true_offset !=0, paste0(100*mean(significant),"%")]` et le taux d’erreur de type II (taux de faux négatifs) est donc de `r some(sim_p)[true_offset !=0, paste0(100*mean(1-significant),"%")]`.
+La puissance estimée (taux de vrais positifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(significant),"%")]` et le taux d’erreur de type II (taux de faux négatifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(1-significant),"%")]`.
 
 <!-- paragraph -->
 
