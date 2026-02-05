@@ -1,4 +1,4 @@
-# Méthode de Newton pour la recherche de racines  
+# Méthode de Newton pour la recherche de racines
 
 <!-- paragraph -->
 
@@ -8,35 +8,35 @@ knitr::opts_chunk$set(fig.path="ch15-figures/")
 
 <!-- paragraph -->
 
-Les racines d'une fonction `f(x)` sont les valeurs de `x` telles que `f(x)=0`.
+Les racines d’une fonction `f(x)` sont les valeurs de `x` telles que `f(x)=0`.
 <!-- comment -->
 Certaines fonctions `f` ont une expression explicite pour leurs racines.
 <!-- comment -->
-Par exemple :
+Par exemple :
 
 <!-- paragraph -->
 
-- la fonction linéaire `f(x)=b*x+c=0` a une seule racine `x=-c/b` lorsque b n'est pas nul.
+- la fonction linéaire `f(x)=b*x+c=0` a une seule racine `x=-c/b` lorsque b n’est pas nul.
 <!-- comment -->
 - la fonction quadratique `f(x)=a*x^2+b*x+c=0` a deux racines `x=(-b±sqrt(b^2-4*a*c))/(2*a)` si le discriminant est positif `b^2-4*a*c>0`.
 <!-- comment -->
-- la fonction sin `f(x)=sin(a*x)=0` a un nombre infini de racines : `pi*z/a` pour tous les entiers `z`.
+- la fonction sin `f(x)=sin(a*x)=0` a un nombre infini de racines : `pi*z/a` pour tous les entiers `z`.
 
 <!-- paragraph -->
 
-Cependant, certaines fonctions n'ont pas d'expression explicite pour leurs racines.
+Cependant, certaines fonctions n’ont pas d’expression explicite pour leurs racines.
 <!-- comment -->
-Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n'ont pas d'expression explicite comme on l'entend en termes de fonctions mathématiques courantes
+Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n’ont pas d’expression explicite comme on l’entend en termes de fonctions mathématiques courantes
 <!-- comment -->
 (en fait, il y a une solution faisant appel à la [fonction W de Lambert](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) mais cette fonction n'est généralement pas disponible). L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la méthode de Newton](https://en.wikipedia.org/wiki/Newton%27s_method) pour trouver les racines de telles fonctions.
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous implémentons d'abord la méthode de Newton pour la perte de Poisson, afin de trouver la racine qui est plus grande que le minimum.
+- Nous implémentons d’abord la méthode de Newton pour la perte de Poisson, afin de trouver la racine qui est plus grande que le minimum.
 <!-- comment -->
 Nous créons plusieurs visualisations de données statiques et une visualisation interactive.
 <!-- comment -->
@@ -44,11 +44,11 @@ Nous créons plusieurs visualisations de données statiques et une visualisation
 
 <!-- paragraph -->
 
-## Plus grande racine dans l'espace moyen {#larger-root}
+## Plus grande racine dans l’espace moyen {#larger-root}
 
 <!-- paragraph -->
 
-Nous commençons par définir les coefficients d'une fonction de perte de Poisson à deux racines.
+Nous commençons par définir les coefficients d’une fonction de perte de Poisson à deux racines.
 
 <!-- paragraph -->
 
@@ -81,7 +81,7 @@ Notre but est de trouver les deux racines de cette fonction.
 <!-- comment -->
 La méthode de Newton pour la recherche de racines prend comme point de départ une racine candidate choisie arbitrairement, puis utilise de manière itérative des approximations linéaires pour trouver des racines candidates plus précises.
 <!-- comment -->
-Pour calculer l'approximation linéaire, nous avons besoin de la dérivée :
+Pour calculer l’approximation linéaire, nous avons besoin de la dérivée :
 
 <!-- paragraph -->
 
@@ -93,7 +93,7 @@ loss.deriv <- function(Mean){
 
 <!-- paragraph -->
 
-Nous commençons la recherche de la racine à un point plus grand que le minimum:
+Nous commençons la recherche de la racine à un point plus grand que le minimum :
 
 <!-- paragraph -->
 
@@ -110,7 +110,7 @@ gg.loss+
 
 <!-- paragraph -->
 
-Nous utilisons ensuite l'implémentation suivante de la méthode de Newton pour trouver une racine:
+Nous utilisons ensuite l’implémentation suivante de la méthode de Newton pour trouver une racine :
 
 <!-- paragraph -->
 
@@ -139,9 +139,9 @@ gg.loss+
 
 Le graphique ci-dessus montre la racine qui a été trouvée.
 <!-- comment -->
-Le critère d'arrêt était une valeur de coût absolu inférieure à `1e-6`, nous savons donc que cette racine est au moins aussi précise que ça.
+Le critère d’arrêt était une valeur de coût absolu inférieure à `1e-6`, nous savons donc que cette racine est au moins aussi précise que ça.
 <!-- comment -->
-Le graphique suivant montre la précision de la racine en fonction du nombre d'itérations.
+Le graphique suivant montre la précision de la racine en fonction du nombre d’itérations.
 
 <!-- paragraph -->
 
@@ -173,17 +173,17 @@ print(gg.it)
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre une ligne horizontale pour le seuil du critère d'arrêt sur l'échelle logarithmique.
+Le graphique ci-dessus montre une ligne horizontale pour le seuil du critère d’arrêt sur l’échelle logarithmique.
 <!-- comment -->
 Il est clair que le point rouge de la dernière itération se situe bien en dessous de ce seuil.
 
 <!-- paragraph -->
 
-Le graphique ci-dessous montre chaque étape de l'algorithme.
+Le graphique ci-dessous montre chaque étape de l’algorithme.
 <!-- comment -->
-Les panneaux de gauche montrent l'approximation linéaire de la racine candidate, ainsi que la racine de l'approximation linéaire.
+Les panneaux de gauche montrent l’approximation linéaire de la racine candidate, ainsi que la racine de l’approximation linéaire.
 <!-- comment -->
-Les panneaux de droite montrent la racine de l'approximation linéaire, ainsi que la valeur de la fonction correspondante (la nouvelle racine candidate).
+Les panneaux de droite montrent la racine de l’approximation linéaire, ainsi que la valeur de la fonction correspondante (la nouvelle racine candidate).
 
 <!-- paragraph -->
 
@@ -219,7 +219,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Il est clair que l'algorithme converge rapidement vers la racine.
+Il est clair que l’algorithme converge rapidement vers la racine.
 <!-- comment -->
 Ce qui suit est une version interactive animée de la même visualisation des données.
 
@@ -291,21 +291,21 @@ loss.fun(c(
 
 <!-- paragraph -->
 
-Pour ces données, on obtient grâce à la fonction W de Lambert une racine légèrement plus précise qu'avec l'implémentation de la méthode de Newton.
+Pour ces données, on obtient grâce à la fonction W de Lambert une racine légèrement plus précise qu’avec l’implémentation de la méthode de Newton.
 
 <!-- paragraph -->
 
-## Recherche de racine dans l'espace logarithmique {#log-space}
+## Recherche de racine dans l’espace logarithmique {#log-space}
 
 <!-- paragraph -->
 
 Dans la section précédente nous avons présenté un algorithme pour trouver la racine qui est plus grande que le minimum.
 <!-- comment -->
-Dans cette section, nous explorons un algorithme permettant de trouver l'autre racine (plus petite que le minimum).
+Dans cette section, nous explorons un algorithme permettant de trouver l’autre racine (plus petite que le minimum).
 <!-- comment -->
-Notez que la perte de Poisson est fortement non linéaire lorsque la moyenne s'approche de zéro, de sorte que l'approximation linéaire dans la recherche de racine de Newton ne fonctionnera pas très bien.
+Notez que la perte de Poisson est fortement non linéaire lorsque la moyenne s’approche de zéro, de sorte que l’approximation linéaire dans la recherche de racine de Newton ne fonctionnera pas très bien.
 <!-- comment -->
-Pour contourner ce problème, nous effectuons une recherche de racine équivalente dans l'espace logarithmique :
+Pour contourner ce problème, nous effectuons une recherche de racine équivalente dans l’espace logarithmique :
 
 <!-- paragraph -->
 
@@ -328,7 +328,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-**Exercice :**
+**Exercice :**
 Dérivez et implémentez la méthode de Newton pour cette fonction, afin de trouver la racine qui est plus petite que le minimum.
 <!-- comment -->
 Créez un `animint2` similaire à la section précédente.
@@ -343,41 +343,41 @@ Dans ce chapitre, nous avons exploré plusieurs visualisations de la méthode de
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
 - Ajoutez un titre à chaque graphique.
 <!-- comment -->
-- Ajoutez une légende de taille au premier graphique (des points noirs  plus grands que les rouges), afin qu'on puisse voir les cas où les points ont la même valeur.
+- Ajoutez une légende de taille au premier graphique (des points noirs  plus grands que les rouges), afin qu’on puisse voir les cas où les points ont la même valeur.
 <!-- comment -->
 - Ajoutez une `geom_hline()` pour mettre en évidence la valeur de perte=0 dans le second graphique.
 <!-- comment -->
-- Ajoutez un `geom_hline()` pour mettre en évidence le seuil d'arrêt dans le premier graphique.
+- Ajoutez un `geom_hline()` pour mettre en évidence le seuil d’arrêt dans le premier graphique.
 <!-- comment -->
-- Désactivez l'une des deux légendes pour gagner de la place.
+- Désactivez l’une des deux légendes pour gagner de la place.
 <!-- comment -->
-- Comment spécifier des transitions graduelles entre les itérations?
+- Comment spécifier des transitions graduelles entre les itérations ?
 <!-- comment -->
-- Au lieu d'utiliser l'itération comme variable d'animation/de temps, créez-en une nouvelle afin de montrer deux états/étapes distincts pour chaque itération, c.-à-d.
+- Au lieu d’utiliser l’itération comme variable d’animation/de temps, créez-en une nouvelle afin de montrer deux états/étapes distincts pour chaque itération, c.-à-d.
 <!-- comment -->
 la variable `step` dans le graphique à facettes ci-dessus.
 <!-- comment -->
-- Qu'arrive-t-il au taux de convergence lorsque vous essayez de trouver la racine la plus grande dans l'espace logarithmique, ou la racine la plus petite dans l'espace original ?
+- Qu’arrive-t-il au taux de convergence lorsque vous essayez de trouver la racine la plus grande dans l’espace logarithmique, ou la racine la plus petite dans l’espace original ?
 <!-- comment -->
 Théoriquement, la convergence devrait être moins rapide, car les fonctions sont plus fortement non linéaires pour ces racines.
 <!-- comment -->
-Réalisez une visualisation des données vous permettant de sélectionner la valeur de départ et qui montre le nombre d'itérations nécessaires pour converger, en respectant le seuil.
+Réalisez une visualisation des données vous permettant de sélectionner la valeur de départ et qui montre le nombre d’itérations nécessaires pour converger, en respectant le seuil.
 <!-- comment -->
 - Créez un autre graphique permettant de sélectionner le seuil.
 <!-- comment -->
-Tracez le nombre d'itérations en fonction du seuil.
+Tracez le nombre d’itérations en fonction du seuil.
 <!-- comment -->
 - Dérivez la fonction de perte pour la [régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression) et visualisez la méthode de recherche de racines de Newton correspondante.
 <!-- comment -->
-- Refactorisez `gg.it` pour n'utiliser qu'un seul `geom_point()` au lieu des quatre geoms du code actuel.
+- Refactorisez `gg.it` pour n’utiliser qu’un seul `geom_point()` au lieu des quatre geoms du code actuel.
 <!-- comment -->
-Conseil : utilisez `rbind()` pour créer un seul tableau avec toutes les données.
+Conseil : utilisez `rbind()` pour créer un seul tableau avec toutes les données.
 
 <!-- paragraph -->
 

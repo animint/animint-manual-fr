@@ -12,13 +12,13 @@ Dans ce chapitre, nous allons explorer plusieurs visualisations des données des
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
 - Nous commençons par effectuer plusieurs visualisations statiques du jeu de données `intreg`.
 <!-- comment -->
-- Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de points de changement/segments, et l'autre graphique montre le modèle correspondant.
+- Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de points de changement/segments, et l’autre graphique montre le modèle correspondant.
 <!-- comment -->
 - Nous terminons en montrant une visualisation statique du modèle de régression linéaire de la marge maximale, et en suggérant des exercices pour créer une version interactive.
 
@@ -41,7 +41,7 @@ lapply(intreg, function(df)data.table(df)[1:2])
 
 <!-- paragraph -->
 
-Comme on peut voir ci-dessus, il s'agit d'une liste nommée de 7 `data.frames` apparentés.
+Comme on peut voir ci-dessus, il s’agit d’une liste nommée de 7 `data.frames` apparentés.
 <!-- comment -->
 Nous commençons notre exploration de ces données en traçant les signaux dans des facettes séparées.
 
@@ -62,19 +62,19 @@ gg.signals
 
 <!-- paragraph -->
 
-Chaque point de données tracé ci-dessus montre une mesure approximative du nombre de copies d'ADN (logratio), en fonction de la position des bases sur un chromosome.
+Chaque point de données tracé ci-dessus montre une mesure approximative du nombre de copies d’ADN (logratio), en fonction de la position des bases sur un chromosome.
 <!-- comment -->
-Ces données proviennent d'analyses à haut débit qui sont importantes pour diagnostiquer certains types de cancer comme le neuroblastome.
+Ces données proviennent d’analyses à haut débit qui sont importantes pour diagnostiquer certains types de cancer comme le neuroblastome.
 
 <!-- paragraph -->
 
-Une partie importante du diagnostic consiste à détecter les points de rupture, soit les changements abrupts au sein d'un chromosome donné (panneau).
+Une partie importante du diagnostic consiste à détecter les points de rupture, soit les changements abrupts au sein d’un chromosome donné (panneau).
 <!-- comment -->
-Le graphique ci-dessus montre clairement qu'il y a plusieurs points de rupture dans ces données.
+Le graphique ci-dessus montre clairement qu’il y a plusieurs points de rupture dans ces données.
 <!-- comment -->
 En particulier, le signal 4.2 semble avoir trois points de rupture, le signal 4.3 semble en avoir un, etc.
 <!-- comment -->
-En fait, ces données proviennent de médecins de l'Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
+En fait, ces données proviennent de médecins de l’Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
 <!-- comment -->
 Ces données sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous.
 
@@ -97,9 +97,9 @@ gg.ann
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre en jaune les régions où les médecins ont déterminé qu'il n'y a pas de point de rupture significatif, et en rouge les régions où il y a un point de rupture.
+Le graphique ci-dessus montre en jaune les régions où les médecins ont déterminé qu’il n’y a pas de point de rupture significatif, et en rouge les régions où il y a un point de rupture.
 <!-- comment -->
-L'objectif de l'analyse de ces données est d'apprendre à partir des données étiquetées limitées (régions colorées) et de fournir des prédictions cohérentes sur les points de rupture (même dans les régions non étiquetées).
+L’objectif de l’analyse de ces données est d’apprendre à partir des données étiquetées limitées (régions colorées) et de fournir des prédictions cohérentes sur les points de rupture (même dans les régions non étiquetées).
 
 <!-- paragraph -->
 
@@ -109,7 +109,7 @@ Les moyennes des segments sont disponibles dans `intreg$segments` et les points 
 <!-- comment -->
 Pour chaque signal, il existe une séquence de modèles de 1 à 20 segments.
 <!-- comment -->
-Zoomons d'abord sur un signal :
+Zoomons d’abord sur un signal :
 
 <!-- paragraph -->
 
@@ -136,7 +136,7 @@ gg.one
 
 <!-- paragraph -->
 
-Nous traçons ci-dessous certains de ces modèles pour l'un des signaux :
+Nous traçons ci-dessous certains de ces modèles pour l’un des signaux :
 
 <!-- paragraph -->
 
@@ -183,7 +183,7 @@ sig.errors <- penaltyLearning::labelError(
 
 Le `data.table` (tableau de données) `sig.errors$label.errors` contient une ligne pour chaque combinaison (modèle, étiquette).
 <!-- comment -->
-La colonne `status` peut être utilisée pour afficher l'erreur d'étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
+La colonne `status` peut être utilisée pour afficher l’erreur d’étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
 
 <!-- paragraph -->
 
@@ -206,13 +206,13 @@ gg.models+
 
 <!-- paragraph -->
 
-En examinant le graphique des erreurs d'étiquettes ci-dessus, il est clair que le modèle à quatre segments devrait être sélectionné, car il permet d'obtenir des erreurs d'étiquettes nulles.
+En examinant le graphique des erreurs d’étiquettes ci-dessus, il est clair que le modèle à quatre segments devrait être sélectionné, car il permet d’obtenir des erreurs d’étiquettes nulles.
 <!-- comment -->
 Un certain nombre de critères peuvent être utilisés pour sélectionner le meilleur modèle.
 <!-- comment -->
-Une façon d'y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
+Une façon d’y parvenir est de sélectionner le modèle avec $s$ segments est $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
-Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle $S^*(\lambda)$ pour ce jeu de données :
+Dans le graphique ci-dessous, nous montrons la fonction de sélection du modèle $S^*(\lambda)$ pour ce jeu de données :
 
 <!-- paragraph -->
 
@@ -241,7 +241,7 @@ Dans la prochaine section, nous réalisons une version interactive de ces deux g
 
 <!-- paragraph -->
 
-Nous allons créer une figure interactive pour un signal en ajoutant un `geom_tallrect()` avec `clickSelects=segments` au graphique ci-dessus :
+Nous allons créer une figure interactive pour un signal en ajoutant un `geom_tallrect()` avec `clickSelects=segments` au graphique ci-dessus :
 
 <!-- paragraph -->
 
@@ -259,7 +259,7 @@ interactive.selection
 
 <!-- paragraph -->
 
-Nous allons combiner cela avec la version non facettée du graphique données/modèles ci-dessous, dans lequel nous avons ajouté `showSelected=segments` aux geoms des modèles :
+Nous allons combiner cela avec la version non facettée du graphique données/modèles ci-dessous, dans lequel nous avons ajouté `showSelected=segments` aux geoms des modèles :
 
 <!-- paragraph -->
 
@@ -296,7 +296,7 @@ interactive.models
 
 <!-- paragraph -->
 
-Bien entendu, le graphique ci-dessus n'est pas très informatif car il n'est pas interactif.
+Bien entendu, le graphique ci-dessus n’est pas très informatif car il n’est pas interactif.
 <!-- comment -->
 Ci-dessous, nous combinons les deux ggplots interactifs dans un `animint` :
 
@@ -312,9 +312,9 @@ animint(
 
 <!-- paragraph -->
 
-Notez que dans la visualisation des données ci-dessus, le modèle à 6 segments ne peut être sélectionné pour aucune valeur de lambda. Il n'est donc pas possible de cliquer sur le graphique pour sélectionner ce modèle.
+Notez que dans la visualisation des données ci-dessus, le modèle à 6 segments ne peut être sélectionné pour aucune valeur de lambda. Il n’est donc pas possible de cliquer sur le graphique pour sélectionner ce modèle.
 <!-- comment -->
-Cependant, il est possible de sélectionner le modèle en utilisant le menu de sélection des segments (cliquez sur « Show selection menus » au bas de la visualisation des données).
+Cependant, il est possible de sélectionner le modèle en utilisant le menu de sélection des segments (cliquez sur « Show selection menus » au bas de la visualisation des données).
 
 <!-- paragraph -->
 
@@ -324,7 +324,7 @@ Cependant, il est possible de sélectionner le modèle en utilisant le menu de s
 
 Une autre partie de ce jeu de données est `intreg$intervals` qui comporte une ligne pour chaque signal.
 <!-- comment -->
-Les colonnes `min.L` et `max.L` indiquent les valeurs min/max de l'intervalle cible, qui correspond à la plage la plus large de valeurs de log(pénalité) avec des erreurs d'étiquette minimales.
+Les colonnes `min.L` et `max.L` indiquent les valeurs min/max de l’intervalle cible, qui correspond à la plage la plus large de valeurs de log(pénalité) avec des erreurs d’étiquette minimales.
 <!-- comment -->
 Nous traçons ci-dessous cet intervalle en fonction du logarithme du nombre de données dans la séquence :
 
@@ -350,13 +350,13 @@ gg.intervals
 
 <!-- paragraph -->
 
-Les intervalles cibles dans le graphique ci-dessus indiquent la région de l'espace log(lambda) qui sélectionnera un modèle avec des erreurs d'étiquette minimales.
+Les intervalles cibles dans le graphique ci-dessus indiquent la région de l’espace log(lambda) qui sélectionnera un modèle avec des erreurs d’étiquette minimales.
 <!-- comment -->
-Il y a un intervalle pour chaque signal ; nous avons fait un `animint` dans la section précédente pour le signal indiqué dans le texte en noir.
+Il y a un intervalle pour chaque signal ; nous avons fait un `animint` dans la section précédente pour le signal indiqué dans le texte en noir.
 <!-- comment -->
-Des algorithmes d'apprentissage automatique peuvent être utilisés pour trouver une fonction de pénalité qui coupe chacun des intervalles et maximise la marge (la distance entre la fonction de régression et la limite de l'intervalle le plus proche).
+Des algorithmes d’apprentissage automatique peuvent être utilisés pour trouver une fonction de pénalité qui coupe chacun des intervalles et maximise la marge (la distance entre la fonction de régression et la limite de l’intervalle le plus proche).
 <!-- comment -->
-Les données pour la fonction de régression linéaire de la marge maximale sont dans `intreg$model` ce qui est illustré dans le graphique ci-dessous :
+Les données pour la fonction de régression linéaire de la marge maximale sont dans `intreg$model` ce qui est illustré dans le graphique ci-dessous :
 
 <!-- paragraph -->
 
@@ -379,9 +379,9 @@ gg.mm
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre la fonction de régression linéaire de la marge maximale f(x) sous la forme d'une ligne rouge pleine.
+Le graphique ci-dessus montre la fonction de régression linéaire de la marge maximale f(x) sous la forme d’une ligne rouge pleine.
 <!-- comment -->
-Il est clair qu'elle coupe chacun des intervalles cibles noirs et maximise la marge (lignes pointillées verticales rouges).
+Il est clair qu’elle coupe chacun des intervalles cibles noirs et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
 Pour plus d'informations sur le thème de la détection supervisée des points de rupture, voir [mon tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
 
@@ -395,27 +395,27 @@ Maintenant que vous savez comment visualiser chacune des sept parties du jeu de 
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
 - Ajouter un `geom_text()` qui affiche le nom du signal actuellement sélectionné en haut du graphique, en `interactive.models` dans le premier `animint` ci-dessus.
 <!-- comment -->
-- Créez une animation avec deux graphiques qui montre l'ensemble de données correspondant à chaque intervalle sur le graphique de régression de la marge maximale.
+- Créez une animation avec deux graphiques qui montre l’ensemble de données correspondant à chaque intervalle sur le graphique de régression de la marge maximale.
 <!-- comment -->
-L'un des graphiques doit montrer une version interactive du graphique de régression de la marge maximale où vous pouvez cliquer sur un intervalle pour sélectionner un signal.
+L’un des graphiques doit montrer une version interactive du graphique de régression de la marge maximale où vous pouvez cliquer sur un intervalle pour sélectionner un signal.
 <!-- comment -->
-L'autre graphique doit afficher le jeu de données pour le signal sélectionné.
+L’autre graphique doit afficher le jeu de données pour le signal sélectionné.
 <!-- comment -->
-- Dans l'`animint` que vous avez créé dans l'exercice précédent, ajoutez un troisième graphique avec la fonction de sélection de modèle pour le signal actuellement sélectionné.
+- Dans l’`animint` que vous avez créé dans l’exercice précédent, ajoutez un troisième graphique avec la fonction de sélection de modèle pour le signal actuellement sélectionné.
 <!-- comment -->
 - Dans la visualisation précédente, enlever le troisième graphique, et ajoutez une facette avec les mêmes informations au graphique de régression, avec les axes alignés.
 <!-- comment -->
-Ajoutez une autre facette qui indique le nombre d'étiquettes incorrectes (`intreg$selection$cost`) pour chaque valeur de log(lambda).
+Ajoutez une autre facette qui indique le nombre d’étiquettes incorrectes (`intreg$selection$cost`) pour chaque valeur de log(lambda).
 <!-- comment -->
 - Ajoutez des geoms pour sélectionner le nombre de segments.
 <!-- comment -->
-En cliquant sur le graphique de sélection du modèle, on devrait sélectionner le nombre de segments, ce qui devrait mettre à jour le modèle affiché et les erreurs d'étiquette sur le graphique des données pour le signal actuellement sélectionné.
+En cliquant sur le graphique de sélection du modèle, on devrait sélectionner le nombre de segments, ce qui devrait mettre à jour le modèle affiché et les erreurs d’étiquette sur le graphique des données pour le signal actuellement sélectionné.
 <!-- comment -->
 En outre, ajoutez une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
@@ -431,7 +431,7 @@ Le résultat devrait ressembler à quelque chose [comme ceci](https://rcdata.nau
 
 <!-- paragraph -->
 
-Dans le [chapitre 17](/ch17), nous vous expliquerons comment visualiser l'algorithme d'agrégation des K-moyennes.
+Dans le [chapitre 17](/ch17), nous vous expliquerons comment visualiser l’algorithme d’agrégation des K-moyennes.
 
 <!-- paragraph -->
 

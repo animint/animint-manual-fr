@@ -13,25 +13,25 @@ Ce chapitre expose les limites de `animint2` pour certaines tâches de visualisa
 <!-- comment -->
 et propose quelques solutions de contournement à utiliser dans ces situations.
 <!-- comment -->
-Après avoir lu ce chapitre, vous saurez comment :
+Après avoir lu ce chapitre, vous saurez comment :
 
 <!-- paragraph -->
 
 - Utiliser une variable normalisée lorsque différents sous-ensembles `showSelected` ont des valeurs très différentes pour une variable que vous souhaitez afficher.
 <!-- comment -->
-- Calculer les statistiques pour chaque sous-ensemble `showSelected` au lieu d'utiliser les fonctions `stat_*` de `ggplot2`.
+- Calculer les statistiques pour chaque sous-ensemble `showSelected` au lieu d’utiliser les fonctions `stat_*` de `ggplot2`.
 <!-- comment -->
-- Ajouter des données une par une à un ensemble de variables à sélection multiple, plutôt que d'utiliser un pinceau de sélection rectangulaire.
+- Ajouter des données une par une à un ensemble de variables à sélection multiple, plutôt que d’utiliser un pinceau de sélection rectangulaire.
 <!-- comment -->
-- Éviter l'utilisation de `vjust` et d'étiquettes à plusieurs lignes dans `geom_text()`.
+- Éviter l’utilisation de `vjust` et d’étiquettes à plusieurs lignes dans `geom_text()`.
 <!-- comment -->
 - Ordonner des graphiques sur une page.
 <!-- comment -->
-- Éviter l'utilisation des options `theme` non supportées.
+- Éviter l’utilisation des options `theme` non supportées.
 <!-- comment -->
 - Utiliser des facettes avec plusieurs variables par axe.
 <!-- comment -->
-- Utiliser le package de serveur web `shiny` pour modifier de manière interactive la cartographie esthétique d'un `animint`, ou pour effectuer des calculs basés sur les valeurs sélectionnées.
+- Utiliser le package de serveur web `shiny` pour modifier de manière interactive la cartographie esthétique d’un `animint`, ou pour effectuer des calculs basés sur les valeurs sélectionnées.
 
 <!-- paragraph -->
 
@@ -43,7 +43,7 @@ Toute idée visant à améliorer `animint2` et à contourner l'une de ces limite
 
 <!-- paragraph -->
 
-Nous implémentons les axes et les légendes de la même manière que dans `ggplot2` : en les calculant une seule fois lors de la première génération du graphique.
+Nous implémentons les axes et les légendes de la même manière que dans `ggplot2` : en les calculant une seule fois lors de la première génération du graphique.
 <!-- comment -->
 Par conséquent, les axes et les légendes de chaque graphique animint ne sont pas interactifs.
 <!-- comment -->
@@ -51,11 +51,11 @@ Pour la plupart des [visualisations de données animées](/ch03#animation-time),
 
 <!-- paragraph -->
 
-Dans certaines situations, il serait utile d'avoir des axes qui se mettent à jour de manière interactive; 
+Dans certaines situations, il serait utile d’avoir des axes qui se mettent à jour de manière interactive ;
 <!-- comment -->
 par exemple, lorsque différents sous-ensembles `showSelected` ont des valeurs très différentes pour les variables affichées sur un axe ou une légende.
 <!-- comment -->
-Dans ce cas, il serait utile d'avoir des axes interactifs qui se mettent à jour et changent en même temps que les données.
+Dans ce cas, il serait utile d’avoir des axes interactifs qui se mettent à jour et changent en même temps que les données.
 <!-- comment -->
 Nous disposons d'une prise en charge expérimentale pour cela, voir la [mise à jour axestest](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer4-update-axes-multiple-ss.R) pour plus de détails.
 
@@ -67,7 +67,7 @@ Nous disposons d'une prise en charge expérimentale pour cela, voir la [mise à 
 
 Dans `animint2`, nous évitons d’utiliser les statistiques et les positions avec `showSelected`.
 <!-- comment -->
-Par exemple, considérons le ggplot à facettes ci-dessous :
+Par exemple, considérons le ggplot à facettes ci-dessous :
 
 <!-- paragraph -->
 
@@ -101,7 +101,7 @@ Utiliser `showSelected` au lieu des facettes ne donne pas le même résultat.
 animint(ggstat, duration = list(facette = 1000))
 ```
 
-Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour changer `facette=2`, vous verrez que le groupe `bas` n'est plus aligné avec `comptage=0`.
+Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour changer `facette=2`, vous verrez que le groupe `bas` n’est plus aligné avec `comptage=0`.
 Une solution de contournement consiste à calculer les valeurs à afficher, puis à utiliser `position=identity`, comme dans le code ci-dessous.
 
 <!-- paragraph -->
@@ -127,7 +127,7 @@ ggidentity+facet_grid(facette ~ .)
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé `geom_segment()` au lieu de `geom_bar()`, mais que l'affichage est semblable.
+Notez que nous avons utilisé `geom_segment()` au lieu de `geom_bar()`, mais que l’affichage est semblable.
 
 <!-- paragraph -->
 
@@ -141,25 +141,25 @@ Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour chan
 
 <!-- paragraph -->
 
-`animint2` ne prend pas en charge la brosse rectangulaire ou le lasso pour définir interactivement un ensemble de valeurs sélectionnées, 
+`animint2` ne prend pas en charge la brosse rectangulaire ou le lasso pour définir interactivement un ensemble de valeurs sélectionnées,
 <!-- comment -->
-mais propose plutôt la sélection multiple en ajoutant des valeurs une par une à l'ensemble de sélection multiple.
+mais propose plutôt la sélection multiple en ajoutant des valeurs une par une à l’ensemble de sélection multiple.
 <!-- comment -->
-Il faut donc utiliser l'option [selector.types](/ch04#selector-types-option) pour déclarer une variable de sélection multiple.
+Il faut donc utiliser l’option [selector.types](/ch04#selector-types-option) pour déclarer une variable de sélection multiple.
 
 <!-- paragraph -->
 
-## Ajuster `y` au lieu d'utiliser `vjust` {#vjust}
+## Ajuster `y` au lieu d’utiliser `vjust` {#vjust}
 
 <!-- paragraph -->
 
-Pour l'alignement horizontal du texte, animint prend en charge l'utilisation de `hjust` dans R. Les valeurs les plus courantes sont : 0 pour l'alignement à gauche, 0,5 pour l'alignement au milieu et 1 pour l'alignement à droite.
+Pour l’alignement horizontal du texte, animint prend en charge l’utilisation de `hjust` dans R. Les valeurs les plus courantes sont : 0 pour l’alignement à gauche, 0,5 pour l’alignement au milieu et 1 pour l’alignement à droite.
 <!-- comment -->
 `animint2` traduit ces trois valeurs `hjust` en propriété `text-anchor` dans la visualisation de données générée.
 
 <!-- paragraph -->
 
-Cependant, `animint` ne prend pas en charge l'alignement vertical du texte à l'aide de `vjust` dans R, car aucune propriété ne permet l'alignement vertical du texte en SVG.
+Cependant, `animint` ne prend pas en charge l’alignement vertical du texte à l’aide de `vjust` dans R, car aucune propriété ne permet l’alignement vertical du texte en SVG.
 
 <!-- paragraph -->
 
@@ -215,9 +215,9 @@ Les solutions de contournement dans `animint2` sont illustrées dans le panneau 
 
 <!-- paragraph -->
 
-Il serait possible d'implémenter une prise en charge de `vjust` pour `geom_text()`, mais nous n'avons pas encore eu le temps d'y travailler.
+Il serait possible d’implémenter une prise en charge de `vjust` pour `geom_text()`, mais nous n’avons pas encore eu le temps d’y travailler.
 <!-- comment -->
-Toute contribution en ce sens sera accueillie avec grand plaisir : n'hésitez pas à soumettre une Pull Request.
+Toute contribution en ce sens sera accueillie avec grand plaisir : n’hésitez pas à soumettre une Pull Request.
 <!-- comment -->
 Nous avons déjà une [issue](https://github.com/tdhock/animint/issues/148) qui explique comment l'implémenter.
 
@@ -227,7 +227,7 @@ Nous avons déjà une [issue](https://github.com/tdhock/animint/issues/148) qui 
 
 <!-- paragraph -->
 
-Lors de l'affichage d'un ggplot à l'aide des périphériques graphiques R habituels, l'utilisation d'un saut de ligne ou d'une nouvelle ligne `\n` dans une étiquette `geom_text()` entraîne l'apparition de plusieurs lignes de texte sur le graphique.
+Lors de l’affichage d’un ggplot à l’aide des périphériques graphiques R habituels, l’utilisation d’un saut de ligne ou d’une nouvelle ligne `\n` dans une étiquette `geom_text()` entraîne l’apparition de plusieurs lignes de texte sur le graphique.
 
 <!-- paragraph -->
 
@@ -252,13 +252,13 @@ animint(gg.return)
 
 <!-- paragraph -->
 
-La prise en charge de plusieurs lignes dans les étiquettes `geom_text()` serait utile, mais nous n'avons pas encore eu le temps de l'implémenter.
+La prise en charge de plusieurs lignes dans les étiquettes `geom_text()` serait utile, mais nous n’avons pas encore eu le temps de l’implémenter.
 <!-- comment -->
 Nous avons créé une [issue](https://github.com/tdhock/animint/issues/149) à ce sujet, et toute Pull Request qui implémente cette fonctionnalité sera acceptée.
 
 <!-- paragraph -->
 
-En attendant, la solution de contournement consiste à utiliser un seul `geom_text()` pour chaque ligne de texte à afficher :
+En attendant, la solution de contournement consiste à utiliser un seul `geom_text()` pour chaque ligne de texte à afficher :
 
 <!-- paragraph -->
 
@@ -284,37 +284,37 @@ animint(gg.two.lines)
 
 L'un des objectifs de `animint2` est de prendre en charge [toutes les options de thème](http://docs.ggplot2.org/current/theme.html), mais nous n'avons pas encore réussi à toutes les implémenter, faute de temps.
 <!-- comment -->
-Si vous utilisez une option de thème que `animint2` ne prend pas encore en charge, n'hésitez pas à nous envoyer une Pull Request.
+Si vous utilisez une option de thème que `animint2` ne prend pas encore en charge, n’hésitez pas à nous envoyer une Pull Request.
 <!-- comment -->
-La liste suivante répertorie les options `theme` déjà prises en charge par `animint2` :
+La liste suivante répertorie les options `theme` déjà prises en charge par `animint2` :
 
 <!-- paragraph -->
 
-- `panel.margin` désigne la distance entre les panneaux, et est utilisé dans l'[idiome des facettes d'économie d'espace](/ch99#space-saving-facets) pour l'éliminer.
+- `panel.margin` désigne la distance entre les panneaux, et est utilisé dans l’[idiome des facettes d’économie d’espace](/ch99#space-saving-facets) pour l’éliminer.
 <!-- comment -->
-- `panel.grid.major` est utilisé pour dessiner à l'échelle, les lignes de la grille qui sont désignées par l'argument `breaks`.
+- `panel.grid.major` est utilisé pour dessiner à l’échelle, les lignes de la grille qui sont désignées par l’argument `breaks`.
 <!-- comment -->
 - `panel.grid.minor` est utilisé pour dessiner les lignes de la grille entre ses lignes principales.
 <!-- comment -->
 - `panel.background` est utilisé pour le `<rect>` en arrière-plan de chaque panneau.
 <!-- comment -->
-- `panel.border` est utilisé pour la bordure `<rect>` de chaque panneau (sur l'arrière-plan `<rect>`).
+- `panel.border` est utilisé pour la bordure `<rect>` de chaque panneau (sur l’arrière-plan `<rect>`).
 <!-- comment -->
-- `legend.position="none"` fonctionne pour cacher toutes les légendes, mais aucune des autres positions de légende n'est prise en charge (les légendes apparaissent toujours à droite du graphique).
+- `legend.position="none"` fonctionne pour cacher toutes les légendes, mais aucune des autres positions de légende n’est prise en charge (les légendes apparaissent toujours à droite du graphique).
 
 <!-- paragraph -->
 
-Les options de thème suivantes peuvent être définies par `element_blank` pour masquer les axes :
+Les options de thème suivantes peuvent être définies par `element_blank` pour masquer les axes :
 
 <!-- paragraph -->
 
-- `axis.title`, `axis.title.x`, `axis.title.y` désignent le titre de l'axe.
+- `axis.title`, `axis.title.x`, `axis.title.y` désignent le titre de l’axe.
 <!-- comment -->
-- `axis.ticks`, `axis.ticks.x`, `axis.ticks.y` désignent les tics de l'axe.
+- `axis.ticks`, `axis.ticks.x`, `axis.ticks.y` désignent les tics de l’axe.
 <!-- comment -->
-- `axis.line`, `axis.line.x`, `axis.line.y` désignent la ligne d'axe.
+- `axis.line`, `axis.line.x`, `axis.line.y` désignent la ligne d’axe.
 <!-- comment -->
-- `axis.text`, `axis.text.x`, `axis.text.y` désignent l'étiquette de texte de l'axe, et prennent en charge les arguments `angle` et `hjust` de `element_text`.
+- `axis.text`, `axis.text.x`, `axis.text.y` désignent l’étiquette de texte de l’axe, et prennent en charge les arguments `angle` et `hjust` de `element_text`.
 
 <!-- paragraph -->
 
@@ -343,7 +343,7 @@ two.strips+ggtitle("two strip labels on the right")
 
 <!-- paragraph -->
 
-En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n'utilisant qu'une seule étiquette de bande.
+En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n’utilisant qu’une seule étiquette de bande.
 
 <!-- paragraph -->
 
@@ -353,19 +353,19 @@ animint(two.strips+ggtitle("only one strip label"))
 
 <!-- paragraph -->
 
-Il serait intéressant de prendre en charge plusieurs étiquettes de bande par axe, mais nous ne l'avons pas encore implémenté.
+Il serait intéressant de prendre en charge plusieurs étiquettes de bande par axe, mais nous ne l’avons pas encore implémenté.
 <!-- comment -->
-Si vous souhaitez le faire, nous serions heureux d'accepter votre Pull Request.
+Si vous souhaitez le faire, nous serions heureux d’accepter votre Pull Request.
 
 <!-- paragraph -->
 
-## Définition interactive de mappings `aes()` à l'aide de shiny {#shiny-aes}
+## Définition interactive de mappings `aes()` à l’aide de shiny {#shiny-aes}
 
 <!-- paragraph -->
 
-Normalement, les mappings `aes()` sont définis une fois dans le code R, et ne peuvent pas être modifiés après l'affichage d'un `animint`.
+Normalement, les mappings `aes()` sont définis une fois dans le code R, et ne peuvent pas être modifiés après l’affichage d’un `animint`.
 <!-- comment -->
-Une façon de surmonter cette limite est de définir des entrées `shiny` qui sont utilisées comme `aes()` de `animint`, tel que démontré dans l'exemple suivant :
+Une façon de surmonter cette limite est de définir des entrées `shiny` qui sont utilisées comme `aes()` de `animint`, tel que démontré dans l’exemple suivant :
 
 <!-- paragraph -->
 
@@ -382,9 +382,9 @@ shiny::runApp(system.file(
 
 Une autre limitation de `animint2` est de ne pouvoir afficher que des données préalablement calculées et stockées dans un tableau.
 <!-- comment -->
-Cela signifie que `animint2` n'est pas approprié lorsqu'il y a trop de sous-ensembles à tracer pour les calculer tous.
+Cela signifie que `animint2` n’est pas approprié lorsqu’il y a trop de sous-ensembles à tracer pour les calculer tous.
 <!-- comment -->
-Dans ce cas, il serait préférable d'utiliser `shiny`.
+Dans ce cas, il serait préférable d’utiliser `shiny`.
 
 <!-- paragraph -->
 
@@ -392,11 +392,11 @@ Dans ce cas, il serait préférable d'utiliser `shiny`.
 
 <!-- paragraph -->
 
-Nous avons discuté des limites de l'implémentation actuelle de `animint2` et présenté plusieurs solutions de contournement.
+Nous avons discuté des limites de l’implémentation actuelle de `animint2` et présenté plusieurs solutions de contournement.
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
@@ -404,7 +404,7 @@ Exercices :
 <!-- comment -->
 Calculez le statut de chaque facette, et utilisez `stat_identity` pour que votre calcul fonctionne avec `animint2`.
 <!-- comment -->
-- Faites un ggplot qui s'affiche bien en utilisant `facet_grid(. ~ var, scales="free")`, mais ne s'affiche pas correctement avec `showSelected=var`.
+- Faites un ggplot qui s’affiche bien en utilisant `facet_grid(. ~ var, scales="free")`, mais ne s’affiche pas correctement avec `showSelected=var`.
 <!-- comment -->
 Pour résoudre le problème, calculez une version normalisée de `var` et utilisez-la dans `showSelected`.
 

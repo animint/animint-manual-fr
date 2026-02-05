@@ -12,7 +12,7 @@ Dans ce chapitre, nous explorerons plusieurs visualisations des données pour un
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
@@ -28,9 +28,9 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Nous commençons par charger le fichier `montreal.bikes` qui n'est pas disponible dans la version CRAN de `animint2`, afin d'économiser de l'espace sur le CRAN.
+Nous commençons par charger le fichier `montreal.bikes` qui n’est pas disponible dans la version CRAN de `animint2`, afin d’économiser de l’espace sur le CRAN.
 <!-- comment -->
-Par conséquent, pour accéder à ce jeu de données, vous devrez installer `animint2` depuis GitHub :
+Par conséquent, pour accéder à ce jeu de données, vous devrez installer `animint2` depuis GitHub :
 
 <!-- paragraph -->
 
@@ -43,11 +43,11 @@ tryCatch({
 })
 ```
 
-Les données sont deux séries temporelles :
+Les données sont deux séries temporelles :
 
-* `montreal.bikes$counter.counts` : les passages de vélos sur les compteurs, dans un tableau avec une ligne pour chaque combinaison de lieu et jour.
+* `montreal.bikes$counter.counts` : les passages de vélos sur les compteurs, dans un tableau avec une ligne pour chaque combinaison de lieu et jour.
 <!-- comment -->
-* `montreal.bikes$accidents` : les accidents, dans un tableau avec une ligne par accident.
+* `montreal.bikes$accidents` : les accidents, dans un tableau avec une ligne par accident.
 
 Nous allons calculer des résumés par mois dans ces deux séries temporelles.
 
@@ -92,7 +92,7 @@ On voit bien la régularité au fil des saisons (moins de vélos en hiver).
 
 ### Accidents
 
-Pour commencer avec les données d'accidents, nous affichons une ligne :
+Pour commencer avec les données d’accidents, nous affichons une ligne :
 
 ```{r}
 montreal.bikes$accidents[1,]
@@ -100,11 +100,11 @@ montreal.bikes$accidents[1,]
 
 <!-- paragraph -->
 
-Pour chaque accident il y a des données sur la date, l'heure, la localisation et le nombre de morts et de blessés.
+Pour chaque accident il y a des données sur la date, l’heure, la localisation et le nombre de morts et de blessés.
 <!-- comment -->
-Certaines valeurs sont en français (par exemple : `Voie de circulation`, `En intersection`, etc).
+Certaines valeurs sont en français (par exemple : `Voie de circulation`, `En intersection`, etc).
 <!-- comment -->
-Pour les colonnes avec noms en anglais, nous allons faire des copies en français :
+Pour les colonnes avec noms en anglais, nous allons faire des copies en français :
 
 <!-- paragraph -->
 
@@ -139,7 +139,7 @@ ymd2POSIXct <- function(date.str){
 
 <!-- paragraph -->
 
-Dans la sortie ci-dessus, on voit que les derniers mois pour les accidents ne sont pas les mêmes que les compteurs. On compare les intervalles dans le code ci-dessous :
+Dans la sortie ci-dessus, on voit que les derniers mois pour les accidents ne sont pas les mêmes que les compteurs. On compare les intervalles dans le code ci-dessous :
 
 ```{r}
 data.list <- list(accidents=accidents_dt, passages=passages_dt)
@@ -148,7 +148,7 @@ sapply(data.list, function(DT)range(DT$mois.str))
 
 Dans la sortie ci-dessus, on voit que les passages et les accidents se chevauchent.
 <!-- comment -->
-Nous allons compiler des résumés pour tous les mois, c'est pourquoi nous faisons un tableau de données pour chaque mois ci-dessous.
+Nous allons compiler des résumés pour tous les mois, c’est pourquoi nous faisons un tableau de données pour chaque mois ci-dessous.
 
 <!-- paragraph -->
 
@@ -159,7 +159,7 @@ mois_01 <- function(mois)ymd2POSIXct(paste0(mois, "-01"))
 mois_dt <- data.table(mois.01 = mois_01(uniq.mois.vec))
 ```
 
-Le code ci-dessous définit l'environnement linguistique (locale) pour avoir les noms de mois en français.
+Le code ci-dessous définit l’environnement linguistique (locale) pour avoir les noms de mois en français.
 
 ```{r}
 old.locale <- Sys.setlocale(locale="fr_CA.UTF-8")
@@ -188,7 +188,7 @@ Dans le code ci-dessous, nous calculons la somme des accidents par mois.
 
 Ci-dessus on voit une ligne pour chaque mois, avec différentes colonnes pour chaque niveau de gravité.
 <!-- comment -->
-Nous convertissons ces colonnes en lignes avec le code ci-dessous :
+Nous convertissons ces colonnes en lignes avec le code ci-dessous :
 
 ```{r}
 (accidents.tall <- melt(
@@ -200,7 +200,7 @@ Nous convertissons ces colonnes en lignes avec le code ci-dessous :
 
 Ci-dessus on voit une ligne pour chaque combinaison de mois et gravité.
 <!-- comment -->
-Dans le code ci-dessous, nous utilisons ces données pour créer un graphique montrant le nombre d'accidents par mois.
+Dans le code ci-dessous, nous utilisons ces données pour créer un graphique montrant le nombre d’accidents par mois.
 
 <!-- paragraph -->
 
@@ -224,9 +224,9 @@ Ci-dessus, on voit le nombre de personnes décédées et blessées au fil du tem
 
 ## Visualisation interactive de la fréquence des accidents {#regression}
 
-Maintenant nous voulons comparer, pour chaque mois, les données de compteurs et d'accidents.
+Maintenant nous voulons comparer, pour chaque mois, les données de compteurs et d’accidents.
 <!-- comment -->
-Est-ce que nous avons plus d'accidents quand il y a plus de passages en vélo ?
+Est-ce que nous avons plus d’accidents quand il y a plus de passages en vélo ?
 Pour vérifier, nous devons calculer un résumé des passages par mois avec le code ci-dessous.
 
 ```{r}
@@ -237,17 +237,17 @@ Pour vérifier, nous devons calculer un résumé des passages par mois avec le c
   value.var="passages"))
 ```
 
-La sortie ci-dessus contient une ligne pour chaque combinaison de lieu et mois, avec des colonnes pour:
+La sortie ci-dessus contient une ligne pour chaque combinaison de lieu et mois, avec des colonnes pour :
 
-* `passages_length` : le nombre de jours.
-* `passages_mean` : le moyenne de passages par jour.
-* `passages_sum` : le total nombre de passages.
+* `passages_length` : le nombre de jours.
+* `passages_mean` : le moyenne de passages par jour.
+* `passages_sum` : le total nombre de passages.
 
-On remarque que certains mois contiennent des journées manquantes. Par exemple, il n'y a que 29 jours pour `Berri` en avril 2009, et 18 jours pour `Totem_Laurier` en septembre 2013.
+On remarque que certains mois contiennent des journées manquantes. Par exemple, il n’y a que 29 jours pour `Berri` en avril 2009, et 18 jours pour `Totem_Laurier` en septembre 2013.
 <!-- comment -->
 Pour modeliser seulement les mois entiers, nous voulons enlever les mois avec jours manquants.
 <!-- comment -->
-Alors on utilise le code ci-dessous pour calculer le nombre de jours dans chaque mois :
+Alors on utilise le code ci-dessous pour calculer le nombre de jours dans chaque mois :
 
 ```{r}
 un.jour <- 60 * 60 * 24
@@ -261,7 +261,7 @@ passages.par.mois[, jours.dans.mois := as.integer(round(difftime(
 
 Dans la sortie ci-dessus, on voit la nouvelle colonne `jours.dans.mois`.
 <!-- comment -->
-Avec le code ci-dessous, on affiche seulement les mois avec jours manquants :
+Avec le code ci-dessous, on affiche seulement les mois avec jours manquants :
 
 ```{r}
 passages.par.mois[
@@ -269,13 +269,13 @@ passages.par.mois[
   .(lieu, mois.str, passages_length, jours.dans.mois)]
 ```
 
-Nous allons exclure les données ci-dessus, en utilisant le code ci-dessous :
+Nous allons exclure les données ci-dessus, en utilisant le code ci-dessous :
 
 ```{r}
 mois.complets <- passages.par.mois[passages_length == jours.dans.mois]
 ```
 
-Ensuite, nous faisons un tableau avec les passages et les accidents dans différents colonnes :
+Ensuite, nous faisons un tableau avec les passages et les accidents dans différents colonnes :
 
 ```{r}
 city.wide.complete <- mois.complets[passages_sum>0, .(
@@ -292,7 +292,7 @@ city.wide.accidents <- accidents_dt[, .(
 
 Dans la sortie ci-dessus, on voit une ligne pour chaque mois avec les données de compteurs et accidents.
 <!-- comment -->
-Ensuite, nous faisons un modèle linéaire pour prédire les accidents à partir des passages :
+Ensuite, nous faisons un modèle linéaire pour prédire les accidents à partir des passages :
 
 ```{r}
 (fit <- lm(total.accidents ~ total.passages - 1, scatter.not.na))
@@ -339,7 +339,7 @@ animint(
 
 La visualisation des données ci-dessus contient deux graphiques réliés.
 <!-- comment -->
-Le graphique de gauche montre que le nombre d'accidents augmente avec le nombre de cyclistes.
+Le graphique de gauche montre que le nombre d’accidents augmente avec le nombre de cyclistes.
 <!-- comment -->
 Le graphique de droite montre la fréquence des accidents au fil du temps.
 
@@ -349,19 +349,19 @@ Le graphique de droite montre la fréquence des accidents au fil du temps.
 
 <!-- paragraph -->
 
-Dans cette partie, nous allons faire une visualisation avec plusieurs composants :
+Dans cette partie, nous allons faire une visualisation avec plusieurs composants :
 
-* Résumé des compteurs : plan des compteurs ou min/max des mois pour chaque compteur, pour sélectionner un compteur.
+* Résumé des compteurs : plan des compteurs ou min/max des mois pour chaque compteur, pour sélectionner un compteur.
 <!-- comment -->
-* Détails d'un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d'un compteur. Cliquer pour sélectionner un mois.
+* Détails d’un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d’un compteur. Cliquer pour sélectionner un mois.
 <!-- comment -->
-* Détails d'un compteur et d'un mois : séries temporelles par jour, pour le mois sélectionné.
+* Détails d’un compteur et d’un mois : séries temporelles par jour, pour le mois sélectionné.
 
 ### Résumé des compteurs avec plan
 
-Les données `counter.locations` contient l'emplacement géographique de chaque compteur.
+Les données `counter.locations` contient l’emplacement géographique de chaque compteur.
 <!-- comment -->
-Pour examiner ces données, il faut d'abord convertir le nom en unicode :
+Pour examiner ces données, il faut d’abord convertir le nom en unicode :
 
 ```{r}
 (counter.locations <- data.table(montreal.bikes$counter.locations)[, .(
@@ -369,9 +369,9 @@ Pour examiner ces données, il faut d'abord convertir le nom en unicode :
   nom_comptage=iconv(nom_comptage, "latin1", "UTF-8"))])
 ```
 
-Dans la sortie ci-dessus, on voit que la colonne `nom_comptage` indique l'emplacement, mais ce ne sont pas exactement les mêmes valeurs que la colonne `lieu` dans les données de passages.
+Dans la sortie ci-dessus, on voit que la colonne `nom_comptage` indique l’emplacement, mais ce ne sont pas exactement les mêmes valeurs que la colonne `lieu` dans les données de passages.
 <!-- comment -->
-On utilise le code ci-dessous pour établir une correspondence entre les tableaux :
+On utilise le code ci-dessous pour établir une correspondence entre les tableaux :
 
 ```{r}
 loc.name.code <- c(
@@ -390,9 +390,9 @@ loc.name.code <- c(
 ][!is.na(lieu)])
 ```
 
-La sortie ci-dessus contient l'emplacement géographique pour chaque compteur.
+La sortie ci-dessus contient l’emplacement géographique pour chaque compteur.
 <!-- comment -->
-L'emplacement des compteurs est tracé ci-dessous.
+L’emplacement des compteurs est tracé ci-dessous.
 
 ```{r}
 map.lim <- show.locations[, lapply(.SD, range), .SDcols=c("lat","lon")]
@@ -433,7 +433,7 @@ La sortie ci-dessus est un plan de Montréal, avec texte pour chacun des dix com
 
 ### Résumé des dates extrêmes pour chaque compteur
 
-Maintenant on calcule les dates extrêmes pour chaque compteur :
+Maintenant on calcule les dates extrêmes pour chaque compteur :
 
 ```{r}
 (location.ranges <- dcast(
@@ -655,7 +655,7 @@ Dans le code ci-dessous, on fait un tableau pour souligner les fins de semaine.
 
 La sortie ci-dessus contient une ligne pour chaque jour de fin de semaine.
 <!-- comment -->
-Ensuite, on fait un tableau qu'on va utiliser pour afficher le nom de chaque lieu.
+Ensuite, on fait un tableau qu’on va utiliser pour afficher le nom de chaque lieu.
 
 ```{r}
 add_jour_mois(passages_dt)
@@ -706,7 +706,7 @@ Ensuite, le code ci-dessous fait un graphique de passages par jour sur les compt
 
 La sortie ci-dessus affiche les données des compteurs, avec trop de données car le graphique statique ne prend pas en compte du mot-clé `showSelected`.
 <!-- comment -->
-Le code ci-dessous rajoute les données d'accidents.
+Le code ci-dessous rajoute les données d’accidents.
 
 ```{r}
 (DaysFacet <- DaysCompteurs+
@@ -755,21 +755,21 @@ animint(
     mois.français="juillet 2012"))
 ```
 
-La sortie ci-dessus contient 4 graphiques :
+La sortie ci-dessus contient 4 graphiques :
 
-* En haut à gauche : séries temporelles avec résumé pour chaque mois.
+* En haut à gauche : séries temporelles avec résumé pour chaque mois.
 <!-- comment -->
-* En haut à droite : séries temporelles pour le mois sélectionné.
+* En haut à droite : séries temporelles pour le mois sélectionné.
 <!-- comment -->
-* En bas à gauche : le min et max dates pour chaque source de données.
+* En bas à gauche : le min et max dates pour chaque source de données.
 <!-- comment -->
-* En bas à droite : lieux des compteurs sur le plan de Montréal.
+* En bas à droite : lieux des compteurs sur le plan de Montréal.
 
 ## Résumé du chapitre et exercices {#ch09-exercises}
 
 Nous avons vu plusieurs graphiques pour visualiser les séries temporelles en rapport avec les vélos de Montréal.
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
@@ -779,13 +779,13 @@ Exercices :
 <!-- comment -->
 - Sur le graphique `MonthSummary`, ajoutez rectangles en arrière-plan pour sélectionner le mois.
 <!-- comment -->
-- Supprimez le graphique `MonthSummary` et ajoutez une visualisation similaire dans un troisième panneau de l'écran dans le graphique `MonthFacet`. Astuce : utilise `theme_animint(rowspan=2)`.
+- Supprimez le graphique `MonthSummary` et ajoutez une visualisation similaire dans un troisième panneau de l’écran dans le graphique `MonthFacet`. Astuce : utilise `theme_animint(rowspan=2)`.
 <!-- comment -->
 - Dans `DaysFacet`, utilisez `aes(tooltip)` avec quelques détails pour chaque accident (addresse, nombre de personnes, etc).
 
 <!-- paragraph -->
 
-Dans le [chapitre 10](/ch10), nous vous expliquerons comment visualiser le modèle d'apprentissage automatique des K-voisins les plus proches.
+Dans le [chapitre 10](/ch10), nous vous expliquerons comment visualiser le modèle d’apprentissage automatique des K-voisins les plus proches.
 
 <!-- paragraph -->
 

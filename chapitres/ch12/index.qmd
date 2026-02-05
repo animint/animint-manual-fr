@@ -12,13 +12,13 @@ L'objectif de ce chapitre est de créer une visualisation des données interacti
 
 <!-- paragraph -->
 
-Résumé du chapitre :
+Résumé du chapitre :
 
 <!-- paragraph -->
 
 - Nous commençons par simuler des données pour une classification binaire en deux dimensions et nous les représentons par quelques graphiques statiques.
 <!-- comment -->
-- Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du séparateur à vaste marge (SVM) linéaire varie en fonction de l'hyperparamètre de coût.
+- Dans la deuxième section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du séparateur à vaste marge (SVM) linéaire varie en fonction de l’hyperparamètre de coût.
 <!-- comment -->
 - Dans la dernière section, nous réalisons une visualisation des données interactive pour montrer comment la limite de décision du séparateur à vaste marge à noyau polynomial varie en fonction des deux hyperparamètres (coût et degré).
 
@@ -28,7 +28,7 @@ Résumé du chapitre :
 
 <!-- paragraph -->
 
-Nous commençons par générer deux fonctionnalités d'entrée, `x1` et `x2`.
+Nous commençons par générer deux fonctionnalités d’entrée, `x1` et `x2`.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessous montre les mêmes données, pour lesquelles deux fonctionnalités d'entrée supplémentaires ont été calculées (les carrés des deux entrées d'origine).
+Le graphique ci-dessous montre les mêmes données, pour lesquelles deux fonctionnalités d’entrée supplémentaires ont été calculées (les carrés des deux entrées d’origine).
 
 <!-- paragraph -->
 
@@ -91,9 +91,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-Concrètement, nous supposons que l'étiquette `y` est négative (-1) si `x1.sq + noise < threshold` et qu'elle est positive (1) dans le cas contraire.
+Concrètement, nous supposons que l’étiquette `y` est négative (-1) si `x1.sq + noise < threshold` et qu’elle est positive (1) dans le cas contraire.
 <!-- comment -->
-Le graphique ci-dessous permet de visualiser les scores et les étiquettes, en fonction de la fonctionnalité d'entrée `x1`.
+Le graphique ci-dessous permet de visualiser les scores et les étiquettes, en fonction de la fonctionnalité d’entrée `x1`.
 <!-- comment -->
 Le graphique montre aussi la fonction de score réel (en noir).
 <!-- comment -->
@@ -159,7 +159,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Ensuite, nous visualisons les étiquettes dans l'espace bidimensionnel des fonctionnalités au carré.
+Ensuite, nous visualisons les étiquettes dans l’espace bidimensionnel des fonctionnalités au carré.
 <!-- comment -->
 Il est clair que la limite de décision est linéaire dans cet espace.
 
@@ -182,9 +182,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessous montre l'espace des fonctionnalités d'entrée (`x1` et `x2`).
+Le graphique ci-dessous montre l’espace des fonctionnalités d’entrée (`x1` et `x2`).
 <!-- comment -->
-Il est clair que la limite de décision n'est pas linéaire en `x1`.
+Il est clair que la limite de décision n’est pas linéaire en `x1`.
 
 <!-- paragraph -->
 
@@ -205,7 +205,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-L'`animint2` ci-dessous utilise `clickSelects` pour montrer les correspondances entre les points de l'espace d'entrée et de l'espace des fonctions au carré.
+L’`animint2` ci-dessous utilise `clickSelects` pour montrer les correspondances entre les points de l’espace d’entrée et de l’espace des fonctions au carré.
 <!-- comment -->
 Il suffit de créer un `data.i` qui possède un identifiant unique pour chaque point de données.
 
@@ -275,11 +275,11 @@ animint(
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé deux graphiques multi-panneaux avec l'option [addColumn then facet](/ch99#addColumn-then-facet) au lieu de créer quatre graphiques distincts.
+Notez que nous avons utilisé deux graphiques multi-panneaux avec l’option [addColumn then facet](/ch99#addColumn-then-facet) au lieu de créer quatre graphiques distincts.
 <!-- comment -->
-Cela met l'accent sur le fait que certains graphiques/facettes ont un axe `x1` ou `x1.sq` commun.
+Cela met l’accent sur le fait que certains graphiques/facettes ont un axe `x1` ou `x1.sq` commun.
 <!-- comment -->
-Notez que nous avons également masqué la légende des couleurs dans le premier graphique, puisqu'une seule légende suffit.
+Notez que nous avons également masqué la légende des couleurs dans le premier graphique, puisqu’une seule légende suffit.
 
 <!-- paragraph -->
 
@@ -313,7 +313,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Nous commençons par ajuster un SVM linéaire aux données d'entraînement dans l'espace des fonctionnalités au carré, puis nous visualisons les vraies étiquettes `y` de même que les étiquettes prédites `pred.y`.
+Nous commençons par ajuster un SVM linéaire aux données d’entraînement dans l’espace des fonctionnalités au carré, puis nous visualisons les vraies étiquettes `y` de même que les étiquettes prédites `pred.y`.
 
 <!-- paragraph -->
 
@@ -334,7 +334,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre clairement qu'il existe plusieurs points de données d'entrainement mal classifiés.
+Le graphique ci-dessus montre clairement qu’il existe plusieurs points de données d’entrainement mal classifiés.
 <!-- comment -->
 Le graphique ci-dessous permet de visualiser la limite de décision et la marge.
 
@@ -391,13 +391,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre la véritable limite de décision à l'aide d'un `vline` gris.
+Le graphique ci-dessus montre la véritable limite de décision à l’aide d’un `vline` gris.
 <!-- comment -->
 Il utilise également `geom_contour()` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire pointillée, scores prédits -1 et 1).
 <!-- comment -->
 Puisque la limite de décision et la marge sont linéaires dans cet espace, nous pouvons également utiliser `geom_abline()` pour les afficher.
 <!-- comment -->
-Pour ce faire, nous devons effectuer quelques calculs mathématiques et trouver les équations de la pente et de l'ordonnée à l'origine de ces droites (en fonction du biais appris `b(fit)` et du `weight.vec`, ainsi que des paramètres d'échelle `mu` et `sigma`).
+Pour ce faire, nous devons effectuer quelques calculs mathématiques et trouver les équations de la pente et de l’ordonnée à l’origine de ces droites (en fonction du biais appris `b(fit)` et du `weight.vec`, ainsi que des paramètres d’échelle `mu` et `sigma`).
 
 <!-- paragraph -->
 
@@ -453,7 +453,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus confirme que notre calcul de la pente et des ordonnées à l'origine (lignes vertes) est en accord avec les contours (lignes noires).
+Le graphique ci-dessus confirme que notre calcul de la pente et des ordonnées à l’origine (lignes vertes) est en accord avec les contours (lignes noires).
 <!-- comment -->
 Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack).
 
@@ -509,7 +509,7 @@ Les vecteurs de support sont les points pour lesquels les coefficients alpha ne 
 <!-- comment -->
 Les vecteurs de support en noir (pleins) sont sur la marge et les vecteurs de support en gris sont du mauvais côté de la marge (et ont une marge de tolérance non nulle).
 <!-- comment -->
-Le graphique ci-dessous montre le modèle qui a été appris dans l'espace des fonctionnalités d'origine.
+Le graphique ci-dessous montre le modèle qui a été appris dans l’espace des fonctionnalités d’origine.
 
 <!-- paragraph -->
 
@@ -560,7 +560,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-L'objectif de la démonstration ci-dessous est de créer une visualisation affichant l’évolution des variables (frontière de décision, marge, ressorts) en fonction du paramètre de coût.
+L’objectif de la démonstration ci-dessous est de créer une visualisation affichant l’évolution des variables (frontière de décision, marge, ressorts) en fonction du paramètre de coût.
 Le code ci-dessous contient une boucle sur les paramètres de coût.
 Pour chaque itération, nous utilisons le code du section précédent, avec la méthode [Liste de tableau de données](/ch99#list-of-data-tables).
 
@@ -789,9 +789,9 @@ Enfin, le code ci-dessous combine les graphiques dans une visualisation interact
 
 <!-- paragraph -->
 
-Dans la section précédente, nous avons ajusté un noyau linéaire dans l'espace des fonctionnalités au carré, ce qui a entraîné l'apprentissage d'une fonction non linéaire en termes d'espace des fonctionnalités d'origine.
+Dans la section précédente, nous avons ajusté un noyau linéaire dans l’espace des fonctionnalités au carré, ce qui a entraîné l’apprentissage d’une fonction non linéaire en termes d’espace des fonctionnalités d’origine.
 <!-- comment -->
-Dans cette section, nous procédons à l'ajustement direct d'un noyau polynomial non linéaire dans l'espace d'origine.
+Dans cette section, nous procédons à l’ajustement direct d’un noyau polynomial non linéaire dans l’espace d’origine.
 
 <!-- paragraph -->
 
@@ -894,25 +894,25 @@ animint(
 
 Nous avons utilisé des `ggplots` pour visualiser le modèle de séparateur à vaste marge pour la classification binaire.
 <!-- comment -->
-Nous avons utilisé `animint()` et l'interactivité pour montrer comment la limite de décision du SVM varie en fonction des hyperparamètres du modèle.
+Nous avons utilisé `animint()` et l’interactivité pour montrer comment la limite de décision du SVM varie en fonction des hyperparamètres du modèle.
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
-- Utilisez [la mise en page d'un tableau HTML](../ch06/ch06-other#html-table-layout) pour [`viz.linear.svm`](#linear-svm) de manière à ce que les deux graphiques de l'espace des variables apparaissent l'un à côté de l'autre et que le graphique « Choisir la régularisation » apparaisse au-dessus ou en-dessous.
+- Utilisez [la mise en page d’un tableau HTML](../ch06/ch06-other#html-table-layout) pour [`viz.linear.svm`](#linear-svm) de manière à ce que les deux graphiques de l’espace des variables apparaissent l’un à côté de l’autre et que le graphique « Choisir la régularisation » apparaisse au-dessus ou en-dessous.
 <!-- comment -->
 - Utilisez `rbfdot` comme fonction noyau.
 <!-- comment -->
-Calculez l'erreur de sous-entraînement et de validation, puis ajoutez un nouveau panneau au graphique « Choisir hyper-paramètres ».
+Calculez l’erreur de sous-entraînement et de validation, puis ajoutez un nouveau panneau au graphique « Choisir hyper-paramètres ».
 <!-- comment -->
 - Les échelles par défaut utilisent les deux mêmes couleurs pour les légendes `y` et `set`, ce qui peut prêter à confusion.
 <!-- comment -->
-Modifiez les couleurs de l'une des deux légendes pour qu'elles soient différentes.
+Modifiez les couleurs de l’une des deux légendes pour qu’elles soient différentes.
 <!-- comment -->
-- Utilisez les paramètres `color` et `color_off` pour modifier l'apparence de `geom_tile()` selon s'il est sélectionné ou non, comme expliqué dans le [chapitre 6, à la section Préciser le mode d'affichage de l'état de la sélection](/ch06#display-selection-state).
+- Utilisez les paramètres `color` et `color_off` pour modifier l’apparence de `geom_tile()` selon s’il est sélectionné ou non, comme expliqué dans le [chapitre 6, à la section Préciser le mode d’affichage de l’état de la sélection](/ch06#display-selection-state).
 
 <!-- paragraph -->
 

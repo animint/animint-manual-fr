@@ -9,29 +9,29 @@ knitr::opts_chunk$set(fig.path="ch06-figures/")
 
 <!-- paragraph -->
 
-Ce chapitre présente l'ensemble des nouvelles fonctionnalités qu'`animint2` ajoute à la grammaire des graphiques.
+Ce chapitre présente l’ensemble des nouvelles fonctionnalités qu’`animint2` ajoute à la grammaire des graphiques.
 <!-- comment -->
-Après l'avoir lu, vous saurez personnaliser vos graphiques `animint2` en utilisant :
+Après l’avoir lu, vous saurez personnaliser vos graphiques `animint2` en utilisant :
 
 <!-- paragraph -->
 
-- les `aes()` `href`, `tooltip` et `id` pour définir les caractéristiques propres à l'observation;
+- les `aes()` `href`, `tooltip` et `id` pour définir les caractéristiques propres à l’observation ;
 <!-- comment -->
-- les éléments nommés de `clickSelects` et `showSelected` pour spécifier plusieurs variables de sélection simultanément;
+- les éléments nommés de `clickSelects` et `showSelected` pour spécifier plusieurs variables de sélection simultanément ;
 <!-- comment -->
-- l'option `chunk_vars` spécifique au geom;
+- l’option `chunk_vars` spécifique au geom ;
 <!-- comment -->
-- les paramètres de geom `color_off`, `fill_off`, et `alpha_off` pour contrôler l'affichage de l'état de la sélection;
+- les paramètres de geom `color_off`, `fill_off`, et `alpha_off` pour contrôler l’affichage de l’état de la sélection ;
 <!-- comment -->
-- les paramètres de geom `help` et `title`, pour le texte affiché dans la visite guidée;
+- les paramètres de geom `help` et `title`, pour le texte affiché dans la visite guidée ;
 <!-- comment -->
-- les légendes et les options de hauteur/largeur propres au graphique;
+- les légendes et les options de hauteur/largeur propres au graphique ;
 <!-- comment -->
 - les options globales.
 
 <!-- paragraph -->
 
-## Options spécifiques à l'observation (nouveaux `aes()`) {#new-aesthetics}
+## Options spécifiques à l’observation (nouveaux `aes()`) {#new-aesthetics}
 
 <!-- paragraph -->
 
@@ -43,17 +43,17 @@ Cette section explique les nouveaux `aes()` reconnus par `animint2`.
 
 <!-- paragraph -->
 
-Discutons d'abord des nouveaux `aes()` déjà introduits dans les chapitres précédents.
+Discutons d’abord des nouveaux `aes()` déjà introduits dans les chapitres précédents.
 
 <!-- paragraph -->
 
-`aes(key)` a été présenté au [chapitre 3](/ch03#duration-key); il sert à désigner une variable à utiliser pour obtenir des transitions fluides et interprétables.
+`aes(key)` a été présenté au [chapitre 3](/ch03#duration-key) ; il sert à désigner une variable à utiliser pour obtenir des transitions fluides et interprétables.
 
 <!-- paragraph -->
 
 ### Hyperliens utilisant `aes(href)` {#aes-href}
 
-Il est possible d'ajouter un hyperlien avec `aes(href)`.
+Il est possible d’ajouter un hyperlien avec `aes(href)`.
 Par exemple, on peut insérer un lien vers la page Wikipédia de chaque État sur une carte des États-Unis.
 On commence par charger les données pour tracer les frontières des États.
 
@@ -63,9 +63,9 @@ if(!requireNamespace('maps'))install.packages('maps')
 USpolygons <- map_data("state")
 ```
 
-Notez, dans le code ci-dessus, qu'il faut installer le package `maps` pour obtenir les données.
+Notez, dans le code ci-dessus, qu’il faut installer le package `maps` pour obtenir les données.
 On utilise ensuite le code pour tracer la carte.
-L'utilisation se `geom_polygon()` avec `aes(href)` créera des hyperliens vers le page Wikipédia de chaque État.
+L’utilisation se `geom_polygon()` avec `aes(href)` créera des hyperliens vers le page Wikipédia de chaque État.
 
 <!-- paragraph -->
 
@@ -84,7 +84,7 @@ animint(
 
 Essayez de cliquer sur un État dans la visualisation de données ci-dessus.
 <!-- comment -->
-Vous devriez voir la page Wikipédia correspondante s'ouvrir dans un nouvel onglet.
+Vous devriez voir la page Wikipédia correspondante s’ouvrir dans un nouvel onglet.
 
 <!-- paragraph -->
 
@@ -92,11 +92,11 @@ Vous devriez voir la page Wikipédia correspondante s'ouvrir dans un nouvel ongl
 
 <!-- paragraph -->
 
-Les infobulles sont des petites fenêtres d'information textuelle qui apparaissent lorsque vous survolez un élément avec le curseur.
+Les infobulles sont des petites fenêtres d’information textuelle qui apparaissent lorsque vous survolez un élément avec le curseur.
 <!-- comment -->
 Dans `animint()`, vous pouvez utiliser `aes(tooltip)` pour définir le message à afficher pour chaque observation.
 <!-- comment -->
-Par exemple, nous l'utilisons pour afficher la population et le nom du pays dans le nuage de points des données de la Banque mondiale ci-dessous.
+Par exemple, nous l’utilisons pour afficher la population et le nom du pays dans le nuage de points des données de la Banque mondiale ci-dessous.
 
 <!-- paragraph -->
 
@@ -114,15 +114,15 @@ animint(
 
 <!-- paragraph -->
 
-Placez le curseur sur l'un des points.
+Placez le curseur sur l’un des points.
 <!-- comment -->
 Vous devriez voir apparaître une petite boîte contenant le nom du pays et la population pour ce point.
 
 <!-- paragraph -->
 
-Notez qu'une infobulle de forme « valeur variable » est définie par défaut pour chaque geom avec `clickSelects`.
+Notez qu’une infobulle de forme « valeur variable » est définie par défaut pour chaque geom avec `clickSelects`.
 <!-- comment -->
-Par exemple, un geom avec `clickSelects="année"` affiche l'infobulle par défaut « année 1984 » pour une observation correspondant à cette période.
+Par exemple, un geom avec `clickSelects="année"` affiche l’infobulle par défaut « année 1984 » pour une observation correspondant à cette période.
 <!-- comment -->
 Vous pouvez modifier cette valeur par défaut en spécifiant explicitement `aes(tooltip)`.
 
@@ -149,9 +149,9 @@ animint(
 
 <!-- paragraph -->
 
-Notez que pour qu'un identifiant soit bien défini, il ne doit pas contenir d'espaces; nous utilisons donc `gsub` pour convertir les espaces en tirets bas (underscores).
+Notez que pour qu’un identifiant soit bien défini, il ne doit pas contenir d’espaces ; nous utilisons donc `gsub` pour convertir les espaces en tirets bas (underscores).
 <!-- comment -->
-Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d'un polygone par État/région, et chaque identifiant doit être unique sur une page web.
+Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d’un polygone par État/région, et chaque identifiant doit être unique sur une page web.
 <!-- comment -->
 Les développeurs d'`animint2` utilisent cette fonctionnalité pour [tester le code de l'afficheur JavaScript de l'animint](https://github.com/tdhock/animint/wiki/Testing) .
 
@@ -161,7 +161,7 @@ Les développeurs d'`animint2` utilisent cette fonctionnalité pour [tester le c
 
 <!-- paragraph -->
 
-Le [chapitre 3](/ch03#selecting-with-menus) introduit `showSelected` pour désigner un geom qui n'affiche que le sous-ensemble sélectionné de ses données.
+Le [chapitre 3](/ch03#selecting-with-menus) introduit `showSelected` pour désigner un geom qui n’affiche que le sous-ensemble sélectionné de ses données.
 
 <!-- paragraph -->
 
@@ -175,13 +175,13 @@ Par exemple, `showSelected=c("année", "pays")` signifie que deux variables de s
 <!-- comment -->
 Cependant, cette méthode est peu pratique si vous avez de nombreux sélecteurs dans votre visualisation des données.
 <!-- comment -->
-Considérons par exemple le cas théorique suivant (le code présenté dans cette section n'est pas directement exécutable).
+Considérons par exemple le cas théorique suivant (le code présenté dans cette section n’est pas directement exécutable).
 <!-- comment -->
 Supposons que vous souhaitez utiliser 20 noms de variables de sélecteurs différents, `selector1value`...
 <!-- comment -->
 `selector20value`.
 <!-- comment -->
-La façon habituelle de définir votre visualisation de données serait la suivante :
+La façon habituelle de définir votre visualisation de données serait la suivante :
 
 <!-- paragraph -->
 
@@ -197,9 +197,9 @@ geom_point(clickSelects="selector20value", data=data20)
 
 <!-- paragraph -->
 
-Cependant, c'est un maauvaise méthode car elle contrevient au principe DRY (Don't Repeat Yourself).
+Cependant, c’est un maauvaise méthode car elle contrevient au principe DRY (Don’t Repeat Yourself).
 <!-- comment -->
-Une autre approche consiste à utiliser une boucle `for`:
+Une autre approche consiste à utiliser une boucle `for` :
 
 <!-- paragraph -->
 
@@ -215,13 +215,13 @@ vis$points <- vis$points +
 
 <!-- paragraph -->
 
-Cette approche est elle aussi inadéquate: elle ralentit la construction de `vis`, et la visualisation compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point()`.
+Cette approche est elle aussi inadéquate : elle ralentit la construction de `vis`, et la visualisation compilée prend potentiellement beaucoup d’espace disque puisqu’il y a au moins un fichier TSV créé pour chaque `geom_point()`.
 <!-- comment -->
-La méthode à privilégier est d'ajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
+La méthode à privilégier est d’ajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
 <!-- comment -->
 Les noms doivent être utilisés pour indiquer la colonne qui contient le nom de la variable du sélecteur.
 <!-- comment -->
-Par exemple :
+Par exemple :
 
 <!-- paragraph -->
 
@@ -236,9 +236,9 @@ vis <- list(
 
 <!-- paragraph -->
 
-Le compilateur d'`animint2` parcourt le data.frame `all.data` et crée des sélecteurs pour chacune des valeurs distinctes de `all.data$selector.name`.
+Le compilateur d’`animint2` parcourt le data.frame `all.data` et crée des sélecteurs pour chacune des valeurs distinctes de `all.data$selector.name`.
 <!-- comment -->
-Lorsqu'on clique sur l'un des points, le sélecteur correspondant est mis à jour avec la valeur indiquée par `all.data$selector.value`.
+Lorsqu’on clique sur l’un des points, le sélecteur correspondant est mis à jour avec la valeur indiquée par `all.data$selector.value`.
 
 <!-- paragraph -->
 
@@ -246,9 +246,9 @@ De la même manière, vous pouvez ajouter des noms au vecteur `showSelected`, au
 
 <!-- paragraph -->
 
-Cette fonctionnalité évite non seulement les répétitions dans la définition de la visualisation des données, mais elle augmente aussi l'efficacité sur le plan computationnel.
+Cette fonctionnalité évite non seulement les répétitions dans la définition de la visualisation des données, mais elle augmente aussi l’efficacité sur le plan computationnel.
 <!-- comment -->
-Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace disque, voir le [chapitre 14](/ch14) .
+Pour un exemple détaillé avec des mesures de temps d’exécution et d’espace disque, voir le [chapitre 14](/ch14) .
 
 <!-- paragraph -->
 
@@ -256,9 +256,9 @@ Pour un exemple détaillé avec des mesures de temps d'exécution et d'espace di
 
 <!-- paragraph -->
 
-Dans `animint2`, il existe plusieurs options de personnalisation des geoms. Par exemple, `chunk_vars` permet de spécifier la division des ensembles de données pour leur stockage sur disque. Quant aux paramètres `*_off`, ils sont utilisés pour définir l'affichage d'un geom `clickSelects` lorsqu'il n'est pas sélectionné.
+Dans `animint2`, il existe plusieurs options de personnalisation des geoms. Par exemple, `chunk_vars` permet de spécifier la division des ensembles de données pour leur stockage sur disque. Quant aux paramètres `*_off`, ils sont utilisés pour définir l’affichage d’un geom `clickSelects` lorsqu’il n’est pas sélectionné.
 <!-- comment -->
-De plus, les paramètres `help` et `title` permettent d'ajouter des informations à la visite guidée.
+De plus, les paramètres `help` et `title` permettent d’ajouter des informations à la visite guidée.
 
 <!-- paragraph -->
 
@@ -266,43 +266,43 @@ De plus, les paramètres `help` et `title` permettent d'ajouter des informations
 
 <!-- paragraph -->
 
-Le paramètre `chunk_vars` définit les variables de sélection qui sont utilisées pour diviser l'ensemble de données en morceaux distincts (fichiers TSV) à télécharger.
+Le paramètre `chunk_vars` définit les variables de sélection qui sont utilisées pour diviser l’ensemble de données en morceaux distincts (fichiers TSV) à télécharger.
 <!-- comment -->
 Un fichier TSV est créé pour chaque combinaison de valeurs des variables `chunk_vars`.
 <!-- comment -->
-Plus le nombre de variables de sélection spécifiées dans `chunk_vars` est élevé, plus l'ensemble de données sera divisé en fichiers TSV distincts, chacun de taille plus petite.
+Plus le nombre de variables de sélection spécifiées dans `chunk_vars` est élevé, plus l’ensemble de données sera divisé en fichiers TSV distincts, chacun de taille plus petite.
 
 <!-- paragraph -->
 
-L'option `chunk_vars` doit être spécifiée comme argument d'une fonction comme `geom_point()`, et sa valeur doit être un sous-ensemble des variables de sélection.
+L’option `chunk_vars` doit être spécifiée comme argument d’une fonction comme `geom_point()`, et sa valeur doit être un sous-ensemble des variables de sélection.
 <!-- comment -->
 Lorsque `chunk_vars=character(0)`, soit un vecteur de caractères de longueur nulle, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
-À l'autre extrême, lorsque `chunk_vars` contient toutes les variables de `showSelected`, un fichier TSV est créé pour chaque combinaison des valeurs de ces variables (beaucoup de fichiers TSV, chacun de petite taille).
+À l’autre extrême, lorsque `chunk_vars` contient toutes les variables de `showSelected`, un fichier TSV est créé pour chaque combinaison des valeurs de ces variables (beaucoup de fichiers TSV, chacun de petite taille).
 
 <!-- paragraph -->
 
-En général, le compilateur `animint2` choisit une valeur par défaut raisonnable pour `chunk_vars`, mais vous pouvez la spécifier si la visualisation se charge lentement ou occupe trop d'espace sur le disque.
+En général, le compilateur `animint2` choisit une valeur par défaut raisonnable pour `chunk_vars`, mais vous pouvez la spécifier si la visualisation se charge lentement ou occupe trop d’espace sur le disque.
 <!-- comment -->
 Si la visualisation se charge lentement, vous devriez ajouter des variables de sélection à `chunk_vars` pour réduire la taille du premier fichier TSV à télécharger.
 <!-- comment -->
-Si la visualisation occupe trop d'espace, vous pouvez retirer les variables de sélection de `chunk_vars` pour réduire le nombre de fichiers TSV.
+Si la visualisation occupe trop d’espace, vous pouvez retirer les variables de sélection de `chunk_vars` pour réduire le nombre de fichiers TSV.
 <!-- comment -->
-De nombreux petits fichiers TSV peuvent occuper plus d'espace disque qu'un seul fichier TSV, car certains systèmes de fichiers stockent une quantité constante de métadonnées pour chaque fichier.
+De nombreux petits fichiers TSV peuvent occuper plus d’espace disque qu’un seul fichier TSV, car certains systèmes de fichiers stockent une quantité constante de métadonnées pour chaque fichier.
 
 <!-- paragraph -->
 
-Pour illustrer l'utilisation de `chunk_vars`, considérons la visualisation suivante de l'ensemble de données `breakpoints`:
+Pour illustrer l’utilisation de `chunk_vars`, considérons la visualisation suivante de l’ensemble de données `breakpoints` :
 
 <!-- paragraph -->
 
-![Visualisation des données 'breakpoints'](ch06-viz-breakpoints.png)
+![Visualisation des données ’breakpoints’](ch06-viz-breakpoints.png)
 
 <!-- paragraph -->
 
-L'esquisse ci-dessus est composée de deux graphiques.
+L’esquisse ci-dessus est composée de deux graphiques.
 <!-- comment -->
-Nous commençons par créer le graphique des courbes d'erreurs situé à gauche.
+Nous commençons par créer le graphique des courbes d’erreurs situé à gauche.
 
 <!-- paragraph -->
 
@@ -372,7 +372,7 @@ signalPlot+facet_grid(segments ~ bases.per.probe)
 
 <!-- paragraph -->
 
-Le graphique non interactif ci-dessus comporte 80 `facets`, un pour chaque combinaison des deux variables `showSelected`, c'est-à-dire `bases.per.probe` et `segments`.
+Le graphique non interactif ci-dessus comporte 80 `facets`, un pour chaque combinaison des deux variables `showSelected`, c’est-à-dire `bases.per.probe` et `segments`.
 <!-- comment -->
 Nous présentons ci-dessous une version interactive dans laquelle un seul de ces `facets` sera affiché.
 
@@ -393,15 +393,15 @@ Nous présentons ci-dessous une version interactive dans laquelle un seul de ces
 
 <!-- paragraph -->
 
-Cliquez sur le bouton « Show download status table » , vous devriez voir des décomptes de chunks (fichiers TSV).
+Cliquez sur le bouton « Show download status table » , vous devriez voir des décomptes de chunks (fichiers TSV).
 <!-- comment -->
-Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline()` dans le code R ci-dessus.
+Notez que `geom6_vline_signal` n’a qu’un seul morceau, puisque `chunk_vars=character()` est spécifié pour l’élément `geom_vline()` dans le code R ci-dessus.
 <!-- comment -->
-Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l'apparence de la visualisation de données devrait rester la même.
+Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l’apparence de la visualisation de données devrait rester la même.
 
 <!-- paragraph -->
 
-Ci-dessous, nous utilisons le programme en ligne de commande `du` pour déterminer l'utilisation du disque de la visualisation pour différents choix de `chunk_vars`.
+Ci-dessous, nous utilisons le programme en ligne de commande `du` pour déterminer l’utilisation du disque de la visualisation pour différents choix de `chunk_vars`.
 
 <!-- paragraph -->
 
@@ -440,42 +440,42 @@ sizes.list <- lapply(chunk_vars_list, tsvSizes)
 
 Le tableau ci-dessus indique le nombre de kilo-octets pour la visualisation des données, ainsi que le nombre de fichiers TSV pour `geom6_vline_signal` et les autres geoms.
 <!-- comment -->
-Notez comment le choix de `chunk_vars` affecte le nombre de fichiers TSV et l'utilisation de l'espace disque.
+Notez comment le choix de `chunk_vars` affecte le nombre de fichiers TSV et l’utilisation de l’espace disque.
 <!-- comment -->
-Puisque `chunk_vars` n'a été spécifié que pour les `geom6_vline_signal`, le nombre de fichiers TSV pour les autres geoms ne change pas.
+Puisque `chunk_vars` n’a été spécifié que pour les `geom6_vline_signal`, le nombre de fichiers TSV pour les autres geoms ne change pas.
 <!-- comment -->
 Lorsque `segments` et `bases.per.probe` sont tous les deux spécifiés pour `chunk_vars`, il y a 76 fichiers TSV pour `geom6_vline_signal`, et la visualisation des données occupe `r sizes["both", "kb"]` kilo-octets.
 <!-- comment -->
-En revanche, `chunk_vars=character()` ne produit qu'un seul fichier TSV pour `geom6_vline_signal`, et la visualisation des données occupe `r sizes["neither", "kb"]` kilo-octets.
+En revanche, `chunk_vars=character()` ne produit qu’un seul fichier TSV pour `geom6_vline_signal`, et la visualisation des données occupe `r sizes["neither", "kb"]` kilo-octets.
 
 <!-- paragraph -->
 
-En conclusion, l'option `chunk_vars` spécifique au geom  détermine le nombre de fichiers TSV créés pour chaque geom.
+En conclusion, l’option `chunk_vars` spécifique au geom  détermine le nombre de fichiers TSV créés pour chaque geom.
 <!-- comment -->
-Lors du choix de la valeur de `chunk_vars`, vous devez tenir compte à la fois de l'utilisation du disque et du temps de chargement.
+Lors du choix de la valeur de `chunk_vars`, vous devez tenir compte à la fois de l’utilisation du disque et du temps de chargement.
 <!-- comment -->
-Un petit nombre de gros fichiers occupe moins d'espace disque, mais leur téléchargement est plus lent que celui de nombreux petits fichiers.
+Un petit nombre de gros fichiers occupe moins d’espace disque, mais leur téléchargement est plus lent que celui de nombreux petits fichiers.
 
 <!-- paragraph -->
 
-### Préciser le mode d'affichage de l'état de la sélection {#display-selection-state}
+### Préciser le mode d’affichage de l’état de la sélection {#display-selection-state}
 
 <!-- paragraph -->
 
-`Animint2` a des valeurs par défaut raisonnables pour l'affichage de l'état de sélection :
+`Animint2` a des valeurs par défaut raisonnables pour l’affichage de l’état de sélection :
 <!-- comment -->
 
 <!-- paragraph -->
 
-- lorsqu'il y a un `rect` ou un `tile` avec `clickSelects`, le noir est utilisé pour `color/border` afin de montrer les éléments qui sont sélectionnés, et le transparent pour les éléments qui ne sont pas sélectionnés.
+- lorsqu’il y a un `rect` ou un `tile` avec `clickSelects`, le noir est utilisé pour `color/border` afin de montrer les éléments qui sont sélectionnés, et le transparent pour les éléments qui ne sont pas sélectionnés.
 <!-- comment -->
 - pour tout autre geom avec `clickSelects`, nous utilisons une opacité complète `alpha` pour afficher les éléments sélectionnés, et une opacité réduite `alpha-0.5` pour les éléments non sélectionnés.
 
 <!-- paragraph -->
 
-Les valeurs par défaut expliquées plus haut sont illustrées dans le premier graphique ci-dessous :
+Les valeurs par défaut expliquées plus haut sont illustrées dans le premier graphique ci-dessous :
 <!-- comment -->
-Ces valeurs par défaut peuvent être personnalisées en utilisant les paramètres du geom `alpha_off`, `fill_off` et `color_off` comme dans le code ci-dessous :
+Ces valeurs par défaut peuvent être personnalisées en utilisant les paramètres du geom `alpha_off`, `fill_off` et `color_off` comme dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -527,9 +527,9 @@ animint(
 
 <!-- paragraph -->
 
-Notez que lorsque vous utilisez l'une de ces propriétés visuelles dans le mapping `aes`, elle ne doit pas être spécifiée en tant que paramètre geom.
+Notez que lorsque vous utilisez l’une de ces propriétés visuelles dans le mapping `aes`, elle ne doit pas être spécifiée en tant que paramètre geom.
 <!-- comment -->
-Par exemple, dans le tile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill` et `fill_off` ne doivent pas être spécifiés comme paramètres pour ce geom (afin qu'il soit clair que `fill` sert à afficher les valeurs des données, et non l'état de sélection).
+Par exemple, dans le tile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill` et `fill_off` ne doivent pas être spécifiés comme paramètres pour ce geom (afin qu’il soit clair que `fill` sert à afficher les valeurs des données, et non l’état de sélection).
 
 <!-- paragraph -->
 
@@ -539,7 +539,7 @@ Par exemple, dans le tile ci-dessus, nous avons utilisé `aes(fill)`, donc `fill
 
 Depuis janvier 2025, `animint2` prend en charge les visites guidées qui affichent des informations sur les interactions possibles avec chaque geom.
 <!-- comment -->
-Pour personnaliser l'affichage pour chaque geom, vous pouvez spécifier les paramètres `help` et `title`, comme dans le code ci-dessous :
+Pour personnaliser l’affichage pour chaque geom, vous pouvez spécifier les paramètres `help` et `title`, comme dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -568,7 +568,7 @@ animint(
 
 Dans le code ci-dessus, nous spécifions `help` pour le `geom_point()`, qui contrôle le sous-texte affiché pour ce geom une fois cliqué le bouton « Start Tour »  au bas de la visualisation.
 <!-- comment -->
-Après avoir cliqué sur le bouton « Next », Dans le code ci-dessus, nous spécifions `help` pour le `geom_point()`, nous pouvons voir le `title` spécifié dans le code s'afficher en haut de la fenêtre de visite, pour le `geom_text()`.
+Après avoir cliqué sur le bouton « Next », Dans le code ci-dessus, nous spécifions `help` pour le `geom_point()`, nous pouvons voir le `title` spécifié dans le code s’afficher en haut de la fenêtre de visite, pour le `geom_text()`.
 <!-- comment -->
 Ce mécanisme peut être utilisé pour fournir des informations supplémentaires aux utilisateurs de la visualisation pour faciliter leur compréhension de l’affichage et des interactions possibles.
 <!-- paragraph -->
@@ -577,7 +577,7 @@ Ce mécanisme peut être utilisé pour fournir des informations supplémentaires
 
 <!-- paragraph -->
 
-Cette section traite des options propres au ggplot d'une visualisation de données.
+Cette section traite des options propres au ggplot d’une visualisation de données.
 <!-- comment -->
 La fonction `theme_animint` est utilisée pour attacher des options `animint2` aux objets ggplot.
 
@@ -587,9 +587,9 @@ La fonction `theme_animint` est utilisée pour attacher des options `animint2` a
 
 <!-- paragraph -->
 
-Les options `width` et `height` permettent de spécifier les dimensions (en pixels) d'un ggplot affiché par `animint()`.
+Les options `width` et `height` permettent de spécifier les dimensions (en pixels) d’un ggplot affiché par `animint()`.
 <!-- comment -->
-Par exemple, considérons cette version remaniée du graphique des États-Unis :
+Par exemple, considérons cette version remaniée du graphique des États-Unis :
 
 <!-- paragraph -->
 
@@ -615,13 +615,13 @@ animint(
 
 Notez que le graphique ci-dessus a été généré avec une largeur de 750 pixels et une hauteur de 500 pixels, en raison des options `theme_animint`.
 <!-- comment -->
-Si l'une de ces options n'est pas définie pour un ggplot, `animint()` utilise une valeur par défaut de 400 pixels.
+Si l’une de ces options n’est pas définie pour un ggplot, `animint()` utilise une valeur par défaut de 400 pixels.
 
 <!-- paragraph -->
 
 Notez également que `theme` a été utilisé pour spécifier plusieurs éléments vides.
 <!-- comment -->
-Cela a pour effet de supprimer les axes et l'arrière-plan, ce qui est généralement utile pour générer des cartes.
+Cela a pour effet de supprimer les axes et l’arrière-plan, ce qui est généralement utile pour générer des cartes.
 
 <!-- paragraph -->
 
@@ -629,9 +629,9 @@ Cela a pour effet de supprimer les axes et l'arrière-plan, ce qui est général
 
 <!-- paragraph -->
 
-L'échelle `scale_size_animint` doit être utilisée dans tous les ggplots où vous précisez `aes(size)`.
+L’échelle `scale_size_animint` doit être utilisée dans tous les ggplots où vous précisez `aes(size)`.
 <!-- comment -->
-Pour comprendre pourquoi, considérons les exemples suivants :
+Pour comprendre pourquoi, considérons les exemples suivants :
 
 <!-- paragraph -->
 
@@ -656,17 +656,17 @@ nuage1975 <- ggplot()+
 
 <!-- paragraph -->
 
-Le premier ggplot ci-dessus n'a pas d'échelle définie, il utilise donc l'échelle par défaut de ggplot2, ce qui pose deux problèmes.
+Le premier ggplot ci-dessus n’a pas d’échelle définie, il utilise donc l’échelle par défaut de ggplot2, ce qui pose deux problèmes.
 <!-- comment -->
-Le premier est que tous les pays semblents avoir peu près la même taille, à l'exception des deux plus grands.
+Le premier est que tous les pays semblents avoir peu près la même taille, à l’exception des deux plus grands.
 <!-- comment -->
 Ce problème peut être résolu en ajoutant simplement `scale_size_animint()` au ggplot pour obtenir le deuxième graphique ci-dessus.
 <!-- comment -->
-Cependant, un second problème apparaît : les entrées de la légende ne montrent pas toute l'étendue des données.
+Cependant, un second problème apparaît : les entrées de la légende ne montrent pas toute l’étendue des données.
 <!-- comment -->
-On résout ce problème dans le troisième graphique ci-dessus, en spécifiant manuellement l'option `breaks` à utiliser pour les entrées de légende.
+On résout ce problème dans le troisième graphique ci-dessus, en spécifiant manuellement l’option `breaks` à utiliser pour les entrées de légende.
 <!-- comment -->
-Notez que l'argument `pixel.range` peut également être utilisé pour définir le rayon du plus grand et du plus petit cercle.
+Notez que l’argument `pixel.range` peut également être utilisé pour définir le rayon du plus grand et du plus petit cercle.
 
 <!-- paragraph -->
 
@@ -676,7 +676,7 @@ Notez que l'argument `pixel.range` peut également être utilisé pour définir 
 
 La syntaxe de définition des axes et de la taille du texte de la légende(en pixels) est pratiquement la même que celle de `ggplot2`.
 <!-- comment -->
-À l'intérieur de `theme`, vous pouvez simplement utiliser des nombres pour modifier la taille de la police, ou utiliser `rel()` pour définir la taille relative.
+À l’intérieur de `theme`, vous pouvez simplement utiliser des nombres pour modifier la taille de la police, ou utiliser `rel()` pour définir la taille relative.
 
 <!-- paragraph -->
 
@@ -703,7 +703,7 @@ nuage1975 <- ggplot()+
 
 <!-- paragraph -->
 
-Cela vous permet de modifier la taille de la police tout en ajustant la taille du graphique, afin d'obtenir un rendu plus cohérent.
+Cela vous permet de modifier la taille de la police tout en ajustant la taille du graphique, afin d’obtenir un rendu plus cohérent.
 
 <!-- paragraph -->
 
@@ -723,29 +723,29 @@ Les options globales de la visualisation des données regroupent tous les élém
 
 <!-- paragraph -->
 
-[Chapitre 3](/ch03#duration-key) a introduit l'option `duration` qui permet de spécifier la durée des transitions en douceur.
+[Chapitre 3](/ch03#duration-key) a introduit l’option `duration` qui permet de spécifier la durée des transitions en douceur.
 
 <!-- paragraph -->
 
-[Chapitre 3](/ch03#animation-time) a introduit l'option `time` qui permet de spécifier une variable de sélection qui est automatiquement mise à jour (animation).
+[Chapitre 3](/ch03#animation-time) a introduit l’option `time` qui permet de spécifier une variable de sélection qui est automatiquement mise à jour (animation).
 
 <!-- paragraph -->
 
-[Chapitre 4](/ch04#first-option) a introduit l'option `first` qui permet de spécifier la sélection lorsque la visualisation des données est générée pour la première fois.
+[Chapitre 4](/ch04#first-option) a introduit l’option `first` qui permet de spécifier la sélection lorsque la visualisation des données est générée pour la première fois.
 
 <!-- paragraph -->
 
-[Chapitre 4](/ch04#selector-types-option) a introduit l'option `selector.types` qui permet de spécifier plusieurs variables de sélection.
+[Chapitre 4](/ch04#selector-types-option) a introduit l’option `selector.types` qui permet de spécifier plusieurs variables de sélection.
 
 <!-- paragraph -->
 
-### Titre de la page web avec l'option `title` {#title-option}
+### Titre de la page web avec l’option `title` {#title-option}
 
 <!-- paragraph -->
 
-L'option `title` doit être une chaîne de caractères définissant l'élément `\<title>` de la page web.
+L’option `title` doit être une chaîne de caractères définissant l’élément `\<title>` de la page web.
 <!-- comment -->
-Il n'est pas utile d'utiliser l'option `title` dans un document Rmd tel que celui-ci.
+Il n’est pas utile d’utiliser l’option `title` dans un document Rmd tel que celui-ci.
 <!-- comment -->
 Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-dessous.
 
@@ -761,21 +761,21 @@ animint2dir(vis.title, "ch06-viz-title")
 
 Notez que `viz.scale.size` possède déjà trois ggplots, chacun avec son `ggtitle`.
 <!-- comment -->
-Ajouter l'option globale `title` a pour effet de définir un titre pour [la page web](ch06-viz-title/index.html) .
+Ajouter l’option globale `title` a pour effet de définir un titre pour [la page web](ch06-viz-title/index.html) .
 
 <!-- paragraph -->
 
 Le chapitre 5 a introduit la fonction [animint2pages](/ch05#pages) qui permet de publier un `animint2` sur GitHub Pages.
 <!-- comment -->
-Il faut que l'`animint2` définisse l'option `title` car ces métadonnées sont nécessaires à l'organisation de l'`animint2` dans une [galerie](/ch05#gallery) .
+Il faut que l’`animint2` définisse l’option `title` car ces métadonnées sont nécessaires à l’organisation de l’`animint2` dans une [galerie](/ch05#gallery) .
 
 <!-- paragraph -->
 
-### Lier le code R avec l'option source {#source-option}
+### Lier le code R avec l’option source {#source-option}
 
 <!-- paragraph -->
 
-L'option `source` doit être une chaîne de caractères fournissant un lien vers le code source R qui a été utilisé pour créer l'`animint2`.
+L’option `source` doit être une chaîne de caractères fournissant un lien vers le code source R qui a été utilisé pour créer l’`animint2`.
 
 <!-- paragraph -->
 
@@ -798,7 +798,7 @@ Notez ci-dessus que le lien source figure au bas de la visualisation des donnée
 
 Le chapitre 5 a introduit la fonction [animint2pages](/ch05#pages) qui permet de publier un `animint2` sur GitHub Pages.
 <!-- comment -->
-Il faut que l'`animint2` définisse l'option `source` car ces métadonnées sont nécessaires à l'organisation de l'`animint2` dans une [galerie](/ch05#gallery) .
+Il faut que l’`animint2` définisse l’option `source` car ces métadonnées sont nécessaires à l’organisation de l’`animint2` dans une [galerie](/ch05#gallery) .
 
 <!-- paragraph -->
 
@@ -806,7 +806,7 @@ Il faut que l'`animint2` définisse l'option `source` car ces métadonnées sont
 
 <!-- paragraph -->
 
-L'option `video` doit être une chaîne de caractères fournissant un lien vers une vidéo qui montre des interactions possibles avec l'`animint2`.
+L’option `video` doit être une chaîne de caractères fournissant un lien vers une vidéo qui montre des interactions possibles avec l’`animint2`.
 <!-- comment -->
 Ce mécanisme peut être utilisé pour faciliter la compréhension de ce qui est affiché et des interactions disponibles.
 
@@ -829,23 +829,23 @@ Dans la visualisation de données ci-dessus, remarquez le lien `video` qui appar
 <!-- comment -->
 En cliquant sur ce lien, on accède à une vidéo expliquant une visualisation de données plus complexe basée sur les données de la Banque mondiale.
 <!-- comment -->
-Vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un lien vers celle-ci à l'aide de ce mécanisme, afin que vos utilisateurs puissent comprendre plus facilement ce qui est affiché et quelles interactions sont possibles.
+Vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un lien vers celle-ci à l’aide de ce mécanisme, afin que vos utilisateurs puissent comprendre plus facilement ce qui est affiché et quelles interactions sont possibles.
 
 <!-- paragraph -->
 
-### Afficher ou masquer les menus de sélection avec l'option `selectize` {#selectize-option}
+### Afficher ou masquer les menus de sélection avec l’option `selectize` {#selectize-option}
 
 <!-- paragraph -->
 
-L'option `selectize` doit être une liste nommée de valeurs booléennes.
+L’option `selectize` doit être une liste nommée de valeurs booléennes.
 <!-- comment -->
 Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/).
 <!-- comment -->
-Par défaut, `animint2` va générer un menu de sélection pour chaque variable de sélection, à deux exceptions près :
+Par défaut, `animint2` va générer un menu de sélection pour chaque variable de sélection, à deux exceptions près :
 
 <!-- paragraph -->
 
-- les variables de sélection basées sur les données qui sont définies à l'aide de variables [`clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors);
+- les variables de sélection basées sur les données qui sont définies à l’aide de variables [`clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) ;
 <!-- comment -->
 - les variables de sélection qui ont beaucoup de valeurs (elles sont lentes à générer).
 
@@ -861,25 +861,25 @@ Pour voir un exemple du fonctionnement de l'option `selectize`, veuillez consult
 
 <!-- paragraph -->
 
-Ce chapitre a expliqué plusieurs options de personnalisation des animints au niveau de l'observation, du geom, du graphique et au niveau global.
+Ce chapitre a expliqué plusieurs options de personnalisation des animints au niveau de l’observation, du geom, du graphique et au niveau global.
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
-- Créez d'autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point()` et `geom_segment()`.
+- Créez d’autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point()` et `geom_segment()`.
 <!-- comment -->
-Comment le choix des `chunk_vars` affecte-t-il l'apparence de la visualisation?
+Comment le choix des `chunk_vars` affecte-t-il l’apparence de la visualisation ?
 <!-- comment -->
-L'espace disque?
+L’espace disque ?
 <!-- comment -->
-Le temps de chargement?
+Le temps de chargement ?
 
 <!-- paragraph -->
 
-Le [chapitre 7](/ch07) explique les limites de l'implémentation actuelle de `animint2`.
+Le [chapitre 7](/ch07) explique les limites de l’implémentation actuelle de `animint2`.
 
 <!-- paragraph -->
 
