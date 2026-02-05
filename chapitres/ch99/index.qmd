@@ -16,7 +16,7 @@ Cette annexe décrit plusieurs techniques de programmation R qui sont utiles pou
 
 <!-- paragraph -->
 
-Pour mettre l'accent sur les données graphiques dans les ggplots à facettes, éliminez l'espace entre les facettes à l'aide de l'idiome suivant.
+Pour mettre l’accent sur les données graphiques dans les ggplots à facettes, éliminez l’espace entre les facettes à l’aide du code suivant.
 
 <!-- paragraph -->
 
@@ -30,11 +30,11 @@ ggplot()+
 
 <!-- paragraph -->
 
-Cet idiome se compose de trois parties :
+Ce code comprend trois parties :
 
 <!-- paragraph -->
 
-- `panel.margin=0` élimine l'espace entre les panneaux.
+- `panel.margin=0` élimine l’espace entre les panneaux.
 <!-- comment -->
 - `theme_bw` active un thème noir et blanc (bordures de panneaux noires et arrière-plans de panneaux blancs).
 <!-- comment -->
@@ -44,11 +44,11 @@ Ceci est nécessaire pour voir les limites entre les panneaux, puisque la foncti
 
 <!-- paragraph -->
 
-Notez que nous utilisons l'unité de grille `lines` qui correspond à la hauteur d'une ligne de texte à la taille par défaut.
+Notez que nous utilisons l’unité de grille `lines` qui correspond à la hauteur d’une ligne de texte à la taille par défaut.
 <!-- comment -->
-C'est la seule unité de grille qu'animint sait traduire.
+C’est la seule unité de grille qu’animint sait traduire.
 <!-- comment -->
-Il n'est pas recommandé d'utiliser d'autres unités telles que `cm`.
+Il n’est pas recommandé d’utiliser d’autres unités telles que `cm`.
 
 <!-- paragraph -->
 
@@ -56,7 +56,7 @@ Il n'est pas recommandé d'utiliser d'autres unités telles que `cm`.
 
 <!-- paragraph -->
 
-Le tableau de données est très utile pour créer des visualisations de données interactives d'une complexité arbitraire.
+Le tableau de données est très utile pour créer des visualisations de données interactives d’une complexité arbitraire.
 <!-- comment -->
 La forme générale ressemble à
 
@@ -81,29 +81,29 @@ inner.data <- do.call(rbind, inner.data.list)
 
 <!-- paragraph -->
 
-Quelques commentaires :
+Quelques commentaires :
 
 <!-- paragraph -->
 
-- La première partie de l'idiome consiste à initialiser des listes vides.
+- La première partie consiste à initialiser des listes vides.
 <!-- comment -->
 Ici, il y en a deux, `outer.data.list` et `inner.data.list`.
 <!-- comment -->
 Toutefois, il peut y en avoir autant que nécessaire.
 <!-- comment -->
-- La deuxième partie de l'idiome est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
+- La deuxième partie est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
 <!-- comment -->
 - Des fonctions comme `computeOuter` et `computeInner` peuvent être utilisées, ou vous pouvez simplement effectuer les calculs directement dans la boucle for.
 <!-- comment -->
 - Pour que votre code soit aussi rapide que possible, utilisez les opérations matrice-vecteur ou vecteur-scalaire dans la boucle for la plus interne.
 <!-- comment -->
-Si vous n'effectuez que des opérations scalaires-scalaires dans votre boucle for interne, vous pouvez certainement améliorer les performances de votre code en supprimant cette boucle for et en réécrivant le calcul en termes d'opérations vectorielles-scalaires.
+Si vous n’effectuez que des opérations scalaires-scalaires dans votre boucle for interne, vous pouvez certainement améliorer les performances de votre code en supprimant cette boucle for et en réécrivant le calcul en termes d’opérations vectorielles-scalaires.
 <!-- comment -->
 - `paste()` est utilisée pour créer un nom pour le `data.table` dans la liste de résultats.
 <!-- comment -->
 En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
 <!-- comment -->
-- La dernière partie de l'idiome utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
+- La dernière partie utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
 
 <!-- paragraph -->
 
@@ -111,9 +111,9 @@ En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la
 
 <!-- paragraph -->
 
-Cet idiome est utile pour créer des ggplots multi-panneaux avec des axes alignés.
+Cette technique est utile pour créer des ggplots multi-panneaux avec des axes alignés.
 <!-- comment -->
-Tout d'abord, définissez une fonction qui prend en entrée un tableau de données et une ou plusieurs valeurs qui seront utilisées pour ajouter des facteurs à ce tableau de données.
+Tout d’abord, définissez une fonction qui prend en entrée un tableau de données et une ou plusieurs valeurs qui seront utilisées pour ajouter des facteurs à ce tableau de données.
 
 <!-- paragraph -->
 
@@ -148,7 +148,7 @@ Notez que `scales="free"` et `xlab("")` sont utilisés car les axes x ont mainte
 
 On peut utiliser `scale_color_manual()` et `scale_fill_manual()` pour préciser les couleurs dans les légendes pour `aes(color)` et `aes(fill)`.
 <!-- comment -->
-En règle générale, nous choisissons l'une des palettes ColorBrewer :
+En règle générale, nous choisissons l’une des palettes ColorBrewer :
 
 <!-- paragraph -->
 
@@ -183,7 +183,7 @@ region.colors
 
 <!-- paragraph -->
 
-Nous pouvons ensuite l'utiliser avec `scale_color_manual()`.
+Nous pouvons ensuite l’utiliser avec `scale_color_manual()`.
 
 <!-- paragraph -->
 

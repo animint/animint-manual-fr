@@ -26,7 +26,7 @@ Dès la [section contexte](#contexte) ci-dessous, ce premier chapitre donne un a
 <!-- comment -->
 Il apporte le contexte et la base théorique nécessaires à la compréhension des autres chapitres, ce qui sera particulièrement utile aux novices en matière d’analyse de données.
 <!-- comment -->
-Il présente la méthode de prototypage de visualisation des données à l’aide d'esquisses, sans introduire de code R.
+Il présente la méthode de prototypage de visualisation des données à l’aide d’esquisses, sans introduire de code R.
 
 <!-- paragraph -->
 
@@ -40,7 +40,7 @@ Nous y expliquons comment générer des ggplots standards sur des pages web en u
 
 Le [chapitre 3](ch03) présente `showSelected`, l’un des deux principaux mots-clés introduits par `animint2`  pour la conception de visualisation des données interactives.
 <!-- comment -->
-Ce chapitre s’ouvre sur une explication des variables de sélection, qui constituent le mécanisme d'interaction dans `animint2`.
+Ce chapitre s’ouvre sur une explication des variables de sélection, qui constituent le mécanisme d’interaction dans `animint2`.
 <!-- comment -->
 Le chapitre 3 explique ensuite comment le mot-clé `showSelected` permet de tracer des sous-ensembles de données.
 <!-- comment -->
@@ -48,7 +48,7 @@ Nous expliquons également comment utiliser des transitions graduelles et des an
 
 <!-- paragraph -->
 
-Le [chapitre 4](ch04) est consacré à  `clickSelects`, l'autre mot-clé important introduit par `animint2` pour la conception de visualisation des données interactives.
+Le [chapitre 4](ch04) est consacré à  `clickSelects`, l’autre mot-clé important introduit par `animint2` pour la conception de visualisation des données interactives.
 <!-- comment -->
 Le mot-clé `clickSelects` permet à l’utilisateur de modifier une variable de sélection en cliquant directement sur un élément du graphique.
 
@@ -64,7 +64,7 @@ Le [chapitre 6](ch06) couvre d’autres fonctionnalités de `animint2`, y compri
 
 Le [chapitre 7](ch07) couvre les limites de l’implémentation actuelle du package R `animint2`, et propose des solutions de contournement pour certains problèmes courants.
 <!-- comment -->
-De plus, il présente quelques idées d'amélioration, à l’intention de ceux qui souhaiteraient contribuer au développement de `animint2`.
+De plus, il présente quelques idées d’amélioration, à l’intention de ceux qui souhaiteraient contribuer au développement de `animint2`.
 
 <!-- paragraph -->
 
@@ -88,11 +88,11 @@ Le [chapitre 10](ch10) présente une visualisation de l’algorithme des plus pr
 
 <!-- paragraph -->
 
-Le [chapitre 11](ch11) présente une visualisation du Lasso, un modèle d'apprentissage automatique pour la régression régularisée.
+Le [chapitre 11](ch11) présente une visualisation du Lasso, un modèle d’apprentissage automatique pour la régression régularisée.
 
 <!-- paragraph -->
 
-Le [chapitre 12](ch12) présente une visualisation du séparateur à vaste marge (aussi connu sous le nom de « machine à vecteurs de support » ou SVM), un modèle d'apprentissage automatique pour la classification binaire.
+Le [chapitre 12](ch12) présente une visualisation du séparateur à vaste marge (aussi connu sous le nom de « machine à vecteurs de support » ou SVM), un modèle d’apprentissage automatique pour la classification binaire.
 
 <!-- paragraph -->
 
@@ -100,28 +100,28 @@ Le [chapitre 13](ch13) présente une visualisation pour la régression de Poisso
 
 <!-- paragraph -->
 
-Le [chapitre 14](ch14) présente une visualisation avec de nombreux sélecteurs, à l'aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive appliqué à un modèle pour la détection de pics.
+Le [chapitre 14](ch14) présente une visualisation avec de nombreux sélecteurs, à l’aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive appliqué à un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
-Le [chapitre 15](ch15) présente une visualisation de l'algorithme de recherche de racines « root-finding » de Newton.
+Le [chapitre 15](ch15) présente une visualisation de l’algorithme de recherche de racines « root-finding » de Newton.
 
 <!-- paragraph -->
 
-Le [chapitre 16](ch16) présente une visualisation d'un modèle de détection de ruptures dans les données séquentielles.
+Le [chapitre 16](ch16) présente une visualisation d’un modèle de détection de ruptures dans les données séquentielles.
 
 <!-- paragraph -->
 
-Le [chapitre 17](ch17) présente une visualisation de l'algorithme d'agrégation « clustering », k-moyennes.
+Le [chapitre 17](ch17) présente une visualisation de l’algorithme d’agrégation « clustering », k-moyennes.
 
 <!-- paragraph -->
 
-Le [chapitre 18](ch18) présente une visualisation de l'algorithme de descente de gradient pour l'apprentissage d'un réseau de neurones.
+Le [chapitre 18](ch18) présente une visualisation de l’algorithme de descente de gradient pour l’apprentissage d’un réseau de neurones.
 
 <!-- paragraph -->
 
-Le [chapitre 19](ch19) présente une visualisation des probabilités critiques (valeurs p) d'un test statistique, pour évaluer la significativité des différences entre deux échantillons.
-Un trop grand nombre de données dans un nuage de points cause de l'occlusion, nous proposons donc une carte thermique reliée à un nuage de points comportant seulement les données sélectionnées.
+Le [chapitre 19](ch19) présente une visualisation des probabilités critiques (valeurs p) d’un test statistique, pour évaluer la significativité des différences entre deux échantillons.
+Un trop grand nombre de données dans un nuage de points cause de l’occlusion, nous proposons donc une carte thermique reliée à un nuage de points comportant seulement les données sélectionnées.
 
 Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différents algorithmes d’apprentissage artificiel, calculé avec le package `mlr3`.
 
@@ -131,11 +131,11 @@ Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différent
 
 <!-- paragraph -->
 
-Le [Glossaire](ch99) contient l’explication détaillée de plusieurs expressions idiomatiques du code R utilisées dans ce manuel.
+Le [Glossaire](ch99) contient l’explication détaillée de plusieurs techniques de programmation R qui sont utiles pour la visualisation.
 
 <!-- paragraph -->
 
-Le [Guide de contribution](contribute.html) fournit des instructions sur la manière de contribuer à l'amélioration de ce manuel.
+Le [Guide de contribution](contribution) fournit des instructions sur la manière de contribuer à l’amélioration de ce manuel.
 
 <!-- paragraph -->
 
@@ -151,23 +151,23 @@ knitr::opts_chunk$set(fig.path="ch01-figures/")
 
 L’objectif de ce manuel est d’expliquer l’utilisation des éléments suivants `animint2`, un package R pour la visualisation interactive des données.
 <!-- comment -->
-Ce chapitre d’introduction répond aux questions suivantes :
+Ce chapitre d’introduction répond aux questions suivantes :
 
 <!-- paragraph -->
 
-- Que sont les données et comment les analyser?
+- Que sont les données et comment les analyser ?
 <!-- comment -->
-- Qu’est-ce que la visualisation des données, et quand est-elle utile pour l’analyse des données?
+- Qu’est-ce que la visualisation des données, et quand est-elle utile pour l’analyse des données ?
 <!-- comment -->
-- Qu’est-ce que la visualisation des données interactive et dans quelles situations est-elle utile?
+- Qu’est-ce que la visualisation des données interactive et dans quelles situations est-elle utile ?
 
 <!-- paragraph -->
 
-La structure du chapitre est la suivante :
+La structure du chapitre est la suivante :
 
 <!-- paragraph -->
 
-- Qu’est-ce qu'une donnée?
+- Qu’est-ce qu’une donnée ?
 <!-- comment -->
 - Petits ensembles de données -- la visualisation des données n’est pas nécessaire.
 <!-- comment -->
@@ -177,55 +177,55 @@ La structure du chapitre est la suivante :
 
 <!-- paragraph -->
 
-### Qu’est-ce que l’analyse des données? {#data}
+### Qu’est-ce que l’analyse des données ? {#data}
 
 <!-- paragraph -->
 
-Les données sont des éléments d'information enregistrés de manière systématique, que ce soit sur support papier ou informatique.
+Les données sont des éléments d’information enregistrés de manière systématique, que ce soit sur support papier ou informatique.
 <!-- comment -->
 Tout le monde peut créer des données, simplement en consignant méthodiquement des éléments.
 <!-- comment -->
-En général, les données sont créées pour répondre à une question précise et sont organisées en tableaux comportant des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
+En général, les données sont créées pour répondre à une question précise et sont organisées en tableaux comportant des lignes pour les observations et des colonnes pour les variables ou différents types d’informations.
 <!-- comment -->
-D’après Larousse, « donnée » désigne la « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée].
+D’après Larousse, « donnée » désigne la « représentation conventionnelle d’une information en vue de son traitement informatique » [@larousse_donnée].
 Dans le cas de `animint2`, la représentation conventionnelle est un tableau, dans lequel chaque ligne correspond à une observation, et chaque colonne à une variable.
 <!-- comment -->
-Nous utilisons le terme « ensemble de données »  pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
+Nous utilisons le terme « ensemble de données »  pour désigner un sous-ensemble d’observations/de lignes, ou le tableau de données dans son intégralité.
 
 <!-- paragraph -->
 
-Il existe de nombreux exemples de données qui pourraient être créées pour répondre à des questions basées sur des expériences quotidiennes :
+Il existe de nombreux exemples de données qui pourraient être créées pour répondre à des questions basées sur des expériences quotidiennes :
 
 <!-- paragraph -->
 
-- Comment la météo de cette année se compare-t-elle à celle  des années précédentes?
+- Comment la météo de cette année se compare-t-elle à celle  des années précédentes ?
 <!-- comment -->
-La quantité de pluie est-elle supérieure ou inférieure à la normale? 
+La quantité de pluie est-elle supérieure ou inférieure à la normale ?
 <!-- comment -->
-Pour répondre à ces questions, nous pourrions créer un tableau de données avec des colonnes pour les mesures des différentes conditions météorologiques (température, précipitations, etc.), ainsi que des colonnes pour la date et l'heure de chaque observation, et une ligne pour chaque observation.
+Pour répondre à ces questions, nous pourrions créer un tableau de données avec des colonnes pour les mesures des différentes conditions météorologiques (température, précipitations, etc.), ainsi que des colonnes pour la date et l’heure de chaque observation, et une ligne pour chaque observation.
 <!-- comment -->
-- Quel est l'effet de mon régime alimentaire sur ma santé? 
+- Quel est l’effet de mon régime alimentaire sur ma santé ?
 <!-- comment -->
-Si vous modifiez votre alimentation, vous pouvez noter ce que vous mangez et comment vous vous sentez après chaque repas dans un tableau de contingence comportant une ligne pour chaque repas et quatre colonnes (date, heure, aliments consommés, effets constatés). 
+Si vous modifiez votre alimentation, vous pouvez noter ce que vous mangez et comment vous vous sentez après chaque repas dans un tableau de contingence comportant une ligne pour chaque repas et quatre colonnes (date, heure, aliments consommés, effets constatés).
 <!-- comment -->
-- Ce nouveau traitement contre le cancer du poumon est-il plus efficace que l'ancien?
+- Ce nouveau traitement contre le cancer du poumon est-il plus efficace que l’ancien ?
 <!-- comment -->
-Le médecin responsable d’un essai clinique répartit au hasard les patients en deux groupes : l’un recevant un nouveau traitement, l’autre l’ancien. 
+Le médecin responsable d’un essai clinique répartit au hasard les patients en deux groupes : l’un recevant un nouveau traitement, l’autre l’ancien.
 <!-- comment -->
-Le médecin créerait ensuite un tableau de données comportant une ligne pour chaque patient, et plusieurs colonnes : nombre d'années de tabagisme, type de traitement (nouveau ou ancien), âge au moment du traitement, âge au décès, mesure des marqueurs tumoraux, etc.
+Le médecin créerait ensuite un tableau de données comportant une ligne pour chaque patient, et plusieurs colonnes : nombre d’années de tabagisme, type de traitement (nouveau ou ancien), âge au moment du traitement, âge au décès, mesure des marqueurs tumoraux, etc.
 
 <!-- paragraph -->
 
-Nous définissons l’« analyse des données »  comme le processus visant à répondre à ces questions en convertissant le tableau de données brut en d'autres formes plus compréhensibles.
+Nous définissons l’« analyse des données »  comme le processus visant à répondre à ces questions en convertissant le tableau de données brut en d’autres formes plus compréhensibles.
 <!-- comment -->
-Parmi les méthodes d’analyse particulièrement efficaces figure la « visualisation des données », qui cherche à répondre aux questions en transposant un ensemble de données en une image informative. 
+Parmi les méthodes d’analyse particulièrement efficaces figure la « visualisation des données », qui cherche à répondre aux questions en transposant un ensemble de données en une image informative.
 <!-- comment -->
-Le terme « visualisation des données » désigne à la fois l’image (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation de données) et le processus de création de l’image.
+Le terme « visualisation des données » désigne à la fois l’image (également connue sous le nom de graphique, figure, diagramme, graph, plot ou visualisation de données) et le processus de création de l’image.
 <!-- paragraph -->
 
-Il existe de nombreuses façons différentes d'effectuer une analyse de données, et différentes techniques sont nécessaires selon la taille des ensembles de données. 
+Il existe de nombreuses façons différentes d’effectuer une analyse de données, et différentes techniques sont nécessaires selon la taille des ensembles de données.
 <!-- comment -->
-Bien que les définitions varient d’un auteur à l’autre, nous adopterons dans ce manuel une classification en trois catégories : petits, moyens et grands ensembles de données.
+Bien que les définitions varient d’un auteur à l’autre, nous adopterons dans ce manuel une classification en trois catégories : petits, moyens et grands ensembles de données.
 <!-- comment -->
 Nous discutons d’abord des petits ensembles de données, pour lesquels la visualisation n’est pas nécessaire.
 
@@ -235,9 +235,9 @@ Nous discutons d’abord des petits ensembles de données, pour lesquels la visu
 
 <!-- paragraph -->
 
-Dans cette section, nous aborderons les « petits ensembles de données » dont la taille restreinte permet une analyse par simple examen du tableau de données.
+Dans cette section, nous aborderons les « petits ensembles de données » dont la taille restreinte permet une analyse par simple examen du tableau de données.
 <!-- comment -->
-Pour ces ensembles, la visualisation graphique n’est pas nécessaire : la présentation sous forme de tableau est suffisante.
+Pour ces ensembles, la visualisation graphique n’est pas nécessaire : la présentation sous forme de tableau est suffisante.
 
 <!-- paragraph -->
 
@@ -245,19 +245,19 @@ Prenons l’exemple de la célèbre [expérience de dégustation du thé  ](http
 <!-- comment -->
 Une dame a affirmé pouvoir détecter si le lait d’une tasse de thé avait été ajouté avant ou après le thé.
 <!-- comment -->
-Fisher s’est posé la question suivante : la dame peut-elle vraiment distinguer les deux types de préparation?
+Fisher s’est posé la question suivante : la dame peut-elle vraiment distinguer les deux types de préparation ?
 
 <!-- paragraph -->
 
-Pour répondre à cette question, Fisher a préparé huit tasses : quatre avec du lait ajouté après le thé, et quatre avec du lait ajouté avant.
+Pour répondre à cette question, Fisher a préparé huit tasses : quatre avec du lait ajouté après le thé, et quatre avec du lait ajouté avant.
 <!-- comment -->
 Il les a ensuite fait goûter à la dame dans un ordre aléatoire en lui demandant d’identifier celles dans lesquelles le lait avait été ajouté après le thé.
 <!-- comment -->
 Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des quatre tasses.
 <!-- comment -->
-Fisher a ensuite consigné les données suivantes : le nombre total de tasses (8), le nombre de tasses dans lesquelles du lait a été ajouté (4) et le nombre de tasses correctement identifiées (3).
+Fisher a ensuite consigné les données suivantes : le nombre total de tasses (8), le nombre de tasses dans lesquelles du lait a été ajouté (4) et le nombre de tasses correctement identifiées (3).
 <!-- comment -->
-Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage :
+Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage :
 
 <!-- paragraph -->
 
@@ -297,7 +297,7 @@ Ces ensembles sont suffisamment volumineux pour nécessiter l’utilisation de l
 
 <!-- paragraph -->
 
-Prenons par exemple les données suivantes sur les concentrations de dioxyde de carbone (CO₂) dans l’atmosphère, enregistrées mensuellement de 1959 à 1997 :
+Prenons par exemple les données suivantes sur les concentrations de dioxyde de carbone (CO₂) dans l’atmosphère, enregistrées mensuellement de 1959 à 1997 :
 
 <!-- paragraph -->
 
@@ -325,7 +325,7 @@ L’impression de ces données sur la ligne de commande R montre qu’il y a 468
 <!-- comment -->
 Ce nombre n’est pas énorme, mais il est déjà suffisamment important pour qu’une simple inspection du tableau ne permette pas de répondre aux questions posées.
 <!-- comment -->
-Nous allons donc créer une visualisation des données statique :
+Nous allons donc créer une visualisation des données statique :
 <!-- paragraph -->
 
 ```{r, echo=FALSE}
@@ -349,9 +349,9 @@ La visualisation des données statiques montre que les concentrations de CO₂ o
 <!-- comment -->
 Cette visualisation des données porte le nom de [courbe de Keeling](https://fr.wikipedia.org/wiki/Courbe_de_Keeling), du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique.
 <!-- comment -->
-La tendance générale à l’augmentation peut être expliquée par le processus chimique de la combustion, qui transforme l’oxygène en CO₂. 
+La tendance générale à l’augmentation peut être expliquée par le processus chimique de la combustion, qui transforme l’oxygène en CO₂.
 <!-- comment -->
-Keeling a noté que « le  taux d’augmentation observé est proche de celui que l’on peut attendre de la combustion de combustibles fossiles »  [@keeling1960concentration] .
+Keeling a noté que « le  taux d’augmentation observé est proche de celui que l’on peut attendre de la combustion de combustibles fossiles »  [@keeling1960concentration] .
 
 <!-- paragraph -->
 
@@ -361,13 +361,13 @@ Cette tendance saisonnière s’explique par l’activité des forêts de l’h�
 <!-- comment -->
 Les feuilles des arbres réalisent la photosynthèse, un processus chimique qui convertit le CO₂ en oxygène.
 <!-- comment -->
-Or, dans l’hémisphère Nord, les arbres n’ont pas de feuilles en hiver et le CO₂ s’accumule dans l’atmosphère jusqu’à atteindre son maximum en mai. 
+Or, dans l’hémisphère Nord, les arbres n’ont pas de feuilles en hiver et le CO₂ s’accumule dans l’atmosphère jusqu’à atteindre son maximum en mai.
 <!-- comment -->
 La photosynthèse reprend lorsque le feuillage réapparaît au printemps et se poursuit tout au long de l’été, faisant baisser la concentration de CO₂ dans l’atmosphère jusqu’à son minimum annuel en octobre.
 
 <!-- paragraph -->
 
-Nous disons que cette visualisation des données est « statique » ou « non interactive » parce que le lecteur peut la visualiser, mais ne peut pas modifier ce qui est affiché.
+Nous disons que cette visualisation des données est « statique » ou « non interactive » parce que le lecteur peut la visualiser, mais ne peut pas modifier ce qui est affiché.
 <!-- comment -->
 Ce genre de visualisation convient parfaitement aux ensembles de données de taille moyenne, dans lesquels nous pouvons voir tous les détails de l’ensemble de données.
 <!-- comment -->
@@ -385,11 +385,11 @@ Pour de tels ensembles, les approches traditionnelles d’analyse consistent à 
 <!-- comment -->
 Cependant, le résumé graphique peut être trompeur, car il ne révèle pas tous les détails des données originales.
 <!-- comment -->
-Dans de telles situations, la « visualisation des données interactive » devient utile.
+Dans de telles situations, la « visualisation des données interactive » devient utile.
 
 <!-- paragraph -->
 
-Examinons tout d’abord une forme légèrement plus élaborée de la courbe de Keeling :
+Examinons tout d’abord une forme légèrement plus élaborée de la courbe de Keeling :
 
 <!-- paragraph -->
 
@@ -409,9 +409,9 @@ TimeSeries
 
 <!-- paragraph -->
 
-Le graphique ci-dessus présente des points colorés pour chaque mois de l’année, plutôt qu’uniquement pour mai et octobre, les pics que nous voulions mettre en évidence. 
+Le graphique ci-dessus présente des points colorés pour chaque mois de l’année, plutôt qu’uniquement pour mai et octobre, les pics que nous voulions mettre en évidence.
 <!-- comment -->
-Ce graphique statique est moins instructif que le précédent, car il ne fait pas ressortir les extrêmes. 
+Ce graphique statique est moins instructif que le précédent, car il ne fait pas ressortir les extrêmes.
 <!-- comment -->
 Il s’agit d’un exemple où il n’est pas souhaitable de tracer toutes les données simultanément.
 <!-- comment -->
@@ -419,7 +419,7 @@ Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant
 
 <!-- paragraph -->
 
-```{r ch01-viz-Keeling, echo=FALSE}
+```{r ch01-vis-Keeling, echo=FALSE}
 animint(
   TimeSeries,
   first=list(mois=c("mai", "octobre")))
@@ -441,7 +441,7 @@ Dans l’exemple ci-dessus, nous avons utilisé une légende interactive qui per
 
 <!-- paragraph -->
 
-L’exemple ci-dessus illustre bien comment `clickSelects` et `showSelected`, les deux mots-clés introduits par `animint2` permettent l'interaction.
+L’exemple ci-dessus illustre bien comment `clickSelects` et `showSelected`, les deux mots-clés introduits par `animint2` permettent l’interaction.
 <!-- comment -->
 Sans entrer dans les détails, le graphique ci-dessus utilise `clickSelects=mois` pour la légende interactive, ce qui signifie qu’un clic sur la légende modifiera les mois sélectionnés.
 <!-- comment -->
@@ -455,13 +455,13 @@ Dans les chapitres 3 et 4, nous expliquerons comment concevoir des visualisation
 
 <!-- paragraph -->
 
-Ce chapitre a introduit quelques notions de base sur les données et a proposé des définitions des différentes tailles d’ensembles de données : petite, moyenne et grande.
+Ce chapitre a introduit quelques notions de base sur les données et a proposé des définitions des différentes tailles d’ensembles de données : petite, moyenne et grande.
 
 <!-- paragraph -->
 
-- Sur la base des définitions présentées dans ce chapitre, qu’est-ce qui distingue les petits ensembles des moyens?
+- Sur la base des définitions présentées dans ce chapitre, qu’est-ce qui distingue les petits ensembles des moyens ?
 <!-- comment -->
-- Quelle est la différence entre les moyens des grands ensembles?
+- Quelle est la différence entre les moyens des grands ensembles ?
 
 <!-- paragraph -->
 

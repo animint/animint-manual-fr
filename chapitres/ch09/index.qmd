@@ -12,7 +12,7 @@ Dans ce chapitre, nous explorons plusieurs visualisations pour un ensemble de do
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
@@ -28,9 +28,9 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Nous commençons par charger le fichier `montreal.bikes`, non disponible dans la version CRAN de `animint2`par souci d’économie d’espace.
+Nous commençons par charger le fichier `montreal.bikes`, non disponible dans la version CRAN de `animint2` par souci d’économie d’espace.
 <!-- comment -->
-Pour accéder à ce jeu de données, vous devrez donc installer `animint2` depuis GitHub :
+Pour accéder à ce jeu de données, vous devrez donc installer `animint2` depuis GitHub :
 
 <!-- paragraph -->
 
@@ -43,17 +43,17 @@ tryCatch({
 })
 ```
 
-Les données se composent de deux séries temporelles :
+Les données se composent de deux séries temporelles :
 
-* `montreal.bikes$counter.counts` : les passages de vélos enregistrés par les compteurs, disposés dans un tableau avec une ligne pour chaque combinaison de lieu et de jour.
+* `montreal.bikes$counter.counts` : les passages de vélos enregistrés par les compteurs, disposés dans un tableau avec une ligne pour chaque combinaison de lieu et de jour.
 <!-- comment -->
-* `montreal.bikes$accidents` : les accidents, dans un tableau avec une ligne par accident.
+* `montreal.bikes$accidents` : les accidents, dans un tableau avec une ligne par accident.
 
 Nous calculerons des résumés mensuels de ces deux séries temporelles.
 
 ### Compteurs
 
-Pour commencer, nous affichons le tableau de données des compteurs de vélos :
+Pour commencer, nous affichons le tableau de données des compteurs de vélos :
 
 ```{r counterRange}
 mois_str <- function(POSIXct)strftime(POSIXct, "%Y-%m")
@@ -67,11 +67,11 @@ library(data.table)
 
 Ci-dessus, on voit une ligne pour chaque combinaison de lieu et de jour.
 <!-- comment -->
-Le comptage de vélos présente des données de séries temporelles que nous visualisons ci-dessous :
+Le comptage de vélos présente des données de séries temporelles que nous visualisons ci-dessous :
 
 <!-- paragraph -->
 
-```{r counterviz}
+```{r countervis}
 passages_dt[, lieu.lines := gsub("[- _]", "\n", lieu)]
 library(animint2)
 ggplot()+
@@ -92,7 +92,7 @@ On voit bien la régularité saisonnière (moins de vélos en hiver).
 
 ### Accidents
 
-Pour aborder les données d’accidents, nous affichons cette ligne :
+Pour aborder les données d’accidents, nous affichons cette ligne :
 
 ```{r}
 montreal.bikes$accidents[1,]
@@ -102,9 +102,9 @@ montreal.bikes$accidents[1,]
 
 Pour chaque accident, il y a des données sur la date, l’heure, la localisation et le nombre de morts et de blessés.
 <!-- comment -->
-Certaines valeurs sont en français (par exemple : `Voie de circulation`, `En intersection`, etc.).
+Certaines valeurs sont en français (par exemple : `Voie de circulation`, `En intersection`, etc.).
 <!-- comment -->
-Nous allons remplacer les noms de colonnes en anglais par des termes en français :
+Nous allons remplacer les noms de colonnes en anglais par des termes en français :
 
 <!-- paragraph -->
 
@@ -122,7 +122,7 @@ accidents_dt <- data.table(montreal.bikes$accidents[, c(
 
 <!-- paragraph -->
 
-Dans le code ci-dessous, nous rajoutons une colonne pour le mois :
+Dans le code ci-dessous, nous rajoutons une colonne pour le mois :
 
 <!-- paragraph -->
 
@@ -139,7 +139,7 @@ ymd2POSIXct <- function(date.str){
 
 <!-- paragraph -->
 
-Dans la sortie ci-dessus, on voit que les derniers mois pour les accidents ne sont pas les mêmes que pour les compteurs. On compare les intervalles dans le code ci-dessous :
+Dans la sortie ci-dessus, on voit que les derniers mois pour les accidents ne sont pas les mêmes que pour les compteurs. On compare les intervalles dans le code ci-dessous :
 
 ```{r}
 data.list <- list(accidents=accidents_dt, passages=passages_dt)
@@ -148,7 +148,7 @@ sapply(data.list, function(DT)range(DT$mois.str))
 
 Dans la sortie ci-dessus, on voit que les passages et les accidents se chevauchent.
 <!-- comment -->
-Nous allons compiler des résumés mensuels, d’où la création du tableau de données ci-dessous :
+Nous allons compiler des résumés mensuels, d’où la création du tableau de données ci-dessous :
 
 <!-- paragraph -->
 
@@ -159,7 +159,7 @@ mois_01 <- function(mois)ymd2POSIXct(paste0(mois, "-01"))
 mois_dt <- data.table(mois.01 = mois_01(uniq.mois.vec))
 ```
 
-Le code ci-dessous définit l’environnement linguistique (locale en anglais) pour présenter les mois en français :
+Le code ci-dessous définit l’environnement linguistique (locale en anglais) pour présenter les mois en français :
 
 ```{r}
 old.locale <- Sys.setlocale(locale="fr_CA.UTF-8")
@@ -176,7 +176,7 @@ La sortie ci-dessus comprend une ligne pour chaque mois.
 <!-- comment -->
 Notez que nous avons créé une colonne `mois.français` qui sera utilisée comme variable de sélection pour les mois.
 <!-- comment -->
-Dans le code ci-dessous, nous calculons la somme des accidents par mois :
+Dans le code ci-dessous, nous calculons la somme des accidents par mois :
 
 ```{r}
 (accidents.par.mois <- dcast(
@@ -188,7 +188,7 @@ Dans le code ci-dessous, nous calculons la somme des accidents par mois :
 
 Ci-dessus on voit une ligne pour chaque mois, avec différentes colonnes pour chaque niveau de gravité.
 <!-- comment -->
-Nous convertissons ces colonnes en lignes avec le code ci-dessous :
+Nous convertissons ces colonnes en lignes avec le code ci-dessous :
 
 ```{r}
 (accidents.tall <- melt(
@@ -200,7 +200,7 @@ Nous convertissons ces colonnes en lignes avec le code ci-dessous :
 
 Ci-dessus on voit une ligne pour chaque combinaison de mois et gravité.
 <!-- comment -->
-Dans le code ci-dessous, nous utilisons ces données pour créer un graphique montrant le nombre d’accidents par mois :
+Dans le code ci-dessous, nous utilisons ces données pour créer un graphique montrant le nombre d’accidents par mois :
 
 <!-- paragraph -->
 
@@ -226,8 +226,8 @@ Ci-dessus, on voit le nombre de personnes décédées et blessées au fil du tem
 
 Nous voulons maintenant comparer, pour chaque mois, les données de compteurs et d’accidents.
 <!-- comment -->
-Est-ce que nous avons plus d’accidents quand il y a plus de passages en vélo?
-Pour le vérifier, nous devons calculer un résumé des passages par mois avec le code ci-dessous :
+Est-ce que nous avons plus d’accidents quand il y a plus de passages en vélo ?
+Pour le vérifier, nous devons calculer un résumé des passages par mois avec le code ci-dessous :
 
 ```{r}
 (passages.par.mois <- dcast(
@@ -237,17 +237,17 @@ Pour le vérifier, nous devons calculer un résumé des passages par mois avec l
   value.var="passages"))
 ```
 
-La sortie ci-dessus contient une ligne pour chaque combinaison de lieu et mois, avec des colonnes pour :
+La sortie ci-dessus contient une ligne pour chaque combinaison de lieu et mois, avec des colonnes pour :
 
-* `passages_length` : le nombre de jours.
-* `passages_mean` : la moyenne de passages par jour.
-* `passages_sum` : le nombre total de passages.
+* `passages_length` : le nombre de jours.
+* `passages_mean` : la moyenne de passages par jour.
+* `passages_sum` : le nombre total de passages.
 
 On remarque qu’il manque des journées pour certains mois. Par exemple, il n’y a que 29 jours pour `Berri` en avril 2009, et 18 jours pour `Totem_Laurier` en septembre 2013.
 <!-- comment -->
 Pour modéliser seulement les mois complets, nous devons exclure ceux avec des journées manquantes.
 <!-- comment -->
-On utilise le code ci-dessous pour calculer le nombre de jours dans chaque mois :
+On utilise le code ci-dessous pour calculer le nombre de jours dans chaque mois :
 
 ```{r}
 un.jour <- 60 * 60 * 24
@@ -261,7 +261,7 @@ passages.par.mois[, jours.dans.mois := as.integer(round(difftime(
 
 Dans la sortie ci-dessus, on voit la nouvelle colonne `jours.dans.mois`.
 <!-- comment -->
-Avec le code ci-dessous, on affiche seulement les mois avec des jours manquants :
+Avec le code ci-dessous, on affiche seulement les mois avec des jours manquants :
 
 ```{r}
 passages.par.mois[
@@ -269,13 +269,13 @@ passages.par.mois[
   .(lieu, mois.str, passages_length, jours.dans.mois)]
 ```
 
-Nous allons exclure les données obtenues, en utilisant le code ci-dessous :
+Nous allons exclure les données obtenues, en utilisant le code ci-dessous :
 
 ```{r}
 mois.complets <- passages.par.mois[passages_length == jours.dans.mois]
 ```
 
-Ensuite, nous créons un tableau avec les passages et les accidents dans des colonnes distinctes :
+Ensuite, nous créons un tableau avec les passages et les accidents dans des colonnes distinctes :
 
 ```{r}
 city.wide.complete <- mois.complets[passages_sum>0, .(
@@ -292,7 +292,7 @@ city.wide.accidents <- accidents_dt[, .(
 
 Dans la sortie ci-dessus, on voit une ligne pour chaque mois avec les données de passages et d’accidents.
 <!-- comment -->
-Ensuite, nous faisons un modèle linéaire pour prédire les accidents à partir des passages :
+Ensuite, nous faisons un modèle linéaire pour prédire les accidents à partir des passages :
 
 ```{r}
 (fit <- lm(total.accidents ~ total.passages - 1, scatter.not.na))
@@ -304,7 +304,7 @@ Dans la sortie ci-dessus, on voit que le coefficient du modèle est proche des m
 <!-- comment -->
 Enfin, nous créons un graphique interactif avec le code ci-dessous.
 
-```{r ch09-viz-regression}
+```{r ch09-vis-regression}
 scatter.not.na[, let(
   pred.accidents = predict(fit),
   mois.français = mois_français(mois.01)
@@ -349,19 +349,19 @@ Le graphique de droite montre la fréquence des accidents au fil du temps.
 
 <!-- paragraph -->
 
-Dans cette section, nous allons faire une visualisation composée des éléments suivants :
+Dans cette section, nous allons faire une visualisation composée des éléments suivants :
 
-* Résumé des compteurs : carte des compteurs ou min/max des mois pour chaque compteur, pour sélectionner un compteur.
+* Résumé des compteurs : carte des compteurs ou min/max des mois pour chaque compteur, pour sélectionner un compteur.
 <!-- comment -->
-* Détails d’un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d’un compteur. Cliquer pour sélectionner un mois.
+* Détails d’un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d’un compteur. Cliquer pour sélectionner un mois.
 <!-- comment -->
-* Détails d’un compteur et d’un mois : séries temporelles par jour, pour le mois sélectionné.
+* Détails d’un compteur et d’un mois : séries temporelles par jour, pour le mois sélectionné.
 
 ### Résumé des compteurs avec carte
 
 Les données `counter.locations` contiennent l’emplacement géographique de chaque compteur.
 <!-- comment -->
-Pour examiner ces données, il faut d’abord convertir le nom en Unicode :
+Pour examiner ces données, il faut d’abord convertir le nom en Unicode :
 
 ```{r}
 (counter.locations <- data.table(montreal.bikes$counter.locations)[, .(
@@ -371,7 +371,7 @@ Pour examiner ces données, il faut d’abord convertir le nom en Unicode :
 
 Dans la sortie ci-dessus, on voit que la colonne `nom_comptage` indique l’emplacement, mais ce ne sont pas exactement les mêmes valeurs que la colonne `lieu` dans les données de passages.
 <!-- comment -->
-On utilise le code ci-dessous pour établir une correspondance entre les tableaux :
+On utilise le code ci-dessous pour établir une correspondance entre les tableaux :
 
 ```{r}
 loc.name.code <- c(
@@ -392,7 +392,7 @@ loc.name.code <- c(
 
 La sortie ci-dessus contient l’emplacement géographique de chaque compteur.
 <!-- comment -->
-L’emplacement des compteurs est tracé ci-dessous :
+L’emplacement des compteurs est tracé ci-dessous :
 
 ```{r}
 map.lim <- show.locations[, lapply(.SD, range), .SDcols=c("lat","lon")]
@@ -433,7 +433,7 @@ La sortie ci-dessus est un plan de Montréal où chacun des dix compteurs est re
 
 ### Résumé des dates extrêmes pour chaque compteur
 
-Maintenant on calcule les dates extrêmes pour chaque compteur :
+Maintenant on calcule les dates extrêmes pour chaque compteur :
 
 ```{r}
 (location.ranges <- dcast(
@@ -498,7 +498,7 @@ Dans la sortie ci-dessus, on voit un segment de plus (pour les accidents en bas)
 
 ### Séries temporelles mensuelles
 
-Le graphique ci-dessous présente le comptage de vélos à chaque localisation, chaque jour :
+Le graphique ci-dessous présente le comptage de vélos à chaque localisation, chaque jour :
 
 ```{r}
 ggplot()+
@@ -514,7 +514,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessous reprend les mêmes données, mais pour chaque mois :
+Le graphique ci-dessous reprend les mêmes données, mais pour chaque mois :
 
 <!-- paragraph -->
 
@@ -543,7 +543,7 @@ COMPTEURS <- function(DT)FACET(DT, "passages/jour")
 
 Le graphique ci-dessus contient une ligne pour chaque compteur.
 <!-- comment -->
-Dans le code ci-dessous, nous ajoutons deux geoms :
+Dans le code ci-dessous, nous ajoutons deux geoms :
 
 ```{r}
 mois.text <- passages.par.mois[
@@ -567,7 +567,7 @@ mois.text <- passages.par.mois[
     data=COMPTEURS(mois.text)))
 ```
 
-Le graphique ci-dessous intègre les accidents :
+Le graphique ci-dessous intègre les accidents :
 
 ```{r}
 ACCIDENTS <- function(DT)FACET(DT, "accidents")
@@ -631,7 +631,7 @@ ggplot()+
 
 Dans la sortie ci-dessus, on voit un point pour chaque accident.
 <!-- comment -->
-Le code ci-dessous permet ensuite de créer une grille de jours  :
+Le code ci-dessous permet ensuite de créer une grille de jours  :
 
 ```{r}
 (days.dt <- mois_dt[, .(date=seq(
@@ -645,7 +645,7 @@ Le code ci-dessous permet ensuite de créer une grille de jours  :
 
 La sortie ci-dessus contient une ligne pour chaque jour dans la période d’observation.
 <!-- comment -->
-Le code ci-dessous, trace un tableau pour souligner les fins de semaine :
+Le code ci-dessous, trace un tableau pour souligner les fins de semaine :
 
 ```{r}
 (weekend.dt <- add_jour_mois(days.dt[
@@ -655,7 +655,7 @@ Le code ci-dessous, trace un tableau pour souligner les fins de semaine :
 
 La sortie ci-dessus contient une ligne pour chaque jour de fin de semaine.
 <!-- comment -->
-Nous créons ensuite un tableau pour afficher le nom de chaque lieu :
+Nous créons ensuite un tableau pour afficher le nom de chaque lieu :
 ```{r}
 add_jour_mois(passages_dt)
 (jour.text <- passages_dt[
@@ -665,7 +665,7 @@ add_jour_mois(passages_dt)
 
 La sortie ci-dessus contient le jour avec le plus de passages, pour chaque lieu et mois.
 <!-- comment -->
-Le code ci-dessous trace ensuite un graphique de passages quotidiens enregistrés par les compteurs :
+Le code ci-dessous trace ensuite un graphique de passages quotidiens enregistrés par les compteurs :
 
 ```{r}
 (DaysCompteurs <- ggplot()+
@@ -705,7 +705,7 @@ Le code ci-dessous trace ensuite un graphique de passages quotidiens enregistré
 
 La sortie ci-dessus affiche les données des compteurs, mais elle est surchargée car le graphique statique ne prend pas en compte le mot-clé `showSelected`.
 <!-- comment -->
-Le code ci-dessous ajoute les données d’accidents :
+Le code ci-dessous ajoute les données d’accidents :
 
 ```{r}
 (DaysFacet <- DaysCompteurs+
@@ -730,9 +730,9 @@ La sortie ci-dessus contient les deux séries temporelles (accidents et compteur
 
 ### Graphique interactif
 
-Enfin, le code ci-dessous combine tous les graphiques :
+Enfin, le code ci-dessous combine tous les graphiques :
 
-```{r ch09-viz-mtl}
+```{r ch09-vis-mtl}
 animint(
   MonthFacet+
     ggtitle("Toutes les données, choisir mois"),
@@ -754,21 +754,21 @@ animint(
     mois.français="juillet 2012"))
 ```
 
-La sortie ci-dessus contient quatre graphiques :
+La sortie ci-dessus contient quatre graphiques :
 
-* En haut à gauche : séries temporelles avec résumé pour chaque mois.
+* En haut à gauche : séries temporelles avec résumé pour chaque mois.
 <!-- comment -->
-* En haut à droite : séries temporelles pour le mois sélectionné.
+* En haut à droite : séries temporelles pour le mois sélectionné.
 <!-- comment -->
-* En bas à gauche : les dates min et max pour chaque source de données.
+* En bas à gauche : les dates min et max pour chaque source de données.
 <!-- comment -->
-* En bas à droite : emplacement des compteurs sur le plan de Montréal.
+* En bas à droite : emplacement des compteurs sur le plan de Montréal.
 
 ## Résumé du chapitre et exercices {#ch09-exercises}
 
 Nous avons vu plusieurs graphiques pour visualiser les séries temporelles en rapport avec les vélos à Montréal.
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
@@ -778,7 +778,7 @@ Exercices :
 <!-- comment -->
 - Sur le graphique `MonthSummary` et ajoutez des rectangles en arrière-plan pour sélectionner le mois.
 <!-- comment -->
-- Supprimez le graphique `MonthSummary` et ajoutez une visualisation similaire dans un troisième panneau de l’écran dans le graphique `MonthFacet`. Astuce : utilisez `theme_animint(rowspan=2)`.
+- Supprimez le graphique `MonthSummary` et ajoutez une visualisation similaire dans un troisième panneau de l’écran dans le graphique `MonthFacet`. Astuce : utilisez `theme_animint(rowspan=2)`.
 <!-- comment -->
 - Dans `DaysFacet`, utilisez `aes(tooltip)` avec quelques détails pour chaque accident (adresse, nombre de personnes, etc.).
 

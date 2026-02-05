@@ -10,13 +10,13 @@ L'objectif de ce chapitre est de créer une visualisation des données interacti
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
 - Nous commençons par plusieurs visualisations statiques du modèle Lasso, soit la régression linéaire avec régularisation L1.
 <!-- comment -->
-- Nous créons ensuite une version interactive avec une facette et un graphique montrant l'erreur d'entraînement/validation et les résidus.
+- Nous créons ensuite une version interactive avec une facette et un graphique montrant l’erreur d’entraînement/validation et les résidus.
 <!-- comment -->
 - Enfin, nous remanions la visualisation interactive des données avec des légendes simplifiées et des `tallrects` mobiles.
 
@@ -26,7 +26,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Nous commençons par charger l'ensemble de données sur le cancer de la prostate.
+Nous commençons par charger l’ensemble de données sur le cancer de la prostate.
 
 <!-- paragraph -->
 
@@ -40,7 +40,7 @@ print(prostate, topn=1, trunc.cols = TRUE)
 
 <!-- paragraph -->
 
-Nous construisons un entrainement d'entrées `x` et des sorties `y` à l'aide du code ci-dessous.
+Nous construisons un entrainement d’entrées `x` et des sorties `y` à l’aide du code ci-dessous.
 
 <!-- paragraph -->
 
@@ -58,7 +58,7 @@ head(y)
 
 <!-- paragraph -->
 
-Ci-dessous, nous procédons à l'ajustement du chemin complet des solutions lasso à l'aide du package `lars`.
+Ci-dessous, nous procédons à l’ajustement du chemin complet des solutions lasso à l’aide du package `lars`.
 
 <!-- paragraph -->
 
@@ -107,13 +107,13 @@ gg.lambda
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre l'ensemble du chemin de lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
+Le graphique ci-dessus montre l’ensemble du chemin de lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
 <!-- comment -->
 Le chemin commence à la solution des moindres carrés, `lambda=0` à gauche.
 <!-- comment -->
-Il se termine par le modèle à ordonnée à l'origine complètement régularisé à droite.
+Il se termine par le modèle à ordonnée à l’origine complètement régularisé à droite.
 <!-- comment -->
-Pour voir l'équivalence avec la solution des moindres carrés ordinaires, nous ajoutons des points dans le graphique ci-dessous.
+Pour voir l’équivalence avec la solution des moindres carrés ordinaires, nous ajoutons des points dans le graphique ci-dessous.
 
 <!-- paragraph -->
 
@@ -132,7 +132,7 @@ gg.lambda+
 
 <!-- paragraph -->
 
-Dans le prochain graphique ci-dessous, nous montrons le chemin en fonction de la norme L1 (arclength), avec quelques points supplémentaires sur une grille régulièrement espacée que nous utiliserons plus tard pour l'animation.
+Dans le prochain graphique ci-dessous, nous montrons le chemin en fonction de la norme L1 (arclength), avec quelques points supplémentaires sur une grille régulièrement espacée que nous utiliserons plus tard pour l’animation.
 
 <!-- paragraph -->
 
@@ -173,19 +173,19 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre que les pondérations aux points de la grille sont cohérentes avec les lignes qui représentent l'ensemble du chemin des solutions.
+Le graphique ci-dessus montre que les pondérations aux points de la grille sont cohérentes avec les lignes qui représentent l’ensemble du chemin des solutions.
 <!-- comment -->
-L'algorithme LARS fournit rapidement des solutions Lasso pour autant de points de grille que vous le souhaitez.
+L’algorithme LARS fournit rapidement des solutions Lasso pour autant de points de grille que vous le souhaitez.
 <!-- comment -->
-Plus précisément, étant donné que l'algorithme LARS ne calcule que les points de changement dans le chemin linéaire par morceaux, sa complexité temporelle ne dépend que du nombre de points de changement (et non du nombre de points de grille).
+Plus précisément, étant donné que l’algorithme LARS ne calcule que les points de changement dans le chemin linéaire par morceaux, sa complexité temporelle ne dépend que du nombre de points de changement (et non du nombre de points de grille).
 
 <!-- paragraph -->
 
-## Visualisation interactive du chemin (path) de la régularisation {#interactive-path-viz}
+## Visualisation interactive de la régularisation {#interactive-path-vis}
 
 <!-- paragraph -->
 
-Le graphique ci-dessous combine le chemin des pondérations du lasso avec le graphique des erreurs d'entraînement/test.
+Le graphique ci-dessous combine les poids du lasso avec le graphique des erreurs de prédiction pour les ensembles entraînement et test.
 
 <!-- paragraph -->
 
@@ -273,7 +273,7 @@ En cliquant sur le premier graphique, on modifie le paramètre de régularisatio
 
 <!-- paragraph -->
 
-```{r ch11-viz-one-split}
+```{r ch11-vis-one-split}
 animint(
   gg.path,
   gg.res,
@@ -289,9 +289,9 @@ animint(
 
 Le refonte ci-dessous comporte deux changements.
 <!-- comment -->
-Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de `set` différentes dans la visualisation précédente (`linetype=set` dans le premier graphique de chemin et `color=set` dans le second graphique de résidus).
+Tout d’abord, vous avez peut-être remarqué qu’il y a deux légendes de `set` différentes dans la visualisation précédente (`linetype=set` dans le premier graphique de chemin et `color=set` dans le second graphique de résidus).
 <!-- comment -->
-Il serait plus facile pour le lecteur de décoder si la variable `set` n'est mappée qu'une seule fois.
+Il serait plus facile pour le lecteur de décoder si la variable `set` n’est mappée qu’une seule fois.
 <!-- comment -->
 Ainsi, dans la visualisation ci-dessous, nous remplaçons le `geom_point()` dans le deuxième graphique par un `geom_segment()` avec `linetype=set`.
 
@@ -299,7 +299,7 @@ Ainsi, dans la visualisation ci-dessous, nous remplaçons le `geom_point()` dans
 
 Deuxièmement, nous avons remplacé le `geom_tallrect()` unique du premier graphique par deux.
 <!-- comment -->
-Le premier `geom_tallrect()` a `showSelected="arclength"` et est utilisé pour afficher la norme L1 (`arclength`) sélectionnée, à l'aide d'un rectangle gris.
+Le premier `geom_tallrect()` a `showSelected="arclength"` et est utilisé pour afficher la norme L1 (`arclength`) sélectionnée, à l’aide d’un rectangle gris.
 <!-- comment -->
 Puisque nous spécifions une durée `duration` pour la variable `arclength` et `key=1`, nous observerons une transition graduelle du rectangle gris sélectionné.
 <!-- comment -->
@@ -309,7 +309,7 @@ Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons
 
 <!-- paragraph -->
 
-```{r ch11-viz-moving-rect}
+```{r ch11-vis-moving-rect}
 tallrect.show.list <- list()
 for(a in tallrect.dt$arclength){
   is.selected <- tallrect.dt$arclength == a
@@ -396,23 +396,23 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons créé une visualisation du modèle d'apprentissage automatique Lasso, qui montre de manière simultanée le chemin de régularisation et les courbes d'erreur.
+Nous avons créé une visualisation du modèle d’apprentissage automatique Lasso, qui montre de manière simultanée le chemin de régularisation et les courbes d’erreur.
 <!-- comment -->
-L'interactivité a été utilisée pour montrer les détails pour différentes valeurs du paramètre de régularisation.
+L’interactivité a été utilisée pour montrer les détails pour différentes valeurs du paramètre de régularisation.
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
 - Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect()`.
 <!-- comment -->
-Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
+Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
 <!-- comment -->
 - Ajoutez un autre nuage de points qui montre les valeurs prédites contre la réponse, avec un `geom_abline()` en arrière-plan pour indiquer une prédiction parfaite.
 <!-- comment -->
-- À quoi ressembleraient les courbes d'erreur si l'on choisissait d'autres répartitions entraînement/validation ?
+- À quoi ressembleraient les courbes d’erreur si l’on choisissait d’autres répartitions entraînement/validation ?
 <!-- comment -->
 Effectuez une validation croisée 4-plis et ajoutez un graphique qui peut être utilisé pour sélectionner le pli de test.
 

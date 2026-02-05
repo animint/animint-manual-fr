@@ -7,11 +7,11 @@ if(FALSE){
 }
 ```
 
-Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel; nous utiliserons des packages `mlr3`.
+Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel ; nous utiliserons des packages `mlr3`.
 
 <!-- comment -->
 
-* Nous démontrons d'abord la pertinence des packages `mlr3` pour la comparaison d'algorithmes d’apprentissage artificiel.
+* Nous démontrons d’abord la pertinence des packages `mlr3` pour la comparaison d’algorithmes d’apprentissage artificiel.
 <!-- comment -->
 * Nous utilisons ensuite `mlr3` pour définir et exécuter une évaluation comparative de plusieurs problèmes de classification binaire, et de plusieurs algorithmes d’apprentissage (plus proches voisins, modèles linéaires, réseaux de neurones).
 <!-- comment -->
@@ -45,7 +45,7 @@ Nous utilisons donc différents packages et analysons ensuite les résultats pou
 <!-- comment -->
 Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
 <!-- comment -->
-En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d'un package à l'autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
+En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d’un package à l’autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
 <!-- comment -->
 Comment adapter un jeux de données à chaque package d’apprentissage ?
 <!-- comment -->
@@ -55,7 +55,7 @@ Le package `mlr3` offre plusieurs fonctions qui simplifient ce type d’analyse,
 
 <!-- comment -->
 
-* Chaque jeu de données est représenté comme un `Task`, c'est-à-dire un tableau de données d’apprentissage accompagné de quelques métadonnées indiquant les colonnes à utiliser pour différents rôles (entrée, sortie, etc.).
+* Chaque jeu de données est représenté comme un `Task`, c’est-à-dire un tableau de données d’apprentissage accompagné de quelques métadonnées indiquant les colonnes à utiliser pour différents rôles (entrée, sortie, etc.).
 <!-- comment -->
 * Chaque algorithme d’apprentissage est représenté comme une classe  `Learner` qui fournit les prédictions dans un type de sortie uniforme (une matrice de probabilités pour chaque classe).
 
@@ -67,7 +67,7 @@ Le code utilisé dans ce chapitre est une version modifiée d’un code pour la 
 
 <!-- comment -->
 
-## Définition et exécution d'une analyse comparative {#exécution-comparaison}
+## Définition et exécution d’une analyse comparative {#exécution-comparaison}
 
 <!-- comment -->
 
@@ -75,9 +75,9 @@ Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes le
 
 <!-- comment -->
 
-* une liste de jeux de données (`Tasks`);
+* une liste de jeux de données (`Tasks`) ;
 <!-- comment -->
-* une liste d’algorithmes d’apprentissage (`Learners`);
+* une liste d’algorithmes d’apprentissage (`Learners`) ;
 <!-- comment -->
 * toutes les itérations d’une méthode de rééchantillonnage (`Resampling`).
 
@@ -87,7 +87,7 @@ Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes le
 
 <!-- comment -->
 
-Nous utilisons d'abord une liste de deux jeux de données.
+Nous utilisons d’abord une liste de deux jeux de données.
 
 ```{r}
 mlr.tasks <- c("spam","sonar")
@@ -186,7 +186,7 @@ knn_learner$param_set$values$k <- paradox::to_tune(1, 40)
 
 Le code ci-dessus précise les bornes de `k` (le nombre de voisins) entre 1 et 40.
 <!-- comment -->
-Le code ci-dessous précise la méthode à utiliser pour la sélection de `k`, c'est-à-dire  une recherche avec 10 valeurs, avec validation croisée à 3 divisions, qui maximise l’aire sous la courbe ROC, (en anglais Area Under the Curve  ou AUC ).
+Le code ci-dessous précise la méthode à utiliser pour la sélection de `k`, c’est-à-dire  une recherche avec 10 valeurs, avec validation croisée à 3 divisions, qui maximise l’aire sous la courbe ROC, (en anglais Area Under the Curve  ou AUC ).
 <!-- comment -->
 Remarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
@@ -311,7 +311,7 @@ if(TRUE){
 
 Si vous souhaitez refaire le calcul pour obtenir ces résultats, exécutez la ligne `benchmark()` ci-dessus.
 <!-- comment -->
-L'exécution pourrait durer plusieurs minutes voire plusieurs heures, selon votre ordinateur.
+L’exécution pourrait durer plusieurs minutes voire plusieurs heures, selon votre ordinateur.
 <!-- comment -->
 Le code `plan("multisession")` implique que chaque combinaison (données, algorithmes, divisions) est traitée par un processeur différent.
 <!-- comment -->
@@ -323,7 +323,7 @@ Pour accélérer le processus, vous pouvez utiliser une grappe de calcul [@Hocki
 
 <!-- comment -->
 
-Tout d'abord, nous définissons les mesures à calculer pour évaluer les prédictions.
+Tout d’abord, nous définissons les mesures à calculer pour évaluer les prédictions.
 
 <!-- comment -->
 
@@ -374,7 +374,7 @@ Le graphique ci-dessus affiche trois cercles pour chaque Y — un cercle pour ch
 <!-- comment -->
 Nous voyons que l’algorithme des plus proches voisins a le plus petit taux d’erreur dans certains jeux de données (`vowel`), tandis que le réseau de neurones (`torch_dense_50`) est meilleur dans d’autres données (`spam`).
 <!-- comment -->
-L'objectif de ce chapitre est d'ajouter l’interactivité à ce graphique, afin de montrer les détails de chaque division de validation croisée.
+L’objectif de ce chapitre est d’ajouter l’interactivité à ce graphique, afin de montrer les détails de chaque division de validation croisée.
 
 <!-- comment -->
 
@@ -398,7 +398,7 @@ Le graphique ci-dessus affiche l’AUC sur l’ensemble test, pour chaque divisi
 <!-- comment -->
 Les résultats d’AUC suggèrent que `zip` est le plus facile d’apprendre, et `sonar` est le plus difficile d’apprendre, ce qui est consistant avec les taux d’erreur affichés dans le graphique précédent.
 <!-- comment -->
-Comme attendu, `featureless` (l’algorithme qui prédit toujours la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction qui est constante. 
+Comme attendu, `featureless` (l’algorithme qui prédit toujours la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction qui est constante.
 <!-- comment -->
 Le code ci-dessous retire les résultats de `featureless`, pour mettre en évidence les autres résultats.
 
@@ -489,7 +489,7 @@ Ci-dessus nous voyons un point pour le seuil par défaut.
 <!-- comment -->
 Il est évident que les différents algorithmes ont différentes valeurs de `FPR` et `TPR`, par défaut.
 <!-- comment -->
-Nous ajoutons également du texte pour l'affichage de la sélection de données et de division de validation croisée.
+Nous ajoutons également du texte pour l’affichage de la sélection de données et de division de validation croisée.
 
 ```{r}
 score_dt[, lev_str := {
@@ -521,7 +521,7 @@ Les rangs calculés ci-dessus sont utilisés dans l’affichage qui suit.
 <!-- comment -->
 Nous créons une visualisation interactive à partir des graphiques de ROC et d’AUC.
 
-```{r viz-auc-roc}
+```{r vis-auc-roc}
 animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split")+
@@ -538,7 +538,7 @@ animint(
       alignment="vertical"))
 ```
 
-Cliquer sur les points d’AUC de la visualisation, permet d'afficher les courbes ROC correspondantes en bas.
+Cliquer sur les points d’AUC de la visualisation, permet d’afficher les courbes ROC correspondantes en bas.
 
 <!-- comment -->
 
@@ -574,7 +574,7 @@ Remarquons que dans le tableau ci-dessus
 * il y a 30 seuils extrêmes pour lesquels les 5 algorithmes sont présents (y compris `featureless`),
 * il y a plusieurs seuils avec 3 algorithmes ou moins et nous ne voulons pas les afficher.
 <!-- comment -->
-Nous voulons conserver uniquement les seuils associés à au moins 4 algorithmes; le code ci-dessous nous le permet.
+Nous voulons conserver uniquement les seuils associés à au moins 4 algorithmes ; le code ci-dessous nous le permet.
 <!-- comment -->
 De plus, pour faciliter la sélection interactive, nous limitons le nombre de seuils à 40, répartis de manière quasi uniforme parmi les valeurs possibles pour le taux de faux positifs.
 
@@ -627,8 +627,8 @@ Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de v
 <!-- comment -->
 Puis nous combinons tous les graphiques précédents dans une visualisation interactive.
 
-```{r viz-select-fpr}
-(viz.select.fpr <- animint(
+```{r vis-select-fpr}
+(vis.select.fpr <- animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split"),
   roc=gg.roc.fpr+
@@ -643,9 +643,9 @@ La visualisation ci-dessus permet de
 
 <!-- comment -->
 
-* cliquer sur le graphique en haut à gauche pour choisir un jeu de données et une division de validation croisée (`task_it`);
+* cliquer sur le graphique en haut à gauche pour choisir un jeu de données et une division de validation croisée (`task_it`) ;
 <!-- comment -->
-* cliquer sur le graphique en haut à droite pour choisir un seuil de taux de faux positifs (`FPR`);
+* cliquer sur le graphique en haut à droite pour choisir un seuil de taux de faux positifs (`FPR`) ;
 <!-- comment -->
 * visualiser les meilleurs taux de vrais positifs, dans le graphique du bas.
 
@@ -665,7 +665,7 @@ Les visualisations précédentes recouraient à des facettes pour afficher l’A
 <!-- comment -->
 Dans cette section, nous proposons d’afficher l’AUC pour un seul jeu de données à la fois.
 <!-- comment -->
-Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations, et de l'AUC maximale, valeurs que nous calculons avec le code ci-dessous.
+Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations, et de l’AUC maximale, valeurs que nous calculons avec le code ci-dessous.
 
 ```{r}
 (summary_dt <- score_dt[, .(
@@ -718,7 +718,7 @@ gg.auc.show.task+facet_grid(task_id ~ .)
 
 Le graphique contient un panneau pour chaque jeu de données.
 <!-- comment -->
-Nous constatons que les valeurs d’AUC varient énormément d'un jeu de données à l'autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
+Nous constatons que les valeurs d’AUC varient énormément d’un jeu de données à l’autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
 <!-- comment -->
 Nous supprimons `featureless` dans le graphique ci-dessous.
 
@@ -757,7 +757,7 @@ Le graphique affiche un panneau pour chaque jeu de données, et pour chaque divi
 <!-- comment -->
 Le code ci-dessous combine ces graphiques dans une visualisation interactive.
 
-```{r viz-two-selectors}
+```{r vis-two-selectors}
 animint(
   summary=gg.summary+
     ggtitle("1. Select task"),
@@ -791,7 +791,7 @@ Le graphique affiche
 
 <!-- comment -->
 
-Il est souvent utile de déterminer s’il existe des différences significatives entre l’AUC de deux algorithmes (les deux ayant l'AUC la plus grande).
+Il est souvent utile de déterminer s’il existe des différences significatives entre l’AUC de deux algorithmes (les deux ayant l’AUC la plus grande).
 Dans cette section, nous calculons des valeurs p pour déterminer si les différences sont significatives.
 <!-- comment -->
 Nous calculons d’abord la moyenne et l’écart type, des divisions de validation croisée.
@@ -1024,7 +1024,7 @@ Nous voyons que
 
 <!-- comment -->
 
-* Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons une AUC maximale avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons une AUC maximale avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre de voisins possible, il ne peut s'agir de sous-apprentissage; nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
+* Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons une AUC maximale avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons une AUC maximale avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre de voisins possible, il ne peut s’agir de sous-apprentissage ; nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
 <!-- comment -->
 * Pour deux jeux de données (`waveform`, `zip`) nous avons une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que nous pourrions éventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le  nombre maximal de voisins, ce qui indique une recherche suffisamment élargie.
 
@@ -1032,7 +1032,7 @@ Nous voyons que
 
 Nous créons ensuite une visualisation interactive pour comprendre le choix du nombre de voisins.
 
-```{r viz-neighbors}
+```{r vis-neighbors}
 animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split"),
@@ -1143,9 +1143,9 @@ Le graphique ci-dessus révèle des caractéristiques importantes :
 
 <!-- comment -->
 
-* il n’y a qu’un minimum pour chaque courbe de perte logistique;
+* il n’y a qu’un minimum pour chaque courbe de perte logistique ;
 <!-- comment -->
-* il peut y avoir plus du’un maximum d’AUC;
+* il peut y avoir plus du’un maximum d’AUC ;
 <!-- comment -->
 * pour l’ensemble de sous-entraînement, l’AUC atteint rapidement le maximum (1), mais la perte logistique continue de diminuer.
 
@@ -1244,8 +1244,8 @@ gg.log.auc <- ggplot()+
 
 Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 
-```{r viz-torch}
-(viz.torch <- animint(
+```{r vis-torch}
+(vis.torch <- animint(
   overview=gg.best.seg+
     theme_animint(width=800, colspan=2, last_in_row=TRUE)+
     ggtitle("Select task and cross-validation iteration"),
@@ -1292,12 +1292,12 @@ Remarquons que dans le code ci-dessus que nous avons utilisé des majuscules pou
 <!-- comment -->
 Nous ajoutons ensuite ce graphique à la visualisation interactive.
 
-```{r viz-torch-log}
-viz.torch.log <- viz.torch
-viz.torch.log$detailsLog <- gg.log.scale+
+```{r vis-torch-log}
+vis.torch.log <- vis.torch
+vis.torch.log$detailsLog <- gg.log.scale+
   ggtitle("Selected learning curves (log scale)")+
   theme(legend.position="none")
-viz.torch.log
+vis.torch.log
 ```
 
 La visualisation contient un graphique en bas à droite, qui affiche l’échelle logarithmique pour la sélection.
@@ -1397,13 +1397,13 @@ Exercices :
 
 <!-- comment -->
 
-* Dans `viz.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
+* Dans `vis.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
 <!-- comment -->
-* Dans `viz.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
+* Dans `vis.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
 <!-- comment -->
 * Le graphique `gg.summary` affiche seulement le max AUC. Rajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
 <!-- comment -->
-* Le graphique `viz.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
+* Le graphique `vis.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
   * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
 <!-- comment -->
@@ -1415,7 +1415,7 @@ Exercices :
 <!-- comment -->
 * Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
-* Dans `viz.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
+* Dans `vis.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
 * Chaque section du chapitre a présenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
 <!-- comment -->
   * Affichez les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch`, nearest neighbors).
@@ -1424,5 +1424,5 @@ Exercices :
 
 <!-- comment -->
 
-Ensuite, [l'annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
+Ensuite, [l’annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
 

@@ -10,17 +10,17 @@ knitr::opts_chunk$set(fig.path="ch13-figures/")
 
 L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la régression de Poisson][(https://en.wikipedia.org/wiki/Poisson_regression)](https://fr.wikipedia.org/wiki/R%C3%A9gression_de_Poisson), un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
 <!-- comment -->
-Il s'agit d'un modèle de « régression linéaire » puisqu'il apprend une fonction linéaire dans l’espace des variables d’entrée.
+Il s’agit d’un modèle de « régression linéaire » puisqu’il apprend une fonction linéaire dans l’espace des variables d’entrée.
 <!-- comment -->
 Comme la régression par les moindres carrés, la régression de Poisson peut être formulée comme un problème de maximum de vraisemblance.
 <!-- comment -->
-Cependant, elle en diffère car elle utilise une distribution de Poisson pour modéliser les étiquettes de sortie, au lieu d'une distribution gaussienne.
+Cependant, elle en diffère car elle utilise une distribution de Poisson pour modéliser les étiquettes de sortie, au lieu d’une distribution gaussienne.
 <!-- comment -->
 Ce choix de modélisation est approprié lorsque les étiquettes de sortie sont des nombres entiers non négatifs.
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
@@ -28,7 +28,7 @@ Plan du chapitre :
 <!-- comment -->
 - Nous ajoutons ensuite un deuxième panneau qui montre la fonction de distribution cumulative.
 <!-- comment -->
-- Nous ajoutons ensuite un second graphique qui montre la perte de Poisson, avec un second sélecteur pour la valeur de l'étiquette.
+- Nous ajoutons ensuite un second graphique qui montre la perte de Poisson, avec un second sélecteur pour la valeur de l’étiquette.
 
 <!-- paragraph -->
 
@@ -36,7 +36,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-L'objectif de cette section est de créer une visualisation des données qui montre la fonction de masse de probabilité pour un paramètre de moyenne de Poisson sélectionné.
+L’objectif de cette section est de créer une visualisation des données qui montre la fonction de masse de probabilité pour un paramètre de moyenne de Poisson sélectionné.
 
 <!-- paragraph -->
 
@@ -99,13 +99,13 @@ prob.mass+
 
 Notez que nous avons utilisé `alpha=0.6` avec `geom_tallrect()` ce qui signifie que le `tallrect` correspondant à la moyenne sélectionnée a une opacité de 0,6 et que les autres `tallrects` ont une opacité de 0,1.
 <!-- comment -->
-Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point()` afin qu'il soit plus facile de voir les points sur un fond gris et de passer le curseur sur les points pour voir l'infobulle.
+Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point()` afin qu’il soit plus facile de voir les points sur un fond gris et de passer le curseur sur les points pour voir l’infobulle.
 <!-- comment -->
 Nous allons maintenant créer une version interactive avec `animint2`.
 
 <!-- paragraph -->
 
-```{r ch13-viz-prob}
+```{r ch13-vis-prob}
 animint(prob.mass)
 ```
 
@@ -117,7 +117,7 @@ Vous pouvez également survoler un point de données avec le curseur pour voir s
 <!-- comment -->
 Notez que pour les valeurs entières de la moyenne de Poisson, il existe deux étiquettes qui sont les plus probables (le mode de la distribution de Poisson).
 <!-- comment -->
-Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabilité maximale d'environ 0,224 pour des valeurs d'étiquettes de 2 et 3.
+Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabilité maximale d’environ 0,224 pour des valeurs d’étiquettes de 2 et 3.
 
 <!-- paragraph -->
 
@@ -125,7 +125,7 @@ Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabi
 
 <!-- paragraph -->
 
-Pour ajouter un panneau à la fonction de répartition, nous allons modifier le ggplot en suivant l'esquisse ci-dessous.
+Pour ajouter un panneau à la fonction de répartition, nous allons modifier le ggplot en suivant l’esquisse ci-dessous.
 
 <!-- paragraph -->
 
@@ -137,7 +137,7 @@ Lorsque nous spécifions les ensembles de données, nous utilisons la méthode [
 
 <!-- paragraph -->
 
-```{r ch13-viz-cum-prob}
+```{r ch13-vis-cum-prob}
 addPanel <- function(dt, panel){
   data.table(dt, panel=factor(panel, c("probability", "cum prob")))
 }
@@ -176,21 +176,21 @@ animint(
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé `addPanel` pour ajouter une variable `panel` à tous les ensembles de données pour chaque geom, à l'exception de `geom_tallrect()`.
+Notez que nous avons utilisé `addPanel` pour ajouter une variable `panel` à tous les ensembles de données pour chaque geom, à l’exception de `geom_tallrect()`.
 <!-- comment -->
-Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom dans un seul panneau, à l'exception de `geom_tallrect()` qui est dessiné dans chaque panneau.
+Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom dans un seul panneau, à l’exception de `geom_tallrect()` qui est dessiné dans chaque panneau.
 
 <!-- paragraph -->
 
-Notez l'utilisation d'un `geom_hline()` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
+Notez l’utilisation d’un `geom_hline()` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l’ensemble des points à tracer pour chaque distribution de Poisson.
 
 <!-- paragraph -->
 
-## Ajout d'un graphique de la perte de Poisson et d'un sélecteur pour la valeur de l'étiquette. {#plot-loss}
+## Ajout d’un graphique de la perte de Poisson et d’un sélecteur pour la valeur de l’étiquette. {#plot-loss}
 
 <!-- paragraph -->
 
-Nous allons ensuite calculer la perte de Poisson pour plusieurs valeurs de l'étiquette de sortie.
+Nous allons ensuite calculer la perte de Poisson pour plusieurs valeurs de l’étiquette de sortie.
 
 <!-- paragraph -->
 
@@ -218,7 +218,7 @@ PoissonLoss <- function(label, seg.mean){
 
 <!-- paragraph -->
 
-Ci-dessous, nous calculons la perte pour plusieurs valeurs d'étiquettes, en utilisant la méthode [Liste de tableau de données](/ch99#list-of-data-tables).
+Ci-dessous, nous calculons la perte pour plusieurs valeurs d’étiquettes, en utilisant la méthode [Liste de tableau de données](/ch99#list-of-data-tables).
 
 <!-- paragraph -->
 
@@ -241,7 +241,7 @@ loss.min <- do.call(rbind, loss.min.list)
 
 <!-- paragraph -->
 
-Nous créons également un tableau de données afin d'afficher des étiquettes de texte pour les valeurs de moyenne et d'étiquette sélectionnées.
+Nous créons également un tableau de données afin d’afficher des étiquettes de texte pour les valeurs de moyenne et d’étiquette sélectionnées.
 
 <!-- paragraph -->
 
@@ -263,8 +263,8 @@ Ensuite, nous créons une visualisation des données avec un panneau supplément
 
 <!-- paragraph -->
 
-```{r ch13-viz-loss}
-(viz.loss <- animint(
+```{r ch13-vis-loss}
+(vis.loss <- animint(
   prob=ggplot()+
     theme_bw()+
     theme(panel.margin=grid::unit(0, "cm"))+
@@ -328,15 +328,15 @@ La visualisation des données ci-dessus montre la probabilité à gauche et la p
 
 <!-- paragraph -->
 
-```{r ch13-viz-log-loss}
-viz.log.loss <- viz.loss
+```{r ch13-vis-log-loss}
+vis.log.loss <- vis.loss
 addX <- function(dt, x.var)data.table(dt, x.var=factor(
   x.var, c("poisson mean", "log(poisson mean)")))
 finite.loss <- loss.fun[is.finite(loss)]
 finite.loss[, log.poisson.mean := log(poisson.mean)]
 finite.log.loss <- finite.loss[is.finite(log.poisson.mean)]
 mean.tallrects[, log.min := ifelse(min < 0, -Inf, log(min))]
-viz.log.loss$loss <- ggplot()+
+vis.log.loss$loss <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
   facet_grid(. ~ x.var, scales="free")+
@@ -374,7 +374,7 @@ viz.log.loss$loss <- ggplot()+
     clickSelects="poisson.mean",
     alpha=0.6,
     data=addX(mean.tallrects, "log(poisson mean)"))
-viz.log.loss
+vis.log.loss
 ```
 
 <!-- paragraph -->
@@ -387,11 +387,11 @@ Nous avons expliqué comment visualiser la distribution et la perte de Poisson, 
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
-- Le code ci-dessus utilisait les fonctions d'aide `addPanel` et `addX` avec plusieurs geoms pour créer des graphiques multi-panneaux, ce qui entraîne des répétitions.
+- Le code ci-dessus utilisait les fonctions d’aide `addPanel` et `addX` avec plusieurs geoms pour créer des graphiques multi-panneaux, ce qui entraîne des répétitions.
 <!-- comment -->
 Pour les éviter, créez une nouvelle visualisation des données qui utilise un seul geom avec un ensemble de données plus important.
 <!-- comment -->

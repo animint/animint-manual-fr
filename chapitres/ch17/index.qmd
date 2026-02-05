@@ -8,29 +8,29 @@ knitr::opts_chunk$set(fig.path="ch17-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations de l'agrégation (clustering) par K-moyennes, un algorithme d'apprentissage non supervisé.
+Dans ce chapitre, nous allons explorer plusieurs visualisations de l’agrégation (clustering) par K-moyennes, un algorithme d’apprentissage non supervisé.
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
 - Nous commençons par visualiser deux caractéristiques des données Iris.
 <!-- comment -->
-- Nous choisissons de manière aléatoire K=trois points de données à utiliser comme centres d'agrégation.
+- Nous choisissons de manière aléatoire K=trois points de données à utiliser comme centres d’agrégation.
 <!-- comment -->
-- Nous expliquons comment calculer et visualiser la distance entre les points de données et les centres d'agrégation.
+- Nous expliquons comment calculer et visualiser la distance entre les points de données et les centres d’agrégation.
 <!-- comment -->
-- Nous terminons par une visualisation de l'évolution des paramètres du modèle K-moyennes à chaque itération.
+- Nous terminons par une visualisation de l’évolution des paramètres du modèle K-moyennes à chaque itération.
 
 <!-- paragraph -->
 
-## Visualisation des données de l'iris avec des étiquettes {#viz-iris}
+## Visualisation des données de l’iris avec des étiquettes {#vis-iris}
 
 <!-- paragraph -->
 
-Nous commençons par une visualisation typique des données de l'iris, comprenant une légende de couleurs pour indiquer les Espèces.
+Nous commençons par une visualisation typique des données de l’iris, comprenant une légende de couleurs pour indiquer les Espèces.
 
 <!-- paragraph -->
 
@@ -54,7 +54,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Nous allons illustrer l'algorithme d'agrégation K-moyennes à l'aide de ces deux dimensions.
+Nous allons illustrer l’algorithme d’agrégation K-moyennes à l’aide de ces deux dimensions.
 
 <!-- paragraph -->
 
@@ -66,9 +66,9 @@ str(data.mat)
 
 <!-- paragraph -->
 
-Pour exécuter K-moyennes, l'hyperparamètre du nombre d'agrégations (K) doit être fixé à l'avance.
+Pour exécuter K-moyennes, l’hyperparamètre du nombre d’agrégations (K) doit être fixé à l’avance.
 <!-- comment -->
-Ensuite, les K-points de données aléatoires sont sélectionnés comme centres d'agrégation initiaux,
+Ensuite, les K-points de données aléatoires sont sélectionnés comme centres d’agrégation initiaux,
 
 <!-- paragraph -->
 
@@ -96,9 +96,9 @@ gg.centers
 
 <!-- paragraph -->
 
-Ci-dessus, nous avons affiché les deux ensembles de données (centres d'agrégation et données) à l'aide de deux instances de `geom_point()`.
+Ci-dessus, nous avons affiché les deux ensembles de données (centres d’agrégation et données) à l’aide de deux instances de `geom_point()`.
 <!-- comment -->
-Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d'agrégation,
+Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d’agrégation,
 
 <!-- paragraph -->
 
@@ -110,7 +110,7 @@ pairs.dt <- data.table(expand.grid(
 
 <!-- paragraph -->
 
-Ces éléments peuvent être visualisés à l'aide d'un `geom_point()`,
+Ces éléments peuvent être visualisés à l’aide d’un `geom_point()`,
 
 <!-- paragraph -->
 
@@ -129,7 +129,7 @@ gg.centers+
 
 <!-- paragraph -->
 
-Il y a `r nrow(seg.dt)` segments superposés ci-dessus, de sorte que l'interactivité serait utile pour mettre en évidence les segments connectés à un point de données précis.
+Il y a `r nrow(seg.dt)` segments superposés ci-dessus, de sorte que l’interactivité serait utile pour mettre en évidence les segments connectés à un point de données précis.
 <!-- comment -->
 Pour ce faire, nous créons une variable de sélection `data.i`,
 
@@ -163,29 +163,29 @@ animint(
 
 <!-- paragraph -->
 
-Dans la visualisation des données ci-dessus, vous pouvez cliquer sur un point de données pour afficher les distances entre ce point et chaque centre d'agrégation.
+Dans la visualisation des données ci-dessus, vous pouvez cliquer sur un point de données pour afficher les distances entre ce point et chaque centre d’agrégation.
 
 <!-- paragraph -->
 
-Exercices pour cette section :
+Exercices pour cette section :
 
 <!-- paragraph -->
 
 - Modifier les échelles x/y de façon à ce que les mêmes tics soient représentés.
 <!-- comment -->
-- Modifier la couleur de chaque segment pour qu'elle soit la même que l'agrégation correspondante.
+- Modifier la couleur de chaque segment pour qu’elle soit la même que l’agrégation correspondante.
 <!-- comment -->
 - Ajouter une infobulle qui indique la valeur de la distance.
 <!-- comment -->
-- Faire varier la largeur du segment en fonction de son optimalité (le segment connecté au centre de l'agrégation la plus proche devrait être mis en évidence par une largeur plus élevée).
+- Faire varier la largeur du segment en fonction de son optimalité (le segment connecté au centre de l’agrégation la plus proche devrait être mis en évidence par une largeur plus élevée).
 
 <!-- paragraph -->
 
-## Visualisation des itérations de l'algorithme {#viz-iterations}
+## Visualisation des itérations de l’algorithme {#vis-iterations}
 
 <!-- paragraph -->
 
-Nous calculons le centre d'agrégation le plus proche pour chaque point de données,
+Nous calculons le centre d’agrégation le plus proche pour chaque point de données,
 
 <!-- paragraph -->
 
@@ -213,7 +213,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Ensuite, nous mettons à jour les centres d'agrégation,
+Ensuite, nous mettons à jour les centres d’agrégation,
 
 <!-- paragraph -->
 
@@ -237,7 +237,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Les visualisations ci-dessus montrent donc les étapes de la méthode K-moyennes : (1) mise à jour de l'agrégation sur la base du centre le plus proche (2) mise à jour du centre sur la base des données affectées à cette agrégation.
+Les visualisations ci-dessus montrent donc les étapes de la méthode K-moyennes : (1) mise à jour de l’agrégation sur la base du centre le plus proche (2) mise à jour du centre sur la base des données affectées à cette agrégation.
 <!-- comment -->
 Pour visualiser plusieurs itérations des deux étapes ci-dessus, nous pouvons utiliser une boucle for,
 
@@ -274,7 +274,7 @@ for(iteration in 1:20){
 
 <!-- paragraph -->
 
-Nous commençons par créer un graphique d'ensemble avec une courbe d'erreur qui servira à sélectionner la taille du modèle,
+Nous commençons par créer un graphique d’ensemble avec une courbe d’erreur qui servira à sélectionner la taille du modèle,
 
 <!-- paragraph -->
 
@@ -289,7 +289,7 @@ gg.err <- ggplot()+
 
 <!-- paragraph -->
 
-Nous créons également un graphique qui indique l'itération en cours,
+Nous créons également un graphique qui indique l’itération en cours,
 
 <!-- paragraph -->
 
@@ -309,7 +309,7 @@ gg.iteration
 
 <!-- paragraph -->
 
-La combinaison des deux graphiques permet d'obtenir une visualisation des données interactive,
+La combinaison des deux graphiques permet d’obtenir une visualisation des données interactive,
 
 <!-- paragraph -->
 
@@ -323,7 +323,7 @@ animint(gg.err, gg.iteration)
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
@@ -331,35 +331,35 @@ Exercices :
 <!-- comment -->
 - Ajoutez des transitions en douceur.
 <!-- comment -->
-- Ajoutez une animation sur la variable d'itération.
+- Ajoutez une animation sur la variable d’itération.
 <!-- comment -->
-- Le code actuel impose un nombre maximum d'itérations, il est donc possible que les dernières ne progressent pas.
+- Le code actuel impose un nombre maximum d’itérations, il est donc possible que les dernières ne progressent pas.
 <!-- comment -->
-Par exemple, dans l'image ci-dessus, l'itération 16 est la dernière à réduire l'erreur (les itérations 17 à 20 n'entraînent aucune diminution).
+Par exemple, dans l’image ci-dessus, l’itération 16 est la dernière à réduire l’erreur (les itérations 17 à 20 n’entraînent aucune diminution).
 <!-- comment -->
-Modifiez le code pour qu'il arrête l'itération s'il n'y a pas de diminution de l'erreur.
+Modifiez le code pour qu’il arrête l’itération s’il n’y a pas de diminution de l’erreur.
 <!-- comment -->
-- La visualisation actuelle n'a qu'un seul cadre d'animation (sous-ensemble `showSelected`) par itération (la moyenne est affichée avant sa mise à jour).
+- La visualisation actuelle n’a qu’un seul cadre d’animation (sous-ensemble `showSelected`) par itération (la moyenne est affichée avant sa mise à jour).
 <!-- comment -->
-Ajoutez un autre cadre d'animation qui montre la moyenne après la mise à jour.
+Ajoutez un autre cadre d’animation qui montre la moyenne après la mise à jour.
 <!-- comment -->
-- Ajoutez des segments interactifs qui montrent la distance entre chaque point de données et chaque centre d'agrégation (comme dans le premier animint de cette page).
+- Ajoutez des segments interactifs qui montrent la distance entre chaque point de données et chaque centre d’agrégation (comme dans le premier animint de cette page).
 <!-- comment -->
 - Ajoutez les fonctionnalités décrites dans les exercices de la section précédente.
 <!-- comment -->
-- Calculez les résultats pour différentes graines aléatoires, puis affichez les taux d'erreur correspondants sur le graphique d'aperçu des erreurs. Permettez ensuite à l'utilisateur de sélectionner n'importe lequel de ces résultats.
+- Calculez les résultats pour différentes graines aléatoires, puis affichez les taux d’erreur correspondants sur le graphique d’aperçu des erreurs. Permettez ensuite à l’utilisateur de sélectionner n’importe lequel de ces résultats.
 <!-- comment -->
-- Calculez les résultats pour plusieurs nombres d'agrégations (K).
+- Calculez les résultats pour plusieurs nombres d’agrégations (K).
 <!-- comment -->
 Calculez l'indice de Rand ajusté en utilisant `pdfCluster::adj.rand.index(species, cluster)` pour chaque K et graine aléatoire différents.
 <!-- comment -->
-Ajoutez un graphique d'ensemble qui montre la valeur ARI de chaque modèle et autorise la sélection du nombre d'agrégations.
+Ajoutez un graphique d’ensemble qui montre la valeur ARI de chaque modèle et autorise la sélection du nombre d’agrégations.
 <!-- comment -->
 - Effectuez une visualisation similaire en utilisant un autre ensemble de données tel que `data("penguins", package="palmerpenguins")`.
 
 <!-- paragraph -->
 
-Ensuite, dans le [chapitre 18](/ch18), nous vous expliquerons comment visualiser l'algorithme d'apprentissage par descente de gradient pour l'apprentissage des réseaux neuronaux.
+Ensuite, dans le [chapitre 18](/ch18), nous vous expliquerons comment visualiser l’algorithme d’apprentissage par descente de gradient pour l’apprentissage des réseaux neuronaux.
 
 <!-- paragraph -->
 
