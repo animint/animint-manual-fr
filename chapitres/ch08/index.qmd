@@ -97,10 +97,8 @@ FACETS <- function(df, top, side){
 
 <!-- paragraph -->
 
-Notez que les niveaux des facteurs détermineront l'ordre des facettes dans le ggplot.
-<!-- comment -->
-Il s’agit d’un exemple de la méthode [rajouter une colonne pour facettes](/ch99#addColumn-then-facet).
-<!-- comment -->
+Le code ci-dessus est un exemple de la méthode [rajouter une colonne et facettes](/ch99#addColumn-then-facet).
+Notez que les niveaux des facteurs détermineront l'ordre des facettes dans l’affichage.
 Nous définissons ci-dessous trois fonctions, une pour chaque facette :
 
 <!-- paragraph -->
