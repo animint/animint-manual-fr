@@ -176,9 +176,7 @@ La structure du chapitre est la suivante :
 
 <!-- paragraph -->
 
-### Qu’est-ce que l’analyse des données?
-<!-- comment -->
-{#data}
+### Qu’est-ce que l’analyse des données? {#data}
 
 <!-- paragraph -->
 
@@ -188,7 +186,7 @@ Tout le monde peut créer des données, simplement en consignant méthodiquement
 <!-- comment -->
 En général, les données sont créées pour répondre à une question précise et sont organisées en tableaux comportant des lignes pour les observations et des colonnes pour les variables ou différents types d'informations.
 <!-- comment -->
-D’après Larousse, « donnée » désigne la « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée]. https://www.larousse.fr/dictionnaires/francais/donnée
+D’après Larousse, « donnée » désigne la « représentation conventionnelle d'une information en vue de son traitement informatique » [@larousse_donnée].
 Dans le cas de `animint2`, la représentation conventionnelle est un tableau, dans lequel chaque ligne correspond à une observation, et chaque colonne à une variable.
 <!-- comment -->
 Nous utilisons le terme « ensemble de données »  pour désigner un sous-ensemble d'observations/de lignes, ou le tableau de données dans son intégralité.
@@ -307,14 +305,14 @@ year.int <- as.integer(floor(time(co2)))
 month.int <- as.integer(time(co2) %% 1 * 12 + 1)
 year.month.chr <- sprintf("%d-%02d-15", year.int, month.int)
 year.month.POSIXct <- as.POSIXct(strptime(year.month.chr, "%Y-%m-%d"))
-hidden <- Sys.setlocale("LC_TIME", "C")
+hidden <- Sys.setlocale("LC_TIME", "fr_CA.utf8")
 month.str <- strftime(year.month.POSIXct, "%B")
-month <- factor(month.str, month.str[1:12])
+mois <- factor(month.str, month.str[1:12])
 library(data.table)
 co2.details <- data.table(
   year.int,
   month.int,
-  month,
+  mois,
   year.month.POSIXct,
   ppm=as.numeric(co2))
 co2.details
@@ -331,13 +329,13 @@ Nous allons donc créer une visualisation des données statique :
 
 ```{r, echo=FALSE}
 library(animint2)
-extremes <- co2.details[month.int %in% c(5, 10),]
+extremes <- co2.details[month.int %in% c(5, 10)]
 ggplot()+
   geom_line(aes(
     year.month.POSIXct, ppm),
     data=co2.details)+
   geom_point(aes(
-    year.month.POSIXct, ppm, color=month),
+    year.month.POSIXct, ppm, color=mois),
     data=extremes)+
   xlab("Moment de la mesure")+
   ylab("CO₂ atmosphérique (ppm)")
@@ -401,7 +399,7 @@ TimeSeries <- ggplot()+
     size=1,
     data=co2.details)+
   geom_point(aes(
-    year.month.POSIXct, ppm, color=month),
+    year.month.POSIXct, ppm, color=mois),
     data=co2.details)+
   xlab("Moment de la mesure")+
   ylab("CO₂ atmosphérique (ppm)")
@@ -423,7 +421,7 @@ Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant
 ```{r ch01-viz-Keeling, echo=FALSE}
 animint(
   TimeSeries,
-  first=list(month=c("May", "October")))
+  first=list(mois=c("mai", "octobre")))
 ```
 
 <!-- paragraph -->
