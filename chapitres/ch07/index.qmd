@@ -97,7 +97,7 @@ Utiliser `showSelected` au lieu des facettes ne donne pas le même résultat.
 
 <!-- paragraph -->
 
-```{r ch07-viz-stat}
+```{r ch07-vis-stat}
 animint(ggstat, duration = list(facette = 1000))
 ```
 
@@ -131,7 +131,7 @@ Notez que nous avons utilisé `geom_segment()` au lieu de `geom_bar()`, mais que
 
 <!-- paragraph -->
 
-```{r ch07-viz-identity}
+```{r ch07-vis-identity}
 animint(ggidentity, duration = list(facette = 1000))
 ```
 
@@ -190,8 +190,8 @@ Le graphique de gauche devrait être le même que le ggplot ci-dessus, mais il y
 
 <!-- paragraph -->
 
-```{r ch07-viz-just}
-(viz.just <- animint(
+```{r ch07-vis-just}
+(vis.just <- animint(
   vjust=gg.vjust+
     ggtitle("aes(vjust) ne marche pas avec geom_text"),
   workaround=gg.lines+
@@ -246,7 +246,7 @@ Cependant, `animint2` ne prend en charge que le tracé de la première ligne de 
 
 <!-- paragraph -->
 
-```{r ch07-viz-return}
+```{r ch07-vis-return}
 animint(gg.return)
 ```
 
@@ -262,7 +262,7 @@ En attendant, la solution de contournement consiste à utiliser un seul `geom_te
 
 <!-- paragraph -->
 
-```{r ch07-viz-two-lines}
+```{r ch07-vis-two-lines}
 gg.two.lines <- ggplot()+
   geom_text(aes(
     hjust, vjust, label=sprintf("x=%.1f", hjust)),
@@ -347,7 +347,7 @@ En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n’utilisant
 
 <!-- paragraph -->
 
-```{r ch07-viz-strips}
+```{r ch07-vis-strips}
 animint(two.strips+ggtitle("only one strip label"))
 ```
 

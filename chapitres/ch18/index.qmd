@@ -29,7 +29,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Visualisation des données simulées {#viz-sim}
+## Visualisation des données simulées {#vis-sim}
 
 <!-- paragraph -->
 
@@ -140,7 +140,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-## Visualiser la fonction de classification optimale de Bayes {#viz-bayes-fun}
+## Visualiser la fonction de classification optimale de Bayes {#vis-bayes-fun}
 
 <!-- paragraph -->
 

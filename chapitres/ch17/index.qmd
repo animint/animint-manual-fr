@@ -26,7 +26,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Visualisation des données de l’iris avec des étiquettes {#viz-iris}
+## Visualisation des données de l’iris avec des étiquettes {#vis-iris}
 
 <!-- paragraph -->
 
@@ -181,7 +181,7 @@ Exercices pour cette section :
 
 <!-- paragraph -->
 
-## Visualisation des itérations de l’algorithme {#viz-iterations}
+## Visualisation des itérations de l’algorithme {#vis-iterations}
 
 <!-- paragraph -->
 

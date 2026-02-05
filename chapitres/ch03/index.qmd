@@ -153,7 +153,7 @@ En revanche, fournir le code ci-dessus comme argument pour `animint()` produit l
 
 <!-- comment -->
 
-```{r ch03-viz-scatter}
+```{r ch03-vis-scatter}
 animint(nuage)
 ```
 
@@ -302,8 +302,8 @@ Pour spécifier une durée de transition par défaut pour la variable `année`, 
 
 <!-- comment -->
 
-```{r ch03-viz-duration}
-(viz.duration <- animint(nuage.key, duration=list(année=2000)))
+```{r ch03-vis-duration}
+(vis.duration <- animint(nuage.key, duration=list(année=2000)))
 ```
 
 <!-- comment -->
@@ -336,10 +336,10 @@ L’option `time` permet de spécifier une variable à utiliser pour l’animati
 <!-- comment -->
 Dans le code ci-dessous, on utilise l’option `time` pour définir `année` comme variable d’animation, et mettre l’animation à jour toutes les 2000 millisecondes.
 
-```{r ch03-viz-duration-time}
-viz.duration.time <- viz.duration
-viz.duration.time$time <- list(variable="année", ms=2000)
-viz.duration.time
+```{r ch03-vis-duration-time}
+vis.duration.time <- vis.duration
+vis.duration.time$time <- list(variable="année", ms=2000)
+vis.duration.time
 ```
 
 On dit que la visualisation ci-dessus est animée, parce que la sélection pour `année` change toutes les deux secondes.

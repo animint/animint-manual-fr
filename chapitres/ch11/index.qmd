@@ -181,11 +181,11 @@ Plus précisément, étant donné que l’algorithme LARS ne calcule que les poi
 
 <!-- paragraph -->
 
-## Visualisation interactive du chemin (path) de la régularisation {#interactive-path-viz}
+## Visualisation interactive de la régularisation {#interactive-path-vis}
 
 <!-- paragraph -->
 
-Le graphique ci-dessous combine le chemin des pondérations du lasso avec le graphique des erreurs d’entraînement/test.
+Le graphique ci-dessous combine les poids du lasso avec le graphique des erreurs de prédiction pour les ensembles entraînement et test.
 
 <!-- paragraph -->
 
@@ -273,7 +273,7 @@ En cliquant sur le premier graphique, on modifie le paramètre de régularisatio
 
 <!-- paragraph -->
 
-```{r ch11-viz-one-split}
+```{r ch11-vis-one-split}
 animint(
   gg.path,
   gg.res,
@@ -309,7 +309,7 @@ Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons
 
 <!-- paragraph -->
 
-```{r ch11-viz-moving-rect}
+```{r ch11-vis-moving-rect}
 tallrect.show.list <- list()
 for(a in tallrect.dt$arclength){
   is.selected <- tallrect.dt$arclength == a

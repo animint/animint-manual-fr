@@ -316,8 +316,8 @@ Le code ci-dessous combine la carte thermique du volcan avec un nuage de points 
 
 <!-- paragraph -->
 
-```{r ch19-viz-volcano}
-(viz.volcano <- animint(
+```{r ch19-vis-volcano}
+(vis.volcano <- animint(
   volcanoTiles=gg.volcano.tiles+
     ggtitle("Click to select volcano tile")+
     theme_animint(width=300, rowspan=1)+
@@ -345,7 +345,7 @@ Ci-dessus, après avoir cliqué sur la carte thermique de gauche, les données a
 
 <!-- paragraph -->
 
-## Visualisation d’une grille de simulations {#viz-grid-simulations}
+## Visualisation d’une grille de simulations {#vis-grid-simulations}
 
 <!-- paragraph -->
 
@@ -493,8 +493,8 @@ Ci-dessous, nous créons une visualisation qui relie la carte thermique d’ense
 
 <!-- paragraph -->
 
-```{r ch19-viz-true-tiles}
-(viz.parameters <- animint(
+```{r ch19-vis-true-tiles}
+(vis.parameters <- animint(
   tiles=gg.true.tiles+
     ggtitle("Click to select simulation parameters")+
     theme_animint(width=800, height=250, last_in_row=TRUE)+
@@ -545,13 +545,13 @@ Exercices :
 
 <!-- paragraph -->
 
-- Dans `viz.volcano`, en cliquant sur l’une des `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
+- Dans `vis.volcano`, en cliquant sur l’une des `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
 <!-- comment -->
 Pour corriger ce problème et occuper tout l’espace, revenez à la définition de `round_neg.log10.p` et utiliser l’argument `offset=0.5` dans `round_rel()` qui décale les valeurs relatives d’un certain décalage.
 <!-- comment -->
-- Dans `viz.volcano`, ajoutez `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
+- Dans `vis.volcano`, ajoutez `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
 <!-- comment -->
-- Notez que deux `geom_tile()` ont été utilisés dans `viz.volcano` et deux `geom_rect()` ont été utilisés dans `viz.parameters`.
+- Notez que deux `geom_tile()` ont été utilisés dans `vis.volcano` et deux `geom_rect()` ont été utilisés dans `vis.parameters`.
 <!-- comment -->
 Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise `fill="transparent"` avec `color="green"` pour la sélection.
 <!-- comment -->
@@ -559,11 +559,11 @@ Essayez une refonte avec un seul geom, qui n’utilise que des `aes(fill)` et ut
 <!-- comment -->
 Quels sont les inconvénients de l’approche utilisant un seul geom ?
 <!-- comment -->
-- Dans `viz.parameters`, ajoutez `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
+- Dans `vis.parameters`, ajoutez `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
 <!-- comment -->
-- Dans `viz.parameters$zoom`, ajoutez `geom_segment()` pour représenter la différence entre les moyennes de chaque essai, en utilisant `aes(linetype=signficant)` pour montrer quelles différences sont significatives au seuil traditionnel de la valeur-p de `0.05`.
+- Dans `vis.parameters$zoom`, ajoutez `geom_segment()` pour représenter la différence entre les moyennes de chaque essai, en utilisant `aes(linetype=signficant)` pour montrer quelles différences sont significatives au seuil traditionnel de la valeur-p de `0.05`.
 <!-- comment -->
-- Dans `viz.parameters$zoom`, ajoutez `geom_point()` pour représenter la moyenne de chaque essai et de chaque condition.
+- Dans `vis.parameters$zoom`, ajoutez `geom_point()` pour représenter la moyenne de chaque essai et de chaque condition.
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
@@ -571,17 +571,17 @@ Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geo
 <!-- comment -->
 - Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->
-- Ajoutez une animation à `viz.parameters` de manière à ce qu’une nouvelle combinaison de paramètres apparaisse toutes les secondes.
+- Ajoutez une animation à `vis.parameters` de manière à ce qu’une nouvelle combinaison de paramètres apparaisse toutes les secondes.
 <!-- comment -->
-- Ajoutez `first` à `viz.parameters` afin que la première sélection affichée corresponde à l’une des combinaisons de paramètres présentées dans le graphique statique à facettes.
+- Ajoutez `first` à `vis.parameters` afin que la première sélection affichée corresponde à l’une des combinaisons de paramètres présentées dans le graphique statique à facettes.
 <!-- comment -->
-- Combinez `viz.volcano` avec `viz.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
+- Combinez `vis.volcano` avec `vis.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
 <!-- comment -->
 Différents types d’interactions sont possibles : - Dans `volcanoZoom`, utilisez `clickSelects="true_tile"` pour que l’interactivité permette de mapper les points du graphique volcan dans l’espace des paramètres de simulation.
 <!-- comment -->
 Ajoutez des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais pour la combinaison de paramètres sélectionnée apparaissent dans l’espace du graphique du volcan.
 <!-- comment -->
-- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial`, puis utilisez-la pour `clickSelects` dans les deux `volcanoZoom` et `viz.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l’espace volcan et un essai dans le graphique des détails du zoom sur les paramètres.
+- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial`, puis utilisez-la pour `clickSelects` dans les deux `volcanoZoom` et `vis.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l’espace volcan et un essai dans le graphique des détails du zoom sur les paramètres.
 
 <!-- paragraph -->
 

@@ -419,7 +419,7 @@ Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant
 
 <!-- paragraph -->
 
-```{r ch01-viz-Keeling, echo=FALSE}
+```{r ch01-vis-Keeling, echo=FALSE}
 animint(
   TimeSeries,
   first=list(mois=c("mai", "octobre")))

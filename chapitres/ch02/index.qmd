@@ -213,7 +213,7 @@ L’étape suivante consiste à utiliser les notes de l’esquisse pour coder un
 
 <!-- comment -->
 
-```{r ch02-viz-scatter-ggplot}
+```{r ch02-vis-scatter-ggplot}
 (nuage_de_points <- ggplot()+
   geom_point(
     mapping=aes(x=espérance.de.vie, y=taux.de.fertilité, color=région),
@@ -240,7 +240,7 @@ Le ggplot de la section précédente peut être affiché avec `animint2`, en uti
 
 <!-- comment -->
 
-```{r ch02-viz-scatter-animint}
+```{r ch02-vis-scatter-animint}
 animint(nuage_de_points)
 ```
 
@@ -292,7 +292,7 @@ Nous traduisons cette esquisse en code R :
 
 <!-- comment -->
 
-```{r ch02-viz-two-layer-viz}
+```{r ch02-vis-two-layer-vis}
 banque_mondiale_avant_1975 <- subset(
   banque_mondiale, 1970 <= année & année <= 1975)
 gg_deux_couches <- nuage_de_points+
@@ -349,7 +349,7 @@ Ci-dessous, nous ajoutons une autre couche avec une étiquette de texte pour cha
 
 <!-- comment -->
 
-```{r ch02-viz-three-layer-viz}
+```{r ch02-vis-three-layer-vis}
 gg_trois_couches <- gg_deux_couches+
   geom_text(aes(
     x=espérance.de.vie, 
@@ -431,7 +431,7 @@ Puisque la liste contient deux ggplots, `animint2` affiche la visualisation sous
 
 <!-- comment -->
 
-```{r ch02-viz-two-plots}
+```{r ch02-vis-two-plots}
 vis.deux.graphes
 ```
 
@@ -516,7 +516,7 @@ Nous traduisons cette esquisse en code R ci-dessous :
 
 <!-- comment -->
 
-```{r ch02-viz-aligned}
+```{r ch02-vis-aligned}
 add.x.var <- function(df, x.var){
   data.frame(df, x.var=factor(x.var, c("espérance de vie", "année")))
 }
@@ -642,7 +642,7 @@ Ci-dessous, nous appliquons les facettes sur la variable `afficher.année` pour 
 
 <!-- comment -->
 
-```{r ch02-viz-panels}
+```{r ch02-vis-panels}
 animint(
   scatter=ggplot()+
     geom_point(aes(

@@ -481,7 +481,7 @@ Enfin, nous combinons les deux `ggplots` et les affichons sous forme d’`animin
 
 <!-- paragraph -->
 
-```{r ch10-viz-static}
+```{r ch10-vis-static}
 animint(
   errorPlotStatic+
     theme_animint(width=300),
@@ -795,7 +795,7 @@ Enfin, nous combinons les deux graphiques dans une visualisation des données un
 
 <!-- paragraph -->
 
-```{r ch10-viz-neighbors}
+```{r ch10-vis-neighbors}
 animint(
   errorPlot+
     theme_animint(width=300),
@@ -945,7 +945,7 @@ Le code ci-dessous crée une visualisation des données interactive à l’aide 
 
 <!-- paragraph -->
 
-```{r ch10-viz-folds}
+```{r ch10-vis-folds}
 animint(
   errorPlotNew+
     theme_animint(width=325),

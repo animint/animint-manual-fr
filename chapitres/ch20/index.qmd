@@ -521,7 +521,7 @@ Les rangs calculés ci-dessus sont utilisés dans l’affichage qui suit.
 <!-- comment -->
 Nous créons une visualisation interactive à partir des graphiques de ROC et d’AUC.
 
-```{r viz-auc-roc}
+```{r vis-auc-roc}
 animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split")+
@@ -627,8 +627,8 @@ Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de v
 <!-- comment -->
 Puis nous combinons tous les graphiques précédents dans une visualisation interactive.
 
-```{r viz-select-fpr}
-(viz.select.fpr <- animint(
+```{r vis-select-fpr}
+(vis.select.fpr <- animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split"),
   roc=gg.roc.fpr+
@@ -757,7 +757,7 @@ Le graphique affiche un panneau pour chaque jeu de données, et pour chaque divi
 <!-- comment -->
 Le code ci-dessous combine ces graphiques dans une visualisation interactive.
 
-```{r viz-two-selectors}
+```{r vis-two-selectors}
 animint(
   summary=gg.summary+
     ggtitle("1. Select task"),
@@ -1032,7 +1032,7 @@ Nous voyons que
 
 Nous créons ensuite une visualisation interactive pour comprendre le choix du nombre de voisins.
 
-```{r viz-neighbors}
+```{r vis-neighbors}
 animint(
   testAUC=gg.auc+
     ggtitle("Select data set and cross-validation split"),
@@ -1244,8 +1244,8 @@ gg.log.auc <- ggplot()+
 
 Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 
-```{r viz-torch}
-(viz.torch <- animint(
+```{r vis-torch}
+(vis.torch <- animint(
   overview=gg.best.seg+
     theme_animint(width=800, colspan=2, last_in_row=TRUE)+
     ggtitle("Select task and cross-validation iteration"),
@@ -1292,12 +1292,12 @@ Remarquons que dans le code ci-dessus que nous avons utilisé des majuscules pou
 <!-- comment -->
 Nous ajoutons ensuite ce graphique à la visualisation interactive.
 
-```{r viz-torch-log}
-viz.torch.log <- viz.torch
-viz.torch.log$detailsLog <- gg.log.scale+
+```{r vis-torch-log}
+vis.torch.log <- vis.torch
+vis.torch.log$detailsLog <- gg.log.scale+
   ggtitle("Selected learning curves (log scale)")+
   theme(legend.position="none")
-viz.torch.log
+vis.torch.log
 ```
 
 La visualisation contient un graphique en bas à droite, qui affiche l’échelle logarithmique pour la sélection.
@@ -1397,13 +1397,13 @@ Exercices :
 
 <!-- comment -->
 
-* Dans `viz.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
+* Dans `vis.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
 <!-- comment -->
-* Dans `viz.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
+* Dans `vis.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
 <!-- comment -->
 * Le graphique `gg.summary` affiche seulement le max AUC. Rajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
 <!-- comment -->
-* Le graphique `viz.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
+* Le graphique `vis.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
   * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
 <!-- comment -->
@@ -1415,7 +1415,7 @@ Exercices :
 <!-- comment -->
 * Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
 <!-- comment -->
-* Dans `viz.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
+* Dans `vis.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
 * Chaque section du chapitre a présenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
 <!-- comment -->
   * Affichez les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch`, nearest neighbors).

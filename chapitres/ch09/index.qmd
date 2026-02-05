@@ -71,7 +71,7 @@ Le comptage de vélos présente des données de séries temporelles que nous vis
 
 <!-- paragraph -->
 
-```{r counterviz}
+```{r countervis}
 passages_dt[, lieu.lines := gsub("[- _]", "\n", lieu)]
 library(animint2)
 ggplot()+
@@ -304,7 +304,7 @@ Dans la sortie ci-dessus, on voit que le coefficient du modèle est proche des m
 <!-- comment -->
 Enfin, nous faisons un graphique interactif avec le code ci-dessous.
 
-```{r ch09-viz-regression}
+```{r ch09-vis-regression}
 scatter.not.na[, let(
   pred.accidents = predict(fit),
   mois.français = mois_français(mois.01)
@@ -733,7 +733,7 @@ La sortie ci-dessus contient les deux séries temporelles (accidents et compteur
 
 Enfin, le code ci-dessous combine tous les graphiques.
 
-```{r ch09-viz-mtl}
+```{r ch09-vis-mtl}
 animint(
   MonthFacet+
     ggtitle("Toutes les données, choisir mois"),

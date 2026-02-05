@@ -39,7 +39,7 @@ Si `vis` est un animint (liste de ggplots et d’options avec la classe animint)
 
 <!-- paragraph -->
 
-```{r ch05-viz-dix-points}
+```{r ch05-vis-dix-points}
 set.seed(1)
 dix.points <- data.frame(x=0:9, y=rnorm(10))
 library(animint2)
@@ -60,7 +60,7 @@ Pour sauvegarder l’animint dans le fichier `"ch05-partager-dix-points"` utilis
 
 <!-- paragraph -->
 
-```{r ch05-viz-partager-dix-points}
+```{r ch05-vis-partager-dix-points}
 animint(
   point=ggplot()+
     geom_point(aes(
@@ -204,7 +204,7 @@ Nous avons aussi [une galerie en français](https://animint.github.io/gallery-fr
 
 - Il y a une ligne pour chaque animint.
 <!-- comment -->
-- La première colonne `viz.link` présente une capture d’écran de l’animint, qui renvoie à la page web de l’animint.
+- La première colonne `vis.link` présente une capture d’écran de l’animint, qui renvoie à la page web de l’animint.
 <!-- comment -->
 - La deuxième colonne `title` indique le nom de la visualisation (extrait de l’option `title` de chaque animint).
 <!-- comment -->

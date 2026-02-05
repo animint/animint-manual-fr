@@ -69,7 +69,7 @@ L’utilisation se `geom_polygon()` avec `aes(href)` créera des hyperliens vers
 
 <!-- paragraph -->
 
-```{r ch06-viz-href}
+```{r ch06-vis-href}
 animint(
   map=ggplot()+
     ggtitle("cliquez sur un state pour lire sa page Wikipedia")+
@@ -100,7 +100,7 @@ Par exemple, nous l’utilisons pour afficher la population et le nom du pays da
 
 <!-- paragraph -->
 
-```{r ch06-viz-tooltip}
+```{r ch06-vis-tooltip}
 data(BanqueMondiale, package="animint2fr")
 BanqueMondiale1975 <- subset(BanqueMondiale, année == 1975)
 animint(
@@ -136,7 +136,7 @@ Puisque tout ce qui est tracé par `animint()` est affiché comme un élément [
 
 <!-- paragraph -->
 
-```{r ch06-viz-id}
+```{r ch06-vis-id}
 animint(
   map=ggplot()+
     ggtitle("chaque state/région/groupe a un id unique")+
@@ -306,7 +306,7 @@ Nous commençons par créer le graphique des courbes d’erreurs situé à gauch
 
 <!-- paragraph -->
 
-```{r ch06-viz-errorPlot}
+```{r ch06-vis-errorPlot}
 data(breakpoints)
 only.error <- subset(breakpoints$error, type=="E")
 only.segments <- subset(only.error,bases.per.probe==bases.per.probe[1])
@@ -352,7 +352,7 @@ Il servira à sélectionner les données et le modèle dans le graphique ci-dess
 
 <!-- paragraph -->
 
-```{r ch06-viz-signalPlot}
+```{r ch06-vis-signalPlot}
 signalPlot <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
@@ -378,8 +378,8 @@ Nous présentons ci-dessous une version interactive dans laquelle un seul de ces
 
 <!-- paragraph -->
 
-```{r ch06-viz-chunk-vars}
-(viz.chunk.vars <- animint(
+```{r ch06-vis-chunk-vars}
+(vis.chunk.vars <- animint(
   errorPlot,
   signal=signalPlot+
     geom_vline(aes(
@@ -479,7 +479,7 @@ Ces valeurs par défaut peuvent être personnalisées en utilisant les paramètr
 
 <!-- paragraph -->
 
-```{r ch06-viz-off}
+```{r ch06-vis-off}
 N <- 3
 set.seed(1)
 demo_df <- data.frame(i=1:N, num=rnorm(N,2))
@@ -543,7 +543,7 @@ Pour personnaliser l’affichage pour chaque geom, vous pouvez spécifier les pa
 
 <!-- paragraph -->
 
-```{r ch06-viz-customTour}
+```{r ch06-vis-customTour}
 animint(
   scatter=ggplot()+
     geom_point(aes(
@@ -593,7 +593,7 @@ Par exemple, considérons cette version remaniée du graphique des États-Unis 
 
 <!-- paragraph -->
 
-```{r ch06-viz-width-height}
+```{r ch06-vis-width-height}
 animint(
   map=ggplot()+
     theme_animint(width=750, height=500)+
@@ -635,7 +635,7 @@ Pour comprendre pourquoi, considérons les exemples suivants :
 
 <!-- paragraph -->
 
-```{r ch06-viz-scale-size}
+```{r ch06-vis-scale-size}
 nuage1975 <- ggplot()+
   geom_point(
     aes(x=espérance.de.vie, y=taux.de.fertilité, size=population),
@@ -643,7 +643,7 @@ nuage1975 <- ggplot()+
     shape=21,
     color="red",
     fill="black")
-(viz.scale.size <- animint(
+(vis.scale.size <- animint(
   ggplotDefault=nuage1975+
     ggtitle("Aucune échelle spécifiée"),
   animintDefault=nuage1975+
@@ -680,12 +680,12 @@ La syntaxe de définition des axes et de la taille du texte de la légende(en pi
 
 <!-- paragraph -->
 
-```{r ch06-viz-text-size}
+```{r ch06-vis-text-size}
 nuage1975 <- ggplot()+
   geom_point(aes(
     x=espérance.de.vie, y=taux.de.fertilité, color=région),
     data=BanqueMondiale1975)
-(viz.text.size <- animint(
+(vis.text.size <- animint(
   animintDefault=nuage1975+
     theme_animint(width=500, height=500)+
     ggtitle("Aucun axe ni taille de légende spécifiés"),
@@ -752,16 +752,16 @@ Un titre peut et doit être utilisé avec `animint2dir` comme dans le code ci-de
 <!-- paragraph -->
 
 ```{r}
-vis.title <- viz.scale.size
+vis.title <- vis.scale.size
 vis.title$title <- "Plusieurs échelles de taille"
-animint2dir(vis.title, "ch06-viz-title")
+animint2dir(vis.title, "ch06-vis-title")
 ```
 
 <!-- paragraph -->
 
-Notez que `viz.scale.size` possède déjà trois ggplots, chacun avec son `ggtitle`.
+Notez que `vis.scale.size` possède déjà trois ggplots, chacun avec son `ggtitle`.
 <!-- comment -->
-Ajouter l’option globale `title` a pour effet de définir un titre pour [la page web](ch06-viz-title/index.html) .
+Ajouter l’option globale `title` a pour effet de définir un titre pour [la page web](ch06-vis-title/index.html) .
 
 <!-- paragraph -->
 
@@ -779,7 +779,7 @@ L’option `source` doit être une chaîne de caractères fournissant un lien ve
 
 <!-- paragraph -->
 
-```{r ch06-viz-source-demo}
+```{r ch06-vis-source-demo}
 animint(
   demo=ggplot()+
     geom_point(aes(
@@ -812,7 +812,7 @@ Ce mécanisme peut être utilisé pour faciliter la compréhension de ce qui est
 
 <!-- paragraph -->
 
-```{r ch06-viz-link-demo}
+```{r ch06-vis-link-demo}
 animint(
   video="https://vimeo.com/1050117030",
   scatter=ggplot()+
@@ -869,7 +869,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Créez d’autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point()` et `geom_segment()`.
+- Créez d’autres versions de `vis.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point()` et `geom_segment()`.
 <!-- comment -->
 Comment le choix des `chunk_vars` affecte-t-il l’apparence de la visualisation ?
 <!-- comment -->

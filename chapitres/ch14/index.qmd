@@ -269,7 +269,7 @@ Le code ci-dessous utilise `theme_animint()` pour associer certaines options d�
 timing.incomplete.construct <- system.time({
   coverage.counts <- table(PSJ$coverage$sample.id)
   facet.rows <- length(coverage.counts)+1
-  viz.incomplete <- animint(
+  vis.incomplete <- animint(
     first=list(
       bases.per.problem=6516,
       problem.name="chr11:118174946-118177139"),
@@ -291,7 +291,7 @@ Générer cette visualisation des données préliminaires (incomplètes) dans le
 
 ```{r ch14incomplete}
 before.incomplete <- Sys.time()
-viz.incomplete
+vis.incomplete
 cat(elapsed.incomplete <- Sys.time()-before.incomplete, "secondes\n")
 ```
 
@@ -336,13 +336,13 @@ Dans cette boucle `for`, nous ajoutons donc quelques couches aux graphiques `cov
 <!-- paragraph -->
 
 ```{r}
-viz.first <- viz.incomplete
-viz.first$first <- c(viz.incomplete$first, PSJ$first)
-viz.first$modelSelection <- viz.first$modelSelection+
+vis.first <- vis.incomplete
+vis.first$first <- c(vis.incomplete$first, PSJ$first)
+vis.first$modelSelection <- vis.first$modelSelection+
   ggtitle("choisir le nombre d’échantillons ayant un pic commun")
 print(timing.for.construct <- system.time({
-  viz.for <- viz.first
-  viz.for$title <- "PSJ avec boucles for"
+  vis.for <- vis.first
+  vis.for$title <- "PSJ avec boucles for"
   for(problem.dot in names(PSJ$modelSelection.by.problem)){
     if(problem.dot %in% names(PSJ$peaks.by.problem)){
       peaks <- PSJ$peaks.by.problem[[problem.dot]]
@@ -352,7 +352,7 @@ print(timing.for.construct <- system.time({
         "chromStart", "chromEnd", problem.dot)
       prob.peaks <- unique(data.frame(peaks)[, prob.peaks.names])
       prob.peaks$sample.id <- "problems"
-      viz.for$coverage <- viz.for$coverage +
+      vis.for$coverage <- vis.for$coverage +
         geom_segment(aes(
           chromStart/1e3, 0,
           xend=chromEnd/1e3, yend=0),
@@ -362,7 +362,7 @@ print(timing.for.construct <- system.time({
     }
     modelSelection.dt <- PSJ$modelSelection.by.problem[[problem.dot]]
     modelSelection.dt[[problem.dot]] <- modelSelection.dt$peaks
-    viz.for$modelSelection <- viz.for$modelSelection+
+    vis.for$modelSelection <- vis.for$modelSelection+
       geom_tallrect(aes(
         xmin=min.log.lambda, 
         xmax=max.log.lambda), 
@@ -383,7 +383,7 @@ Ensuite, nous compilons la visualisation des données.
 
 ```{r ch14for}
 before.for <- Sys.time()
-viz.for
+vis.for
 cat(elapsed.for <- Sys.time()-before.for, "seconds\n")
 ```
 
@@ -439,16 +439,16 @@ Le compilateur `animint2dir()` crée une variable de sélection pour chaque vale
 
 ```{r}
 print(timing.named.construct <- system.time({
-  viz.named <- viz.first
-  viz.named$title <- "PSJ avec clickSelects et showSelected nommés"
-  viz.named$coverage <- viz.named$coverage+
+  vis.named <- vis.first
+  vis.named$title <- "PSJ avec clickSelects et showSelected nommés"
+  vis.named$coverage <- vis.named$coverage+
     geom_segment(aes(
       chromStart/1e3, 0,
       xend=chromEnd/1e3, yend=0),
       clickSelects="problem.name",
       showSelected=c(problem.dot="peaks", "bases.per.problem"),
       data=sample.peaks, size=7, color="deepskyblue")
-  viz.named$modelSelection <- viz.named$modelSelection+
+  vis.named$modelSelection <- vis.named$modelSelection+
     geom_tallrect(aes(
       xmin=min.log.lambda,
       xmax=max.log.lambda),
@@ -468,7 +468,7 @@ Nous le compilons ci-dessous.
 
 ```{r ch14named}
 before.named <- Sys.time()
-viz.named
+vis.named
 cat(elapsed.named <- Sys.time()-before.named, "seconds\n")
 ```
 
@@ -489,9 +489,9 @@ Dans cette section, nous calculons l’utilisation du disque pour les deux méth
 <!-- paragraph -->
 
 ```{r}
-viz.dirs.vec <- c("ch14incomplete", "ch14for", "ch14named")
-viz.dirs.text <- paste(viz.dirs.vec, collapse=" ")
-(cmd <- paste("du -ks", viz.dirs.text))
+vis.dirs.vec <- c("ch14incomplete", "ch14for", "ch14named")
+vis.dirs.text <- paste(vis.dirs.vec, collapse=" ")
+(cmd <- paste("du -ks", vis.dirs.text))
 (kb.dt <- fread(cmd=cmd, col.names=c("kilobytes", "path")))
 ```
 

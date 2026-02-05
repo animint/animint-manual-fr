@@ -225,7 +225,7 @@ Ce qui suit est une version interactive animée de la même visualisation des do
 
 <!-- paragraph -->
 
-```{r ch15-viz}
+```{r ch15-vis}
 animint(
   time=list(variable="iteration", ms=2000),
   iterations=gg.it+

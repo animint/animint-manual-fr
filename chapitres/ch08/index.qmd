@@ -199,7 +199,7 @@ Nous affichons également ce ggplot de manière interactive ci-dessous :
 
 <!-- paragraph -->
 
-```{r ch08-viz-ts-scatter}
+```{r ch08-vis-ts-scatter}
 animint(ts.scatter)
 ```
 
@@ -238,8 +238,8 @@ Nous affichons une version interactive ci-dessous :
 
 <!-- paragraph -->
 
-```{r ch08-viz-scatter-both}
-viz.scatter.both <- animint(
+```{r ch08-vis-scatter-both}
+vis.scatter.both <- animint(
   title="Données de la Banque mondiale (multiple selection, facets)",
   scatterBoth=scatter.both+
     theme_animint(width=1000, height=800),
@@ -247,7 +247,7 @@ viz.scatter.both <- animint(
   time=list(variable="année", ms=3000),
   first=list(année=1975, pays=c("United States", "Vietnam")),
   selector.types=list(pays="multiple"))
-viz.scatter.both
+vis.scatter.both
 ```
 
 <!-- paragraph -->
