@@ -270,6 +270,7 @@ timing.incomplete.construct <- system.time({
   coverage.counts <- table(PSJ$coverage$sample.id)
   facet.rows <- length(coverage.counts)+1
   viz.incomplete <- animint(
+    out.dir="ch14incomplete",
     first=list(
       bases.per.problem=6516,
       problem.name="chr11:118174946-118177139"),
@@ -343,6 +344,7 @@ viz.first$modelSelection <- viz.first$modelSelection+
 print(timing.for.construct <- system.time({
   viz.for <- viz.first
   viz.for$title <- "PSJ avec boucles for"
+  viz.for$out.dir <- "ch14for"
   for(problem.dot in names(PSJ$modelSelection.by.problem)){
     if(problem.dot %in% names(PSJ$peaks.by.problem)){
       peaks <- PSJ$peaks.by.problem[[problem.dot]]
@@ -441,6 +443,7 @@ Le compilateur `animint2dir()` crée une variable de sélection pour chaque vale
 print(timing.named.construct <- system.time({
   viz.named <- viz.first
   viz.named$title <- "PSJ avec clickSelects et showSelected nommés"
+  viz.named$out.dir <- "ch14named"
   viz.named$coverage <- viz.named$coverage+
     geom_segment(aes(
       chromStart/1e3, 0,
