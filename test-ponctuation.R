@@ -21,7 +21,7 @@ for(qmd in qmd.files){
   is.fence <- grepl("```", qmd.lines)
   is.text <- (cumsum(is.fence) %% 2)==0
   qmd.text <- qmd.lines[is.text]
-  no.comments <- grep("<!--", qmd.text, invert=TRUE, value=TRUE)
+  no.comments <- grep("<!--|http|::", qmd.text, invert=TRUE, value=TRUE)
   bad.lines <- get_bad(no.comments)
   if(length(bad.lines)){
     violations[[qmd]] <- bad.lines

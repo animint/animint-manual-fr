@@ -131,11 +131,11 @@ Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différent
 
 <!-- paragraph -->
 
-Le [Glossaire](ch99) contient l’explication détaillée de plusieurs expressions idiomatiques du code R utilisées dans ce manuel.
+Le [Glossaire](ch99) contient l’explication détaillée de plusieurs techniques de programmation R qui sont utiles pour la visualisation.
 
 <!-- paragraph -->
 
-Le [Guide de contribution](contribute.html) fournit des instructions sur la manière de contribuer à l’amélioration de ce manuel.
+Le [Guide de contribution](contribution) fournit des instructions sur la manière de contribuer à l’amélioration de ce manuel.
 
 <!-- paragraph -->
 

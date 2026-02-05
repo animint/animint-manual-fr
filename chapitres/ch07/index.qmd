@@ -290,7 +290,7 @@ La liste suivante répertorie les options `theme` déjà prises en charge par `a
 
 <!-- paragraph -->
 
-- `panel.margin` désigne la distance entre les panneaux, et est utilisé dans l’[idiome des facettes d’économie d’espace](/ch99#space-saving-facets) pour l’éliminer.
+- `panel.margin` désigne la distance entre les panneaux, et est utilisé dans la méthode [facettes économes en espace](/ch99#space-saving-facets).
 <!-- comment -->
 - `panel.grid.major` est utilisé pour dessiner à l’échelle, les lignes de la grille qui sont désignées par l’argument `breaks`.
 <!-- comment -->

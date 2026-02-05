@@ -16,7 +16,7 @@ Cette annexe décrit plusieurs techniques de programmation R qui sont utiles pou
 
 <!-- paragraph -->
 
-Pour mettre l’accent sur les données graphiques dans les ggplots à facettes, éliminez l’espace entre les facettes à l’aide de l’idiome suivant.
+Pour mettre l’accent sur les données graphiques dans les ggplots à facettes, éliminez l’espace entre les facettes à l’aide du code suivant.
 
 <!-- paragraph -->
 
@@ -30,7 +30,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Cet idiome se compose de trois parties :
+Ce code comprend trois parties :
 
 <!-- paragraph -->
 
@@ -85,13 +85,13 @@ Quelques commentaires :
 
 <!-- paragraph -->
 
-- La première partie de l’idiome consiste à initialiser des listes vides.
+- La première partie consiste à initialiser des listes vides.
 <!-- comment -->
 Ici, il y en a deux, `outer.data.list` et `inner.data.list`.
 <!-- comment -->
 Toutefois, il peut y en avoir autant que nécessaire.
 <!-- comment -->
-- La deuxième partie de l’idiome est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
+- La deuxième partie est un tas de boucles for imbriquées qui assignent des tableaux de données aux éléments de ces listes.
 <!-- comment -->
 - Des fonctions comme `computeOuter` et `computeInner` peuvent être utilisées, ou vous pouvez simplement effectuer les calculs directement dans la boucle for.
 <!-- comment -->
@@ -103,7 +103,7 @@ Si vous n’effectuez que des opérations scalaires-scalaires dans votre boucle 
 <!-- comment -->
 En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la pratique `data.table` est souvent beaucoup plus rapide lors de la dernière étape de combinaison.
 <!-- comment -->
-- La dernière partie de l’idiome utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
+- La dernière partie utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
 
 <!-- paragraph -->
 
@@ -111,7 +111,7 @@ En principe, on peut utiliser soit `data.frame`, soit `data.table`, mais dans la
 
 <!-- paragraph -->
 
-Cet idiome est utile pour créer des ggplots multi-panneaux avec des axes alignés.
+Cette technique est utile pour créer des ggplots multi-panneaux avec des axes alignés.
 <!-- comment -->
 Tout d’abord, définissez une fonction qui prend en entrée un tableau de données et une ou plusieurs valeurs qui seront utilisées pour ajouter des facteurs à ce tableau de données.
 
