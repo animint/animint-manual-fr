@@ -141,9 +141,9 @@ Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour chan
 
 <!-- paragraph -->
 
-`animint2` ne prend pas en charge la brosse rectangulaire ou le lasso pour définir interactivement un ensemble de valeurs prises en charge.
+`animint2` ne prend pas en charge la brosse rectangulaire ou le lasso pour définir interactivement un ensemble de valeurs sélectionnées, 
 <!-- comment -->
-Au lieu de cela, `animint` prend en charge la sélection multiple en ajoutant des valeurs une par une à l'ensemble de sélection multiple.
+mais propose plutôt la sélection multiple en ajoutant des valeurs une par une à l'ensemble de sélection multiple.
 <!-- comment -->
 Il faut donc utiliser l'option [selector.types](/ch04#selector-types-option) pour déclarer une variable de sélection multiple.
 
@@ -211,7 +211,7 @@ Le graphique de gauche devrait être le même que le ggplot ci-dessus, mais il y
 Les solutions de contournement dans `animint2` sont illustrées dans le panneau de droite ci-dessus.
 
 * Ajuster les valeurs de la position verticale `y` des éléments de texte pour lesquels vous auriez utilisé `vjust`.
-* Utiliser `geom_label_aligned()` qui marche avec `vjust`. Pour un exemple, lire le [chapitre 8](/ch08).
+* Utiliser `geom_label_aligned()`, qui fonctionne avec `vjust`. Pour un exemple, lire le [chapitre 8](/ch08).
 
 <!-- paragraph -->
 
@@ -324,7 +324,7 @@ Les options de thème suivantes peuvent être définies par `element_blank` pour
 
 `animint2` prend en charge `facet_grid` pour créer des visualisations de données à plusieurs panneaux, mais ne prend en charge que de manière limitée les variables multiples par axe.
 <!-- comment -->
-Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui se traduit par deux étiquettes de bande lorsqu'elles sont générées avec `ggplot2`.
+Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui fait deux lignes de texte pour le titre de chaque facette lorsque la visualisation est générée avec les sorties graphiques traditionnelles de R.
 
 <!-- paragraph -->
 
