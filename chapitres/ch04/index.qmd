@@ -43,7 +43,7 @@ Considérons l'esquisse de la visualisation de données de la Banque mondiale pr
 
 <!-- paragraph -->
 
-![Esquisse avec clickSelects en légende](ch04-legend-clickSelects.png)
+![Esquisse avec `clickSelects` en légende](ch04-legend-clickSelects.png)
 
 <!-- paragraph -->
 
@@ -51,13 +51,13 @@ Puisque la légende indique `clickSelects=région`, cliquer sur une entrée de c
 <!-- comment -->
 Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n'avez donc pas besoin de spécifier explicitement `clickSelects=région` pour la légende.
 <!-- comment -->
-En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point`, `animint2` fait deux choses automatiquement :
+En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point()`, `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
-- `showSelected=région` est aussi affecté au même `geom_point` .
+- `showSelected="région"` est aussi affecté au même `geom_point()` .
 <!-- comment -->
-- `clickSelects=région`  est attribué à la légende des couleurs.
+- `clickSelects="région"`  est attribué à la légende des couleurs.
 
 <!-- paragraph -->
 
@@ -150,7 +150,7 @@ animint(
 
 La visualisation ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l'afficher sous forme d'une étiquette de texte sur le nuage de points.
 <!-- comment -->
-Nous pouvons le faire en ajoutant une couche `geom_text`  avec deux variables `showSelected` :
+Nous pouvons le faire en ajoutant une couche `geom_text()` avec deux variables `showSelected` :
 
 <!-- paragraph -->
 
@@ -188,7 +188,7 @@ Les informations affichées pendant la visite sont personnalisables, il suffit d
 
 Comme nous l'avons expliqué dans le dernier chapitre, toute variable spécifiée à l'aide du mot-clé `showSelected` d'un geom est traitée comme une variable interactive.
 <!-- comment -->
-Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text`.
+Dans l'exemple ci-dessus, nous avons spécifié deux variables `showSelected` pour le `geom_text()`.
 <!-- comment -->
 Cela signifie qu'une étiquette de texte ne sera dessinée que pour les lignes de la base de données `BanqueMondiale` qui correspondent aux valeurs actuelles des deux variables de sélection.
 <!-- comment -->
@@ -204,11 +204,11 @@ Vous devriez voir le point disparaître, mais le texte restera affiché.
 
 Exercice : comment faire disparaître le texte en même temps que le point?
 <!-- comment -->
-Indice : il faut ajouter un mot-clé au `geom_text`.
+Indice : il faut ajouter un mot-clé au `geom_text()`.
 
 <!-- paragraph -->
 
-Dans le dernier chapitre, nous avons introduit les termes « manipulation directe » et « manipulation indirecte » pour décrire les interactions avec les légendes et les menus.
+Dans le dernier chapitre, nous avons introduit les termes « manipulation directe » et « manipulation indirecte » pour décrire les interactions avec les légendes et les menus.
 <!-- comment -->
 Dans la visualisation ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
 <!-- comment -->
@@ -319,7 +319,7 @@ Toutefois, dans cette visualisation en particulier, il n'est pas si facile de su
 
 Exercice :  Recréez la visualisation ci-dessus de manière à ce qu'un clic sur une étiquette de texte supprime le pays de l'ensemble de sélection.
 <!-- comment -->
-Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text`.
+Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text()`.
 
 <!-- paragraph -->
 
@@ -343,7 +343,7 @@ L'objectif de cette section est d'ajouter un graphique de série temporelle sur 
 
 <!-- paragraph -->
 
-Notez que l'esquisse ci-dessus comprend `geom_tallrect`, un nouveau geom introduit dans `animint2`.
+Notez que l'esquisse ci-dessus comprend `geom_tallrect()`, un nouveau geom introduit dans `animint2`.
 <!-- comment -->
 Il est qualifié de « grand », car  il occupe tout l'espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
@@ -393,10 +393,10 @@ Exercice  : animez la visualisation de données en spécifiant l'option `time`, 
 
 <!-- paragraph -->
 
-Exercices avec multicouches : ajoutez un `geom_text` qui indique l'année en cours sur le nuage de points.
+Exercices avec multicouches : ajoutez un `geom_text()` qui indique l'année en cours sur le nuage de points.
 <!-- comment -->
-Ajoutez un `geom_path` qui présente les données des 5 dernières années.
-Ajoutez un `geom_label_aligned` pour les pays sélectionnés dans la série temporelle.
+Ajoutez un `geom_path()` qui présente les données des 5 dernières années.
+Ajoutez un `geom_label_aligned()` pour les pays sélectionnés dans la série temporelle.
 
 <!-- paragraph -->
 
@@ -472,13 +472,13 @@ Les deux geom définis ci-dessus occupent un nouveau `facet` pour la valeur `ann
 <!-- comment -->
 Puisque ces deux geoms ont des définitions différentes de `clickSelects`, un clic sur chaque geom mettra à jour le graphique d'une manière différente.
 <!-- comment -->
-Notez que pour le `geom_line` nous spécifions `size=3` ce qui correspond à une largeur de trait de 3 pixels.
+Notez que pour le `geom_line()` nous spécifions `size=3` ce qui correspond à une largeur de trait de 3 pixels.
 <!-- comment -->
 En général, il est judicieux d'augmenter la taille des geoms avec `clickSelects`, afin de les rendre plus faciles à cliquer.
 
 <!-- paragraph -->
 
-Notez également que nous avons spécifié `alpha=0.5` pour le `geom_tallrect` et `alpha=0.6` pour le `geom_line`.
+Notez également que nous avons spécifié `alpha=0.5` pour le `geom_tallrect()` et `alpha=0.6` pour le `geom_line()`.
 <!-- comment -->
 Puisque ces deux geoms définissent `clickSelects`, parmi les lignes et rectangles tracés, certains seront sélectionnés et d'autres non. 
 <!-- comment -->
@@ -508,9 +508,9 @@ Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de poi
 
 La visualisation de données interactive ci-dessus contient un nouveau panneau avec des lignes qui montrent une série temporelle du taux de fertilité pour toutes les années.
 <!-- comment -->
-Puisque nous avons précisé `clickSelects=pays`  pour le `geom_line`, un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
+Puisque nous avons précisé `clickSelects="pays"`  pour le `geom_line()`, un clic sur une ligne met à jour l'ensemble des pays sélectionnés.
 <!-- comment -->
-Puisque nous avons spécifié `clickSelects=année` pour le `geom_tallrect`, en cliquant sur un `tallrect` on met à jour l'année sélectionnée.
+Puisque nous avons spécifié `clickSelects="année"` pour le `geom_tallrect()`, en cliquant sur un rectangle on met à jour l'année sélectionnée.
 
 <!-- paragraph -->
 
@@ -542,13 +542,13 @@ Classez ces trois techniques de manipulation, de la plus directe, à la moins di
 <!-- comment -->
 Quelle technique privilégier et dans quelles circonstances?
 <!-- comment -->
-- Quand `geom_point(clickSelects=something, alpha=0.75)` est affiché avec le périphérique graphique R habituel, quel est le degré d'opacité/transparence pour tous les points de données?
+- Quand `alpha=0.75` est utilisé pour `geom_point()` avec les sorties graphiques habituelles dans R, quel est le degré d'opacité pour tous les points de données?
 <!-- comment -->
 Lorsque `animint2` affiche le même geom, certains points seront sélectionnés et d'autres non.
 <!-- comment -->
-Quelle est l'opacité/transparence des points sélectionnés?
+Quelle est l'opacité des points sélectionnés?
 <!-- comment -->
-Quelle est l'opacité/transparence des points non sélectionnés?
+Quelle est l'opacité des points non sélectionnés?
 <!-- comment -->
 - Ajoutez `aes(size=population)` aux points du nuage de la Banque mondiale.
 <!-- comment -->
@@ -556,11 +556,11 @@ La légende de la taille est-elle interactive?
 <!-- comment -->
 Pourquoi?
 <!-- comment -->
-- Ajoutez un `geom_text` au nuage de points de la Banque mondiale pour montrer l'année sélectionnée.
+- Ajoutez un `geom_text()` au nuage de points de la Banque mondiale pour montrer l'année sélectionnée.
 <!-- comment -->
-- Ajoutez un `geom_text`  à la série chronologique de la Banque mondiale pour afficher le nom des pays sélectionnés.
+- Ajoutez un `geom_text()`  à la série chronologique de la Banque mondiale pour afficher le nom des pays sélectionnés.
 <!-- comment -->
-- Ajoutez un `geom_path`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
+- Ajoutez un `geom_path()`  au nuage de points de la Banque mondiale pour afficher les données des cinq dernières années.
 <!-- comment -->
 - Utilisez l'option `time` pour créer une version animée de `vis.facets`.
 <!-- comment -->

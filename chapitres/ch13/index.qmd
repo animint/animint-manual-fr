@@ -97,9 +97,9 @@ prob.mass+
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé `alpha=0.6` avec `geom_tallrect` ce qui signifie que le `tallrect` correspondant à la moyenne sélectionnée a une opacité de 0,6 et que les autres `tallrects` ont une opacité de 0,1.
+Notez que nous avons utilisé `alpha=0.6` avec `geom_tallrect()` ce qui signifie que le `tallrect` correspondant à la moyenne sélectionnée a une opacité de 0,6 et que les autres `tallrects` ont une opacité de 0,1.
 <!-- comment -->
-Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point` afin qu'il soit plus facile de voir les points sur un fond gris et de passer le curseur sur les points pour voir l'infobulle.
+Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point()` afin qu'il soit plus facile de voir les points sur un fond gris et de passer le curseur sur les points pour voir l'infobulle.
 <!-- comment -->
 Nous allons maintenant créer une version interactive avec `animint2`.
 
@@ -133,7 +133,7 @@ Pour ajouter un panneau à la fonction de répartition, nous allons modifier le 
 
 <!-- paragraph -->
 
-Lorsque nous spécifions les ensembles de données, nous utilisons l'idiome [addColumn then facet](/ch99#addColumn-then-facet) pour ajouter une variable `panel`.
+Lorsque nous spécifions les ensembles de données, nous utilisons la méthode [rajouter colonnes et facettes](/ch99#addColumn-then-facet) pour ajouter une variable `panel`.
 
 <!-- paragraph -->
 
@@ -176,13 +176,13 @@ animint(
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé `addPanel` pour ajouter une variable `panel` à tous les ensembles de données pour chaque geom, à l'exception de `geom_tallrect`.
+Notez que nous avons utilisé `addPanel` pour ajouter une variable `panel` à tous les ensembles de données pour chaque geom, à l'exception de `geom_tallrect()`.
 <!-- comment -->
-Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom dans un seul panneau, à l'exception de `geom_tallrect` qui est dessiné dans chaque panneau.
+Utiliser `panel` comme variable à facettes a pour effet de dessiner chaque geom dans un seul panneau, à l'exception de `geom_tallrect()` qui est dessiné dans chaque panneau.
 
 <!-- paragraph -->
 
-Notez l'utilisation d'un `geom_hline` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
+Notez l'utilisation d'un `geom_hline()` pour indiquer le seuil de la fonction de répartition, 0,99, servant à déterminer l'ensemble des points à tracer pour chaque distribution de Poisson.
 <!-- comment -->
 Ceci est un exemple de "montrer vos choix arbitraires", l'un des principes généraux de la conception de bonnes visualisations de données interactives.
 
@@ -397,13 +397,13 @@ Exercices :
 <!-- comment -->
 Pour les éviter, créez une nouvelle visualisation des données qui utilise un seul geom avec un ensemble de données plus important.
 <!-- comment -->
-Par exemple, les points rouges dans les deux panneaux du premier graphique pourraient être définis à l'aide d'un seul `geom_point` avec un ensemble de données plus important (Conseil : utilisez `data.table::melt` avec `measure.vars=c("cum.prob", "probability")`).
+Par exemple, les points rouges dans les deux panneaux du premier graphique pourraient être définis à l'aide d'un seul `geom_point()` avec un ensemble de données plus important (Conseil : utilisez `data.table::melt()` avec `measure.vars=c("cum.prob", "probability")`).
 <!-- comment -->
 - Créez une séquence similaire de visualisation des données pour le modèle de [Régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression).
 
 <!-- paragraph -->
 
-Dans le [chapitre 14](/ch14), nous vous expliquerons comment utiliser les `clickSelects/showSelected` explicites pour visualiser le modèle d'apprentissage automatique PeakSegJoint avec des variables de sélection basées sur les données.
+Ensuite, dans le [chapitre 14](/ch14), nous vous expliquerons comment utiliser les `clickSelects` et `showSelected` nommés pour créer une visualisation avec plusieurs variables de sélection.
 
 <!-- paragraph -->
 

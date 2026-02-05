@@ -41,11 +41,11 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-- `geom_line` et `geom_point` pour les courbes d'erreur.
+- `geom_line()` et `geom_point()` pour les courbes d'erreur.
 <!-- comment -->
-- `geom_linerange` pour les barres d'erreur de la courbe d'erreur de validation.
+- `geom_linerange()` pour les barres d'erreur de la courbe d'erreur de validation.
 <!-- comment -->
-- `geom_hline` pour l'erreur de Bayes.
+- `geom_hline()` pour l'erreur de Bayes.
 <!-- comment -->
 - x = voisins.
 <!-- comment -->
@@ -59,13 +59,13 @@ Cette figure se compose de deux graphiques :
 
 <!-- paragraph -->
 
-- `geom_point` pour les points de données.
+- `geom_point()` pour les points de données.
 <!-- comment -->
-- `geom_point` pour les prédictions de classification sur la grille en arrière-plan.
+- `geom_point()` pour les prédictions de classification sur la grille en arrière-plan.
 <!-- comment -->
-- `geom_path` pour les limites de décision.
+- `geom_path()` pour les limites de décision.
 <!-- comment -->
-- `geom_text` pour les taux d'erreur train/test/Bayes.
+- `geom_text()` pour les taux d'erreur (entraînement, test, et Bayes).
 
 <!-- paragraph -->
 
@@ -513,13 +513,13 @@ Notez les changements suivants :
 
 <!-- paragraph -->
 
-- ajout d'un sélecteur pour le nombre de voisins (`geom_tallrect`).
+- ajout d'un `geom_tallrect()` pour sélectionner le nombre de voisins.
 <!-- comment -->
-- changement de la limite de décision de Bayes de `geom_hline` avec une entrée de légende, vers un `geom_segment` avec une étiquette de texte.
+- changement de la limite de décision de Bayes de `geom_hline()` avec une entrée de légende, vers un `geom_segment()` avec une étiquette de texte.
 <!-- comment -->
 - ajout d'une légende de type de ligne pour distinguer les taux d'erreur des modèles de Bayes et de KPPV.
 <!-- comment -->
-- changement des barres d'erreur ( `geom_linerange` ) en bandes d'erreur (`geom_ribbon`).
+- changement des barres d'erreur, `geom_linerange()`, en bandes d'erreur, `geom_ribbon()`.
 
 <!-- paragraph -->
 
@@ -559,9 +559,9 @@ Nous redéfinissons le graphique des courbes d'erreur ci-dessous.
 
 <!-- paragraph -->
 
-- Nous utilisons `showSelected` dans `geom_text` et `geom_ribbon` afin qu'ils soient masqués lorsque l'on clique sur les légendes interactives.
+- Nous utilisons `showSelected` dans `geom_text()` et `geom_ribbon()` afin qu'ils soient masqués lorsque l'on clique sur les légendes interactives.
 <!-- comment -->
-- Nous utilisons `clickSelects` dans `geom_tallrect` pour sélectionner le nombre de voisins.
+- Nous utilisons `clickSelects` dans `geom_tallrect()` pour sélectionner le nombre de voisins.
 <!-- comment -->
 Les geoms cliquables doivent être placés en dernier (couche supérieure) afin de ne pas être masqués par les geoms non cliquables (couches inférieures).
 
@@ -675,7 +675,7 @@ pred.boundary
 
 <!-- paragraph -->
 
-Au lieu d'afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
+Au lieu d'afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text()` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
 
 <!-- paragraph -->
 
@@ -976,7 +976,7 @@ Exercices :
 
 - Faites en sorte que les taux d'erreur du texte affichés en bas à gauche du deuxième graphique soient masqués quand on clique  sur les entrées de la légende pour Bayes, train, test.
 <!-- comment -->
-Conseil : vous pouvez soit utiliser un `geom_text` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](/ch14)) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
+Conseil : vous pouvez soit utiliser un `geom_text()` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](/ch14)) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
 - La colonne de probabilité ("probability") du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->

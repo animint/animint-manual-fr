@@ -120,9 +120,9 @@ Vous devriez voir apparaître une petite boîte contenant le nom du pays et la p
 
 <!-- paragraph -->
 
-Notez qu'une infobulle de forme « valeur variable » est définie par défaut pour chaque geom avec `aes(clickSelects)`.
+Notez qu'une infobulle de forme « valeur variable » est définie par défaut pour chaque geom avec `clickSelects`.
 <!-- comment -->
-Par exemple, un geom avec `aes(clickSelects=année)` affiche l'infobulle par défaut « année 1984 » pour une observation correspondant à cette période.
+Par exemple, un geom avec `clickSelects="année"` affiche l'infobulle par défaut « année 1984 » pour une observation correspondant à cette période.
 <!-- comment -->
 Vous pouvez modifier cette valeur par défaut en spécifiant explicitement `aes(tooltip)`.
 
@@ -215,7 +215,7 @@ vis$points <- vis$points +
 
 <!-- paragraph -->
 
-Cette approche est elle aussi inadéquate: elle ralentit la construction de `vis`, et la visualisation compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point`.
+Cette approche est elle aussi inadéquate: elle ralentit la construction de `vis`, et la visualisation compilée prend potentiellement beaucoup d'espace disque puisqu'il y a au moins un fichier TSV créé pour chaque `geom_point()`.
 <!-- comment -->
 La méthode à privilégier est d'ajouter des noms dans le vecteur utilisé pour `clickSelects` ou `showSelected`.
 <!-- comment -->
@@ -274,7 +274,7 @@ Plus le nombre de variables de sélection spécifiées dans `chunk_vars` est él
 
 <!-- paragraph -->
 
-L'option `chunk_vars` doit être spécifiée comme argument d'une fonction `geom_*`, et sa valeur doit être un vecteur de caractères contenant le nom des variables de sélection.
+L'option `chunk_vars` doit être spécifiée comme argument d'une fonction comme `geom_point()`, et sa valeur doit être un sous-ensemble des variables de sélection.
 <!-- comment -->
 Lorsque `chunk_vars=character(0)`, soit un vecteur de caractères de longueur nulle, toutes les données sont stockées dans un seul fichier TSV.
 <!-- comment -->
@@ -346,7 +346,7 @@ errorPlot
 
 <!-- paragraph -->
 
-Le graphique ci-dessus comprend un `geom_tallrect` avec `clickSelects=segments` et un `geom_line` avec `clickSelects=bases.per.probe`.
+Le graphique ci-dessus comprend un `geom_tallrect()` avec `clickSelects="segments"` et un `geom_line()` avec `clickSelects="bases.per.probe"`.
 <!-- comment -->
 Il servira à sélectionner les données et le modèle dans le graphique ci-dessous.
 
@@ -395,7 +395,7 @@ Nous présentons ci-dessous une version interactive dans laquelle un seul de ces
 
 Cliquez sur le bouton « Show download status table » , vous devriez voir des décomptes de chunks (fichiers TSV).
 <!-- comment -->
-Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline` dans le code R ci-dessus.
+Notez que `geom6_vline_signal` n'a qu'un seul morceau, puisque `chunk_vars=character()` est spécifié pour l'élément `geom_vline()` dans le code R ci-dessus.
 <!-- comment -->
 Si une autre valeur de `chunk_vars` était spécifiée, cela créerait un nombre différent de fichiers TSV, mais l'apparence de la visualisation de données devrait rester la même.
 
@@ -566,9 +566,9 @@ animint(
 
 <!-- paragraph -->
 
-Dans le code ci-dessus, nous spécifions `help` pour le `geom_point`, qui contrôle le sous-texte affiché pour ce geom une fois cliqué le bouton « Start Tour »  au bas de la visualisation.
+Dans le code ci-dessus, nous spécifions `help` pour le `geom_point()`, qui contrôle le sous-texte affiché pour ce geom une fois cliqué le bouton « Start Tour »  au bas de la visualisation.
 <!-- comment -->
-Après avoir cliqué sur le bouton « Next », Dans le code ci-dessus, nous spécifions `help` pour le `geom_point`, nous pouvons voir le `title` spécifié dans le code s'afficher en haut de la fenêtre de visite, pour le `geom_text`.
+Après avoir cliqué sur le bouton « Next », Dans le code ci-dessus, nous spécifions `help` pour le `geom_point()`, nous pouvons voir le `title` spécifié dans le code s'afficher en haut de la fenêtre de visite, pour le `geom_text()`.
 <!-- comment -->
 Ce mécanisme peut être utilisé pour fournir des informations supplémentaires aux utilisateurs de la visualisation pour faciliter leur compréhension de l’affichage et des interactions possibles.
 <!-- paragraph -->
@@ -845,7 +845,7 @@ Par défaut, `animint2` va générer un menu de sélection pour chaque variable 
 
 <!-- paragraph -->
 
-- les variables de sélection basées sur les données qui sont définies à l'aide de [namedclickSelects/showSelectedvariables](/ch06#data-driven-selectors);
+- les variables de sélection basées sur les données qui sont définies à l'aide de variables [`clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors);
 <!-- comment -->
 - les variables de sélection qui ont beaucoup de valeurs (elles sont lentes à générer).
 
@@ -869,7 +869,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Créez d'autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point` et `geom_segment`.
+- Créez d'autres versions de `viz.chunk.vars` avec différentes valeurs de `chunk_vars` pour les `geom_point()` et `geom_segment()`.
 <!-- comment -->
 Comment le choix des `chunk_vars` affecte-t-il l'apparence de la visualisation?
 <!-- comment -->

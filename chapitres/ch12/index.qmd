@@ -393,9 +393,9 @@ ggplot()+
 
 Le graphique ci-dessus montre la véritable limite de décision à l'aide d'un `vline` gris.
 <!-- comment -->
-Il utilise également`geom_contour` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire pointillée, scores prédits -1 et 1).
+Il utilise également `geom_contour()` pour afficher la limite de décision (ligne noire continue, score prédit 0) et la marge (ligne noire pointillée, scores prédits -1 et 1).
 <!-- comment -->
-Puisque la limite de décision et la marge sont linéaires dans cet espace, nous pouvons également utiliser `geom_abline` pour les afficher.
+Puisque la limite de décision et la marge sont linéaires dans cet espace, nous pouvons également utiliser `geom_abline()` pour les afficher.
 <!-- comment -->
 Pour ce faire, nous devons effectuer quelques calculs mathématiques et trouver les équations de la pente et de l'ordonnée à l'origine de ces droites (en fonction du biais appris `b(fit)` et du `weight.vec`, ainsi que des paramètres d'échelle `mu` et `sigma`).
 
@@ -455,7 +455,7 @@ ggplot()+
 
 Le graphique ci-dessus confirme que notre calcul de la pente et des ordonnées à l'origine (lignes vertes) est en accord avec les contours (lignes noires).
 <!-- comment -->
-Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment` pour visualiser la variable ressort (slack).
+Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack).
 
 <!-- paragraph -->
 
@@ -912,7 +912,7 @@ Calculez l'erreur de sous-entraînement et de validation, puis ajoutez un nouvea
 <!-- comment -->
 Modifiez les couleurs de l'une des deux légendes pour qu'elles soient différentes.
 <!-- comment -->
-- Utilisez les paramètres `color` et `color_off` pour modifier l'apparence de `geom_tile` selon s'il est sélectionné ou non, comme expliqué dans le [chapitre 6, à la section Préciser le mode d'affichage de l'état de la sélection](/ch06#display-selection-state).
+- Utilisez les paramètres `color` et `color_off` pour modifier l'apparence de `geom_tile()` selon s'il est sélectionné ou non, comme expliqué dans le [chapitre 6, à la section Préciser le mode d'affichage de l'état de la sélection](/ch06#display-selection-state).
 
 <!-- paragraph -->
 

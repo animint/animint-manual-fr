@@ -1,9 +1,4 @@
----
-title: La grammaire des graphiques
-format:
-  html:
-    page-layout: full
----
+# La grammaire des graphiques
 
 ```{r}
 #| echo: false
@@ -229,7 +224,7 @@ L’étape suivante consiste à utiliser les notes de l’esquisse pour coder un
 
 La fonction `aes()` est appelée avec les noms des propriétés visuelles (`x`, `y`, `color`) et les valeurs des variables de données correspondantes (`espérance.de.vie`, `taux.de.fertilité`, `région`).
 <!-- comment -->
-Cette correspondance est appliquée aux variables du tableau de données `banque_mondiale_1975`, afin de créer les propriétés du `geom_point`.
+Cette correspondance est appliquée aux variables du tableau de données `banque_mondiale_1975`, afin de créer les propriétés du `geom_point()`.
 <!-- comment -->
 Le ggplot a été sauvegardé dans une variable nommée `nuage_de_points` qui, lorsqu’imprimée sur la ligne de commande R, affiche le graphique sur un périphérique graphique.
 <!-- comment -->
@@ -274,11 +269,11 @@ Lors de l’exécution du code ci-dessus, si l’animint ne s’affiche pas dans
 
 <!-- comment -->
 
-Dans ggplot, nous utilisons le mot « couche » comme synonyme de « geom », par exemple `geom_point` que nous avons utilisé ci-dessus.
-D’autres geoms existent, tels que `geom_line` et `geom_path` qui s'utilisent pour dessiner des courbes.
-On appelle un graphique « multicouche » lorsqu’on utilise plusieurs geoms dans le même graphique, dessinés les uns sur les autres.
+Dans les ggplots, nous utilisons le mot « couche » comme synonyme de « geom », par exemple `geom_point()` que nous avons utilisé ci-dessus.
+D’autres geoms existent, tels que `geom_line()` et `geom_path()` qui s'utilisent pour dessiner des courbes.
+On appelle un graphique « multicouche » lorsqu’on utilise plusieurs geoms dans le même graphique, dessinés les uns sur les autres.
 Cette approche s’avère utile pour afficher plusieurs geoms ou ensembles de données dans le même graphique.
-Considérons par exemple l’esquisse suivante qui ajoute une couche de `geom_path` à la visualisation de données précédente :
+Considérons par exemple l’esquisse suivante qui ajoute une couche de `geom_path()` à la visualisation de données précédente :
 
 <!-- comment -->
 
@@ -312,7 +307,7 @@ gg_deux_couches <- nuage_de_points+
 
 <!-- comment -->
 
-Dans le code ci-dessus, nous créons d’abord un nouveau jeu de données `banque_mondiale_avant_1975`, puis nous ajoutons un `geom_path` au `nuage_de_points` ce qui donnne `gg_deux_couches` un ggplot à deux couches.
+Dans le code ci-dessus, nous créons d’abord un nouveau jeu de données `banque_mondiale_avant_1975`, puis nous ajoutons un `geom_path()` au `nuage_de_points` ce qui donnne `gg_deux_couches` un ggplot à deux couches.
 <!-- comment -->
 Nous sauvegardons ensuite la valeur rendue par l’appel à `animint()` dans l'objet `vis.deux.couches`, qu’on imprime pour l’afficher.
 <!-- comment -->
@@ -324,13 +319,13 @@ Le graphique ci-dessus est une visualisation de données à deux couches :
 
 <!-- comment -->
 
-* le `geom_point` montre l’espérance de vie, le taux de fertilité et la région de tous les pays en 1975;
+* le `geom_point()` montre l’espérance de vie, le taux de fertilité et la région de tous les pays en 1975;
 <!-- comment -->
-* le `geom_path` montre les mêmes variables pour les cinq années précédentes.
+* le `geom_path()` montre les mêmes variables pour les cinq années précédentes.
 
 <!-- comment -->
 
-L’ajout de `geom_path` montre l’évolution des pays au fil du temps.
+L’ajout de `geom_path()` montre l’évolution des pays au fil du temps.
 <!-- comment -->
 Pour la plupart des pays, les données se sont déplacées vers la droite et vers le bas, ce qui indique une espérance de vie plus élevée et un taux de fertilité plus faible.
 <!-- comment -->
@@ -513,7 +508,7 @@ Considérons l’esquisse ci-dessous qui contient un graphique avec deux panneau
 
 Notez que les deux panneaux tracent des geoms différents, chacun avec son propre `aes()`.
 <!-- comment -->
-Le `geom_point` et le `geom_path` dans le panneau de gauche ont `x=espérance.de.vie`, tandis que le `geom_line` du panneau de droite utilise `x=année`.
+Le `geom_point()` et le `geom_path()` dans le panneau de gauche ont `x=espérance.de.vie`, tandis que le `geom_line()` du panneau de droite utilise `x=année`.
 <!-- comment -->
 Notez également que nous avons écrit `facet=x.var`, nous devons donc ajouter une variable `x.var` à chacun des trois ensembles de données.
 <!-- comment -->
@@ -547,9 +542,9 @@ add.x.var <- function(df, x.var){
 
 La visualisation de données ci-dessus contient un seul ggplot avec deux panneaux et trois couches.
 <!-- comment -->
-Le panneau de gauche montre les `geom_point` et `geom_path` et le panneau de droite montre les `geom_line`.
+Le panneau de gauche affiche les `geom_point()` et `geom_path()` et le panneau de droite affiche le `geom_line()`.
 <!-- comment -->
-Les panneaux ont un axe commun pour le taux de fertilité, ce qui facilite la comparaison directe entre le `geom_line` du panneau des séries temporelles et le `geom_point` et le `geom_path` du panneau du nuage de points.
+Les panneaux ont un axe commun pour le taux de fertilité, ce qui facilite la comparaison directe entre le `geom_line()` du panneau des séries temporelles et le `geom_point()` et le `geom_path()` du panneau du nuage de points.
 
 <!-- comment -->
 
@@ -605,13 +600,13 @@ Prenons l’exemple de l’esquisse ci-dessous :
 
 <!-- comment -->
 
-Notez que les trois panneaux tracent les deux mêmes geoms, `geom_point` et `geom_path`.
+Notez que les trois panneaux tracent les deux mêmes geoms, `geom_point()` et `geom_path()`.
 <!-- comment -->
 Puisque `facet=afficher.année` et qu’il y a trois panneaux, nous devrons créer des tableaux de données qui auront trois valeurs pour la variable `afficher.année`.
 <!-- comment -->
-Le `geom_point` ne contient des données que pour 3 ans, et le tableau `geom_path` a des données pour 15 ans (mais 3 valeurs de `afficher.année`).
+Le `geom_point()` ne contient des données que pour 3 ans; cependant le `geom_path()` contient des données pour 15 ans (mais 3 valeurs de `afficher.année`).
 <!-- comment -->
-Le code ci-dessous crée ces deux ensembles de données pour 3 années de l’ensemble de données de la Banque mondiale :
+Le code ci-dessous crée ces deux ensembles de données pour 3 années de l’ensemble de données de la Banque mondiale :
 
 <!-- comment -->
 

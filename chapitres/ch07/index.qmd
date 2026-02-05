@@ -23,7 +23,7 @@ Après avoir lu ce chapitre, vous saurez comment :
 <!-- comment -->
 - Ajouter des données une par une à un ensemble de variables à sélection multiple, plutôt que d'utiliser un pinceau de sélection rectangulaire.
 <!-- comment -->
-- Éviter l'utilisation de `vjust` et d'étiquettes à plusieurs lignes dans `geom_text`.
+- Éviter l'utilisation de `vjust` et d'étiquettes à plusieurs lignes dans `geom_text()`.
 <!-- comment -->
 - Ordonner des graphiques sur une page.
 <!-- comment -->
@@ -65,7 +65,7 @@ Nous disposons d'une prise en charge expérimentale pour cela, voir la [mise à 
 
 <!-- paragraph -->
 
-Les statistiques `geom_*(stat=...)` et les positions `geom_*(position=...)` sont calculées avec toutes les données (et non pour chaque valeur de `showSelected`).
+Dans `animint2`, nous évitons d’utiliser les statistiques et les positions avec `showSelected`.
 <!-- comment -->
 Par exemple, considérons le ggplot à facettes ci-dessous :
 
@@ -227,7 +227,7 @@ Nous avons déjà une [issue](https://github.com/tdhock/animint/issues/148) qui 
 
 <!-- paragraph -->
 
-Lors de l'affichage d'un ggplot à l'aide des périphériques graphiques R habituels, l'utilisation d'un saut de ligne ou d'une nouvelle ligne `\n` dans une étiquette `geom_text` entraîne l'apparition de plusieurs lignes de texte sur le graphique.
+Lors de l'affichage d'un ggplot à l'aide des périphériques graphiques R habituels, l'utilisation d'un saut de ligne ou d'une nouvelle ligne `\n` dans une étiquette `geom_text()` entraîne l'apparition de plusieurs lignes de texte sur le graphique.
 
 <!-- paragraph -->
 
@@ -252,13 +252,13 @@ animint(gg.return)
 
 <!-- paragraph -->
 
-La prise en charge de plusieurs lignes dans les étiquettes `geom_text` serait utile, mais nous n'avons pas encore eu le temps de l'implémenter.
+La prise en charge de plusieurs lignes dans les étiquettes `geom_text()` serait utile, mais nous n'avons pas encore eu le temps de l'implémenter.
 <!-- comment -->
 Nous avons créé une [issue](https://github.com/tdhock/animint/issues/149) à ce sujet, et toute Pull Request qui implémente cette fonctionnalité sera acceptée.
 
 <!-- paragraph -->
 
-En attendant, la solution de contournement consiste à utiliser un seul `geom_text` pour chaque ligne de texte à afficher :
+En attendant, la solution de contournement consiste à utiliser un seul `geom_text()` pour chaque ligne de texte à afficher :
 
 <!-- paragraph -->
 

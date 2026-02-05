@@ -283,7 +283,7 @@ animint(
 
 <!-- paragraph -->
 
-## Refonte avec des `tallrects` mobiles {#re-design}
+## Refonte avec des rectangles mobiles {#re-design}
 
 <!-- paragraph -->
 
@@ -293,7 +293,7 @@ Tout d'abord, vous avez peut-être remarqué qu'il y a deux légendes de "set" d
 <!-- comment -->
 Il serait plus facile pour le lecteur de décoder si la variable "set" n'est mappée qu'une seule fois.
 <!-- comment -->
-Ainsi, dans la refonte ci-dessous, nous remplaçons le `geom_point` dans le deuxième graphique par un `geom_segment` avec `linetype=set`.
+Ainsi, dans la refonte ci-dessous, nous remplaçons le `geom_point()` dans le deuxième graphique par un `geom_segment()` avec `linetype=set`.
 
 <!-- paragraph -->
 
@@ -305,7 +305,7 @@ Puisque nous spécifions une durée `duration` pour la variable `arclength` et l
 <!-- comment -->
 Le deuxième tallrect a `clickSelects=arclength` et le fait de cliquer dessus a pour effet de modifier la valeur sélectionnée de `arclength`.
 <!-- comment -->
-Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables clickSelects/showSelected nommées](/ch06#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
+Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
 
 <!-- paragraph -->
 
@@ -406,11 +406,11 @@ Exercices :
 
 <!-- paragraph -->
 
-- Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect`.
+- Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect()`.
 <!-- comment -->
 Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
 <!-- comment -->
-- Ajoutez un autre nuage de points qui montre les valeurs prédites contre la réponse, avec un `geom_abline` en arrière-plan pour indiquer une prédiction parfaite.
+- Ajoutez un autre nuage de points qui montre les valeurs prédites contre la réponse, avec un `geom_abline()` en arrière-plan pour indiquer une prédiction parfaite.
 <!-- comment -->
 - À quoi ressembleraient les courbes d'erreur si l'on choisissait d'autres répartitions entraînement/validation ?
 <!-- comment -->

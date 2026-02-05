@@ -24,4 +24,5 @@ for(qmd in qmd.files){
   }
 }
 print(violations)
+
 q(status=length(violations))

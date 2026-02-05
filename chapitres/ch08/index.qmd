@@ -14,7 +14,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par charger le jeu de données de la Banque mondiale et définir quelques fonctions d'aide pour créer un ggplot multipanneaux avec plusieurs geoms.
+- Nous commençons par charger le jeu de données de la Banque mondiale et définir quelques fonctions pour créer un ggplot multipanneaux avec plusieurs geoms.
 <!-- comment -->
 - Nous créons ensuite un graphique de série temporelle pour l'espérance de vie.
 <!-- comment -->
@@ -24,7 +24,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Chargement des données et définition des fonctions d'aide {#load}
+## Chargement des données et définition des fonctions {#load}
 
 <!-- paragraph -->
 
@@ -83,7 +83,7 @@ not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
 
 <!-- paragraph -->
 
-Nous définissons ensuite la fonction d'aide suivante utilisée pour ajouter des colonnes aux ensembles de données afin d'affecter des geoms aux facettes.
+Nous définissons ensuite la fonction suivante utilisée pour ajouter des colonnes aux ensembles de données afin d'affecter des geoms aux facettes.
 
 <!-- paragraph -->
 
@@ -101,7 +101,7 @@ Notez que les niveaux des facteurs détermineront l'ordre des facettes dans le g
 <!-- comment -->
 Il s’agit d’un exemple de la méthode [rajouter une colonne pour facettes](/ch99#addColumn-then-facet).
 <!-- comment -->
-Nous définissons ci-dessous trois fonctions d'aide, une pour chaque facette :
+Nous définissons ci-dessous trois fonctions, une pour chaque facette :
 
 <!-- paragraph -->
 
@@ -120,7 +120,7 @@ TS.ABOVE <- function(df)FACETS(
 
 <!-- paragraph -->
 
-Tout d'abord, nous définissons un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'un `geom_tallrect` en arrière-plan.
+Tout d'abord, nous définissons un ensemble de données avec une ligne pour chaque année, que nous utiliserons pour sélectionner les années à l'aide d'un `geom_tallrect()` en arrière-plan.
 
 <!-- paragraph -->
 
@@ -130,7 +130,7 @@ années <- unique(not.na[, .(année)])
 
 <!-- paragraph -->
 
-Nous définissons le ggplot avec un `geom_tallrect` en arrière-plan et un `geom_line` pour les séries temporelles.
+Nous définissons le ggplot avec un `geom_tallrect()` en arrière-plan et un `geom_line()` pour les séries temporelles.
 
 <!-- paragraph -->
 

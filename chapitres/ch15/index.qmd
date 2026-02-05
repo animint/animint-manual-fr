@@ -351,9 +351,9 @@ Exercices :
 <!-- comment -->
 - Ajoutez une légende de taille au premier graphique (des points noirs  plus grands que les rouges), afin qu'on puisse voir les cas où les points ont la même valeur.
 <!-- comment -->
-- Ajoutez une `geom_hline` pour mettre en évidence la valeur de perte=0 dans le second graphique.
+- Ajoutez une `geom_hline()` pour mettre en évidence la valeur de perte=0 dans le second graphique.
 <!-- comment -->
-- Ajoutez un `geom_hline` pour mettre en évidence le seuil d'arrêt dans le premier graphique.
+- Ajoutez un `geom_hline()` pour mettre en évidence le seuil d'arrêt dans le premier graphique.
 <!-- comment -->
 - Désactivez l'une des deux légendes pour gagner de la place.
 <!-- comment -->
@@ -375,7 +375,7 @@ Tracez le nombre d'itérations en fonction du seuil.
 <!-- comment -->
 - Dérivez la fonction de perte pour la [régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression) et visualisez la méthode de recherche de racines de Newton correspondante.
 <!-- comment -->
-- Refactorisez `gg.it` pour n'utiliser qu'un seul `geom_point` au lieu des quatre geoms du code actuel.
+- Refactorisez `gg.it` pour n'utiliser qu'un seul `geom_point()` au lieu des quatre geoms du code actuel.
 <!-- comment -->
 Conseil : utilisez `rbind()` pour créer un seul tableau avec toutes les données.
 
