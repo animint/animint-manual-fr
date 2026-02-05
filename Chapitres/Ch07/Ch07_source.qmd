@@ -324,7 +324,7 @@ Les options de thème suivantes peuvent être définies par `element_blank` pour
 
 `animint2` prend en charge `facet_grid` pour créer des visualisations de données à plusieurs panneaux, mais ne prend en charge que de manière limitée les variables multiples par axe.
 <!-- comment -->
-Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui se traduit par deux étiquettes de bande lorsque la visualisation est générée avec `ggplot2`.
+Par exemple, le ggplot ci-dessous utilise deux variables pour créer des facettes verticales, ce qui fait deux lignes de texte pour le titre de chaque facette lorsque la visualisation est générée avec les sorties graphiques traditionnelles de R.
 
 <!-- paragraph -->
 
