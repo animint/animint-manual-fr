@@ -31,5 +31,5 @@ jobs:
           netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}
           pat_github_pr: ${{ secrets.PAT_GITHUB_PR }}
-          path: Chapitres/_book
+          path: chapitres/_book
           netlify_url: animint-manual-fr.netlify.app
