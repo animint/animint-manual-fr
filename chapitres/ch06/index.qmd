@@ -356,7 +356,7 @@ Il servira à sélectionner les données et le modèle dans le graphique ci-dess
 signalPlot <- ggplot()+
   theme_bw()+
   theme(panel.margin=grid::unit(0, "lines"))+
-  theme_animint(height=800)+
+  theme_animint(last_in_row=TRUE)+
   geom_point(aes(
     position/1e5, signal),
     showSelected="bases.per.probe",

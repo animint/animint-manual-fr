@@ -149,7 +149,7 @@ knitr::opts_chunk$set(fig.path="ch01-figures/")
 
 <!-- paragraph -->
 
-L’objectif de ce manuel est d’expliquer l’utilisation des éléments suivants `animint2`, un package R pour la visualisation interactive des données.
+L’objectif de ce manuel est d’expliquer l’utilisation d’`animint2`, un package R pour la visualisation interactive des données.
 <!-- comment -->
 Ce chapitre d’introduction répond aux questions suivantes :
 
@@ -241,7 +241,7 @@ Pour ces ensembles, la visualisation graphique n’est pas nécessaire : la pr�
 
 <!-- paragraph -->
 
-Prenons l’exemple de la célèbre [expérience de dégustation du thé  ](https://fr.wikipedia.org/wiki/The_lady_tasting_tea) conçue par Ronald Fisher.
+Prenons l’exemple de la célèbre expérience de dégustation du thé conçue par Ronald Fisher [@TeaTasting].
 <!-- comment -->
 Une dame a affirmé pouvoir détecter si le lait d’une tasse de thé avait été ajouté avant ou après le thé.
 <!-- comment -->
@@ -344,14 +344,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXᵉ siècle
-.
+La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXᵉ siècle.
 <!-- comment -->
-Cette visualisation des données porte le nom de [courbe de Keeling](https://fr.wikipedia.org/wiki/Courbe_de_Keeling), du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique.
+Cette visualisation des données porte le nom de courbe de Keeling, du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique [@keeling1960concentration].
 <!-- comment -->
 La tendance générale à l’augmentation peut être expliquée par le processus chimique de la combustion, qui transforme l’oxygène en CO₂.
 <!-- comment -->
-Keeling a noté que « le  taux d’augmentation observé est proche de celui que l’on peut attendre de la combustion de combustibles fossiles »  [@keeling1960concentration] .
+Keeling a noté que « le taux d’augmentation observé est proche de celui que l’on peut attendre de la combustion de combustibles fossiles » [@keeling1960concentration].
 
 <!-- paragraph -->
 
