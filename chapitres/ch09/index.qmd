@@ -430,9 +430,9 @@ show.paths <- bike.paths[(
 
 La sortie ci-dessus est un plan de Montréal où chacun des dix compteurs est représenté par du texte.
 
-### Résumé des dates extrêmes pour chaque compteur
+### Résumé des dates de début et de fin pour chaque compteur
 
-Maintenant on calcule les dates extrêmes pour chaque compteur :
+Nous calculons maintenant la période d’activité de chaque compteur :
 
 ```{r}
 (location.ranges <- dcast(
@@ -443,7 +443,7 @@ Maintenant on calcule les dates extrêmes pour chaque compteur :
   value.var="mois.01"))
 ```
 
-Dans la sortie ci-dessus, on voit une ligne pour chaque compteur, avec des colonnes pour les dates extrêmes.
+Dans la sortie ci-dessus, on voit une ligne pour chaque compteur, avec des colonnes pour les dates de début et de fin.
 <!-- comment -->
 Le graphique ci-dessous montre la période pendant laquelle chaque compteur a fonctionné.
 
@@ -493,7 +493,7 @@ accidents.range <- dcast(
     size=seg.size))
 ```
 
-Dans la sortie ci-dessus, on voit un segment de plus (pour les accidents en bas).
+Dans la sortie ci-dessus, on voit un segment supplémentaire (pour les accidents, en bas).
 
 ### Séries temporelles mensuelles
 
