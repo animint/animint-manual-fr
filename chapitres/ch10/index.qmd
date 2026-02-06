@@ -10,11 +10,11 @@ Dans ce chapitre, nous explorons plusieurs visualisations des données du classi
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par la visualisation statique originale, repensée sous forme de deux ggplots affichés par `animint2` : un graphique de l’erreur de validation à 10 divisions et un graphique des prédictions du classificateur des 7 plus proches voisins.
+- Nous commençons par la visualisation statique originale, repensée sous forme de deux ggplots affichés par `animint2` : un graphique de l’erreur de validation à 10 divisions et un graphique des prédictions du classificateur des 7 plus proches voisins.
 <!-- comment -->
 
 <!-- comment -->
