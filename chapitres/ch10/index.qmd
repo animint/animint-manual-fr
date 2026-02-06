@@ -1,4 +1,4 @@
-# K-plus-proches-voisins
+# K plus proches voisins
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="ch10-figures/")
@@ -6,17 +6,17 @@ knitr::opts_chunk$set(fig.path="ch10-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous explorerons plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
+Dans ce chapitre, nous explorons plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commencerons par la visualisation statique originale des données, repensée sous la forme de deux ggplots affichés par `animint2`.
+- Nous commençons par la visualisation statique originale, repensée sous forme de deux ggplots affichés par `animint2` : un graphique de l’erreur de validation à 10 divisions et un graphique des prédictions du classificateur des 7 plus proches voisins.
 <!-- comment -->
-Voici un graphique de l’erreur de validation à 10 divisions et un graphique des prédictions du classificateur 7 plus proches voisins.
+
 <!-- comment -->
 - Nous proposons une refonte permettant de sélectionner le nombre de voisins utilisés pour les prédictions du modèle.
 <!-- comment -->
