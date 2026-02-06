@@ -414,8 +414,7 @@ Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent 
 on.text <- function(V1, V2){
   V2 <= max(error.text$V2.top) & V1 <= text.V1.prop
 }
-show.grid <- boundary.grid[!on.text(V1, V2)]
-show.grid
+(show.grid <- boundary.grid[!on.text(V1, V2)])
 ```
 
 <!-- paragraph -->
@@ -713,12 +712,12 @@ Enfin, nous redéfinissons le graphique, en utilisant le nombre voisins (`neighb
 <!-- paragraph -->
 
 ```{r}
+err_set <- function(set)paste("Err.", set)
 scatterPlot <- ggplot()+
   ggtitle("Erreurs de classification (entraînement)")+
   theme_bw()+
-  xlab("Variable d'entrée 1")+
-  ylab("Variable d'entrée 2")+
-  coord_equal()+
+  xlab("Variable d’entrée 1")+
+  ylab("Variable d’entrée 2")+
   scale_linetype_manual(
     "méthode", values=classifier.linetypes)+
   scale_fill_manual(
@@ -747,7 +746,7 @@ scatterPlot <- ggplot()+
     size=3,
     data=show.points)+
   geom_text(aes(
-    text.V1.error, text.V2.bottom, label=paste("Err.", set_fr, ":")),
+    text.V1.error, text.V2.bottom, label=err_set(set_fr)),
     data=Bayes.error,
     hjust=0)+
   geom_text(aes(
@@ -755,7 +754,7 @@ scatterPlot <- ggplot()+
     data=Bayes.error,
     hjust=1)+
   geom_text(aes(
-    text.V1.error, V2.bottom, label=paste("Err.", set_fr, ":")),
+    text.V1.error, V2.bottom, label=err_set(set_fr)),
     showSelected="neighbors",
     data=other.error,
     hjust=0)+
