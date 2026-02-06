@@ -1,4 +1,4 @@
-# Détection supervisée des points de changement
+# Détection supervisée des ruptures
 
 <!-- paragraph -->
 
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="ch16-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données des modèles de détection supervisée des points de changement.
+Dans ce chapitre, nous allons explorer plusieurs visualisations des modèles de détection supervisée des ruptures, dans les données séquentielles.
 
 <!-- paragraph -->
 
@@ -18,7 +18,7 @@ Plan du chapitre :
 
 - Nous commençons par effectuer plusieurs visualisations statiques du jeu de données `intreg`.
 <!-- comment -->
-- Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de points de changement/segments, et l’autre graphique montre le modèle correspondant.
+- Nous créons ensuite une visualisation interactive dans laquelle un graphique peut être cliqué pour sélectionner le nombre de ruptures et segments, avec un autre graphique qui affiche le modèle correspondant.
 <!-- comment -->
 - Nous terminons en montrant une visualisation statique du modèle de régression linéaire de la marge maximale, et en suggérant des exercices pour créer une version interactive.
 
@@ -183,7 +183,7 @@ sig.errors <- penaltyLearning::labelError(
 
 Le `data.table` (tableau de données) `sig.errors$label.errors` contient une ligne pour chaque combinaison (modèle, étiquette).
 <!-- comment -->
-La colonne `status` peut être utilisée pour afficher l’erreur d’étiquette : `false negative` pour trop peu de changements, `false positive` pour trop de changements, ou `correct` pour le bon nombre de modifications.
+La colonne `status` peut être utilisée pour afficher l’erreur d’étiquette : `false negative` pour trop peu de ruptures, `false positive` pour trop de ruptures, ou `correct` pour le bon nombre de modifications.
 
 <!-- paragraph -->
 
