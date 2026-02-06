@@ -329,7 +329,7 @@ errorPlotStatic
 
 <!-- paragraph -->
 
-### Graphique des limites de décision dans l’espace des variables d’entrée. {#static-features}
+### Graphique des limites de décision dans l’espace des variables d’entrée {#static-features}
 
 <!-- paragraph -->
 
@@ -347,7 +347,7 @@ show.points
 
 <!-- paragraph -->
 
-Ensuite, nous calculons les taux d’erreur de mauvaise classification, que nous afficherons en bas à gauche du graphique de l’espace des variables.
+Ensuite, nous calculons les taux d’erreur de classification, que nous afficherons en bas à gauche du graphique de l’espace des variables.
 
 <!-- paragraph -->
 
@@ -366,7 +366,7 @@ error.text
 
 <!-- paragraph -->
 
-Nous définissons la fonction suivante que nous utiliserons pour calculer les limites de décision.
+Nous définissons la fonction suivante, que nous utiliserons pour calculer les limites de décision.
 
 <!-- paragraph -->
 
@@ -417,7 +417,7 @@ on.text <- function(V1, V2){
 
 <!-- paragraph -->
 
-Le nuage de points ci-dessous reproduit le classificateur des 7 Plus Proches Voisins de la figure originale.
+Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale.
 
 <!-- paragraph -->
 
@@ -430,7 +430,7 @@ scatterPlotStatic <- ggplot()+
   theme(axis.text=element_blank(),
         axis.ticks=element_blank(),
         axis.title=element_blank())+
-  ggtitle("7-Plus proches voisins")+
+  ggtitle("7 plus proches voisins")+
   scale_color_manual(
     "classe",
     values=label.colors)+
@@ -473,7 +473,7 @@ scatterPlotStatic
 
 <!-- paragraph -->
 
-Enfin, nous combinons les deux `ggplots` et les affichons sous forme d’`animint2`.
+Enfin, nous combinons les deux `ggplots` et les affichons sous forme d’un `animint2`.
 
 <!-- paragraph -->
 
@@ -487,7 +487,7 @@ animint(
 
 <!-- paragraph -->
 
-Bien que cette visualisation des données comporte trois légendes interactives, elle est statique dans le sens où elle n’affiche que les prédictions du modèle des 7 Plus Proches Voisins.
+Bien que cette visualisation comporte trois légendes interactives, elle est statique dans le sens où elle n’affiche que les prédictions du modèle des 7 plus proches voisins.
 
 <!-- paragraph -->
 
@@ -509,19 +509,19 @@ Notez les changements suivants :
 
 <!-- paragraph -->
 
-- ajout d’un `geom_tallrect()` pour sélectionner le nombre de voisins.
+- ajout d’un `geom_tallrect()` pour sélectionner le nombre de voisins;
 <!-- comment -->
-- changement de la limite de décision de Bayes de `geom_hline()` avec une entrée de légende, vers un `geom_segment()` avec une étiquette de texte.
+- changement de la limite de décision de Bayes, passant d'un `geom_hline()` avec une entrée de légende, à un `geom_segment()` avec une étiquette de texte;
 <!-- comment -->
-- ajout d’une légende de type de ligne pour distinguer les taux d’erreur des modèles de Bayes et de KPPV.
+- ajout d’une légende de type de ligne pour distinguer les taux d’erreur des modèles de Bayes et de KPPV;
 <!-- comment -->
-- changement des barres d’erreur, `geom_linerange()`, en bandes d’erreur, `geom_ribbon()`.
+- remplacement des barres d’erreur, `geom_linerange()`, par des bandes d’erreur, `geom_ribbon()`.
 
 <!-- paragraph -->
 
 Les seules nouvelles données que nous devons définir sont les points d’extrémité du segment que nous utiliserons pour tracer la frontière de décision de Bayes.
 <!-- comment -->
-À noter que nous redéfinissons également l’ensemble test pour souligner que l’erreur de Bayes représente le meilleur taux d’erreur atteignable pour les données de test.
+Notez que nous redéfinissons également l’ensemble test pour souligner que l’erreur de Bayes représente le meilleur taux d’erreur atteignable pour les données de test.
 
 <!-- paragraph -->
 
@@ -536,7 +536,7 @@ Bayes.segment$set_fr <- "test"
 
 <!-- paragraph -->
 
-Nous ajoutons également aux tableaux de données une variable d’erreur qui contient l’erreur de prédiction des modèles de type KPPV.
+Nous ajoutons également aux tableaux de données une variable d’erreur qui contient l’erreur de prédiction des modèles KPPV.
 <!-- comment -->
 Cette variable d’erreur sera utilisée pour la légende du type de ligne.
 
@@ -551,7 +551,7 @@ other.error$classifier <- "KPPV"
 
 Nous redéfinissons le graphique des courbes d’erreur ci-dessous.
 <!-- comment -->
-À noter que :
+Notez que :
 
 <!-- paragraph -->
 
@@ -632,7 +632,7 @@ errorPlot
 
 <!-- paragraph -->
 
-Concentrons nous ensuite sur la refonte du graphique de l’espace des caractéristiques.
+Concentrons-nous maintenant sur la refonte du graphique de l’espace des caractéristiques.
 <!-- comment -->
 Dans la section précédente, nous n’avons considéré que le sous-ensemble de données du modèle à 7 voisins.
 <!-- comment -->
@@ -642,7 +642,7 @@ Notre refonte comprend les changements suivants :
 
 - Nous utilisons les voisins comme variable `showSelected`.
 <!-- comment -->
-- Nous ajoutons une légende pour indiquer les points de données d’entraînement mal classés.
+- Nous ajoutons une légende pour indiquer les points de données d’entraînement mal classées.
 <!-- comment -->
 - Nous utilisons des coordonnées à espacement égal afin que la distance visuelle (pixels) soit la même que la distance euclidienne dans l’espace des variables.
 
@@ -655,7 +655,7 @@ show.data <- data.all.folds[validation.fold==0]
 
 <!-- paragraph -->
 
-Ci-dessous, nous calculons les limites de décision prédites séparément pour chaque modèle de K Plus Proches Voisins.
+Ci-dessous, nous calculons les limites de décision prédites séparément pour chaque modèle de K plus proches voisins.
 
 <!-- paragraph -->
 
@@ -705,7 +705,7 @@ Bayes.error <- data.table(
 
 <!-- paragraph -->
 
-Enfin, nous redéfinissons le graphique, en utilisant le nombre voisins (`neighbors`) comme variable `showSelected` dans plusieurs geoms.
+Enfin, nous redéfinissons le graphique, en utilisant le nombre de voisins (`neighbors`) comme variable `showSelected` dans plusieurs geoms.
 
 <!-- paragraph -->
 
@@ -786,7 +786,7 @@ scatterPlot+
 
 <!-- paragraph -->
 
-Enfin, nous combinons les deux graphiques dans une visualisation des données unique avec le nombre de voisins (`neighbors`) comme variable de sélection.
+Enfin, nous combinons les deux graphiques dans une visualisation unique avec le nombre de voisins (`neighbors`) comme variable de sélection.
 
 <!-- paragraph -->
 
@@ -802,7 +802,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez que le nombre de voisins (`neighbors`) sont utilisés comme variable de temps, de sorte que l’animation montre les prédictions des différents modèles.
+Notez que le nombre de voisins (`neighbors`) est utilisé comme variable de temps, de sorte que l’animation montre les prédictions des différents modèles.
 
 <!-- paragraph -->
 
@@ -810,11 +810,11 @@ Notez que le nombre de voisins (`neighbors`) sont utilisés comme variable de te
 
 <!-- paragraph -->
 
-Dans cette section, nous faisons une visualisation qui permet à l’utilisateur de sélectionner le nombre de divisions utilisés pour calculer la courbe d’erreur de validation.
+Dans cette section, nous proposons une visualisation qui permet à l’utilisateur de sélectionner le nombre de divisions utilisées pour calculer la courbe d’erreur de validation.
 
 <!-- paragraph -->
 
-La boucle `for` ci-dessous calcule la courbe d’erreur de validation pour plusieurs valeurs différentes de `n.folds`.
+La boucle `for` ci-dessous calcule la courbe d’erreur de validation pour différentes valeurs de `n.folds`.
 
 <!-- paragraph -->
 
@@ -936,7 +936,7 @@ errorPlotNew+facet_grid(facet ~ n.folds, scales="free")
 
 <!-- paragraph -->
 
-Le code ci-dessous crée une visualisation des données interactive à l’aide du nouveau graphique de la courbe d’erreur.
+Le code ci-dessous crée une visualisation interactive à l’aide du nouveau graphique de la courbe d’erreur.
 
 <!-- paragraph -->
 
@@ -955,13 +955,13 @@ animint(
 
 <!-- paragraph -->
 
-Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K Plus Proches Voisins.
+Nous avons montré comment ajouter deux fonctionnalités interactives à une visualisation des données des prédictions du modèle des K plus proches voisins.
 <!-- comment -->
-Nous avons commencé par une visualisation statique qui n’affichait que les prédictions des 7 Plus Proches Voisins.
+Nous avons commencé par une visualisation statique qui n’affiche que les prédictions des 7 plus proches voisins.
 <!-- comment -->
-Ensuite, nous avons créé une visualisation interactive qui permettait de sélectionner K, le nombre de voisins.
+Nous avons ensuite créé une visualisation interactive qui permet de sélectionner K, le nombre de voisins.
 <!-- comment -->
-Nous avons procédé à une autre visualisation, en ajoutant une facette permettant de sélectionner le nombre de divsions dans la validation croisée.
+Nous avons finalement proposé une autre visualisation, en ajoutant une facette qui permet de sélectionner le nombre de divsions dans la validation croisée.
 
 <!-- paragraph -->
 
@@ -969,15 +969,15 @@ Exercices :
 
 <!-- paragraph -->
 
-- Faites en sorte que les taux d’erreur du texte affichés en bas à gauche du deuxième graphique soient masqués quand on clique  sur les entrées de la légende pour Bayes, train, test.
+- Faites en sorte que les taux d’erreur affichés dans le texte en bas à gauche du deuxième graphique soient masqués quand on clique  sur les entrées de la légende pour Bayes, train et test.
 <!-- comment -->
 Conseil : vous pouvez soit utiliser un `geom_text()` avec `showSelected=c(selectorNameColumn="selectorValueColumn")` (comme expliqué dans le [chapitre 14](/ch14)) ou deux `geom_text` chacun avec un paramètre `showSelected` différent.
 <!-- comment -->
 - La colonne de probabilité (`probability`) du tableau de données `show.grid` est la probabilité prédite de la classe 1.
 <!-- comment -->
-Comment feriez-vous la refonte de la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille ?
+Comment feriez-vous la refonte de la visualisation pour montrer la probabilité prédite plutôt que la classe prédite à chaque point de la grille?
 <!-- comment -->
-La difficulté principale est que la probabilité est une variable numérique, mais que `animint2` impose que chaque échelle soit exclusivement continue ou discrète (pas les deux).
+La difficulté principale est que la probabilité est une variable numérique, mais que `animint2` impose des échelles exclusivement continues ou discrètes (pas les deux).
 <!-- comment -->
 Vous pourriez utiliser une échelle continue pour `fill`, mais vous devrez alors utiliser une échelle différente pour montrer la variable de prédiction.
 <!-- comment -->
