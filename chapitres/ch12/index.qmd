@@ -84,7 +84,6 @@ ggplot()+
   scale_fill_gradient2(midpoint=true.decision.boundary)+
   geom_point(aes(
     x1.sq, x2.sq, fill=f),
-    shape=21,
     color="grey",
     data=data.dt)
 ```
@@ -127,7 +126,6 @@ ggplot()+
     data=scores)+
   geom_point(aes(
     x1, f.noise, color=y),
-    shape=21,
     fill=NA,
     data=data.dt)
 ```
@@ -152,7 +150,6 @@ ggplot()+
   geom_line(aes(x1.sq, f), data=scores)+
   geom_point(aes(
     x1.sq, f.noise, color=y),
-    shape=21,
     fill=NA,
     data=data.dt)
 ```
@@ -175,7 +172,6 @@ ggplot()+
     data=x1sq.boundary)+
   geom_point(aes(
     x1.sq, x2.sq, color=y),
-    shape=21,
     fill=NA,
     data=data.dt)
 ```
@@ -198,7 +194,6 @@ ggplot()+
     data=x1.boundaries)+
   geom_point(aes(
     x1, x2, color=y),
-    shape=21,
     fill=NA,
     data=data.dt)
 ```
@@ -326,7 +321,6 @@ subtrain.dt$pred.y <- predict(fit)
 ggplot()+
   geom_point(aes(
     x1.sq, x2.sq, color=pred.y, fill=y),
-    shape=21,
     size=4,
     stroke=2,
     data=subtrain.dt)
@@ -369,7 +363,6 @@ ggplot()+
   scale_color_manual(values=c(error="black", correct=NA))+
   geom_point(aes(
     x1.sq, x2.sq, fill=y, color=train.error),
-    shape=21,
     stroke=1,
     size=4,
     data=subtrain.dt)+
@@ -434,7 +427,6 @@ ggplot()+
     data=abline.dt)+
   geom_point(aes(
     x1.sq, x2.sq, color=y),
-    shape=21,
     fill=NA,
     size=4,
     data=subtrain.dt)+
@@ -494,7 +486,6 @@ ggplot()+
   scale_fill_manual(values=sv.colors, breaks=names(sv.colors))+
   geom_point(aes(
     x1.sq, x2.sq, color=y, fill=status),
-    shape=21,
     size=4,
     data=subtrain.dt)
 ```
@@ -554,7 +545,6 @@ ggplot()+
     x1, x2, color=y,
     size=train.error,
     fill=status),
-    shape=21,
     data=subtrain.dt)
 ```
 

@@ -165,7 +165,6 @@ ggplot()+
     data=lpoints)+
   geom_point(aes(
     arclength, standardized.coef, color=variable),
-    shape=21,
     fill=NA,
     size=3,
     data=coef.grid)
@@ -260,7 +259,6 @@ gg.res <- ggplot()+
     response, residual, fill=set, 
     key=observation.i),
     showSelected="arclength",
-    shape=21,
     data=lasso.res)
 print(gg.res)
 ```
@@ -357,7 +355,6 @@ animint(
       response, residual, 
       key=observation.i),
       showSelected=c("set", "arclength"),
-      shape=21,
       fill=NA,
       color="black",
       data=lasso.res)+

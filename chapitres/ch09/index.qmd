@@ -80,7 +80,6 @@ ggplot()+
   facet_grid(lieu.lines ~ .)+
   geom_point(aes(
     date, passages, color=passages==0),
-    shape=21,
     data=passages_dt)+
   scale_color_manual(values=c("TRUE"="grey", "FALSE"="black"))
 ```

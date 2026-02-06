@@ -360,7 +360,6 @@ signalPlot <- ggplot()+
   geom_point(aes(
     position/1e5, signal),
     showSelected="bases.per.probe",
-    shape=1,
     data=breakpoints$signals)+
   geom_segment(aes(
     first.base/1e5, mean, xend=last.base/1e5, yend=mean),
@@ -640,7 +639,6 @@ nuage1975 <- ggplot()+
   geom_point(
     aes(x=espérance.de.vie, y=taux.de.fertilité, size=population),
     BanqueMondiale1975,
-    shape=21,
     color="red",
     fill="black")
 (vis.scale.size <- animint(
