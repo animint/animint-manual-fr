@@ -204,7 +204,7 @@ Ci-dessous, nous exécutons la fonction `OneFold` en parallèle à l’aide du p
 <!-- comment -->
 Pour `validation.fold` de 1 à 10, on calcule l’erreur de l’ensemble de validation.
 <!-- comment -->
-Pour `validation.fold=0`, on traite l’ensemble des 200 observations comme un ensemble d’entraînement, qui sera utilisé pour visualiser les frontières de décision apprises avec K Plus Proches Voisins.
+Pour `validation.fold=0`, on traite l’ensemble des 200 observations comme un ensemble d’entraînement, qui sera utilisé pour visualiser les limites de décision apprises des K plus proches voisins.
 
 <!-- paragraph -->
 
