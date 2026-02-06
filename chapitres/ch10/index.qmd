@@ -1,4 +1,4 @@
-# K-plus -proches-voisins
+# K-plus-proches-voisins
 
 ```{r setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path="ch10-figures/")
