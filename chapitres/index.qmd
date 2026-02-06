@@ -72,7 +72,7 @@ De plus, il présente quelques idées d’amélioration, à l’intention de ceu
 
 <!-- paragraph -->
 
-L’ordre de lecture des chapitres suivants n’est pas important, puisqu’ils expliquent comment réaliser des visualisations pour un jeu de données ou à un algorithme statistique particulier.
+L’ordre de lecture des chapitres suivants n’est pas important, puisqu’ils expliquent comment réaliser des visualisations pour un jeu de données ou un algorithme statistique particulier.
 
 <!-- paragraph -->
 
