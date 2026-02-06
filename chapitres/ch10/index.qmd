@@ -947,6 +947,7 @@ Le code ci-dessous crée une visualisation des données interactive à l’aide 
 
 ```{r ch10-vis-folds}
 animint(
+  out.dir="ch10visfolds",
   errorPlotNew+
     theme_animint(width=325),
   scatterPlot+
