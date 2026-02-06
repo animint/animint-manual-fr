@@ -38,8 +38,9 @@ data(BanqueMondiale, package="animint2fr")
 BanqueMondiale$Region <- sub(
   " (all income levels)", "", BanqueMondiale$region, fixed=TRUE)
 library(data.table)
-not.na <- data.table(
-  BanqueMondiale)[!(is.na(espérance.de.vie) | is.na(taux.de.fertilité))]
+not.na <- data.table(BanqueMondiale)[
+  !(is.na(espérance.de.vie) | is.na(taux.de.fertilité))
+]
 ```
 
 <!-- paragraph -->
@@ -65,7 +66,9 @@ Le tableau ci-dessous présente les données des années voisines, de 1991 à 19
 <!-- paragraph -->
 
 ```{r}
-not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
+not.na[
+  pays == "Koweït" & 1991 <= année & année <= 1995,
+  .(pays, année, population)]
 ```
 
 <!-- paragraph -->
@@ -78,7 +81,9 @@ Nous remplissons les valeurs manquantes ci-dessous :
 
 ```{r}
 not.na[is.na(population), population := 1700000]
-not.na[pays == "Kuwait" & 1991 <= année & année <= 1995]
+not.na[
+  pays == "Koweït" & 1991 <= année & année <= 1995,
+  .(pays, année, population)]
 ```
 
 <!-- paragraph -->
