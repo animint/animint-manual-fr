@@ -350,11 +350,11 @@ Le graphique de droite montre la fréquence des accidents au fil du temps.
 
 Dans cette section, nous allons faire une visualisation composée des éléments suivants :
 
-* Résumé des compteurs : carte des compteurs ou min/max des mois pour chaque compteur, pour sélectionner un compteur.
+* Résumé des compteurs : carte des compteurs avec période d’utilisation pour chacun, pour sélectionner un compteur.
 <!-- comment -->
-* Détails d’un compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données d’un compteur. Cliquer pour sélectionner un mois.
+* Détails du compteur, résumé des mois : séries temporelles par mois, pour les accidents et les données du compteur. Cliquer pour sélectionner un mois.
 <!-- comment -->
-* Détails d’un compteur et d’un mois : séries temporelles par jour, pour le mois sélectionné.
+* Détails du compteur et du mois : séries temporelles par jour, pour le mois sélectionné.
 
 ### Résumé des compteurs avec carte
 
