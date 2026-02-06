@@ -138,7 +138,7 @@ library(animint2)
 <!-- comment -->
 
 Dans cette section, nous expliquons comment traduire une esquisse de graphique en code R.
-Dans ce manuel, nous utilisons le mot « esquisse » dans le sens de « Première forme, traitée à grands traits et généralement en dimensions réduites, de l’œuvre projetée » [@larousse_esquisse].
+Dans ce manuel, nous utilisons le mot « esquisse » dans le sens de « Première forme, traitée à grands traits et généralement en dimensions réduites, de l’œuvre projetée » [@larousse_esquisse].
 Nous vous présenterons souvent l’esquisse dessinée à la main du graphique à créer, avant d’écrire le code nécessaire.
 Chaque esquisse comportera certains éléments qui nous permettront d’écrire facilement le code correspondant.
 Nous vous encourageons à faire vos propres esquisses dans un cahier ou sur un tableau avant d’écrire le code du graphique que vous voulez créer.
@@ -248,7 +248,7 @@ Lorsqu’on le visualise dans un navigateur web, le graphique ressemble aux vers
 <!-- comment -->
 sauf pour la légende, qui est interactive : en cliquant sur celle-ci, les points de cette couleur sont cachés ou affichés.
 <!-- comment -->
-À l’interne, la fonction `animint()` crée une liste de classe `animint`, puis R exécute la fonction `print.animint()` grâce au système d'objets S3 [@wickham2019advanced].
+À l’interne, la fonction `animint()` crée une liste de classe `animint`, puis R exécute la fonction `print.animint()` grâce au système d’objets S3 [@wickham2019advanced].
 La fonction `animint2dir()` est appelée pour compiler la liste en un dossier de fichiers de données (CSV) et de codes (HTML, JavaScript) affichables dans un navigateur web.
 <!-- comment -->
 Dans RStudio, vous devriez voir le graphique s’afficher sous l’onglet « visualiseur ».

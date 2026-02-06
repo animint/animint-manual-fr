@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="ch13-figures/")
 
 <!-- paragraph -->
 
-L'objectif de ce chapitre est de créer une visualisation des données interactive qui explique la régression de Poisson [@poissonReg], un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
+L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique la régression de Poisson [@poissonReg], un modèle d'apprentissage automatique pour la prédiction d'une sortie à valeur entière à partir d'entrées sous forme de vecteurs à valeur réelle.
 <!-- comment -->
 Il s’agit d’un modèle de « régression linéaire » puisqu’il apprend une fonction linéaire dans l’espace des variables d’entrée.
 <!-- comment -->
