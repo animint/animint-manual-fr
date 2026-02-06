@@ -40,7 +40,7 @@ L’objectif de cette section est de créer une visualisation des données qui m
 
 <!-- paragraph -->
 
-![Visualisation des probabilités dans la régression de Poisson](ch13-viz-prob.png)
+![Esquisse d’un graphique des probabilités dans la régression de Poisson](ch13-viz-prob.png)
 
 <!-- paragraph -->
 
@@ -129,7 +129,7 @@ Pour ajouter un panneau à la fonction de répartition, nous allons modifier le 
 
 <!-- paragraph -->
 
-![Visualisation des probabilités cumulées dans la régression de Poisson](ch13-viz-cum-prob.png)
+![Esquisse d’un graphique des probabilités cumulées dans la régression de Poisson](ch13-viz-cum-prob.png)
 
 <!-- paragraph -->
 

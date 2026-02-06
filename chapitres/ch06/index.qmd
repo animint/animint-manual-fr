@@ -296,7 +296,7 @@ Pour illustrer l’utilisation de `chunk_vars`, considérons la visualisation su
 
 <!-- paragraph -->
 
-![Visualisation des données ’breakpoints’](ch06-viz-breakpoints.png)
+![Esquisse d’une visualisation pour la détection des ruptures](ch06-viz-breakpoints.png)
 
 <!-- paragraph -->
 

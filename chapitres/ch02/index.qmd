@@ -186,7 +186,7 @@ L’esquisse ci-dessous contient les principaux éléments de cette visualisatio
 
 <!-- comment -->
 
-![World Bank scatterplot](ch02-viz-scatter.png)
+![Esquisse d’un nuage de points pour les données de la banque mondiale](ch02-viz-scatter.png)
 
 <!-- comment -->
 
@@ -277,7 +277,7 @@ Considérons par exemple l’esquisse suivante qui ajoute une couche de `geom_pa
 
 <!-- comment -->
 
-![multi-layer WorldBank data viz](ch02-two-layer-viz.png)
+![Esquisse d’un graphique à multiples couches pour les données de la banque mondiale](ch02-two-layer-viz.png)
 
 <!-- comment -->
 
@@ -394,7 +394,7 @@ Nous esquissons ci-dessous le graphique des séries temporelles :
 
 <!-- comment -->
 
-![WorldBank data viz with two plots](ch02-viz-two-plots.png)
+![Esquisse avec deux graphiques pour les données de la banque mondiale](ch02-viz-two-plots.png)
 
 <!-- comment -->
 
@@ -502,7 +502,7 @@ Les facettes sont utiles pour aligner les axes quand on veut afficher différent
 <!-- comment -->
 Considérons l’esquisse ci-dessous qui contient un graphique avec deux panneaux :
 
-![World Bank aligned plot](ch02-viz-aligned.png)
+![Esquisse avec facettes alignées pour les données de la banque mondiale](ch02-viz-aligned.png)
 
 <!-- comment -->
 
@@ -596,7 +596,7 @@ Prenons l’exemple de l’esquisse ci-dessous :
 
 <!-- comment -->
 
-![World Bank panels plot](ch02-viz-panels.png)
+![Esquisse avec facettes pour trois ans des données de la banque mondiale](ch02-viz-panels.png)
 
 <!-- comment -->
 
