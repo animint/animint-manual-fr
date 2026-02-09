@@ -7,6 +7,7 @@ lang: fr
 language:
   toc-title-document: "Table des matières"
   title-block-author-plural: "Auteurs"
+  title-block-author-single: "Auteur"
   repo-action-links-issue: "Signaler un problème ou<br>formuler une suggestion"
 crossref:
   lof-title: "Liste des figures"
