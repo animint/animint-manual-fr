@@ -18,7 +18,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par charger le jeu de données `PSJ` et compiler les données à tracer.
+- Nous commençons par charger le jeu de données `PSJ` et calculer les données à tracer.
 <!-- comment -->
 - Nous présentons une méthode pour définir un `animint` avec de nombreux sélecteurs, en utilisant des boucles `for`.
 <!-- comment -->
@@ -306,7 +306,7 @@ Nous voyons ci-dessus une visualisation des données avec trois graphiques :
 <!-- comment -->
 - En cliquant sur le graphique en bas à gauche, on sélectionne la taille du problème, ce qui met à jour les problèmes affichés en haut.
 <!-- comment -->
-- Le graphique en bas à droite montre le nombre de pics et d’erreurs en fonction de la pénalité (plus grande pour moins de pics).
+- Le graphique en bas à droite montre le nombre de pics et d’erreurs en fonction de la pénalité (plus elle est élevée, moins il y a de pics).
 
 <!-- paragraph -->
 
@@ -425,7 +425,7 @@ Tout d’abord, nous définissons quelques données communes.
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre un tableau avec une ligne par pic pouvant être affiché, pour différents échantillons, problèmes, et choix interactifs des variables `bases.per.problem` et `peaks`.
+La sortie ci-dessus montre un tableau avec une ligne par pic pouvant être affiché, pour différents échantillons, problèmes, et choix interactifs des paramètres `bases.per.problem` et `peaks`.
 <!-- comment -->
 Notez la colonne `problem.dot` : elle détermine le nom du sélecteur qui stockera le nombre de pics sélectionné pour le problème.
 
