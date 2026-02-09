@@ -30,7 +30,7 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 }
 ```
 
-![logos](Figures/cc-by-sa-uds-fabriqueREL.png)
+![License Creative Commons et logos de l’UDS et fabriqueREL](Figures/cc-by-sa-uds-fabriqueREL.png)
 
 ## Informations de publication {#publication}
 
