@@ -11,12 +11,13 @@ for(qmd in qmd.files){
     "\\]\\(",
     file=".*?",
     "\\)")
+  is.Figure <- grep("Figures/", link_dt$file)
   long_dt <- rbind(
     data.table(file="ignored", type=c("exists","link")),
     data.table(
       file=dir(dirname(qmd), pattern="png$"),
       type="exists"),
-    link_dt[, .(file, type="link")])
+    link_dt[!is.Figure, .(file, type="link")])
   wide_dt <- dcast(long_dt, file ~ type, length)
   problem_dt <- wide_dt[exists+link<2]
   if(nrow(problem_dt)){

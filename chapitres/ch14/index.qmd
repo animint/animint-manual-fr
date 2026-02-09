@@ -191,7 +191,7 @@ Des rectangles gris seront utilisés pour sélectionner la taille du problème.
 
 <!-- paragraph -->
 
-Un paramètre de pénalité contrôle le nombre d’échantillons ayant un pic commun ; il est défini dans le tableau de données de sélection de modèle dans le code ci-dessous.
+Un paramètre de pénalité contrôle le nombre d’échantillons ayant un pic commun ; il est défini dans le tableau de données de sélection de modèle dans le code ci-dessous.
 
 <!-- paragraph -->
 
@@ -298,7 +298,7 @@ cat(elapsed.incomplete <- Sys.time()-before.incomplete, "secondes\n")
 
 <!-- paragraph -->
 
-Nous voyons ci-dessus une visualisation des données avec trois graphiques :
+Nous voyons ci-dessus une visualisation des données avec trois graphiques :
 
 <!-- paragraph -->
 
@@ -318,7 +318,7 @@ Dans cette section, nous ajoutons des couches aux `ggplots` précédents en util
 <!-- comment -->
 La visualisation de la section précédente est incomplète.
 <!-- comment -->
-Nous aimerions y ajouter :
+Nous aimerions y ajouter :
 
 <!-- paragraph -->
 
@@ -393,7 +393,7 @@ cat(elapsed.for <- Sys.time()-before.for, "seconds\n")
 
 Notez que la compilation nécessite plusieurs secondes, car il y a de nombreux geoms (cliquez sur « Show download status table » pour les voir tous).
 <!-- comment -->
-Par rapport à la visualisation des données de la section précédente, celle-ci présente :
+Par rapport à la visualisation des données de la section précédente, celle-ci présente :
 
 <!-- paragraph -->
 

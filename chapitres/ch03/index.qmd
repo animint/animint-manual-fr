@@ -372,7 +372,7 @@ Exercices :
 
 - Réalisez une version améliorée de `vis.alignée` du chapitre précédent. Au lieu de fixer l’année à 1975, utilisez `showSelected="année"` pour que l’utilisateur puisse sélectionner une année. Ajoutez des geoms qui affichent l’année sélectionnée : un `geom_text()` sur le nuage de points et un `geom_vline()` sur la série temporelle.
 <!-- comment -->
-- Traduisez l'un des [exemples de `library(animation)`](https://yihui.name/animation/examples/) en `animint2`. Indice : dans le code de `library(animation)`, il y a toujours une boucle `for` sur la variable de temps. Au lieu d'appeler une fonction d'affichage à l'intérieur de la boucle `for`, utilisez la méthode [liste de tableaux de données](/ch99#list-of-data-tables) pour stocker les données à tracer. Utilisez ensuite ces données avec `showSelected` pour créer des ggplots, et affichez-les avec `animint2`.
+- Traduisez l’un des exemples de `library(animation)` en `animint2` [@animation]. Indice : dans le code de `library(animation)`, il y a toujours une boucle `for` sur la variable de temps. Au lieu d’appeler une fonction d’affichage à l’intérieur de la boucle `for`, utilisez la méthode [liste de tableaux de données](/ch99#list-of-data-tables) pour stocker les données à tracer. Utilisez ensuite ces données avec `showSelected` pour créer des ggplots, et affichez-les avec `animint2`.
 
 <!-- comment -->
 

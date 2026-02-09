@@ -15,11 +15,11 @@ Après avoir lu ce chapitre, vous saurez comment partager des animints :
 
 - à partir d’un répertoire local sur votre ordinateur personnel ;
 <!-- comment -->
-- dans des documents [R Markdown](http://rmarkdown.rstudio.com/);
+- dans des documents R Markdown ;
 <!-- comment -->
-- en utilisant n'importe quel serveur web, notamment [NetlifyDrop](https://app.netlify.com/drop);
+- en utilisant n’importe quel serveur web, notamment NetlifyDrop ;
 <!-- comment -->
-- en les publiant sur [GitHub Pages](https://pages.github.com/) et en les organisant dans une galerie.
+- en les publiant sur GitHub Pages et en les organisant dans une galerie.
 
 <!-- paragraph -->
 
@@ -79,7 +79,7 @@ Si `out.dir` existe déjà (et contient un fichier nommé `animint.js`), tous le
 <!-- comment -->
 Pour afficher la visualisation, il suffit d’aller à `ch05-partager-dix-points/index.html` dans un navigateur web (ce qui devrait être fait automatiquement/par défaut).
 <!-- comment -->
-Si la page web est vide, vous devrez peut-être configurer votre navigateur pour autoriser l'exécution du code JavaScript local, comme expliqué dans notre [ FAQ](https://github.com/tdhock/animint2/wiki/FAQ#web-browser-on-local-indexhtml-file-is-blank).
+Si la page web est vide, vous devrez peut-être configurer votre navigateur pour autoriser l’exécution du code JavaScript local, comme expliqué dans notre FAQ [@animintFAQ].
 
 <!-- paragraph -->
 
