@@ -6,6 +6,20 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 <!-- paragraph -->
 
+**Remerciements :** Ce manuel a été réalisé avec le soutien de la fabriqueREL. Fondée en 2019, la fabriqueREL est portée par divers établissements d'enseignement supérieur du Québec et agit en collaboration avec les services de soutien pédagogique et les bibliothèques. Son but est de faire des ressources éducatives libres (REL) le matériel privilégié en enseignement supérieur au Québec.
+
+**Logo de la page couverture :** Andrés Henao Florez.
+
+**Comité de lecture :** Mariano Avino, Guillaume Blanchet, Aurélien Nicosia, Nadia Tahiri.
+
+**Traduction :** Anna Artiges et Jérémi LePage.
+
+**Révision linguistique :** Nadia Fournier.
+
+© Toby Dylan HOCKING.
+
+**Pour citer cet ouvrage :** Toby Hocking (2026). *Visualisation interactive de données dans R avec animint2*. Université de Sherbrooke, Département d’informatique. fabriqueREL. Licence CC BY-SA. <br /> <br />
+
 ## Contenu
 
 <!-- paragraph -->
