@@ -12,7 +12,7 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 **Comité de lecture :** Mariano Avino, Guillaume Blanchet, Aurélien Nicosia, Nadia Tahiri.
 
-**Traduction :** Anna Artiges et Jérémi LePage.
+**Traduction :** Anna Artiges et Jérémi Lepage.
 
 **Révision linguistique :** Nadia Fournier.
 
@@ -34,7 +34,7 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 ## Informations de publication {#publication}
 
-Cette section est copié avec modifications de l’introduction du livre sur R, *Méthodes quantitatives en sciences sociales : un grand bol d’R* [@Apparicio2024].
+Cette section reprend, avec des modifications, l’introduction du livre *Méthodes quantitatives en sciences sociales : un grand bol d’R* [@Apparicio2024].
 
 ### Un manuel sous la forme d’une ressource éducative libre {#rel}
 
@@ -53,11 +53,11 @@ La licence de ce livre, CC BY-SA (@fig-Licence), permet donc de :
 
 -   **Remixer**, c’est-à-dire « combiner la ressource avec d’autres ressources dont la licence le permet aussi pour créer une nouvelle ressource intégrée ».
 
--   **Redistribuer**, c’est-à-dire distribuer, en totalité ou en partie, le manuel ou une version révisée sur d’autres canaux que le site Web du livre (par exemple, sur le site Moodle de votre université ou en faire une version imprimée).
+-   **Redistribuer**, c’est-à-dire distribuer, en totalité ou en partie, le manuel ou une version révisée sur d’autres canaux que le site Web du livre (par exemple, sur le site Moodle de votre université) ou en faire une version imprimée.
 
 La licence de ce livre, CC BY-SA (@fig-Licence), oblige donc à :
 
--   Attribuer la paternité de l’auteur dans vos versions dérivées, ainsi qu’une mention concernant les grandes modifications apportées.
+-   Attribuer la paternité de l’auteur dans vos versions dérivées, et ajouter une mention concernant les grandes modifications apportées.
 -   Utiliser la même licence ou une licence similaire à toutes versions dérivées.
 
 ![Licence Creative Commons du livre](Figures/licence.jpg){#fig-Licence width="80%" fig-align="center"}
@@ -76,7 +76,7 @@ Plusieurs adaptations du manuel sont possibles :
 
 ### Un manuel conçu comme un projet collaboratif {#collaboratif}
 
-Il existe actuellement de nombreux ressources, surtout en anglais, pour l’apprentissage de la visualisation statique (non-interactive) avec la grammaire de graphiques.
+Il existe actuellement de nombreuses ressources, surtout en anglais, pour l’apprentissage de la visualisation statique (non-interactive) avec la grammaire des graphiques.
 En français il y a :
 
 * Exploration de données avec R, Chapitre 8 [@exploration-ch8].
@@ -85,18 +85,18 @@ En français il y a :
 * Introduction à l’analyse d’enquêtes avec R et RStudio, Introduction à ggplot2, la grammaire des graphiques [@Larmarange2024].
 * utilitr, Faire des graphiques avec ggplot2 [@utilitr2024].
 
-Il y a certaines ressources sur R en français qui propose un chapitre sur la visualisation interactive :
+Il y a certaines ressources sur R en français qui proposent un chapitre sur la visualisation interactive :
 
 * Les packages `plotly` et `shiny` pour les épidémiologistes [@Batra2026].
 * Plusieurs packages pour différentes sortes de visualisation [@Rouvière2026].
 
 À notre connaissance, ce projet constitue le premier manuel numérique en français sur la visualisation de données interactive.
-Ceci est un tradiction du livre en anglais [@Hocking-2026-animint-manual-en].
+Ceci est une traduction du livre en anglais [@Hocking-2026-animint-manual-en].
 Nous considérons ce livre comme un **projet collaboratif visant à mobiliser la communauté universitaire francophone qui enseigne la science de données avec R**. Plusieurs raisons motivent cette vision collaborative :
 
 - **Rien n’est parfait !** Cette première version comprend sûrement des coquilles et certaines sections mériteraient d’être améliorées. Les commentaires et suggestions visant à améliorer son contenu sont les bienvenus.
 
-- **La table des matières doit être impérativement extensible !** Si vous êtes intéressé(e)s à ajouter un nouveau chapitre ou une partie du livre, nous vous invitons vivement à communiquer avec nous (avec « Signaler un problème ou
+- **La table des matières doit être impérativement extensible !** Si vous êtes intéressé(e)s à ajouter un nouveau chapitre ou une partie du livre, nous vous invitons vivement à communiquer avec nous (en utilisant l’option « Signaler un problème ou
 formuler une suggestion » à droite sur chaque page web).
 
 ## Contenu {#contenu}
