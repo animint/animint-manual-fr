@@ -458,13 +458,13 @@ Ce chapitre a introduit quelques notions de base sur les données et a proposé 
 
 <!-- paragraph -->
 
-- Sur la base des définitions présentées dans ce chapitre, qu’est-ce qui distingue les petits ensembles des moyens ?
+- D’après les définitions des tailles des jeux de données présentées dans ce chapitre, quelle est la différence entre petite et moyenne ?
 <!-- comment -->
-- Quelle est la différence entre les moyens des grands ensembles ?
+- Quelle est la différence entre moyenne et grande ?
 
 <!-- paragraph -->
 
-Au [chapitre 2](ch02), nous vous expliquerons comment la grammaire graphique peut être utilisée pour créer des visualisations des données.
+Au [chapitre 2](ch02), nous vous présentons la grammaire des graphiques pour la création des visualisations des données.
 
 <!-- paragraph -->
 
