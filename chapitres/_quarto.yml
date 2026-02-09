@@ -26,6 +26,11 @@ book:
   favicon: Figures/favicon.ico
   cover-image: Figures/logo.png
   downloads: [pdf]
+  author:
+    - name: Toby Dylan Hocking
+      url: https://tdhock.github.io
+      affiliation: Département de informatique<br>Université de Sherbrooke
+      affiliation-url: https://www.usherbrooke.ca/informatique
   sidebar:
     style: "docked"
     collapse-level: 2
