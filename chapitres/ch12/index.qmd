@@ -12,7 +12,7 @@ L’objectif de ce chapitre est de créer une visualisation des données interac
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
@@ -629,7 +629,7 @@ setErrors <- do.call(rbind, setErrors.list)
 ```
 
 Le tableau ci-dessus comporte une ligne pour chaque coût.
-Les colonnes présentent les propriétés de chaque modèle :
+Les colonnes présentent les propriétés de chaque modèle :
 
 * `slack` est la quantité d’erreur donnée par les variables ressorts.
 * `norm` est la norme du vecteur poids.
@@ -896,7 +896,7 @@ Exercices :
 <!-- comment -->
 - Utilisez `rbfdot` comme fonction noyau.
 <!-- comment -->
-Calculez l’erreur de sous-entraînement et de validation, puis ajoutez un nouveau panneau au graphique « Choisir hyper-paramètres ».
+Calculez l’erreur de sous-entraînement et de validation, puis ajoutez un nouveau panneau au graphique « Choisir hyper-paramètres ».
 <!-- comment -->
 - Les échelles par défaut utilisent les mêmes couleurs pour les légendes `y` et `set`, ce qui peut prêter à confusion.
 <!-- comment -->

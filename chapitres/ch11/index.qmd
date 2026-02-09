@@ -10,7 +10,7 @@ L’objectif de ce chapitre est de créer une visualisation des données interac
 
 <!-- paragraph -->
 
-Plan du chapitre :
+Plan du chapitre :
 
 <!-- paragraph -->
 
@@ -109,7 +109,7 @@ gg.lambda
 
 Le graphique ci-dessus montre l’ensemble du chemin de Lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
 <!-- comment -->
-Le chemin commence à la solution des moindres carrés (`lambda=0`), à gauche et se termine par le modèle à ordonnée à l’origine complètement régularisé à droite. 
+Le chemin commence à la solution des moindres carrés (`lambda=0`), à gauche et se termine par le modèle à ordonnée à l’origine complètement régularisé à droite.
 <!-- comment -->
 <!-- comment -->
 Pour voir la correspondance avec la solution des moindres carrés ordinaires, nous ajoutons des points dans le graphique ci-dessous.
@@ -398,17 +398,17 @@ L’interactivité a été utilisée pour montrer les détails pour différentes
 
 <!-- paragraph -->
 
-Exercices :
+Exercices :
 
 <!-- paragraph -->
 
 - Refaites cette visualisation des données, en incluant le même effet visuel pour les `tallrects`, en utilisant un seul `geom_tallrect()`.
 <!-- comment -->
-Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
+Conseil : créez un autre ensemble de données avec `expand.grid(arclength.click=arclength, arclength.show=arclength)` comme dans la définition de la fonction `make_tallrect_or_widerect`.
 <!-- comment -->
 - Ajoutez un autre nuage de points qui montre les valeurs prédites par rapport à la réponse, avec un `geom_abline()` en arrière-plan pour indiquer une prédiction parfaite.
 <!-- comment -->
-- À quoi ressembleraient les courbes d’erreur si d’autres répartitions entraînement/validation étaient choisies?
+- À quoi ressembleraient les courbes d’erreur si d’autres répartitions entraînement/validation étaient choisies ?
 <!-- comment -->
 Effectuez une validation croisée à 4 plis et ajoutez un graphique permettant de sélectionner le pli de test.
 
