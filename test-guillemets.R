@@ -9,6 +9,7 @@ for(qmd in qmd.files){
   qmd.text <- qmd.lines[is.text]
   not.backticks <- gsub("`.*?`", "", qmd.text)
   not.angle <- gsub("<.*?>", "", not.backticks)
+  #"![Licence Creative Commons du livre](Figures/licence.jpg){#fig-Licence width=\"80%\" fig-align=\"center\"}"
   quote.lines <- grep('".*?"', not.angle, value=TRUE, perl=TRUE)
   if(length(quote.lines)){
     violations[[qmd]] <- quote.lines
