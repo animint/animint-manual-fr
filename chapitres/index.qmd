@@ -6,7 +6,7 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 <!-- paragraph -->
 
-**Remerciements :** Ce manuel a été réalisé avec le soutien de la fabriqueREL. Fondée en 2019, la fabriqueREL est portée par divers établissements d'enseignement supérieur du Québec et agit en collaboration avec les services de soutien pédagogique et les bibliothèques. Son but est de faire des ressources éducatives libres (REL) le matériel privilégié en enseignement supérieur au Québec.
+**Remerciements :** Ce manuel a été réalisé avec le soutien de la fabriqueREL. Fondée en 2019, la fabriqueREL est portée par divers établissements d’enseignement supérieur du Québec et agit en collaboration avec les services de soutien pédagogique et les bibliothèques. Son but est de faire des ressources éducatives libres (REL) le matériel privilégié en enseignement supérieur au Québec.
 
 **Logo de la page couverture :** Andrés Henao Florez.
 
@@ -34,35 +34,35 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 ## Informations de publication {#publication}
 
-Cette section est copié avec modifications de l’introduction du livre sur R, *Méthodes quantitatives en sciences sociales : un grand bol d'R* [@Apparicio2024].
+Cette section est copié avec modifications de l’introduction du livre sur R, *Méthodes quantitatives en sciences sociales : un grand bol d’R* [@Apparicio2024].
 
-### Un manuel sous la forme d'une ressource éducative libre {#rel}
+### Un manuel sous la forme d’une ressource éducative libre {#rel}
 
-**Pourquoi un manuel sous licence libre?**
+**Pourquoi un manuel sous licence libre ?**
 
-Les logiciels libres sont aujourd'hui très répandus. Comparativement aux logiciels propriétaires, l'accès au code source permet à quiconque de l'utiliser, de le modifier, de le dupliquer et de le partager.
+Les logiciels libres sont aujourd’hui très répandus. Comparativement aux logiciels propriétaires, l’accès au code source permet à quiconque de l’utiliser, de le modifier, de le dupliquer et de le partager.
 Le logiciel R est à la fois un langage de programmation et un logiciel libre, sous la licence publique générale [@wiki-gpl].
-Par analogie aux logiciels libres, il existe aussi des **ressources éducatives libres (REL)** « dont la licence accorde les permissions désignées par les 5R (**Retenir --- Réutiliser --- Réviser --- Remixer --- Redistribuer**) et donc permet nécessairement la modification » [@fabriqueREL].
+Par analogie aux logiciels libres, il existe aussi des **ressources éducatives libres (REL)** « dont la licence accorde les permissions désignées par les 5R (**Retenir --- Réutiliser --- Réviser --- Remixer --- Redistribuer**) et donc permet nécessairement la modification » [@fabriqueREL].
 La licence de ce livre, CC BY-SA (@fig-Licence), permet donc de :
 
--   **Retenir**, c'est-à-dire télécharger et imprimer gratuitement le livre. Notez qu'il aurait été plutôt surprenant d'écrire un livre payant sur un logiciel libre et donc gratuit. Aussi, nous aurions été très embarrassés que des personnes étudiantes avec des ressources financières limitées doivent payer pour avoir accès au livre, sans pour autant savoir préalablement si le contenu est réellement adapté à leurs besoins.
+-   **Retenir**, c’est-à-dire télécharger et imprimer gratuitement le livre. Notez qu’il aurait été plutôt surprenant d’écrire un livre payant sur un logiciel libre et donc gratuit. Aussi, nous aurions été très embarrassés que des personnes étudiantes avec des ressources financières limitées doivent payer pour avoir accès au livre, sans pour autant savoir préalablement si le contenu est réellement adapté à leurs besoins.
 
--   **Réutiliser**, c'est-à-dire utiliser la totalité ou une section du livre sans limitation et sans compensation financière. Cela permet ainsi à d'autres personnes enseignantes de l'utiliser dans le cadre d'activités pédagogiques.
+-   **Réutiliser**, c’est-à-dire utiliser la totalité ou une section du livre sans limitation et sans compensation financière. Cela permet ainsi à d’autres personnes enseignantes de l’utiliser dans le cadre d’activités pédagogiques.
 
--   **Réviser**, c'est-à-dire modifier, adapter et traduire le contenu en fonction d'un besoin pédagogique précis puisqu'aucun manuel n'est parfait, tant s'en faut! Le livre a d'ailleurs été écrit intégralement dans R avec Quarto. Quiconque peut ainsi télécharger gratuitement le code source du livre, et le modifier à sa guise (voir l'encadré intitulé *Suggestions d'adaptation du manuel*).
+-   **Réviser**, c’est-à-dire modifier, adapter et traduire le contenu en fonction d’un besoin pédagogique précis puisqu’aucun manuel n’est parfait, tant s’en faut ! Le livre a d’ailleurs été écrit intégralement dans R avec Quarto. Quiconque peut ainsi télécharger gratuitement le code source du livre, et le modifier à sa guise (voir l’encadré intitulé *Suggestions d’adaptation du manuel*).
 
--   **Remixer**, c'est-à-dire « combiner la ressource avec d'autres ressources dont la licence le permet aussi pour créer une nouvelle ressource intégrée ».
+-   **Remixer**, c’est-à-dire « combiner la ressource avec d’autres ressources dont la licence le permet aussi pour créer une nouvelle ressource intégrée ».
 
--   **Redistribuer**, c'est-à-dire distribuer, en totalité ou en partie, le manuel ou une version révisée sur d'autres canaux que le site Web du livre (par exemple, sur le site Moodle de votre université ou en faire une version imprimée).
+-   **Redistribuer**, c’est-à-dire distribuer, en totalité ou en partie, le manuel ou une version révisée sur d’autres canaux que le site Web du livre (par exemple, sur le site Moodle de votre université ou en faire une version imprimée).
 
 La licence de ce livre, CC BY-SA (@fig-Licence), oblige donc à :
 
--   Attribuer la paternité de l'auteur dans vos versions dérivées, ainsi qu'une mention concernant les grandes modifications apportées.
+-   Attribuer la paternité de l’auteur dans vos versions dérivées, ainsi qu’une mention concernant les grandes modifications apportées.
 -   Utiliser la même licence ou une licence similaire à toutes versions dérivées.
 
 ![Licence Creative Commons du livre](Figures/licence.jpg){#fig-Licence width="80%" fig-align="center"}
 
-### Suggestions d'adaptation du manuel {#adaptations}
+### Suggestions d’adaptation du manuel {#adaptations}
 
 Plusieurs adaptations du manuel sont possibles :
 
@@ -70,7 +70,7 @@ Plusieurs adaptations du manuel sont possibles :
 *  En faire une version imprimée et la distribuer aux personnes étudiantes.
 *  Modifier un plusieurs chapitres en effectuant les mises à jour directement dans les chapitres.
 *  Modifier les tableaux et figures.
-*  Ajouter une série d'exercices.
+*  Ajouter une série d’exercices.
 *  Rédiger un nouveau chapitre.
 *  Toute autre adaptation qui permet de répondre au mieux à un besoin pédagogique.
 
@@ -87,14 +87,14 @@ En français il y a :
 
 Il y a certaines ressources sur R en français qui propose un chapitre sur la visualisation interactive :
 
-* Les packages `plotly` et `shiny` pour les épidémiologistes [@Batra2026]. 
+* Les packages `plotly` et `shiny` pour les épidémiologistes [@Batra2026].
 * Plusieurs packages pour différentes sortes de visualisation [@Rouvière2026].
 
 À notre connaissance, ce projet constitue le premier manuel numérique en français sur la visualisation de données interactive.
 Ceci est un tradiction du livre en anglais [@Hocking-2026-animint-manual-en].
 Nous considérons ce livre comme un **projet collaboratif visant à mobiliser la communauté universitaire francophone qui enseigne la science de données avec R**. Plusieurs raisons motivent cette vision collaborative :
 
-- **Rien n'est parfait !** Cette première version comprend sûrement des coquilles et certaines sections mériteraient d'être améliorées. Les commentaires et suggestions visant à améliorer son contenu sont les bienvenus.
+- **Rien n’est parfait !** Cette première version comprend sûrement des coquilles et certaines sections mériteraient d’être améliorées. Les commentaires et suggestions visant à améliorer son contenu sont les bienvenus.
 
 - **La table des matières doit être impérativement extensible !** Si vous êtes intéressé(e)s à ajouter un nouveau chapitre ou une partie du livre, nous vous invitons vivement à communiquer avec nous (avec « Signaler un problème ou
 formuler une suggestion » à droite sur chaque page web).
