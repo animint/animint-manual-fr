@@ -125,7 +125,7 @@ Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabi
 
 <!-- paragraph -->
 
-Pour ajouter un panneau à la fonction de répartition, nous allons modifier le ggplot en suivant l’esquisse ci-dessous.
+Pour ajouter un panneau affichant la fonction de répartition, nous allons modifier le ggplot en suivant l’esquisse ci-dessous.
 
 <!-- paragraph -->
 
