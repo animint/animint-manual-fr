@@ -111,7 +111,7 @@ Ce manuel comporte trois volets que nous présentons dans les sections suivantes
 
 <!-- paragraph -->
 
-Les sept premiers chapitres fournissent les bases de la visualisation interactive des données avec animint2 et vous devriez les lire dans l’ordre.
+Les sept premiers chapitres fournissent les bases de la visualisation interactive des données avec `animint2` et vous devriez les lire dans l’ordre.
 
 <!-- paragraph -->
 
