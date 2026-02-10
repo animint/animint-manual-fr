@@ -339,7 +339,7 @@ Créez un `animint2` similaire à celle de la section précédente.
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous avons exploré plusieurs visualisations de la méthode de Newton pour trouver les racines de fonctions en douceur.
+Dans ce chapitre, nous avons exploré plusieurs visualisations de la méthode de Newton pour trouver les racines de fonctions lisses.
 
 <!-- paragraph -->
 
