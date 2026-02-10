@@ -302,7 +302,7 @@ Nous voyons ci-dessus une visualisation des données avec trois graphiques :
 
 <!-- paragraph -->
 
-- Dans la partie supérieure, quatre profils de données ChIP-seq sont affichés, ainsi qu’un panneau de problèmes qui divise l’axe X en sections dans lesquels l’algorithme de segmentation s’exécute.
+- Dans la partie supérieure, quatre profils de données ChIP-seq sont affichés, ainsi qu’un panneau de problèmes qui divise l’axe `x` en sections dans lesquels l’algorithme de segmentation s’exécute.
 <!-- comment -->
 - En cliquant sur le graphique en bas à gauche, on sélectionne la taille du problème, ce qui met à jour les problèmes affichés en haut.
 <!-- comment -->
@@ -330,7 +330,7 @@ Nous aimerions y ajouter :
 
 Une façon (inefficace) d’ajouter ces éléments serait d’utiliser la boucle `for` codée ci-dessous.
 <!-- comment -->
-Pour chaque problème, il existe un sélecteur (appelé `problem.dot`) pour le nombre de pics.
+Pour chaque problème, on trouve un sélecteur (appelé `problem.dot`) pour le nombre de pics.
 <!-- comment -->
 Dans cette boucle `for`, nous ajoutons donc quelques couches aux graphiques `coverage` et `modelSelection` à l’aide de `clickSelects="problem.dot"` ou `showSelected="problem.dot"`.
 
