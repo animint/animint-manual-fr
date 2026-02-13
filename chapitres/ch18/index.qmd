@@ -106,7 +106,7 @@ Pour former correctement un réseau neuronal, nous divisons les données en deux
 <!-- comment -->
 Avec suffisamment d’itérations/époques et un modèle de réseau neuronal assez puissant (nombre suffisant d’unités/couches cachées), il devrait être possible d’obtenir une prédiction parfaite sur l’ensemble de sous-entraînement (substrain).
 <!-- comment -->
-- validation : utilisé pour éviter le surajustement.
+- validation : utilisé pour éviter le surapprentissage.
 <!-- comment -->
 En calculant l’erreur de prédiction sur cet ensemble et en choisissant le nombre d’itérations/époques de descente du gradient qui minimise l’erreur de validation, nous nous assurons que le modèle appris possède de bonnes propriétés de généralisation (il fournit de bonnes prédictions non seulement sur l’ensemble de sous-entraînement, mais aussi sur de nouveaux points de données comme dans l’ensemble de validation).
 
@@ -319,7 +319,7 @@ mm <- function(feature.node, weight.node)new_node(
 
 La définition de `mm` ci-dessus suppose l’existence d’un nœud de pondération dont le nombre de lignes est le même que le nombre de colonnes (plus une pour l’ordonnée à l’origine) dans le nœud pour les variables d’entrée.
 <!-- comment -->
-Les calculs d’avance/valeur et de gradient reposent sur la multiplication matricielle.
+Les calculs de valeur et de gradient des propagation avant reposent sur la multiplication matricielle.
 <!-- comment -->
 Par exemple, nous utilisons `mm` pour définir un modèle linéaire simple :
 
