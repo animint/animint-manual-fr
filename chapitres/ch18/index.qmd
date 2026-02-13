@@ -11,7 +11,7 @@ if(FALSE){
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des données de l’algorithme d’apprentissage par descente de gradient pour les réseaux neuronaux.
+Dans ce chapitre, nous explorerons plusieurs visualisations des données de l’algorithme d’apprentissage par descente de gradient pour les réseaux neuronaux.
 
 <!-- paragraph -->
 
@@ -19,13 +19,13 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-- Nous commençons par simuler et visualiser quelques données 2d pour une classification binaire.
+- Nous commençons par simuler et visualiser quelques données 2D pour une classification binaire.
 <!-- comment -->
-- Nous montrons ensuite comment une fonction de classification en 2d peut être visualisée en calculant les prédictions sur une grille, puis en utilisant `geom_tile()` ou `geom_path()` avec des lignes de contour.
+- Nous montrons ensuite comment une fonction de classification en 2D peut être visualisée en calculant les prédictions sur une grille, puis en utilisant `geom_tile()` ou `geom_path()` avec des lignes de contour.
 <!-- comment -->
 - Nous calculons les prédictions du modèle linéaire et les mises à jour de la descente de gradient à l’aide d’un système simple de différenciation automatique (auto-grad).
 <!-- comment -->
-- Nous terminons en implémentant la descente de gradient pour un réseau neuronal, et en utilisant une visualisation des données interactive pour montrer comment les prédictions deviennent plus précises avec les itérations de l’algorithme d’apprentissage.
+- Nous terminons en implémentant la descente de gradient pour un réseau neuronal, et en utilisant une visualisation interactive pour montrer comment les prédictions se précisent avec les itérations de l’algorithme d’apprentissage.
 
 <!-- paragraph -->
 
@@ -47,9 +47,9 @@ head(features.hidden)
 
 <!-- paragraph -->
 
-Dans la simulation, le tableau de données ci-dessus comporte les variables cachées (`hidden`) qui sont utilisées pour créer les étiquettes, mais ne sont pas disponibles pour l’apprentissage.
+Dans la simulation, le tableau de données comporte les variables cachées (`hidden`) utilisées pour créer les étiquettes, mais elles ne sont pas disponibles pour l’apprentissage.
 <!-- comment -->
-La fonction latente/vraie utilisée pour la classification est la suivante,
+La fonction latente/vraie utilisée pour la classification est la suivante :
 
 <!-- paragraph -->
 
@@ -63,7 +63,7 @@ table(label.vec)
 
 <!-- paragraph -->
 
-Les étiquettes binaires ci-dessus sont créées à partir des caractéristiques cachées, mais pour l’apprentissage, nous n’avons accès qu’aux caractéristiques bruitées ci-dessous,
+Les étiquettes binaires ci-dessus sont générées à partir des variables cachées, mais pour l’apprentissage, nous n’avons accès qu’aux caractéristiques bruitées ci-dessous :
 
 <!-- paragraph -->
 
@@ -75,7 +75,7 @@ head(features.noisy)
 
 <!-- paragraph -->
 
-Pour tracer les données et visualiser le motif, nous utilisons le code ci-dessous,
+Pour tracer les données et visualiser le motif, nous utilisons le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -92,23 +92,23 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre chaque ligne de l’ensemble de données comme un point, avec les deux caractéristiques sur les deux axes, et les deux étiquettes dans deux couleurs différentes.
+Le graphique ci-dessus représente chaque observation par un point, dont les deux caractéristiques figurent sur les  axes, et chaque étiquette par une couleur distincte.
 <!-- comment -->
-La partie inférieure droite de l’espace des caractéristiques a tendance à avoir des étiquettes positives, et les zones gauche et supérieure ont des étiquettes négatives.
+La partie inférieure droite de l’espace des caractéristiques a tendance à avoir des étiquettes positives, tandis que les zones gauche et supérieure ont des étiquettes négatives.
 <!-- comment -->
-Il s’agit du motif que le réseau neuronal va apprendre.
+C’est ce motif que le réseau neuronal devra apprendre.
 <!-- comment -->
-Pour former correctement un réseau neuronal, nous devons diviser les données en deux ensembles :
+Pour former correctement un réseau neuronal, nous divisons les données en deux ensembles :
 
 <!-- paragraph -->
 
-- subtrain : utilisé pour calculer les gradients, qui servent à mettre à jour les paramètres de pondération, et les valeurs prédites.
+- subtrain : utilisé pour calculer les gradients qui servent à mettre à jour les paramètres de pondération et les valeurs prédites.
 <!-- comment -->
-Avec un nombre suffisant d’itérations/époques de l’algorithme d’apprentissage par descente de gradient et un modèle de réseau neuronal suffisamment puissant (nombre suffisant d’unités/couches cachées), il devrait être possible d’obtenir une prédiction parfaite sur l’ensemble de sous-entraînement.
+Avec suffisamment d’itérations/époques et un modèle de réseau neuronal assez puissant (nombre suffisant d’unités/couches cachées), il devrait être possible d’obtenir une prédiction parfaite sur l’ensemble de sous-entraînement (substrain).
 <!-- comment -->
-- validation : utilisée pour éviter le surajustement.
+- validation : utilisé pour éviter le surajustement.
 <!-- comment -->
-En calculant l’erreur de prédiction sur l’ensemble de validation et en choisissant le nombre d’itérations/époques de descente du gradient qui minimise l’erreur de validation, nous pouvons nous assurer que le modèle appris possède de bonnes propriétés de généralisation (il fournit de bonnes prédictions non seulement sur l’ensemble de sous-entraînement, mais aussi sur de nouveaux points de données comme dans l’ensemble de validation).
+En calculant l’erreur de prédiction sur cet ensemble et en choisissant le nombre d’itérations/époques de descente du gradient qui minimise l’erreur de validation, nous nous assurons que le modèle appris possède de bonnes propriétés de généralisation (il fournit de bonnes prédictions non seulement sur l’ensemble de sous-entraînement, mais aussi sur de nouveaux points de données comme dans l’ensemble de validation).
 
 <!-- paragraph -->
 
@@ -122,9 +122,9 @@ table(set.vec)
 
 <!-- paragraph -->
 
-Le code ci-dessus est utilisé pour affecter aléatoirement la moitié des données à chacun des ensembles de sous-entraînement et de validation.
+Le code ci-dessus répartit aléatoirement les données aux ensembles de sous-entraînement et de validation.
 <!-- comment -->
-Ci-dessous, nous traçons les deux ensembles dans des facettes séparées,
+Ci-dessous, nous traçons les deux ensembles dans des facettes séparées :
 
 <!-- paragraph -->
 
@@ -140,13 +140,13 @@ ggplot()+
 
 <!-- paragraph -->
 
-## Visualiser la fonction de classification optimale de Bayes {#vis-bayes-fun}
+## Visualisation de la fonction de classification optimale de Bayes {#vis-bayes-fun}
 
 <!-- paragraph -->
 
-Pour visualiser la limite de décision optimale/Bayes, nous devons évaluer la fonction sur une grille de points 2d qui couvre l’espace des caractéristiques.
+Pour visualiser la limite de décision optimale/Bayes, il faut évaluer la fonction sur une grille de points 2D qui couvre l’espace des caractéristiques.
 <!-- comment -->
-Pour créer une telle grille, nous commençons par créer une liste contenant les deux grilles 1d pour chaque caractéristique,
+Pour créer cette grille, nous créons d’abord une liste contenant les deux grilles 1D pour chaque caractéristique.
 
 <!-- paragraph -->
 
@@ -158,7 +158,7 @@ Pour créer une telle grille, nous commençons par créer une liste contenant le
 
 <!-- paragraph -->
 
-Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données représentant la grille 2d, pour laquelle nous évaluons la fonction de classification best/Bayes,
+Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données représentant la grille 2D, pour laquelle nous évaluons la fonction de classification best/Bayes.
 
 <!-- paragraph -->
 
@@ -174,7 +174,7 @@ Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données rep
 
 <!-- paragraph -->
 
-La meilleure (`best`) fonction de classification est visualisée ci-dessous dans l’espace des variables d’entrée.
+La meilleure fonction de classification (`best`) est visualisée ci-dessous dans l’espace des variables d’entrée :
 
 <!-- paragraph -->
 
@@ -193,9 +193,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre que même en utilisant la meilleure fonction possible, il subsiste des erreurs de prédiction (points sur fond de couleur différente).
+Le graphique ci-dessus montre que même en utilisant la meilleure fonction possible, des erreurs de prédiction subsistent (points sur fond de couleur différente).
 <!-- comment -->
-Une autre façon de visualiser la meilleure fonction de classification est d’utiliser la limite de décision, qui peut être calculée à l’aide du code ci-dessous,
+Pour visualiser autrement la meilleure fonction de classification, on peut utiliser la limite de décision, le code ci-dessous permet de la calculer :
 
 <!-- paragraph -->
 
@@ -220,7 +220,7 @@ get_boundary <- function(score){
 
 <!-- paragraph -->
 
-La meilleure limite de décision est visualisée dans l’espace des caractéristiques ci-dessous,
+La meilleure limite de décision est visualisée dans l’espace des caractéristiques ci-dessous :
 
 <!-- paragraph -->
 
@@ -242,13 +242,15 @@ ggplot()+
 
 <!-- paragraph -->
 
-Pour implémenter l’algorithme de descente de gradient pour l’apprentissage des paramètres du modèle de réseau de neurones, nous utiliserons un système simple d’auto-grad.
+Pour implémenter l’algorithme de descente de gradient pour l’apprentissage des paramètres du modèle de réseau neuronal, nous utiliserons un système simple d’auto-grad.
 <!-- comment -->
-L’idée de l’auto-grad est que la structure du modèle de réseau neuronal doit être définie une seule fois et que cette structure doit être utilisée pour dériver les calculs de propagation vers l’avant (prédiction) et vers l’arrière (gradient).
+Le principe de l’auto-grad consiste à définir une seule fois la structure du modèle et à utiliser cette structure pour  dériver les calculs de propagation vers l’avant (prédiction) et vers l’arrière (gradient).
+
+<!-- paragraph -->
+
+Nous utilisons ci-dessous un système auto-grad simple où chaque nœud du graphe de calcul est représenté par un environnement R (une structure de données mutable, nécessaire à la rétropropagation des gradients à tous les paramètres du modèle) :
 <!-- comment -->
-Nous utilisons ci-dessous un système auto-grad simple où chaque nœud du graphe de calcul est représenté par un environnement R (une structure de données mutable, nécessaire pour que les gradients soient rétropropagés à tous les paramètres du modèle).
-<!-- comment -->
-La fonction ci-dessous est un constructeur pour l’élément le plus élémentaire du système auto-grad, un nœud dans le graphe de calcul :
+La fonction ci-dessous est un constructeur pour l’élément de base du système auto-grad, un nœud dans le graphe de calcul :
 
 <!-- paragraph -->
 
@@ -271,21 +273,21 @@ new_node <- function(value, gradient=NULL, ...){
 
 <!-- paragraph -->
 
-Le code de la fonction ci-dessus commence par créer un nouvel environnement, puis le remplit avec trois objets :
+Le code de la fonction ci-dessus créé un nouvel environnement puis le remplit avec trois objets :
 
 <!-- paragraph -->
 
 - `value` est une matrice calculée par propagation vers l’avant à ce nœud du graphe de calcul.
 <!-- comment -->
-- `parent.list` est une liste de nœuds parents, chacun d’entre eux étant utilisé pour calculer `value`.
+- `parent.list` est une liste de nœuds parents utilisés pour calculer `value`.
 <!-- comment -->
 - `backward` est une fonction qui doit être appelée par l’utilisateur sur le nœud final/de perte dans le graphe de calcul.
 <!-- comment -->
-Elle appelle `gradient` qui doit calculer le gradient de la perte par rapport aux nœuds parents, qui sont stockés dans l’attribut `grad` dans chaque nœud parent correspondant, avant d’appeler récursivement `backward` sur chaque nœud parent.
+Elle appelle `gradient` qui calcule le gradient de la perte par rapport aux nœuds parents, et le stocke dans l’attribut `grad` du nœud parent correspondant, puis appelle récursivement `backward` sur chaque nœud parent.
 
 <!-- paragraph -->
 
-Le type de nœud le plus simple est le nœud initial, défini par le code ci-dessous,
+Le type de nœud le plus simple est le nœud initial, défini par le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -297,9 +299,9 @@ initial_node <- function(mat){
 
 <!-- paragraph -->
 
-Le code ci-dessus indique qu’un nœud initial stocke simplement la matrice d’entrée `mat` comme valeur, et a une fonction `gradient` qui ne fait rien (parce que les nœuds initiaux dans le graphe de calcul n’ont pas de parents pour lesquels des gradients pourraient être calculés).
+Le code ci-dessus indique qu’un nœud initial stocke simplement la matrice d’entrée `mat` comme valeur, et a une fonction `gradient` qui n’a  aucun effet (parce que les nœuds initiaux dans le graphe de calcul n’ont pas de parents pour lesquels des gradients pourraient être calculés).
 <!-- comment -->
-Le code ci-dessous définit `mm` un noeud dans le graphe de calcul qui représente une multiplication de matrice,
+Le code ci-dessous définit `mm`, un noeud dans le graphe de calcul qui représente une multiplication de matrice :
 
 <!-- paragraph -->
 
@@ -315,11 +317,11 @@ mm <- function(feature.node, weight.node)new_node(
 
 <!-- paragraph -->
 
-La définition de `mm` ci-dessus suppose qu’il existe un nœud de pondération ayant le même nombre de lignes que le nombre de colonnes (plus une pour l’ordonnée à l’origine) dans le nœud pour les variables d’entrée.
+La définition de `mm` ci-dessus suppose l’existence d’un nœud de pondération dont le nombre de lignes est le même que le nombre de colonnes (plus une pour l’ordonnée à l’origine) dans le nœud pour les variables d’entrée.
 <!-- comment -->
-Les calculs d’avance/valeur et de gradient utilisent la multiplication matricielle.
+Les calculs d’avance/valeur et de gradient reposent sur la multiplication matricielle.
 <!-- comment -->
-Par exemple, nous pouvons utiliser `mm` de la manière suivante pour définir un modèle linéaire simple,
+Par exemple, nous utilisons `mm` pour définir un modèle linéaire simple :
 
 <!-- paragraph -->
 
@@ -332,9 +334,9 @@ str(linear.pred.node$value)
 
 <!-- paragraph -->
 
-On peut voir dans le code ci-dessus que la fonction `mm` renvoie un nœud représentant les valeurs prédites, un pour chaque ligne de la matrice des variables d’entrée).
+On voit dans le code ci-dessus que la fonction `mm` renvoie un nœud représentant les valeurs prédites (un pour chaque ligne de la matrice des variables d’entrée).
 <!-- comment -->
-Pour utiliser les caractéristiques de gradient, nous avons besoin d’une fonction de perte qui, dans le cas de la classification binaire, est la perte logistique (entropie croisée),
+Pour exploiter les caractéristiques de gradient, nous avons besoin d’une fonction de perte qui, dans le cas de la classification binaire, est la perte logistique (entropie croisée).
 
 <!-- paragraph -->
 
@@ -351,7 +353,7 @@ log_loss <- function(pred.node, label.node)new_node(
 
 <!-- paragraph -->
 
-Le code ci-dessus définit la perte logistique et le gradient, en supposant que l’étiquette est soit -1, soit 1, et que la prédiction est un nombre réel (pas nécessairement entre 0 et 1, peut-être négatif).
+Le code ci-dessus définit la perte logistique et le gradient, en supposant que l’étiquette est soit -1 soit 1, et que la prédiction est un nombre réel (pas nécessairement entre 0 et 1, il peut-être négatif).
 <!-- comment -->
 Le code ci-dessous crée des noeuds pour les étiquettes et la perte,
 
@@ -365,7 +367,7 @@ loss.node$value
 
 <!-- paragraph -->
 
-Maintenant que nous avons calculé la perte, nous pouvons calculer le gradient de la perte par rapport aux pondérations, qui est utilisé pour effectuer les mises à jour pendant l’apprentissage.
+Maintenant que la perte est calculée, nous pouvons déterminer le gradient de la perte par rapport aux pondérations, qui servira aux mises à jour pendant l’apprentissage.
 <!-- comment -->
 Rappelez-vous que nous devons maintenant appeler `backward` (sur la perte de sous-entrainement), qui devrait finalement stocker le gradient en tant que `weight.node$grad`.
 <!-- comment -->
@@ -381,7 +383,7 @@ weight.node$grad
 
 <!-- paragraph -->
 
-Notez que, puisque `loss.node` contient des références récursives à ses nœuds parents (y compris les prédictions et les pondérations), l’appel `backward` ci-dessus est capable de calculer et de stocker de manière pratique `weight.node$grad`, le gradient de la perte par rapport aux paramètres de pondération.
+Puisque `loss.node` contient des références récursives à ses nœuds parents (y compris les prédictions et les pondérations), l’appel `backward` ci-dessus peut calculer et stocker aisément `weight.node$grad`, le gradient de la perte par rapport aux paramètres de pondération.
 <!-- comment -->
 Le gradient est la direction de la montée la plus raide, ce qui signifie que les pondérations de direction pourraient être modifiées pour maximiser la perte.
 <!-- comment -->
@@ -397,13 +399,13 @@ Comme nous voulons minimiser la perte, l’algorithme d’apprentissage effectue
 
 En descente de gradient pour ce modèle linéaire, nous mettons à jour le vecteur de pondération dans cette direction.
 <!-- comment -->
-Chaque mise à jour du vecteur de pondération est appelée itération ou étape.
+Chaque mise à jour est appelée itération ou étape.
 <!-- comment -->
-Un petit pas dans cette direction garantit une diminution de la perte, mais un pas trop petit ne permet pas de faire beaucoup de progrès vers la minimisation de la perte.
+Un petit pas dans cette direction garantit une diminution de la perte, mais s’il est trop petit les progrès vers la minimisation de la perte seront limités.
 <!-- comment -->
-On ne sait pas jusqu’où il est préférable d’aller dans cette direction, c’est pourquoi il faut généralement chercher dans une grille de tailles de pas (ou de taux d’apprentissage).
+On ignore jusqu’où on doit d’aller dans cette direction, il faut donc généralement chercher dans une grille de tailles de pas (ou de taux d’apprentissage).
 <!-- comment -->
-Nous pouvons également effectuer une recherche linéaire, c’est-à-dire tracer le graphique suivant de la perte en fonction de la taille du pas, puis choisir la taille du pas avec la perte minimale.
+On peut également effectuer une recherche linéaire, c’est-à-dire tracer le graphique suivant de la perte en fonction de la taille du pas, puis choisir la taille avec la perte minimale :
 
 <!-- paragraph -->
 
@@ -433,7 +435,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre que la perte minimale se produit à une taille de pas d’environ 3, ce qui signifie que la recherche linéaire choisirait cette taille de pas pour cette mise à jour/itération des paramètres de descente de gradient, avant de recalculer le gradient à l’itération suivante.
+Le graphique ci-dessus montre que la perte minimale se produit à une taille de pas d’environ 3, ce qui signifie que la recherche linéaire choisirait cette valeur pour la mise à jour/itération des paramètres de descente de gradient, avant de recalculer le gradient à l’itération suivante.
 
 <!-- paragraph -->
 
@@ -441,11 +443,11 @@ Le graphique ci-dessus montre que la perte minimale se produit à une taille de 
 
 <!-- paragraph -->
 
-La définition d’un modèle linéaire dans la section précédente était relativement simple, car il n’y a qu’un seul paramètre de matrice de pondération (en fait, un vecteur de pondération, avec le même nombre d’éléments que le nombre de colonnes/caractéristiques, plus un pour l’ordonnée à l’origine).
+Définir un modèle linéaire dans la section précédente était relativement simple, car il n’y avait  qu’un paramètre de matrice de pondération (en fait, un vecteur de pondération, avec le même nombre d’éléments que le nombre de colonnes/caractéristiques, plus un pour l’ordonnée à l’origine).
 <!-- comment -->
 En revanche, un réseau neuronal a plus d’un paramètre de matrice de pondération à apprendre.
 <!-- comment -->
-Nous initialisons ces pondérations sous forme de nœuds dans le code ci-dessous,
+Nous initialisons ces pondérations sous forme de nœuds dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -468,14 +470,14 @@ lapply(weight.node.list, function(node)dim(node$value))
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre qu’il y a une seule couche avec 40 unités cachées dans le réseau neuronal, ce qui signifie qu’il y a deux matrices de pondération à apprendre.
+La sortie ci-dessus montre que le réseau neuronal comporte une seule couche de 40 unités cachées, ce qui implique deux matrices de pondération à apprendre.
 <!-- comment -->
-Chacune de ces matrices de pondération est utilisée pour prédire les unités d’une couche donnée, à partir des unités de la couche précédente.
+Chacune d’elle est utilisée pour prédire les unités d’une couche donnée à partir des unités de la couche précédente.
 <!-- comment -->
-Afin d’apprendre une fonction de prédiction qui est une fonction non linéaire des caractéristiques, chaque couche, à l’exception de la dernière, doit avoir une fonction d’activation non linéaire, appliquée élément par élément aux unités après la multiplication de la matrice.
+Pour apprendre une fonction de prédiction, qui est une fonction non linéaire des caractéristiques, chaque couche (sauf la dernière) doit avoir une fonction d’activation non linéaire, appliquée élément par élément aux unités, après la multiplication de la matrice.
 <!-- comment -->
 
-Par exemple, une fonction d’activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), qui est implémentée ci-dessous,
+Par exemple, une fonction d’activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), implémentée ci-dessous :
 
 <!-- paragraph -->
 
@@ -494,7 +496,7 @@ hidden.after.act$value[1:5,1:5]
 
 <!-- paragraph -->
 
-Notez dans la sortie ci-dessus que l’activation ReLU met les valeurs négatives à zéro et maintient les valeurs positives inchangées :
+Notez dans la sortie ci-dessus que l’activation ReLU ramène les valeurs négatives à zéro et maintient les valeurs positives.
 
 <!-- paragraph -->
 
@@ -511,7 +513,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Enfin, le dernier nœud dont nous avons besoin pour implémenter notre réseau neuronal est un nœud pour les prédictions, calculé avec la boucle `for` sur les nœuds de pondération dans la fonction ci-dessous,
+Le dernier nœud nécessaire à l’implémentation de notre réseau neuronal est un nœud pour les prédictions, calculé par une boucle `for` sur les nœuds de pondération dans la fonction ci-dessous :
 
 <!-- paragraph -->
 
@@ -535,7 +537,7 @@ str(nn.pred.node$value)
 
 <!-- paragraph -->
 
-La fonction `pred_node` est également utile pour calculer les prédictions sur la grille de caractéristiques, ce qui sera utile plus tard pour visualiser la fonction apprise,
+La fonction `pred_node` est également utile pour calculer les prédictions sur la grille de caractéristiques, ce qui servira lors de la visualisation de la fonction apprise.
 
 <!-- paragraph -->
 
@@ -547,9 +549,9 @@ str(nn.grid.node$value)
 
 <!-- paragraph -->
 
-Le code ci-dessous combine tous les éléments ci-dessus dans un algorithme d’apprentissage par descente de gradient.
+Le code ci-dessous combine tous les éléments précédents dans un algorithme d’apprentissage par descente de gradient.
 <!-- comment -->
-Les hyperparamètres sont la taille du pas constant et le nombre maximum d’itérations.
+Les hyperparamètres sont la taille du pas constant et le nombre maximal d’itérations.
 
 <!-- paragraph -->
 
@@ -616,7 +618,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Dans le code ci-dessus, nous avons enregistré les pertes et les prédictions pour toutes les itérations de la descente de gradient, mais dans le code ci-dessous, nous ne visualisons que certaines d’entre elles, en raison de l’espace limité :
+Dans le code ci-dessus, nous avons enregistré les pertes et les prédictions pour toutes les itérations de la descente de gradient, mais nous ne visualisons que certaines d’entre elles dans le code ci-dessous, faute d’espace :
 
 <!-- paragraph -->
 
@@ -655,9 +657,9 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre qu’au fur et à mesure que le nombre d’itérations augmente, les prédictions deviennent plus précises.
+Le graphique ci-dessus montre les prédictions gagnent en précision à mesure que le nombre d’itérations augmente. 
 <!-- comment -->
-Enfin, nous terminons par un graphique interactif dans lequel vous pouvez cliquer sur le graphique des pertes pour sélectionner une itération de descente de gradient, pour laquelle la limite de décision correspondante est affichée sur le graphique des prédictions.
+Nous terminons la section par un graphique interactif dans lequel on peut cliquer sur la courbe des pertes pour sélectionner une itération de descente de gradient, dont la limite de décision correspondante s’affiche alors sur le graphique des prédictions.
 
 <!-- paragraph -->
 
@@ -742,23 +744,23 @@ Exercices :
 
 <!-- paragraph -->
 
-- Ajoutez l’animation sur le nombre d’itérations.
+- Animez le nombre d’itérations.
 <!-- comment -->
 - Ajoutez des transitions fluides pour le nombre d’itérations.
 <!-- comment -->
-- Ajoutez une boucle `for` sur des graines aléatoires (ou des plis de validation croisée) dans l’étape de division des données, et créez une visualisation qui montre comment cela affecte les résultats.
+- Ajoutez une boucle `for` sur des graines aléatoires (ou des plis de validation croisée) à l’étape de division des données, et créez une visualisation qui montre l’impact sur les résultats.
 <!-- comment -->
 - Ajoutez une boucle `for` sur des graines aléatoires à l’étape d’initialisation de la matrice de pondération, et créez une visualisation qui montre comment cela affecte les résultats.
 <!-- comment -->
 - Calculez les résultats pour une autre architecture de réseau neuronal (et/ou un modèle linéaire, en ajoutant une boucle `for` sur différentes valeurs de `units.per.layer`).
 <!-- comment -->
-Ajoutez un autre graphique ou une facette permettant de sélectionner l’architecture du réseau neuronal et de comparer facilement la perte de validation minimale entre les modèles (par exemple, ajoutez des colonnes de facettes au graphique de perte et ajoutez des lignes horizontales pour mettre en évidence la perte minimale).
+Ajoutez un graphique ou une facette permettant de sélectionner l’architecture du réseau neuronal et de comparer facilement la perte de validation minimale entre les modèles (par exemple, ajoutez des colonnes de facettes au graphique de perte et ajoutez des lignes horizontales pour mettre en évidence la perte minimale).
 <!-- comment -->
 - Modifiez l’algorithme d’apprentissage pour utiliser la recherche linéaire plutôt qu’une taille de pas constante, puis créez une visualisation qui compare les deux approches en termes de perte de validation minimale.
 
 <!-- paragraph -->
 
-Ensuite, dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs p) d’un test statistique.
+Dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs p) d’un test statistique.
 <!-- comment -->
 .
 
