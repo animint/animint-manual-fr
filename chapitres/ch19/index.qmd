@@ -1,4 +1,4 @@
-# Probabilités critiques (valeurs p)
+# Probabilités critiques (valeurs-p)
 
 <!-- paragraph -->
 
@@ -11,20 +11,20 @@ if(FALSE){
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous allons explorer plusieurs visualisations des tests statistiques.
-Plus précisement, nous allons visualiser la probabilité critique, aussi appelée la [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
+Dans ce chapitre, nous explorerons plusieurs visualisations de tests statistiques.
+Plus précisement, nous visualiserons la probabilité critique, aussi appelée [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
 
 <!-- paragraph -->
 
-- nous commençons par expliquer le concept de valeur-p.
+- Nous expliquons d’abord le concept de valeur-p.
 <!-- comment -->
-- nous simulons des données pour un test T à deux échantillons.
+- Nous simulons des données pour un test de Student (test T) à deux échantillons.
 <!-- comment -->
-- nous montrons comment créer un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
+- Nous créons ensuite un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
 <!-- comment -->
-- nous expliquons comment l’occlusion pourrait être problèmatique dans un graphique avec trop de points, et comment contourner ce problème avec une carte thermique liée à un graphique montrant un sous-ensemble de points.
+- Nous expliquons comment l’occlusion nuit à la lisibilité dans un graphique comportant trop de points, et comment y remédier par une carte thermique couplée à un graphique montrant un sous-ensemble de points.
 <!-- comment -->
-- nous terminons par une autre carte thermique des valeurs des paramètres simulés, avec un graphique lié qui montre les données simulées.
+- Nous terminons par une carte thermique des valeurs des paramètres simulés, avec un graphique lié qui montre les données simulées.
 
 <!-- paragraph -->
 
@@ -34,37 +34,37 @@ Plus précisement, nous allons visualiser la probabilité critique, aussi appel�
 
 <!-- paragraph -->
 
-Une valeur P est utilisée pour mesurer la signification d’un test statistique.
+Une valeur-p est utilisée pour mesurer la signification d’un test statistique.
 <!-- comment -->
-Les probabilités critiques (valeurs p) peuvent être calculées pour n’importe quel test statistique, mais une application typique est un test de Student entre deux conditions :
+Les probabilités critiques (valeurs-p) peuvent être calculées pour n’importe quel test statistique, mais l’application la plus courante est un test de Student entre deux conditions :
 
 <!-- paragraph -->
 
-- dans une expérience médicale, le traitement est-il plus efficace que le contrôle ?
+- Dans une expérience médicale, le traitement est-il plus efficace que le contrôle ?
 <!-- comment -->
-Par exemple, dans le cas d’un médicament pour la perte de poids, nous aimerions savoir si le poids du groupe expérimental est significativement inférieur à celui du groupe témoin.
+Par exemple, pour un médicament favorisant la perte de poids, on veut déterminer si le poids du groupe expérimental a diminué significativement par rapport au groupe témoin.
 <!-- comment -->
-Supposons que 10 personnes soient assignées au groupe de contrôle et 15 au groupe de traitement.
+Supposons que 10 personnes appartiennent au groupe de contrôle et 15 au groupe de traitement.
 <!-- comment -->
-Nous pourrions ensuite calculer une valeur-p à l’aide d’un test de Student unilatéral pour évaluer la signification statistique (et non apparié parce que chaque personne du groupe de traitement n’a pas de membre correspondant dans le groupe témoin).
+On peut alors calculer une valeur-p à l’aide d’un test de Student unilatéral pour évaluer la signification statistique (test non apparié, puisque chaque membre du groupe de traitement n’a pas de membre correspondant dans le groupe témoin).
 <!-- comment -->
 - Dans une expérience d’apprentissage automatique, le réseau neuronal est-il plus précis que le modèle linéaire ?
 <!-- comment -->
-Par exemple, considérons un ensemble de données de référence de classification d’images, et une évaluation utilisant la validation croisée à 5 divisions.
+Par exemple, considérons un ensemble de données de référence de classification d’images, et une évaluation utilisant la validation croisée à cinq divisions.
 <!-- comment -->
-Nous aurions cinq mesures du taux d’erreur pour chacun des deux algorithmes d’apprentissage (réseau neuronal et modèle linéaire).
+On obtient cinq mesures du taux d’erreur pour chacun des deux algorithmes d’apprentissage (réseau neuronal et modèle linéaire).
 <!-- comment -->
-Nous pourrions ensuite calculer une valeur-p à l’aide d’un test de Student unilatéral, pour évaluer la signification statistique (apparié parce qu’il y a un taux d’erreur pour chacun des algorithmes, dans chaque division de la validation croisée)
+On peut alors calculer une valeur-p à l’aide d’un test de Student unilatéral, pour évaluer la signification statistique (test apparié, puisqu’il y a un taux d’erreur pour chacun des algorithmes, dans chaque division de la validation croisée).
 
 <!-- paragraph -->
 
-Après avoir calculé les mesures (poids de chaque personne ou précision des tests de chaque algorithme d’apprentissage automatique), nous pouvons les utiliser comme données d’entrée pour `t.test()` qui calculera une valeur-p (plus elle est petite, plus la différence est significative).
+Après avoir calculé les mesures (poids de chaque personne ou précision des tests de chaque algorithme d’apprentissage automatique), on les utilise comme données d’entrée pour `t.test()` qui calculera une valeur-p (plus elle est petite, plus la différence est significative).
 <!-- comment -->
-Pour comprendre la valeur-p, nous devons d’abord adopter l’hypothèse nulle : nous supposons qu’il n’y a pas de différence entre les conditions.
+Pour comprendre la valeur-p, il faut d’abord adopter l’hypothèse nulle : on suppose qu’il n’y a pas de différence entre les conditions.
 <!-- comment -->
-Ensuite, la valeur-p du test est définie comme la probabilité que nous observions une différence aussi grande que les mesures données, ou plus grande.
+La valeur-p du test est alors définie comme la probabilité d’observer une différence au moins aussi grande que les mesures données. 
 <!-- comment -->
-Étant donné que l’hypothèse nulle est qu’il n’y a pas de différence, il est extrêmement improbable d’observer des différences importantes, c’est pourquoi les petites valeurs-p sont plus significatives.
+Puisque l’hypothèse nulle postule qu’il n’y a pas de différence, il est extrêmement improbable d’observer des différences importantes, c’est pourquoi les petites valeurs-p sont plus significatives.
 
 <!-- paragraph -->
 
@@ -78,10 +78,10 @@ Notre simulation comporte quatre paramètres :
 
 <!-- paragraph -->
 
-- `true_offset` est la véritable différence entre les conditions,
-- `sd` est l’écart-type des données simulées,
-- `sample` est un nombre d’échantillons (la moitié des échantillons dans une condition, l’autre moitié dans l’autre condition),
-- `trial` est le nombre de fois que nous répétons l’expérience (pour chaque différence et écart-type).
+- `true_offset` est la véritable différence entre les conditions.
+- `sd` est l’écart-type des données simulées.
+- `sample` est un nombre d’échantillons (moitié des échantillons dans une condition, moitié dans l’autre),
+- `trial` est le nombre de répétitions de l’expérience (pour chaque différence et écart-type).
 
 <!-- paragraph -->
 
@@ -112,7 +112,7 @@ set.seed(1)
 
 <!-- paragraph -->
 
-Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pour chaque `value` (valeur) normale aléatoire simulée (dont la moyenne dépend de `true_offset` et de `condition`).
+Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pour chaque `value` (valeur normale aléatoire simulée, dont la moyenne dépend de `true_offset` et de `condition`).
 
 <!-- paragraph -->
 
@@ -120,19 +120,18 @@ Le résultat ci-dessus montre plusieurs centaines de milliers de lignes, une pou
 
 <!-- paragraph -->
 
-Dans cette section, nous calculons les résultats des tests t et les visualisons à l’aide d’un graphique volcan, qui est un graphique des valeurs-p en logarithme négatif par rapport aux tailles d’effet estimées.
+Dans cette section, nous calculons les résultats des tests t et les visualisons à l’aide d’un graphique volcan, un graphique des valeurs-p en logarithme négatif par rapport aux tailles d’effet estimées.
 <!-- comment -->
-La visualisation des résultats du test est appelée graphique volcan parce que la distribution typique des points ressemble à un volcan en éruption de l’origine vers le haut, vers la gauche et vers la droite.
-
+Cette visualisation tire son nom de la distribution typique des points dont la forme ressemble à un volcan en éruption depuis l’origine vers le haut, la gauche et la droite.
 <!-- -- commentaire -->
 
 Tout d’abord, nous ajoutons les colonnes que nous utiliserons pour la visualisation :
 
 <!-- paragraph -->
 
-- `true_tile` est une chaîne de texte permettant de sélectionner une combinaison d’une différence et d’un écart-type.
+- `true_tile` est une chaîne de texte permettant de sélectionner la combinaison d’une différence et d’un écart-type.
 <!-- comment -->
-- `Condition` est une chaîne de caractères indiquant la condition (soit `zero` ou `offset`).
+- `Condition` est une chaîne de caractères indiquant la condition (soit `zero` soit `offset`).
 
 <!-- paragraph -->
 
@@ -176,13 +175,13 @@ Le code ci-dessous calcule un test de Student pour chaque répétition de la sim
 
 <!-- paragraph -->
 
-La sortie ci-dessus comporte une ligne pour chaque test de Student et des colonnes pour la différence moyenne (`mean_zero`) et la `p.value`.
+La sortie ci-dessus présente une ligne pour chaque test de Student et des colonnes pour la différence moyenne (`mean_zero`) et la valeur-p `p.value`.
 <!-- comment -->
 Comme il y a dix échantillons par essai, il y a dix fois moins de lignes que dans le tableau de données simulées original.
 <!-- comment -->
-Chaque essai implique un test de Student avec 5 échantillons dans le groupe témoin (`condition=zero`), contre 5 échantillons dans le groupe expérimentale (`condition=offset`).
+Chaque essai implique un test de Student avec cinq échantillons dans le groupe témoin (`condition=zero`), et cinq échantillons dans le groupe expérimental (`condition=offset`).
 <!-- comment -->
-Ensuite, nous ajoutons des colonnes pour le graphique volcan :
+Nous ajoutons ensuite des colonnes pour le graphique volcan :
 
 <!-- paragraph -->
 
@@ -200,13 +199,13 @@ sim_p[, let(
 
 <!-- paragraph -->
 
-Ensuite, nous dessinons le graphique volcan :
+Ensuite, nous traçons le graphique volcan :
 
 <!-- paragraph -->
 
 - L’axe des X indique la différence entre les conditions (taille de l’effet).
 <!-- comment -->
-- L’axe des Y indique le logarithme négatif de la valeur P.
+- L’axe des Y indique le logarithme négatif de la valeur-p.
 
 <!-- paragraph -->
 
@@ -225,9 +224,9 @@ library(animint2)
 
 Le graphique statique ci-dessus montre un point par résultat de test de Student.
 <!-- comment -->
-Les points proches de l’origine (0,0) représentent des tests qui n’ont pas produit de différence significative, tandis que les points avec de grandes valeurs Y représentent des différences significatives.
+Les points proches de l’origine (0,0) représentent des tests qui n’ont pas produit de différence significative, tandis que ceux avec de grandes valeurs Y représentent des différences significatives.
 <!-- comment -->
-Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions voir comment les paramètres de simulation affectent le graphique volcan :
+Le graphique comprend également `fill=true_offset` et `color=sd` afin de visualiser les impacts des paramètres de simulation sur le graphique volcan :
 
 <!-- paragraph -->
 
@@ -237,7 +236,7 @@ Il comprend également `fill=true_offset` et `color=sd` afin que nous puissions 
 
 <!-- paragraph -->
 
-Enfin, on voit l’occlusion dans le nuage de points, ce qui signifie que nous ne pouvons pas voir tous les détails, car il y a trop de points de données tracés les uns sur les autres.
+Enfin, on voit l’occlusion dans le nuage de points, ce qui masque les détails, car il y a trop de points de données tracés les uns sur les autres.
 
 <!-- paragraph -->
 
@@ -245,15 +244,15 @@ Enfin, on voit l’occlusion dans le nuage de points, ce qui signifie que nous n
 
 <!-- paragraph -->
 
-Dans cette section, nous montrons comment le graphique volcan précédent peut être révisé pour montrer plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
+Dans cette section, nous montrons comment réviser le graphique volcan précédent pour qu’il montre plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
 <!-- comment -->
-Pour commencer, nous définissons la fonction `round_rel()` ci-dessous, qui est utilisée pour ajouter les colonnes `round_*` et `rel_*` que nous utiliserons pour définir les tuiles de la carte thermique.
+Tout d’abord, nous définissons la fonction `round_rel()` ci-dessous, qui sert à ajouter les colonnes `round_*` et `rel_*` utilisées pour définir les tuiles de la carte thermique :
 
 <!-- paragraph -->
 
-- les colonnes `round_*` sont arrondies à la taille de bac la plus proche (entière par défaut), et sont utilisées pour définir les positions `x` et `y` de la tuile de la carte thermique.
+- Les colonnes `round_*` sont arrondies à la taille de bac la plus proche (entière par défaut), et sevent à définir les positions `x` et `y` de la tuile de la carte thermique.
 <!-- comment -->
-- les colonnes `rel_*` sont utilisées pour les positions `x` et `y` dans l’affichage zoomé, et sont des unités relatives à la valeur de `round_*` correspondante.
+- Les colonnes `rel_*` sont utilisées pour les positions `x` et `y` dans l’affichage zoomé, et sont des unités relatives à la valeur de `round_*` correspondante.
 
 <!-- paragraph -->
 
@@ -270,7 +269,7 @@ round_rel(sim_p, "neg.log10.p")
 
 <!-- paragraph -->
 
-Ensuite, nous définissons `volcano_tile` une combinaison de chaînes de texte de variables `round_*` qui sera utilisée pour la sélection.
+Ensuite, nous définissons `volcano_tile`, une combinaison de chaînes de texte de variables `round_*` qui sera utilisée pour la sélection.
 
 <!-- paragraph -->
 
@@ -280,7 +279,7 @@ sim_p[, volcano_tile := paste(round_diff_means, round_neg.log10.p)]
 
 <!-- paragraph -->
 
-Ensuite, nous calculons un tableau de contingence avec une ligne par carreau de la carte thermique que nous allons afficher.
+Puis nous calculons un tableau de contingence avec une ligne par tuile de la carte thermique à afficher.
 
 <!-- paragraph -->
 
@@ -292,9 +291,9 @@ Ensuite, nous calculons un tableau de contingence avec une ligne par carreau de 
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre une ligne par tuile de la carte thermique, avec la colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
+La sortie ci-dessus montre une ligne par tuile de la carte thermique, et une la colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
 <!-- comment -->
-Ci-dessous, nous créons la carte thermique du volcan.
+Ci-dessous, nous créons la carte thermique du volcan :
 
 <!-- paragraph -->
 
@@ -310,9 +309,9 @@ Ci-dessous, nous créons la carte thermique du volcan.
 
 <!-- paragraph -->
 
-Le résultat ci-dessus est une carte thermique, les régions plus foncées indiquant les zones du graphique volcan qui ont plus de résultats de tests.
+Le résultat ci-dessus est une carte thermique. Les régions plus foncées indiquent les zones du graphique volcan qui ont plus de résultats de tests.
 <!-- comment -->
-Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, en utilisant le sélecteur `volcano_tile` pour les relier.
+Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, et utilise le sélecteur `volcano_tile` pour les relier  :
 
 <!-- paragraph -->
 
@@ -341,7 +340,7 @@ Le code ci-dessous combine la carte thermique du volcan avec un nuage de points 
 
 <!-- paragraph -->
 
-Ci-dessus, après avoir cliqué sur la carte thermique de gauche, les données affichées dans le graphique de droite changent.
+Ci-dessus, un clic sur la carte thermique de gauche change les données affichées dans le graphique de droite.
 
 <!-- paragraph -->
 
@@ -351,7 +350,7 @@ Ci-dessus, après avoir cliqué sur la carte thermique de gauche, les données a
 
 Dans cette section, nous créons une nouvelle visualisation pour révéler les détails de chaque combinaison de paramètres de simulation.
 <!-- comment -->
-Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l’effet (`diff_means`) et le logarithme négatif de la valeur P (`neg.log10.p`), sur l’ensemble des 100 répétitions de chaque combinaison de paramètres.
+Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l’effet (`diff_means`) et le logarithme négatif de la valeur-p (`neg.log10.p`), sur l’ensemble des 100 répétitions de chaque combinaison de paramètres :
 
 <!-- paragraph -->
 
@@ -367,7 +366,7 @@ Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l�
 
 Le résultat ci-dessus comporte une ligne par combinaison de paramètres de simulation (`true_offset` et `sd`).
 <!-- comment -->
-Nous utilisons le code ci-dessous pour visualiser cette grille de combinaisons de paramètres.
+Nous utilisons le code ci-dessous pour visualiser cette grille de combinaisons de paramètres :
 
 <!-- paragraph -->
 
@@ -391,21 +390,21 @@ height <- sd_by*0.45
 
 <!-- paragraph -->
 
-La figure ci-dessus montre un rectangle pour chaque combinaison de paramètres de simulation.
+La figure ci-dessus montre un rectangle par combinaison de paramètres de simulation.
 <!-- comment -->
-Il est clair que :
+On observe que :
 
 <!-- paragraph -->
 
-- la taille estimée de l’effet (`fill=diff_means`) est cohérente avec le décalage réel (axe des X).
+- la taille estimée de l’effet (`fill=diff_means`) est cohérente avec le décalage réel (axe des X);
 <!-- comment -->
-- les valeurs P les plus significatives (grandes `neg.log10.p`) sont associées à des paramètres à faible écart-type (parce que le rapport signal/bruit est plus important).
+- les valeurs-p les plus significatives (grandes `neg.log10.p`) sont associées à des paramètres à faible écart-type (parce que le rapport signal/bruit est plus important).
 
 <!-- paragraph -->
 
 Nous allons créer un graphique lié qui montre les détails des simulations pour chaque combinaison de paramètres.
 <!-- comment -->
-Nous commençons par établir le prototype des graphiques détaillés en examinant un sous-ensemble :
+Nous commençons par établir le prototype des graphiques détaillés en examinant un sous-ensemble.
 
 <!-- paragraph -->
 
@@ -422,7 +421,7 @@ gg.true.tiles+
 
 <!-- paragraph -->
 
-La figure ci-dessus montre deux rectangles soulignés d’un contour vert, pour lesquels nous créons un graphique à facettes non interactif à l’aide du code ci-dessous.
+La figure précédente montre deux rectangles soulignés d’un contour vert, pour lesquels nous créons un graphique à facettes non interactif à l’aide du code ci-dessous :
 
 <!-- paragraph -->
 
@@ -438,9 +437,9 @@ La figure ci-dessus montre deux rectangles soulignés d’un contour vert, pour 
 
 La figure ci-dessus montre un panneau pour chacune des deux combinaisons de paramètres mises en évidence dans le graphique précédent.
 <!-- comment -->
-L’axe des X représente `trial`, qui s’étend de 1 à 100, chacune avec différentes valeurs aléatoires simulées à l’aide des mêmes hypothèses (`true_offset=0` ou `2`).
+L’axe des X représente `trial` (essai), qui s’étend de 1 à 100, chacun utilisant différentes valeurs aléatoires simulées à l’aide des mêmes hypothèses (`true_offset=0` ou `2`).
 <!-- comment -->
-Le test de Student est utilisé pour déterminer s’il existe une différence de moyennes entre les deux conditions.
+Le test de Student sert à déterminer s’il existe une différence de moyennes entre les deux conditions :
 
 <!-- paragraph -->
 
@@ -450,7 +449,7 @@ Le test de Student est utilisé pour déterminer s’il existe une différence d
 
 <!-- paragraph -->
 
-Le code ci-dessous crée une nouvelle colonne `significant` qui indique si le test rejette l’hypothèse nulle au seuil traditionnel de 5 %.
+Le code ci-dessous crée une nouvelle colonne `significant` qui indique si le test rejette l’hypothèse nulle au seuil traditionnel de 5 %  :
 
 <!-- paragraph -->
 
@@ -460,7 +459,7 @@ sim_p[, significant := p.value < 0.05]
 
 <!-- paragraph -->
 
-Le code ci-dessous ajoute un nouveau `geom_point()` pour mettre l’accent sur les essais qui ont montré une différence significative au niveau de 5 %.
+Le code ci-dessous ajoute un nouveau `geom_point()` pour mettre l’accent sur les essais qui ont montré une différence significative au seuil de 5 % :
 
 <!-- paragraph -->
 
@@ -475,21 +474,21 @@ gg.some.values+
 
 <!-- paragraph -->
 
-La figure ci-dessus montre un point noir pour chaque essai présentant une différence significative.
+La figure ci-dessus montre un point noir pour chaque essai présentant une différence significative :
 
 <!-- paragraph -->
 
-- Pour `true_offset=0` nous voyons qu’il y a `r nrow(some(only_significant)[true_offset==0])` essais avec une différence significative, même s’il n’y a pas de différence dans les vraies moyennes dans la simulation.
+- Pour `true_offset=0`, on observe qu’il y a `r nrow(some(only_significant)[true_offset==0])` essais avec une différence significative, même s’il n’y a pas de différence dans les vraies moyennes dans la simulation.
 <!-- comment -->
-Ce nombre de faux positifs est cohérent avec le seuil de 5% de la valeur P (taux d’erreur de type I) que nous avons utilisé pour définir la significativité.
+Ce nombre de faux positifs est cohérent avec le seuil de 5 % de la valeur-p (taux d’erreur de type I) que nous avons utilisé pour définir la significativité.
 <!-- comment -->
-- Pour `true_offset=2`, nous voyons que seul `r nrow(some(only_significant)[true_offset!=0])` des essais sont significatifs, même s’il y a une vraie différence de moyenne.
+- Pour `true_offset=2`, nous voyons que seuls `r nrow(some(only_significant)[true_offset!=0])` essais sont significatifs, même s’il y a une vraie différence de moyenne.
 <!-- comment -->
 La puissance estimée (taux de vrais positifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(significant),"%")]` et le taux d’erreur de type II (taux de faux négatifs) est donc de `r some(sim_p)[true_offset!=0, paste0(100*mean(1-significant),"%")]`.
 
 <!-- paragraph -->
 
-Ci-dessous, nous créons une visualisation qui relie la carte thermique d’ensemble au graphique de dispersion détaillé, en remplaçant `facet_grid(true_offset ~ .)` dans le code ci-dessus par `showSelected="true_tile"` dans le code ci-dessous.
+Nous créons une visualisation qui relie la carte thermique d’ensemble au graphique de dispersion détaillé, en remplaçant `facet_grid(true_offset ~ .)` du code précédent par `showSelected="true_tile"` dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -523,7 +522,7 @@ Ci-dessous, nous créons une visualisation qui relie la carte thermique d’ense
 
 <!-- paragraph -->
 
-Dans la visualisation ci-dessus, vous pouvez cliquer sur le graphique du haut pour sélectionner une combinaison de paramètres de simulation.
+Dans la visualisation ci-dessus, il suffit de cliquer sur le graphique du haut pour sélectionner une combinaison de paramètres de simulation.
 <!-- comment -->
 Les 100 essais pour la combinaison de paramètres sélectionnée sont affichés dans le graphique du bas.
 
@@ -533,11 +532,11 @@ Les 100 essais pour la combinaison de paramètres sélectionnée sont affichés 
 
 <!-- paragraph -->
 
-Nous avons créé plusieurs visualisations des données à l’aide de simulations pour illustrer les valeurs P.
+Nous avons créé plusieurs visualisations des données à l’aide de simulations pour illustrer les valeurs-p.
 <!-- comment -->
-Comme il y avait trop de tests t à montrer sur le graphique volcan, nous avons plutôt utilisé une carte thermique liée à un diagramme de dispersion zoomé.
+Comme il y avait trop de tests T à afficher sur le graphique volcan, nous avons utilisé une carte thermique liée à un diagramme de dispersion zoomé.
 <!-- comment -->
-Nous avons également montré comment lier une carte thermique de combinaisons de paramètres à un graphique de dispersion qui montre les détails des valeurs correspondantes dans les simulations.
+Nous avons également démontré comment lier une carte thermique de combinaisons de paramètres à un graphique de dispersion affichant les détails des valeurs correspondantes dans les simulations.
 
 <!-- paragraph -->
 
@@ -545,19 +544,19 @@ Exercices :
 
 <!-- paragraph -->
 
-- Dans `vis.volcano`, en cliquant sur l’une des `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
+- Dans `vis.volcano`, lorsqu'on clique sur une `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
 <!-- comment -->
-Pour corriger ce problème et occuper tout l’espace, revenez à la définition de `round_neg.log10.p` et utiliser l’argument `offset=0.5` dans `round_rel()` qui décale les valeurs relatives d’un certain décalage.
+Pour corriger ce problème et occuper tout l’espace, revenez à la définition de `round_neg.log10.p` et utilisez l’argument `offset=0.5` dans `round_rel()` ce qui décalera les valeurs relatives.
 <!-- comment -->
 - Dans `vis.volcano`, ajoutez `aes(tooltip)` à `volcanoTiles` pour indiquer le nombre de points dans chaque tuile de la carte thermique.
 <!-- comment -->
-- Notez que deux `geom_tile()` ont été utilisés dans `vis.volcano` et deux `geom_rect()` ont été utilisés dans `vis.parameters`.
+- Notez que deux `geom_tile()` ont été utilisés dans `vis.volcano` et deux `geom_rect()` dans `vis.parameters`.
 <!-- comment -->
-Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second geom utilise `fill="transparent"` avec `color="green"` pour la sélection.
+Le premier geom utilise la couleur et le remplissage pour visualiser les données, tandis que le second utilise `fill="transparent"` avec `color="green"` pour la sélection.
 <!-- comment -->
 Essayez une refonte avec un seul geom, qui n’utilise que des `aes(fill)` et utilise `color` comme paramètre de geom.
 <!-- comment -->
-Quels sont les inconvénients de l’approche utilisant un seul geom ?
+Quels sont les inconvénients de l’approche à un seul geom ?
 <!-- comment -->
 - Dans `vis.parameters`, ajoutez `geom_hline()` pour mettre en évidence la valeur sélectionnée du vrai décalage.
 <!-- comment -->
@@ -567,25 +566,25 @@ Quels sont les inconvénients de l’approche utilisant un seul geom ?
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Ajoutez des éléments graphiques à `gg.volcano` pour mettre l’accent sur le seuil traditionnel de la valeur-p de `0.05` : `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou au-dessous du seuil (utiliser un texte comme « 1500 tests non significatifs »).
+- Ajoutez des éléments graphiques à `gg.volcano` pour mettre en évidence le seuil traditionnel de la valeur-p de `0.05` ; `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou en dessous du seuil (utiliser un texte comme « 1500 tests non significatifs »).
 <!-- comment -->
 - Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->
-- Ajoutez une animation à `vis.parameters` de manière à ce qu’une nouvelle combinaison de paramètres apparaisse toutes les secondes.
+- Ajoutez une animation à `vis.parameters` de manière à afficher une nouvelle combinaison de paramètres toutes les secondes.
 <!-- comment -->
-- Ajoutez `first` à `vis.parameters` afin que la première sélection affichée corresponde à l’une des combinaisons de paramètres présentées dans le graphique statique à facettes.
+- Ajoutez l’option `first` à `vis.parameters` afin que la première sélection affichée corresponde à l’une des combinaisons de paramètres présentées dans le graphique statique à facettes.
 <!-- comment -->
 - Combinez `vis.volcano` avec `vis.parameters` pour créer une nouvelle visualisation des données avec quatre graphiques liés.
 <!-- comment -->
-Différents types d’interactions sont possibles : - Dans `volcanoZoom`, utilisez `clickSelects="true_tile"` pour que l’interactivité permette de mapper les points du graphique volcan dans l’espace des paramètres de simulation.
+Dans `volcanoZoom`, utilisez `clickSelects="true_tile"` pour que l’interactivité permette de mapper les points du graphique volcan dans l’espace des paramètres de simulation.
 <!-- comment -->
-Ajoutez des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais pour la combinaison de paramètres sélectionnée apparaissent dans l’espace du graphique du volcan.
+Ajoutez des points verts avec `showSelected="true_tile"` à `volcanoTiles` pour montrer où les 100 essais de la combinaison sélectionnée apparaissent dans l’espace du graphique du volcan.
 <!-- comment -->
-- Créez une nouvelle variable de sélection qui est une combinaison unique de `true_tile` et `trial`, puis utilisez-la pour `clickSelects` dans les deux `volcanoZoom` et `vis.parameters$zoom` de sorte que nous pouvons voir une correspondance entre un point dans l’espace volcan et un essai dans le graphique des détails du zoom sur les paramètres.
+- Créez une nouvelle variable de sélection qui combine `true_tile` et `trial`, puis utilisez-la pour `clickSelects` dans les deux `volcanoZoom` et `vis.parameters$zoom` afin de visualiser la correspondance entre un point dans l’espace volcan et un essai dans le graphique des détails du zoom sur les paramètres.
 
 <!-- paragraph -->
 
-Ensuite, dans le [chapitre 20](/ch19), nous expliquons la visualisation des résultats d’apprentissage artificiel avec le package `mlr3`.
+Dans le [chapitre 20](/ch19), nous vous expliquons la visualisation des résultats d’apprentissage artificiel avec le package `mlr3`.
 
 <!-- paragraph -->
 
