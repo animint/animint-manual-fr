@@ -74,7 +74,7 @@ Le code utilisé est une version modifiée d’un code pour la création des vis
 
 <!-- comment -->
 
-Dans `mlr3`, une comparaison « benchmark » comprend le calcul de toutes les combinaisons des éléments suivants :
+Dans `mlr3`, une comparaison benchmark comprend le calcul de toutes les combinaisons des éléments suivants :
 
 <!-- comment -->
 
@@ -97,7 +97,7 @@ mlr.tasks <- c("spam","sonar")
 task_list <- mlr3::tsks(mlr.tasks)
 ```
 
-Ensuite, nous définissons une fonction pour télécharger un jeu de données depuis le site web du livre « Elements of Statistical Learning » [@Hastie2009].
+Nous définissons ensuite une fonction pour télécharger un jeu de données depuis le site web du livre *Elements of Statistical Learning* [@Hastie2009].
 
 ```{r}
 library(data.table)
@@ -114,8 +114,7 @@ cache.fread <- function(data.name, f){
 }
 ```
 
-Puis, nous créons une boucle pour télécharger trois jeux de données.
-On ajoute à chacun un `Task` de classification binaire (avec seulement les deux premières classes).
+Puis, nous créons une boucle pour télécharger trois jeux de données auxquels nous ajoutons un `Task` de classification binaire (en utilisant seulement les deux premières classes).
 
 ```r
 data.sets <- c("vowel","waveform","zip")
@@ -142,15 +141,15 @@ for(data.name in data.sets){
 task_list
 ```
 
-Le code ci-dessus produit une liste de 5 tâches de classification binaire :
+Le code ci-dessus produit une liste de cinq tâches de classification binaire :
 
 <!-- comment -->
 
-* `spam` représente une classification de courriels (`spam` étant un pourriel et `nonspam`  un courriel légitime) à partir d’un vecteur de comptage de mots « bag of words ».
+* `spam` représente une classification de courriels (`spam` étant un pourriel et `nonspam` un courriel légitime) à partir d’un vecteur de comptage de mots « bag of words ».
 <!-- comment -->
-* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente une classification entre métal et roche, à partir d’un vecteur de bandes de fréquences sonores.
+* [`sonar`](https://rdrr.io/cran/mlbench/man/Sonar.html) représente une classification entre métal et roche à partir d’un vecteur de bandes de fréquences sonores.
 <!-- comment -->
-* `vowel` représente une classification du son des voyelles, à partir de dix variables calculées depuis un fichier audio.
+* `vowel` représente une classification du son des voyelles, à partir de dix variables extraites d’un fichier audio.
 <!-- comment -->
 * `waveform` est un jeu de données de simulation [@Hastie2009].
 <!-- comment -->
@@ -158,7 +157,7 @@ Le code ci-dessus produit une liste de 5 tâches de classification binaire :
 
 <!-- comment -->
 
-### Algorithmes d’apprentissage {#learners}
+### Algorithmes d’apprentissage {#learners} (`Learners`)
 
 <!-- comment -->
 
@@ -168,7 +167,7 @@ Le code ci-dessous commence par une liste de deux algorithmes :
 
 <!-- comment -->
 
-* `cv_glmnet` est un modèle linéaire, avec régularisation L1 qui minimise le taux d’erreur dans la validation croisée à 10 divisions (en anglais fold).
+* `cv_glmnet` est un modèle linéaire, avec régularisation L1 qui minimise le taux d’erreur dans la validation croisée à dix divisions (folds).
 <!-- comment -->
 * `featureless` est le modèle constant, il n’utilise pas les variables d’entrée, et prédit toujours la classe la plus fréquente dans les données d’apprentissage.
 
@@ -187,11 +186,11 @@ knn_learner <- mlr3learners::LearnerClassifKKNN$new()
 knn_learner$param_set$values$k <- paradox::to_tune(1, 40)
 ```
 
-Le code ci-dessus précise les bornes de `k` (le nombre de voisins) entre 1 et 40.
+Le code ci-dessus fixe les bornes de `k` (le nombre de voisins) entre 1 et 40.
 <!-- comment -->
-Le code ci-dessous précise la méthode à utiliser pour la sélection de `k`, c’est-à-dire  une recherche avec 10 valeurs, avec validation croisée à 3 divisions, qui maximise l’aire sous la courbe ROC, (en anglais Area Under the Curve  ou AUC ).
+Le code qui suit précise la méthode de sélection de `k`, soit  une recherche avec dix valeurs, avec validation croisée à trois divisions, qui maximise l’aire sous la courbe ROC, (Area Under the Curve  ou AUC ).
 <!-- comment -->
-Remarquons que si on veut calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
+Pour calculer l’AUC pour l’ensemble de validation, il faut préciser `predict_type="prob"`, ce qui fait que la prédiction est un nombre réel (et non seulement la classe la plus probable).
 
 ```{r}
 kfoldcv <- mlr3::rsmp("cv")
@@ -238,15 +237,15 @@ make_po_list <- function(...)list(
     epochs = paradox::to_tune(upper = n.epochs, internal = TRUE)))
 ```
 
-Remarquons que dans le code ci-dessus  `lr` est le taux d’apprentissage. (en anglais learning rate).
+Dans le code ci-dessus `lr` est le taux d’apprentissage (learning rate).
 <!-- comment -->
 La fonction ci-dessous définit :
 
 <!-- comment -->
 
-* la moitié des données d’apprentissage comme ensemble de validation (`validate = 0.5`), et l’autre moitié comme ensemble de sous-entraînement (pour calculer les gradients).
+* la moitié des données d’apprentissage comme ensemble de validation (`validate = 0.5`) et l’autre moitié comme ensemble de sous-entraînement (pour calculer les gradients).
 <!-- comment -->
-* que le nombre d’époques est choisi en minimisant la première mesure dans la liste `measure_list` (perte logistique).
+* le nombre d’époques choisi en minimisant la première mesure dans la liste `measure_list` (perte logistique).
 
 ```{r}
 make_torch_learner <- function(id,...){
@@ -263,7 +262,7 @@ make_torch_learner <- function(id,...){
 }
 ```
 
-Le code ci-dessous rajoute deux algorithmes d’apprentissage.
+Le code ci-dessous rajoute deux algorithmes d’apprentissage  :
 
 ```{r}
 if(torch::torch_is_installed()){
