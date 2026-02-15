@@ -7,8 +7,9 @@ if(FALSE){
 }
 ```
 
-Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel ; nous utiliserons des packages `mlr3`.
+Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel à l’aide des packages `mlr3`.
 
+Plan du chapitre :
 <!-- comment -->
 
 * Nous démontrons d’abord la pertinence des packages `mlr3` pour la comparaison d’algorithmes d’apprentissage artificiel.
@@ -33,37 +34,39 @@ Plusieurs packages R proposent des algorithmes d’apprentissage artificiel, par
 
 * `library(kknn)` offre des K Plus Proches Voisins (KPPV), présentés dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le LASSO, que nous avons explorés dans le [chapitre 11](/ch11).
+* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le Lasson, exploré dans le [chapitre 11](/ch11).
 <!-- comment -->
-* `library(torch)` offre des réseaux des neurones, exposés dans le [chapitre 18](/ch18).
+* `library(torch)` offre des réseaux de neurones, exposés dans le [chapitre 18](/ch18).
 
 <!-- comment -->
 
-Pour obtenir de bons résultats de prédiction sur un jeu de données, nous entraînons plusieurs algorithmes, car nous ignorons quel algorithme aura les meilleures performances pour ces données.
+Pour obtenir de bonnes prédictions sur un jeu de données, on doit entraîner plusieurs algorithmes, car il est impossible de savoir lequel sera le plus performant pour ces données.
 <!-- comment -->
-Nous utilisons donc différents packages et analysons ensuite les résultats pour déterminer quel algorithme fournit les meilleures prédictions.
+On utilise donc différents packages puis les résultats sont analysés pour déterminer quel algorithme fournit les meilleures prédictions.
 <!-- comment -->
-Dans chaque package, les fonctions pour l’apprentissage et la prédiction ont différents noms, et différentes interfaces.
+Les fonctions d’apprentissage et de prédiction ont des noms et des interfaces différents selon les packages.
 <!-- comment -->
-En général, chaque package contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d’un package à l’autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
+En général, chacun contient une fonction `predict()` qui calcule les prédictions, mais le type de sortie est différent d’un package à l’autre (`factor` pour classe, `matrix` pour probabilités de chaque classe, etc.).
 <!-- comment -->
-Comment adapter un jeux de données à chaque package d’apprentissage ?
+
+
+Comment adapter le jeu de données à chaque package d’apprentissage ?
 <!-- comment -->
-Comment uniformiser les types de sortie pour permettre la comparaison de résultats ?
+Comment uniformiser le type de sortie pour comparer les résultats ?
 <!-- comment -->
-Le package `mlr3` offre plusieurs fonctions qui simplifient ce type d’analyse, appelé « benchmark » [@bischl2024applied].
+Le package `mlr3` offre plusieurs fonctions qui simplifient ce type d’analyse, qu’on nomme « benchmark » [@bischl2024applied].
 
 <!-- comment -->
 
-* Chaque jeu de données est représenté comme un `Task`, c’est-à-dire un tableau de données d’apprentissage accompagné de quelques métadonnées indiquant les colonnes à utiliser pour différents rôles (entrée, sortie, etc.).
+* Chaque jeu de données est représenté par `Task`, c’est-à-dire un tableau de données accompagné de quelques métadonnées précisant le rôle de chaque colonne (entrée, sortie, etc.).
 <!-- comment -->
-* Chaque algorithme d’apprentissage est représenté comme une classe  `Learner` qui fournit les prédictions dans un type de sortie uniforme (une matrice de probabilités pour chaque classe).
+* Chaque algorithme est représenté comme une classe `Learner` qui fournit les prédictions dans un type de sortie uniforme (une matrice de probabilités pour chaque classe).
 
 <!-- comment -->
 
-Dans ce chapitre, nous expliquons l’utilisation d’`animint2` pour la visualisation interactive des résultats des différents algorithmes d’apprentissage sur différents jeux de données.
+Dans ce chapitre, nous expliquons l’utilisation de `animint2` pour la visualisation interactive des résultats des algorithmes d’apprentissage sur différents jeux de données.
 <!-- comment -->
-Le code utilisé dans ce chapitre est une version modifiée d’un code pour la création des visualisations statiques [@Hocking2025-mlr3-cluster].
+Le code utilisé est une version modifiée d’un code pour la création des visualisations statiques [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
