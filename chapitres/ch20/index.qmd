@@ -157,7 +157,7 @@ Le code ci-dessus produit une liste de cinq tâches de classification binaire :
 
 <!-- comment -->
 
-### Algorithmes d’apprentissage {#learners} (`Learners`)
+### Algorithmes d’apprentissage {#learners} 
 
 <!-- comment -->
 
@@ -280,7 +280,7 @@ if(torch::torch_is_installed()){
 
 <!-- comment -->
 
-Avant de calculer les résultats pour des algorithmes de classification, il faut préciser que `predict_type=prob` pour faire en sorte que les prédictions soient des valeurs réelles (et pouvoir calculer des mesures d’évaluation comme l’AUC).
+Avant de calculer les résultats pour des algorithmes de classification, il faut préciser `predict_type=prob` pour que les prédictions soient des valeurs réelles (et pouvoir calculer des mesures d’évaluation comme l’AUC).
 
 ```{r}
 for(learner.i in seq_along(learner.list)){
@@ -288,7 +288,7 @@ for(learner.i in seq_along(learner.list)){
 }
 ```
 
-Puis nous combinons les jeux de données, les algorithmes d’apprentissage et la méthode d’échantillonnage (validation croisée à 3 divisions).
+Puis nous combinons les jeux de données, les algorithmes d’apprentissage et la méthode d’échantillonnage (validation croisée à trois divisions).
 
 ```{r}
 bench.grid <- mlr3::benchmark_grid(
@@ -297,8 +297,8 @@ bench.grid <- mlr3::benchmark_grid(
   kfoldcv)
 ```
 
-Puisque notre but est d’expliquer la visualisation, nous avons déjà calculé et sauvegardé les résultats dans `library(animint2data)`.
-Le code ci-dessous télécharge ces résultats.
+Puisque notre objectif est d’expliquer la visualisation, nous avons déjà calculé et sauvegardé les résultats dans `library(animint2data)`.
+Le code ci-dessous télécharge ces résultats :
 
 ```{r}
 if(TRUE){
@@ -311,13 +311,13 @@ if(TRUE){
 }
 ```
 
-Si vous souhaitez refaire le calcul pour obtenir ces résultats, exécutez la ligne `benchmark()` ci-dessus.
+Si vous souhaitez refaire le calcul, exécutez la ligne `benchmark()` ci-dessus.
 <!-- comment -->
 L’exécution pourrait durer plusieurs minutes voire plusieurs heures, selon votre ordinateur.
 <!-- comment -->
 Le code `plan("multisession")` implique que chaque combinaison (données, algorithmes, divisions) est traitée par un processeur différent.
 <!-- comment -->
-Pour accélérer le processus, vous pouvez utiliser une grappe de calcul [@Hocking2025-mlr3-cluster].
+Pour accélérer le processus, utilisez une grappe de calcul [@Hocking2025-mlr3-cluster].
 
 <!-- comment -->
 
@@ -339,10 +339,10 @@ sapply(test_measure_list, function(M)M$label)
 
 La sortie ci-dessous affiche la correspondance entre le nom et le code des mesures.
 
-* `classif.auc` est l’aire sous la courbe ROC.
-* `classif.ce` est le taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre total d’étiquettes.
-* `classif.tpr` est le taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
-* `classif.fpr` est le taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
+* `classif.auc` : aire sous la courbe ROC.
+* `classif.ce` : taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre total d’étiquettes.
+* `classif.tpr` : taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
+* `classif.fpr` : taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
 
 <!-- comment -->
 Ensuite, nous utilisons `$score()` pour calculer ces mesures pour les données test, dans chaque division de validation croisée.
@@ -352,12 +352,11 @@ score_dt <- bench.result$score(test_measure_list)
 score_dt[, .(task_id, learner_id, iteration, classif.auc, classif.ce)]
 ```
 
-La sortie ci-dessus contient une ligne pour chaque combinaison de données, algorithme, division de validation croisée.
-Il y a des colonnes pour deux mesures : l’AUC et le taux d’erreur.
+La sortie ci-dessus contient une ligne pour chaque combinaison données, algorithme, division de validation croisée et des colonnes pour deux mesures (AUC et taux d’erreur). 
 <!-- comment -->
 Le code ci-dessous visualise les taux d’erreur.
 <!-- comment -->
-Remarquons que nous convertissons le taux d’erreur en pourcentage afin d’économiser l’espace sur l’axe X (par exemple, 0.3 devient 30).
+Notez que nous convertissons le taux d’erreur en pourcentage afin d’économiser l’espace sur l’axe X (par exemple, 0.3 devient 30).
 
 ```{r}
 library(animint2)
@@ -372,9 +371,9 @@ ggplot()+
     limits=c(0,60))
 ```
 
-Le graphique ci-dessus affiche trois cercles pour chaque Y — un cercle pour chaque division de validation croisée.
+Le graphique ci-dessus affiche trois cercles par ligne — un pour chaque division de validation croisée.
 <!-- comment -->
-Nous voyons que l’algorithme des plus proches voisins a le plus petit taux d’erreur dans certains jeux de données (`vowel`), tandis que le réseau de neurones (`torch_dense_50`) est meilleur dans d’autres données (`spam`).
+On constate que l’algorithme des plus proches voisins a le plus petit taux d’erreur dans certains jeux de données (`vowel`), tandis que le réseau de neurones (`torch_dense_50`) est meilleur dans d’autres (`spam`).
 <!-- comment -->
 L’objectif de ce chapitre est d’ajouter l’interactivité à ce graphique, afin de montrer les détails de chaque division de validation croisée.
 
@@ -384,9 +383,9 @@ L’objectif de ce chapitre est d’ajouter l’interactivité à ce graphique, 
 
 <!-- comment -->
 
-Dans cette section, nous affichons des courbes ROC, utiles à l’évaluation en classification binaire.
+Dans cette section, nous calculons des courbes ROC, utiles à l’évaluation en classification binaire.
 <!-- comment -->
-En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC), nous allons la visualiser avec le code ci-dessous.
+En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC) et nous la visualisons avec le code ci-dessous :
 
 ```{r}
 ggplot()+
@@ -396,13 +395,13 @@ ggplot()+
     data=score_dt)
 ```
 
-Le graphique ci-dessus affiche l’AUC sur l’ensemble test, pour chaque division de validation croisée, chaque jeu de données, et chaque algorithme d’apprentissage.
+Le graphique ci-dessus affiche l’AUC sur l’ensemble test, pour chaque division de validation croisée, jeu de données et algorithme d’apprentissage.
 <!-- comment -->
-Les résultats d’AUC suggèrent que `zip` est le plus facile d’apprendre, et `sonar` est le plus difficile d’apprendre, ce qui est consistant avec les taux d’erreur affichés dans le graphique précédent.
+Les résultats d’AUC suggèrent que `zip` est le plus facile à apprendre, et `sonar` le plus difficile, ce qui est cohérent avec les taux d’erreur affichés dans le graphique précédent.
 <!-- comment -->
-Comme attendu, `featureless` (l’algorithme qui prédit toujours la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction qui est constante.
+Comme prévu, `featureless` (l’algorithme qui prédit la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction constante.
 <!-- comment -->
-Le code ci-dessous retire les résultats de `featureless`, pour mettre en évidence les autres résultats.
+Le code ci-dessous masque les résultats de `featureless`, pour mettre en évidence les autres résultats :
 
 ```{r}
 ggplot()+
@@ -412,11 +411,11 @@ ggplot()+
     data=score_dt[learner_id!="featureless"])
 ```
 
-Nous ne voyons plus les résultats pour `featureless` dans le graphique ci-dessus.
+On n voit plus les résultats pour `featureless` dans le graphique ci-dessus.
 <!-- comment -->
 Le code ci-dessous produit le même graphique, avec quelques ajouts pour l’affichage interactif.
 <!-- comment -->
-Remarquons que la colonne `task_it` sera utile comme variable de sélection (pour à la fois `task_id` et `iteration`).
+Notez que la colonne `task_it` sera utile comme variable de sélection (à la fois pour `task_id` et pour `iteration`).
 
 ```{r}
 score_dt[, task_it := paste(task_id, iteration)]
@@ -437,9 +436,9 @@ score_dt[, task_it := paste(task_id, iteration)]
 
 Nous calculons ensuite une courbe ROC pour chaque combinaison de `task_id`, `learner_id` et division de validation croisée (`iteration`).
 <!-- comment -->
-Remarquons que le vecteur d’étiquettes à prédire dans la classification binaire est un facteur à deux niveaux.
+Notez que le vecteur d’étiquettes à prédire dans la classification binaire est un facteur à deux niveaux.
 <!-- comment -->
-Dans `mlr3`, le premier niveau est la classe positive, alors nous utilisons la première colonne de `prob` pour calculer la courbe ROC.
+Dans `mlr3`, le premier niveau est la classe positive, nous utilisons donc la première colonne de `prob` pour calculer la courbe ROC.
 
 ```{r}
 roc_dt <- score_dt[, {
@@ -451,11 +450,11 @@ roc_dt <- score_dt[, {
 roc_dt[, .(task_it, learner_id, threshold, FPR, TPR)]
 ```
 
-Le tableau ci-dessus représente les courbes ROC à utiliser pour évaluer les prédictions sur les ensembles test.
+Le tableau ci-dessus représente les courbes ROC à utiliser pour évaluer les prédictions sur les ensembles tests.
 <!-- comment -->
-Nous voyons que `FPR=TPR=1` quand `threshold=0`, et que `FPR=TPR=0` quand `threshold=Inf`.
+On constate que `FPR=TPR=1` quand `threshold=0`, et que `FPR=TPR=0` quand `threshold=Inf`.
 <!-- comment -->
-Le code ci-dessous affiche les courbes ROC dans différentes facettes.
+Le code ci-dessous affiche les courbes ROC dans des facettes distinctes.
 
 ```{r}
 gg.roc <- ggplot()+
@@ -469,9 +468,9 @@ gg.roc <- ggplot()+
 gg.roc+facet_grid(iteration ~ task_id)
 ```
 
-Nous voyons une facette pour chaque jeu de données et pour chaque division de validation croisée.
+On voit une facette pour chaque jeu de données et pour chaque division de validation croisée.
 <!-- comment -->
-Nous ajoutons maintenant un point pour montrer le seuil par défaut pour chaque algorithme.
+Nous ajoutons ci-dessous un point pour montrer le seuil par défaut pour chaque algorithme :
 
 ```{r}
 gg.roc.point <- gg.roc+
@@ -487,11 +486,11 @@ gg.roc.point <- gg.roc+
 gg.roc.point+facet_grid(iteration ~ task_id)
 ```
 
-Ci-dessus nous voyons un point pour le seuil par défaut.
+Ci-dessus on voit un point pour le seuil par défaut.
 <!-- comment -->
-Il est évident que les différents algorithmes ont différentes valeurs de `FPR` et `TPR`, par défaut.
+Il est évident que les algorithmes ont différentes valeurs de `FPR` et `TPR`, par défaut.
 <!-- comment -->
-Nous ajoutons également du texte pour l’affichage de la sélection de données et de division de validation croisée.
+Ci-dessous nous ajoutons du texte pour l’affichage de la sélection de données et de division de validation croisée :
 
 ```{r}
 score_dt[, lev_str := {
@@ -511,7 +510,7 @@ gg.roc.text+facet_grid(iteration ~ task_id)
 
 Le graphique affiche le texte sous chaque facette.
 <!-- comment -->
-Ensuite, nous calculons le rang de chaque algorithme dans chaque jeu de données et dans chaque division.
+Nous calculons ensuite le rang des algorithmes dans chaque jeu de données et division.
 
 ```{r}
 score_dt[
@@ -540,7 +539,7 @@ animint(
       alignment="vertical"))
 ```
 
-Cliquer sur les points d’AUC de la visualisation, permet d’afficher les courbes ROC correspondantes en bas.
+Cliquer sur les points d’AUC de la visualisation du haut, affiche les courbes ROC correspondantes en bas.
 
 <!-- comment -->
 
