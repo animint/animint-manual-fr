@@ -549,7 +549,7 @@ Cliquer sur les points d’AUC de la visualisation du haut, affiche les courbes 
 
 Dans la section précédente, nous avons affiché un point sur chaque courbe ROC pour représenter le seuil par défaut.
 <!-- comment -->
-Ces points correspondent aux différents taux de faux positifs, pour les différents algorithmes d’apprentissage.
+Ces points correspondent aux différents taux de faux positifs.
 <!-- comment -->
 Pour améliorer la justesse de la comparaison entre les algorithmes, nous affichons le meilleur taux de vrais positifs, pour un seuil de faux positifs donné (à définir dans la sélection interactive).
 
@@ -559,9 +559,9 @@ Pour améliorer la justesse de la comparaison entre les algorithmes, nous affich
 ), by=.(task_id,iteration,task_it,learner_id,FPR)])
 ```
 
-Le tableau ci-dessous contient le meilleur taux de vrais positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
+Le tableau ci-dessous présente le meilleur taux de vrais positifs (`best_TPR`), pour chaque seuil de faux positifs (`FPR`).
 <!-- comment -->
-Nous voulons afficher uniquement les seuils pour lesquels tous les algorithmes sont présents, nous comptons donc les algorithmes pour chaque seuil.
+Nous voulons afficher uniquement les seuils pour lesquels tous les algorithmes sont présents, nous dénombrons donc les algorithmes pour chaque seuil.
 
 ```{r}
 best_TPR_algos <- best_TPR_dt[, .(
@@ -570,12 +570,13 @@ best_TPR_algos <- best_TPR_dt[, .(
 table(best_TPR_algos$algos)
 ```
 
-Remarquons que dans le tableau ci-dessus
+Notez que le tableau ci-dessus présente :
 
-* il y a 30 seuils extrêmes pour lesquels les 5 algorithmes sont présents (y compris `featureless`),
-* il y a plusieurs seuils avec 3 algorithmes ou moins et nous ne voulons pas les afficher.
+* 30 seuils extrêmes pour lesquels les cinq algorithmes sont présents (y compris `featureless`);
+* plusieurs seuils avec trois algorithmes ou moins (nous ne voulons pas les afficher).
 <!-- comment -->
-Nous voulons conserver uniquement les seuils associés à au moins 4 algorithmes ; le code ci-dessous nous le permet.
+
+Le code ci-dessous nous permet de conserver uniquement les seuils associés à au moins quatre algorithmes. 
 <!-- comment -->
 De plus, pour faciliter la sélection interactive, nous limitons le nombre de seuils à 40, répartis de manière quasi uniforme parmi les valeurs possibles pour le taux de faux positifs.
 
@@ -587,9 +588,9 @@ max.FPR.values <- 40
 , by=.(task_id,iteration,task_it)][keep==TRUE])
 ```
 
-Le tableau ci-dessus contient les seuils sélectionnables avec l’interactivité.
+Le tableau ci-dessus regroupe les seuils sélectionnables avec l’interactivité.
 <!-- comment -->
-Dans le code ci-dessous, nous représentons chaque seuil par une ligne verticale.
+Dans le code ci-dessous, nous représentons chaque seuil par une ligne verticale :
 
 ```{r}
 gg.roc.fpr <- gg.roc.text+
@@ -626,7 +627,7 @@ best_TPR_show <- best_TPR_dt[
 
 Le graphique ci-dessus affiche un point et du texte pour les meilleurs taux de vrais positifs.
 <!-- comment -->
-Puis nous combinons tous les graphiques précédents dans une visualisation interactive.
+Nous combinons finalement tous les graphiques précédents dans une visualisation interactive.
 
 ```{r vis-select-fpr}
 (vis.select.fpr <- animint(
@@ -640,7 +641,7 @@ Puis nous combinons tous les graphiques précédents dans une visualisation inte
     theme_animint(colspan=2, width=800, height=200)))
 ```
 
-La visualisation ci-dessus permet de
+La visualisation ci-dessus permet de :
 
 <!-- comment -->
 
@@ -652,7 +653,7 @@ La visualisation ci-dessus permet de
 
 <!-- comment -->
 
-En cliquant sur les seuils de FRP dans les données `sonar`, vous verrez que le meilleur algorithme dépend du seuil choisi.
+En cliquant sur les seuils de FPR dans les données `sonar`, vous verrez que le meilleur algorithme dépend du seuil choisi.
 <!-- comment -->
 Par exemple, `cv_glmnet` est le moins bon pour un `FPR` faible, mais il est le meilleur pour un `FPR` plus élevé.
 
@@ -664,9 +665,9 @@ Par exemple, `cv_glmnet` est le moins bon pour un `FPR` faible, mais il est le m
 
 Les visualisations précédentes recouraient à des facettes pour afficher l’AUC des différents jeux de données.
 <!-- comment -->
-Dans cette section, nous proposons d’afficher l’AUC pour un seul jeu de données à la fois.
+Dans cette section, nous proposons d’afficher l’AUC pour un seul jeu à la fois.
 <!-- comment -->
-Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations, et de l’AUC maximale, valeurs que nous calculons avec le code ci-dessous.
+Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations et de l’AUC maximale, valeurs que nous calculons avec le code ci-dessous :
 
 ```{r}
 (summary_dt <- score_dt[, .(
@@ -675,9 +676,9 @@ Nous créerons un graphique permettant de sélectionner un jeu de données en fo
 ), by=task_id])
 ```
 
-Le tableau ci-dessus contient une ligne pour chaque jeu de données.
+Le tableau ci-dessus contient une ligne par jeu de données.
 <!-- comment -->
-Nous utilisons ce tableau pour dessiner le nuage de points ci-dessous.
+Nous l’utilisons pour dessiner le nuage de points ci-dessous :
 
 ```{r}
 point_size <- 5
@@ -698,7 +699,7 @@ point_color_off <- "grey"
 
 Le graphique contient un point pour chaque jeu de données.
 <!-- comment -->
-Remarquons que, dans le code ci-dessus, le paramètre `clickSelects="task_id"`, permet uniquement la sélection d’un jeu de données  (et non de la division de validation croisée).
+Notez que dans le code ci-dessus, le paramètre `clickSelects="task_id"` permet uniquement la sélection d’un jeu de données  (et non de la division de validation croisée).
 <!-- comment -->
 Nous créons ensuite un graphique avec `showSelected="task_id"` et `clickSelects="iteration"`.
 
@@ -717,11 +718,11 @@ gg.auc.show.task <- ggplot()+
 gg.auc.show.task+facet_grid(task_id ~ .)
 ```
 
-Le graphique contient un panneau pour chaque jeu de données.
+Le graphique ci-dessus présente un panneau par jeu de données.
 <!-- comment -->
-Nous constatons que les valeurs d’AUC varient énormément d’un jeu de données à l’autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
+On constate que les valeurs d’AUC varient énormément d’un jeu de données à l’autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
 <!-- comment -->
-Nous supprimons `featureless` dans le graphique ci-dessous.
+Nous supprimons `featureless` dans le graphique ci-dessous :
 
 ```{r}
 gg.auc.show.task.zoom <- ggplot()+
@@ -738,9 +739,9 @@ gg.auc.show.task.zoom <- ggplot()+
 gg.auc.show.task.zoom+facet_grid(task_id ~ .)
 ```
 
-Le graphique ci-dessus ne contient plus `featureless`.
+Le graphique ci-dessus exclut `featureless`.
 <!-- comment -->
-Nous créons maintenant un graphique des courbes ROC pour la sélection de `task_id` et `iteration`.
+Nous créons maintenant un graphique des courbes ROC pour la sélection de `task_id` et de `iteration`.
 
 ```{r}
 gg.roc.show.task.it <- ggplot()+
@@ -754,9 +755,9 @@ gg.roc.show.task.it <- ggplot()+
 gg.roc.show.task.it+facet_grid(iteration ~ task_id)
 ```
 
-Le graphique affiche un panneau pour chaque jeu de données, et pour chaque division de validation croisée.
+Le graphique affiche un panneau par jeu de données et par division de validation croisée.
 <!-- comment -->
-Le code ci-dessous combine ces graphiques dans une visualisation interactive.
+Le code ci-dessous combine ces graphiques dans une visualisation interactive :
 
 ```{r vis-two-selectors}
 animint(
@@ -776,26 +777,26 @@ animint(
       width=800, height=200, last_in_row=TRUE, colspan=2))
 ```
 
-Le graphique affiche
+Le graphique affiche :
 
 <!-- comment -->
 
-* en haut à gauche, un résumé de tous les jeux de données (cliquez sur un point pour sélectionner un jeu de données).
+* en haut à gauche, un résumé des jeux de données (cliquez sur un point pour sélectionner un jeu);
 <!-- comment -->
-* en bas, deux graphiques de l’AUC pour les ensembles test, pour le jeu de données sélectionné (cliquez sur un point pour sélectionner une division de validation croisée).
+* en bas, deux graphiques de l’AUC pour les ensembles tests pour le jeu de données sélectionné (cliquez sur un point pour sélectionner une division de validation croisée);
 <!-- comment -->
-* en haut à droite, les courbes ROC pour la sélection de `task_id` et `iteration`.
+* en haut à droite, les courbes ROC pour la sélection de `task_id` et de `iteration`.
 
 <!-- comment -->
 
-### Tests statistiques pour différences entre algorithmes {#p-values-learners}
+### Tests statistiques des différences entre les algorithmes {#p-values-learners}
 
 <!-- comment -->
 
-Il est souvent utile de déterminer s’il existe des différences significatives entre l’AUC de deux algorithmes (les deux ayant l’AUC la plus grande).
-Dans cette section, nous calculons des valeurs p pour déterminer si les différences sont significatives.
+Il est souvent utile de déterminer si des différences significatives existent entre les AUC des deux algorithmes ayant les AUC les plus grandes.
+Dans cette section, nous calculons des valeurs-p pour évaluer si les différences sont significatives.
 <!-- comment -->
-Nous calculons d’abord la moyenne et l’écart type, des divisions de validation croisée.
+Nous calculons d’abord la moyenne et l’écart type des divisions de validation croisée.
 
 ```{r}
 (score_stats <- dcast(
@@ -805,7 +806,7 @@ Nous calculons d’abord la moyenne et l’écart type, des divisions de validat
   value.var="classif.auc"))
 ```
 
-Nous visualisons ces statistiques grâce au code ci-dessous.
+Nous visualisons ces statistiques grâce au code ci-dessous :
 
 ```{r}
 score_stats[, let(
@@ -825,17 +826,17 @@ ggplot()+
     breaks=seq(0,1,by=0.1))
 ```
 
-Ci-dessus nous voyons un point pour chaque moyenne, et un segment pour l’écart type.
+Ci-dessus on voit un point pour chaque moyenne et un segment pour l’écart type.
 <!-- comment -->
-Ensuite nous calculons le rang de chaque algorithme, pour chaque jeu de données.
+Nous calculons ensuite le rang des algorithmes pour chaque jeu de données.
 
 ```{r}
 score_stats[, auc.task.rank := rank(-classif.auc_mean), by=task_id][]
 ```
 
-Ci-dessus nous voyons une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
+Ci-dessus on contate la présence d’une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
 <!-- comment -->
-Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous.
+Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous :
 
 ```{r}
 gg.rank <- ggplot()+
@@ -855,9 +856,9 @@ gg.rank <- ggplot()+
 gg.rank+facet_wrap("task_id", scales="free")
 ```
 
-Ci-dessus nous voyons les rangs, mais pas les noms.
+Ci-dessus on voit bien les rangs, mais pas les noms.
 <!-- comment -->
-Nous ajoutons les noms ci-dessous.
+Nous les ajoutons ci-dessous :
 
 ```{r}
 gg.rank.text <- gg.rank+
@@ -872,7 +873,7 @@ gg.rank.text <- gg.rank+
 gg.rank.text+facet_wrap("task_id", scales="free")
 ```
 
-Pour tester les différences entre les rangs adjacents, nous faisons une jointure entre chaque rang (`auc.task.rank`) et le rang suivant (`next.rank`).
+Pour tester les différences entre les rangs adjacents, nous effectuaons une jointure entre chaque rang (`auc.task.rank`) et le suivant (`next.rank`).
 
 ```{r}
 score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
@@ -887,7 +888,7 @@ score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
   nomatch=0L])
 ```
 
-Ensuite nous effectuons des tests de Student.
+Nous appliquons ensuite des tests de Student.
 
 ```{r}
 (pval_dt <- join_dt[, .SDcols=c("good.auc","bad.auc"), {
@@ -898,9 +899,9 @@ Ensuite nous effectuons des tests de Student.
 }, keyby=.(task_id, good.rank, bad.rank)])
 ```
 
-Le tableau ci-dessus contient une ligne pour chaque test statistique.
+Le tableau ci-dessus comporte une ligne par test statistique.
 <!-- comment -->
-Ci-dessous, nous rajoutons des segments rouges pour souligner les différences entre les moyennes.
+Ci-dessous, nous rajoutons des segments en rouge pour souligner les différences entre les moyennes.
 
 ```{r}
 gg.rank.seg <- gg.rank+
@@ -914,7 +915,7 @@ gg.rank.seg+facet_wrap("task_id", scales="free")
 
 Ci-dessus nous voyons un segment pour chaque test statistique.
 <!-- comment -->
-Nous rajoutons ensuite des éléments de texte pour afficher les valeurs p.
+Nous ajoutons ensuite des éléments de texte pour afficher les valeurs-p.
 
 ```{r}
 gg.rank.p <- gg.rank.seg+
@@ -927,17 +928,18 @@ gg.rank.p <- gg.rank.seg+
 gg.rank.p+facet_wrap("task_id", scales="free")
 ```
 
-Le graphique affiche les valeurs p.
+Le graphique affiche les valeurs-p.
 
 <!-- comment -->
 
-* Une des valeur p est inférieure à 1% (`P<0.01`), ce qui indique une différence significative, entre les rangs 2 et 3 dans les données `sonar`.
+* Une des valeurs-p est inférieure à 1% (`P<0.01`), ce qui indique une différence significative entre les rangs 2 et 3 dans les données `sonar`.
 <!-- comment -->
-* Les autres valeurs p sont supérieures à 5% (`P>0.05`), ce qui indique des différences non-significatives.
+* Les autres valeurs-p sont supérieures à 5% (`P>0.05`), ce qui indique des différences non significatives.
 <!-- comment -->
-* L’absence de différences significatives est partiellement due à la taille réduite de l’échantillon utilisé pour le test de Student (seulement 3 divisions de validation croisée). Vous pourriez éventuellement obtenir des valeurs p plus petites en augmentant le nombre de divisions de validation croisée (voir exercice).
+* L’absence de différences significatives s’explique en partie par la taille réduite de l’échantillon utilisé pour le test de Student (seulement trois divisions de validation croisée). On pourrait obtenir des valeurs-p plus petites en augmentant le nombre de divisions de validation croisée (voir exercice).
 <!-- comment -->
-* Exercice : afficher les valeurs p avec le nom des algorithmes et les statistiques (moyenne et écart type) sur le même graphique. Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédente.
+
+Exercice : combinez sur un même grapfique les valeurs-p avec le nom des algorithmes et les statistiques (moyenne et écart type). Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédente.
 
 <!-- comment -->
 
@@ -945,17 +947,17 @@ Le graphique affiche les valeurs p.
 
 <!-- comment -->
 
-Dans cette section, nous voulons créer des graphiques pour vérifier que les algorithmes sont régularisés correctement.
+Dans cette section, nous créerons des graphiques pour vérifier que les algorithmes sont régularisés correctement.
 <!-- comment -->
-Chaque algorithme d’apprentissage utilise une méthode différente de régularisation, et différents hyperparamètres pour éviter à la fois le surapprentissage et le sous-apprentissage.
+Chaque algorithme d’apprentissage utilise une méthode de régularisation différente, et des hyperparamètres spécifiques pour éviter à la fois le surapprentissage et le sous-apprentissage.
 
 <!-- comment -->
 
-* Pour les plus proches voisins, il faut augmenter le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage, et un grand nombre de voisins peut donner un sous-apprentissage.
+* Pour les plus proches voisins, il faut augmenter le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage; un grand nombre, un sous-apprentissage.
 <!-- comment -->
-* Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage, et un grand nombre d’époques peut donner un surapprentissage.
+* Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage; un grand nombre, un surapprentissage.
 <!-- comment -->
-* Pour le modèle lineaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage, et une grande penalité peut donner un sous-apprentissage.
+* Pour le modèle lineaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage; une grande penalité, un sous-apprentissage.
 
 <!-- comment -->
 
