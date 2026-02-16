@@ -250,7 +250,7 @@ Tout d’abord, nous définissons la fonction `round_rel()` ci-dessous, qui sert
 
 <!-- paragraph -->
 
-- Les colonnes `round_*` sont arrondies à la taille de ??? la plus proche (entière par défaut), et sevent à définir les positions `x` et `y` de la tuile de la carte thermique.
+- Les colonnes `round_*` sont arrondies à la valeur la plus proche de `bin_size` (entière par défaut), et servent à définir les positions `x` et `y` de la tuile de la carte thermique.
 <!-- comment -->
 - Les colonnes `rel_*` sont utilisées pour les positions `x` et `y` dans l’affichage zoomé, et sont des unités relatives à la valeur de `round_*` correspondante.
 
