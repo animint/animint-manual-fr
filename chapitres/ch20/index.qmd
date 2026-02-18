@@ -1321,7 +1321,7 @@ plot(L$model)
 score_glmnet[1, title(paste(task_id, iteration), line=3)]
 ```
 
-Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de non-zéro coefficients en haut, négative log pénalité en bas).
+Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de non-zéro coefficients en haut, pénalité log négative en bas).
 <!-- comment -->
 On voit une courbe qui descend, mais ne remonte pas, ce qui suggère un sous-apprentissage.
 <!-- comment -->
