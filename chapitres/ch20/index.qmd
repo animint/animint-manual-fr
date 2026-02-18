@@ -965,12 +965,12 @@ Chaque algorithme d’apprentissage utilise une méthode de régularisation diff
 
 <!-- comment -->
 
-Dans cette section, nous vérifions le choix de nombre de voisins.
+Dans cette section, nous vérifions le choix du nombre de voisins.
 Normalement, pour chaque division des données en test et entraînement, nous faisons ensuite une division d’entraînement en sous-entraînement et validation.
-Nous voulons choisir le nombre de voisins qui maximise l’AUC sur l’ensemble de validation, et ensuite utiliser ce nombre de voisins pour calculer les prédictions sur l’ensemble test.
-Pour chaque ensemble test, il y pourrait avoir un différent nombre de voisins.
+L’objectif est de retenir le nombre de voisins qui maximise l’AUC sur l’ensemble de validation, et d’utiliser ce nombre pour le calcul des prédictions sur l’ensemble test.
+Pour chaque ensemble test, il pourrait y avoir un nombre différent de voisins.
 <!-- comment -->
-Nous commençons par calculer un tableau avec une ligne par division de validation croisée, et une colonne avec le nombre de voisins.
+Nous commençons par calculer un tableau avec une ligne par division de validation croisée, et une colonne pour le nombre de voisins.
 
 ```{r}
 (best_dt <- score_dt[grep("knn", learner_id), {
@@ -981,17 +981,17 @@ Nous commençons par calculer un tableau avec une ligne par division de validati
 }, by=.(task_id, iteration, task_it)])
 ```
 
-Le tableau contient les colonnes
+Le tableau contient les colonnes suivantes :
 
 <!-- comment -->
 
-* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation.
+* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation;
 <!-- comment -->
 * `details`, un tableau d’informations sur le choix du nombre de voisins.
 
 <!-- comment -->
 
-Ensuite, nous faisons un tableau qui combine les détails pour chaque division.
+Ensuite, nous bâtissons un tableau combinant les détails de chaque division.
 
 ```{r}
 details_dt <- best_dt[
@@ -1002,7 +1002,7 @@ details_dt[, .(task_id, iteration, k, classif.auc, status)]
 
 Le tableau ci-dessus contient une ligne pour chaque nombre de voisins testé sur les ensembles de validation.
 <!-- comment -->
-Ensuite nous visualisons l’AUC sur l’ensemble de validation, en fonction du nombre de voisins.
+Nous visualisons ensuite l’AUC sur l’ensemble de validation, en fonction du nombre de voisins.
 
 ```{r}
 gg.neighbors <- ggplot()+
@@ -1018,18 +1018,18 @@ gg.neighbors <- ggplot()+
 gg.neighbors+facet_grid(task_id ~ iteration)
 ```
 
-Dans le graphique ci-dessus, nous utilisons
+Dans le graphique ci-dessus :
 
-* couleur pour souligner les meilleurs choix pour le nombre de voisins, et
-* une ligne verticale pour indiquer le choix retenu.
+* la couleur met en évidence les meilleurs choix pour le nombre de voisins;
+* une ligne verticale indique le choix retenu.
 
-Nous voyons que
+L’examen du graphique révèle que :
 
 <!-- comment -->
 
-* Pour trois jeux de données (`sonar`, `spam`, `vowel`) nous avons une AUC maximale avec un nombre de voisins intermédiare, ce qui indique un bon niveau de régularisation (ni surapprentissage, ni sous-apprentissage). Pour `vowel` itération 2, nous avons une AUC maximale avec seulement 1 voisin, soit le plus petit hyper-paramètre dans notre recherche. D’habitude, ça pourrait suggèrer qu’il vaut mieux élargir l’espace de recherche, en espèrant qu’un hyper-paramètre encore plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre de voisins possible, il ne peut s’agir de sous-apprentissage ; nous n’avons donc pas besoin d’élargir notre recherche dans ce cas-ci.
+* Trois jeux de données (`sonar`, `spam`, `vowel`) présentent une AUC maximale avec un nombre de voisins intermédaire, ce qui indique un bon niveau de régularisation (ni surapprentissage ni sous-apprentissage). Pour `vowel` itération 2, l’AUC est maximale avec seulement 1 voisin, soit le plus petit hyperparamètre de la recherche.En principe, ce résultat inviterait à élargir l’espace de recherche, dans l’espoir qu’un hyperparamètre plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre possible, il ne peut s’agir de sous-apprentissage ; il est donc inutile d’élargir la recherche.
 <!-- comment -->
-* Pour deux jeux de données (`waveform`, `zip`) nous avons une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que nous pourrions éventuellement améliorer l’AUC en augmentant le nombre de voisins au-delà de 40. Idéalement, nous voyons l’AUC diminuer pour le  nombre maximal de voisins, ce qui indique une recherche suffisamment élargie.
+* Deux jeux de données (`waveform`, `zip`) présentent une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que l’AUC pourrait ête améliorée si le nombre de voisins était augmenté au-delà de 40. La situation idéale serait une AUC qui diminue pour le nombre maximal de voisins, ce qui indiquerait une recherche suffisamment élargie.
 
 <!-- comment -->
 
@@ -1047,7 +1047,7 @@ animint(
 Le graphique de gauche permet de sélectionner un jeu de données et une division de validation croisée.
 <!-- comment -->
 Si vous cliquez sur `zip` ou sur `waveform`, vous observerez une AUC maximale pour le plus grand nombre de voisins (40), ce qui suggère un surapprentissage.
-Exercice : refaites l’apprentissage en augmentant le max nombre de voisins. Est-ce vous voyez le max AUC avec un nombre de voisins intermédiaire ?
+Exercice : relancez l’apprentissage en augmentant le max nombre de voisins. Est-ce que vous voyez le max AUC avec un nombre de voisins intermédiaire ?
 
 <!-- comment -->
 
@@ -1055,13 +1055,13 @@ Exercice : refaites l’apprentissage en augmentant le max nombre de voisins. E
 
 <!-- comment -->
 
-Dans cette section, nous explorons la régularisation d’arrêt prématuré, avec les algoritmes d’apprentissage dans le package `torch`.
+Dans cette section, nous explorons la régularisation d’arrêt prématuré appliquée aux algoritmes d’apprentissage du package `torch`.
 Ces algorithmes utilisent la descente de gradient, ce qui minimise une fonction de perte sur l’ensemble de sous-entraînement.
-Normalement la perte va aussi descendre sur l’ensemble de validation, jusqu’à un certain nombre d’époques, après quoi la perte va augmenter.
-Nous voulons arrêter la descente de gradient quand la perte est minimale sur l’ensemble de validation, ce qui est « prématuré » car la perte va toujours descendre sur l’ensemble de sous-entraînement.
-Nous allons vérifier que le nombre d’époques est choisi correctement, pour éviter le sous-apprentissage et le surapprentissage.
+En règle générale, la perte sur l’ensemble de validation décroit jusqu’à un certain nombre d’époques, pour ensuite augmenter.
+L’objectif est d’interrompre la descente de gradient au moment où la perte atteint son minimum sur l’ensemble de validation, ce qui est « prématuré », car la perte continue de descendre sur l’ensemble de sous-entraînement. 
+Nous allons vérifier que le nombre d’époques retenu évite le sous-apprentissage et le surapprentissage.
 <!-- comment -->
-Nous commençons avec le calcul d’une variable `best_epoch`, soit le nombre d’époques choisi (normalement le meilleur sur l’ensemble de validation).
+Nous calculons d’abord une variable `best_epoch`, soit le nombre d’époques choisi (normalement le meilleur sur l’ensemble de validation).
 
 ```{r}
 score_torch <- score_dt[
@@ -1071,7 +1071,7 @@ score_torch <- score_dt[
 )]
 ```
 
-Ensuite, nous créons un tableau représentant l’histoire d’entraînement, avec une ligne pour chaque époque.
+Nous créons ensuite un tableau représentant l’historique d’entraînement, avec une ligne par époque.
 
 ```{r}
 (history_torch <- score_torch[, {
@@ -1081,17 +1081,17 @@ Ensuite, nous créons un tableau représentant l’histoire d’entraînement, a
 }, by=.(task_id, learner_id, iteration, task_it)])
 ```
 
-Le tableau ci-dessus contient une ligne pour chaque époque, et les colonnes suivantes :
+Le tableau ci-dessus contient une ligne par époque, et les colonnes suivantes :
 
 <!-- comment -->
 
-* `train.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble utilisé pour calculer les gradients, ce qui devrait toujours diminuer, si les hyper-paramètres sont appropriés (taux d’apprentissage, taille de lot, etc.). Remarquons que le nom `train` « entraînement » pourrait faire croire qu’il faudra encore diviser ces données en sous-entraînement et validation, mais ce n’est pas le cas. Pour préciser, nous allons plutôt utiliser le nom `subtrain` « sous-entraînement » dans les codes et les graphiques ci-dessous.
+* `train.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble utilisé pour calculer les gradients, servant au calcul des gradients, elle devrait toujours diminuer si les hyperparamètres sont appropriés (taux d’apprentissage, taille de lot, etc.). Notez que le nom `train` (entraînement) pourrait faire croire qu’il faudra encore diviser ces données en sous-entraînement et validation, mais ce n’est pas le cas. Pour éviter toute confusion, nous allons plutôt utiliser le nom `subtrain` (sous-entraînement) dans les codes et les graphiques qui suivent.
 <!-- comment -->
-* `valid.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble qui n’est pas utilisé pour le calcul des gradients. Minimiser cette perte est le critère utilisé pour choisir le meilleur nombre d’époques, car `classif.logloss` était la première mesure dans `measure_list`.
+* `valid.classif.logloss`, la perte logistique (entropie croisée) sur l’ensemble qui ne sert pas au calcul des gradients. Minimiser cette perte est le critère utilisé pour choisir le meilleur nombre d’époques, car `classif.logloss` était la première mesure dans `measure_list`.
 
 <!-- comment -->
 
-Ensuite, nous créons un tableau mieux adapté à la visualisation.
+Nous créons maintenant un tableau mieux adapté à la visualisation.
 
 ```{r}
 (history_long <- nc::capture_melt_single(
@@ -1101,9 +1101,9 @@ Ensuite, nous créons un tableau mieux adapté à la visualisation.
   measure=nc::alevels("logloss", auc="AUC")))
 ```
 
-Le tableau ci-dessus contient les nouvelles colonnes `set`, `measure`, and `value`.
+Le tableau ci-dessus contient les nouvelles colonnes `set`, `measure` et `value`.
 <!-- comment -->
-Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble.
+Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble :
 
 ```{r}
 one_split <- function(DT,it=1)DT[iteration==it & task_id=="sonar"]
@@ -1116,13 +1116,13 @@ one_split_history <- one_split(history_long)
     data=one_split_history))
 ```
 
-Le graphique ci-dessus contient des courbes d’apprentissage typiques.
+Le graphique ci-dessus présente des courbes d’apprentissage typiques :
 
 <!-- comment -->
 
-* La perte logistique diminue, et l’AUC augmente, pour l’ensemble de sous-apprentissage (utilisé dans le calcul des gradients).
+* La perte logistique diminue et l’AUC augmente  pour l’ensemble de sous-apprentissage (utilisé dans le calcul des gradients).
 <!-- comment -->
-* Comme attendu, la perte sur l’ensemble de validation diminue en premier, pour ensuite remonter plus tard. Typiquement nous choissisons le nombre d’époques qui minimise cette courbe (ou bien, qui maximise l’AUC pous l’ensemble de validation).
+* Comme prévu, la perte sur l’ensemble de validation diminue d’abord et remonte ensuite. Généralement, le nombre d’époques choisi est celui qui minimise cette courbe (ou bien, qui maximise l’AUC pour l’ensemble de validation).
 
 <!-- comment -->
 
@@ -1148,13 +1148,13 @@ Le graphique ci-dessus révèle des caractéristiques importantes :
 
 * il n’y a qu’un minimum pour chaque courbe de perte logistique ;
 <!-- comment -->
-* il peut y avoir plus du’un maximum d’AUC ;
+* il peut y avoir plus d’un maximum d’AUC ;
 <!-- comment -->
 * pour l’ensemble de sous-entraînement, l’AUC atteint rapidement le maximum (1), mais la perte logistique continue de diminuer.
 
 <!-- comment -->
 
-Nous rajoutons ensuite des lignes verticales pour mettre en évidence le nombre d’époques choisi.
+Nous ajoutons ensuite des lignes verticales afin de mettre en évidence le nombre d’époques choisi.
 
 ```{r}
 one_split_score <- one_split(score_torch)
@@ -1168,9 +1168,9 @@ one_split_score <- one_split(score_torch)
     data=one_split_score))
 ```
 
-Ci-dessus nous voyons que nous avons choisi le nombre d’époques qui minimise la perte logistique sur l’ensemble de validation.
+Ci-dessus, on peut voir que nous avons choisi le nombre d’époques qui minimise la perte logistique sur l’ensemble de validation.
 <!-- comment -->
-Ensuite, nous proposons un résumé, qui affiche le nombre d’époques pour chaque jeu de données, division de validation croisée et algorithme d’apprentissage.
+Nous proposons ensuite un résumé, qui affiche le nombre d’époques pour chaque jeu de données, division de validation croisée et algorithme d’apprentissage.
 
 ```{r}
 (history_best_wide <- dcast(
@@ -1182,7 +1182,7 @@ Ensuite, nous proposons un résumé, qui affiche le nombre d’époques pour cha
 
 Le tableau présente des colonnes pour les époques correspondant aux meilleures mesures.
 <!-- comment -->
-Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin.
+Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin :
 
 ```{r}
 history_best_valid <- history_best_wide[set=="validation"]
@@ -1202,17 +1202,17 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-Dans le graphique ci-dessus, il est clair que
+Dans le graphique ci-dessus, on bserve que :
 
 <!-- comment -->
 
-* pour certains jeux de données (`sonar` and `waveform`), la meilleure époque a des valeurs inférieures au maximum. Ces résultats suggèrent que le choix pour le nombre d’époques est bon (ni surapprentissage ni sous-apprentissage).
+* pour certains jeux de données (`sonar` et `waveform`), la meilleure époque a des valeurs inférieures au maximum, ce qui suggère que le choix pour le nombre d’époques est adéquat (ni surapprentissage ni sous-apprentissage);
 <!-- comment -->
-* pour d’autres jeux de données (`vowel` and `zip`) la meilleure époque correspond au maximum (200 époques). Ces résultats suggèrent un sous-apprentissage (nous pouvons augmenter le nombre d’époques pour minimiser davantage la perte sur l’ensemble de validation).
+* pour d’autres jeux de données (`vowel` et `zip`) la meilleure époque correspond au maximum (200 époques), ce qui suggère un sous-apprentissage (on peut augmenter le nombre d’époques pour minimiser davantage la perte sur l’ensemble de validation).
 
 <!-- comment -->
 
-Ensuite nous rajoutons un segment pour afficher le min et max du nombre d’époques qui atteignent la meilleure AUC pour l’ensemble de validation.
+Ensuite, nous rajoutons un segment pour afficher le min et max du nombre d’époques qui atteignent la meilleure AUC pour l’ensemble de validation.
 
 ```{r}
 (gg.best.seg <- gg.best.valid+
@@ -1226,9 +1226,9 @@ Ensuite nous rajoutons un segment pour afficher le min et max du nombre d’épo
      data=history_best_valid))
 ```
 
-Ci-dessus nous voyons qu’il y a plusieurs époques qui atteignent le maximum d’AUC, dans les ensembles validation de `vowel` et `zip`.
+On constate ci-dessus que plusieurs époques atteignent le maximum d’AUC dans les ensembles de validation de `vowel` et `zip`.
 <!-- comment -->
-Nous préparons ensuite un graphique pour afficher les détails, avec des valeurs relatives entre 0 et 1 (car les valeurs absolues sont très différentes d’un jeu de données à l’autre).
+Nous préparons maintenant un graphique pour afficher les détails, avec des valeurs relatives entre 0 et 1 (car les valeurs absolues sont très différentes d’un jeu de données à l’autre).
 
 ```{r}
 norm01 <- function(x)(x-min(x))/(max(x)-min(x))
@@ -1259,19 +1259,19 @@ Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 Ci-dessous nous voyons deux graphiques :
 
 <!-- comment -->
-* Cliquez sur le graphique du haut pour sélectionner un jeu de données et une division de validation croisée.
+* cliquez sur le graphique du haut pour sélectionner un jeu de données et une division de validation croisée;
 <!-- comment -->
-* Le graphique du bas affichera les courbes d’apprentissage pour la sélection.
+* •	observez le graphique du bas, il affiche les courbes d’apprentissage pour la sélection.
 
 <!-- comment -->
 
-Pour certains jeux de données, l’AUC atteint rapidement un maximum proche de 1, ce qui rend difficile d’observer à quel point la courbe se rapproche de 1.
+Pour certains jeux de données, l’AUC atteint rapidement un maximum proche de 1, ce qui rend difficile à estimer à quel point elle s’en rapproche. 
 <!-- comment -->
 Pour visualiser ces détails, nous calculons l’inverse de l’AUC (1-AUC).
 <!-- comment -->
 La meilleure valeur de l’AUC est 1, mais la meilleure valeur pour l’inverse de l’AUC est 0.
 <!-- comment -->
-Nous pouvons alors utiliser l’échelle logarithmique pour visualiser à quel point la courbe est proche de 0.
+Nous pouvons alors utiliser l’échelle logarithmique pour visualiser la proximité de la courbe et de 0.
 
 ```{r}
 history_long[, let(
@@ -1291,9 +1291,9 @@ gg.log.scale <- ggplot()+
      data=history_long)
 ```
 
-Remarquons que dans le code ci-dessus que nous avons utilisé des majuscules pour les variables `Measure` et `Relative_values`, et une échelle logarithmique pour Y.
+Notez que, dans le code ci-dessus, nous avons utilisé des majuscules pour les variables `Measure` et `Relative_values`, et une échelle logarithmique pour Y.
 <!-- comment -->
-Nous ajoutons ensuite ce graphique à la visualisation interactive.
+Nous ajoutons ce graphique à la visualisation interactive.
 
 ```{r vis-torch-log}
 vis.torch.log <- vis.torch
@@ -1305,11 +1305,11 @@ vis.torch.log
 
 La visualisation contient un graphique en bas à droite, qui affiche l’échelle logarithmique pour la sélection.
 <!-- comment -->
-En cliquant sur `vowel`, nous voyons des différences entre les graphiques de détails (en bas à droite, nous voyons mieux quelles époques sont les meilleures).
+En cliquant sur `vowel`, on voit les différences entre les graphiques de détails (en bas à droite, il est plus facile de voir quelles époques sont les meilleures).
 
 ### glmnet {#glmnet}
 
-Dans cette section, nous explorons des visualisations de l’algorithme de `glmnet`, un modèle linéaire avec régularisation L1.
+Dans cette section, nous explorons des visualisations de l’algorithme `glmnet`, un modèle linéaire avec régularisation L1.
 <!-- comment -->
 Nous commençons avec la méthode `plot()` du premier modèle.
 
@@ -1323,9 +1323,9 @@ score_glmnet[1, title(paste(task_id, iteration), line=3)]
 
 Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de non-zéro coefficients en haut, négative log pénalité en bas).
 <!-- comment -->
-Nous voyons une courbe qui descend, mais qui ne remonte pas, ce qui suggère un sous-apprentissage.
+On voit une courbe qui descend, mais ne remonte pas, ce qui suggère un sous-apprentissage.
 <!-- comment -->
-Nous faisons une version de ce graphique avec le code ci-dessous.
+Nous créons une version de ce graphique avec le code ci-dessous :
 
 ```{r}
 cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
@@ -1343,7 +1343,7 @@ cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
 
 Ci-dessus nous voyons un ggplot qui ressemble au graphique précédant, avec la couleur indiquant le nombre de non-zéro coefficients.
 <!-- comment -->
-Ensuite, nous rajoutons du texte pour souligner le nombre de non-zéro coefficients pour plusieurs niveaux de régularisation.
+Nous y ajoutons du texte pour souligner ce nombre pour plusieurs niveaux de régularisation.
 
 ```{r}
 gg.glmnet+
@@ -1355,9 +1355,9 @@ gg.glmnet+
 
 Le graphique ci-dessus affiche le nombre de non-zéro coefficients en haut, pour plusieurs niveaux de régularisation.
 <!-- comment -->
-Notre but dans cette section est de faire une visualisation interactive avec ces informations.
+L’objectif de cette section est de produire une visualisation interactive avec ces informations.
 <!-- comment -->
-Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modèles.
+Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modèles :
 
 ```{r}
 (cv_glmnet_all <- score_glmnet[, with(learner[[1]]$model, data.table(
@@ -1365,9 +1365,9 @@ Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les m
 )), by=.(task_id, iteration, task_it)])
 ```
 
-Le tableau ci-dessus contient une ligne pour chaque jeu de données, chaque division de validation croisée et chaque niveau de régularisation.
+Le tableau ci-dessus contient une ligne par jeu de données, division de validation croisée et niveau de régularisation.
 <!-- comment -->
-Ensuite nous affichons la perte logistique sur l’ensemble de validation, avec une courbe pour chaque division de validation croisée et un panneau pour chaque jeu de données.
+Nous affichons ensuite la perte logistique sur l’ensemble de validation, avec une courbe pour chaque division de validation croisée et un panneau pour chaque jeu de données.
 
 ```{r}
 ggplot()+
@@ -1378,13 +1378,13 @@ ggplot()+
   facet_wrap("task_id", scales="free")
 ```
 
-Ci-dessus nous voyons que le modèle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel`, `waveform`), si le niveau de régularisation est trop faible.
-Dans les autres jeux de données (`spam` and `zip`), nous voyons une courbe qui ne remonte pas, ce qui suggère le sous-apprentissage.
-Nous pourrions donc soupçonner qu’un modèle non-linéaire serait capable de donner des meilleurs résultats.
-En regardant les résultats précédents, nous pourrions vérifier cette hypothèse.
+Le graphique ci-dessus révèle que le modèle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel` et `waveform`) si le niveau de régularisation est trop faible.
+Dans les autres jeux de données (`spam` et `zip`), on voit une courbe qui ne remonte pas, signe de sous-apprentissage.
+Un modèle non linéaire est susceptible de donner de meilleurs résultats,
+Nous vérifions cette hypothèse en examinant les résultats précédents  :
 
 * Dans `spam`, nous voyons que `torch_dense_50` obtient de meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction linéaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
-* Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite (ou presque). Nous en déduisons que ces données réprésentent un problème de prédiction qui est très facile pour tous les algorithmes (même le modèle linéaire).
+* Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite (ou presque). Nous en déduisons que ces données constituent un problème de prédiction facile à résoudre pour tous les algorithmes (même le modèle linéaire).
 
 <!-- comment -->
 
@@ -1402,30 +1402,30 @@ Exercices :
 
 * Dans `vis.select.fpr`, il n’y a pas de transitions fluides. Rajoutez-en une pour la variable `FPR`, et définissez `aes(key)` pour `geom_point()` et `geom_text()` dans `gg.tpr`.
 <!-- comment -->
-* Dans `vis.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Enlevez ce graphique, et rajoutez les mêmes informations avec `geom_point()` et `geom_label_aligned()` dans le graphique avec les courbes ROC.
+* Dans `vis.select.fpr`, un graphique affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs. Supprimez ce graphique, et intégrez les informations au graphique des courbes ROC via `geom_point()` et `geom_label_aligned()`.
 <!-- comment -->
-* Le graphique `gg.summary` affiche seulement le max AUC. Rajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
+* Le graphique `gg.summary` affiche seulement le max AUC. Ajoutez un `geom_segment()` qui affiche la variation d’AUC entre les algorithmes.
 <!-- comment -->
 * Le graphique `vis.select.fpr` affiche le meilleur taux de vrais positifs pour la sélection du taux de faux positifs.
 <!-- comment -->
-  * Rajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
+  * Ajoutez un graphique « Meilleur taux d’erreur pour la sélection du taux de faux positifs ». Indice : pour calculer le taux d’erreur, il faut faire une jointure entre le nombre d’étiquettes et les courbes ROC.
 <!-- comment -->
-  * Rajoutez un `geom_text()` qui affiche le taux séléctionné de faux positifs.
+  * Ajoutez un `geom_text()` qui affiche le taux de faux positifs sélectionné.
 <!-- comment -->
-  * Faites une visualisation qui affiche le meilleur taux de faux positifs, pour une sélection du taux de vrais positifs.
+  * Faites une visualisation qui affiche le meilleur taux de faux positifs pour une sélection du taux de vrais positifs.
 <!-- comment -->
-* Dans les légendes, les deux modèles linéaires (`cv_glmnet` et `torch_linear`) ont différentes couleurs (jaune et violet). Accordez les deux couleurs (par exemple, violet pâle et violet foncé).
+* Dans les légendes, les deux modèles linéaires (`cv_glmnet` et `torch_linear`) sont représentés par des couleurs différentes (jaune et violet). Harmonisez-les en leur attribuant des nuances d’une même couleur (par exemple, violet pâle et violet foncé).
 <!-- comment -->
-* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, avec une légende cohérente avec les courbes ROC. Affichez seulement une légende, avec les éléments triés pour accorder à l’ordre de présentation des axes Y affichant `learner_id`. Assurez-vous que vous pouvez cliquer sur un élément de la légende pour faire disparaître toutes les données correspondantes à cet algorithme d’apprentissage, à travers tous les graphiques.
+* Dans les visualisations des courbes ROC, rajoutez `aes(color)` ou `aes(fill)` aux autres graphiques, en adoptant une légende cohérente avec celle des courbes ROC. N’affichez qu’une légende dont les éléments sont triés dans l’ordre de présentation des axes Y affichant `learner_id`. Vérifiez qu’un clic sur un élément de la légende fait disparaître toutes les données correspondantes à cet algorithme d’apprentissage dans tous les graphiques.
 <!-- comment -->
-* Dans `vis.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques, et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
-* Chaque section du chapitre a présenté sa propre méthode de visualisation. Combinez plusieurs méthodes dans une seule visualisation :
+* Dans `vis.torch.log`, rajoutez des points pour mettre en évidence les meilleures époques et une ligne verticale pour indiquer l’époque choisie par la validation croisée.
+* Chaque section du chapitre a présenté une méthode de visualisation. Combinez-en plusieurs dans une seule visualisation :
 <!-- comment -->
-  * Affichez les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch`, nearest neighbors).
+  * Affichez les trois graphiques pour la vérification de la régularisation (`glmnet`, `torch` et nearest neighbors).
 <!-- comment -->
   * Affichez les courbes ROC interactives à côté des graphiques pour la vérification de la régularisation.
 
 <!-- comment -->
 
-Ensuite, [l’annexe](/ch99) explique certaines méthodes de programmation R qui sont généralement utiles pour la visualisation de données.
+Consultez [l’annexe](/ch99) pour en apprendre davantage sur plusieurs méthodes de programmation R utiles pour la visualisation de données.
 
