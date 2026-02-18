@@ -34,7 +34,7 @@ Plusieurs packages R proposent des algorithmes d’apprentissage artificiel, par
 
 * `library(kknn)` offre des K Plus Proches Voisins (KPPV), présentés dans le [chapitre 10](/ch10).
 <!-- comment -->
-* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le Lasson, exploré dans le [chapitre 11](/ch11).
+* `library(glmnet)` offre des modèles linéaires avec régularisation L1, comme le Lasso, exploré dans le [chapitre 11](/ch11).
 <!-- comment -->
 * `library(torch)` offre des réseaux de neurones, exposés dans le [chapitre 18](/ch18).
 
@@ -313,7 +313,7 @@ if(TRUE){
 
 Si vous souhaitez refaire le calcul, exécutez la ligne `benchmark()` ci-dessus.
 <!-- comment -->
-L’exécution pourrait durer plusieurs minutes voire plusieurs heures, selon votre ordinateur.
+L’exécution pourrait durer plusieurs minutes, voire plusieurs heures, selon votre ordinateur.
 <!-- comment -->
 Le code `plan("multisession")` implique que chaque combinaison (données, algorithmes, divisions) est traitée par un processeur différent.
 <!-- comment -->
@@ -834,7 +834,7 @@ Nous calculons ensuite le rang des algorithmes pour chaque jeu de données.
 score_stats[, auc.task.rank := rank(-classif.auc_mean), by=task_id][]
 ```
 
-Ci-dessus on contate la présence d’une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
+Ci-dessus on constate la présence d’une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
 <!-- comment -->
 Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous :
 
@@ -873,7 +873,7 @@ gg.rank.text <- gg.rank+
 gg.rank.text+facet_wrap("task_id", scales="free")
 ```
 
-Pour tester les différences entre les rangs adjacents, nous effectuaons une jointure entre chaque rang (`auc.task.rank`) et le suivant (`next.rank`).
+Pour tester les différences entre les rangs adjacents, nous effectuons une jointure entre chaque rang (`auc.task.rank`) et le suivant (`next.rank`).
 
 ```{r}
 score_dt_rank <- score_stats[, .(auc.task.rank, learner_id, task_id)][
@@ -939,7 +939,7 @@ Le graphique affiche les valeurs-p.
 * L’absence de différences significatives s’explique en partie par la taille réduite de l’échantillon utilisé pour le test de Student (seulement trois divisions de validation croisée). On pourrait obtenir des valeurs-p plus petites en augmentant le nombre de divisions de validation croisée (voir exercice).
 <!-- comment -->
 
-Exercice : combinez sur un même grapfique les valeurs-p avec le nom des algorithmes et les statistiques (moyenne et écart type). Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédente.
+Exercice : combinez sur un même graphique les valeurs-p avec le nom des algorithmes et les statistiques (moyenne et écart type). Utilisez ce graphique au lieu de `testAUCzoom` dans la visualisation précédente.
 
 <!-- comment -->
 
@@ -957,7 +957,7 @@ Chaque algorithme d’apprentissage utilise une méthode de régularisation diff
 <!-- comment -->
 * Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage; un grand nombre, un surapprentissage.
 <!-- comment -->
-* Pour le modèle lineaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage; une grande penalité, un sous-apprentissage.
+* Pour le modèle linéaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage; une grande pénalité, un sous-apprentissage.
 
 <!-- comment -->
 
@@ -1027,9 +1027,9 @@ L’examen du graphique révèle que :
 
 <!-- comment -->
 
-* Trois jeux de données (`sonar`, `spam`, `vowel`) présentent une AUC maximale avec un nombre de voisins intermédaire, ce qui indique un bon niveau de régularisation (ni surapprentissage ni sous-apprentissage). Pour `vowel` itération 2, l’AUC est maximale avec seulement 1 voisin, soit le plus petit hyperparamètre de la recherche.En principe, ce résultat inviterait à élargir l’espace de recherche, dans l’espoir qu’un hyperparamètre plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre possible, il ne peut s’agir de sous-apprentissage ; il est donc inutile d’élargir la recherche.
+* Trois jeux de données (`sonar`, `spam`, `vowel`) présentent une AUC maximale avec un nombre de voisins intermédiaire, ce qui indique un bon niveau de régularisation (ni surapprentissage ni sous-apprentissage). Pour `vowel` itération 2, l’AUC est maximale avec seulement 1 voisin, soit le plus petit hyperparamètre de la recherche. En principe, ce résultat inviterait à élargir l’espace de recherche, dans l’espoir qu’un hyperparamètre plus petit soit meilleur. Cependant, puisque 1 voisin est le plus petit nombre possible, il ne peut s’agir de sous-apprentissage ; il est donc inutile d’élargir la recherche.
 <!-- comment -->
-* Deux jeux de données (`waveform`, `zip`) présentent une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que l’AUC pourrait ête améliorée si le nombre de voisins était augmenté au-delà de 40. La situation idéale serait une AUC qui diminue pour le nombre maximal de voisins, ce qui indiquerait une recherche suffisamment élargie.
+* Deux jeux de données (`waveform`, `zip`) présentent une AUC maximale avec le plus grand nombre de voisins (40), ce qui suggère un surapprentissage. Ces résultats laissent supposer que l’AUC pourrait être améliorée si le nombre de voisins était augmenté au-delà de 40. La situation idéale serait une AUC qui diminue pour le nombre maximal de voisins, ce qui indiquerait une recherche suffisamment élargie.
 
 <!-- comment -->
 
@@ -1055,7 +1055,7 @@ Exercice : relancez l’apprentissage en augmentant le max nombre de voisins. E
 
 <!-- comment -->
 
-Dans cette section, nous explorons la régularisation d’arrêt prématuré appliquée aux algoritmes d’apprentissage du package `torch`.
+Dans cette section, nous explorons la régularisation d’arrêt prématuré appliquée aux algorithmes d’apprentissage du package `torch`.
 Ces algorithmes utilisent la descente de gradient, ce qui minimise une fonction de perte sur l’ensemble de sous-entraînement.
 En règle générale, la perte sur l’ensemble de validation décroit jusqu’à un certain nombre d’époques, pour ensuite augmenter.
 L’objectif est d’interrompre la descente de gradient au moment où la perte atteint son minimum sur l’ensemble de validation, ce qui est « prématuré », car la perte continue de descendre sur l’ensemble de sous-entraînement. 
@@ -1202,7 +1202,7 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-Dans le graphique ci-dessus, on bserve que :
+Dans le graphique ci-dessus, on observe que :
 
 <!-- comment -->
 
@@ -1378,9 +1378,9 @@ ggplot()+
   facet_wrap("task_id", scales="free")
 ```
 
-Le graphique ci-dessus révèle que le modèle lineaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel` et `waveform`) si le niveau de régularisation est trop faible.
+Le graphique ci-dessus révèle que le modèle linéaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel` et `waveform`) si le niveau de régularisation est trop faible.
 Dans les autres jeux de données (`spam` et `zip`), on voit une courbe qui ne remonte pas, signe de sous-apprentissage.
-Un modèle non linéaire est susceptible de donner de meilleurs résultats,
+Un modèle non linéaire est susceptible de donner de meilleurs résultats.
 Nous vérifions cette hypothèse en examinant les résultats précédents  :
 
 * Dans `spam`, nous voyons que `torch_dense_50` obtient de meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction linéaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
