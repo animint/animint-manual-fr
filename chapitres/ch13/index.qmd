@@ -32,7 +32,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-## Tracer la fonction de masse de probabilité et sélectionner le paramètre de moyenne de Poisson. {#plot-prob-mass}
+## Tracer la fonction de masse de probabilité et sélectionner le paramètre de moyenne de Poisson {#plot-prob-mass}
 
 <!-- paragraph -->
 
@@ -66,7 +66,7 @@ poisson.prob
 
 <!-- paragraph -->
 
-La visualisation des données statiques ci-dessous montre une facette pour chaque distribution de Poisson.
+La visualisation des données statiques ci-dessous montre une facette pour chaque distribution de Poisson :
 
 <!-- paragraph -->
 
@@ -99,7 +99,7 @@ prob.mass+
 
 Notez que nous avons utilisé `alpha=0.6` avec `geom_tallrect()` ce qui signifie que le `tallrect` correspondant à la moyenne sélectionnée a une opacité de 0.6 et que les autres `tallrects` ont une opacité de 0.1.
 <!-- comment -->
-Notez également que nous utilisons`color="red"` et `size=5` avec `geom_point()` afin de faciliter la visualisation des points sur un fond gris et le survaol avec le curseur pour afficher l’infobulle.
+Notez également que nous utilisons `color="red"` et `size=5` avec `geom_point()` afin de faciliter la visualisation des points sur un fond gris et le survol avec le curseur pour afficher l’infobulle.
 <!-- comment -->
 Nous allons maintenant créer une version interactive avec `animint2`.
 
@@ -125,7 +125,7 @@ Par exemple, la distribution de Poisson avec une moyenne de 3 atteint sa probabi
 
 <!-- paragraph -->
 
-Pour ajouter un panneau affichant la fonction de répartition, nous allons modifier le ggplot en suivant l’esquisse ci-dessous.
+Pour ajouter un panneau affichant la fonction de répartition, nous allons modifier le ggplot en suivant l’esquisse ci-dessous :
 
 <!-- paragraph -->
 
