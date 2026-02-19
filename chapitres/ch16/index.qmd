@@ -20,7 +20,7 @@ Plan du chapitre :
 <!-- comment -->
 - Nous créons ensuite une visualisation interactive. Un clic dans un graphique permettra de sélectionner le nombre de ruptures et de segments, et un autre graphique affichera le modèle correspondant.
 <!-- comment -->
-- Nous terminons avec une visualisation statique du modèle de régression linéaire de la marge maximale puis nous suggérons des exercices pour créer une version interactive.
+- Nous terminons avec une visualisation statique du modèle de régression linéaire de la marge maximale, puis nous suggérons des exercices pour créer une version interactive.
 
 <!-- paragraph -->
 
@@ -74,9 +74,9 @@ Le graphique ci-dessus en montre plusieurs.
 <!-- comment -->
 En particulier, le signal 4.3 semble en avoir un et le signal 4.2 trois.
 <!-- comment -->
-Ces données sont fournies par de médecins de l’Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
+Ces données sont fournies par des médecins de l’Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
 <!-- comment -->
-Elles sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous.
+Elles sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous :
 
 <!-- paragraph -->
 
@@ -165,7 +165,7 @@ gg.models
 
 Le graphique ci-dessus montre les modèles de segmentation de vraisemblance maximale en vert (de un à six segments).
 <!-- comment -->
-Ci-dessous, nous utilisons la fonction `penaltyLearning::labelError` pour calculer l’erreur d’étiquette, qui établit quels modèles correspondent à quelles étiquettes.
+Ci-dessous, nous utilisons la fonction `penaltyLearning::labelError` pour calculer l’erreur d’étiquette, qui établit quels modèles correspondent à quelles étiquettes :
 
 <!-- paragraph -->
 
@@ -206,9 +206,9 @@ gg.models+
 
 <!-- paragraph -->
 
-En examinant le graphique des erreurs d’étiquettes ci-dessus, il devient évident que le modèle à quatre segments devrait être sélectionné, car il permet d’obtenir un nombre nul d’erreur d’étiquette.
+En examinant le graphique des erreurs d’étiquettes ci-dessus, il devient évident que le modèle à quatre segments devrait être sélectionné, car il permet d’obtenir un nombre nul d’erreurs d’étiquette.
 <!-- comment -->
-Un certain nombre de méthodes peuvent être utilisés pour sélectionner le meilleur modèle.
+Un certain nombre de méthodes peuvent être utilisées pour sélectionner le meilleur modèle.
 <!-- comment -->
 L’une d'elles consiste à sélectionner le modèle avec $s$ segments, selon la formule $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
@@ -241,7 +241,7 @@ Dans la prochaine section, nous réalisons une version interactive de ces deux g
 
 <!-- paragraph -->
 
-Nous allons créer une figure interactive pour un signal en ajoutant un `geom_tallrect()` avec `clickSelects=segments` au graphique ci-dessus :
+Nous allons créer une figure interactive pour un signal en ajoutant un `geom_tallrect()` avec `clickSelects=segments` au graphique ci-dessus.
 
 <!-- paragraph -->
 
@@ -312,7 +312,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez que dans la visualisation ci-dessus, le modèle à six segments ne peut être sélectionné avec une valeur de lambda. Il est donc impossible sélectionner ce modèle en cliquant sur le graphique.
+Notez que dans la visualisation ci-dessus, le modèle à six segments ne peut être sélectionné avec une valeur de lambda. Il est donc impossible de sélectionner ce modèle en cliquant sur le graphique.
 <!-- comment -->
 Cependant, il est possible de le sélectionner en utilisant le menu de sélection des segments (cliquez sur « Show selection menus » au bas de la visualisation des données).
 
@@ -352,7 +352,7 @@ gg.intervals
 
 Les intervalles cibles dans le graphique ci-dessus indiquent la région de l’espace log(lambda) qui sélectionnera un modèle avec des erreurs d’étiquette minimales.
 <!-- comment -->
-Il y a un intervalle par signal ; nous créé un `animint` dans la section précédente pour le signal indiqué en noir.
+Il y a un intervalle par signal ; nous avons créé un `animint` dans la section précédente pour le signal indiqué en noir.
 <!-- comment -->
 Des algorithmes d’apprentissage automatique peuvent être utilisés pour trouver une fonction de pénalité qui coupe chacun des intervalles et maximise la marge (distance entre la fonction de régression et la limite de l’intervalle le plus proche).
 <!-- comment -->
@@ -381,13 +381,13 @@ gg.mm
 
 Le graphique ci-dessus représente la fonction de régression linéaire de la marge maximale f(x) par une ligne rouge pleine.
 <!-- comment -->
-On voit clairement qu’elle coupe chaque intervalle cible nois et maximise la marge (lignes pointillées verticales rouges).
+On voit clairement qu’elle coupe chaque intervalle cible en noir et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
 Pour plus d’informations sur  la détection supervisée des points de rupture, voir le [tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
 
 <!-- paragraph -->
 
-Vous savez comment visualiser les sept parties du jeu de données `intreg`. Le reste du chapitre est consacré à des exercices.
+Vous savez maintenant comment visualiser les sept parties du jeu de données `intreg`. Le reste du chapitre est consacré à des exercices.
 
 <!-- paragraph -->
 
@@ -407,7 +407,7 @@ L’un des graphiques doit montrer une version interactive du graphique de régr
 <!-- comment -->
 L’autre doit afficher le jeu de données pour le signal sélectionné.
 <!-- comment -->
-- Dans le `animint` créé dans l’exercice précédent, ajoutez un troisième graphique incluant la fonction de sélection de modèle pour le signal sélectionné.
+- Dans le `animint` créé dans l’exercice précédent, ajoutez un troisième graphique incluant la fonction de sélection de modèles pour le signal sélectionné.
 <!-- comment -->
 - Dans la visualisation précédente, supprimez le troisième graphique, et ajoutez une facette avec les mêmes informations au graphique de régression, avec les axes alignés.
 <!-- comment -->
@@ -415,7 +415,7 @@ Ajoutez une autre facette qui indique le nombre d’étiquettes incorrectes (`in
 <!-- comment -->
 - Ajoutez des geoms pour sélectionner le nombre de segments.
 <!-- comment -->
-Un clic sur le graphique de sélection du modèle doit permettre de sélectionner le nombre de segments, en entraîner la mise à jour du modèle affiché et des erreurs d’étiquette sur le graphique pour le signal sélectionné.
+Un clic sur le graphique de sélection du modèle doit permettre de sélectionner le nombre de segments, et entraîner la mise à jour du modèle affiché et des erreurs d’étiquette sur le graphique pour le signal sélectionné.
 <!-- comment -->
 Ajoutez également une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
@@ -425,7 +425,7 @@ Le résultat devrait ressembler à [ceci](https://rcdata.nau.edu/genomic-ml/anim
 <!-- comment -->
 Ajoutez un graphique permettant de sélectionner le nombre de segments pour chaque signal.
 <!-- comment -->
-Dans le graphique à facettes, montrez le modèle sélectionné pour chaque signal (il devrait y avoir une variable de sélection distincte pour chaque signal -- vous pouvez utiliser les `clickSelects` et `showSelected` nommés comme expliqué dans le [chapitre 14](/ch14)).
+Dans le graphique à facettes, montrez le modèle sélectionné pour chaque signal (il devrait y avoir une variable de sélection distincte pour chaque signal). Vous pouvez utiliser les `clickSelects` et `showSelected` nommés comme expliqué dans le [chapitre 14](/ch14)).
 <!-- comment -->
 Le résultat devrait ressembler à [ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
 
