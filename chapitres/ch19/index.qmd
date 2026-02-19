@@ -12,13 +12,13 @@ if(FALSE){
 <!-- paragraph -->
 
 Dans ce chapitre, nous explorerons plusieurs visualisations de tests statistiques.
-Plus précisement, nous visualiserons la probabilité critique, aussi appelée [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
+Plus précisément, nous visualiserons la probabilité critique, aussi appelée [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
 
 <!-- paragraph -->
 
 - Nous expliquons d’abord le concept de valeur-p.
 <!-- comment -->
-- Nous simulons des données pour un test de Student (test T) à deux échantillons.
+- Nous simulons des données pour un test de Student (test t) à deux échantillons.
 <!-- comment -->
 - Nous créons ensuite un graphique en forme de volcan pour résumer un ensemble de valeurs-p.
 <!-- comment -->
@@ -58,7 +58,7 @@ On peut alors calculer une valeur-p à l’aide d’un test de Student unilatér
 
 <!-- paragraph -->
 
-Après avoir calculé les mesures (poids de chaque personne ou précision des tests de chaque algorithme d’apprentissage automatique), on les utilise comme données d’entrée pour `t.test()` qui calculera une valeur-p (plus elle est petite, plus la différence est significative).
+Après avoir calculé les mesures (perte de poids de chaque personne ou précision des tests de chaque algorithme d’apprentissage automatique), on les utilise comme données d’entrée pour `t.test()` qui calculera une valeur-p (plus elle est petite, plus la différence est significative).
 <!-- comment -->
 Pour comprendre la valeur-p, il faut d’abord adopter l’hypothèse nulle : on suppose qu’il n’y a pas de différence entre les conditions.
 <!-- comment -->
@@ -80,7 +80,7 @@ Notre simulation comporte quatre paramètres :
 
 - `true_offset` est la véritable différence entre les conditions.
 - `sd` est l’écart-type des données simulées.
-- `sample` est un nombre d’échantillons (moitié des échantillons dans une condition, moitié dans l’autre),
+- `sample` est le nombre d’échantillons (moitié des échantillons dans une condition, moitié dans l’autre),
 - `trial` est le nombre de répétitions de l’expérience (pour chaque différence et écart-type).
 
 <!-- paragraph -->
@@ -175,7 +175,7 @@ Le code ci-dessous calcule un test de Student pour chaque répétition de la sim
 
 <!-- paragraph -->
 
-La sortie ci-dessus présente une ligne pour chaque test de Student et des colonnes pour la différence moyenne (`mean_zero`) et la valeur-p `p.value`.
+La sortie ci-dessus présente une ligne pour chaque test de Student et des colonnes pour la différence moyenne (`mean_zero`) et la valeur-p (`p.value`).
 <!-- comment -->
 Comme il y a dix échantillons par essai, il y a dix fois moins de lignes que dans le tableau de données simulées original.
 <!-- comment -->
@@ -186,7 +186,7 @@ Nous ajoutons ensuite des colonnes pour le graphique volcan :
 <!-- paragraph -->
 
 - `diff_means` est la différence entre les moyennes des deux conditions, parfois appelée « taille de l’effet ».
-- `neg.log10.p` est la probabilté critique, transformée en logarithme négatif (plus elle est grande, plus elle est significative).
+- `neg.log10.p` est la probabilité critique, transformée en logarithme négatif (plus elle est grande, plus elle est significative).
 
 <!-- paragraph -->
 
@@ -244,7 +244,7 @@ Enfin, on voit l’occlusion dans le nuage de points, ce qui masque les détails
 
 <!-- paragraph -->
 
-Dans cette section, nous montrons comment réviser le graphique volcan précédent pour qu’il montre plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
+Dans cette section, nous expliquons comment réviser le graphique volcan précédent pour qu’il montre plus de détails, en utilisant une carte thermique liée à un nuage de points zoomé.
 <!-- comment -->
 Tout d’abord, nous définissons la fonction `round_rel()` ci-dessous, qui sert à ajouter les colonnes `round_*` et `rel_*` utilisées pour définir les tuiles de la carte thermique :
 
@@ -291,7 +291,7 @@ Puis nous calculons un tableau de contingence avec une ligne par tuile de la car
 
 <!-- paragraph -->
 
-La sortie ci-dessus montre une ligne par tuile de la carte thermique, et une la colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
+La sortie ci-dessus montre une ligne par tuile de la carte thermique, et une colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
 <!-- comment -->
 Ci-dessous, nous créons la carte thermique du volcan :
 
@@ -534,7 +534,7 @@ Les 100 essais pour la combinaison de paramètres sélectionnée sont affichés 
 
 Nous avons créé plusieurs visualisations des données à l’aide de simulations pour illustrer les valeurs-p.
 <!-- comment -->
-Comme il y avait trop de tests T à afficher sur le graphique volcan, nous avons utilisé une carte thermique liée à un diagramme de dispersion zoomé.
+Comme il y avait trop de tests t à afficher sur le graphique volcan, nous avons utilisé une carte thermique liée à un diagramme de dispersion zoomé.
 <!-- comment -->
 Nous avons également démontré comment lier une carte thermique de combinaisons de paramètres à un graphique de dispersion affichant les détails des valeurs correspondantes dans les simulations.
 
@@ -566,7 +566,7 @@ Quels sont les inconvénients de l’approche à un seul geom ?
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Ajoutez des éléments graphiques à `gg.volcano` pour mettre en évidence le seuil traditionnel de la valeur-p de `0.05` ; `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou en dessous du seuil (utiliser un texte comme « 1500 tests non significatifs »).
+- Ajoutez des éléments graphiques à `gg.volcano` pour mettre en évidence le seuil traditionnel de la valeur-p de `0.05` ; `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou en dessous du seuil (utilisez un texte comme « 1500 tests non significatifs »).
 <!-- comment -->
 - Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->
