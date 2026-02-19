@@ -146,7 +146,7 @@ ggplot()+
 
 Pour visualiser la limite de décision optimale/Bayes, il faut évaluer la fonction sur une grille de points 2D qui couvre l’espace des caractéristiques.
 <!-- comment -->
-Pour créer cette grille, nous créons d’abord une liste contenant les deux grilles 1D pour chaque caractéristique.
+Pour tracer cette grille, nous créons d’abord une liste contenant les deux grilles 1D pour chaque caractéristique.
 
 <!-- paragraph -->
 
@@ -193,7 +193,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre que même en utilisant la meilleure fonction possible, des erreurs de prédiction subsistent (points sur fond de couleur différente).
+Le graphique ci-dessus montre que, même en utilisant la meilleure fonction possible, des erreurs de prédiction subsistent (points sur fond de couleur différente).
 <!-- comment -->
 Pour visualiser autrement la meilleure fonction de classification, on peut utiliser la limite de décision, le code ci-dessous permet de la calculer :
 
@@ -248,7 +248,7 @@ Le principe de l’auto-grad consiste à définir une seule fois la structure du
 
 <!-- paragraph -->
 
-Nous utilisons ci-dessous un système auto-grad simple où chaque nœud du graphe de calcul est représenté par un environnement R (une structure de données mutable, nécessaire à la rétropropagation des gradients à tous les paramètres du modèle) :
+Nous utilisons ci-dessous un système auto-grad simple où chaque nœud du graphe de calcul est représenté par un environnement R (une structure de données mutable, nécessaire à la rétropropagation des gradients à tous les paramètres du modèle).
 <!-- comment -->
 La fonction ci-dessous est un constructeur pour l’élément de base du système auto-grad, un nœud dans le graphe de calcul :
 
@@ -301,7 +301,7 @@ initial_node <- function(mat){
 
 Le code ci-dessus indique qu’un nœud initial stocke simplement la matrice d’entrée `mat` comme valeur, et a une fonction `gradient` qui n’a  aucun effet (parce que les nœuds initiaux dans le graphe de calcul n’ont pas de parents pour lesquels des gradients pourraient être calculés).
 <!-- comment -->
-Le code ci-dessous définit `mm`, un noeud dans le graphe de calcul qui représente une multiplication de matrice :
+Le code ci-dessous définit `mm`, un nœud dans le graphe de calcul qui représente une multiplication de matrice :
 
 <!-- paragraph -->
 
@@ -319,7 +319,7 @@ mm <- function(feature.node, weight.node)new_node(
 
 La définition de `mm` ci-dessus suppose l’existence d’un nœud de pondération dont le nombre de lignes est le même que le nombre de colonnes (plus une pour l’ordonnée à l’origine) dans le nœud pour les variables d’entrée.
 <!-- comment -->
-Les calculs de valeur et de gradient des propagation avant reposent sur la multiplication matricielle.
+Les calculs de valeur et de gradient des propagations avant reposent sur la multiplication matricielle.
 <!-- comment -->
 Par exemple, nous utilisons `mm` pour définir un modèle linéaire simple :
 
@@ -355,7 +355,7 @@ log_loss <- function(pred.node, label.node)new_node(
 
 Le code ci-dessus définit la perte logistique et le gradient, en supposant que l’étiquette est soit -1 soit 1, et que la prédiction est un nombre réel (pas nécessairement entre 0 et 1, il peut-être négatif).
 <!-- comment -->
-Le code ci-dessous crée des noeuds pour les étiquettes et la perte,
+Le code ci-dessous crée des nœuds pour les étiquettes et la perte :
 
 <!-- paragraph -->
 
@@ -401,7 +401,7 @@ En descente de gradient pour ce modèle linéaire, nous mettons à jour le vecte
 <!-- comment -->
 Chaque mise à jour est appelée itération ou étape.
 <!-- comment -->
-Un petit pas dans cette direction garantit une diminution de la perte, mais s’il est trop petit les progrès vers la minimisation de la perte seront limités.
+Un petit pas dans cette direction garantit une diminution de la perte, mais s’il est trop petit, les progrès vers la minimisation de la perte seront limités.
 <!-- comment -->
 On ignore jusqu’où on doit d’aller dans cette direction, il faut donc généralement chercher dans une grille de tailles de pas (ou de taux d’apprentissage).
 <!-- comment -->
@@ -472,7 +472,7 @@ lapply(weight.node.list, function(node)dim(node$value))
 
 La sortie ci-dessus montre que le réseau neuronal comporte une seule couche de 40 unités cachées, ce qui implique deux matrices de pondération à apprendre.
 <!-- comment -->
-Chacune d’elle est utilisée pour prédire les unités d’une couche donnée à partir des unités de la couche précédente.
+Chacune d’elles est utilisée pour prédire les unités d’une couche donnée à partir des unités de la couche précédente.
 <!-- comment -->
 Pour apprendre une fonction de prédiction, qui est une fonction non linéaire des caractéristiques, chaque couche (sauf la dernière) doit avoir une fonction d’activation non linéaire, appliquée élément par élément aux unités, après la multiplication de la matrice.
 <!-- comment -->
@@ -657,7 +657,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre les prédictions gagnent en précision à mesure que le nombre d’itérations augmente. 
+Le graphique ci-dessus montre que les prédictions gagnent en précision à mesure que le nombre d’itérations augmente. 
 <!-- comment -->
 Nous terminons la section par un graphique interactif dans lequel on peut cliquer sur la courbe des pertes pour sélectionner une itération de descente de gradient, dont la limite de décision correspondante s’affiche alors sur le graphique des prédictions.
 
@@ -760,9 +760,8 @@ Ajoutez un graphique ou une facette permettant de sélectionner l’architecture
 
 <!-- paragraph -->
 
-Dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs p) d’un test statistique.
+Dans le [chapitre 19](/ch19), nous vous expliquerons comment visualiser les probabilités critiques (valeurs-p) d’un test statistique.
 <!-- comment -->
-.
 
 <!-- paragraph -->
 
