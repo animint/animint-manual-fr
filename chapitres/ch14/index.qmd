@@ -8,7 +8,7 @@ knitr::opts_chunk$set(fig.path="ch14-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous expliquons comment utiliser les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour créer des noms de sélecteurs à parir des données.
+Dans ce chapitre, nous expliquons comment utiliser les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour créer des noms de sélecteurs à partir des données.
 <!-- comment -->
 Cette fonctionnalité facilite l’écriture du code `animint2` et accélère la compilation.
 
@@ -59,7 +59,7 @@ On peut voir, ci-dessus, que `PSJ` est une liste de plusieurs éléments (listes
 
 Nous commençons par créer un graphique montrant certaines données ChIP-seq génomiques, des données séquentielles dont les valeurs augmentent dans les zones actives (généralement lorsque des gènes sont transcrits).
 <!-- comment -->
-Dans le code ci-dessous, nous affichons chaque échantillon dans un panneau distinct.
+Dans le code ci-dessous, nous affichons chaque échantillon dans un panneau distinct :
 
 <!-- paragraph -->
 
@@ -109,7 +109,7 @@ Dans chacun d’eux, un algorithme cherche un pic commun à tous les échantillo
 <!-- comment -->
 et prédit les positions de début et de fin du pic de valeur élevée.
 <!-- comment -->
-Le code ci-dessous calcule un tableau de contingence avec une ligne par problème.
+Le code ci-dessous calcule un tableau de contingence avec une ligne par problème :
 
 <!-- paragraph -->
 
@@ -151,7 +151,7 @@ Ci-dessus, on voit qu’un panneau inférieur intitulé `problems` a été ajout
 <!-- comment -->
 Le graphique statique ci-dessus est surchargé ; la version interactive sera lisible parce qu’elle n’affichera qu’une seule valeur de `bases.per.problem` à la fois.
 <!-- comment -->
-Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du problème), nous utiliserons un autre graphique, qui présentera le meilleur taux d’erreur pour chaque taille de problème, comme le montrent les données ci-dessous.
+Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du problème), nous utiliserons un autre graphique, qui présentera le meilleur taux d’erreur pour chaque taille de problème, comme le montrent les données ci-dessous :
 
 <!-- paragraph -->
 
@@ -163,7 +163,7 @@ Pour sélectionner les différentes valeurs de `bases.per.problem` (taille du pr
 
 Le tableau ci-dessus comporte une ligne par valeur de `bases.per.problem`, un paramètre de taille de fenêtre coulissante, que nous allons explorer à l’aide de l’interactivité.
 <!-- comment -->
-Nous utilisons ces données pour tracer le graphique ci-dessous.
+Nous utilisons ces données pour tracer le graphique ci-dessous :
 
 <!-- paragraph -->
 
@@ -191,7 +191,7 @@ Des rectangles gris seront utilisés pour sélectionner la taille du problème.
 
 <!-- paragraph -->
 
-Un paramètre de pénalité contrôle le nombre d’échantillons ayant un pic commun ; il est défini dans le tableau de données de sélection de modèle dans le code ci-dessous.
+Un paramètre de pénalité contrôle le nombre d’échantillons ayant un pic commun ; il est défini dans le tableau de données de sélection de modèles dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -211,7 +211,7 @@ pdot <- function(L){
 
 Le code ci-dessus utilise la fonction `pdot()` qui fait appel à la méthode [liste des tableaux de données](/ch99#list-of-data-tables) pour ajouter une colonne nommée `problem.dot`, laquelle servira ensuite à définir les sélecteurs dans la visualisation interactive.
 <!-- comment -->
-Nous traçons ci-dessous le nombre de pics et d’erreurs d’étiquettes, en fonction du paramètre de pénalité de l’algorithme.
+Nous traçons ci-dessous le nombre de pics et d’erreurs d’étiquettes, en fonction du paramètre de pénalité de l’algorithme :
 
 <!-- paragraph -->
 
@@ -465,7 +465,7 @@ print(timing.named.construct <- system.time({
 
 De toute évidence, le code R ci-dessus, qui utilise les `clickSelects` et `showSelected` nommés, améliore la rapidité.
 <!-- comment -->
-Nous le compilons ci-dessous.
+Nous le compilons ci-dessous :
 
 <!-- paragraph -->
 
@@ -479,7 +479,7 @@ cat(elapsed.named <- Sys.time()-before.named, "seconds\n")
 
 Le `animint` produit ci-dessus devrait être identique à la visualisation de la section précédente.
 <!-- comment -->
-Les temps d’exécution ci-dessus montrent que les `clickSelects` et `showSelected` nommés sont beaucoup plus rapides que les boucles `for`, tant pour définition que pour la compilation.
+Les temps d’exécution ci-dessus montrent que les `clickSelects` et `showSelected` nommés sont beaucoup plus rapides que les boucles `for`, tant pour la définition que pour la compilation.
 
 <!-- paragraph -->
 
@@ -500,7 +500,7 @@ vis.dirs.text <- paste(vis.dirs.vec, collapse=" ")
 
 <!-- paragraph -->
 
-Le tableau ci-dessus montre que la visualisation définie à l’aide de boucles `for` occupe environ deux fois plus d’espace disque que la visualisation utilisant des `clickSelects` et `showSelected` nommés.
+Le tableau ci-dessus montre que la visualisation définie à l’aide des boucles `for` occupe environ deux fois plus d’espace disque que la visualisation utilisant des `clickSelects` et `showSelected` nommés.
 
 <!-- paragraph -->
 
@@ -508,7 +508,7 @@ Le tableau ci-dessus montre que la visualisation définie à l’aide de boucles
 
 <!-- paragraph -->
 
-Le tableau ci-dessous résume l’utilisation du disque et les temps d’exécution présentés dans ce chapitre.
+Le tableau ci-dessous résume l’utilisation du disque et les temps d’exécution présentés dans ce chapitre :
 
 <!-- paragraph -->
 
