@@ -28,7 +28,7 @@ Cependant, certaines fonctions n’ont pas d’expression explicite de leurs rac
 <!-- comment -->
 Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n’ont pas d’expression explicite  en termes de fonctions mathématiques courantes
 <!-- comment -->
-(en fait, une solution faisant appel à la [fonction W de Lambert](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) existe mais cette fonction n’est généralement pas disponible). L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la méthode de Newton](https://fr.wikipedia.org/wiki/M%C3%A9thode_de_Newton) pour trouver les racines de telles fonctions.
+(en fait, une solution faisant appel à la [fonction W de Lambert](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) existe, mais cette fonction n’est généralement pas disponible). L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la méthode de Newton](https://fr.wikipedia.org/wiki/M%C3%A9thode_de_Newton) pour trouver les racines de telles fonctions.
 
 <!-- paragraph -->
 
@@ -331,7 +331,7 @@ ggplot()+
 **Exercice :**
 Dérivez et implémentez la méthode de Newton pour cette fonction, afin de trouver la racine qui est plus petite que le minimum.
 <!-- comment -->
-Créez un `animint2` similaire à celle de la section précédente.
+Créez un `animint2` similaire à celui de la section précédente.
 
 <!-- paragraph -->
 
