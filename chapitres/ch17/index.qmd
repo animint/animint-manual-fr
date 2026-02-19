@@ -18,7 +18,7 @@ Plan du chapitre :
 
 - Nous commençons par visualiser deux caractéristiques des données Iris.
 <!-- comment -->
-- Nous choisissons de manière aléatoire K= trois points de données à utiliser comme centres d’agrégation.
+- Nous choisissons de manière aléatoire K= 3 points de données à utiliser comme centres d’agrégation.
 <!-- comment -->
 - Nous expliquons comment calculer et visualiser la distance entre les points de données et les centres d’agrégation.
 <!-- comment -->
@@ -110,7 +110,7 @@ pairs.dt <- data.table(expand.grid(
 
 <!-- paragraph -->
 
-Ces éléments peuvent être visualisés à l’aide d’un `geom_point()`,
+Ces éléments peuvent être visualisés à l’aide d’un `geom_point()`.
 
 <!-- paragraph -->
 
@@ -131,7 +131,7 @@ gg.centers+
 
 Il y a `r nrow(seg.dt)` segments superposés ci-dessus, si bien que l’interactivité serait utile pour mettre en évidence les segments connectés à un point de données précis.
 <!-- comment -->
-à cet effet, nous créons ci-dessous une variable de sélection `data.i` :
+À cet effet, nous créons ci-dessous une variable de sélection `data.i` :
 
 <!-- paragraph -->
 
@@ -289,7 +289,7 @@ gg.err <- ggplot()+
 
 <!-- paragraph -->
 
-Nous créons également un graphique montrant l’itération en cours,
+Nous créons également un graphique montrant l’itération en cours.
 
 <!-- paragraph -->
 
