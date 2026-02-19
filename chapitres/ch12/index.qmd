@@ -20,7 +20,7 @@ Plan du chapitre :
 <!-- comment -->
 - Dans la deuxième section, nous réalisons une visualisation interactive pour montrer comment la limite de décision du SVM linéaire varie en fonction de l’hyperparamètre de coût.
 <!-- comment -->
-- Dans la dernière section, nous réalisons une visualisation interactive pour montrer comment la limite de décision du SVM à noyau polynomial varie en fonction des deux hyperparamètres (coût et degré).
+- Dans la dernière section, nous réalisons une visualisation interactive pour montrer comment la limite de décision du SVM à noyau polynomial varie en fonction de deux hyperparamètres (coût et degré).
 
 <!-- paragraph -->
 
@@ -96,7 +96,7 @@ Le graphique ci-dessous permet de visualiser les scores et les étiquettes en fo
 <!-- comment -->
 Le graphique montre aussi la fonction de score réel (en noir).
 <!-- comment -->
-Bien entendu, une telle visualisation serait impossible avec des données réelles (seules les étiquettes sont connues dans les données réelles, pas les scores).
+Bien entendu, une telle visualisation serait impossible avec des données réelles (seules les étiquettes sont connues, pas les scores).
 
 <!-- paragraph -->
 
@@ -270,7 +270,7 @@ animint(
 
 <!-- paragraph -->
 
-Notez que nous avons utilisé deux graphiques multipanneaux avec l’option [addColumn then facet](/ch99#addColumn-then-facet) plutôt que quatre graphiques distincts.
+Notez que nous avons utilisé deux graphiques multipanneaux avec l’option [rajouter des colonnes et des facettes](/ch99#addColumn-then-facet) plutôt que quatre graphiques distincts.
 <!-- comment -->
 Cette approche démontre que certains graphiques/facettes ont un axe `x1` ou `x1.sq` commun.
 <!-- comment -->
@@ -330,7 +330,7 @@ ggplot()+
 
 Le graphique ci-dessus montre clairement que plusieurs points de données d’entrainement sont mal classifiés.
 <!-- comment -->
-Le graphique ci-dessous permet de visualiser la limite de décision et la marge.
+Le graphique ci-dessous permet de visualiser la limite de décision et la marge :
 
 <!-- paragraph -->
 
@@ -447,7 +447,7 @@ ggplot()+
 
 Le graphique ci-dessus confirme que notre calcul de la pente et des ordonnées à l’origine (lignes vertes) concorde avec les contours (lignes noires).
 <!-- comment -->
-Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack).
+Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack) :
 
 <!-- paragraph -->
 
@@ -500,7 +500,7 @@ Les vecteurs de support sont les points dont les coefficients alpha ont une vale
 <!-- comment -->
 Les vecteurs de support en noir (pleins) se situent sur la marge, tandis que les vecteurs de support en gris sont du mauvais côté de la marge (et ont une marge de tolérance non nulle).
 <!-- comment -->
-Le graphique ci-dessous montre le modèle appris dans l’espace des fonctionnalités d’origine.
+Le graphique ci-dessous montre le modèle appris dans l’espace des fonctionnalités d’origine :
 
 <!-- paragraph -->
 
@@ -552,7 +552,7 @@ ggplot()+
 
 L’objectif de la démonstration ci-dessous est de créer une visualisation affichant l’évolution des variables (frontière de décision, marge, ressorts) en fonction du paramètre de coût.
 Le code ci-dessous contient une boucle sur les paramètres de coût.
-Pour chaque itération, nous utilisons le code du section précédente, avec la méthode [Liste de tableau de données](/ch99#list-of-data-tables).
+Pour chaque itération, nous utilisons le code de la section précédente, avec la méthode [liste de tableau de données](/ch99#list-of-data-tables).
 
 <!-- paragraph -->
 
@@ -631,11 +631,11 @@ setErrors <- do.call(rbind, setErrors.list)
 Le tableau ci-dessus comporte une ligne pour chaque coût.
 Les colonnes présentent les propriétés de chaque modèle :
 
-* `slack` est la quantité d’erreur donnée par les variables ressorts.
+* `slack` est la quantité d’erreurs donnée par les variables ressorts.
 * `norm` est la norme du vecteur poids.
 * `margin` est la largeur entre les lignes de marge.
 
-Dans le code ci-dessous, nous restructurons les données dans une forme qui facilitera l’affichage.
+Dans le code ci-dessous, nous restructurons les données dans une forme qui facilitera l’affichage :
 
 ```{r}
 modelInfo.tall <- melt(modelInfo, id.vars="cost.param")
@@ -761,7 +761,7 @@ gg.carrée.linéaire <- ggplot()+
 gg.carrée.linéaire+facet_wrap("cost.param")
 ```
 
-Ci-dessus nous voyons l’espace au carré, utilisé pour l’apprentissage avec le noyau polynome d’ordre 2.
+Ci-dessus nous voyons l’espace au carré, utilisé pour l’apprentissage avec le noyau polynôme d’ordre 2.
 Enfin, le code ci-dessous combine les graphiques dans une visualisation interactive.
 
 ```{r ch12-vis-linear-svm}
@@ -902,7 +902,7 @@ Calculez l’erreur de sous-entraînement et de validation, puis ajoutez un nouv
 <!-- comment -->
 Modifiez les couleurs de l’une des deux légendes pour les différencier.
 <!-- comment -->
-- Utilisez les paramètres `color` et `color_off` pour modifier l’apparence de `geom_tile()` selon son état de sélection, comme expliqué à la section [Préciser le mode d’affichage de l’état de la sélection](/ch06#display-selection-state)du chapitre 6.
+- Utilisez les paramètres `color` et `color_off` pour modifier l’apparence de `geom_tile()` selon son état de sélection, comme expliqué à la section [préciser le mode d’affichage de l’état de la sélection](/ch06#display-selection-state) du chapitre 6.
 
 <!-- paragraph -->
 
