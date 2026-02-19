@@ -966,7 +966,7 @@ Chaque algorithme d’apprentissage utilise une méthode de régularisation diff
 <!-- comment -->
 
 Dans cette section, nous vérifions le choix du nombre de voisins.
-Normalement, pour chaque division des données en test et entraînement, nous faisons ensuite une division d’entraînement en sous-entraînement et validation.
+Normalement, après avoir divisé les données en ensembles de test et d’entraînement, nous subdivisons l’ensemble d’entraînement en sous-entraînement et validation.
 L’objectif est de retenir le nombre de voisins qui maximise l’AUC sur l’ensemble de validation, et d’utiliser ce nombre pour le calcul des prédictions sur l’ensemble test.
 Pour chaque ensemble test, il pourrait y avoir un nombre différent de voisins.
 <!-- comment -->
@@ -1271,7 +1271,7 @@ Pour visualiser ces détails, nous calculons l’inverse de l’AUC (1-AUC).
 <!-- comment -->
 La meilleure valeur de l’AUC est 1, mais la meilleure valeur pour l’inverse de l’AUC est 0.
 <!-- comment -->
-Nous pouvons alors utiliser l’échelle logarithmique pour visualiser la proximité de la courbe et de 0.
+Nous pouvons alors utiliser l’échelle logarithmique pour visualiser la proximité entre la courbe et le 0.
 
 ```{r}
 history_long[, let(
@@ -1321,7 +1321,7 @@ plot(L$model)
 score_glmnet[1, title(paste(task_id, iteration), line=3)]
 ```
 
-Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de non-zéro coefficients en haut, négative log pénalité en bas).
+Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Deviance » pour l’ensemble de validation, en fonction de la taille du modèle (nombre de coefficients non nuls en haut, négative log pénalité en bas).
 <!-- comment -->
 On voit une courbe qui descend, mais ne remonte pas, ce qui suggère un sous-apprentissage.
 <!-- comment -->
@@ -1341,7 +1341,7 @@ cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
    scale_fill_gradient(low="white", high="red"))
 ```
 
-Ci-dessus nous voyons un ggplot qui ressemble au graphique précédant, avec la couleur indiquant le nombre de non-zéro coefficients.
+Ci-dessus nous voyons un ggplot qui ressemble au graphique précédant, avec la couleur indiquant le nombre de coefficients non nuls.
 <!-- comment -->
 Nous y ajoutons du texte pour souligner ce nombre pour plusieurs niveaux de régularisation.
 
@@ -1353,7 +1353,7 @@ gg.glmnet+
     data=cv_glmnet_one[seq(1, .N, by=5)])
 ```
 
-Le graphique ci-dessus affiche le nombre de non-zéro coefficients en haut, pour plusieurs niveaux de régularisation.
+Le graphique ci-dessus affiche le nombre de coefficients non nuls en haut, pour plusieurs niveaux de régularisation.
 <!-- comment -->
 L’objectif de cette section est de produire une visualisation interactive avec ces informations.
 <!-- comment -->
