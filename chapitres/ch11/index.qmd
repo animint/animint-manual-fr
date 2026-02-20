@@ -6,7 +6,7 @@ knitr::opts_chunk$set(fig.path="ch11-figures/")
 
 <!-- paragraph -->
 
-L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique le [Lasso](https://en.wikipedia.org/wiki/Lasso_%28statistics%29), un modèle d'apprentissage automatique pour la régression linéaire régularisée.
+L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique le [Lasso](https://fr.wikipedia.org/wiki/Lasso_(statistiques)), un modèle d'apprentissage automatique pour la régression linéaire régularisée.
 
 <!-- paragraph -->
 
@@ -40,7 +40,7 @@ print(prostate, topn=1, trunc.cols = TRUE)
 
 <!-- paragraph -->
 
-Nous construisons un entrainement d’entrées `x` et des sorties `y` à l’aide du code ci-dessous.
+Nous construisons un entrainement d’entrées `x` et des sorties `y` à l’aide du code ci-dessous :
 
 <!-- paragraph -->
 
@@ -58,7 +58,7 @@ head(y)
 
 <!-- paragraph -->
 
-Ci-dessous, nous ajustons le chemin complet des solutions Lasso à l’aide du package `lars`.
+Ci-dessous, nous ajustons le chemin complet des solutions Lasso à l’aide du package `lars` :
 
 <!-- paragraph -->
 
@@ -109,7 +109,7 @@ gg.lambda
 
 Le graphique ci-dessus montre l’ensemble du chemin de Lasso, les pondérations optimales dans le problème de régression par moindres carrés régularisés L1, pour chaque paramètre de régularisation lambda.
 <!-- comment -->
-Le chemin commence à la solution des moindres carrés (`lambda=0`), à gauche et se termine par le modèle à ordonnée à l’origine complètement régularisé à droite.
+Le chemin commence à la solution des moindres carrés (`lambda=0`) à gauche, et se termine par le modèle à ordonnée à l’origine complètement régularisé à droite.
 <!-- comment -->
 <!-- comment -->
 Pour voir la correspondance avec la solution des moindres carrés ordinaires, nous ajoutons des points dans le graphique ci-dessous.
@@ -131,7 +131,7 @@ gg.lambda+
 
 <!-- paragraph -->
 
-Dans le prochain graphique ci-dessous, nous montrons le chemin en fonction de la norme L1 (arclength), avec quelques points supplémentaires sur une grille régulièrement espacée que nous utiliserons plus tard pour l’animation.
+Dans le prochain graphique, nous montrons le chemin en fonction de la norme L1 (arclength), avec quelques points supplémentaires sur une grille régulièrement espacée que nous utiliserons plus tard pour l’animation.
 
 <!-- paragraph -->
 
@@ -284,7 +284,7 @@ animint(
 
 <!-- paragraph -->
 
-Le refonte ci-dessous comporte deux changements.
+La refonte ci-dessous comporte deux changements.
 <!-- comment -->
 Tout d’abord, vous avez peut-être remarqué que la visualisation précédente présente deux légendes distinctes pour la variable set (`linetype=set` dans le premier graphique de chemin et `color=set` dans le second graphique de résidus).
 <!-- comment -->
@@ -296,11 +296,11 @@ Ainsi, dans la visualisation ci-dessous, nous remplaçons le `geom_point()` dans
 
 Le second changement est que nous avons remplacé le `geom_tallrect()` unique du premier graphique par deux autres.
 <!-- comment -->
-Le premier `geom_tallrect()` a `showSelected="arclength"` et sert à afficher la norme L1 (`arclength`) sélectionnée, à l’aide d’un rectangle gris.
+Le premier `geom_tallrect()` contient `showSelected="arclength"` et sert à afficher la norme L1 (`arclength`) sélectionnée, à l’aide d’un rectangle gris.
 <!-- comment -->
 Puisque nous spécifions une durée `duration` pour la variable `arclength` et `key=1`, nous observerons une transition graduelle du rectangle gris sélectionné.
 <!-- comment -->
-Le deuxième `geom_tallrect()` a `clickSelects="arclength"` de sorte que cliquer dessus modifie la valeur sélectionnée de `arclength`.
+Le deuxième `geom_tallrect()` contient `clickSelects="arclength"` de sorte que cliquer dessus modifie la valeur sélectionnée de `arclength`.
 <!-- comment -->
 Nous spécifions un autre ensemble de données avec plus de lignes, et utilisons les [variables `clickSelects` et `showSelected` nommées](/ch06#data-driven-selectors) pour indiquer que `arclength` doit également être utilisé comme une variable `showSelected`.
 
@@ -410,7 +410,7 @@ Conseil : créez un autre ensemble de données avec `expand.grid(arclength.clic
 <!-- comment -->
 - À quoi ressembleraient les courbes d’erreur si d’autres répartitions entraînement/validation étaient choisies ?
 <!-- comment -->
-Effectuez une validation croisée à 4 plis et ajoutez un graphique permettant de sélectionner le pli de test.
+Effectuez une validation croisée à quatre plis et ajoutez un graphique permettant de sélectionner le pli de test.
 
 <!-- paragraph -->
 
