@@ -6,7 +6,7 @@ knitr::opts_chunk$set(fig.path="ch10-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous explorons plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
+Dans ce chapitre, nous explorerons plusieurs visualisations des données du classificateur des K plus proches voisins (KPPV).
 
 <!-- paragraph -->
 
@@ -98,7 +98,7 @@ Nous utiliserons les éléments suivants de cet ensemble de données :
 <!-- comment -->
 - `prob` : la probabilité de la classe 1 à chacun des points de la grille (6831 valeurs numériques comprises entre 0 et 1).
 <!-- comment -->
-- `px1` : la grille de points pour le premier variable d’entrée (69 valeurs numériques comprises entre -2,6 et 4,2).
+- `px1` : la grille de points pour la première variable d’entrée (69 valeurs numériques comprises entre -2,6 et 4,2).
 <!-- comment -->
 Ces points seront utilisés pour calculer la limite de décision de Bayes à l’aide de la fonction `contourLines`.
 <!-- comment -->
@@ -147,7 +147,7 @@ test.and.grid
 
 <!-- paragraph -->
 
-Nous assignons aléatoirement chaque observation de l’ensemble de données d’apprentissage à l’un des 10 divisions.
+Nous assignons aléatoirement chaque observation de l’ensemble de données d’apprentissage à l’une des 10 divisions.
 
 <!-- paragraph -->
 
@@ -202,9 +202,9 @@ OneFold <- function(validation.fold){
 
 Ci-dessous, nous exécutons la fonction `OneFold` en parallèle à l’aide du package `future`.
 <!-- comment -->
-Pour `validation.fold` de 1 à 10, on calcule l’erreur de l’ensemble de validation.
+Pour `validation.fold` de 1 à 10, nous calculons l’erreur de l’ensemble de validation.
 <!-- comment -->
-Pour `validation.fold=0`, on traite l’ensemble des 200 observations comme un ensemble d’entraînement, qui sera utilisé pour visualiser les limites de décision apprises des K plus proches voisins.
+Pour `validation.fold=0`, nous traitons l’ensemble des 200 observations comme un ensemble d’entraînement, qui sera utilisé pour visualiser les limites de décision apprises des K plus proches voisins.
 
 <!-- paragraph -->
 
@@ -366,7 +366,7 @@ error.text
 
 <!-- paragraph -->
 
-Nous définissons la fonction suivante, que nous utiliserons pour calculer les limites de décision.
+Nous définissons la fonction suivante, que nous utiliserons pour calculer les limites de décision :
 
 <!-- paragraph -->
 
@@ -404,7 +404,7 @@ Bayes.boundary
 
 <!-- paragraph -->
 
-Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent pas les étiquettes de texte.
+Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent pas les étiquettes de texte :
 
 <!-- paragraph -->
 
@@ -417,7 +417,7 @@ on.text <- function(V1, V2){
 
 <!-- paragraph -->
 
-Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale.
+Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale :
 
 <!-- paragraph -->
 
@@ -671,7 +671,7 @@ pred.boundary
 
 <!-- paragraph -->
 
-Au lieu d’afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text()` qui sera mis à jour en fonction du nombre de voisins sélectionnés.
+Au lieu d’afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text()` qui sera mis à jour en fonction du nombre de voisins sélectionnés :
 
 <!-- paragraph -->
 
@@ -682,7 +682,7 @@ show.text <- show.grid[, list(
 
 <!-- paragraph -->
 
-Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d’erreur du modèle sélectionné.
+Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d’erreur du modèle sélectionné :
 
 <!-- paragraph -->
 
@@ -693,7 +693,7 @@ other.error[, V2.bottom := rep(
 
 <!-- paragraph -->
 
-Ci-dessous, nous redéfinissons les données de l’erreur de Bayes sans colonne de voisins, afin qu’elles apparaissent dans chaque sous-ensemble `showSelected`.
+Ci-dessous, nous redéfinissons les données de l’erreur de Bayes sans colonne de voisins, afin qu’elles apparaissent dans chaque sous-ensemble `showSelected` :
 
 <!-- paragraph -->
 
@@ -961,7 +961,7 @@ Nous avons commencé par une visualisation statique qui n’affiche que les pré
 <!-- comment -->
 Nous avons ensuite créé une visualisation interactive qui permet de sélectionner K, le nombre de voisins.
 <!-- comment -->
-Nous avons finalement proposé une autre visualisation, en ajoutant une facette qui permet de sélectionner le nombre de divsions dans la validation croisée.
+Nous avons finalement proposé une autre visualisation, en ajoutant une facette qui permet de sélectionner le nombre de divisions dans la validation croisée.
 
 <!-- paragraph -->
 
