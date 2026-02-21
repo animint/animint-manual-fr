@@ -40,7 +40,7 @@ print(prostate, topn=1, trunc.cols = TRUE)
 
 <!-- paragraph -->
 
-Nous construisons un entrainement d’entrées `x` et des sorties `y` à l’aide du code ci-dessous :
+Nous construisons un entrainement d’entrées `x` et des sorties `y` à l’aide du code ci-dessous :
 
 <!-- paragraph -->
 
@@ -58,7 +58,7 @@ head(y)
 
 <!-- paragraph -->
 
-Ci-dessous, nous ajustons le chemin complet des solutions Lasso à l’aide du package `lars` :
+Ci-dessous, nous ajustons le chemin complet des solutions Lasso à l’aide du package `lars` :
 
 <!-- paragraph -->
 

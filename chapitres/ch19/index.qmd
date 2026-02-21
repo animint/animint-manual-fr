@@ -62,7 +62,7 @@ Après avoir calculé les mesures (perte de poids de chaque personne ou précisi
 <!-- comment -->
 Pour comprendre la valeur-p, il faut d’abord adopter l’hypothèse nulle : on suppose qu’il n’y a pas de différence entre les conditions.
 <!-- comment -->
-La valeur-p du test est alors définie comme la probabilité d’observer une différence au moins aussi grande que les mesures données. 
+La valeur-p du test est alors définie comme la probabilité d’observer une différence au moins aussi grande que les mesures données.
 <!-- comment -->
 Puisque l’hypothèse nulle postule qu’il n’y a pas de différence, il est extrêmement improbable d’observer des différences importantes, c’est pourquoi les petites valeurs-p sont plus significatives.
 
@@ -226,7 +226,7 @@ Le graphique statique ci-dessus montre un point par résultat de test de Student
 <!-- comment -->
 Les points proches de l’origine (0,0) représentent des tests qui n’ont pas produit de différence significative, tandis que ceux avec de grandes valeurs Y représentent des différences significatives.
 <!-- comment -->
-Le graphique comprend également `fill=true_offset` et `color=sd` afin de visualiser les impacts des paramètres de simulation sur le graphique volcan :
+Le graphique comprend également `fill=true_offset` et `color=sd` afin de visualiser les impacts des paramètres de simulation sur le graphique volcan :
 
 <!-- paragraph -->
 
@@ -293,7 +293,7 @@ Puis nous calculons un tableau de contingence avec une ligne par tuile de la car
 
 La sortie ci-dessus montre une ligne par tuile de la carte thermique, et une colonne `tests` qui indique le nombre de points apparaissant dans la zone correspondante du graphique volcan.
 <!-- comment -->
-Ci-dessous, nous créons la carte thermique du volcan :
+Ci-dessous, nous créons la carte thermique du volcan :
 
 <!-- paragraph -->
 
@@ -311,7 +311,7 @@ Ci-dessous, nous créons la carte thermique du volcan :
 
 Le résultat ci-dessus est une carte thermique. Les régions plus foncées indiquent les zones du graphique volcan qui ont plus de résultats de tests.
 <!-- comment -->
-Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, et utilise le sélecteur `volcano_tile` pour les relier  :
+Le code ci-dessous combine la carte thermique du volcan avec un nuage de points agrandi, et utilise le sélecteur `volcano_tile` pour les relier :
 
 <!-- paragraph -->
 
@@ -350,7 +350,7 @@ Ci-dessus, un clic sur la carte thermique de gauche change les données affiché
 
 Dans cette section, nous créons une nouvelle visualisation pour révéler les détails de chaque combinaison de paramètres de simulation.
 <!-- comment -->
-Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l’effet (`diff_means`) et le logarithme négatif de la valeur-p (`neg.log10.p`), sur l’ensemble des 100 répétitions de chaque combinaison de paramètres :
+Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l’effet (`diff_means`) et le logarithme négatif de la valeur-p (`neg.log10.p`), sur l’ensemble des 100 répétitions de chaque combinaison de paramètres :
 
 <!-- paragraph -->
 
@@ -366,7 +366,7 @@ Tout d’abord, dans le code ci-dessous, nous calculons la taille moyenne de l�
 
 Le résultat ci-dessus comporte une ligne par combinaison de paramètres de simulation (`true_offset` et `sd`).
 <!-- comment -->
-Nous utilisons le code ci-dessous pour visualiser cette grille de combinaisons de paramètres :
+Nous utilisons le code ci-dessous pour visualiser cette grille de combinaisons de paramètres :
 
 <!-- paragraph -->
 
@@ -396,7 +396,7 @@ On observe que :
 
 <!-- paragraph -->
 
-- la taille estimée de l’effet (`fill=diff_means`) est cohérente avec le décalage réel (axe des X);
+- la taille estimée de l’effet (`fill=diff_means`) est cohérente avec le décalage réel (axe des X) ;
 <!-- comment -->
 - les valeurs-p les plus significatives (grandes `neg.log10.p`) sont associées à des paramètres à faible écart-type (parce que le rapport signal/bruit est plus important).
 
@@ -421,7 +421,7 @@ gg.true.tiles+
 
 <!-- paragraph -->
 
-La figure précédente montre deux rectangles soulignés d’un contour vert, pour lesquels nous créons un graphique à facettes non interactif à l’aide du code ci-dessous :
+La figure précédente montre deux rectangles soulignés d’un contour vert, pour lesquels nous créons un graphique à facettes non interactif à l’aide du code ci-dessous :
 
 <!-- paragraph -->
 
@@ -439,7 +439,7 @@ La figure ci-dessus montre un panneau pour chacune des deux combinaisons de para
 <!-- comment -->
 L’axe des X représente `trial` (essai), qui s’étend de 1 à 100, chacun utilisant différentes valeurs aléatoires simulées à l’aide des mêmes hypothèses (`true_offset=0` ou `2`).
 <!-- comment -->
-Le test de Student sert à déterminer s’il existe une différence de moyennes entre les deux conditions :
+Le test de Student sert à déterminer s’il existe une différence de moyennes entre les deux conditions :
 
 <!-- paragraph -->
 
@@ -449,7 +449,7 @@ Le test de Student sert à déterminer s’il existe une différence de moyennes
 
 <!-- paragraph -->
 
-Le code ci-dessous crée une nouvelle colonne `significant` qui indique si le test rejette l’hypothèse nulle au seuil traditionnel de 5 %  :
+Le code ci-dessous crée une nouvelle colonne `significant` qui indique si le test rejette l’hypothèse nulle au seuil traditionnel de 5 % :
 
 <!-- paragraph -->
 
@@ -459,7 +459,7 @@ sim_p[, significant := p.value < 0.05]
 
 <!-- paragraph -->
 
-Le code ci-dessous ajoute un nouveau `geom_point()` pour mettre l’accent sur les essais qui ont montré une différence significative au seuil de 5 % :
+Le code ci-dessous ajoute un nouveau `geom_point()` pour mettre l’accent sur les essais qui ont montré une différence significative au seuil de 5 % :
 
 <!-- paragraph -->
 
@@ -474,7 +474,7 @@ gg.some.values+
 
 <!-- paragraph -->
 
-La figure ci-dessus montre un point noir pour chaque essai présentant une différence significative :
+La figure ci-dessus montre un point noir pour chaque essai présentant une différence significative :
 
 <!-- paragraph -->
 
@@ -488,7 +488,7 @@ La puissance estimée (taux de vrais positifs) est donc de `r some(sim_p)[true_o
 
 <!-- paragraph -->
 
-Nous créons une visualisation qui relie la carte thermique d’ensemble au graphique de dispersion détaillé, en remplaçant `facet_grid(true_offset ~ .)` du code précédent par `showSelected="true_tile"` dans le code ci-dessous :
+Nous créons une visualisation qui relie la carte thermique d’ensemble au graphique de dispersion détaillé, en remplaçant `facet_grid(true_offset ~ .)` du code précédent par `showSelected="true_tile"` dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -544,7 +544,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Dans `vis.volcano`, lorsqu'on clique sur une `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
+- Dans `vis.volcano`, lorsqu’on clique sur une `volcanoTiles` du bas, on ne voit qu’une partie de l’espace occupé dans `volcanoZoom`.
 <!-- comment -->
 Pour corriger ce problème et occuper tout l’espace, revenez à la définition de `round_neg.log10.p` et utilisez l’argument `offset=0.5` dans `round_rel()` ce qui décalera les valeurs relatives.
 <!-- comment -->
@@ -566,7 +566,7 @@ Quels sont les inconvénients de l’approche à un seul geom ?
 <!-- comment -->
 Conseil : vous pouvez soit ajouter deux instances de `geom_point()` ou une `geom_point()` avec un tableau de données plus long créé via `melt(sim_p, measure.vars=measure(Condition, sep="mean_(.*)"))`.
 <!-- comment -->
-- Ajoutez des éléments graphiques à `gg.volcano` pour mettre en évidence le seuil traditionnel de la valeur-p de `0.05` ; `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou en dessous du seuil (utilisez un texte comme « 1500 tests non significatifs »).
+- Ajoutez des éléments graphiques à `gg.volcano` pour mettre en évidence le seuil traditionnel de la valeur-p de `0.05` ; `geom_hline()` peut montrer le seuil, et `geom_text()` peut indiquer combien de tests se situent au-dessus ou en dessous du seuil (utilisez un texte comme « 1500 tests non significatifs »).
 <!-- comment -->
 - Ajoutez `aes(tooltip)` à `gg.true.tiles` pour afficher les valeurs de `neg.log10.p` et `diff_means`.
 <!-- comment -->

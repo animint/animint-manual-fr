@@ -366,7 +366,7 @@ error.text
 
 <!-- paragraph -->
 
-Nous définissons la fonction suivante, que nous utiliserons pour calculer les limites de décision :
+Nous définissons la fonction suivante, que nous utiliserons pour calculer les limites de décision :
 
 <!-- paragraph -->
 
@@ -404,7 +404,7 @@ Bayes.boundary
 
 <!-- paragraph -->
 
-Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent pas les étiquettes de texte :
+Ci-dessous, nous ne considérons que les points de la grille qui ne chevauchent pas les étiquettes de texte :
 
 <!-- paragraph -->
 
@@ -417,7 +417,7 @@ on.text <- function(V1, V2){
 
 <!-- paragraph -->
 
-Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale :
+Le nuage de points ci-dessous reproduit le classificateur des 7 plus proches voisins de la figure originale :
 
 <!-- paragraph -->
 
@@ -671,7 +671,7 @@ pred.boundary
 
 <!-- paragraph -->
 
-Au lieu d’afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text()` qui sera mis à jour en fonction du nombre de voisins sélectionnés :
+Au lieu d’afficher le nombre de voisins dans le titre du graphique, nous créons ci-dessous un élément `geom_text()` qui sera mis à jour en fonction du nombre de voisins sélectionnés :
 
 <!-- paragraph -->
 
@@ -682,7 +682,7 @@ show.text <- show.grid[, list(
 
 <!-- paragraph -->
 
-Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d’erreur du modèle sélectionné :
+Nous calculons ci-dessous la position du texte qui affichera, en bas à gauche, le taux d’erreur du modèle sélectionné :
 
 <!-- paragraph -->
 
@@ -693,7 +693,7 @@ other.error[, V2.bottom := rep(
 
 <!-- paragraph -->
 
-Ci-dessous, nous redéfinissons les données de l’erreur de Bayes sans colonne de voisins, afin qu’elles apparaissent dans chaque sous-ensemble `showSelected` :
+Ci-dessous, nous redéfinissons les données de l’erreur de Bayes sans colonne de voisins, afin qu’elles apparaissent dans chaque sous-ensemble `showSelected` :
 
 <!-- paragraph -->
 

@@ -49,7 +49,7 @@ head(features.hidden)
 
 Dans la simulation, le tableau de données comporte les variables cachées (`hidden`) utilisées pour créer les étiquettes, mais elles ne sont pas disponibles pour l’apprentissage.
 <!-- comment -->
-La fonction latente/vraie utilisée pour la classification est la suivante :
+La fonction latente/vraie utilisée pour la classification est la suivante :
 
 <!-- paragraph -->
 
@@ -63,7 +63,7 @@ table(label.vec)
 
 <!-- paragraph -->
 
-Les étiquettes binaires ci-dessus sont générées à partir des variables cachées, mais pour l’apprentissage, nous n’avons accès qu’aux caractéristiques bruitées ci-dessous :
+Les étiquettes binaires ci-dessus sont générées à partir des variables cachées, mais pour l’apprentissage, nous n’avons accès qu’aux caractéristiques bruitées ci-dessous :
 
 <!-- paragraph -->
 
@@ -75,7 +75,7 @@ head(features.noisy)
 
 <!-- paragraph -->
 
-Pour tracer les données et visualiser le motif, nous utilisons le code ci-dessous :
+Pour tracer les données et visualiser le motif, nous utilisons le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -124,7 +124,7 @@ table(set.vec)
 
 Le code ci-dessus répartit aléatoirement les données aux ensembles de sous-entraînement et de validation.
 <!-- comment -->
-Ci-dessous, nous traçons les deux ensembles dans des facettes séparées :
+Ci-dessous, nous traçons les deux ensembles dans des facettes séparées :
 
 <!-- paragraph -->
 
@@ -174,7 +174,7 @@ Ensuite, nous utilisons `CJ` (cross-join) pour créer un tableau de données rep
 
 <!-- paragraph -->
 
-La meilleure fonction de classification (`best`) est visualisée ci-dessous dans l’espace des variables d’entrée :
+La meilleure fonction de classification (`best`) est visualisée ci-dessous dans l’espace des variables d’entrée :
 
 <!-- paragraph -->
 
@@ -195,7 +195,7 @@ ggplot()+
 
 Le graphique ci-dessus montre que, même en utilisant la meilleure fonction possible, des erreurs de prédiction subsistent (points sur fond de couleur différente).
 <!-- comment -->
-Pour visualiser autrement la meilleure fonction de classification, on peut utiliser la limite de décision, le code ci-dessous permet de la calculer :
+Pour visualiser autrement la meilleure fonction de classification, on peut utiliser la limite de décision, le code ci-dessous permet de la calculer :
 
 <!-- paragraph -->
 
@@ -220,7 +220,7 @@ get_boundary <- function(score){
 
 <!-- paragraph -->
 
-La meilleure limite de décision est visualisée dans l’espace des caractéristiques ci-dessous :
+La meilleure limite de décision est visualisée dans l’espace des caractéristiques ci-dessous :
 
 <!-- paragraph -->
 
@@ -287,7 +287,7 @@ Elle appelle `gradient` qui calcule le gradient de la perte par rapport aux nœu
 
 <!-- paragraph -->
 
-Le type de nœud le plus simple est le nœud initial, défini par le code ci-dessous :
+Le type de nœud le plus simple est le nœud initial, défini par le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -301,7 +301,7 @@ initial_node <- function(mat){
 
 Le code ci-dessus indique qu’un nœud initial stocke simplement la matrice d’entrée `mat` comme valeur, et a une fonction `gradient` qui n’a  aucun effet (parce que les nœuds initiaux dans le graphe de calcul n’ont pas de parents pour lesquels des gradients pourraient être calculés).
 <!-- comment -->
-Le code ci-dessous définit `mm`, un nœud dans le graphe de calcul qui représente une multiplication de matrice :
+Le code ci-dessous définit `mm`, un nœud dans le graphe de calcul qui représente une multiplication de matrice :
 
 <!-- paragraph -->
 
@@ -321,7 +321,7 @@ La définition de `mm` ci-dessus suppose l’existence d’un nœud de pondérat
 <!-- comment -->
 Les calculs de valeur et de gradient des propagations avant reposent sur la multiplication matricielle.
 <!-- comment -->
-Par exemple, nous utilisons `mm` pour définir un modèle linéaire simple :
+Par exemple, nous utilisons `mm` pour définir un modèle linéaire simple :
 
 <!-- paragraph -->
 
@@ -355,7 +355,7 @@ log_loss <- function(pred.node, label.node)new_node(
 
 Le code ci-dessus définit la perte logistique et le gradient, en supposant que l’étiquette est soit -1 soit 1, et que la prédiction est un nombre réel (pas nécessairement entre 0 et 1, il peut-être négatif).
 <!-- comment -->
-Le code ci-dessous crée des nœuds pour les étiquettes et la perte :
+Le code ci-dessous crée des nœuds pour les étiquettes et la perte :
 
 <!-- paragraph -->
 
@@ -405,7 +405,7 @@ Un petit pas dans cette direction garantit une diminution de la perte, mais s’
 <!-- comment -->
 On ignore jusqu’où on doit d’aller dans cette direction, il faut donc généralement chercher dans une grille de tailles de pas (ou de taux d’apprentissage).
 <!-- comment -->
-On peut également effectuer une recherche linéaire, c’est-à-dire tracer le graphique suivant de la perte en fonction de la taille du pas, puis choisir la taille avec la perte minimale :
+On peut également effectuer une recherche linéaire, c’est-à-dire tracer le graphique suivant de la perte en fonction de la taille du pas, puis choisir la taille avec la perte minimale :
 
 <!-- paragraph -->
 
@@ -447,7 +447,7 @@ Définir un modèle linéaire dans la section précédente était relativement s
 <!-- comment -->
 En revanche, un réseau neuronal a plus d’un paramètre de matrice de pondération à apprendre.
 <!-- comment -->
-Nous initialisons ces pondérations sous forme de nœuds dans le code ci-dessous :
+Nous initialisons ces pondérations sous forme de nœuds dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -477,7 +477,7 @@ Chacune d’elles est utilisée pour prédire les unités d’une couche donnée
 Pour apprendre une fonction de prédiction, qui est une fonction non linéaire des caractéristiques, chaque couche (sauf la dernière) doit avoir une fonction d’activation non linéaire, appliquée élément par élément aux unités, après la multiplication de la matrice.
 <!-- comment -->
 
-Par exemple, une fonction d’activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), implémentée ci-dessous :
+Par exemple, une fonction d’activation non linéaire courante et efficace est la ReLU (Rectified Linear Units), implémentée ci-dessous :
 
 <!-- paragraph -->
 
@@ -513,7 +513,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le dernier nœud nécessaire à l’implémentation de notre réseau neuronal est un nœud pour les prédictions, calculé par une boucle `for` sur les nœuds de pondération dans la fonction ci-dessous :
+Le dernier nœud nécessaire à l’implémentation de notre réseau neuronal est un nœud pour les prédictions, calculé par une boucle `for` sur les nœuds de pondération dans la fonction ci-dessous :
 
 <!-- paragraph -->
 
@@ -657,7 +657,7 @@ ggplot()+
 
 <!-- paragraph -->
 
-Le graphique ci-dessus montre que les prédictions gagnent en précision à mesure que le nombre d’itérations augmente. 
+Le graphique ci-dessus montre que les prédictions gagnent en précision à mesure que le nombre d’itérations augmente.
 <!-- comment -->
 Nous terminons la section par un graphique interactif dans lequel on peut cliquer sur la courbe des pertes pour sélectionner une itération de descente de gradient, dont la limite de décision correspondante s’affiche alors sur le graphique des prédictions.
 

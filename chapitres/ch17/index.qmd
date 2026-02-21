@@ -98,7 +98,7 @@ gg.centers
 
 Ci-dessus, nous avons affiché les deux ensembles de données (centres d’agrégation et données) à l’aide de deux `geom_point()`.
 <!-- comment -->
-Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d’agrégation :
+Nous calculons ci-dessous la distance entre chaque point de données et chaque centre d’agrégation :
 
 <!-- paragraph -->
 
@@ -131,7 +131,7 @@ gg.centers+
 
 Il y a `r nrow(seg.dt)` segments superposés ci-dessus, si bien que l’interactivité serait utile pour mettre en évidence les segments connectés à un point de données précis.
 <!-- comment -->
-À cet effet, nous créons ci-dessous une variable de sélection `data.i` :
+À cet effet, nous créons ci-dessous une variable de sélection `data.i` :
 
 <!-- paragraph -->
 

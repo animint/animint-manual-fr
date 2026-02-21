@@ -9,7 +9,7 @@ if(FALSE){
 
 Dans ce chapitre, nous explorerons plusieurs visualisations pour comparer la performance des algorithmes d’apprentissage artificiel à l’aide des packages `mlr3`.
 
-Plan du chapitre :
+Plan du chapitre :
 <!-- comment -->
 
 * Nous démontrons d’abord la pertinence des packages `mlr3` pour la comparaison d’algorithmes d’apprentissage artificiel.
@@ -157,7 +157,7 @@ Le code ci-dessus produit une liste de cinq tâches de classification binaire :
 
 <!-- comment -->
 
-### Algorithmes d’apprentissage {#learners} 
+### Algorithmes d’apprentissage {#learners}
 
 <!-- comment -->
 
@@ -262,7 +262,7 @@ make_torch_learner <- function(id,...){
 }
 ```
 
-Le code ci-dessous rajoute deux algorithmes d’apprentissage  :
+Le code ci-dessous rajoute deux algorithmes d’apprentissage :
 
 ```{r}
 if(torch::torch_is_installed()){
@@ -298,7 +298,7 @@ bench.grid <- mlr3::benchmark_grid(
 ```
 
 Puisque notre objectif est d’expliquer la visualisation, nous avons déjà calculé et sauvegardé les résultats dans `library(animint2data)`.
-Le code ci-dessous télécharge ces résultats :
+Le code ci-dessous télécharge ces résultats :
 
 ```{r}
 if(TRUE){
@@ -339,10 +339,10 @@ sapply(test_measure_list, function(M)M$label)
 
 La sortie ci-dessous affiche la correspondance entre le nom et le code des mesures.
 
-* `classif.auc` : aire sous la courbe ROC.
-* `classif.ce` : taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre total d’étiquettes.
-* `classif.tpr` : taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
-* `classif.fpr` : taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
+* `classif.auc` : aire sous la courbe ROC.
+* `classif.ce` : taux d’erreur de classification, soit le nombre d’étiquettes avec prédictions incorrectes, divisé par le nombre total d’étiquettes.
+* `classif.tpr` : taux de vrais positifs, soit le nombre d’étiquettes positives avec prédictions correctes, divisé par le nombre d’étiquettes positives.
+* `classif.fpr` : taux de faux positifs, soit le nombre d’étiquettes négatives avec prédictions incorrectes, divisé par le nombre d’étiquettes négatives.
 
 <!-- comment -->
 Ensuite, nous utilisons `$score()` pour calculer ces mesures pour les données test, dans chaque division de validation croisée.
@@ -352,7 +352,7 @@ score_dt <- bench.result$score(test_measure_list)
 score_dt[, .(task_id, learner_id, iteration, classif.auc, classif.ce)]
 ```
 
-La sortie ci-dessus contient une ligne pour chaque combinaison données, algorithme, division de validation croisée et des colonnes pour deux mesures (AUC et taux d’erreur). 
+La sortie ci-dessus contient une ligne pour chaque combinaison données, algorithme, division de validation croisée et des colonnes pour deux mesures (AUC et taux d’erreur).
 <!-- comment -->
 Le code ci-dessous visualise les taux d’erreur.
 <!-- comment -->
@@ -385,7 +385,7 @@ L’objectif de ce chapitre est d’ajouter l’interactivité à ce graphique, 
 
 Dans cette section, nous calculons des courbes ROC, utiles à l’évaluation en classification binaire.
 <!-- comment -->
-En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC) et nous la visualisons avec le code ci-dessous :
+En fait, `$score()` a déjà calculé l’aire sous la courbe (AUC) et nous la visualisons avec le code ci-dessous :
 
 ```{r}
 ggplot()+
@@ -401,7 +401,7 @@ Les résultats d’AUC suggèrent que `zip` est le plus facile à apprendre, et 
 <!-- comment -->
 Comme prévu, `featureless` (l’algorithme qui prédit la classe majoritaire) a toujours AUC=0.5, ce qui correspond à une fonction de prédiction constante.
 <!-- comment -->
-Le code ci-dessous masque les résultats de `featureless`, pour mettre en évidence les autres résultats :
+Le code ci-dessous masque les résultats de `featureless`, pour mettre en évidence les autres résultats :
 
 ```{r}
 ggplot()+
@@ -470,7 +470,7 @@ gg.roc+facet_grid(iteration ~ task_id)
 
 On voit une facette pour chaque jeu de données et pour chaque division de validation croisée.
 <!-- comment -->
-Nous ajoutons ci-dessous un point pour montrer le seuil par défaut pour chaque algorithme :
+Nous ajoutons ci-dessous un point pour montrer le seuil par défaut pour chaque algorithme :
 
 ```{r}
 gg.roc.point <- gg.roc+
@@ -490,7 +490,7 @@ Ci-dessus on voit un point pour le seuil par défaut.
 <!-- comment -->
 Il est évident que les algorithmes ont différentes valeurs de `FPR` et `TPR`, par défaut.
 <!-- comment -->
-Ci-dessous nous ajoutons du texte pour l’affichage de la sélection de données et de division de validation croisée :
+Ci-dessous nous ajoutons du texte pour l’affichage de la sélection de données et de division de validation croisée :
 
 ```{r}
 score_dt[, lev_str := {
@@ -570,13 +570,13 @@ best_TPR_algos <- best_TPR_dt[, .(
 table(best_TPR_algos$algos)
 ```
 
-Notez que le tableau ci-dessus présente :
+Notez que le tableau ci-dessus présente :
 
-* 30 seuils extrêmes pour lesquels les cinq algorithmes sont présents (y compris `featureless`);
+* 30 seuils extrêmes pour lesquels les cinq algorithmes sont présents (y compris `featureless`) ;
 * plusieurs seuils avec trois algorithmes ou moins (nous ne voulons pas les afficher).
 <!-- comment -->
 
-Le code ci-dessous nous permet de conserver uniquement les seuils associés à au moins quatre algorithmes. 
+Le code ci-dessous nous permet de conserver uniquement les seuils associés à au moins quatre algorithmes.
 <!-- comment -->
 De plus, pour faciliter la sélection interactive, nous limitons le nombre de seuils à 40, répartis de manière quasi uniforme parmi les valeurs possibles pour le taux de faux positifs.
 
@@ -590,7 +590,7 @@ max.FPR.values <- 40
 
 Le tableau ci-dessus regroupe les seuils sélectionnables avec l’interactivité.
 <!-- comment -->
-Dans le code ci-dessous, nous représentons chaque seuil par une ligne verticale :
+Dans le code ci-dessous, nous représentons chaque seuil par une ligne verticale :
 
 ```{r}
 gg.roc.fpr <- gg.roc.text+
@@ -641,7 +641,7 @@ Nous combinons finalement tous les graphiques précédents dans une visualisatio
     theme_animint(colspan=2, width=800, height=200)))
 ```
 
-La visualisation ci-dessus permet de :
+La visualisation ci-dessus permet de :
 
 <!-- comment -->
 
@@ -667,7 +667,7 @@ Les visualisations précédentes recouraient à des facettes pour afficher l’A
 <!-- comment -->
 Dans cette section, nous proposons d’afficher l’AUC pour un seul jeu à la fois.
 <!-- comment -->
-Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations et de l’AUC maximale, valeurs que nous calculons avec le code ci-dessous :
+Nous créerons un graphique permettant de sélectionner un jeu de données en fonction du nombre d’observations et de l’AUC maximale, valeurs que nous calculons avec le code ci-dessous :
 
 ```{r}
 (summary_dt <- score_dt[, .(
@@ -678,7 +678,7 @@ Nous créerons un graphique permettant de sélectionner un jeu de données en fo
 
 Le tableau ci-dessus contient une ligne par jeu de données.
 <!-- comment -->
-Nous l’utilisons pour dessiner le nuage de points ci-dessous :
+Nous l’utilisons pour dessiner le nuage de points ci-dessous :
 
 ```{r}
 point_size <- 5
@@ -722,7 +722,7 @@ Le graphique ci-dessus présente un panneau par jeu de données.
 <!-- comment -->
 On constate que les valeurs d’AUC varient énormément d’un jeu de données à l’autre, et que `featureless` a toujours une AUC de 0.5, comme prévu.
 <!-- comment -->
-Nous supprimons `featureless` dans le graphique ci-dessous :
+Nous supprimons `featureless` dans le graphique ci-dessous :
 
 ```{r}
 gg.auc.show.task.zoom <- ggplot()+
@@ -757,7 +757,7 @@ gg.roc.show.task.it+facet_grid(iteration ~ task_id)
 
 Le graphique affiche un panneau par jeu de données et par division de validation croisée.
 <!-- comment -->
-Le code ci-dessous combine ces graphiques dans une visualisation interactive :
+Le code ci-dessous combine ces graphiques dans une visualisation interactive :
 
 ```{r vis-two-selectors}
 animint(
@@ -777,13 +777,13 @@ animint(
       width=800, height=200, last_in_row=TRUE, colspan=2))
 ```
 
-Le graphique affiche :
+Le graphique affiche :
 
 <!-- comment -->
 
-* en haut à gauche, un résumé des jeux de données (cliquez sur un point pour sélectionner un jeu);
+* en haut à gauche, un résumé des jeux de données (cliquez sur un point pour sélectionner un jeu) ;
 <!-- comment -->
-* en bas, deux graphiques de l’AUC pour les ensembles tests pour le jeu de données sélectionné (cliquez sur un point pour sélectionner une division de validation croisée);
+* en bas, deux graphiques de l’AUC pour les ensembles tests pour le jeu de données sélectionné (cliquez sur un point pour sélectionner une division de validation croisée) ;
 <!-- comment -->
 * en haut à droite, les courbes ROC pour la sélection de `task_id` et de `iteration`.
 
@@ -806,7 +806,7 @@ Nous calculons d’abord la moyenne et l’écart type des divisions de validati
   value.var="classif.auc"))
 ```
 
-Nous visualisons ces statistiques grâce au code ci-dessous :
+Nous visualisons ces statistiques grâce au code ci-dessous :
 
 ```{r}
 score_stats[, let(
@@ -836,7 +836,7 @@ score_stats[, auc.task.rank := rank(-classif.auc_mean), by=task_id][]
 
 Ci-dessus on constate la présence d’une nouvelle colonne `auc.task.rank` qui présente des valeurs entre 1 et 4.
 <!-- comment -->
-Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous :
+Nous utilisons ces valeurs sur l’axe Y dans le graphique ci-dessous :
 
 ```{r}
 gg.rank <- ggplot()+
@@ -858,7 +858,7 @@ gg.rank+facet_wrap("task_id", scales="free")
 
 Ci-dessus on voit bien les rangs, mais pas les noms.
 <!-- comment -->
-Nous les ajoutons ci-dessous :
+Nous les ajoutons ci-dessous :
 
 ```{r}
 gg.rank.text <- gg.rank+
@@ -953,11 +953,11 @@ Chaque algorithme d’apprentissage utilise une méthode de régularisation diff
 
 <!-- comment -->
 
-* Pour les plus proches voisins, il faut augmenter le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage; un grand nombre, un sous-apprentissage.
+* Pour les plus proches voisins, il faut augmenter le nombre de voisins pour régulariser. Un petit nombre de voisins peut donner un surapprentissage ; un grand nombre, un sous-apprentissage.
 <!-- comment -->
-* Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage; un grand nombre, un surapprentissage.
+* Pour les algorithmes de `torch`, il faut réduire le nombre d’époques de descente de gradient pour régulariser. Un petit nombre d’époques peut donner un sous-apprentissage ; un grand nombre, un surapprentissage.
 <!-- comment -->
-* Pour le modèle linéaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage; une grande pénalité, un sous-apprentissage.
+* Pour le modèle linéaire avec régularisation L1 (`glmnet`), il faut augmenter la pénalité pour régulariser. Une petite pénalité peut donner un surapprentissage ; une grande pénalité, un sous-apprentissage.
 
 <!-- comment -->
 
@@ -981,11 +981,11 @@ Nous commençons par calculer un tableau avec une ligne par division de validati
 }, by=.(task_id, iteration, task_it)])
 ```
 
-Le tableau contient les colonnes suivantes :
+Le tableau contient les colonnes suivantes :
 
 <!-- comment -->
 
-* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation;
+* `k`, le nombre de voisins choisi pour maximiser l’AUC sur l’ensemble de validation ;
 <!-- comment -->
 * `details`, un tableau d’informations sur le choix du nombre de voisins.
 
@@ -1018,12 +1018,12 @@ gg.neighbors <- ggplot()+
 gg.neighbors+facet_grid(task_id ~ iteration)
 ```
 
-Dans le graphique ci-dessus :
+Dans le graphique ci-dessus :
 
-* la couleur met en évidence les meilleurs choix pour le nombre de voisins;
+* la couleur met en évidence les meilleurs choix pour le nombre de voisins ;
 * une ligne verticale indique le choix retenu.
 
-L’examen du graphique révèle que :
+L’examen du graphique révèle que :
 
 <!-- comment -->
 
@@ -1058,7 +1058,7 @@ Exercice : relancez l’apprentissage en augmentant le max nombre de voisins. E
 Dans cette section, nous explorons la régularisation d’arrêt prématuré appliquée aux algorithmes d’apprentissage du package `torch`.
 Ces algorithmes utilisent la descente de gradient, ce qui minimise une fonction de perte sur l’ensemble de sous-entraînement.
 En règle générale, la perte sur l’ensemble de validation décroit jusqu’à un certain nombre d’époques, pour ensuite augmenter.
-L’objectif est d’interrompre la descente de gradient au moment où la perte atteint son minimum sur l’ensemble de validation, ce qui est « prématuré », car la perte continue de descendre sur l’ensemble de sous-entraînement. 
+L’objectif est d’interrompre la descente de gradient au moment où la perte atteint son minimum sur l’ensemble de validation, ce qui est « prématuré », car la perte continue de descendre sur l’ensemble de sous-entraînement.
 Nous allons vérifier que le nombre d’époques retenu évite le sous-apprentissage et le surapprentissage.
 <!-- comment -->
 Nous calculons d’abord une variable `best_epoch`, soit le nombre d’époques choisi (normalement le meilleur sur l’ensemble de validation).
@@ -1103,7 +1103,7 @@ Nous créons maintenant un tableau mieux adapté à la visualisation.
 
 Le tableau ci-dessus contient les nouvelles colonnes `set`, `measure` et `value`.
 <!-- comment -->
-Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble :
+Nous utilisons le code ci-dessous pour la visualisation d’un sous-ensemble :
 
 ```{r}
 one_split <- function(DT,it=1)DT[iteration==it & task_id=="sonar"]
@@ -1116,7 +1116,7 @@ one_split_history <- one_split(history_long)
     data=one_split_history))
 ```
 
-Le graphique ci-dessus présente des courbes d’apprentissage typiques :
+Le graphique ci-dessus présente des courbes d’apprentissage typiques :
 
 <!-- comment -->
 
@@ -1182,7 +1182,7 @@ Nous proposons ensuite un résumé, qui affiche le nombre d’époques pour chaq
 
 Le tableau présente des colonnes pour les époques correspondant aux meilleures mesures.
 <!-- comment -->
-Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin :
+Dans le graphique ci-dessous, nous utilisons les valeurs `mid`, soit à mi-chemin :
 
 ```{r}
 history_best_valid <- history_best_wide[set=="validation"]
@@ -1202,11 +1202,11 @@ learner.colors <- c(
    facet_wrap("task_id"))
 ```
 
-Dans le graphique ci-dessus, on observe que :
+Dans le graphique ci-dessus, on observe que :
 
 <!-- comment -->
 
-* pour certains jeux de données (`sonar` et `waveform`), la meilleure époque a des valeurs inférieures au maximum, ce qui suggère que le choix pour le nombre d’époques est adéquat (ni surapprentissage ni sous-apprentissage);
+* pour certains jeux de données (`sonar` et `waveform`), la meilleure époque a des valeurs inférieures au maximum, ce qui suggère que le choix pour le nombre d’époques est adéquat (ni surapprentissage ni sous-apprentissage) ;
 <!-- comment -->
 * pour d’autres jeux de données (`vowel` et `zip`) la meilleure époque correspond au maximum (200 époques), ce qui suggère un sous-apprentissage (on peut augmenter le nombre d’époques pour minimiser davantage la perte sur l’ensemble de validation).
 
@@ -1259,13 +1259,13 @@ Enfin, nous combinons les graphiques pour créer une visualisation interactive.
 Ci-dessous nous voyons deux graphiques :
 
 <!-- comment -->
-* cliquez sur le graphique du haut pour sélectionner un jeu de données et une division de validation croisée;
+* cliquez sur le graphique du haut pour sélectionner un jeu de données et une division de validation croisée ;
 <!-- comment -->
 * •	observez le graphique du bas, il affiche les courbes d’apprentissage pour la sélection.
 
 <!-- comment -->
 
-Pour certains jeux de données, l’AUC atteint rapidement un maximum proche de 1, ce qui rend difficile à estimer à quel point elle s’en rapproche. 
+Pour certains jeux de données, l’AUC atteint rapidement un maximum proche de 1, ce qui rend difficile à estimer à quel point elle s’en rapproche.
 <!-- comment -->
 Pour visualiser ces détails, nous calculons l’inverse de l’AUC (1-AUC).
 <!-- comment -->
@@ -1325,7 +1325,7 @@ Dans le graphique ci-dessus, nous voyons la perte logistique « Binomial Devia
 <!-- comment -->
 On voit une courbe qui descend, mais ne remonte pas, ce qui suggère un sous-apprentissage.
 <!-- comment -->
-Nous créons une version de ce graphique avec le code ci-dessous :
+Nous créons une version de ce graphique avec le code ci-dessous :
 
 ```{r}
 cv_glmnet_one <- with(L$model, data.table(nzero, lambda, cvm, cvsd))
@@ -1357,7 +1357,7 @@ Le graphique ci-dessus affiche le nombre de coefficients non nuls en haut, pour 
 <!-- comment -->
 L’objectif de cette section est de produire une visualisation interactive avec ces informations.
 <!-- comment -->
-Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modèles :
+Dans le code ci-dessous, nous calculons un tableau de résultats pour tous les modèles :
 
 ```{r}
 (cv_glmnet_all <- score_glmnet[, with(learner[[1]]$model, data.table(
@@ -1381,7 +1381,7 @@ ggplot()+
 Le graphique ci-dessus révèle que le modèle linéaire risque le surapprentissage dans trois jeux de données (`sonar`, `vowel` et `waveform`) si le niveau de régularisation est trop faible.
 Dans les autres jeux de données (`spam` et `zip`), on voit une courbe qui ne remonte pas, signe de sous-apprentissage.
 Un modèle non linéaire est susceptible de donner de meilleurs résultats.
-Nous vérifions cette hypothèse en examinant les résultats précédents  :
+Nous vérifions cette hypothèse en examinant les résultats précédents :
 
 * Dans `spam`, nous voyons que `torch_dense_50` obtient de meilleurs résultats que `cv_glmnet`. Nous en déduisons qu’une fonction linéaire n’est pas assez puissante pour obtenir la prédiction optimale dans ces données.
 * Dans `zip`, nous voyons que tous les algorithmes d’apprentissage donnent une fonction de prédiction parfaite (ou presque). Nous en déduisons que ces données constituent un problème de prédiction facile à résoudre pour tous les algorithmes (même le modèle linéaire).

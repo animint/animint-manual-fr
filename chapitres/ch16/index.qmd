@@ -70,13 +70,13 @@ Ces données proviennent d’analyses à haut débit essentielles pour diagnosti
 
 Une partie importante du diagnostic consiste à détecter les points de rupture, soit les changements abrupts au sein d’un chromosome donné (panneau).
 <!-- comment -->
-Le graphique ci-dessus en montre plusieurs. 
+Le graphique ci-dessus en montre plusieurs.
 <!-- comment -->
 En particulier, le signal 4.3 semble en avoir un et le signal 4.2 trois.
 <!-- comment -->
 Ces données sont fournies par des médecins de l’Institut Curie (Paris, France) qui ont annoté visuellement les régions avec et sans points de rupture.
 <!-- comment -->
-Elles sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous :
+Elles sont disponibles en tant que `intreg$annotations` et sont tracées ci-dessous :
 
 <!-- paragraph -->
 
@@ -210,7 +210,7 @@ En examinant le graphique des erreurs d’étiquettes ci-dessus, il devient évi
 <!-- comment -->
 Un certain nombre de méthodes peuvent être utilisées pour sélectionner le meilleur modèle.
 <!-- comment -->
-L’une d'elles consiste à sélectionner le modèle avec $s$ segments, selon la formule $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
+L’une d’elles consiste à sélectionner le modèle avec $s$ segments, selon la formule $S^*(\lambda)=L_s + \lambda*s$, où $L_s$ est la perte totale du modèle avec $s$ segments, et $\lambda$ est une pénalité non négative.
 <!-- comment -->
 Le graphique ci-dessous montre la fonction de sélection du modèle $S^*(\lambda)$ pour ce jeu de données :
 

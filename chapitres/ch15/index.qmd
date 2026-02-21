@@ -139,7 +139,7 @@ gg.loss+
 
 Le graphique ci-dessus montre la racine trouvée.
 <!-- comment -->
-Le critère d’arrêt était une valeur de coût absolu inférieure à `1e-6`; nous savons donc que cette racine est au moins aussi précise que ce seuil.
+Le critère d’arrêt était une valeur de coût absolu inférieure à `1e-6` ; nous savons donc que cette racine est au moins aussi précise que ce seuil.
 <!-- comment -->
 Le graphique suivant montre la précision de la racine en fonction du nombre d’itérations.
 

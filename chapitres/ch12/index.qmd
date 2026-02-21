@@ -330,7 +330,7 @@ ggplot()+
 
 Le graphique ci-dessus montre clairement que plusieurs points de données d’entrainement sont mal classifiés.
 <!-- comment -->
-Le graphique ci-dessous permet de visualiser la limite de décision et la marge :
+Le graphique ci-dessous permet de visualiser la limite de décision et la marge :
 
 <!-- paragraph -->
 
@@ -447,7 +447,7 @@ ggplot()+
 
 Le graphique ci-dessus confirme que notre calcul de la pente et des ordonnées à l’origine (lignes vertes) concorde avec les contours (lignes noires).
 <!-- comment -->
-Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack) :
+Dans le graphique ci-dessous, nous présentons les coefficients `alpha` appris et ajoutons un `geom_segment()` pour visualiser la variable ressort (slack) :
 
 <!-- paragraph -->
 
@@ -500,7 +500,7 @@ Les vecteurs de support sont les points dont les coefficients alpha ont une vale
 <!-- comment -->
 Les vecteurs de support en noir (pleins) se situent sur la marge, tandis que les vecteurs de support en gris sont du mauvais côté de la marge (et ont une marge de tolérance non nulle).
 <!-- comment -->
-Le graphique ci-dessous montre le modèle appris dans l’espace des fonctionnalités d’origine :
+Le graphique ci-dessous montre le modèle appris dans l’espace des fonctionnalités d’origine :
 
 <!-- paragraph -->
 
@@ -635,7 +635,7 @@ Les colonnes présentent les propriétés de chaque modèle :
 * `norm` est la norme du vecteur poids.
 * `margin` est la largeur entre les lignes de marge.
 
-Dans le code ci-dessous, nous restructurons les données dans une forme qui facilitera l’affichage :
+Dans le code ci-dessous, nous restructurons les données dans une forme qui facilitera l’affichage :
 
 ```{r}
 modelInfo.tall <- melt(modelInfo, id.vars="cost.param")
