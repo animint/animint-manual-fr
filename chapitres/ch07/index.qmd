@@ -35,7 +35,7 @@ Après avoir lu ce chapitre, vous saurez comment :
 
 <!-- paragraph -->
 
-Toute idée visant à améliorer `animint2` et à contourner l'une de ces limites est la bienvenue. Les développeurs de `animint2` seraient plus qu'heureux d'accepter votre [Pull Request](https://github.com/tdhock/animint2/compare).
+Toute idée visant à améliorer `animint2` et à contourner l'une de ces limites est la bienvenue. Les développeurs de `animint2` seraient plus qu'heureux d'accepter votre Pull Request [@Pull_Request].
 
 <!-- paragraph -->
 
@@ -57,7 +57,7 @@ par exemple, lorsque différents sous-ensembles `showSelected` ont des valeurs t
 <!-- comment -->
 Dans ce cas, il serait utile d’avoir des axes interactifs qui se mettent à jour et changent en même temps que les données.
 <!-- comment -->
-Nous disposons d'une prise en charge expérimentale pour cela, voir la [mise à jour axestest](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer4-update-axes-multiple-ss.R) pour plus de détails.
+Nous disposons d'une prise en charge expérimentale pour cela, voir le test pour plus de détails [@update-axes-multiple-ss].
 
 <!-- paragraph -->
 
@@ -219,7 +219,7 @@ Il serait possible d’implémenter une prise en charge de `vjust` pour `geom_te
 <!-- comment -->
 Toute contribution en ce sens sera accueillie avec grand plaisir : n’hésitez pas à soumettre une Pull Request.
 <!-- comment -->
-Nous avons déjà une [issue](https://github.com/tdhock/animint/issues/148) qui explique comment l'implémenter.
+Nous avons déjà une issue qui explique comment l'implémenter [@issue_explaining_how_to_implement_it].
 
 <!-- paragraph -->
 
@@ -254,7 +254,7 @@ animint(gg.return)
 
 La prise en charge de plusieurs lignes dans les étiquettes `geom_text()` serait utile, mais nous n’avons pas encore eu le temps de l’implémenter.
 <!-- comment -->
-Nous avons créé une [issue](https://github.com/tdhock/animint/issues/149) à ce sujet, et toute Pull Request qui implémente cette fonctionnalité sera acceptée.
+Nous avons créé une issue à ce sujet [@issue_multi_line_text].
 
 <!-- paragraph -->
 
@@ -282,7 +282,7 @@ animint(gg.two.lines)
 
 <!-- paragraph -->
 
-L'un des objectifs de `animint2` est de prendre en charge [toutes les options de thème](http://docs.ggplot2.org/current/theme.html), mais nous n'avons pas encore réussi à toutes les implémenter, faute de temps.
+L'un des objectifs de `animint2` est de prendre en charge toutes les options de thème [@all_of_the_theme_options], mais nous n'avons pas encore réussi à toutes les implémenter, faute de temps.
 <!-- comment -->
 Si vous utilisez une option de thème que `animint2` ne prend pas encore en charge, n’hésitez pas à nous envoyer une Pull Request.
 <!-- comment -->

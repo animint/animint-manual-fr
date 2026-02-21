@@ -397,7 +397,7 @@ Pour les éviter, créez une nouvelle visualisation des données qui utilise un 
 <!-- comment -->
 Par exemple, les points rouges dans les deux panneaux du premier graphique pourraient être définis à l’aide d’un seul `geom_point()` avec un ensemble de données plus important. Conseil : utilisez `data.table::melt()` avec `measure.vars=c("cum.prob", "probability")`.
 <!-- comment -->
-- Créez une séquence similaire de visualisation des données pour le modèle de [Régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression) (en anglais seulement).
+- Créez une visualisation des données pour la régression binomiale [@binomial].
 
 <!-- paragraph -->
 

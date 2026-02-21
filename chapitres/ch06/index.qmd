@@ -132,7 +132,7 @@ Vous pouvez modifier cette valeur par défaut en spécifiant explicitement `aes(
 
 <!-- paragraph -->
 
-Puisque tout ce qui est tracé par `animint()` est affiché comme un élément [SVG](http://www.w3schools.com/html/html5_svg.asp) dans une page web, vous pourriez vouloir spécifier un élément [attribut HTML id](http://www.w3schools.com/tags/att_global_id.asp) à l'aide de `aes(id)` comme ci-dessous.
+Puisque tout ce qui est tracé par `animint()` est affiché comme un élément SVG dans une page web [@SVG], vous pourriez vouloir spécifier un élément attribut HTML `id` [@HTML_id_attribute] à l'aide de `aes(id)` comme ci-dessous.
 
 <!-- paragraph -->
 
@@ -153,11 +153,11 @@ Notez que pour qu’un identifiant soit bien défini, il ne doit pas contenir d�
 <!-- comment -->
 Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d’un polygone par État/région, et chaque identifiant doit être unique sur une page web.
 <!-- comment -->
-Les développeurs d'`animint2` utilisent cette fonctionnalité pour [tester le code de l'afficheur JavaScript de l'animint](https://github.com/tdhock/animint/wiki/Testing) .
+Les développeurs d'`animint2` utilisent cette fonctionnalité pour tester notre code JavaScript [@for_testing_the_animint_JavaScript_renderer_code]
 
 <!-- paragraph -->
 
-### Noms de sélecteurs dynamiques basés sur les données en utilisant des `clickSelects` et `showSelected` nommés {#data-driven-selectors}
+### Noms de sélecteurs dynamiques avec `clickSelects` et `showSelected` nommés {#data-driven-selectors}
 
 <!-- paragraph -->
 
@@ -837,7 +837,7 @@ Vous pouvez enregistrer une vidéo pour chacun de vos animints, puis inclure un 
 
 L’option `selectize` doit être une liste nommée de valeurs booléennes.
 <!-- comment -->
-Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via [selectize.js](http://selectize.github.io/selectize.js/).
+Les noms doivent être des variables de sélecteur, et les valeurs doivent indiquer si vous souhaitez ou non générer un menu de sélection via `selectize.js` [@selectize.js].
 <!-- comment -->
 Par défaut, `animint2` va générer un menu de sélection pour chaque variable de sélection, à deux exceptions près :
 
@@ -851,7 +851,7 @@ Par défaut, `animint2` va générer un menu de sélection pour chaque variable 
 
 Ces valeurs par défaut devraient convenir à la grande majorité des animints.
 <!-- comment -->
-Pour voir un exemple du fonctionnement de l'option `selectize`, veuillez consulter [PredictedPeaks dans le code source de `animint2`](https://github.com/tdhock/animint2/blob/master/tests/testthat/test-renderer2-PredictedPeaks.R) .
+Pour voir un exemple du fonctionnement de l'option `selectize`, veuillez consulter le test `PredictedPeaks` [@PredictedPeaks_test_in_the_animint2_source_code].
 
 <!-- paragraph -->
 

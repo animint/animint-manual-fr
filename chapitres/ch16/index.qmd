@@ -419,7 +419,7 @@ Un clic sur le graphique de sélection du modèle doit permettre de sélectionne
 <!-- comment -->
 Ajoutez également une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
-Le résultat devrait ressembler à [ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-01-28-Max-margin-interval-regression-for-supervised-segmentation-model-selection/index.html).
+Le résultat devrait ressembler à ceci [@mmir_viz].
 <!-- comment -->
 - Créez une autre visualisation des données à partir du graphique à facettes `gg.signals` présenté au début de ce chapitre.
 <!-- comment -->
@@ -427,7 +427,7 @@ Ajoutez un graphique permettant de sélectionner le nombre de segments pour chaq
 <!-- comment -->
 Dans le graphique à facettes, montrez le modèle sélectionné pour chaque signal (il devrait y avoir une variable de sélection distincte pour chaque signal). Vous pouvez utiliser les `clickSelects` et `showSelected` nommés comme expliqué dans le [chapitre 14](/ch14)).
 <!-- comment -->
-Le résultat devrait ressembler à [ceci](https://rcdata.nau.edu/genomic-ml/animint-gallery/2016-11-10-Max-margin-supervised-penalty-learning-for-peak-detection-in-ChIP-seq-data/index.html).
+Le résultat devrait ressembler à ceci [@mmir_chipseq].
 
 <!-- paragraph -->
 
