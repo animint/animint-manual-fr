@@ -132,7 +132,7 @@ Vous pouvez modifier cette valeur par défaut en spécifiant explicitement `aes(
 
 <!-- paragraph -->
 
-Puisque tout ce qui est tracé par `animint()` est affiché comme un élément SVG dans une page web [@SVG], vous pourriez vouloir spécifier un élément attribut HTML `id` [@HTML_id_attribute] à l'aide de `aes(id)` comme ci-dessous.
+Puisque tout ce qui est tracé par `animint()` est affiché comme un élément SVG dans une page web [@SVG], vous pourriez vouloir spécifier un élément attribut HTML `id` [@HTML_id_attribute] à l’aide de `aes(id)` comme ci-dessous.
 
 <!-- paragraph -->
 
@@ -153,7 +153,7 @@ Notez que pour qu’un identifiant soit bien défini, il ne doit pas contenir d�
 <!-- comment -->
 Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car il peut y avoir plus d’un polygone par État/région, et chaque identifiant doit être unique sur une page web.
 <!-- comment -->
-Les développeurs d'`animint2` utilisent cette fonctionnalité pour tester notre code JavaScript [@for_testing_the_animint_JavaScript_renderer_code]
+Les développeurs d’`animint2` utilisent cette fonctionnalité pour tester notre code JavaScript [@for_testing_the_animint_JavaScript_renderer_code]
 
 <!-- paragraph -->
 
@@ -851,7 +851,7 @@ Par défaut, `animint2` va générer un menu de sélection pour chaque variable 
 
 Ces valeurs par défaut devraient convenir à la grande majorité des animints.
 <!-- comment -->
-Pour voir un exemple du fonctionnement de l'option `selectize`, veuillez consulter le test `PredictedPeaks` [@PredictedPeaks_test_in_the_animint2_source_code].
+Pour voir un exemple du fonctionnement de l’option `selectize`, veuillez consulter le test `PredictedPeaks` [@PredictedPeaks_test_in_the_animint2_source_code].
 
 <!-- paragraph -->
 

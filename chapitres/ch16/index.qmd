@@ -383,7 +383,7 @@ Le graphique ci-dessus représente la fonction de régression linéaire de la ma
 <!-- comment -->
 On voit clairement qu’elle coupe chaque intervalle cible en noir et maximise la marge (lignes pointillées verticales rouges).
 <!-- comment -->
-Pour plus d’informations sur  la détection supervisée des points de rupture, voir le [tutoriel useR 2017](https://github.com/tdhock/change-tutorial).
+Pour plus d’informations sur  la détection supervisée des points de rupture, voir le tutoriel du useR 2017 [@my_useR_2017_tutorial].
 
 <!-- paragraph -->
 
@@ -419,7 +419,7 @@ Un clic sur le graphique de sélection du modèle doit permettre de sélectionne
 <!-- comment -->
 Ajoutez également une indication visuelle du modèle sélectionné sur le graphique de régression de la marge maximale.
 <!-- comment -->
-Le résultat devrait ressembler à ceci [@mmir_viz].
+Le résultat devrait ressembler à ceci [@mmir_vis].
 <!-- comment -->
 - Créez une autre visualisation des données à partir du graphique à facettes `gg.signals` présenté au début de ce chapitre.
 <!-- comment -->

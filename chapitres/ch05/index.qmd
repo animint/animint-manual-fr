@@ -139,7 +139,7 @@ Si vous n’avez pas accès à un serveur web personnel ou par le biais d’un l
 
 <!-- paragraph -->
 
-Netlify Drop est un service d'hébergement de sites web statiques [@Netlify_Drop].
+Netlify Drop est un service d’hébergement de sites web statiques [@Netlify_Drop].
 Pour y publier votre visualisation de données, il suffit de faire glisser un répertoire sur cette page web (il peut s'agir d'un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
 <!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce répertoire.
@@ -154,11 +154,11 @@ Vous pouvez souscrire à un compte gratuit si vous souhaitez que vos visualisati
 
 <!-- paragraph -->
 
-GitHub Pages est un service d'hébergement de sites web statiques sur lequel on peut publier des animints [@GitHub_pages].
+GitHub Pages est un service d’hébergement de sites web statiques sur lequel on peut publier des animints [@GitHub_pages].
 <!-- comment -->
 Pour publier un animint sur GitHub Pages, vous avez besoin d’un compte GitHub ainsi que des packages `gert` (pour exécuter git à partir de R), `gh` (pour utiliser l’API GitHub à partir de R), et `gitcreds` (pour interagir avec le stockage des identifiants de git et faciliter l’authentification lors de l’envoi à GitHub).
 <!-- comment -->
-Tout d'abord, installez ces packages. Si vous n'avez pas de compte GitHub, vous pouvez vous inscrire gratuitement.
+Tout d’abord, installez ces packages. Si vous n’avez pas de compte GitHub, vous pouvez vous inscrire gratuitement.
 <!-- comment -->
 Ensuite, assurez-vous d’indiquer à R le nom et le courriel à utiliser pour la publication des commits git :
 

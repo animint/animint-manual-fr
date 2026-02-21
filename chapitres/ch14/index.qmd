@@ -535,7 +535,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation illustrant le surapprentissage et le sous-apprentissage, comme nous l'avons fait dans cette visualisation du modèle linéaire et des plus proches voisins [@this_visualization_of_linear_model_and_nearest_neighbors].
+- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation illustrant le surapprentissage et le sous-apprentissage, comme nous l’avons fait dans cette visualisation du modèle linéaire et des plus proches voisins [@this_visualization_of_linear_model_and_nearest_neighbors].
 <!-- comment -->
 - Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation de données dans votre domaine d’expertise.
 

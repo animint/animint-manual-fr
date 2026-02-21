@@ -6,7 +6,7 @@ knitr::opts_chunk$set(fig.path="ch11-figures/")
 
 <!-- paragraph -->
 
-L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique le Lasso, un modèle d'apprentissage automatique pour la régression linéaire régularisée [@Lasso].
+L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique le Lasso, un modèle d’apprentissage automatique pour la régression linéaire régularisée [@Lasso].
 
 <!-- paragraph -->
 
