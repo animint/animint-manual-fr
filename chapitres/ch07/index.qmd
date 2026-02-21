@@ -102,7 +102,7 @@ animint(ggstat, duration = list(facette = 1000))
 ```
 
 Dans le graphique ci-dessus, si vous cliquez sur le menu de sélection pour changer `facette=2`, vous verrez que le groupe `bas` n’est plus aligné avec `comptage=0`.
-Une solution de contournement consiste à calculer les valeurs à afficher, puis à utiliser `position=identity`, comme dans le code ci-dessous.
+Une solution de contournement consiste à calculer les valeurs à afficher, puis à utiliser `position=identity`, comme dans le code ci-dessous :
 
 <!-- paragraph -->
 
@@ -343,7 +343,7 @@ two.strips+ggtitle("two strip labels on the right")
 
 <!-- paragraph -->
 
-En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n’utilisant qu’une seule étiquette de bande.
+En comparaison, `animint2` affiche le même `ggplot` ci-dessous en n’utilisant qu’une seule étiquette de bande :
 
 <!-- paragraph -->
 
@@ -410,7 +410,7 @@ Pour résoudre le problème, calculez une version normalisée de `var` et utilis
 
 <!-- paragraph -->
 
-Dans le [chapitre 8](/ch08), nous vous expliquerons comment créer une visualisation multi-panneaux des données de la Banque mondiale.
+Dans le [chapitre 8](/ch08), nous vous expliquerons comment créer une visualisation multipanneaux des données de la Banque mondiale.
 
 <!-- paragraph -->
 
