@@ -186,7 +186,7 @@ L’esquisse ci-dessous contient les principaux éléments de cette visualisatio
 
 <!-- comment -->
 
-![Esquisse d’un nuage de points pour les données de la banque mondiale](ch02-viz-scatter.png)
+![Esquisse d’un nuage de points pour les données de la Banque mondiale](ch02-viz-scatter.png)
 
 <!-- comment -->
 
@@ -196,7 +196,7 @@ Ces éléments de l’esquisse peuvent être directement traduits en code R à l
 <!-- comment -->
 Tout d’abord, nous devons construire un tableau de données comportant une ligne par pays pour l’année 1975, et des colonnes nommées `espérance.de.vie`, `taux.de.fertilité`, et `région`.
 <!-- comment -->
-Le jeu de données `banque_mondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour 1975 :
+Le jeu de données `banque_mondiale` possède déjà ces colonnes, il suffit donc de considérer le sous-ensemble pour 1975.
 
 <!-- comment -->
 
@@ -209,7 +209,7 @@ tail(banque_mondiale_1975)
 
 Le code ci-dessus imprime les dernières lignes en 1975, une ligne par pays.
 <!-- comment -->
-L’étape suivante consiste à utiliser les notes de l’esquisse pour coder un ggplot avec `aes()` qui établit la correspondance entre variables et propriétés visuelles :
+L’étape suivante consiste à utiliser les notes de l’esquisse pour coder un ggplot avec `aes()` qui établit la correspondance entre variables et propriétés visuelles.
 
 <!-- comment -->
 
@@ -236,7 +236,7 @@ Notez que nous avons automatiquement une légende `région` en couleur.
 
 Cette section explique comment `animint2` peut être utilisé pour afficher des ggplots sur des pages web.
 <!-- comment -->
-Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint` :
+Le ggplot de la section précédente peut être affiché avec `animint2`, en utilisant la fonction `animint`.
 
 <!-- comment -->
 
@@ -277,7 +277,7 @@ Considérons par exemple l’esquisse suivante qui ajoute une couche de `geom_pa
 
 <!-- comment -->
 
-![Esquisse d’un graphique à multiples couches pour les données de la banque mondiale](ch02-two-layer-viz.png)
+![Esquisse d’un graphique à multiples couches pour les données de la Banque mondiale](ch02-two-layer-viz.png)
 
 <!-- comment -->
 
@@ -288,7 +288,7 @@ De plus, le `geom_path()` contient `group=pays`, ce qui signifie qu’il faut de
 
 <!-- comment -->
 
-Nous traduisons cette esquisse en code R :
+Nous traduisons cette esquisse en code R.
 
 <!-- comment -->
 
@@ -394,13 +394,13 @@ Nous esquissons ci-dessous le graphique des séries temporelles :
 
 <!-- comment -->
 
-![Esquisse avec deux graphiques pour les données de la banque mondiale](ch02-viz-two-plots.png)
+![Esquisse avec deux graphiques pour les données de la Banque mondiale](ch02-viz-two-plots.png)
 
 <!-- comment -->
 
 Notez que l’esquisse ci-dessus peut être directement traduite dans le code R ci-dessous.
 <!-- comment -->
-Nous copions ensuite la visualisation existante (`vis.deux.couches`), puis nous ajoutons un ggplot dans un nouvel élément nommé `timeSeries` :
+Nous copions ensuite la visualisation existante (`vis.deux.couches`), puis nous ajoutons un ggplot dans un nouvel élément nommé `timeSeries`.
 
 <!-- comment -->
 
@@ -427,7 +427,7 @@ summary(vis.deux.graphes)
 
 On peut imprimer ou afficher cette liste de visualisation de données en tapant son nom.
 <!-- comment -->
-Puisque la liste contient deux ggplots, `animint2` affiche la visualisation sous la forme de deux graphiques liés :
+Puisque la liste contient deux ggplots, `animint2` affiche la visualisation sous la forme de deux graphiques liés.
 
 <!-- comment -->
 
@@ -502,7 +502,7 @@ Les facettes sont utiles pour aligner les axes quand on veut afficher différent
 <!-- comment -->
 Considérons l’esquisse ci-dessous qui contient un graphique avec deux panneaux :
 
-![Esquisse avec facettes alignées pour les données de la banque mondiale](ch02-viz-aligned.png)
+![Esquisse avec facettes alignées pour les données de la Banque mondiale](ch02-viz-aligned.png)
 
 <!-- comment -->
 
@@ -550,7 +550,7 @@ Les panneaux ont un axe commun pour le taux de fertilité, ce qui facilite la co
 
 La méthode employée ici utilise `add.x.var` pour ajouter une variable `x.var` à chaque ensemble de données, puis nous avons utilisé cette variable dans la fonction `facet_grid(scales="free")`.
 <!-- comment -->
-Nous appelons cette méthode [Ajouter une variable ensuite des facettes](/ch99#addColumn-then-facet). Elle est particulièrement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
+Nous appelons cette méthode [ajouter une variable ensuite des facettes](/ch99#addColumn-then-facet). Elle est particulièrement utile pour créer une visualisation de données à plusieurs panneaux avec des axes alignés.
 <!-- comment -->
 Ainsi, pour changer l’ordre des panneaux dans la visualisation, il suffit de modifier l’ordre des niveaux de facteurs dans la définition de `add.x.var`.
 
@@ -560,7 +560,7 @@ Notez également que `theme_bw()` produit des bordures de panneaux noires et des
 <!-- comment -->
 Cette élimination libère de l’espace pour les panneaux, ce qui met l’accent sur les données.
 <!-- comment -->
-Nous appelons cette méthode [Les facettes économes en espace](/ch99#space-saving-facets), elle est généralement utile dans tout ggplot avec des facettes.
+Nous appelons cette méthode [les facettes économes en espace](/ch99#space-saving-facets), elle est généralement utile dans tout ggplot avec des facettes.
 
 <!-- comment -->
 
@@ -568,9 +568,9 @@ Dans la visualisation ci-dessus, les étiquettes de texte se chevauchent un peu,
 
 <!-- comment -->
 
-* en utilisant l’argument `breaks` de `scale_x_continuous()`
+* en utilisant l’argument `breaks` de `scale_x_continuous()`;
 <!-- comment -->
-* en réduisant la taille du texte avec `theme()` et `element_text()`
+* en réduisant la taille du texte avec `theme()` et `element_text()`;
 <!-- comment -->
 * en augmentant la largeur du graphique à l’aide de `theme_animint()` voir le [chapitre 6](/ch06#plot-height-width) pour plus d’informations.
 
@@ -596,7 +596,7 @@ Prenons l’exemple de l’esquisse ci-dessous :
 
 <!-- comment -->
 
-![Esquisse avec facettes pour trois ans des données de la banque mondiale](ch02-viz-panels.png)
+![Esquisse avec facettes pour trois ans des données de la Banque mondiale](ch02-viz-panels.png)
 
 <!-- comment -->
 
@@ -634,7 +634,7 @@ Pour chaque valeur de `afficher.année` nous stockons un sous-ensemble de donné
 <!-- comment -->
 Après la boucle for, nous utilisons `do.call` avec `rbind` pour combiner les sous-ensembles de données.
 <!-- comment -->
-Il s’agit d’un exemple de la méthode [Liste de tableau de données](/ch99#list-of-data-tables), utile pour la visualisation interactive :
+Il s’agit d’un exemple de la méthode [liste de tableau de données](/ch99#list-of-data-tables), utile pour la visualisation interactive :
 
 <!-- comment -->
 
@@ -723,5 +723,5 @@ Exercices :
 
 <!-- comment -->
 
-Dans le [chapitre 3](/ch03) nous expliquons le mot-clé `showSelected`, qui nous permettra de préciser l’interactivité ainsi que l’animation.
+Dans le [chapitre 3](/ch03), nous expliquons le mot-clé `showSelected`, qui nous permettra de préciser l’interactivité ainsi que l’animation.
 
