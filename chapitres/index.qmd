@@ -49,7 +49,7 @@ La licence de ce livre, CC BY-SA (@fig-Licence), permet donc de :
 
 -   **Réutiliser**, c’est-à-dire utiliser la totalité ou une section du livre sans limitation et sans compensation financière. Cela permet ainsi à d’autres personnes enseignantes de l’utiliser dans le cadre d’activités pédagogiques.
 
--   **Réviser**, c’est-à-dire modifier, adapter et traduire le contenu en fonction d’un besoin pédagogique précis puisqu’aucun manuel n’est parfait, tant s’en faut ! Le livre a d’ailleurs été écrit intégralement dans R avec Quarto. Quiconque peut ainsi télécharger gratuitement le code source du livre, et le modifier à sa guise (voir l’encadré intitulé *Suggestions d’adaptation du manuel*).
+-   **Réviser**, c’est-à-dire modifier, adapter et traduire le contenu en fonction d’un besoin pédagogique précis, puisqu’aucun manuel n’est parfait, tant s’en faut ! Le livre a d’ailleurs été écrit intégralement dans R avec Quarto. Quiconque peut ainsi télécharger gratuitement le code source du livre, et le modifier à sa guise (voir l’encadré intitulé *Suggestions d’adaptation du manuel*).
 
 -   **Remixer**, c’est-à-dire « combiner la ressource avec d’autres ressources dont la licence le permet aussi pour créer une nouvelle ressource intégrée ».
 
@@ -68,7 +68,7 @@ Plusieurs adaptations du manuel sont possibles :
 
 *  Conserver uniquement les chapitres sur les méthodes ciblées dans votre cours.
 *  En faire une version imprimée et la distribuer aux personnes étudiantes.
-*  Modifier un plusieurs chapitres en effectuant les mises à jour directement dans les chapitres.
+*  Modifier un ou plusieurs chapitres en effectuant les mises à jour directement dans les chapitres.
 *  Modifier les tableaux et figures.
 *  Ajouter une série d’exercices.
 *  Rédiger un nouveau chapitre.
@@ -76,7 +76,7 @@ Plusieurs adaptations du manuel sont possibles :
 
 ### Un manuel conçu comme un projet collaboratif {#collaboratif}
 
-Il existe actuellement de nombreuses ressources, surtout en anglais, pour l’apprentissage de la visualisation statique (non-interactive) avec la grammaire des graphiques.
+Il existe actuellement de nombreuses ressources, surtout en anglais, pour l’apprentissage de la visualisation statique (non interactive) avec la grammaire des graphiques.
 En français il y a :
 
 * Exploration de données avec R, Chapitre 8 [@exploration-ch8].
@@ -96,7 +96,7 @@ Nous considérons ce livre comme un **projet collaboratif visant à mobiliser la
 
 - **Rien n’est parfait !** Cette première version comprend sûrement des coquilles et certaines sections mériteraient d’être améliorées. Les commentaires et suggestions visant à améliorer son contenu sont les bienvenus.
 
-- **La table des matières doit être impérativement extensible !** Si vous êtes intéressé(e)s à ajouter un nouveau chapitre ou une partie du livre, nous vous invitons vivement à communiquer avec nous (en utilisant l’option « Signaler un problème ou
+- **La table des matières doit être impérativement extensible !** Si vous êtes intéressé(e)s à ajouter un nouveau chapitre ou une partie au livre, nous vous invitons vivement à communiquer avec nous (en utilisant l’option « Signaler un problème ou
 formuler une suggestion » à droite sur chaque page web).
 
 ## Contenu {#contenu}
@@ -117,7 +117,7 @@ Les sept premiers chapitres fournissent les bases de la visualisation interactiv
 
 Dès la [section contexte](#contexte) ci-dessous, ce premier chapitre donne un aperçu de l’analyse et de la visualisation de données.
 <!-- comment -->
-Il apporte le contexte et la base théorique nécessaires à la compréhension des autres chapitres, ce qui sera particulièrement utile aux novices en matière d’analyse de données.
+Il apporte le contexte et la base théorique nécessaire à la compréhension des autres chapitres, ce qui sera particulièrement utile aux novices en matière d’analyse de données.
 <!-- comment -->
 Il présente la méthode de prototypage de visualisation des données à l’aide d’esquisses, sans introduire de code R.
 
@@ -193,7 +193,7 @@ Le [chapitre 13](ch13) présente une visualisation pour la régression de Poisso
 
 <!-- paragraph -->
 
-Le [chapitre 14](ch14) présente une visualisation avec de nombreux sélecteurs, à l’aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive appliqué à un modèle pour la détection de pics.
+Le [chapitre 14](ch14) présente une visualisation avec de nombreux sélecteurs, à l’aide de `clickSelects` et `showSelected` nommés, dans une visualisation interactive appliquée à un modèle pour la détection de pics.
 
 <!-- paragraph -->
 
@@ -213,7 +213,7 @@ Le [chapitre 18](ch18) présente une visualisation de l’algorithme de descente
 
 <!-- paragraph -->
 
-Le [chapitre 19](ch19) présente une visualisation des probabilités critiques (valeurs p) d’un test statistique, pour évaluer la significativité des différences entre deux échantillons.
+Le [chapitre 19](ch19) présente une visualisation des probabilités critiques (valeurs-p) d’un test statistique, pour évaluer la significativité des différences entre deux échantillons.
 Un trop grand nombre de données dans un nuage de points cause de l’occlusion, nous proposons donc une carte thermique reliée à un nuage de points comportant seulement les données sélectionnées.
 
 Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différents algorithmes d’apprentissage artificiel, calculé avec le package `mlr3`.
@@ -224,11 +224,11 @@ Le [chapitre 20](ch20) propose plusieurs visualisations pour comparer différent
 
 <!-- paragraph -->
 
-Le [Glossaire](ch99) contient l’explication détaillée de plusieurs techniques de programmation R qui sont utiles pour la visualisation.
+Le [glossaire](ch99) contient l’explication détaillée de plusieurs techniques de programmation R qui sont utiles pour la visualisation.
 
 <!-- paragraph -->
 
-Le [Guide de contribution](contribution) fournit des instructions sur la manière de contribuer à l’amélioration de ce manuel.
+Le [guide de contribution](contribution) fournit des instructions sur la manière de contribuer à l’amélioration de ce manuel.
 
 <!-- paragraph -->
 
@@ -350,7 +350,7 @@ Selon `help(fisher.test)` dans R, la dame a correctement identifié trois des qu
 <!-- comment -->
 Fisher a ensuite consigné les données suivantes : le nombre total de tasses (8), le nombre de tasses dans lesquelles du lait a été ajouté (4) et le nombre de tasses correctement identifiées (3).
 <!-- comment -->
-Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage :
+Cet ensemble de données peut être visualisé dans R en imprimant un tableau de contingence des données de comptage.
 
 <!-- paragraph -->
 
@@ -418,7 +418,7 @@ L’impression de ces données sur la ligne de commande R montre qu’il y a 468
 <!-- comment -->
 Ce nombre n’est pas énorme, mais il est déjà suffisamment important pour qu’une simple inspection du tableau ne permette pas de répondre aux questions posées.
 <!-- comment -->
-Nous allons donc créer une visualisation des données statique :
+Nous allons donc créer une visualisation des données statique.
 <!-- paragraph -->
 
 ```{r, echo=FALSE}
@@ -439,7 +439,7 @@ ggplot()+
 
 La visualisation des données statiques montre que les concentrations de CO₂ ont augmenté au cours de la seconde moitié du XXᵉ siècle.
 <!-- comment -->
-Cette visualisation des données porte le nom de courbe de Keeling, du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux CO₂ atmosphérique [@keeling1960concentration].
+Cette visualisation des données porte le nom de courbe de Keeling, du nom de Charles David Keeling, le premier scientifique à effectuer des relevés continus et systématiques des taux de CO₂ atmosphérique [@keeling1960concentration].
 <!-- comment -->
 La tendance générale à l’augmentation peut être expliquée par le processus chimique de la combustion, qui transforme l’oxygène en CO₂.
 <!-- comment -->
@@ -477,11 +477,11 @@ Pour de tels ensembles, les approches traditionnelles d’analyse consistent à 
 <!-- comment -->
 Cependant, le résumé graphique peut être trompeur, car il ne révèle pas tous les détails des données originales.
 <!-- comment -->
-Dans de telles situations, la « visualisation des données interactive » devient utile.
+Dans de telles situations, la visualisation des données interactive devient utile.
 
 <!-- paragraph -->
 
-Examinons tout d’abord une forme légèrement plus élaborée de la courbe de Keeling :
+Examinons tout d’abord une forme légèrement plus élaborée de la courbe de Keeling.
 
 <!-- paragraph -->
 
@@ -507,8 +507,7 @@ Ce graphique statique est moins instructif que le précédent, car il ne fait pa
 <!-- comment -->
 Il s’agit d’un exemple où il n’est pas souhaitable de tracer toutes les données simultanément.
 <!-- comment -->
-Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant.
-
+Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant :
 <!-- paragraph -->
 
 ```{r ch01-vis-Keeling, echo=FALSE}
@@ -521,7 +520,7 @@ animint(
 
 Dans le graphique ci-dessus, les mois de mai et octobre sont mis en évidence par défaut, mais l’utilisateur peut cliquer sur la légende pour mettre à jour l’accentuation.
 <!-- comment -->
-Cet exemple simple illustre l’idée principale de la visualisation interactive des données à l’aide de`animint()`.
+Cet exemple simple illustre l’idée principale de la visualisation interactive des données à l’aide de `animint()`.
 <!-- comment -->
 De nombreux choix doivent être effectués pour montrer les détails des ensembles de données volumineux.
 <!-- comment -->
