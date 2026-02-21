@@ -12,7 +12,7 @@ if(FALSE){
 <!-- paragraph -->
 
 Dans ce chapitre, nous explorerons plusieurs visualisations de tests statistiques.
-Plus précisément, nous visualiserons la probabilité critique, aussi appelée [valeur-p](https://fr.wikipedia.org/wiki/Valeur_p):
+Plus précisément, nous visualiserons la probabilité critique, aussi appelée valeur-p [@P-values].
 
 <!-- paragraph -->
 

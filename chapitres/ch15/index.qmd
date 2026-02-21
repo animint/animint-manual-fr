@@ -26,9 +26,10 @@ Par exemple :
 
 Cependant, certaines fonctions n’ont pas d’expression explicite de leurs racines.
 <!-- comment -->
-Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n’ont pas d’expression explicite  en termes de fonctions mathématiques courantes
+Par exemple, les racines de la perte de Poisson `f(x)=a*x+b*log(x)+c` n’ont pas d’expression explicite en termes de fonctions mathématiques courantes.
 <!-- comment -->
-(en fait, une solution faisant appel à la [fonction W de Lambert](https://www.wolframalpha.com/input/?i=a*x+%2Bb*log%28x%29%2B+c%3D0) existe, mais cette fonction n’est généralement pas disponible). L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique [la méthode de Newton](https://fr.wikipedia.org/wiki/M%C3%A9thode_de_Newton) pour trouver les racines de telles fonctions.
+En fait, une solution faisant appel à la fonction W de Lambert existe [@Lambert_W_function].
+L’objectif de ce chapitre est de créer une visualisation des données interactive qui explique la méthode de Newton pour trouver les racines de telles fonctions [@Newton].
 
 <!-- paragraph -->
 
@@ -371,7 +372,7 @@ Réalisez une visualisation des données qui permet la sélection de la valeur d
 <!-- comment -->
 Tracez le nombre d’itérations en fonction du seuil.
 <!-- comment -->
-- Dérivez la fonction de perte pour la [régression binomiale](https://en.wikipedia.org/wiki/Binomial_regression) (en anglais seulement) et visualisez la méthode de recherche de racines de Newton correspondante.
+- Dérivez la fonction de perte pour la régression binomiale et visualisez la méthode de recherche de racines de Newton correspondante [@binomial].
 <!-- comment -->
 - Refactorisez `gg.it` pour n’utiliser qu’un seul `geom_point()` au lieu des quatre geoms du code actuel.
 <!-- comment -->

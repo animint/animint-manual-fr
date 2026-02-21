@@ -4,7 +4,7 @@ Nous vous demandons de nous aider à améliorer ce manuel, en suivant les demarc
 
 ## Issues {#reporting-issues}
 
-Si vous ne comprenez pas quelque chose, SVP nous signaler, en écrivant un [issue](https://github.com/animint/animint-manual-fr/issues/new) dans ce dépôt sur GitHub.
+Si vous ne comprenez pas quelque chose, SVP nous signaler, en écrivant un issue dans ce dépôt sur GitHub [@report_an_issue].
 Ce lien « Signaler un problème ou formuler une suggestion » s’affiche aussi à droite sur chaque page.
 
 ## Envoyer une modification {#submitting-edits}

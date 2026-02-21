@@ -27,7 +27,7 @@ Plan du chapitre :
 
 <!-- paragraph -->
 
-Notre objectif, dans ce chapitre, est de produire une version interactive de la figure 13.4 tirée de [*Elements of Statistical Learning*](http://statweb.stanford.edu/~tibs/ElemStatLearn/) [@Hastie2009].
+Notre objectif, dans ce chapitre, est de produire une version interactive de la figure 13.4 tirée du livre *Elements of Statistical Learning* [@Hastie2009].
 <!-- comment -->
 Cette figure se compose de deux graphiques :
 
