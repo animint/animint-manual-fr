@@ -1,6 +1,6 @@
 # Contribution
 
-Nous vous demandons de nous aider à améliorer ce manuel, en suivant les demarches ci-dessous.
+Nous vous demandons de nous aider à améliorer ce manuel en suivant les démarches expliquées dans cette section.
 
 ## Issues {#reporting-issues}
 
@@ -9,7 +9,7 @@ Ce lien « Signaler un problème ou formuler une suggestion » s’affiche a
 
 ## Envoyer une modification {#submitting-edits}
 
-Si vous voyez une coquille, ou vous savez comment arranger un autre problème, alors nous vous prions de modifier la page, et nous envoyer un Pull Request.
+Si vous voyez une coquille, ou si vous savez comment résoudre un problème, nous vous prions de modifier la page et de nous envoyer un Pull Request.
 
 * Cliquez « <i class="bi bi-github"></i>Modifier cette page » à droite.
 * Écrivez les modifications.

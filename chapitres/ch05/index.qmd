@@ -35,7 +35,7 @@ Cette section présente deux méthodes pour compiler les animints dans un réper
 
 Dans les chapitres précédents, nous n’avons abordé qu’une seule méthode pour créer des visualisations interactives.
 <!-- comment -->
-Si `vis` est un animint (liste de ggplots et d’options avec la classe animint), alors `print(vis)` va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci,
+Si `vis` est un animint (liste de ggplots et d’options avec la classe animint), alors `print(vis)` va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci :
 
 <!-- paragraph -->
 
@@ -160,7 +160,7 @@ Pour publier un animint sur GitHub Pages, vous avez besoin d’un compte GitHub 
 <!-- comment -->
 Tout d’abord, installez ces packages. Si vous n’avez pas de compte GitHub, vous pouvez vous inscrire gratuitement.
 <!-- comment -->
-Ensuite, assurez-vous d’indiquer à R le nom et le courriel à utiliser pour la publication des commits git :
+Ensuite, assurez-vous d’indiquer à R le nom et le courriel à utiliser pour la publication des commits git.
 
 <!-- paragraph -->
 
@@ -171,7 +171,7 @@ gert::git_config_global_set("user.email", "<votre_courriel>")
 
 <!-- paragraph -->
 
-Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_dépôt")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_répertoire` (à noter que `votre_identifiant_github`  n’est pas écrit dans le code, puisque `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
+Vous pouvez ensuite utiliser `animint2pages(vis, "nouveau_dépôt")` pour publier votre visualisation dans la branche `gh-pages` de `votre_identifiant_github/nouveau_répertoire` (notez que `votre_identifiant_github`  n’est pas écrit dans le code, puisque `gitcreds` obtiendra cette information à partir du stockage des identifiants de git).
 <!-- comment -->
 Un message affichera l’URL ou le lien pour accéder à votre visualisation de données.
 <!-- comment -->
@@ -217,7 +217,7 @@ Une galerie est un répertoire sur GitHub qui doit avoir deux fichiers sources d
 <!-- paragraph -->
 
 - `repos.txt` (liste des dépôts sur GitHub qui contiennent des animints, un propriétaire/dépôt par ligne).
-- `index.Rmd` (source de la page web avec des liens vers animints).
+- `index.Rmd` (source de la page web avec des liens vers les animints).
 
 <!-- paragraph -->
 
@@ -233,9 +233,9 @@ Pour ajouter un nouvel animint à la galerie publiée sur la branche `gh-pages` 
 <!-- comment -->
 - ajoutez `votre_identifiant_github/répertoire_de_vis` au fichier `repos.txt` dans la branche `gh-pages` de `votre_identifiant_github/galerie` ;
 <!-- comment -->
-- exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu'un clone du répertoire de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Le code R lira `galerie/repos.txt`, puis les méta-données (`title`, `source`, `Capture.PNG`) de chaque répertoire qui n'est pas déjà présent dans `galerie/meta.csv`, il écrira ensuite les fichiers de méta-données mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera les fichiers et les poussera vers `origin`.
+- exécutez le code R `animint2::update_gallery("path/to/galerie")` (notez qu’un clone du répertoire de la galerie doit être présent sur le système où vous exécutez cette fonction, et que le GitHub distant doit être nommé `origin`). Le code R lira `galerie/repos.txt`, puis les métadonnées (`title`, `source`, `Capture.PNG`) de chaque répertoire qui n'est pas déjà présent dans `galerie/meta.csv`, il écrira ensuite les fichiers de métadonnées mis à jour dans la galerie, affichera les fichiers de `galerieo/index.Rmd` dans `galerie/index.html`, validera les fichiers et les poussera vers `origin`.
 <!-- comment -->
-- la galerie mise à jour sera consultable sur le web, à l'adresse `https://votre_identifiant_github.github.io/galerie` après quelques minutes (généralement pas plus de cinq).
+- la galerie mise à jour sera consultable sur le web, à l’adresse `https://votre_identifiant_github.github.io/galerie` après quelques minutes (généralement pas plus de cinq).
 
 <!-- paragraph -->
 
@@ -257,7 +257,7 @@ Exercices :
 <!-- comment -->
 - Utilisez `animint2pages()` pour publier cet animint dans un nouveau dépôt GitHub. Faites une capture d'écran et enregistrez-la en tant que `Capture.PNG` dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt au fichier `repos.txt` en soumettant une Pull Request sur GitHub [@repos.txt].
 <!-- comment -->
-- Créez votre propre galerie animint, et ajoutez y au moins deux de vos propres animints.
+- Créez votre propre galerie animint, et ajoutez-y au moins deux de vos propres animints.
 
 <!-- paragraph -->
 

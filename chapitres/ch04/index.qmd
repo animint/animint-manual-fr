@@ -9,7 +9,7 @@ knitr::opts_chunk$set(fig.path="ch04-figures/")
 
 Dans ce chapitre, nous expliquons `clickSelects`, l’un des deux principaux mots-clés qu’`animint2` propose pour la visualisation interactive de données.
 <!-- comment -->
-Le mot-clé `clickSelects` précise quelle variable de séléction sera mise à jour lorsqu’on clique sur le geom correspondant.
+Le mot-clé `clickSelects` précise quelle variable de sélection sera mise à jour lorsqu’on clique sur le geom correspondant.
 <!-- comment -->
 Chaque geom d’une visualisation possède son propre ensemble de données et sa propre définition du mot-clé `clickSelects`.
 <!-- comment -->
@@ -51,7 +51,7 @@ Puisque la légende indique `clickSelects=région`, cliquer sur une entrée de c
 <!-- comment -->
 Notez que `animint2` rend automatiquement chaque légende discrète interactive, vous n’avez donc pas besoin de spécifier explicitement `clickSelects=région` pour la légende.
 <!-- comment -->
-En fait, lorsque nous avons spécifié `color=région`  pour le `geom_point()`, `animint2` fait deux choses automatiquement :
+En fait, lorsque nous spécifions `color=région`  pour le `geom_point()`, `animint2` fait deux choses automatiquement :
 
 <!-- paragraph -->
 
@@ -102,7 +102,7 @@ Notez que le graphique ci-dessus n’est pas interactif, car il s’affiche à l
 En revanche, afficher le même ggplot en utilisant `animint2` produit un graphique interactif :
 
 * `showSelected="année"` limite l’affichage aux données de l’année sélectionnée.
-* `duration=list(année=2000)` définit un délai de 2 sécondes pour les transitions fluides entre les années.
+* `duration=list(année=2000)` définit un délai de 2 secondes pour les transitions fluides entre les années.
 * Nous avons vu dans le [chapitre 3](/ch03#duration-key) qu’il est important d’utiliser `aes(key)` pour chaque geom avec transition fluide.
 * Nous avons donc utilisé `aes(key=pays)` pour indiquer que la variable `pays` sera utilisée pour les transitions fluides entre les années.
 
@@ -118,18 +118,18 @@ Essayez de cliquer sur des points de données dans le nuage de points ci-dessus.
 <!-- comment -->
 Vous devriez voir la valeur de la variable `pays` changer après avoir cliqué sur un point de données.
 <!-- comment -->
-Vous devriez également constater que le point corrspondant au pays sélectionné est plus foncé que les autres.
+Vous devriez également constater que le point correspondant au pays sélectionné est plus foncé que les autres.
 <!-- comment -->
 Cette mise en évidence de la sélection en cours est générée automatiquement pour chaque geom avec `clickSelects`.
 <!-- comment -->
 Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
-Ces valeurs peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection en cours.
+Ces valeurs peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection en cours :
 
 * `aes(fill=région)` indique que la variable `région` détermine la couleur du remplissage des cercles.
 * `clickSelects=pays` indique qu’on peut cliquer pour changer la sélection de la variable `pays`.
 * `color="black"` indique que le pays sélectionné aura un contour noir.
-* `color_off=NA` indique que les pays non-sélectionnés auront un contour transparent.
+* `color_off=NA` indique que les pays non sélectionnés auront un contour transparent.
 
 <!-- paragraph -->
 
@@ -150,7 +150,7 @@ animint(
 
 La visualisation ci-dessus affiche le nom du pays sélectionné dans le menu de sélection, mais il serait préférable de l’afficher sous forme d’une étiquette de texte sur le nuage de points.
 <!-- comment -->
-Nous pouvons le faire en ajoutant une couche `geom_text()` avec deux variables `showSelected` :
+Nous pouvons le faire en ajoutant une couche `geom_text()` avec deux variables `showSelected`.
 
 <!-- paragraph -->
 
@@ -178,7 +178,7 @@ La visualisation ci-dessus contient plus d’un geom, chacun avec des caractéri
 Essayez de cliquer sur le bouton « Start Tour » (démarrer la visite guidée) au bas de la visualisation.
 Une fenêtre s’affichera pour expliquer les fonctions interactives disponibles pour le premier geom.
 <!-- comment -->
-En cliquant sur « Next », vous obtiendrez des informations sur le prochain geom. Enn cliquant sur « Done » ou sur l’arrière-plan gris, vous mettrez fin à la visite guidée.
+En cliquant sur « Next », vous obtiendrez des informations sur le prochain geom. En cliquant sur « Done » ou sur l’arrière-plan gris, vous mettrez fin à la visite guidée.
 <!-- comment -->
 La visite guidée aidera les nouveaux utilisateurs à découvrir les fonctions interactives présentes dans chaque geom.
 <!-- comment -->
@@ -196,7 +196,7 @@ Cela signifie qu’une étiquette de texte ne sera dessinée que pour les lignes
 
 <!-- paragraph -->
 
-Essayez de cliquer sur l’entrée de la légende qui correspond à la région du pays actuellement sélectionné (par exemple, si le Canada est sélectionné, cliquez sur l’entrée de la légende Amérique du Nord).
+Essayez de cliquer sur l’entrée de la légende qui correspond à la région du pays sélectionné (par exemple, si le Canada est sélectionné, cliquez sur l’entrée de la légende Amérique du Nord).
 <!-- comment -->
 Vous devriez voir le point disparaître, mais le texte restera affiché.
 
@@ -208,7 +208,7 @@ Indice : il faut ajouter un mot-clé au `geom_text()`.
 
 <!-- paragraph -->
 
-Dans le dernier chapitre, nous avons introduit les termes « manipulation directe » et « manipulation indirecte » pour décrire les interactions avec les légendes et les menus.
+Dans le chapitre précédent, nous avons introduit les termes « manipulation directe » et « manipulation indirecte » pour décrire les interactions avec les légendes et les menus.
 <!-- comment -->
 Dans la visualisation ci-dessus, nous pouvons modifier la valeur de la variable de sélection `pays` en cliquant sur un point de données (manipulation directe) ou en utilisant le menu de sélection (manipulation indirecte).
 <!-- comment -->
@@ -269,7 +269,7 @@ Dans la section suivante, nous expliquerons comment l’option `selector.types` 
 
 Dans cette section, notre objectif est de produire une version légèrement plus complexe du nuage de points de la section précédente.
 <!-- comment -->
-L’esquisse ci-dessous ne présente qu’une seule différence par rapport celle de la dernière section : les étiquettes de texte sont affichées pour plus d’un pays.
+L’esquisse ci-dessous ne présente qu’une seule différence par rapport à celle de la dernière section : les étiquettes de texte sont affichées pour plus d’un pays.
 
 <!-- paragraph -->
 
@@ -309,7 +309,7 @@ Elle affiche également une étiquette de texte pour le Canada.
 
 <!-- paragraph -->
 
-Il est facile d’ajouter des pays à la sélection actuelle en cliquant sur des points de données.
+Il est facile d’ajouter des pays à la sélection en cliquant sur des points de données.
 <!-- comment -->
 Normalement, le fait de cliquer sur un point supprime ce pays de la sélection en cours.
 <!-- comment -->
@@ -317,7 +317,7 @@ Toutefois, dans cette visualisation en particulier, il n’est pas si facile de 
 
 <!-- paragraph -->
 
-Exercice :  Recréez la visualisation ci-dessus de manière à ce qu’un clic sur une étiquette de texte supprime le pays de l’ensemble de sélection.
+Exercice : recréez la visualisation ci-dessus de manière à ce qu’un clic sur une étiquette de texte supprime le pays de l’ensemble de sélection.
 <!-- comment -->
 Indice : vous devez ajouter un mot-clé `clickSelects` au `geom_text()`.
 
@@ -347,7 +347,7 @@ Notez que l’esquisse ci-dessus comprend `geom_tallrect()`, un nouveau geom int
 <!-- comment -->
 Il est qualifié de « grand », car  il occupe tout l’espace vertical du graphique, il ne nécessite donc que la définition de ses limites horizontales dans `aes()` avec `xmin`  et `xmax`.
 <!-- comment -->
-En spécifiant `clickSelects=année` nous indiquons que nous voulons tracer un `tallrect` pour chaque année, et que cliquer sur un `tallrect` changera l’année sélectionnée.
+En spécifiant `clickSelects=année`. nous indiquons que nous voulons tracer un `tallrect` pour chaque année, et que cliquer sur un `tallrect` changera l’année sélectionnée.
 <!-- comment -->
 Nous devons donc créer un nouvel ensemble de données appelé `années`, avec une ligne pour chaque année des données `BanqueMondiale`.
 
@@ -395,7 +395,7 @@ Exercice  : animez la visualisation de données en spécifiant l’option `time
 
 Exercices avec multicouches : ajoutez un `geom_text()` qui indique l’année en cours sur le nuage de points.
 <!-- comment -->
-Ajoutez un `geom_path()` qui présente les données des 5 dernières années.
+Ajoutez un `geom_path()` qui présente les données des cinq dernières années.
 Ajoutez un `geom_label_aligned()` pour les pays sélectionnés dans la série temporelle.
 
 <!-- paragraph -->
@@ -412,7 +412,7 @@ L’objectif de cette section est d’ajouter une facette avec un graphique de s
 
 <!-- paragraph -->
 
-Tout d’abord, nous recréons le nuage de points de la section précédente à l’aide de la méthode [Ajouter une variable ensuite des facettes](/ch99#addColumn-then-facet), utile pour créer des ggplots avec des axes alignés.
+Tout d’abord, nous recréons le nuage de points de la section précédente à l’aide de la méthode [ajouter une variable ensuite des facettes](/ch99#addColumn-then-facet), utile pour créer des ggplots avec des axes alignés.
 
 <!-- paragraph -->
 
@@ -446,7 +446,7 @@ Notez que le ggplot ci-dessus utilise les mêmes définitions `aes` que le nuage
 <!-- comment -->
 La seule différence est l’utilisation d’un jeu de données `BanqueMondiale` enrichi d’une variable `x.var` utilisée avec `facet_grid`.
 <!-- comment -->
-Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle aligné sur l’axe du taux de fertilité.
+Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle aligné sur l’axe du taux de fertilité :
 
 <!-- paragraph -->
 
@@ -492,11 +492,11 @@ Depuis septembre 2023, il est également possible de spécifier l’opacité, le
 <!-- comment -->
 Les utilisateurs peuvent définir ces paramètres dans le geom (pas dans le `aes`) afin de personnaliser l’apparence des éléments sélectionnés et non sélectionnés, au lieu de se limiter aux spécifications décrites ci-dessus.
 <!-- comment -->
-Pour plus d’informations, voir la discussion et l’exemple dans la section [Préciser le mode d’affichage de l’état de la sélection, au chapitre 6](/ch06#display-selection-state) .
+Pour plus d’informations, voir la discussion et l’exemple dans la section [préciser le mode d’affichage de l’état de la sélection, au chapitre 6](/ch06#display-selection-state).
 
 <!-- paragraph -->
 
-Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle.
+Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle :
 
 <!-- paragraph -->
 
@@ -568,7 +568,7 @@ Pourquoi ?
 
 <!-- paragraph -->
 
-Dans le [chapitre 5](/ch05) nous expliquons différentes méthodes pour publier et partager des animints sur le web.
+Dans le [chapitre 5](/ch05), nous expliquons différentes méthodes pour publier et partager des animints sur le web.
 
 <!-- paragraph -->
 

@@ -6,7 +6,7 @@ knitr::opts_chunk$set(fig.path="ch08-figures/")
 
 <!-- paragraph -->
 
-Dans ce chapitre, nous explorons plusieurs visualisations des données de la Banque mondiale.
+Dans ce chapitre, nous explorerons plusieurs visualisations des données de la Banque mondiale.
 
 <!-- paragraph -->
 
@@ -214,11 +214,11 @@ Notez que la sélection unique est utilisée par défaut pour l’année et le p
 
 <!-- paragraph -->
 
-## Ajout d’une autre facette pour les séries temporelles {#add-ts}
+## Ajout d’une facette pour les séries temporelles {#add-ts}
 
 <!-- paragraph -->
 
-Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité.
+Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité :
 
 <!-- paragraph -->
 
@@ -261,7 +261,7 @@ vis.scatter.both
 
 <!-- paragraph -->
 
-Nous avons montré comment créer une visualisation multicouche et multipanneaux (mais à graphique unique) des données de la Banque mondiale.
+Nous avons montré comment créer une visualisation multicouches et multipanneaux (mais à graphique unique) des données de la Banque mondiale.
 
 <!-- paragraph -->
 
@@ -285,7 +285,7 @@ L’étiquette ne doit apparaître que lorsque le pays est sélectionné, et dis
 
 <!-- paragraph -->
 
-Le [chapitre 9](/ch09) présente comment visualiser les données sur les vélos à Montréal.
+Dans le [chapitre 9](/ch09) nous vous expliquerons comment visualiser les données sur les vélos à Montréal.
 
 <!-- paragraph -->
 
