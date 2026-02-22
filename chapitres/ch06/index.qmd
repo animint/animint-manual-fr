@@ -156,6 +156,18 @@ Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car
 Les développeurs d'`animint2` utilisent cette fonctionnalité pour [tester le code de l'afficheur JavaScript de l'animint](https://github.com/tdhock/animint/wiki/Testing) .
 
 <!-- paragraph -->
+### Compression de données en utilisant `aes(group)` {#aes-group}
+<!-- paragraph -->
+
+La compression de données améliore le téléchargement et le stockage des grands ensembles de données dont certaines données sont communes à plusieurs segments (fichiers TSV pour différentes valeurs de variables `showSelected`).
+<!-- comment -->
+En règle générale, on utilise la fonction `aes(group)` pour définir des lignes, des chemins, des polygones et des rubans.
+<!-- comment -->
+Dans `animint2`, on peut également utiliser `aes(group)` pour définir la compression de données.
+<!-- comment -->
+`aes(group)` doit être appliqué à un groupe de variables qui sont communes à différents sous-ensembles `showSelected`.
+<!-- comment -->
+Considérons l’exemple suivant qui présente des données mensuelles pour certaines années et certains pays :
 
 ### Noms de sélecteurs dynamiques basés sur les données en utilisant des `clickSelects` et `showSelected` nommés {#data-driven-selectors}
 
