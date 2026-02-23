@@ -169,6 +169,31 @@ Dans `animint2`, on peut également utiliser `aes(group)` pour définir la compr
 <!-- comment -->
 Considérons l’exemple suivant qui présente des données mensuelles pour certaines années et certains pays :
 
+
+```{r}
+library(data.table)
+mois.dt <- rbind(
+  data.table(année=1, mois=10:12),
+  data.table(année=2, mois=1:12),
+  data.table(année=3, mois=1:5))
+set.seed(1)
+(pays.dt <- rbind(
+  data.table(mois.dt, pays="États-Unis")[, valeur := rnorm(.N, 5)][-.N],
+  data.table(mois.dt, pays="Canada")[, valeur := rnorm(.N, 9)][-1]))
+```
+
+The output above shows a table with one row per month and country.
+We use these data in the visualization below.
+
+```{r ch06-viz-group}
+animint(
+  ggplot()+
+    geom_point(aes(
+      mois, valeur, color=pays),
+      data=pays.dt,
+      showSelected="année"))
+```
+
 ### Noms de sélecteurs dynamiques basés sur les données en utilisant des `clickSelects` et `showSelected` nommés {#data-driven-selectors}
 
 <!-- paragraph -->
