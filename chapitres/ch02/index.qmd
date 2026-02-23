@@ -568,9 +568,9 @@ Dans la visualisation ci-dessus, les étiquettes de texte se chevauchent un peu,
 
 <!-- comment -->
 
-* en utilisant l’argument `breaks` de `scale_x_continuous()`;
+* en utilisant l’argument `breaks` de `scale_x_continuous()` ;
 <!-- comment -->
-* en réduisant la taille du texte avec `theme()` et `element_text()`;
+* en réduisant la taille du texte avec `theme()` et `element_text()` ;
 <!-- comment -->
 * en augmentant la largeur du graphique à l’aide de `theme_animint()` voir le [chapitre 6](/ch06#plot-height-width) pour plus d’informations.
 

@@ -507,7 +507,7 @@ Ce graphique statique est moins instructif que le précédent, car il ne fait pa
 <!-- comment -->
 Il s’agit d’un exemple où il n’est pas souhaitable de tracer toutes les données simultanément.
 <!-- comment -->
-Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant :
+Nous pouvons résoudre ce problème en utilisant le graphique interactif suivant :
 <!-- paragraph -->
 
 ```{r ch01-vis-Keeling, echo=FALSE}

@@ -35,7 +35,7 @@ Cette section présente deux méthodes pour compiler les animints dans un réper
 
 Dans les chapitres précédents, nous n’avons abordé qu’une seule méthode pour créer des visualisations interactives.
 <!-- comment -->
-Si `vis` est un animint (liste de ggplots et d’options avec la classe animint), alors `print(vis)` va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci :
+Si `vis` est un animint (liste de ggplots et d’options avec la classe animint), alors `print(vis)` va compiler cet animint dans un répertoire temporaire, en utilisant un code comme celui-ci :
 
 <!-- paragraph -->
 

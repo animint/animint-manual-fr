@@ -218,7 +218,7 @@ Notez que la sélection unique est utilisée par défaut pour l’année et le p
 
 <!-- paragraph -->
 
-Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité :
+Nous ajoutons ci-dessous des rectangles pour sélectionner les années, et des courbes pour afficher le taux de fertilité :
 
 <!-- paragraph -->
 

@@ -124,7 +124,7 @@ Cette mise en évidence de la sélection en cours est générée automatiquement
 <!-- comment -->
 Par défaut, le point sélectionné a `alpha=1` (totalement opaque, pas de transparence), et les autres points ont `alpha=0.5` (moitié semi-transparent).
 <!-- comment -->
-Ces valeurs peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection en cours :
+Ces valeurs peuvent être personnalisées ; par exemple, dans le code ci-dessous, un contour noir est utilisé pour mettre en évidence la sélection en cours :
 
 * `aes(fill=région)` indique que la variable `région` détermine la couleur du remplissage des cercles.
 * `clickSelects=pays` indique qu’on peut cliquer pour changer la sélection de la variable `pays`.
@@ -446,7 +446,7 @@ Notez que le ggplot ci-dessus utilise les mêmes définitions `aes` que le nuage
 <!-- comment -->
 La seule différence est l’utilisation d’un jeu de données `BanqueMondiale` enrichi d’une variable `x.var` utilisée avec `facet_grid`.
 <!-- comment -->
-Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle aligné sur l’axe du taux de fertilité :
+Ci-dessous, nous ajoutons des geoms pour un graphique de série temporelle aligné sur l’axe du taux de fertilité :
 
 <!-- paragraph -->
 
@@ -496,7 +496,7 @@ Pour plus d’informations, voir la discussion et l’exemple dans la section [p
 
 <!-- paragraph -->
 
-Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle :
+Enfin, nous utilisons le code R ci-dessous pour afficher le nouveau nuage de points aligné avec la série temporelle :
 
 <!-- paragraph -->
 

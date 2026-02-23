@@ -301,7 +301,7 @@ scatter.not.na[, sum(total.accidents)/sum(total.passages)]
 
 Dans la sortie ci-dessus, on voit que le coefficient du modèle est proche des moyennes empiriques.
 <!-- comment -->
-Enfin, nous créons un graphique interactif avec le code ci-dessous :
+Enfin, nous créons un graphique interactif avec le code ci-dessous :
 
 ```{r ch09-vis-regression}
 scatter.not.na[, let(
@@ -445,7 +445,7 @@ Nous calculons maintenant la période d’activité de chaque compteur.
 
 Dans la sortie ci-dessus, on voit une ligne par compteur, avec des colonnes pour les dates de début et de fin.
 <!-- comment -->
-Le graphique ci-dessous montre la période pendant laquelle chaque compteur a fonctionné :
+Le graphique ci-dessous montre la période pendant laquelle chaque compteur a fonctionné :
 
 ```{r}
 location.colors <- c(#dput(RColorBrewer::brewer.pal(12, "Set3"))
@@ -476,7 +476,7 @@ seg.size <- 10
 
 La sortie ci-dessus contient un segment pour chaque compteur.
 <!-- comment -->
-Avec le code ci-dessous, nous rajoutons un segment pour les accidents :
+Avec le code ci-dessous, nous rajoutons un segment pour les accidents :
 
 ```{r}
 accidents.range <- dcast(
@@ -590,7 +590,7 @@ Dans la sortie ci-dessus, on voit les deux sources de données (accidents et com
 
 Dans cette section, nous voulons créer un graphique des accidents pour chaque mois, avec un point pour chaque personne qui a eu un accident.
 <!-- comment -->
-Ci-dessous, nous classons les accidents selon le degré de gravité pour les personnes touchées :
+Ci-dessous, nous classons les accidents selon le degré de gravité pour les personnes touchées :
 
 ```{r}
 accidents_dt[, gravité.str := fcase(
@@ -604,7 +604,7 @@ accidents_dt[, gravité.str := fcase(
 
 Le résultat ci-dessus montre que les accidents avec blessures mineures sont les plus fréquents, tandis que ceux avec décès sont les moins fréquents.
 <!-- comment -->
-Dans le code ci-dessous, nous créons une colonne `accident.i` qui attribue un numéro unique à chaque accident de la journée :
+Dans le code ci-dessous, nous créons une colonne `accident.i` qui attribue un numéro unique à chaque accident de la journée :
 
 ```{r}
 jour_du_mois <- function(POSIXct)as.integer(strftime(POSIXct, "%d"))

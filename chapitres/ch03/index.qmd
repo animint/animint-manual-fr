@@ -149,7 +149,7 @@ Notez que le code ci-dessus contient le mot-clé `showSelected`, une nouveauté 
 Comme vous le voyez ci-dessus, le mot-clé `showSelected` est ignoré lors de l’affichage du graphique avec les fonctions habituelles de R, qui produisent un nuage de points incluant toutes les années.
 <!-- comment -->
 
-En revanche, fournir le code ci-dessus comme argument pour `animint()` produit la visualisation interactive ci-dessous, qui dessine une année à la fois :
+En revanche, fournir le code ci-dessus comme argument pour `animint()` produit la visualisation interactive ci-dessous, qui dessine une année à la fois :
 
 <!-- comment -->
 
@@ -245,7 +245,7 @@ Pourquoi ?
 
 Les transitions fluides n’ont de sens que pour les points de données présents à la fois avant et après la modification de la sélection.
 <!-- comment -->
-Dans le code R ci-dessous, nous calculons un tableau de contingence des points de données traçables pour chacune de ces trois années :
+Dans le code R ci-dessous, nous calculons un tableau de contingence des points de données traçables pour chacune de ces trois années :
 
 <!-- comment -->
 
@@ -263,7 +263,7 @@ Le tableau ci-dessus montre clairement que 187 points peuvent être tracés en 1
 <!-- comment -->
 Cependant, en 1981, il y a un point de données supplémentaire correspondant à un pays pour lequel nous n’avions pas de données en 1980.
 <!-- comment -->
-Nous présentons ci-dessous les données de ce pays, le Kosovo :
+Nous présentons ci-dessous les données de ce pays, le Kosovo :
 
 <!-- comment -->
 
@@ -279,7 +279,7 @@ Il ne serait donc pas possible d’effectuer une transition fluide pour ce pays 
 <!-- comment -->
 Comment préciser qu’on veut utiliser `pays` comme clé d’identification de chaque point dessiné avec ce geom ?
 <!-- comment -->
-Dans le code ci-dessous, nous utilisons `aes(key=pays)` pour indiquer que la variable `pays` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection :
+Dans le code ci-dessous, nous utilisons `aes(key=pays)` pour indiquer que la variable `pays` doit être utilisée pour faire correspondre les points de données avant et après la modification de la sélection :
 
 <!-- comment -->
 
@@ -298,7 +298,7 @@ Le `aes(key)` dans le ggplot ci-dessus n’a de sens que pour la visualisation i
 <!-- comment -->
 Cependant, si nous affichons ce ggplot en utilisant `animint2`, la variable `pays` permettra des durées de transitions pertinentes.
 <!-- comment -->
-Pour spécifier une durée de transition par défaut pour la variable `année`, nous utilisons l’option `duration` dans la visualisation ci-dessous :
+Pour spécifier une durée de transition par défaut pour la variable `année`, nous utilisons l’option `duration` dans la visualisation ci-dessous :
 
 <!-- comment -->
 

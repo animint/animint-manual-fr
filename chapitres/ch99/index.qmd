@@ -16,7 +16,7 @@ Cette annexe décrit plusieurs techniques de programmation R utiles dans la cré
 
 <!-- paragraph -->
 
-Pour mettre l’accent sur les données graphiques dans les ggplots à facettes, éliminez l’espace entre les facettes à l’aide du code suivant :
+Pour mettre l’accent sur les données graphiques dans les ggplots à facettes, éliminez l’espace entre les facettes à l’aide du code suivant :
 
 <!-- paragraph -->
 
@@ -36,7 +36,7 @@ Ce code comprend trois parties :
 
 - `panel.margin=0` élimine l’espace entre les panneaux.
 <!-- comment -->
-- `theme_bw` active un thème noir et blanc (bordures de panneaux noires et arrière-plans de panneaux blancs), ce qui rend visibles les limites entre les panneaux, une étape nécessaire, puisque la fonction par défaut de ggplot `theme_grey` utilise des fonds de panneaux gris et pas de bordures de panneaux. 
+- `theme_bw` active un thème noir et blanc (bordures de panneaux noires et arrière-plans de panneaux blancs), ce qui rend visibles les limites entre les panneaux, une étape nécessaire, puisque la fonction par défaut de ggplot `theme_grey` utilise des fonds de panneaux gris et pas de bordures de panneaux.
 
 <!-- comment -->
 - `facet_*` crée un ggplot multipanneaux.
@@ -57,7 +57,7 @@ L’utilisation d’autres unités telles que `cm` n’est pas recommandée.
 
 Les tableaux de données sont très utiles pour créer des visualisations de données interactives, quelle que soit leur complexité.
 <!-- comment -->
-Leur structure générale est la suivante :
+Leur structure générale est la suivante :
 
 <!-- paragraph -->
 
@@ -98,7 +98,7 @@ Si vous n’effectuez que des opérations scalaires-scalaires dans votre boucle 
 <!-- comment -->
 - `paste()` est utilisée pour nommer le `data.table` dans la liste de résultats.
 <!-- comment -->
-Bien qu'on puisse utiliser `data.frame` ou `data.table`, en pratique `data.table` est souvent bien plus rapide lors de l’étape finale de combinaison.
+Bien qu’on puisse utiliser `data.frame` ou `data.table`, en pratique `data.table` est souvent bien plus rapide lors de l’étape finale de combinaison.
 <!-- comment -->
 - La dernière partie utilise `do.call` avec `rbind` pour combiner les tableaux de données stockés au cours des boucles for.
 
@@ -155,7 +155,7 @@ RColorBrewer::display.brewer.all()
 
 <!-- paragraph -->
 
-Par exemple, pour obtenir le code R de la palette Set1, nous écrivons :
+Par exemple, pour obtenir le code R de la palette Set1, nous écrivons :
 
 <!-- paragraph -->
 
