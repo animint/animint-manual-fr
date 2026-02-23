@@ -125,9 +125,9 @@ Comme les animints ne sont que des répertoires contenant des fichiers HTML, TSV
 
 <!-- paragraph -->
 
-Par exemple, j’ai exécuté le code dans  <https://github.com/animint/animint2/blob/master/inst/examples/WorldBank-facets.R>  pour créer le `WorldBank-facets` répertoire sur mon ordinateur personnel.
+Par exemple, j'ai exécuté du code R pour créer une visualisation dans le répertoire `WorldBank-facets` sur mon ordinateur personnel.^[<https://github.com/animint/animint2/blob/master/inst/examples/WorldBank-facets.R>]
 <!-- comment -->
-J’ai copié ce répertoire sur le serveur web de mon laboratoire à l’aide de la commande `rsync -r WorldBank-facets/ monsoon.hpc.nau.edu:genomic-ml/WorldBank-facets/` et je peux ainsi le visualiser sur <https://rcdata.nau.edu/genomic-ml/WorldBank-facets/>
+J'ai copié ce répertoire sur le serveur web de mon laboratoire à l'aide de la commande `rsync -r WorldBank-facets/ monsoon.hpc.nau.edu:genomic-ml/WorldBank-facets/` et je peux ainsi le visualiser sur le web.^[<https://rcdata.nau.edu/genomic-ml/WorldBank-facets/>]
 
 <!-- paragraph -->
 
@@ -139,8 +139,8 @@ Si vous n’avez pas accès à un serveur web personnel ou par le biais d’un l
 
 <!-- paragraph -->
 
-[Netlify Drop](https://app.netlify.com/drop) est un service d'hébergement de sites web statiques.
-Pour y publier votre visualisation de données, il suffit de faire glisser un répertoire sur cette page web (il peut s’agir d’un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l’intérieur de Rmd, comme décrit ci-dessus).
+Netlify Drop est un service d’hébergement de sites web statiques [@Netlify_Drop].
+Pour y publier votre visualisation de données, il suffit de faire glisser un répertoire sur cette page web (il peut s'agir d'un répertoire issu de `animint2dir` ou de `rmarkdown::render` si votre animint est à l'intérieur de Rmd, comme décrit ci-dessus).
 <!-- comment -->
 Une fois le téléversement terminé, vous obtiendrez un lien qui vous permettra de visualiser les fichiers contenus dans ce répertoire.
 <!-- comment -->
@@ -154,11 +154,11 @@ Vous pouvez souscrire à un compte gratuit si vous souhaitez que vos visualisati
 
 <!-- paragraph -->
 
-[GitHub Pages](https://pages.github.com/) est un service d’hébergement de sites web statiques sur lequel on peut publier des animints.
+GitHub Pages est un service d’hébergement de sites web statiques sur lequel on peut publier des animints [@GitHub_pages].
 <!-- comment -->
 Pour publier un animint sur GitHub Pages, vous avez besoin d’un compte GitHub ainsi que des packages `gert` (pour exécuter git à partir de R), `gh` (pour utiliser l’API GitHub à partir de R), et `gitcreds` (pour interagir avec le stockage des identifiants de git et faciliter l’authentification lors de l’envoi à GitHub).
 <!-- comment -->
-Tout d'abord, installez ces packages. Si vous n’avez pas de compte GitHub, vous pouvez [vous inscrire gratuitement](https://github.com/join).
+Tout d’abord, installez ces packages. Si vous n’avez pas de compte GitHub, vous pouvez vous inscrire gratuitement.
 <!-- comment -->
 Ensuite, assurez-vous d’indiquer à R le nom et le courriel à utiliser pour la publication des commits git.
 
@@ -197,8 +197,8 @@ Si votre visualisation de données contient un fichier TSV de plus de 100 Mo, vo
 
 Une galerie est une collection de métadonnées pour un ensemble de visualisations publiées sur GitHub Pages.
 <!-- comment -->
-Par exemple, la galerie principale des animints [https://animint.github.io/gallery/](https://animint.github.io/gallery/) (en anglais) est une page web contenant des liens vers divers animints, organisés en tableau de contingence.
-Nous avons aussi [une galerie en français](https://animint.github.io/gallery-fr/).
+Par exemple, la galerie principale (en anglais) est une page web contenant des liens vers divers animints [@animint-gallery].
+Nous avons aussi une galerie en français [@animint-gallery-fr].
 
 <!-- paragraph -->
 
@@ -255,7 +255,7 @@ Exercices :
 <!-- comment -->
 - Utilisez Netlify Drop pour publier cette animation sur le web.
 <!-- comment -->
-- Utilisez `animint2pages` pour publier cet animint dans un nouveau dépôt GitHub. Faites une capture d’écran et enregistrez-la en tant que `Capture.PNG` dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt à la galerie principale de l’animint [repos.txt](https://github.com/animint/gallery/blob/gh-pages/repos.txt) en soumettant une Pull Request sur GitHub.
+- Utilisez `animint2pages()` pour publier cet animint dans un nouveau dépôt GitHub. Faites une capture d'écran et enregistrez-la en tant que `Capture.PNG` dans la branche `gh-pages` de ce dépôt. Ajoutez ce dépôt au fichier `repos.txt` en soumettant une Pull Request sur GitHub [@repos.txt].
 <!-- comment -->
 - Créez votre propre galerie animint, et ajoutez-y au moins deux de vos propres animints.
 

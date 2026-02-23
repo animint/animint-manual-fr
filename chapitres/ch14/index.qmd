@@ -34,7 +34,7 @@ Cette méthode est plus efficace sur le plan computationnel et s’avère plus f
 
 <!-- paragraph -->
 
-Les données de cet exemple proviennent du [package PeakSegJoint](https://github.com/tdhock/PeakSegJoint) qui sert à détecter les pics dans des séquences de données génomiques.
+Les données de cet exemple proviennent du package `PeakSegJoint` qui sert à détecter les pics dans des séquences de données génomiques [@PeakSegJoint_package].
 <!-- comment -->
 Le code ci-dessous télécharge le jeu de données.
 
@@ -535,7 +535,7 @@ Exercices :
 
 <!-- paragraph -->
 
-- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation illustrant le surapprentissage et le sous-apprentissage, comme nous l'avons fait dans cette [visualisation du modèle linéaire et des plus proches voisins](https://tdhock.github.io/2023-12-04-degree-neighbors/).
+- Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation illustrant le surapprentissage et le sous-apprentissage, comme nous l’avons fait dans cette visualisation du modèle linéaire et des plus proches voisins [@this_visualization_of_linear_model_and_nearest_neighbors].
 <!-- comment -->
 - Utilisez des `clickSelects` et des `showSelected` nommés pour créer une visualisation de données dans votre domaine d’expertise.
 
