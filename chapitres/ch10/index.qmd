@@ -942,6 +942,7 @@ Le code ci-dessous crée une visualisation interactive à l’aide du nouveau gr
 
 ```{r ch10-vis-folds}
 animint(
+  out.dir="ch10visfolds",
   errorPlotNew+
     theme_animint(width=325),
   scatterPlot+
