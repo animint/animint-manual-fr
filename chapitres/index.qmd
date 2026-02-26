@@ -18,7 +18,7 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
 
 © Toby Dylan HOCKING.
 
-**Pour citer cet ouvrage :** Toby Hocking (2026). *Visualisation interactive de données dans R avec animint2*. Université de Sherbrooke, Département d’informatique. fabriqueREL. Licence CC BY-SA. <br /> <br />
+**Pour citer cet ouvrage :** Toby Hocking (2026). *Visualisation interactive de données dans R avec animint2*. Université de Sherbrooke, Département d’informatique. fabriqueREL. Licence CC BY-SA. <https://doi.org/10.71892/11143/1448> <br /> <br />
 
 ```bib
 @book{Hocking2026,
@@ -26,7 +26,8 @@ Dans ce manuel, nous expliquons comment planifier et créer des visualisations d
   author={Toby Dylan Hocking},
   year={2026},
   publisher={Université de Sherbrooke, fabriqueREL, license CC_BY-SA},
-  url={https://animint-manual-fr.netlify.app}
+  url={https://animint-manual-fr.netlify.app},
+  doi={10.71892/11143/1448}
 }
 ```
 
