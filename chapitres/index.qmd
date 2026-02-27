@@ -2,7 +2,13 @@
 
 <!-- paragraph -->
 
-Dans ce manuel, nous expliquons comment planifier et créer des visualisations de données interactives avec le package R `animint2`.
+**Résumé :**
+Dans la visualisation de données, les graphiques interactifs permettent de cliquer sur des éléments d’un graphique, pour ensuite changer ce qui est affiché dans un autre graphique.
+Ils sont utiles pour l’enseignement et la recherche, mais ils sont souvent difficiles à créer.
+Ce livre présente `animint2`, un package R qui facilite la création des visualisations interactives.
+Nous présentons d’abord quelques principes fondamentaux pour la visualisation de données ; ensuite, nous donnons quelques exemples avancés.
+Chaque chapitre présente des codes R et leurs sorties graphiques, avec commentaires pour aider le lecteur à interpréter les graphiques, et à comprendre les codes.
+Pour faciliter l’utilisation du livre dans un cours de visualisation de données, il y a des exercices à la fin de chaque chapitre.
 
 <!-- paragraph -->
 
