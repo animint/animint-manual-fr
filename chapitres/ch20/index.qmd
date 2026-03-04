@@ -411,7 +411,7 @@ ggplot()+
     data=score_dt[learner_id!="featureless"])
 ```
 
-On n voit plus les résultats pour `featureless` dans le graphique ci-dessus.
+On ne voit plus les résultats pour `featureless` dans le graphique ci-dessus.
 <!-- comment -->
 Le code ci-dessous produit le même graphique, avec quelques ajouts pour l’affichage interactif.
 <!-- comment -->
