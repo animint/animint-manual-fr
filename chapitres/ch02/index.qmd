@@ -339,7 +339,7 @@ Par ailleurs, certains pays ont enregistré une hausse de leur taux de fertilit�
 <!-- comment -->
 Indice : vous devez utiliser la même spécification `aes(color=revenu)` pour tous les geoms.
 <!-- comment -->
-Vous pouvez utiliser `scale_color_manual` avec une palette de couleurs séquentielle. Pour plus de détails, consulter `RColorBrewer::display.brewer.all(type="seq")` et lire [l’annexe](/ch99#manual-color-legends).
+Vous pouvez utiliser `scale_color_manual()` avec une palette de couleurs séquentielle. Pour plus de détails, consulter `RColorBrewer::display.brewer.all(type="seq")` et lire [l’annexe](/ch99#manual-color-legends).
 
 <!-- comment -->
 
