@@ -184,6 +184,7 @@ set.seed(1)
 
 The output above shows a table with one row per month and country.
 We use these data in the visualization below.
+modif
 
 ```{r ch06-viz-group}
 animint(
