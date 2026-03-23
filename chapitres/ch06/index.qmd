@@ -986,7 +986,7 @@ Notez ci-dessus que le lien source figure au bas de la visualisation des donnée
 
 Le chapitre 5 a introduit la fonction [animint2pages](/ch05#pages) qui permet de publier un `animint2` sur GitHub Pages.
 <!-- comment -->
-Il faut que le `animint2` définisse l’option `source`, car ces métadonnées sont nécessaires à l’organisation du `animint2` dans une [galerie](/ch05#gallery) .
+Il faut définir l’option `source`, car ces métadonnées sont nécessaires à l’organisation des visualisations dans une [galerie](/ch05#gallery).
 
 <!-- paragraph -->
 
