@@ -159,13 +159,13 @@ Les développeurs d’`animint2` utilisent cette fonctionnalité pour tester le 
 ### Compression de données en utilisant `aes(group)` {#aes-group}
 <!-- paragraph -->
 
-La compression de données améliore le téléchargement et le stockage des grands ensembles de données dont certaines données sont communes à plusieurs segments (fichiers TSV pour différentes valeurs de variables `showSelected`).
+La compression de données améliore le téléchargement et le stockage des grands jjeux de données avec des structures répétées à travers les sous-ensembles `showSelected`.
 <!-- comment -->
-En règle générale, on utilise la fonction `aes(group)` pour définir des lignes, des chemins, des polygones et des rubans.
+Dans `ggplot2`, on utilise `aes(group)` pour définir des courbes (`geom_line()` et `geom_path()`) et des polygones (`geom_polygon()` et `geom_ribbon()`).
 <!-- comment -->
-Dans `animint2`, on peut également utiliser `aes(group)` pour définir la compression de données.
+Dans `animint2`, on peut également utiliser `aes(group)` pour définir la compression de données, même avec d’autres geoms qui n’acceptent pas `aes(group)` dans `ggplot2` (comme `geom_point()`).
 <!-- comment -->
-`aes(group)` doit être appliqué à un groupe de variables qui sont communes à différents sous-ensembles `showSelected`.
+Cette utilisation est avantageux pour gagner en efficacité du téléchargement et du stockage, quand il y a les mêmes données pour chaque groupe, à travers différents sous-ensembles `showSelected`.
 <!-- comment -->
 Considérons l’exemple suivant qui présente des données mensuelles pour certaines années et certains pays :
 
