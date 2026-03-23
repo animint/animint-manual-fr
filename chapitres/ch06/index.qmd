@@ -346,7 +346,7 @@ Les exemples précédents montrent que plusieurs paramètres permettent la compr
 
 Le meilleur choix de ces paramètres dépend de l’ensemble de données dans votre visualisation.
 En général, on choisi celui qui minimise l’espace disque utilisé et réduit le temps de téléchargement.
-Pour quelques exemples plus grands, voir la galérie HiC [@gallery-hic].
+Pour quelques exemples présentant de plus grands ensembles de données, consultez la galérie HiC [@gallery-hic].
 
 ### Noms de sélecteurs dynamiques avec `clickSelects` et `showSelected` nommés {#data-driven-selectors}
 <!-- paragraph -->
