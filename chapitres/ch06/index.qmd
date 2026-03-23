@@ -949,7 +949,7 @@ animint2dir(vis.title, "ch06-vis-title")
 
 Notez que `vis.scale.size` possède déjà trois ggplots, chacun avec son `ggtitle`.
 <!-- comment -->
-Ajouter l’option globale `title` a pour effet de définir un titre pour [la page web](ch06-vis-title/index.html) .
+Ajouter l’option globale `title` a pour effet de définir un titre pour [la page web](ch06-vis-title/index.html).
 
 <!-- paragraph -->
 
