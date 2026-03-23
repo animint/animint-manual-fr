@@ -236,8 +236,9 @@ animint_tsv(
 ```
 
 La sortie ci-dessus est une liste de trois tableaux de données, un pour chaque année.
-Lorsqu’on la compare à celle de l’exemple précédent, on voit qu’il manque une colonne `showSelected1`, qui était utilisée pour les valeurs d’année, mais qui devient inutile, puisque la colonne serait identique pour chaque fichier.
-Pour activer la compression des données, nous spécifions `aes(group=pays)` dans le code ci-dessous, ce qui entraîne la vérification de valeurs communes à chaque `pays` sur l’ensemble des valeurs `années`.
+Lorsqu’on la compare à celle de l’exemple précédent, on voit qu’il manque une colonne `showSelected1`, qui était utilisée pour les valeurs d’année, mais qui devient inutile, puisque la colonne n’aurait qu’un seule valeur par fichier.
+Pour activer la compression des données, nous utilisons `aes(group=pays)` dans le code ci-dessous.
+Le code va alors tenter la compression, en cherchant des données pour chaque `pays`, qui sont répétées pour chaque `année`.
 
 ```{r}
 animint_tsv(
@@ -249,10 +250,10 @@ animint_tsv(
       showSelected="année"))
 ```
 
-La sortie ci-dessous est une liste de quatre tableaux de données qui présentent une compression d’une valeur commune pour chaque groupe (pays), sur tous les sous-ensembles `showSelected` (années).
+La sortie ci-dessous est une liste de quatre tableaux de données qui présentent une compression des données propres aux groupes (pays), qui sont répétées à travers les sous-ensembles `showSelected` (années).
 
-* Les trois premiers tableaux ont des segments numérotés pour chaque année et des colonnes `groupe` `x` et `y` dont les valeurs diffèrent pour chaque groupe (`x` et `y` sont différents pour chaque pays et année).
-* Le dernier tableau regroupe les données communes en une ligne par pays/groupe et des colonnes `groupe`, `colour`, `fill` et `showSelected2`. Ces colonnes contiennent les valeurs identiques pour les pays, quelle que soit l’année.
+* Les trois premiers tableaux sont numérotés de 1 à 3, une pour chaque année. Les colonnes `x` et `y` ont les valeurs diffèrentes pour chaque groupe (`x` et `y` sont différents pour chaque pays et année).
+* Le dernier tableau regroupe les données communes en une ligne par pays/groupe. Les colonnes `colour`, `fill` et `showSelected2` contiennent les valeurs propres à chaque pays, quelle que soit l’année.
 
 Ci-dessous, nous utilisons `aes(group=mois)` à titre de comparaison :
 
