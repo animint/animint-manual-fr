@@ -285,7 +285,7 @@ La sortie ci-dessus est une liste de quatre tableaux de données qui présentent
 * Les trois premiers tableaux ont des segments numérotés, un pour chaque année, et les colonnes `groupe` et `y`. La seule colonne dont les valeurs diffèrent pour chaque groupe/mois d’une année à l’autre est la colonne `y`.
 * Le dernier tableau regroupe les données communes avec une ligne par pays/mois et les colonnes `groupe`, `colour`, `fill` et `x`. Ces colonnes contiennent des valeurs communes pour chaque groupe dans un même mois d’une année à l’autre.
 
-Ci-dessous, nous présentons un exemple de compression à l’aide de `geom_path()`, dans lequel nous utilisons également `aes(group)` pour déterminer les différents courbes.
+Ci-dessous, nous présentons un exemple de compression à l’aide de `geom_path()`, dans lequel nous utilisons également `aes(group)` pour déterminer les différentes courbes.
 De plus, nous redéfinissons `color` et `group` pour `pays` :
 
 ```{r}
