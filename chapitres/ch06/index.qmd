@@ -341,11 +341,11 @@ Pour `chunk2.tsv` et `chunk3.tsv` ces colonnes sont inutiles, car il n’y a pas
 Les exemples précédents montrent que plusieurs paramètres permettent la compression des données :
 
 * `chunk_vars` définit les variables `showSelected` utilisées pour diviser les données dans des fichiers TSV.
-* `aes(group)` est défini pour une variable dont les groupes possédent des données communes.
+* `aes(group)` est défini pour une variable dont les groupes possèdent des données communes.
 * Les valeurs manquantes explicites (`NA`) sont utilisées pour inclure un vecteur de valeurs dans le fichier de données communes, tandis que les valeurs manquantes implicites (suppression de lignes) conviennent lorsque le fichier de données communes ne doit contenir que des valeurs constantes.
 
 Le meilleur choix de ces paramètres dépend de l’ensemble de données dans votre visualisation.
-En général, on choisi celui qui minimise l’espace disque utilisé et réduit le temps de téléchargement.
+En général, on choisit celui qui minimise l’espace disque utilisé et réduit le temps de téléchargement.
 Pour quelques exemples présentant de plus grands ensembles de données, consultez la galérie HiC [@gallery-hic].
 
 ### Noms de sélecteurs dynamiques avec `clickSelects` et `showSelected` nommés {#data-driven-selectors}
