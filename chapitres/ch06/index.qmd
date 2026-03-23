@@ -267,7 +267,7 @@ animint_tsv(
       showSelected="année"))
 ```
 
-La sortie ci-dessus est une liste de trois tableaux de données contenant des segments numérotés, sans fichier TSV de données communes.
+La sortie ci-dessus est une liste de trois tableaux de données, sans fichier TSV de données communes.
 Dans ce cas, la compression ne s’applique pas, puisqu’il n’y a qu’une colonne (`x`) avec une valeur commune pour chaque groupe/mois, d’une année à l’autre.
 Pour activer la compression avec `group=mois`, il faut au moins deux variables communes à chaque groupe d’une année à l’autre, comme le montre l’exemple ci-dessous dans lequel nous avons modifié `aes(color)` :
 
@@ -281,10 +281,10 @@ animint_tsv(
       showSelected="année"))
 ```
 
-La sortie ci-dessus est une liste de quatre tableaux de données qui présentent un autre exemple de compression d’une valeur commune pour chaque groupe, cette fois-ci le mois, sur le sous-ensemble `showSelected` subsets (années comme précédemment).
+La sortie ci-dessus est une liste de quatre tableaux de données qui présentent un autre exemple de compression.
 
-* Les trois premiers tableaux ont des segments numérotés, un pour chaque année, et les colonnes `groupe` et `y`. La seule colonne dont les valeurs diffèrent pour chaque groupe/mois d’une année à l’autre est la colonne `y`.
-* Le dernier tableau regroupe les données communes avec une ligne par pays/mois et les colonnes `groupe`, `colour`, `fill` et `x`. Ces colonnes contiennent des valeurs communes pour chaque groupe dans un même mois d’une année à l’autre.
+* Les trois premiers tableaux sont numérotés de 1 à 3, un pour chaque année. Il n’y a qu’une seule colonne `y` avec valeurs diffèrentes pour chaque groupe/mois.
+* Le dernier tableau regroupe les données communes avec une ligne par pays/mois. Les colonnes `colour`, `fill` et `x` contiennent des valeurs propres à chaque groupe/mois, qui sont répétées d’une année à l’autre.
 
 Ci-dessous, nous présentons un exemple de compression à l’aide de `geom_path()`, dans lequel nous utilisons également `aes(group)` pour déterminer les différentes courbes.
 De plus, nous redéfinissons `color` et `group` pour `pays` :
