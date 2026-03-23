@@ -953,9 +953,8 @@ Ajouter l’option globale `title` a pour effet de définir un titre pour [la pa
 
 <!-- paragraph -->
 
-Le chapitre 5 a introduit la fonction [animint2pages](/ch05#pages) qui permet de publier un `animint2` sur GitHub Pages.
-<!-- comment -->
-Il faut définir l’option `title` car ces métadonnées sont nécessaires à l’organisation des visualisations dans une [galerie](/ch05#gallery).
+Le chapitre 5 a introduit la fonction [`animint2pages()`](/ch05#pages) qui permet de publier une visualisation sur GitHub Pages.
+L’option `title` est nécessaire pour publier une visualisation dans une [galerie](/ch05#gallery).
 
 <!-- paragraph -->
 
@@ -984,9 +983,9 @@ Notez ci-dessus que le lien source figure au bas de la visualisation des donnée
 
 <!-- paragraph -->
 
-Le chapitre 5 a introduit la fonction [animint2pages](/ch05#pages) qui permet de publier un `animint2` sur GitHub Pages.
+Le chapitre 5 a introduit la fonction [`animint2pages()`](/ch05#pages) qui permet de publier une visualisation sur GitHub Pages.
 <!-- comment -->
-Il faut définir l’option `source`, car ces métadonnées sont nécessaires à l’organisation des visualisations dans une [galerie](/ch05#gallery).
+L’option `source` est nécessaire pour publier une visualisation dans une [galerie](/ch05#gallery).
 
 <!-- paragraph -->
 
