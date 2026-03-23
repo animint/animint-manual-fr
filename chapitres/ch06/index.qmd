@@ -159,7 +159,7 @@ Les développeurs d’`animint2` utilisent cette fonctionnalité pour tester le 
 ### Compression de données en utilisant `aes(group)` {#aes-group}
 <!-- paragraph -->
 
-La compression de données améliore le téléchargement et le stockage des grands jjeux de données avec des structures répétées à travers les sous-ensembles `showSelected`.
+La compression de données améliore le téléchargement et le stockage des grands jeux de données avec des structures répétées à travers les sous-ensembles `showSelected`.
 <!-- comment -->
 Dans `ggplot2`, on utilise `aes(group)` pour définir des courbes (`geom_line()` et `geom_path()`) et des polygones (`geom_polygon()` et `geom_ribbon()`).
 <!-- comment -->
