@@ -203,8 +203,8 @@ Pour analyser les compressions possibles, nous définissons une fonction auxilia
 
 ```{r}
 animint_tsv <- function(...){
-  viz <- animint(...)
-  info <- animint2dir(viz, "ch06tsv")
+  vis <- animint(...)
+  info <- animint2dir(vis, "ch06tsv")
   tsv.files <- Sys.glob(file.path(info$out.dir,"*.tsv"))
   sapply(tsv.files, fread, simplify=FALSE)
 }
