@@ -1,11 +1,11 @@
 Ce dépôt contient le code source pour [Visualisation interactive de données dans R avec animint2](https://animint-manual-fr.netlify.app/), une ressource educative numérique, créée grâce à un financement de [FabriqueREL](https://fabriquerel.org/) (2025-2026).
 
-C’est un traduction de la version anglaise, [Animated interactive data visualization using animint2 in R](https://animint-manual-en.netlify.app/).
+C’est une traduction de la version anglaise, [Animated interactive data visualization using animint2 in R](https://animint-manual-en.netlify.app/).
 
 # Autres pages de documentation sur `animint2` en français
 
-* Diapositives en [français](https://docs.google.com/presentation/d/1WpRZs9qz9wm1yik_MLj8tIJyWuL5-IBPYKLhOHZ9X4Y/edit?usp=sharing) pour une présentation de 30 à 60 minutes sur animint2 !
-  * [Résumé](https://github.com/animint/animint2/wiki/Presentations#30-60-minute-talk),
+* Diapositives en [français](https://docs.google.com/presentation/d/1WpRZs9qz9wm1yik_MLj8tIJyWuL5-IBPYKLhOHZ9X4Y/edit?usp=sharing) pour une présentation de 30 à 60 minutes sur animint2 ! (y compris quelques explications sur le deploiement continu du site grâce à GitHub Actions et Netlify)
+* [Résumé de la présenstation](https://github.com/animint/animint2/wiki/Presentations#30-60-minute-talk),
 * [Vidéo de la présentation à Toulouse-Dataviz](https://www.youtube.com/watch?v=Em6AVJi37zo).
 * [GitHub Pages galerie en français](https://animint.github.io/gallery-fr) contient des visualisations avec affichage en français.
 
