@@ -156,7 +156,7 @@ Notez également que `paste` est utilisé pour ajouter un numéro de groupe, car
 Les développeurs d’`animint2` utilisent cette fonctionnalité pour tester le code JavaScript [@for_testing_the_animint_JavaScript_renderer_code] (en anglais).
 
 <!-- paragraph -->
-### Compression de données en utilisant `aes(group)` {#aes-group}
+### Compression de données utilisant `aes(group)` {#aes-group}
 <!-- paragraph -->
 
 La compression de données améliore le téléchargement et le stockage des grands jeux de données avec des structures répétées à travers les sous-ensembles `showSelected`.
