@@ -165,7 +165,7 @@ Dans `ggplot2`, on utilise `aes(group)` pour définir des courbes (`geom_line()`
 <!-- comment -->
 Dans `animint2`, on peut également utiliser `aes(group)` pour définir la compression de données, même avec d’autres geoms qui n’acceptent pas `aes(group)` dans `ggplot2` (comme `geom_point()`).
 <!-- comment -->
-Cette utilisation est avantageux pour gagner en efficacité du téléchargement et du stockage, quand il y a les mêmes données pour chaque groupe, à travers différents sous-ensembles `showSelected`.
+Cette utilisation est avantageuse pour améliorer l’efficacité du téléchargement et du stockage, quand il y a les mêmes données pour chaque groupe, à travers différents sous-ensembles `showSelected`.
 <!-- comment -->
 Considérons l’exemple suivant qui présente des données mensuelles pour certaines années et certains pays :
 
