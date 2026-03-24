@@ -28,9 +28,7 @@ Plus précisément, nous visualiserons la probabilité critique, aussi appelée 
 
 <!-- paragraph -->
 
-## Qu’est-ce qu’une valeur-p ?
-<!-- comment -->
-{#what-is-p-value}
+## Qu’est-ce qu’une valeur-p ? {#what-is-p-value}
 
 <!-- paragraph -->
 
