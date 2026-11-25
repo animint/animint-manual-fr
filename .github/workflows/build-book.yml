@@ -19,7 +19,7 @@ jobs:
       - name: Setup r2u
         uses: eddelbuettel/github-actions/r2u-setup@master
       - run: locale -a
-      - run: /usr/bin/sudo DEBIAN_FRONTEND=noninteractive apt install tidy texlive texlive-fonts-extra texlive-extra-utils language-pack-fr r-recommended -y
+      - run: /usr/bin/sudo DEBIAN_FRONTEND=noninteractive apt install tidy texlive texlive-fonts-extra texlive-extra-utils texlive-latex-extra texlive-lang-french texlive-lang-european language-pack-fr r-recommended -y
       - run: locale -a
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Render book
