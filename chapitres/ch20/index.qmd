@@ -392,7 +392,6 @@ ggplot()+
   facet_grid(task_id ~ .)+
   geom_point(aes(
     classif.auc, learner_id),
-    color="red",
     data=score_dt)
 ```
 
